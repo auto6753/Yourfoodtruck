@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false"  contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p id="logo">´ç½ÅÀÇ ÇªµåÆ®·°</p>
+	<p id="logo">ë‹¹ì‹ ì˜ í‘¸ë“œíŠ¸ëŸ­</p>
 
 </body>
 </html>

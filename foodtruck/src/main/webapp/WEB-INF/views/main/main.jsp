@@ -59,22 +59,22 @@
       <!-- Slide One - Set the background image for this slide in the line below -->
       <div class="carousel-item active" style="background-image: url('resources/image/food1.png')"><a href=#></a>
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">First Slide</h3>
-          <p class="lead">This is a description for the first slide.</p>
+          <h3 class="display-4">닭치고 닭꼬치</h3>
+          <!-- <p class="lead">닭치고 닭꼬치</p> -->
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('resources/image/noodle.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">Second Slide</h3>
-          <p class="lead">This is a description for the second slide.</p>
+          <h3 class="display-4">오니기리</h3>
+          <!-- <p class="lead">오니기리</p> -->
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('resources/image/don.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">Third Slide</h3>
-          <p class="lead">This is a description for the third slide.</p>
+          <h3 class="display-4">김밥천국</h3>
+          <!-- <p class="lead">김밥천국</p> -->
         </div>
       </div>
     </div>
