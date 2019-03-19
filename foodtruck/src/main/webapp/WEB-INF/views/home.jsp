@@ -5,13 +5,20 @@
 <head>
 	<title>당신의 푸드트럭</title>
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+	<style>
+		.header {height : 90px;}
+	</style>
 </head>
 <body>
-<!-- header -->
-<jsp:include page="header/header.jsp"></jsp:include>
 
+<!-- header -->
+<div class="header">
+	<jsp:include page="header/header.jsp"></jsp:include>
+</div>
 <!-- content -->
-<jsp:include page="${content}"></jsp:include>
+<div class="content">
+	<jsp:include page="${content}"></jsp:include>
+</div>
 
 <script type="text/javascript" src="resources/js/jquery.min.js" ></script> 
 <script type="text/javascript" src="resources/js/bootstrap.min.js" ></script>
