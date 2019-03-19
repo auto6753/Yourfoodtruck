@@ -64,7 +64,7 @@
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('resources/image/noodle.jpg')">
+      <div class="carousel-item" style="background-image: url('resources/image/food2.png')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">Second Slide</h3>
           <p class="lead">This is a description for the second slide.</p>
