@@ -15,7 +15,7 @@
 		<div class="carousel-inner" role="listbox">
 			<!-- Slide One - Set the background image for this slide in the line below -->
 			<div class="carousel-item active"
-				style="width: 100%; height: auto; background-image: url('resources/image/so.jpg')">
+				style="width: 100%; height: auto; background-image: url('resources/image/food1.png')">
 				<div class="carousel-caption d-none d-md-block">
 					<h3 class="display-4">First Slide</h3>
 					<p class="lead">This is a description for the first slide.</p>
@@ -56,8 +56,7 @@
 		</div>
 		<div style="display: inline;">
 			<!-- <button style="width:50%" type="button" class="btn btn-outline-secondary">월간 맛트럭</button> -->
-			<button style="width: 50%" type="button" class="btn btn-warning">월간
-				맛트럭</button>
+			<button style="width: 50%" type="button" class="btn btn-warning">월간 맛트럭</button>
 		</div>
 	</div>
 
