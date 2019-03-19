@@ -41,5 +41,20 @@ public class HomeController {
 		
 		return "main/main.jsp";
 	}
+	@RequestMapping(value = "/.do", method = RequestMethod.GET)
+	public String mypage(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		return "customer/mypage";
+	}
+	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypagedo(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		
+		model.addAttribute("content",mypage(locale, model));
+	
+		return "home";
+	}
 
 }
