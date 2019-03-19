@@ -30,7 +30,7 @@
 	<nav
 		class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">당신의 푸드트럭!</a>
+			<a class="navbar-brand" href="rehome">당신의 푸드트럭!</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
 							<span class="sr-only">(current)</span>
 					</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">트럭검색</a></li>
+					<li class="nav-item"><a class="nav-link" href="serach">트럭검색</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">모집공고</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
