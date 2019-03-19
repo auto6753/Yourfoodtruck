@@ -56,5 +56,13 @@ public class HomeController {
 	
 		return "home";
 	}
-
+	@RequestMapping(value = "/serach", method = RequestMethod.GET)
+	public String serach(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		
+		model.addAttribute("content",mypage(locale, model));
+	
+		return "serach/serach";
+	}
 }

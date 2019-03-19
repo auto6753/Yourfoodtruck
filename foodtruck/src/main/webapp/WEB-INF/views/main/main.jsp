@@ -66,14 +66,14 @@
       <!-- Slide Two - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('resources/image/food2.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">오니기리</h3>
+          <h3 class="display-4">타코 트럭</h3>
           <!-- <p class="lead">오니기리</p> -->
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">김밥천국</h3>
+          <h3 class="display-4">커피 트럭</h3>
           <!-- <p class="lead">김밥천국</p> -->
         </div>
       </div>
