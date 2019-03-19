@@ -9,7 +9,7 @@
 <h1>
 	Hello world!  
 </h1>
-		dfsfsdfsdfsdf백백
+		dfsfsdfsdfsdf백백교
 <P>  The time on the server is ${serverTime}. </P>
 송탁
 </body>
