@@ -68,8 +68,6 @@ public class HomeController {
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Locale locale, Model model) {
 		
-
-
 		model.addAttribute("content",returnHelp(model));
 		return "home";
 	}
@@ -83,6 +81,7 @@ public class HomeController {
 	
 		return "login/idsearch";
 	}
+<<<<<<< HEAD
 	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
 	public String idsearch1(Locale locale, Model model) {
 		
@@ -90,4 +89,6 @@ public class HomeController {
 		return "login/idsearch1";
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 }
