@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false"  contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+=======
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +69,10 @@ body {
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 	<p id="logo">당신의 푸드트럭</p>
 
 	<div>
@@ -93,6 +101,9 @@ body {
 	
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 </body>
 </html>

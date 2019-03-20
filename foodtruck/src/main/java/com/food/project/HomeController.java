@@ -70,9 +70,12 @@ public class HomeController {
 		
 
 
+<<<<<<< HEAD
+=======
 		model.addAttribute("content",returnHelp(model));
 		return "home";
 	}
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 	
 	public String returnHelp(Model model) {
 		return "help/help.jsp";
@@ -83,5 +86,8 @@ public class HomeController {
 	
 		return "login/idsearch";
 	}
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 }
