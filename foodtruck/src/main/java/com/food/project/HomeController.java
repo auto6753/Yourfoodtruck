@@ -21,12 +21,12 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-//	로그인
+//	濡쒓렇�씤
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		return "login/login";
 	}
-//	아이디 찾기
+//	�븘�씠�뵒 李얘린
 	@RequestMapping(value = "/forgetid", method = RequestMethod.GET)
 	public String forgetid(Locale locale, Model model) {
 		return "login/idsearch";
@@ -44,13 +44,13 @@ public class HomeController {
 		return "main/main";
 	}
 
-// 메인
+// 硫붿씤
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		return "main/main";
 	}
 
-// 푸드트럭 검색
+// �뫖�뱶�듃�윮 寃��깋
 	@RequestMapping(value = "/serach", method = RequestMethod.GET)
 	public String serach(Locale locale, Model model) {
 		return "serach/serach";
@@ -64,13 +64,18 @@ public class HomeController {
 	}
 	
 	
-// 고객센터
+// 怨좉컼�꽱�꽣
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Locale locale, Model model) {
-		return "help/help";
+		
+
+
+<<<<<<< HEAD
+=======
+		model.addAttribute("content",returnHelp(model));
+		return "home";
 	}
-
-
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 	
 	public String returnHelp(Model model) {
 		return "help/help.jsp";
@@ -81,4 +86,8 @@ public class HomeController {
 	
 		return "login/idsearch";
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 }

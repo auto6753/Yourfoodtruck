@@ -12,12 +12,12 @@
 
 
 	<!-- Oracl JDBC Conncetion Pool 6조 서버 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
 		destroy-method="close"> <property value="oracle.jdbc.driver.OracleDriver" 
 		name="driverClassName" /> <property value="jdbc:oracle:thin:@39.127.7.90:1521:orcl" 
 		name="url" /> <property value="six" name="username" /> <property value="1234" 
 		name="password" /> </bean>
-
+ -->
 	<!-- Oracl JDBC Conncetion Pool 학교 서버 -->
 	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
 		destroy-method="close"> <property value="oracle.jdbc.driver.OracleDriver" 
@@ -27,14 +27,14 @@
 
 
 	<!-- Sql session factory -->
-	<bean id="sqlSessionFactory"
+<!-- 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+	</bean> -->
 	<!-- mapper 부분 안에있는자료 올림 -->
-	<mybatis-spring:scan base-package="com.food.project.mapper" />
+	<!-- <mybatis-spring:scan base-package="com.food.project.mapper" /> -->
 	 <!-- service 부분 안에있는자료 올림  -->
 		
-	<context:component-scan base-package="com.food.project.service" />
+<!-- 	<context:component-scan base-package="com.food.project.service" /> -->
 
 </beans>
