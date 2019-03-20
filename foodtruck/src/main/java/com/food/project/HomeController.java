@@ -70,11 +70,7 @@ public class HomeController {
 		return "help/help";
 	}
 
-<<<<<<< HEAD
-=======
-		model.addAttribute("content",returnHelp(model));
-		return "home";
-	}
+
 	
 	public String returnHelp(Model model) {
 		return "help/help.jsp";
@@ -85,5 +81,4 @@ public class HomeController {
 	
 		return "login/idsearch";
 	}
->>>>>>> refs/remotes/origin/master
 }
