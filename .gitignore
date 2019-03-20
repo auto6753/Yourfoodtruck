@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/java,eclipse
-# Edit at https://www.gitignore.io/?templates=java,eclipse
+# Created by https://www.gitignore.io/api/java,eclipse,windows
+# Edit at https://www.gitignore.io/?templates=java,eclipse,windows
 
 ### Eclipse ###
 
@@ -97,4 +97,29 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# End of https://www.gitignore.io/api/java,eclipse
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.gitignore.io/api/java,eclipse,windows

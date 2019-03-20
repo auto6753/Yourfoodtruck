@@ -67,24 +67,20 @@ public class HomeController {
 // 怨좉컼�꽱�꽣
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Locale locale, Model model) {
-		
-		model.addAttribute("content",returnHelp(model));
-		return "home";
+		return "help/help";
 	}
 	
-	public String returnHelp(Model model) {
-		return "help/help.jsp";
-	}
 	@RequestMapping(value = "/idsearch", method = RequestMethod.GET)
 	public String idsearch(Locale locale, Model model) {
-		
-	
 		return "login/idsearch";
 	}
+<<<<<<< HEAD
 	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
 	public String idsearch1(Locale locale, Model model) {
 		
 	
 		return "login/idsearch1";
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 }
