@@ -63,19 +63,15 @@ public class HomeController {
 		return "customer/Mypage";
 	}
 	
+	
 // 怨좉컼�꽱�꽣
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Locale locale, Model model) {
-
 		return "help/help";
-		
 	}
 	
-// ??
-	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
-	public String idsearch1(Locale locale, Model model) {
-
-		return "login/idsearch1";
+	@RequestMapping(value = "/idsearch", method = RequestMethod.GET)
+	public String idsearch(Locale locale, Model model) {
+		return "login/idsearch";
 	}
-
 }
