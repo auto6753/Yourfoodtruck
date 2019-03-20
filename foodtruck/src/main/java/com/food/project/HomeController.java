@@ -74,13 +74,11 @@ public class HomeController {
 	public String idsearch(Locale locale, Model model) {
 		return "login/idsearch";
 	}
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
 	public String idsearch1(Locale locale, Model model) {
 		
 	
 		return "login/idsearch1";
 	}
-=======
->>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
 }
