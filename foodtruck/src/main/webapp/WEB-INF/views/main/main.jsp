@@ -1,9 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<body>
+<jsp:include page="../header/header.jsp"></jsp:include>
+
 <!-- 	<div id="carouselExampleIndicators" class="carousel slide"
 		data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -57,12 +56,14 @@
     </ol>
     <div class="carousel-inner" role="listbox">
       <!-- Slide One - Set the background image for this slide in the line below -->
-      <div class="carousel-item active" style="background-image: url('resources/image/food1.png')"><a href=#></a>
+      <div class="carousel-item active" style="background-image: url('resources/image/food1.png')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">닭치고 닭꼬치</h3>
           <!-- <p class="lead">닭치고 닭꼬치</p> -->
         </div>
       </div>
+    
+      
       <!-- Slide Two - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('resources/image/food2.jpg')">
         <div class="carousel-caption d-none d-md-block">
@@ -123,5 +124,3 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
