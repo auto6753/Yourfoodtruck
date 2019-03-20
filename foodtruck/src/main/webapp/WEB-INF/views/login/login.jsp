@@ -13,10 +13,10 @@ background-color: rgb(248,249,250);
 
 #logo {
 	text-align: center;
-	margin-top: 120px;
+	margin-top: 100px;
 	color:blue;
 	font-weight:bold;
-	font-size: 30px;
+	font-size: 50px;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
 }
 
 #login_box {
-	width: 300px;
+	width: 400px;
 	margin: 0 auto;
 }
 #form{
@@ -36,7 +36,7 @@ body {
  </script>
 </head>
 <body>
-		<p id="logo">당신의 푸드트럭</p>
+		<p id="logo"><a href="rehome">당신의 푸드트럭</a></p>
 	<form id="form" >
 		<div id="login_box">
 			<div class="form-group">
@@ -50,13 +50,15 @@ body {
 
 
 
-			<br> <span class="txt_find"> <a href="" class="link_find">아이디찾기</a>
+			<br> <span class="txt_find"> <a href="forgetid" class="link_find">아이디찾기</a>
 
-				<a href="" class="link_find">비밀번호찾기</a> <a href="" class="link_find">회원가입</a>
+				<a href="" class="link_find">비밀번호찾기</a> <a href="register" class="link_find">회원가입</a>
 
-			</span> 
+			</span>
+			 
 		</div>
-	</form>
+	</form> 
+	
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 </body>
