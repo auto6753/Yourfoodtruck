@@ -29,7 +29,7 @@ body {
 
 #login_box {
 	width: 500px;
-	margin-top: 150px;
+	margin-top: 20px;
 }
 
 #next {
@@ -54,6 +54,9 @@ body {
 	float: right;
 	margin: 10px 0;
 }
+.card-header{
+	width: 500px;
+}
 </style>	
 
 
@@ -65,10 +68,11 @@ body {
 <body>
 
 	<p id="logo">당신의 푸드트럭</p>
-
+	
 	<div>
+		<ul>	
 		<form id="form">
-
+			<div class="card-header">아이디찾기</div>
 			<div id="login_box">
 				<div class="form-group">
 					<input type="text" class="form-control" id="name" placeholder="이름">
@@ -87,9 +91,9 @@ body {
 
 			</div>
 		</form>
-		
+		</ul>
 	</div>
-	
+
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 
