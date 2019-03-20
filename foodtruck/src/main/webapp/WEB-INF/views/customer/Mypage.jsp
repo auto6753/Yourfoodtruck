@@ -1,14 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html>
-<head>
-<title>당신의 푸드트럭</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/customercss.css">
-</head>
-<body>
 
+<link rel="stylesheet" href="resources/css/customercss.css">
+<jsp:include page="../header/header.jsp"></jsp:include>
+
+<div style="margin-left:;width:800px;height: 300px">
 	<div id="title">
 		<div id="container" class="snip1535 text">탑승<br>트럭</div>
 		<div id="container" class="snip1535 text">운행중인<br>트럭</div>
@@ -21,8 +18,5 @@
 		<div id="container2" class="snip1535 text2">회원탈퇴</div>
 	</div>
 	<!-- content -->
+</div>
 
-	<script type="text/javascript" src="resources/js/jquery.min.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-</body>
-</html>

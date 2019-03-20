@@ -14,83 +14,64 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class HomeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-	
-	
-
-		
-	
-//	∑Œ±◊¿Œ ∆‰¿Ã¡ˆ
+//	Î°úÍ∑∏Ïù∏
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
-		
 		return "login/login";
 	}
-
-// ∑Œ∞Ì≈¨∏ØΩ√ 
+//	ÏïÑÏù¥Îîî Ï∞æÍ∏∞
+	@RequestMapping(value = "/forgetid", method = RequestMethod.GET)
+	public String forgetid(Locale locale, Model model) {
+		return "login/idsearch";
+	}
+//	register
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(Locale locale, Model model) {
+		return "login/register";
+	}	
+	
+// rehome 
 	@RequestMapping(value = "/rehome", method = RequestMethod.GET)
 	public String rehome(Locale locale, Model model) {
-		model.addAttribute("content",main(model));
-		return "home";
-	}	
-	
-	
-// ±‚∫ª »®
-	
-	@RequestMapping(value = "/" , method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		model.addAttribute("content",main(model));
-		return "home";
+//		model.addAttribute("content",main(model));
+		return "main/main";
 	}
-	
-	public String main(Model model) {
-		return "main/main.jsp";
-		
-	}
-	
-	
-// ∏∂¿Ã∆‰¿Ã¡ˆ	
-	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypagedo(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		model.addAttribute("content",mypage(model));
-		return "home";
-	}	
-	
-	public String mypage(Model model) {
-	
-		return "customer/mypage";
-	}
-	
 
-//∆Æ∑∞ ∞Àªˆ
+// Î©îÏù∏
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		return "main/main";
+	}
+
+// Ìë∏ÎìúÌä∏Îü≠ Í≤ÄÏÉâ
 	@RequestMapping(value = "/serach", method = RequestMethod.GET)
 	public String serach(Locale locale, Model model) {
-		
-		model.addAttribute("content",rtserach());
-	
-		return "home";
+		return "serach/serach";
 
 	}
-	
-	public String rtserach() {
-		
-		return "serach/serach.jsp";
+
+// mypage	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypagedo(Locale locale, Model model) {
+		return "customer/Mypage";
 	}
-
-		
-
 	
-//∞Ì∞¥ºæ≈Õ
+	
+// Í≥†Í∞ùÏÑºÌÑ∞
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Locale locale, Model model) {
+		return "help/help";
+	}
 
+<<<<<<< HEAD
+=======
 		model.addAttribute("content",returnHelp(model));
 		return "home";
 	}
@@ -104,4 +85,5 @@ public class HomeController {
 	
 		return "login/idsearch";
 	}
+>>>>>>> refs/remotes/origin/master
 }
