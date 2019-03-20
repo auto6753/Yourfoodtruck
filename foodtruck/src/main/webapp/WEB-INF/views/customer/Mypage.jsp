@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="resources/css/customercss.css">
 <jsp:include page="../header/header.jsp"></jsp:include>
 
-<div style="margin-left:;width:800px;height: 300px">
+<div>
 	<div id="title">
 		<div id="container" class="snip1535 text">탑승<br>트럭</div>
 		<div id="container" class="snip1535 text">운행중인<br>트럭</div>
