@@ -70,4 +70,20 @@ public class HomeController {
 		return "help/help";
 	}
 
+<<<<<<< HEAD
+=======
+		model.addAttribute("content",returnHelp(model));
+		return "home";
+	}
+	
+	public String returnHelp(Model model) {
+		return "help/help.jsp";
+	}
+	@RequestMapping(value = "/idsearch", method = RequestMethod.GET)
+	public String idsearch(Locale locale, Model model) {
+		
+	
+		return "login/idsearch";
+	}
+>>>>>>> refs/remotes/origin/master
 }
