@@ -13,10 +13,10 @@ background-color: rgb(248,249,250);
 
 #logo {
 	text-align: center;
-	margin-top: 120px;
+	margin-top: 100px;
 	color:blue;
 	font-weight:bold;
-	font-size: 30px;
+	font-size: 50px;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
 }
 
 #login_box {
-	width: 300px;
+	width: 400px;
 	margin: 0 auto;
 }
 #form{
@@ -56,7 +56,8 @@ body {
 
 			</span> 
 		</div>
-	</form>
+	</form> 
+	
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 </body>

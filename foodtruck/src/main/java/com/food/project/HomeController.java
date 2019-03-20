@@ -43,4 +43,10 @@ public class HomeController {
 		
 		return "main/main.jsp";
 	}
+	@RequestMapping(value = "/idsearch", method = RequestMethod.GET)
+	public String idsearch(Locale locale, Model model) {
+		
+	
+		return "login/idsearch";
+	}
 }
