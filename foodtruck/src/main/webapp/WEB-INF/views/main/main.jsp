@@ -59,22 +59,22 @@
       <!-- Slide One - Set the background image for this slide in the line below -->
       <div class="carousel-item active" style="background-image: url('resources/image/food1.png')"><a href=#></a>
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">First Slide</h3>
-          <p class="lead">This is a description for the first slide.</p>
+          <h3 class="display-4">닭치고 닭꼬치</h3>
+          <!-- <p class="lead">닭치고 닭꼬치</p> -->
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('resources/image/noodle.jpg')">
+      <div class="carousel-item" style="background-image: url('resources/image/food2.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">Second Slide</h3>
-          <p class="lead">This is a description for the second slide.</p>
+          <h3 class="display-4">타코 트럭</h3>
+          <!-- <p class="lead">오니기리</p> -->
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('resources/image/don.jpg')">
+      <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">Third Slide</h3>
-          <p class="lead">This is a description for the third slide.</p>
+          <h3 class="display-4">커피 트럭</h3>
+          <!-- <p class="lead">김밥천국</p> -->
         </div>
       </div>
     </div>
@@ -107,7 +107,7 @@
 		</nav>
 		<div class="card-deck">
 			<div class="card">
-				<a href="#"><img class="card-img-top" src="resources/image/이벤트.jpg" alt="Card image cap"></a>
+				<a href="#"><img class="card-img-top" src="resources/image/event.jpg" alt="Card image cap"></a>
 				<div class="card-body">
 					<h4 class="card-title">이벤트</h4>
 					<p class="card-text">각 푸드트럭에서 실시하는 이벤트를 알아보세요.</p>
@@ -115,7 +115,7 @@
 				</div>
 			</div>
 			<div class="card"> 
-				<a href="#"><img class="card-img-top" src="resources/image/뉴스.jpg" alt="Card image cap" ></a>
+				<a href="#"><img class="card-img-top" src="resources/image/news.png" alt="Card image cap" ></a>
 				<div class="card-body">
 					<h4 class="card-title">푸드트럭 News</h4>
 					<p class="card-text">당신의 푸드트럭의 새로운 소식을 알아보세요.</p>
