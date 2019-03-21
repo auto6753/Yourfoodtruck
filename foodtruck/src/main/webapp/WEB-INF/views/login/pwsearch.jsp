@@ -19,51 +19,46 @@ body {
 	margin-top: 100px;
 	color: blue;
 	font-weight: bold;
-	font-size: 300%;
+	font-size: 40px;
 }
 
 #form {
-	margin-left: 10%;
-	margin-right: 10%;
-
-}
-#all{
-
 	margin-top: 50px;
-	
-	width: 50%;
-	margin: 0 auto;
-
+	height: 210px;
+	width: 50%
 }
+
 
 #login_box {
+	magin:0 auto;
 	margin-top: 20px;
-	
 }
 
 #next {
 	align: center;
-	
+	width: 100px
 }
 
-/* .test {
+.test {
 	width: 85%
-} */
+}
 
 .test2 {
 	display: block;
 	float: right;
 }
 
-/* #mcheck {
+#mcheck {
 	margin-top: -38px;
-} */
+}
 
 #next {
 	float: right;
 	margin: 10px 0;
 }
-
+.card-header{
+	width: 500px;
+}
 </style>	
 
 
@@ -74,29 +69,26 @@ body {
 
 <body>
 
-	<div id="logo">당신의 푸드트럭</div>
+	<p id="logo">당신의 푸드트럭</p>
 	
-	<div id="all">
+	<div>
+		<ul>	
 		<form id="form">
-			<div class="card-header">아이디찾기</div>
+			<div class="card-header">비밀번호찾기</div>
 			<div id="login_box">
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="이름">
+					<input type="text" class="form-control" id="name" placeholder="아이디입력">
 				</div>
-				<div style="display: block" class="form-group">
-					<input type="text" class="form-control test" id="email"
-						placeholder="이메일">
-					<button id="mcheck" type="button" class="btn btn-primary test2">인증</button>
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" id="check"
-						placeholder="인증번호 입력">
+				
+					
 					<button id="next" type="button"
 						class="btn btn-primary btn-lg btn-block">다음</button>
 				</div>
+
+			</form>
+		</ul>
 			</div>
-		</form>
-	</div>
+	
 
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>

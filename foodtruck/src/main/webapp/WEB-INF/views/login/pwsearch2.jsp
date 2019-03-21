@@ -33,17 +33,12 @@ body {
 	width: 500px;
 }
 #next {
-	float: left;
-	margin: 10px 0;
-	align: center;
-	width: 200px
-}
-#next1 {
 	float: right;
 	margin: 10px 0;
 	align: center;
 	width: 200px
 }
+
 
 </style>
 
@@ -60,18 +55,14 @@ body {
 	<div>
 		
 			
-			<div class="card-header">아이디찾기</div>
+			<div class="card-header">비밀번호찾기</div>
 			<form id="form">
 				<div class="form-group">
-					<label for="exampleFormControlTextarea1">보유중인 아이디</label>
-					<li><a href="" title="Banking & Insurance apps">
-                                <span class="text">tmxk55</span></a>
-                                <div class="clearfix"></div>
-                            </li>
+					<label for="exampleFormControlTextarea1">회원님의 입력하신 이메일로 임시비밀번호가 발송 됩니다.</label>
+					
 				</div>
 				
-				<button id="next1" type="button"
-					class="btn btn-primary btn-lg btn-block">비밀번호찾기</button>
+				
 					<button id="next" type="button"
 					class="btn btn-primary btn-lg btn-block">로그인하기</button>
 			</form>
