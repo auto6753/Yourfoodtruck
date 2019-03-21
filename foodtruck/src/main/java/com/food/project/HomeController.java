@@ -8,14 +8,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.food.project.domain.MemberVO;
+import com.food.project.service.MemberService;
+
+import lombok.AllArgsConstructor;
 
 /**
  * Handles requests for the application home page.
  */
+@AllArgsConstructor
 @Controller
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+	private MemberService memservice;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -26,17 +35,7 @@ public class HomeController {
 	public String login(Locale locale, Model model) {
 		return "login/login";
 	}
-//	�븘�씠�뵒 李얘린
-	@RequestMapping(value = "/forgetid", method = RequestMethod.GET)
-	public String forgetid(Locale locale, Model model) {
-		return "login/idsearch";
-	}
-//	register
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Locale locale, Model model) {
-		return "login/register";
-	}	
-	
+
 // rehome 
 	@RequestMapping(value = "/rehome", method = RequestMethod.GET)
 	public String rehome(Locale locale, Model model) {
@@ -62,53 +61,62 @@ public class HomeController {
 	public String mypagedo(Locale locale, Model model) {
 		return "customer/Mypage";
 	}
-	
-	
+
 // 怨좉컼�꽱�꽣
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Locale locale, Model model) {
 		return "help/help";
 	}
-	
+
+//forget id
 	@RequestMapping(value = "/idsearch", method = RequestMethod.GET)
 	public String idsearch(Locale locale, Model model) {
 		return "login/idsearch";
 	}
 
+//forget id next
 	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
 	public String idsearch1(Locale locale, Model model) {
-		
-	
 		return "login/idsearch1";
 	}
-<<<<<<< HEAD
+
+//forget pw 
 	@RequestMapping(value = "/pwsearch", method = RequestMethod.GET)
 	public String pwsearch(Locale locale, Model model) {
-		
-	
 		return "login/pwsearch";
 	}
+
+//forget pw next
 	@RequestMapping(value = "/pwsearch1", method = RequestMethod.GET)
 	public String pwsearch1(Locale locale, Model model) {
-		
-	
 		return "login/pwsearch1";
 	}
+
+//forget pw next next 
 	@RequestMapping(value = "/pwsearch2", method = RequestMethod.GET)
 	public String pwsearch2(Locale locale, Model model) {
-		
-	
 		return "login/pwsearch2";
 	}
-	@RequestMapping(value = "/joinmember", method = RequestMethod.GET)
+
+//join
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String joinmember(Locale locale, Model model) {
-		
-	
-		return "login/joinmember";
+		return "login/join";
 	}
 
+//register
+	@RequestMapping(value = "/regi", method = RequestMethod.GET)
+	public String register(Locale locale, Model model, MemberVO memvo) {
+		System.out.println("레지도착");
+		memvo.getM_name();
+		memservice.meminsert(memvo);
+		return "login/join";
+	}
 
-
-=======
->>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
+//login check
+	@RequestMapping(value = "/logincheck", method = RequestMethod.GET)
+	public String searchCustomer(@RequestParam("m_mail") String m_mail,@RequestParam("passwd") String passwd, Model model) {
+		model.addAttribute("customer", memservice.getmember(m_mail));
+		return "customer::customerInfo";
+	}
 }
