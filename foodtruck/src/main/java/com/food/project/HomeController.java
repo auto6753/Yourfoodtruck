@@ -81,4 +81,12 @@ public class HomeController {
 	
 		return "login/idsearch1";
 	}
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
+	public String withdrawal(Locale locale, Model model) {
+		return "customer/withdrawal";
+	}
+	@RequestMapping(value = "/withdrawalcheck", method = RequestMethod.GET)
+	public String withdrawalcheck(Locale locale, Model model) {
+		return "customer/withdrawalcheck";
+	}
 }
