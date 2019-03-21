@@ -81,14 +81,38 @@ public class HomeController {
 	
 		return "login/idsearch";
 	}
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
 	public String idsearch1(Locale locale, Model model) {
 		
 	
 		return "login/idsearch1";
 	}
+	@RequestMapping(value = "/pwsearch", method = RequestMethod.GET)
+	public String pwsearch(Locale locale, Model model) {
+		
+	
+		return "login/pwsearch";
+	}
+	@RequestMapping(value = "/pwsearch1", method = RequestMethod.GET)
+	public String pwsearch1(Locale locale, Model model) {
+		
+	
+		return "login/pwsearch1";
+	}
+	@RequestMapping(value = "/pwsearch2", method = RequestMethod.GET)
+	public String pwsearch2(Locale locale, Model model) {
+		
+	
+		return "login/pwsearch2";
+	}
+	@RequestMapping(value = "/joinmember", method = RequestMethod.GET)
+	public String joinmember(Locale locale, Model model) {
+		
+	
+		return "login/joinmember";
+	}
 
-=======
->>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
+
+
 }

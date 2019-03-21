@@ -13,10 +13,11 @@ background-color: rgb(248,249,250);
 
 #logo {
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 150px;
 	color:blue;
 	font-weight:bold;
-	font-size: 50px;
+	font-size: 40px;
+
 }
 
 body {
@@ -24,7 +25,7 @@ body {
 }
 
 #login_box {
-	width: 400px;
+	width: 360px;
 	margin: 0 auto;
 }
 #form{
