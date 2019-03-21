@@ -22,10 +22,16 @@
 	margin-top: 50px;
 	margin-left: 26%;
 }
+
+.test {
+	margin-bottom: 90px;
+}
+
 </style>
 <!-- Navigation -->
+<div class="test">
 <nav
-	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top test">
 	<div class="container">
 		<a class="navbar-brand" href="rehome">당신의 푸드트럭!</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -56,8 +62,8 @@
 				</c:if>
 			</div>
 		</div>
-
 	</div>
 </nav>
+</div>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
