@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
@@ -49,10 +49,11 @@
 				<span id="login" class="badge badge-light"><a href="login">로그인</a></span>
 				<span class="badge badge-light"><a href="/project/login/register">회원가입</a></span>
 				</c:if>
-				<c:if test="${sessionid != null}">
-				<span id="" class="badge badge-light"><a href="#">${name }님</a></span>
-				<span id="" class="badge badge-light"><a href="#">마이페이지</a></span>
-				<span id="" class="badge badge-light"><a href="#">로그아웃</a></span>
+				<%-- <c:if test="${sessionid != null}"> --%>
+				<c:if test="${not empty sessionScope.sessionid}">
+					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.m_name}님</a></span>
+					<span id="" class="badge badge-light"><a href="#">마이페이지</a></span>
+					<span id="" class="badge badge-light"><a href="#">로그아웃</a></span>
 				</c:if>
 			</div>
 		</div>
@@ -61,3 +62,4 @@
 </nav>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+

@@ -38,12 +38,7 @@ body {
 	align: center;
 	width: 200px
 }
-#next1 {
-	float: right;
-	margin: 10px 0;
-	align: center;
-	width: 200px
-}
+
 
 </style>
 
@@ -58,24 +53,24 @@ body {
 	<p id="logo">당신의 푸드트럭</p>
 
 	<div>
-		<ul>
+		
+			
+			<div class="card-header">비밀번호찾기</div>
 			<form id="form">
 				<div class="form-group">
-					<label for="exampleFormControlTextarea1">아이디찾기</label>
-					<textarea class="form-control" id="exampleFormControlTextarea1"
-						rows="3"></textarea>
+					<label for="exampleFormControlTextarea1">회원님의 입력하신 이메일로 임시비밀번호가 발송 됩니다.</label>
+					
 				</div>
 				
-				<button id="next1" type="button"
-					class="btn btn-primary btn-lg btn-block">비밀번호찾기</button>
+				
 					<button id="next" type="button"
 					class="btn btn-primary btn-lg btn-block">로그인하기</button>
-	</div>
+			</form>
+		</div>
 
-	</div>
-	</form>
-	</ul>
-	</div>
+
+
+
 
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>

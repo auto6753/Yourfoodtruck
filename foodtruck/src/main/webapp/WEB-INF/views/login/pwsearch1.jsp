@@ -72,7 +72,7 @@ body {
 	<div>
 		<ul>	
 		<form id="form">
-			<div class="card-header">아이디찾기</div>
+			<div class="card-header">비밀번호찾기</div>
 			<div id="login_box">
 				<div class="form-group">
 					<input type="text" class="form-control" id="name" placeholder="이름">
