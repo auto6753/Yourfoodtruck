@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <style>
 .carousel-item {
 	height: 65vh;
@@ -61,5 +61,5 @@
 
 	</div>
 </nav>
-<script type="text/javascript" src="resources/js/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
