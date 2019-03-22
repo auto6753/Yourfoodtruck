@@ -118,6 +118,14 @@
 	margin-left:860px;
 	margin-top:10px;
 }
+.sunjae{
+	width:200px;
+	margin: 0 auto;
+	text-align: center;
+}
+.sg {
+    transform: translate(8%,15%);
+}
 
 </style>
 </head>
@@ -182,7 +190,8 @@
 				
 		</table>
 	</div>
-	<nav aria-label="Page navigation example" id="nav">
+	<div class="sunjae">
+	<nav aria-label="Page navigation example" id="nav" class="sg">
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Previous">
@@ -201,6 +210,7 @@
     </li>
   </ul>
 </nav>
+</div>
 		<script src="js/jquery-3.1.1.js"></script>
 		<script src="js/bootstrap.js"></script>
 </body>
