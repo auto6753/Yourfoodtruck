@@ -16,6 +16,7 @@
 			location.href="customer/callList";
 		});
 	});
+
 </script>
 <div>
 	<div id="title">
@@ -31,3 +32,4 @@
 	</div>
 	<!-- content -->
 </div>
+
