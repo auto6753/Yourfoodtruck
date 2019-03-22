@@ -22,8 +22,13 @@
 	margin-top: 50px;
 	margin-left: 26%;
 }
+
+.test{
+	margin-bottom: 90px;
+}
 </style>
 <!-- Navigation -->
+<div class="test">
 <nav
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
 	<div class="container">
@@ -59,5 +64,6 @@
 
 	</div>
 </nav>
+</div>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>

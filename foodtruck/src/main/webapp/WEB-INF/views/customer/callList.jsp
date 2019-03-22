@@ -8,23 +8,28 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <jsp:include page="../header/header.jsp"></jsp:include>
 <style>
+
 #with {
+	margin: 0 auto;
 	margin-top: 150px;
-	margin-left: 350px;
 	width: 1200px;
 	height: 600px;
 	border: 1px solid darkgray;
 }
-#nav{
-	margin-left:860px;
-	margin-top:10px;
+	
+.sunjae{
+	width:200px;
+	margin: 0 auto;
+	text-align: center;
 }
-
+.sg {
+    transform: translate(8%,15%);
+}
 </style>
 </head>
 <body>
-	<div id="with">
-		<table class="table table-hover">
+	<div id="with" class="col">
+		<table class="table table-hover" class="col">
 			<h1 style="text-align:center; margin-top:10px;">호출내역</h1>
 			<br>
 			<thead>
@@ -79,12 +84,13 @@
 				
 		</table>
 	</div>
-	<nav aria-label="Page navigation example" id="nav">
+<div class="sunjae">
+	<nav aria-label="Page navigation example" id="nav" class="sg" >
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
+        <span class="sr-only"></span>
       </a>
     </li>
     <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -93,11 +99,13 @@
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
+        <span class="sr-only"></span>
       </a>
     </li>
   </ul>
 </nav>
+</div>
+
 		<script src="js/jquery-3.1.1.js"></script>
 		<script src="js/bootstrap.js"></script>
 </body>
