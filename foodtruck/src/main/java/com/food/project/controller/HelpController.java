@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/help", method = RequestMethod.GET)
 public class HelpController {
 	
-//	@RequestMapping(value = "", method = RequestMethod.GET)
-//	public String help(Locale locale, Model model) {
-//		return "help/helpMain";
-//	}
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String help(Locale locale, Model model) {
+		return "help/helpMain";
+	}
 	
 //	@RequestMapping(value = "/questionReg", method = RequestMethod.GET)
 //	public String area(Locale locale, Model model) {

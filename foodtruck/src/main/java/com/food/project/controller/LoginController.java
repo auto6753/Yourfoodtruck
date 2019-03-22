@@ -54,6 +54,6 @@ public class LoginController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Locale locale, Model model) {
-		return "login/register";
+		return "login/registerForm";
 	}
 }
