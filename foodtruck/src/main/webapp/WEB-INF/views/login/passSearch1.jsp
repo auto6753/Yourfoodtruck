@@ -19,44 +19,46 @@ body {
 	margin-top: 100px;
 	color: blue;
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 300%;
 }
 
 #form {
+	margin-left: 10%;
+	margin-right: 10%;
+
+}
+#all{
+
 	margin-top: 50px;
+	
+	width: 60%;
+	margin: 0 auto;
+
 }
 
-
 #login_box {
-	width: 500px;
 	margin-top: 20px;
+	
 }
 
 #next {
 	align: center;
-	width: 100px
+	
 }
 
-.test {
-	width: 85%
-}
 
 .test2 {
 	display: block;
 	float: right;
 }
 
-#mcheck {
-	margin-top: -38px;
-}
+
 
 #next {
 	float: right;
 	margin: 10px 0;
 }
-.card-header{
-	width: 500px;
-}
+
 </style>	
 
 
@@ -67,12 +69,11 @@ body {
 
 <body>
 
-	<p id="logo">당신의 푸드트럭</p>
+	<div id="logo"><a href="rehome">당신의 푸드트럭</a></div>
 	
-	<div>
-		<ul>	
+	<div id="all">
 		<form id="form">
-			<div class="card-header">아이디찾기</div>
+			<div class="card-header">비밀번호찾기</div>
 			<div id="login_box">
 				<div class="form-group">
 					<input type="text" class="form-control" id="name" placeholder="이름">
@@ -88,10 +89,8 @@ body {
 					<button id="next" type="button"
 						class="btn btn-primary btn-lg btn-block">다음</button>
 				</div>
-
 			</div>
 		</form>
-		</ul>
 	</div>
 
 	<script src="resources/js/jquery.min.js"></script>
