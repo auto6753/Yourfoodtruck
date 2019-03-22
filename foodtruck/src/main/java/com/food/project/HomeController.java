@@ -89,4 +89,12 @@ public class HomeController {
 	public String withdrawalcheck(Locale locale, Model model) {
 		return "customer/withdrawalcheck";
 	}
+	@RequestMapping(value = "/breakdown", method = RequestMethod.GET)
+	public String breakdown(Locale locale, Model model) {
+		return "customer/breakdown";
+	}
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String review(Locale locale, Model model) {
+		return "customer/review";
+	}
 }
