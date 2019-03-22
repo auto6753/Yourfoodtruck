@@ -1,4 +1,4 @@
-package com.food.project.Controller;
+package com.food.project.controller;
 //package com.food.project;
 //
 //import java.util.Locale;
