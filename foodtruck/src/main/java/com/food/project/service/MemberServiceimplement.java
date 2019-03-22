@@ -21,10 +21,10 @@ public class MemberServiceimplement implements MemberService {
 		
 	}
 	@Override
-	public String getmember(String m_mail) {
+	public MemberVO getmember(String m_mail) {
 		// TODO Auto-generated method stub
-		memmapper.getmember(m_mail);
-		return null;
+		
+		return memmapper.getmember(m_mail);
 	}
 
 

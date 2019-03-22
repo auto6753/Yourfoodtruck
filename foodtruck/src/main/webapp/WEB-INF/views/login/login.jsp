@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+	<script src="resources/js/jquery.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
 <title>BootStrap</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <style>
@@ -33,19 +36,29 @@ body {
 }
 </style>
  <script>
- $(document).reday(function(){
+ $(document).ready(function(){
 	$("#login").click(function(){
+		alert("클릭");
 		var path = "check";
 		var query = {
-				id:$("#id").val(),
-				pw:$("#pw").val()
+				m_mail:$("#id").val(),
+				m_passwd:$("#pw").val()
 		}
 		$.ajax({
 			url:path,
-			type:post,
+			type:"post",
 			data:query,
 			success:function(data){
-				alert(data);
+				console.log(data);
+				if(data=="idfail") //아이디틀림
+				alert("아이디 틀렸당");
+				else if(data == "pwfail")//비번틀림
+				alert("비번 틀렸당")
+				else{
+					alert("성공");
+					location.href="rehome";
+				}
+					
 			}
 		});
 	});
@@ -64,13 +77,9 @@ body {
 			</div>
 			<button id="login" type="button" class="btn btn-primary btn-lg btn-block">로그인</button>
 			<br> <span class="txt_find"> <a href="forgetid" class="link_find">아이디찾기</a>
-
 				<a href="" class="link_find">비밀번호찾기</a> <a href="register" class="link_find">회원가입</a>
 			</span>
 		</div>
 	</form> 
-	
-	<script src="resources/js/jquery.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>

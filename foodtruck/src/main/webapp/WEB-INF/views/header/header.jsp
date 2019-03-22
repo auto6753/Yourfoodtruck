@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -45,14 +45,16 @@
 				<li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
 			</ul>
 			<div id="top-right">
-				<c:if test="${sessionid == null}">
-				<span id="login" class="badge badge-light"><a href="login">로그인</a></span>
-				<span class="badge badge-light"><a href="register">회원가입</a></span>
+				
+				<c:if test="${empty sessionScope.sessionid}">
+					<span id="login" class="badge badge-light"><a href="login">로그인</a></span>
+					<span class="badge badge-light"><a href="register">회원가입</a></span>
 				</c:if>
-				<c:if test="${sessionid != null}">
-				<span id="" class="badge badge-light"><a href="#">${name }님</a></span>
-				<span id="" class="badge badge-light"><a href="#">마이페이지</a></span>
-				<span id="" class="badge badge-light"><a href="#">로그아웃</a></span>
+				<%-- <c:if test="${sessionid != null}"> --%>
+				<c:if test="${not empty sessionScope.sessionid}">
+					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.m_name}님</a></span>
+					<span id="" class="badge badge-light"><a href="#">마이페이지</a></span>
+					<span id="" class="badge badge-light"><a href="#">로그아웃</a></span>
 				</c:if>
 			</div>
 		</div>

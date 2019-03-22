@@ -20,13 +20,14 @@
 		select * from customer where cid = #{cid}
 	</select>
  -->
+ <!-- 회원가입 -->
  	<insert id="meminsert">
 		insert into member(m_mail,m_passwd,m_name,m_nicname,m_position,m_license,company,hp)values(#{m_mail,jdbcType=VARCHAR},#{m_passwd,jdbcType=VARCHAR},#{m_name,jdbcType=VARCHAR},#{m_nicname,jdbcType=VARCHAR},#{m_position,jdbcType=INTEGER},#{m_license,jdbcType=INTEGER},#{company,jdbcType=VARCHAR},#{hp,jdbcType=INTEGER})
 	</insert>
 	
+ <!-- 로그인 -->	
 	<select id="getmember" resultType="com.food.project.domain.MemberVO">
-		select * from member where m_mail = #{m_mail}
+		select m_mail,m_passwd,m_name from member where m_mail = #{m_mail}
 	</select>
-	
 	
 </mapper>

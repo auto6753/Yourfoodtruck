@@ -1,6 +1,10 @@
 package com.food.project;
 
+import java.sql.SQLException;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.MemberVO;
 import com.food.project.service.MemberService;
@@ -114,9 +119,37 @@ public class HomeController {
 	}
 
 //login check
-	@RequestMapping(value = "/logincheck", method = RequestMethod.GET)
-	public String searchCustomer(@RequestParam("m_mail") String m_mail,@RequestParam("passwd") String passwd, Model model) {
-		model.addAttribute("customer", memservice.getmember(m_mail));
-		return "customer::customerInfo";
+	@ResponseBody
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public String logincheck(@RequestParam("m_mail") String m_mail,@RequestParam("m_passwd") String m_passwd, Model model,HttpSession session,HttpServletRequest request) {
+//		model.addAttribute("customer", memservice.getmember(m_mail));
+		String result;
+		System.out.println("왔다.");
+		System.out.println(m_mail);
+		MemberVO memvo =  memservice.getmember(m_mail);
+		
+		if(memvo == null) {
+			System.out.println("아이디틀림");
+			result="idfail"; //아이디틀림
+		}
+		else if(memvo.getM_passwd().equals(m_passwd)) {
+			System.out.println("성공");
+			result="success";// 성공
+			/* HttpSession si = null; */
+			/* session.setAttribute("sessionid", memvo.getM_mail()); */
+			/* si.setAttribute("sessionid", memvo); */
+			
+			request.getSession().setAttribute("sessionid", memvo);
+			System.out.println(request.getSession().getAttribute("sessionid"));
+		}
+		else {
+			System.out.println("비번틀림");
+			result="pwfail";//비번틀림
+		}	
+
+//		System.out.println(memvo.getM_passwd());
+		System.out.println(result);
+		
+		return result;
 	}
 }
