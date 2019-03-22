@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<script src="resources/js/jquery.min.js"></script>
 <style>
 .carousel-item {
 	height: 65vh;
@@ -31,7 +31,7 @@
 <!-- Navigation -->
 <div class="test">
 <nav
-	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top test">
+	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
 	<div class="container">
 		<a class="navbar-brand" href="rehome">당신의 푸드트럭!</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
