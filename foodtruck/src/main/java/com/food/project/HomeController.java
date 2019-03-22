@@ -59,8 +59,8 @@ public class HomeController {
 
 // mypage	
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypagedo(Locale locale, Model model) {
-		return "customer/Mypage";
+	public String mypage(Locale locale, Model model) {
+		return "customer/mypage";
 	}
 	
 	
@@ -81,17 +81,17 @@ public class HomeController {
 	
 		return "login/idsearch1";
 	}
-	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
-	public String withdrawal(Locale locale, Model model) {
-		return "customer/withdrawal";
+	@RequestMapping(value = "/goodbyeform", method = RequestMethod.GET)
+	public String goodbyeform(Locale locale, Model model) {
+		return "customer/goodbyeform";
 	}
-	@RequestMapping(value = "/withdrawalcheck", method = RequestMethod.GET)
-	public String withdrawalcheck(Locale locale, Model model) {
-		return "customer/withdrawalcheck";
+	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
+	public String goodbye(Locale locale, Model model) {
+		return "customer/goodbye";
 	}
-	@RequestMapping(value = "/breakdown", method = RequestMethod.GET)
-	public String breakdown(Locale locale, Model model) {
-		return "customer/breakdown";
+	@RequestMapping(value = "/callList", method = RequestMethod.GET)
+	public String callList(Locale locale, Model model) {
+		return "customer/callList";
 	}
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public String review(Locale locale, Model model) {
