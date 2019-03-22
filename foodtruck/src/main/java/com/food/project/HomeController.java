@@ -41,7 +41,7 @@ public class HomeController {
 	@RequestMapping(value = "/rehome", method = RequestMethod.GET)
 	public String rehome(Locale locale, Model model) {
 //		model.addAttribute("content",main(model));
-		return "main/main";
+		return "redirect:/";
 	}
 
 // 硫붿씤
