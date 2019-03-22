@@ -26,17 +26,8 @@ public class HomeController {
 	public String login(Locale locale, Model model) {
 		return "login/login";
 	}
-//	�븘�씠�뵒 李얘린
-	@RequestMapping(value = "/forgetid", method = RequestMethod.GET)
-	public String forgetid(Locale locale, Model model) {
-		return "login/idsearch";
-	}
-//	register
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Locale locale, Model model) {
-		return "login/register";
-	}	
-	
+
+
 // rehome 
 	@RequestMapping(value = "/rehome", method = RequestMethod.GET)
 	public String rehome(Locale locale, Model model) {
@@ -50,12 +41,6 @@ public class HomeController {
 		return "main/main";
 	}
 
-// �뫖�뱶�듃�윮 寃��깋
-	@RequestMapping(value = "/serach", method = RequestMethod.GET)
-	public String serach(Locale locale, Model model) {
-		return "serach/serach";
-
-	}
 
 // mypage	
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
@@ -70,45 +55,53 @@ public class HomeController {
 		return "help/help";
 	}
 	
-	@RequestMapping(value = "/idsearch", method = RequestMethod.GET)
-	public String idsearch(Locale locale, Model model) {
-		return "login/idsearch";
+	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
+	public String idSearch(Locale locale, Model model) {
+		
+	
+		return "login/idSearch";
 	}
 
-	@RequestMapping(value = "/idsearch1", method = RequestMethod.GET)
-	public String idsearch1(Locale locale, Model model) {
+	@RequestMapping(value = "/idSearch1", method = RequestMethod.GET)
+	public String idSearch1(Locale locale, Model model) {
 		
 	
-		return "login/idsearch1";
+		return "login/idSearch1";
 	}
-<<<<<<< HEAD
-	@RequestMapping(value = "/pwsearch", method = RequestMethod.GET)
-	public String pwsearch(Locale locale, Model model) {
+
+	@RequestMapping(value = "/passSearch", method = RequestMethod.GET)
+	public String passSearch(Locale locale, Model model) {
 		
 	
-		return "login/pwsearch";
+		return "login/passSearch";
 	}
-	@RequestMapping(value = "/pwsearch1", method = RequestMethod.GET)
-	public String pwsearch1(Locale locale, Model model) {
+	@RequestMapping(value = "/passSearch1", method = RequestMethod.GET)
+	public String passSearch1(Locale locale, Model model) {
 		
 	
-		return "login/pwsearch1";
+		return "login/passSearch1";
 	}
-	@RequestMapping(value = "/pwsearch2", method = RequestMethod.GET)
-	public String pwsearch2(Locale locale, Model model) {
+	@RequestMapping(value = "/passSearch2", method = RequestMethod.GET)
+	public String passSearch2(Locale locale, Model model) {
 		
 	
-		return "login/pwsearch2";
+		return "login/passSearch2";
 	}
-	@RequestMapping(value = "/joinmember", method = RequestMethod.GET)
-	public String joinmember(Locale locale, Model model) {
+	@RequestMapping(value = "/registerAgree", method = RequestMethod.GET)
+	public String registerAgree(Locale locale, Model model) {
 		
 	
-		return "login/joinmember";
+		return "login/registerAgree";
+	}
+
+	@RequestMapping(value = "/registerForm", method = RequestMethod.GET)
+	public String registerForm(Locale locale, Model model) {
+		
+	
+		return "login/registerForm";
 	}
 
 
 
-=======
->>>>>>> branch 'master' of https://github.com/auto6753/Yourfoodtruck.git
+  
 }

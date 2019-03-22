@@ -20,30 +20,29 @@ body {
 	margin-top: 100px;
 	color: blue;
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 300%;
+}
+#all{
+
+	margin-top: 50px;
+	
+	width: 60%;
+	margin: 0 auto;
+	
+}
+#font {
+	font-size: 100%;
 }
 
-#form {
-	width: 500px;
-	margin-top: 20px;
-}
 
 
-.card-header {
-	width: 500px;
-}
 #next {
-	float: left;
-	margin: 10px 0;
-	align: center;
-	width: 200px
+	
+	
+	margin: 0 auto;
+	width: 150px
 }
-#next1 {
-	float: right;
-	margin: 10px 0;
-	align: center;
-	width: 200px
-}
+
 
 </style>
 
@@ -55,23 +54,19 @@ body {
 
 <body>
 
-	<p id="logo">당신의 푸드트럭</p>
+	<div id="logo"><a href="rehome">당신의 푸드트럭</a></div>
 
-	<div>
+	<div id="all">
 		
 			
-			<div class="card-header">아이디찾기</div>
+			<div class="card-header">비밀번호찾기</div>
 			<form id="form">
 				<div class="form-group">
-					<label for="exampleFormControlTextarea1">보유중인 아이디</label>
-					<li><a href="" title="Banking & Insurance apps">
-                                <span class="text">tmxk55</span></a>
-                                <div class="clearfix"></div>
-                            </li>
+					<label id="font" for="exampleFormControlTextarea1">회원님의 입력하신 이메일로 임시비밀번호가 발송 됩니다.</label>
+					
 				</div>
 				
-				<button id="next1" type="button"
-					class="btn btn-primary btn-lg btn-block">비밀번호찾기</button>
+				
 					<button id="next" type="button"
 					class="btn btn-primary btn-lg btn-block">로그인하기</button>
 			</form>

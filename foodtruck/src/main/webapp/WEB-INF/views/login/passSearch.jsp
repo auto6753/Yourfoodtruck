@@ -19,46 +19,35 @@ body {
 	margin-top: 100px;
 	color: blue;
 	font-weight: bold;
-	font-size: 40px;
+	font-size: 300%;
 }
 
-#form {
+#all{
+
 	margin-top: 50px;
-	height: 210px;
-	width: 50%
+	
+	width: 50%;
+	margin: 0 auto;
+
+}
+#form {
+	margin-left: 10%;
+	margin-right: 10%;
+	
 }
 
 
 #login_box {
-	magin:0 auto;
+	
 	margin-top: 20px;
 }
 
 #next {
 	align: center;
-	width: 100px
+	
 }
 
-.test {
-	width: 85%
-}
 
-.test2 {
-	display: block;
-	float: right;
-}
-
-#mcheck {
-	margin-top: -38px;
-}
-
-#next {
-	float: right;
-	margin: 10px 0;
-}
-.card-header{
-	width: 500px;
-}
 </style>	
 
 
@@ -69,12 +58,11 @@ body {
 
 <body>
 
-	<p id="logo">당신의 푸드트럭</p>
+	<div id="logo"><a href="rehome">당신의 푸드트럭</a></div>
 	
-	<div>
-		<ul>	
-		<form id="form">
-			<div class="card-header">비밀번호찾기</div>
+	<div id= "all">
+				<form id="form">
+			<div id="title"class="card-header">비밀번호찾기</div>
 			<div id="login_box">
 				<div class="form-group">
 					<input type="text" class="form-control" id="name" placeholder="아이디입력">
@@ -86,7 +74,7 @@ body {
 				</div>
 
 			</form>
-		</ul>
+	
 			</div>
 	
 
