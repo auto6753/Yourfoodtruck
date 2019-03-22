@@ -16,6 +16,7 @@
 
 
 
+
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=clusterer"></script>
@@ -50,3 +51,4 @@
 		clusterer.addMarkers(markers);
 	});
 </script>
+<style>#map{height:50%;}</style>
