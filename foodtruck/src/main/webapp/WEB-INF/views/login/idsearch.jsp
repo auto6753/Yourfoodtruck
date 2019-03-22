@@ -1,102 +1,69 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false"  contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>BootStrap</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<style>
-* {
-	margin: 0 auto;
-}
-
-body {
-	background-color: rgb(248, 249, 250);
-}
-
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 300%;
-}
-
-#form {
-	margin-left: 10%;
-	margin-right: 10%;
-
-}
-#all{
-
-	margin-top: 50px;
-	
-	width: 50%;
-	margin: 0 auto;
-
-}
-
-#login_box {
-	margin-top: 20px;
-	
-}
-
-#next {
-	align: center;
-	
-}
-
-/* .test {
-	width: 85%
-} */
-
-.test2 {
-	display: block;
-	float: right;
-}
-
-/* #mcheck {
-	margin-top: -38px;
-} */
-
-#next {
-	float: right;
-	margin: 10px 0;
-}
-
-</style>	
 
 
-<script>
-	
-</script>
-</head>
+<form class="form-horizontal" action="regi" method="get">
+<fieldset>
 
-<body>
+<!-- Form Name -->
+<legend>Register</legend>
 
-	<div id="logo">당신의 푸드트럭</div>
-	
-	<div id="all">
-		<form id="form">
-			<div class="card-header">아이디찾기</div>
-			<div id="login_box">
-				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="이름">
-				</div>
-				<div style="display: block" class="form-group">
-					<input type="text" class="form-control test" id="email"
-						placeholder="이메일">
-					<button id="mcheck" type="button" class="btn btn-primary test2">인증</button>
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" id="check"
-						placeholder="인증번호 입력">
-					<button id="next" type="button"
-						class="btn btn-primary btn-lg btn-block">다음</button>
-				</div>
-			</div>
-		</form>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="m_mail">이메일</label>  
+  <div class="col-md-2">
+  <input id="emailaddr" name="m_mail" type="text" placeholder="Email" class="form-control input-md" required="">
+    
+  </div>
+</div>
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="m_passwd">패스워드</label>
+  <div class="col-md-2">
+    <input id="password" name="m_passwd" type="password" placeholder="Password" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="m_nicname">닉네임</label>  
+  <div class="col-md-2">
+  <input id="emailaddr" name="m_nicname" type="text" placeholder="닉네임" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="m_name">이름</label>  
+  <div class="col-md-2">
+  <input id="hostkey" name="m_name" type="text" placeholder="이름" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <button id="submit" name="submit" class="btn btn-primary">회원가입</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+<div class="container">
+	<div class="row">
 	</div>
+</div>
+
 
 	<script src="resources/js/jquery.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
