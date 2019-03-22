@@ -34,7 +34,7 @@ body {
 </head>
 <body>
 	<div id="logo">
-		<a href="rehome">당신의 푸드트럭</a>
+		<a href="rehome">당신의 푸드트럭2</a>
 	</div>
 	<form id="form">
 		<div id="login_box">
