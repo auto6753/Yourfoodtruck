@@ -10,10 +10,11 @@
 		$(".review").click(function(){
 			location.href="/project/customer/review";
 		});
-	});
-	$(document).ready(function() {
 		$(".callList").click(function(){
 			location.href="/project/customer/callList";
+		});
+		$(".goodbye").click(function(){
+			location.href="/project/customer/goodbyeForm";
 		});
 	});
 
@@ -28,7 +29,7 @@
 	<div id="title2">
 		<div id="container2" class="snip1535 text2">회원 정보 관리</div>
 		<div id="container2" class="snip1535 text2">1:1문의 내역</div>
-		<div id="container2" class="snip1535 text2">회원탈퇴</div>
+		<div id="container2" class="snip1535 goodbye">회원탈퇴</div>
 	</div>
 	<!-- content -->
 </div>

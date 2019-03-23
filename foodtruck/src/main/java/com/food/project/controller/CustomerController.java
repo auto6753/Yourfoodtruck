@@ -16,38 +16,38 @@ public class CustomerController {
 		return "customer/mypage";
 	}
 	
-//	@RequestMapping(value = "/onboard", method = RequestMethod.GET)
-//	public String onboard(Locale locale, Model model) {
-//		return "customer/onboard";
-//	}
+	@RequestMapping(value = "/onboard", method = RequestMethod.GET)
+	public String onboard(Locale locale, Model model) {
+		return "customer/onboard";
+	}
 	
-//	@RequestMapping(value = "/onSale", method = RequestMethod.GET)
-//	public String onSale(Locale locale, Model model) {
-//		return "customer/onSale";
-//	}
+	@RequestMapping(value = "/onSale", method = RequestMethod.GET)
+	public String onSale(Locale locale, Model model) {
+		return "customer/onSale";
+	}
 	
-//	@RequestMapping(value = "/review", method = RequestMethod.GET)
-//	public String review(Locale locale, Model model) {
-//		return "customer/review";
-//	}
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String review(Locale locale, Model model) {
+		return "customer/review";
+	}
 	
-//	@RequestMapping(value = "/callList", method = RequestMethod.GET)
-//	public String callList(Locale locale, Model model) {
-//		return "customer/callList";
-//	}
+	@RequestMapping(value = "/callList", method = RequestMethod.GET)
+	public String callList(Locale locale, Model model) {
+		return "customer/callList";
+	}
 	
-//	@RequestMapping(value = "/cusInfo", method = RequestMethod.GET)
-//	public String onSale(Locale locale, Model model) {
-//		return "customer/cusInfo";
-//	}
+	@RequestMapping(value = "/cusInfo", method = RequestMethod.GET)
+	public String cusInfo(Locale locale, Model model) {
+		return "customer/cusInfo";
+	}
 	
-//	@RequestMapping(value = "/goodbyeForm", method = RequestMethod.GET)
-//	public String onSale(Locale locale, Model model) {
-//		return "customer/goodbyeForm";
-//	}
+	@RequestMapping(value = "/goodbyeForm", method = RequestMethod.GET)
+	public String goodbyeForm(Locale locale, Model model) {
+		return "customer/goodbyeForm";
+	}
 	
-//	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
-//	public String onSale(Locale locale, Model model) {
-//		return "customer/goodbye";
-//	}
+	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
+	public String goodbye(Locale locale, Model model) {
+		return "customer/goodbye";
+	}
 }
