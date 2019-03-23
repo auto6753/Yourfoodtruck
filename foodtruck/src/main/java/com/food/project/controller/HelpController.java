@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,13 +17,13 @@ public class HelpController {
 		return "help/helpMain";
 	}
 	
-//	@RequestMapping(value = "/questionReg", method = RequestMethod.GET)
-//	public String area(Locale locale, Model model) {
-//		return "help/questionReg";
-//	}
+	@RequestMapping(value = "/questionReg", method = RequestMethod.GET)
+	public String area(Locale locale, Model model) {
+		return "help/questionReg";
+	}
 	
-//	@RequestMapping(value = "/help/myQuestion/{cid}", method = RequestMethod.GET)
-//	public String onSale(@PathVariable cid String cid,Locale locale, Model model) {
-//		return "help/myQuestion";
-//	}
+	@RequestMapping(value = "/myQuestion", method = RequestMethod.GET)
+	public String onSale(Locale locale, Model model) {
+		return "help/myQuestion";
+	}
 }

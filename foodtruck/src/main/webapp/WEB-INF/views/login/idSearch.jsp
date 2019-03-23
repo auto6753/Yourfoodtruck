@@ -1,11 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>BootStrap</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <style>
 * {
 	margin: 0 auto;
@@ -81,8 +80,8 @@ body {
 
 
 </style>
-	<script src="resources/js/jquery.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 
 <script>
 	$(document).ready(function(){
@@ -97,7 +96,7 @@ body {
 <body>
 
 	<div id="logo">
-		<a href="rehome">당신의 푸드트럭</a>
+		<a href="/project/rehome">당신의 푸드트럭</a>
 	</div>
 
 	<div id="idsearch">
@@ -130,10 +129,7 @@ body {
 				<li><a href="" title="Banking & Insurance apps"> <span
 						class="text">tmxk55</span></a>
 					<div class="clearfix"></div></li>
-			</div>
-	
-
-		
+			</div>	
 			<div id="pwnext" style="display: inline-block;">
 				<button id="button" type="button"
 					class="btn btn-primary btn-lg btn-block">비밀번호찾기</button>
@@ -143,10 +139,7 @@ body {
 				<button id="button1" type="button"
 					class="btn btn-primary btn-lg btn-block">로그인하기</button>
 			</div>
-		
 		</form>
 	</div>
-
-
 </body>
 </html>

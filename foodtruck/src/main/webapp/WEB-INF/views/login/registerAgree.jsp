@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title></title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <!-- <script type="text/javascript">
 function chk(){
  var req = document.form.req.checked;
@@ -73,7 +73,7 @@ body {
 </head>
 <body>
 	<div id="logo">
-		<a href="rehome">당신의 푸드트럭</a>
+		<a href="/project/rehome">당신의 푸드트럭</a>
 	</div>
 
 	<div id="all">
@@ -309,7 +309,7 @@ NAVER 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과정�
 
 		</div>
 	</div>
-	<script src="resources/js/jquery.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

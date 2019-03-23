@@ -1,11 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>BootStrap</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <style>
 body {
 	background-color: rgb(248, 249, 250);
@@ -34,7 +33,7 @@ body {
 </head>
 <body>
 	<div id="logo">
-		<a href="rehome">당신의 푸드트럭</a>
+		<a href="/project/rehome">당신의 푸드트럭</a>
 	</div>
 	<form id="form">
 		<div id="login_box">
@@ -46,20 +45,13 @@ body {
 					placeholder="비밀번호">
 			</div>
 			<button type="button" class="btn btn-primary btn-lg btn-block">로그인</button>
-			<br> <span class="txt_find"> <a href="idSearch"
-				class="link_find">아이디찾기</a> <a href="passSearch" class="link_find">비밀번호찾기</a>
-				<a href="registerForm" class="link_find">회원가입</a>
-
+			<br> <span class="txt_find"> <a href="/project/login/idSearch"
+				class="link_find">아이디찾기</a> <a href="/project/login/passSearch" class="link_find">비밀번호찾기</a>
+				<a href="/project/login/register" class="link_find">회원가입</a>
 			</span>
-
-
-
-
 		</div>
-
 	</form>
-
-	<script src="resources/js/jquery.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

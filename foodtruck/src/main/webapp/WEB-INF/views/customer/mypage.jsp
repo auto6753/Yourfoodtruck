@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -8,12 +8,12 @@
 <script>
 	$(document).ready(function() {
 		$(".review").click(function(){
-			location.href="customer/review";
+			location.href="/project/customer/review";
 		});
 	});
 	$(document).ready(function() {
 		$(".callList").click(function(){
-			location.href="customer/callList";
+			location.href="/project/customer/callList";
 		});
 	});
 

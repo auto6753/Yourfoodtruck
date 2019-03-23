@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
 	
-//	@RequestMapping(value = "", method = RequestMethod.GET)
-//	public String mypage(Locale locale, Model model) {
-//		return "customer/mypage";
-//	}
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String mypage(Locale locale, Model model) {
+		return "customer/mypage";
+	}
 	
 //	@RequestMapping(value = "/onboard", method = RequestMethod.GET)
 //	public String onboard(Locale locale, Model model) {

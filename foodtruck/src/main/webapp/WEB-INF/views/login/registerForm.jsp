@@ -1,18 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>BootStrap</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <style>
-
-
 body {
 	background-color: rgb(248, 249, 250);
 }
-
 #logo {
 	text-align: center;
 	margin-top: 100px;
@@ -56,25 +53,16 @@ body {
 #mcheck{
 	float:right;
 }
-
-
 </style>
-
-
 <script>
 	
 </script>
 </head>
-
 <body>
 
 	<div id="logo">
-		<a href="rehome">당신의 푸드트럭</a>
+		<a href="/project/rehome">당신의 푸드트럭</a>
 	</div>
-
-	
-
-
 	<div id="all">
 	<div id="member" class="card-header">회원가입</div>
 	<div id="container">
@@ -146,8 +134,8 @@ body {
 		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script
 		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="resources/js/jquery.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 
 </body>
 </html>
