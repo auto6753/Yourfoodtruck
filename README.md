@@ -1,7 +1,6 @@
 # 19.03.23 주요 사항
 >### 링크 설정시 절대 경로로 해야 여러번 왔다갔다 하지않음
 예)  a태그 : href="rehome"  =>  href="/project/rehome"
-
     이미지 태그는 이렇게 해아 제대로 로딩 됨'resources/image' 폴더 밑에 있다는 가정하에)
     => img src='${pageContext.request.contextPath}/resources/image/question.png'
   
