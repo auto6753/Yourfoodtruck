@@ -56,7 +56,7 @@
 				<c:if test="${not empty sessionScope.sessionid}">
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.m_name}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
-					<span id="" class="badge badge-light"><a href="#">로그아웃</a></span>
+					<span id="" class="badge badge-light"><a href="/project/login/logout">로그아웃</a></span>
 				</c:if>
 			</div>
 		</div>
