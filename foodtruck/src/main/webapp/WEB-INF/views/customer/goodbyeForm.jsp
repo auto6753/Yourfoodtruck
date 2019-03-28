@@ -54,15 +54,18 @@ Q. 탈퇴 시 보유한 쿠폰은 환불/양도 되나요?<br>
 타인에게 양도가 불가합니다.
 </h1>
 	</div>
+<form action="/project/customer/goodbye" method="get">
 	<div id="check">
 	<P style="font-size:20px">당신의 푸드트럭을 탈퇴하시는 이유는 무엇인가요?</P>
 	<input id="box" type="checkbox">단순변심&nbsp;&nbsp;&nbsp;
 	<input id="box" type="checkbox">자주이용하지않음&nbsp;&nbsp;&nbsp;&nbsp;
 	<input id="box" type="checkbox">개인정보/사생활 침해 사례경험<br>
 	<input id="box" type="checkbox">찾고자하는 정보가 없음&nbsp;&nbsp;&nbsp;
-	<input id="box" type="checkbox">기타&nbsp;<input>
+	<input id="box" type="checkbox">기타&nbsp;
+	<input name="m_mail" type="hidden" value="${sessionScope.sessionid.m_mail}">
 	</div>
-	<button style="margin-top:30px; margin-left: 400px; height: 60px; width:200px;">탈퇴확인</button>
-</div>
+	<input type="submit" value="탈퇴확인" style="margin-top:30px; margin-left: 400px; height: 60px; width:200px;">
+</form>
+</div>	
 </body>
 </html>

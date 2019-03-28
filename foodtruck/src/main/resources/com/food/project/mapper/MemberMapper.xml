@@ -29,6 +29,15 @@
 	<select id="getmember" resultType="com.food.project.domain.MemberVO">
 		select m_mail,m_passwd,m_name from member where m_mail = #{m_mail}
 	</select>
+	
+	<select id="getname" resultType="com.food.project.domain.MemberVO">
+		select m_nicname from member where m_nicname = #{m_nicname}
+	</select>
+	
+	<delete id="deletmem">
+		delete from member where m_mail = #{m_mail}
+	</delete>
+	
 <!--아이디 서치 -->
 	<select id="idSearch" resultType="com.food.project.domain.MemberVO">
 		select m_mail from member where m_name like #{m_name} and hp LIKE #{hp}

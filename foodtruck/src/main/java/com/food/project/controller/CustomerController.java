@@ -2,14 +2,23 @@ package com.food.project.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.service.MemberService;
+
+import lombok.AllArgsConstructor;
+@AllArgsConstructor
 @Controller
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
+	private MemberService service;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
@@ -46,8 +55,13 @@ public class CustomerController {
 		return "customer/goodbyeForm";
 	}
 	
+	//회원탈퇴
 	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
-	public String goodbye(Locale locale, Model model) {
+	public String goodbye(Locale locale, Model model,@RequestParam("m_mail") String m_mail,HttpServletRequest request) {
+		request.getSession().removeAttribute("sessionid");
+		service.deletemem(m_mail);	
 		return "customer/goodbye";
 	}
+	
+
 }

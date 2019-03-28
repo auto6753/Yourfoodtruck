@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>당신의 푸드트럭</title>
-<jsp:include page="../header/header.jsp"></jsp:include>
+<%-- <jsp:include page="../header/header.jsp"></jsp:include> --%>
 <style>
 #with{
 	margin-top: 200px;
@@ -36,12 +36,15 @@ button{
 <body>
 <div id="with">
 <img src='${pageContext.request.contextPath}/resources/image/text.png'>
-<p style="margin-top:20px; text-align: center; font-size:50px;"><span style="color: #0080FF;">회원탈퇴</span>가 완료되었습니다.</p>
+<p style="margin-top:20px; text-align: center; font-size:50px;"><span style="color: #0080FF;">회원가입</span>이 완료되었습니다.</p>
 <div id="check">
 <br>
-<h1>그 동안 당신의 푸드트럭을 이용해주셔서 감사합니다.</h1>
-<h2>보다 나은 서비스로 찾아뵙겠습니다.</h2>
-<a href="/project/rehome"><button style="margin-top:50px; margin-left: 400px; height: 60px; width:200px;">첫 화면</button></a>
+<h1>당신의 푸드트럭의 회원이 되신것을 환영합니다!</h1>
+<h2>당신이 원하는 푸드트럭을 이용해보세요!</h2>
+<div>
+<a href="/project/rehome"><button style="margin-top:50px; margin-left: 300px; height: 60px; width:200px;">첫 화면</button></a>
+<a href="/project/login"><button style="margin-left: 10px; height: 60px; width:200px;">로그인</button></a>
+</div>
 </div>
 
 </div>

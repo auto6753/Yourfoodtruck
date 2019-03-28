@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>당신의 푸드트럭</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/login/registerAgree.css"/>">
 <!-- <script type="text/javascript">
@@ -28,7 +28,35 @@ location.href="../index.jsp";}
 <style>
 
 </style>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script>
+$(document).ready(function(){
+var istrue = false;
+	$("#next2").click(function(){
+		chk();
+		if(istrue){
+			return true;
+		}else{
+			alert("필수 동의사항 체크해주세요");
+			return false;
+		}
+	});
+function chk(){
+	var ch1 = $("#agree1").is(":checked");
+	var ch2 = $("#agree2").is(":checked");
+	
+	if(ch1 && ch2){
+		istrue = true;
+	}else{
+		istrue =false;
+	}
+}
 
+
+});
+
+</script>
 </head>
 <body>
 	<div id="logo">
@@ -42,7 +70,7 @@ location.href="../index.jsp";}
 
 
 		<div class="container">
-			<form id="main" name="registration">
+			<form id="main" name="registration" action="registerForm" method="post" >
 				<p>
 					<textarea id="rules">
 					
@@ -198,8 +226,9 @@ location.href="../index.jsp";}
     </textarea>
 				</p>
 				<p>
-					<input type="checkbox" id="agree" name="accept" /> <label
-						for="agree">당신의푸드트럭 이용약관 동의(필수)</label>
+				
+					<input type="checkbox" id="agree1" name="accept1" /> <label
+						for="agree1">당신의푸드트럭 이용약관 동의(필수)</label>
 
 				</p>
 				<p>
@@ -252,23 +281,22 @@ NAVER 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과정�
     </textarea>
 				</p>
 				<p>
-					<input type="checkbox" id="agree" name="accept" /> <label
-						for="agree">개인정보 수집 및 이용에 대한 안내(필수)</label>
+					<input type="checkbox" id="agree2" name="accept" /> <label
+						for="agree2">개인정보 수집 및 이용에 대한 안내(필수)</label>
 				</p>
 				<p>
-					<input type="checkbox" id="agree" name="accept" /> <label
-						for="agree">이벤트 알림 메시지 or 이메일 수신(선택)</label>
+					<input type="checkbox" id="agree3" name="accept" /> <label
+						for="agree3">이벤트 알림 메시지 or 이메일 수신(선택)</label>
 				</p>
-
-			</form>
-			<div id="next1" style="display: inline-block;">
-				<button id="button1" type="button"
-					class="btn btn-primary btn-lg btn-block">다음</button>
+				<div id="next1" style="display: inline-block;">
+				<input id="next2" type="submit"
+					class="btn btn-primary btn-lg btn-block" value="다음">
 			</div>
+			</form>
+
 
 		</div>
 	</div>
-	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	
 </body>
 </html>
