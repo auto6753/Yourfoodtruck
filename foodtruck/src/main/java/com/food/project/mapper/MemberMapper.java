@@ -11,9 +11,14 @@ public interface MemberMapper {
 	//로그인 체크, 및 세션담기
 	public MemberVO getmember(String m_mail);
 	
-	// 닉네임 체크
 	public MemberVO getname(String m_nicname);
 	
-	//회원 탈퇴
 	public void deletmem(String m_mail);
+
+	public MemberVO idSearch(MemberVO vo);
+
+	public MemberVO mailSearch(MemberVO mail);
+
+	public MemberVO passSearch(MemberVO vo);
+
 }

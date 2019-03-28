@@ -6,6 +6,7 @@
 <head>
 <title>당신의 푸드트럭</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/login/registerAgree.css"/>">
 <!-- <script type="text/javascript">
 function chk(){
  var req = document.form.req.checked;
@@ -25,49 +26,7 @@ location.href="../index.jsp";}
 </script> -->
 
 <style>
-body {
-	background-color: rgb(248, 249, 250);
-}
 
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 290%;
-}
-
-#title {
-	width:100%;
-	margin-right: auto;
-	margin-left: auto;
-	
-}
-
-#main {
-	margin-top: 40px;
-}
-
-#notice {
-	display: inline-block;
-	margin-bottom: 12px;
-	border-radius: 5px;
-	width: 100%;
-	border: 2px blue solid;
-}
-
-#rules {
-	width: 100%;
-	height: 350px;
-	border: gray solid 3px;
-	border-radius: 5px;
-}
-
-#next1 {
-	margin-left:35%;
-	margin-right:35%;
-	width:30%;
-}
 </style>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
@@ -106,7 +65,7 @@ function chk(){
 
 	<div id="all">
 
-		<div id="title" class="card-header"></div>
+	
 
 
 

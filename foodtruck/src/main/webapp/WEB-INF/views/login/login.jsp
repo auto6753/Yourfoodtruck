@@ -3,31 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>당신의 푸드트럭</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap.min.css"/>">
-<style>
-body {
-	background-color: rgb(248, 249, 250);
-}
+<title>BootStrap</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/login/login.css"/>">
 
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 290%;
-}
-
-#login_box {
-	width: 340px;
-	margin: 0 auto;
-}
-
-#form {
-	margin-top: 50px;
-}
-</style>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript"

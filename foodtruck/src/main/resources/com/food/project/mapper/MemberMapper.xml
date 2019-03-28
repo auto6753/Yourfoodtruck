@@ -38,4 +38,12 @@
 		delete from member where m_mail = #{m_mail}
 	</delete>
 	
+<!--아이디 서치 -->
+	<select id="idSearch" resultType="com.food.project.domain.MemberVO">
+		select m_mail from member where m_name like #{m_name} and hp LIKE #{hp}
+	</select>
+<!-- 비밀번호찾기 1단계 아이디 인증 -->	
+	<select id="passSearch" resultType="com.food.project.domain.MemberVO">
+		select m_passwd from member where m_mail like #{m_mail} and m_name like #{m_name} and hp like #{hp}
+	</select>
 </mapper>

@@ -25,6 +25,7 @@ public class MemberServiceimplement implements MemberService {
 		return memmapper.getmember(m_mail);
 	}
 	@Override
+
 	public MemberVO getname(String m_nicname) {
 		// TODO Auto-generated method stub
 		return memmapper.getname(m_nicname);
@@ -35,6 +36,14 @@ public class MemberServiceimplement implements MemberService {
 		 memmapper.deletmem(m_mail);
 		
 	}
-
+	public MemberVO idSearch(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memmapper.idSearch(vo);
+	}
+	@Override
+	public MemberVO passSearch(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memmapper.passSearch(vo);
+	}
 
 }

@@ -4,58 +4,9 @@
 <html>
 <head>
 <title>당신의 푸드트럭</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap.min.css"/>">
-<style>
-body {
-	background-color: rgb(248, 249, 250);
-}
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/login/registerForm.css"/>">
 
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 290%;
-}
-/* #member {
-	margin-top: 50px;
-	width:80%;
-	margin: 0 auto;
-} */
-/* #container{
-	margin-top: 120px;
-	width:100%;
-	margin: 0 auto;	
-	
-
-} */
-
-/* #box {
-	margin: 0 auto;
-	
-	width:100%;
-	
-}  */
-#all {
-	width: 100%;
-	margin: 0 auto;
-}
-
-#member {
-	width: 49.5%;
-	margin: 0 auto;
-}
-
-#card {
-	width: 100%;
-	margin: 0 auto;
-}
-
-#mcheck {
-	float: right;
-}
-</style>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript"
