@@ -1,33 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
-<style>
+<link rel="stylesheet" href="<c:url value ="/resources/css/customercss/callList.css"/>"/>
 
-#with {
-	margin: 0 auto;
-	margin-top: 150px;
-	width: 1200px;
-	height: 600px;
-	border: 1px solid darkgray;
-}
-	
-.sunjae{
-	width:200px;
-	margin: 0 auto;
-	text-align: center;
-}
-.sg {
-    transform: translate(8%,15%);
-}
-</style>
 </head>
 <body>
 	<div id="with" class="col">
-		<h1 style="text-align:center; margin-top:10px;">호출내역</h1><br>
+		<h1>호출내역</h1><br>
 		<table class="table table-hover" class="col">
 			<thead>
 				<th>푸드트럭명</th>
