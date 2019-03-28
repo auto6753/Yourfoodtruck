@@ -11,6 +11,6 @@ public class MemberVO {
 	private int m_position;
 	private int m_license;
 	private String company;
-	private int hp;
+	private String hp;
 
 }

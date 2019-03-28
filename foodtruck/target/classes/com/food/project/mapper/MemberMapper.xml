@@ -22,12 +22,19 @@
  -->
  <!-- 회원가입 -->
  	<insert id="meminsert">
-		insert into member(m_mail,m_passwd,m_name,m_nicname,m_position,m_license,company,hp)values(#{m_mail,jdbcType=VARCHAR},#{m_passwd,jdbcType=VARCHAR},#{m_name,jdbcType=VARCHAR},#{m_nicname,jdbcType=VARCHAR},#{m_position,jdbcType=INTEGER},#{m_license,jdbcType=INTEGER},#{company,jdbcType=VARCHAR},#{hp,jdbcType=INTEGER})
+		insert into member(m_mail,m_passwd,m_name,m_nicname,m_position,m_license,company,hp)values(#{m_mail,jdbcType=VARCHAR},#{m_passwd,jdbcType=VARCHAR},#{m_name,jdbcType=VARCHAR},#{m_nicname,jdbcType=VARCHAR},#{m_position,jdbcType=INTEGER},#{m_license,jdbcType=INTEGER},#{company,jdbcType=VARCHAR},#{hp,jdbcType=VARCHAR})
 	</insert>
 	
  <!-- 로그인 -->	
 	<select id="getmember" resultType="com.food.project.domain.MemberVO">
 		select m_mail,m_passwd,m_name from member where m_mail = #{m_mail}
 	</select>
-	
+<!--아이디 서치 -->
+	<select id="idSearch" resultType="com.food.project.domain.MemberVO">
+		select m_mail from member where m_name like #{m_name} and hp LIKE #{hp}
+	</select>
+<!-- 비밀번호찾기 1단계 아이디 인증 -->	
+	<select id="passSearch" resultType="com.food.project.domain.MemberVO">
+		select m_passwd from member where m_mail like #{m_mail} and m_name like #{m_name} and hp like #{hp}
+	</select>
 </mapper>

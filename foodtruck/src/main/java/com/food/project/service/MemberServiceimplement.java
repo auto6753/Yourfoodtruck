@@ -26,6 +26,19 @@ public class MemberServiceimplement implements MemberService {
 		
 		return memmapper.getmember(m_mail);
 	}
+	@Override
+	
+	public MemberVO idSearch(MemberVO vo) {
+		// TODO Auto-generated method stub
+		
+		return memmapper.idSearch(vo);
+	}
+	@Override
+	public MemberVO passSearch(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memmapper.passSearch(vo);
+	}
+	
 
 
 }

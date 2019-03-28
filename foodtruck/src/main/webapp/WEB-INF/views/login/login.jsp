@@ -5,27 +5,9 @@
 <head>
 <title>BootStrap</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/login/login.css"/>">
 <style>
-body {
-	background-color: rgb(248, 249, 250);
-}
 
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 290%;
-}
-
-#login_box {
-	width: 340px;
-	margin: 0 auto;
-}
-
-#form {
-	margin-top: 50px;
-}
 </style>
 <script>
 	
