@@ -6,17 +6,16 @@
 	
 }
 .revenue{
-	height:60%;
+	height:70%;
 }
 .passenger {
 	height:25%;
 }
 .revenueSpecific {
-	width : 45%;
-	height:45%;
-	margin:1%;
+	width : 400px;
+	height:250px;
 	margin-left:2%;
-	display:inline-block;
+	float:left;
 }
 .passSpecific {
 	width:50%;
