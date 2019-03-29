@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.LoginMapper">
+<!-- 	<select id="getList"
+		resultType="com.example.hellomx.domain.CustomerVO">
+		select * from customer
+	</select>
+	<select id="King"
+		resultType="com.example.hellomx.domain.CustomerVO">
+		select * from customer where cid = #{a}
+	</select>
+
+	<insert id="insert2" parameterType="HashMap">
+		insert into man(id,pw,name)values(#{id},#{pw},#{name})
+	</insert>
+
+	<select id="get"
+		resultType="com.example.hellomx.domain.CustomerVO">
+		select * from customer where cid = #{cid}
+	</select>
+ -->
+ <!-- 회원가입 -->
+ 	<insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO">
+		insert into customer(email,password,telephone,position,nickname)
+		values(#{email},#{password},#{telephone},#{position},#{nickname})
+	</insert>
+	
+ <!-- 로그인 -->	
+	<select id="getCustomer" resultType="com.food.project.domain.CustomerVO">
+		select * from customer where email = #{email}
+	</select>
+	
+	<select id="getName" resultType="com.food.project.domain.CustomerVO">
+		select nickname from customer where nickname = #{nickname}
+	</select>
+	
+	<delete id="delete">
+		delete from customer where email = #{email}
+	</delete>
+	
+<!--아이디 서치 -->
+	<select id="idSearch" resultType="com.food.project.domain.CustomerVO">
+		select email from customer where nickname LIKE #{nickname} and telephone LIKE #{telephone}
+	</select>
+<!-- 비밀번호찾기 1단계 아이디 인증 -->	
+	<select id="passSearch" resultType="com.food.project.domain.CustomerVO">
+		select password from customer where email like #{email} and nickname LIKE #{nickname} and telephone like #{telephone}
+	</select>
+</mapper>

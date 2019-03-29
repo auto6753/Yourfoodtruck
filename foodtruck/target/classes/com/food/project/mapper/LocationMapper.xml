@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.LocationMapper">
+	<!-- 위치 불러오기 -->
+	<!-- <select id="getLocation" resultType="com.food.project.domain.LocationVO"> 
+		select rownum,lat_y,lng_x from( select loc.* from location loc where truck_code 
+		like #{truckcode} order by loc.loc_time desc) where rownum=1; </select> -->
+	<!-- select * from( select loc.* from location loc where truck_code = #{truck_code} 
+		order by loc.loc_time desc) where rownum=1; -->
+	<select id="getLoc"
+		resultType="com.food.project.domain.LocationVO">
+		select truck_code,lat_y,lng_x
+		from location
+	</select>
+
+	<!-- 위치넣기 -->
+	<!-- <insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO"> 
+		insert into customer(email,password,telephone,position,nickname) values(#{email},#{password},#{telephone},#{position},#{nickname}) 
+		</insert> -->
+</mapper>

@@ -107,7 +107,7 @@
 		</nav>
 		<div class="card-deck">
 			<div class="card">
-				<a href="#"><img class="card-img-top" src="resources/image/event.jpg" alt="Card image cap"></a>
+				<a href="/project/eventOn"><img class="card-img-top" src="resources/image/event.jpg" alt="Card image cap"></a>
 				<div class="card-body">
 					<h4 class="card-title">이벤트</h4>
 					<p class="card-text">각 푸드트럭에서 실시하는 이벤트를 알아보세요.</p>
@@ -115,7 +115,7 @@
 				</div>
 			</div>
 			<div class="card"> 
-				<a href="#"><img class="card-img-top" src="resources/image/news.png" alt="Card image cap" ></a>
+				<a href="/project/news""><img class="card-img-top" src="resources/image/news.png" alt="Card image cap" ></a>
 				<div class="card-body">
 					<h4 class="card-title">푸드트럭 News</h4>
 					<p class="card-text">당신의 푸드트럭의 새로운 소식을 알아보세요.</p>

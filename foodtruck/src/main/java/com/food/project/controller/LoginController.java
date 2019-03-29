@@ -1,28 +1,28 @@
 package com.food.project.controller;
 
+
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.food.project.domain.MemberVO;
-import com.food.project.service.MemberService;
+import com.food.project.domain.CustomerVO;
+import com.food.project.service.LoginService;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping(value = "/login", method = RequestMethod.GET)
+@RequestMapping(value = "/login")
 public class LoginController {
-	private MemberService memservice;
+	private LoginService loginservice;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
@@ -37,18 +37,21 @@ public class LoginController {
 	}
 	
 
-	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
-	public String loginCheck(Locale locale, Model model,MemberVO mem,HttpSession session) {
-		System.out.println("좀와라 시발");
-		String id = mem.getM_mail();
-		String pw = mem.getM_passwd();
-		MemberVO m = new MemberVO();
-		m = memservice.getmember(id);
-		if(m==null) {
+	public String loginCheck(Locale locale, Model model,CustomerVO cus,HttpSession session) {
+		String email = cus.getEmail();
+		String password = cus.getPassword();
+		System.out.println(email+password);
+		CustomerVO c = new CustomerVO();
+		c = loginservice.getCustomer(email);
+		
+		if(c==null) {
 			return "idfail";
-		}else if(pw.equals(m.getM_passwd())){
-			session.setAttribute("sessionid", m);
+		}else if(password.equals(c.getPassword())){
+			System.out.println(c.getEmail());
+			System.out.println(c.getPassword());
+			session.setAttribute("sessionid", c);
 			System.out.println("success");
 			return "success";
 			
@@ -57,29 +60,26 @@ public class LoginController {
 		}	
 	}
 
-	@RequestMapping(value = "/idSearchck", method = RequestMethod.POST)
+	@RequestMapping(value = "/idSearchck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idSearchck(Locale locale, Model model,MemberVO vo) {
+	public String idSearchck(Model model,CustomerVO vo) {
 		//데이터를 받아
 		//받은데이터로 DB랑 검사
 		//ajax -> LoginController.java ->  MemberService -> MemberServiceimplement.java - > MemberMapper.java-> MemberMapper.xml 
 		//db쿼리 실행후 비교를하거나 결과값을 화면에 안뿌려준다면 여기서 끝 아니라면 다시 돌아감
 		// MemberMapper.xml에서 실행한결과값을 들고 MemberMapper.java-> MemberSErviceimplement.java
 		//-> MemberSErvice - > LoginController.java -> ajax 
-
-		MemberVO ck = memservice.idSearch(vo);
-		System.out.println("개새끼야");
 		
+		CustomerVO ck = loginservice.idSearch(vo);	
 		if(ck == null) {
 			return "false"; 
 		}else {
-			return ck.getM_mail();
+			return ck.getEmail();
 		}
 		
 	}
 	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
 	public String idSearch(Locale locale, Model model) {
-		 
 		return "login/idSearch";
 	}	
 
@@ -91,19 +91,16 @@ public class LoginController {
 	
 	@RequestMapping(value = "/passSearchck", method = RequestMethod.POST)
 	@ResponseBody
-	public String passSearchck(Locale locale, Model model , MemberVO vo) {
-	
-		
-		 MemberVO ck = memservice.passSearch(vo);
-		
+	public String passSearchck(Locale locale, Model model , CustomerVO vo) {
+		CustomerVO ck = loginservice.passSearch(vo);
 		 if (ck == null) {
 			 return "false";
 		 }else
-			 return ck.getM_passwd();
+			 return ck.getPassword();
 				
 	}
 
-	@RequestMapping(value = "/passSearch", method = RequestMethod.POST)
+	@RequestMapping(value = "/passSearch", method = RequestMethod.GET)
 	public String passSearch(Locale locale, Model model) {
 		return "login/passSearch";
 	}
@@ -130,10 +127,10 @@ public class LoginController {
 	
 	@RequestMapping(value = "/idck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idck(Locale locale, Model model,@RequestParam("m_mail") String m_mail,@RequestParam("m_nicname") String m_nicname) {
-		System.out.println(m_mail);
-		MemberVO mail = memservice.getmember(m_mail);
-		MemberVO name = memservice.getname(m_nicname);
+	public String idck(Locale locale, Model model,@RequestParam("m_mail") String email,@RequestParam("m_nicname") String nickname) {
+		System.out.println(email);
+		CustomerVO mail = loginservice.getCustomer(email);
+		CustomerVO name = loginservice.getName(nickname);
 		if(mail == null) {	//이메일 같은게 없을때
 			if(name == null){ //닉네임 같은게 없을때
 				return "success";
@@ -141,16 +138,16 @@ public class LoginController {
 			return "nicname";
 		}
 			return "email";
-		
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insert(Locale locale, Model model,MemberVO mem) {
-		memservice.meminsert(mem);
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String insert(Locale locale, Model model,CustomerVO cus) {
+		cus.setRegdate(new Date());
+		loginservice.insertCustomer(cus);
 		return "redirect:/login/registerSuccess";
 	}
 	@RequestMapping(value = "/registerSuccess", method = RequestMethod.GET)
-	public String joinsuccess(Locale locale, Model model,MemberVO mem) {	
+	public String joinsuccess() {	
 		return "/login/registerSuccess";
 	}
 	
