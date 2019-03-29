@@ -17,16 +17,16 @@
 <script>
 	$(document).ready(function() {
 		$("#next").click(function() {
-			var name = $("#name").val();
-			var pnumber =$("#pnumber").val();
+			var nickname = $("#nickname").val();
+			var telephone =$("#telephone").val();
 			
 			if(ck()){
 				query = {
-					m_name : name,
-					hp:pnumber
+					nickname : nickname,
+					telephone:telephone
 				}
 				$.ajax({
-					type:"post",
+					type:"get",
 					url:"/project/login/idSearchck",
 					data:query,
 					success:function(data){
@@ -79,10 +79,10 @@ function ck(){
 			<div id="title" class="card-header">아이디찾기</div>
 			<div id="login_box">
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="이름">
+					<input type="text" class="form-control" id="nickname" placeholder="이름">
 				</div>
 				<div style="display: block" class="form-group">
-					<input type="text" class="form-control test" id="pnumber"
+					<input type="text" class="form-control test" id="telephone"
 						placeholder="전화번호">
 				</div>
 				<div class="form-group">

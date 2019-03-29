@@ -12,7 +12,9 @@
 
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!-- 	<div class="option"> -->
-
+<c:forEach var="test" items="${loc}">
+${test.lat_y} // ${test.lng_x }
+</c:forEach>
 <form id="fr">
 	검색 : <input type="text" value="" id="keyword" size="15"> <input
 		id="submit" type="button" value="검색하기">

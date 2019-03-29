@@ -15,14 +15,14 @@
 <script>
 	$(document).ready(function() {
 		$("#next").click(function() {
-			var mail = $("#mail").val();
-			var name = $("#name").val();
-			var pnumber = $("#pnumber").val();
+			var email = $("#mail").val();
+			var nickname = $("#name").val();
+			var telephone = $("#pnumber").val();
 			if(check()){
 				query = {
-						m_mail : mail,
-						m_name : name,
-						hp : pnumber
+						email : email,
+						nickname : nickname,
+						telephone : telephone
 				}
 			$.ajax({
 				type:"post",

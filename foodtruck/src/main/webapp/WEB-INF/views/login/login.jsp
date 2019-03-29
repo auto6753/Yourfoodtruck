@@ -20,12 +20,12 @@
 			chk();
 			if(isTrue){
 					var query =  {
-					m_mail: $("#id").val(),
-					m_passwd: $("#pw").val()
+					email: $("#id").val(),
+					password: $("#pw").val()
 				}
 				$.ajax({
 					type:"post",
-					url:"/project/login/loginCheck",
+					url:"/project/login",
 					data: query,
 					success:function(data){
 						if("idfail"==data){
