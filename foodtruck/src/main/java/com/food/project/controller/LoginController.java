@@ -1,5 +1,6 @@
 package com.food.project.controller;
 
+
 import java.util.Date;
 import java.util.Locale;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.food.project.domain.CustomerVO;
 import com.food.project.service.LoginService;
 
@@ -147,7 +147,7 @@ public class LoginController {
 		return "redirect:/login/registerSuccess";
 	}
 	@RequestMapping(value = "/registerSuccess", method = RequestMethod.GET)
-	public String joinsuccess(Locale locale, Model model,CustomerVO mem) {	
+	public String joinsuccess() {	
 		return "/login/registerSuccess";
 	}
 	
