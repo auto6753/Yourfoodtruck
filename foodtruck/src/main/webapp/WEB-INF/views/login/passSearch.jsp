@@ -5,80 +5,115 @@
 <head>
 <title>BootStrap</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/login/passSearch.css"/>">
 <style>
-* {
-	margin: 0 auto;
-}
-
-body {
-	background-color: rgb(248, 249, 250);
-}
-
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 300%;
-}
-
-#all{
-
-	margin-top: 50px;
-	
-	width: 50%;
-	margin: 0 auto;
-
-}
-#form {
-	margin-left: 10%;
-	margin-right: 10%;
-	
-}
-
-
-#login_box {
-	
-	margin-top: 20px;
-}
-
-#next {
-	align: center;
-	
-}
-
 
 </style>	
 
-
+<script type="text/javascript"src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript"src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script>
+	$(document).ready(function() {
+		$("#next").click(function() {
+			var mail = $("#mail").val();
+			var name = $("#name").val();
+			var pnumber = $("#pnumber").val();
+			if(check()){
+				query = {
+						m_mail : mail,
+						m_name : name,
+						hp : pnumber
+				}
+			$.ajax({
+				type:"post",
+				url:"/project/login/passSearchck",
+				data:query,
+				success:function(data){
+					if(data == "false"){
+						alert("비밀번호를 찾지 못했습니다.")
+					}else{
+						$("#searchpass").text(data);
+						$("#idsearch").css("display", "none");
+						$("#idsearch1").css("display", "block");
+						
+					}
+				}
+			});
+			
+			}
+		});
+		
+	});
+function check(){
+	var empty = false;
+	var mail = $("#mail").val();
+	var name = $("#name").val();
+	var pnumber = $("#pnumber").val();
+	
+	if (mail == ""){
+		alert("아이디를 입력하시오.");
+		empty = false;
+		return empty;
+	}else if (name == ""){
+		alert("이름을 입력하시오.");
+		empty = false;
+		return empty;
+	}else if (pnumber == ""){
+		alert("전화번호를 입력하시오.");
+		empty = false;
+		return empty;
+	}else{
+		empty = true;
+		return true;
+	}
+	
+}
 	
 </script>
 </head>
 
 <body>
 
-	<div id="logo"><a href="/project/rehome">당신의 푸드트럭</a></div>
-	
-	<div id= "all">
-				<form id="form">
-			<div id="title"class="card-header">비밀번호찾기</div>
+	<div id="logo">
+		<a href="/project/rehome">당신의 푸드트럭</a>
+	</div>
+
+	<div id="idsearch">
+		<form id="form">
+			<div id="title" class="card-header">비밀번호찾기</div>
 			<div id="login_box">
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="아이디입력">
+					<input type="text" class="form-control" id="mail" placeholder="아이디">
 				</div>
-				
-					
+				<div class="form-group">
+					<input type="text" class="form-control" id="name" placeholder="이름">
+				</div>
+				<div style="display: block" class="form-group">
+					<input type="text" class="form-control test" id="pnumber"
+						placeholder="전화번호">
+				</div>
+				<div class="form-group">
 					<button id="next" type="button"
 						class="btn btn-primary btn-lg btn-block">다음</button>
 				</div>
-
-			</form>
-	
 			</div>
-	
+		</form>
+	</div>
 
-	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<div id="idsearch1" style="display: none">
+		<form id="form1">
+			<div id="title" class="card-header">비밀번호찾기</div>
+			<div id="result"class="form-group">
+				<label for="exampleFormControlTextarea1" id="searchpass">비밀번호</label>
+				
+			</div>
+			
+
+			<div id="loginnext" style="display: inline-block;">
+				<a href="/project/login"><button id="button1" type="button"
+						class="btn btn-primary btn-lg btn-block">로그인하기</button></a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
