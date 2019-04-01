@@ -8,12 +8,9 @@
 		like #{truckcode} order by loc.loc_time desc) where rownum=1; </select> -->
 	<!-- select * from( select loc.* from location loc where truck_code = #{truck_code} 
 		order by loc.loc_time desc) where rownum=1; -->
-	<select id="getLoc"
-		resultType="com.food.project.domain.LocationVO">
-		select truck_code,lat_y,lng_x
-		from location
+	<select id="getLoc" resultType="com.food.project.domain.LocationVO">
+		select * from location
 	</select>
-
 	<!-- 위치넣기 -->
 	<!-- <insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO"> 
 		insert into customer(email,password,telephone,position,nickname) values(#{email},#{password},#{telephone},#{position},#{nickname}) 
