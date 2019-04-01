@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.food.project.domain.LocationVO;
 import com.food.project.service.LocationService;
 
+import lombok.AllArgsConstructor;
+
 @Controller
+@AllArgsConstructor
 @RequestMapping(value = "/search", method = RequestMethod.GET)
 public class SearchController {
 	
@@ -21,10 +24,12 @@ public class SearchController {
 	public String search(Locale locale, Model model) {
 		
 		try{
-			ArrayList<LocationVO> a = locservice.getLoc();
-			for (LocationVO s : a) {
-				s.getTruck_code();
-			}
+			ArrayList<LocationVO> a=locservice.getLoc();
+				for (LocationVO s : a) {
+					System.out.println(s.getTruck_code());
+				}
+			model.addAttribute("loc",a);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
