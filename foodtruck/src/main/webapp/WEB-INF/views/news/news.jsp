@@ -129,7 +129,17 @@
 
 		<button type="button" class="btn btn-primary" >등록</button>
 	</div>
-
+/*${postList}
+<button id="test">테스트</button>
+*/
 
 </body>
 </html>
+<script>
+	$(function() {
+		$('#test').click(function() {
+			location.href="/project/news/specific";
+		});
+	});
+</script>
+

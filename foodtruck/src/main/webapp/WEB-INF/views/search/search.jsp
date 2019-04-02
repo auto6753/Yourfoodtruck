@@ -9,22 +9,21 @@
 </style>
 
 <div style="margin-top: 180px; border: solid 1px;"></div>
-
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!-- 	<div class="option"> -->
-
+<c:forEach var="test" items="${loc}">
+${test.lat_y} // ${test.lng_x }
+</c:forEach>
 <form id="fr">
 	검색 : <input type="text" value="" id="keyword" size="15"> <input
 		id="submit" type="button" value="검색하기">
 </form>
-
 <!-- 	</div>
 	<hr>
 	<ul id="placesList"></ul>
 	<div id="pagination"></div> -->
 <!-- </div> -->
 <div id="map" style="width: 60%; height: 50%; margin: 0 auto;"></div>
-
 
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <!-- <script type="text/javascript"
@@ -33,12 +32,6 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services,clusterer,drawing"></script>
 <script>
-
-/* 	var map = new daum.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-		center : new daum.maps.LatLng(35.7183, 127.6358), // 지도의 중심좌표 
-		level : 14
-	// 지도의 확대 레벨 
-	}); */
 
 	function reflash(){
 		map.setBounds(37.566826, 126.9786567)
@@ -65,7 +58,7 @@
 		minLevel : 10
 	// 클러스터 할 최소 지도 레벨 
 	});
-
+	
 	// 데이터를 가져오기 위해 jQuery를 사용합니다
 	// 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
 	var positions = $.get("resources/js/food.json");
@@ -110,7 +103,6 @@
 		searchPlaces();
 	});
 	/* searchPlaces(); */
-
 	// 키워드 검색을 요청하는 함수입니다
 	function searchPlaces() {
 
@@ -133,7 +125,6 @@
 			/* console.log(data); */
 			console.log(status);
 			/* console.log(pagination); */
-			
 			displayPlaces(data);
 
 			// 페이지 번호를 표출합니다
@@ -155,10 +146,6 @@
 	function displayPlaces(places) {
 		bounds = new daum.maps.LatLngBounds();
 		/* console.log(places); */
-/* 		var listEl = document.getElementById('placesList'), menuEl = document
-				.getElementById('menu_wrap'), fragment = document
-				.createDocumentFragment(), bounds = new daum.maps.LatLngBounds(), listStr = ''; */
-		
 		// 검색 결과 목록에 추가된 항목들을 제거합니다
 		/* removeAllChildNods(listEl); */
 
@@ -176,7 +163,6 @@
 			bounds.extend(placePosition);
 			console.log(bounds);
 			console.log(placePosition);
-			
 			map.setBounds(bounds);
 			// 마커와 검색결과 항목에 mouseover 했을때
 			// 해당 장소에 인포윈도우에 장소명을 표시합니다
@@ -204,7 +190,6 @@
 			/* fragment.appendChild(itemEl); */
 		}
 	}
-	
 </script>
 <style>
 #map {

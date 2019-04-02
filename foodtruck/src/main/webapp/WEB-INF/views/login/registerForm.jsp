@@ -85,40 +85,28 @@
 
 						<article class="card-body">
 							<form id="target" name="fr" action="/project/login/insert"
-								onsubmit="return ck();" method="get">
+								onsubmit="return ck();" method="post">
 								<!-- onsubmit="return ck();" -->
-								<div class="form-row">
-									<div class="col form-group">
-										<label>이름</label> <input name="m_name" id="name" type="text"
-											class="form-control" placeholder="">
-									</div>
-								</div>
 								<div class="form-group">
-									<label>아이디</label> <input name="m_mail" type="email"
+									<label>아이디</label> <input name="email" type="email"
 										class="form-control" placeholder="">
 								</div>
 								<div class="form-group">
-									<label>비밀번호</label> <input name="m_passwd" type="password"
+									<label>비밀번호</label> <input name="password" type="password"
 										class="form-control" placeholder="">
 								</div>
+<!-- 								<div class="form-group">
+									<label>비밀번호확인</label> <input id="repasswd" type="password"
+										class="form-control" placeholder="">
+								</div> -->
 								<div class="form-group">
-									<label>비밀번호확인</label> <input name="repasswd" type="password"
+									<label>닉네임</label> <input name="nickname" type="text"
 										class="form-control" placeholder="">
 								</div>
-								<div class="form-group">
-									<label>닉네임</label> <input name="m_nicname" type="text"
-										class="form-control" placeholder="">
-								</div>
-
 								<!-- form-row.// -->
 								<div class="form-group">
-									<label>휴대폰인증</label> <input name="hp" class="form-control"
+									<label>전화번호</label> <input name="telephone" class="form-control"
 										type="tel" placeholder="전화번호입력">
-									<button id="mcheck" type="button" class="btn btn-primary test2">인증</button>
-								</div>
-								<div class="form-group">
-									<label>인증번호</label> <input class="form-control" type="password"
-										placeholder="인증번호입력">
 								</div>
 								<!-- form-group end.// -->
 								<div class="form-group">

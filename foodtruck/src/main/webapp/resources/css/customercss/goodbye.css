@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+#with{
+	margin: 0 auto;
+	margin-top: 200px;
+	width: 1000px;
+	height: 650px;
+	border: 1px solid darkgray;
+}
+img{
+	width: 100px;
+	height: 100px;
+}
+#check{
+	width:1000px;
+	height:300px;
+	background-color: #E6E6E6;
+	padding: -15px;
+
+
+}
+.cool{
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+h1,h2{
+	text-align: center;
+}
+#button{
+	margin: 0 auto; 
+	height: 60px; 
+	width:200px;
+}
+.no-padding {
+  padding: 0 !important;
+}
+p{
+	margin-top:20px; text-align: center; font-size:50px;
+}
+span{
+	color: #0080FF;
+}
+button{
+	 margin-top:50px; 
+	 height: 60px; 
+	 width:200px;
+}

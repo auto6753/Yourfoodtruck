@@ -39,7 +39,8 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 
-				<li class="nav-item active"><a class="nav-link" href="#">트럭소개
+
+				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="/project/search">트럭검색</a></li>
@@ -52,12 +53,10 @@
 				<span id="login" class="badge badge-light"><a href="/project/login">로그인</a></span>
 				<span class="badge badge-light"><a href="/project/login/register">회원가입</a></span>
 				</c:if>
-				<%-- <c:if test="${sessionid != null}"> --%>
 				<c:if test="${not empty sessionScope.sessionid}">
-					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.m_name}님</a></span>
+					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
-					<span id="" class="badge badge-light"><a href="#">로그아웃</a></span>
-					<span id="" class="badge badge-light"><a href="/project/seller">상인 관리페이지</a></span>
+					<span id="" class="badge badge-light"><a href="/project/login/logout">로그아웃</a></span>
 				</c:if>
 			</div>
 		</div>
@@ -67,4 +66,3 @@
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
