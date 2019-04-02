@@ -50,4 +50,5 @@ public class CustomerController {
 	public String goodbye(Locale locale, Model model) {
 		return "customer/goodbye";
 	}
+	
 }
