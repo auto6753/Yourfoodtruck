@@ -22,13 +22,14 @@ public class SearchController {
 	
 	LocationService locservice;
 	
+
 	@SuppressWarnings("unchecked")
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String search(Locale locale, Model model) {
 		
 		try{
 			ArrayList<LocationVO> a=locservice.getLoc();
-			
 			JSONObject positions = new JSONObject();
 			JSONArray dataarr = new JSONArray();
 				for (LocationVO s : a) {

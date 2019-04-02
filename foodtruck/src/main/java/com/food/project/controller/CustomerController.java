@@ -62,6 +62,4 @@ public class CustomerController {
 		service.deletemem(m_mail);	
 		return "customer/goodbye";
 	}
-	
-
 }
