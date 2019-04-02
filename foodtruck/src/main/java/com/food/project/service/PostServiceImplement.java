@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.food.project.domain.PostVO;
 import com.food.project.domain.ReplyVO;
-import com.food.project.mapper.LocationMapper;
 import com.food.project.mapper.PostMapper;
 
 import lombok.AllArgsConstructor;

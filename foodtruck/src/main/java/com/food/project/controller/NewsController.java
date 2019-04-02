@@ -20,7 +20,7 @@ public class NewsController {
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(Model model) {
-		//model.addAttribute("postList",service.getPostList());
+		model.addAttribute("postList",service.getPostList());
 		return "news/news";
 	}
 	
@@ -32,10 +32,19 @@ public class NewsController {
 		return "news/specific";
 	}
 	
+	@RequestMapping(value= "/news/addNews", method= RequestMethod.POST)
+	public String addNews(Model model, PostVO vo) {
+		vo.setPost_class(0);
+		service.insertPost(vo);
+		model.addAttribute("postList",service.getPostList());
+		return "news/news";
+	}
+	
 	@RequestMapping(value = "/eventOn", method = RequestMethod.GET)
 	public String eventOn(Locale locale, Model model) {
 		return "event/event";
 	}
+
 	
 //	@RequestMapping(value = "/eventOff", method = RequestMethod.GET)
 //	public String eventOff(Locale locale, Model model) {
