@@ -1,11 +1,14 @@
 package com.food.project.controller;
 
 
+
 import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Controller
+
 @RequestMapping(value = "/login")
 public class LoginController {
 	private LoginService loginservice;
@@ -36,7 +40,6 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
 	public String loginCheck(Locale locale, Model model,CustomerVO cus,HttpSession session) {
@@ -63,6 +66,7 @@ public class LoginController {
 	@RequestMapping(value = "/idSearchck", method = RequestMethod.GET)
 	@ResponseBody
 	public String idSearchck(Model model,CustomerVO vo) {
+
 		//데이터를 받아
 		//받은데이터로 DB랑 검사
 		//ajax -> LoginController.java ->  MemberService -> MemberServiceimplement.java - > MemberMapper.java-> MemberMapper.xml 
@@ -80,6 +84,7 @@ public class LoginController {
 	}
 	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
 	public String idSearch(Locale locale, Model model) {
+
 		return "login/idSearch";
 	}	
 

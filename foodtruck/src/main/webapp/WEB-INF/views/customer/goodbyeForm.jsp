@@ -1,3 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>당신의 푸드트럭</title>
+<jsp:include page="../header/header.jsp"></jsp:include>
+<style>
+#with{
+	margin-top: 100px;
+	margin-left:450px;
+	width: 1000px;
+	height: 850px;
+	border: 1px solid darkgray;
+}
+#drawal{
+	margin-left: 150px;
+	width: 700px;
+	height: 400px;
+	border: 1px solid darkgray;
+}
+#check{
+	margin-left:150px;
+	margin-top:10px;
+	height: 150px
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8"
@@ -54,5 +80,4 @@ Q. 탈퇴 시 보유한 쿠폰은 환불/양도 되나요?<br>
 	</div>
 </div>
 </body>
-
 </html>
