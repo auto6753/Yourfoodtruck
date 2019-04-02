@@ -4,95 +4,70 @@
 <html>
 <head>
 <title>BootStrap</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet"href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/login/idSearch.css"/>">
 <style>
-* {
-	margin: 0 auto;
-}
-
-body {
-	background-color: rgb(248, 249, 250);
-}
-
-#logo {
-	text-align: center;
-	margin-top: 100px;
-	color: blue;
-	font-weight: bold;
-	font-size: 300%;
-}
-
-#form {
-	margin-left: 25%;
-	margin-right: 25%;
-}
-#form1 {
-	
-	margin-left: 20%;
-	margin-right: 20%;
-}
-
-#all {
-	margin-top: 50px;
-	width: 60%;
-	margin: 0 auto;
-}
-
-#login_box {
-	margin-top: 20px;
-}
-
-#next {
-	align: center;
-}
-
-.test2 {
-	display: block;
-	float: right;
-}
-
-#next {
-	float: right;
-	margin: 10px 0;
-}
-
-#title {
-	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-
-
-/* #nextall {
-	
-	margin-left:auto;
-	margin-rignt:auto;
-	
-	
-} */
-#button{
-	font-size: 60%;
-}
-#button1{
-	font-size: 60%;
-}
-
 
 </style>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 
 <script>
-	$(document).ready(function(){
-		$("#next").click(function(){
-			$("#idsearch").css("display","none");
-			$("#idsearch1").css("display","block");
+	$(document).ready(function() {
+		$("#next").click(function() {
+			var nickname = $("#nickname").val();
+			var telephone =$("#telephone").val();
+			
+			if(ck()){
+				query = {
+					nickname : nickname,
+					telephone:telephone
+				}
+				$.ajax({
+					type:"get",
+					url:"/project/login/idSearchck",
+					data:query,
+					success:function(data){
+						if(data == "false"){
+							alert("존재하는 아이디가 없습니다.");
+						}
+						else {
+							$("#searchid").text(data);
+							$("#idsearch").css("display", "none");
+							$("#idsearch1").css("display", "block"); 
+							
+						}
+					}
+					
+				});
+			}
+			
+	
 		});
 	});
+function ck(){
+	var istrue = false;
+	var name = $("#name").val();
+	var pnumber =$("#pnumber").val();
+
+	if (name == "") {
+		alert("이름을 입력하시오.");
+		istrue = false;
+		return istrue;
+	}else if(pnumber == ""){
+		alert("전화 번호를 입력하세요");
+		istrue = false;
+		return istrue;
+	}else{
+		istrue = true;
+		return true;
+	}
+	
+}
 </script>
 </head>
-
 <body>
 
 	<div id="logo">
@@ -104,40 +79,35 @@ body {
 			<div id="title" class="card-header">아이디찾기</div>
 			<div id="login_box">
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="이름">
+					<input type="text" class="form-control" id="nickname" placeholder="이름">
 				</div>
 				<div style="display: block" class="form-group">
-					<input type="text" class="form-control test" id="email"
-						placeholder="이메일">
-					<button id="mcheck" type="button" class="btn btn-primary test2">인증</button>
+					<input type="text" class="form-control test" id="telephone"
+						placeholder="전화번호">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="check"
-						placeholder="인증번호 입력">
 					<button id="next" type="button"
 						class="btn btn-primary btn-lg btn-block">다음</button>
 				</div>
 			</div>
 		</form>
 	</div>
-	
+
 	<div id="idsearch1" style="display: none">
 		<form id="form1">
-		<div id="title" class="card-header">아이디찾기</div>
-			<div class="form-group">
-				<label for="exampleFormControlTextarea1">보유중인 아이디</label>
-				<li><a href="" title="Banking & Insurance apps"> <span
-						class="text">tmxk55</span></a>
-					<div class="clearfix"></div></li>
-			</div>	
+			<div id="title" class="card-header">아이디찾기</div>
+			<div id="result"class="form-group">
+				<label for="exampleFormControlTextarea1" id="searchid">보유중인 아이디</label>
+				
+			</div>
 			<div id="pwnext" style="display: inline-block;">
-				<button id="button" type="button"
-					class="btn btn-primary btn-lg btn-block">비밀번호찾기</button>
+				<a href="/project/login/passSearch"><button id="button"
+						type="button" class="btn btn-primary btn-lg btn-block">비밀번호찾기</button></a>
 			</div>
 
 			<div id="loginnext" style="display: inline-block;">
-				<button id="button1" type="button"
-					class="btn btn-primary btn-lg btn-block">로그인하기</button>
+				<a href="/project/login"><button id="button1" type="button"
+						class="btn btn-primary btn-lg btn-block">로그인하기</button></a>
 			</div>
 		</form>
 	</div>
