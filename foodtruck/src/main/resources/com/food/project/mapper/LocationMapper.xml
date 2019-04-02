@@ -9,7 +9,7 @@
 	<!-- select * from( select loc.* from location loc where truck_code = #{truck_code} 
 		order by loc.loc_time desc) where rownum=1; -->
 	<select id="getLoc" resultType="com.food.project.domain.LocationVO">
-		select * from location
+		select * from location where lat_y is not null
 	</select>
 	<!-- 위치넣기 -->
 	<!-- <insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO"> 
