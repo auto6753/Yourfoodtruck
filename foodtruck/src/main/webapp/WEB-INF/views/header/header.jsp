@@ -19,11 +19,16 @@
 #top-right {
 	margin-top: 50px;
 	margin-left: 26%;
+	
 }
 
 .test{
 	margin-bottom: 90px;
 }
+a{
+	color: rgb(255, 94, 24);
+}
+
 </style>
 <!-- Navigation -->
 <div class="test">
