@@ -288,9 +288,9 @@ NAVER 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과정�
 					<input type="checkbox" id="agree3" name="accept" /> <label
 						for="agree3">이벤트 알림 메시지 or 이메일 수신(선택)</label>
 				</p>
-				<div id="next1" style="display: inline-block;">
-				<input id="next2" type="submit"
-					class="btn btn-primary btn-lg btn-block" value="다음">
+				<div>
+				<button id="next2" type="submit"
+					class="btn" >다음</button>
 			</div>
 			</form>
 

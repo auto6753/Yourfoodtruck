@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.SellerMapper">
+
+	<select id="getmenu" resultType="com.food.project.domain.MenuVO" parameterType="String">
+		select menu_code,menu_name,menu_category,unit_price,menu_desc,truck_code from menu where truck_code = #{truckcode}
+	</select>
+</mapper>

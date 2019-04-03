@@ -3,6 +3,8 @@ package com.food.project.controller;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +22,26 @@ public class SearchController {
 	
 	LocationService locservice;
 	
+
+	@SuppressWarnings("unchecked")
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String search(Locale locale, Model model) {
 		
 		try{
 			ArrayList<LocationVO> a=locservice.getLoc();
+			JSONObject positions = new JSONObject();
+			JSONArray dataarr = new JSONArray();
 				for (LocationVO s : a) {
-					System.out.println(s.getTruck_code());
+					JSONObject data = new JSONObject();
+					data.put("lat", s.getLat_y());
+					data.put("lng",s.getLng_x());
+					dataarr.add(data);
 				}
-			model.addAttribute("loc",a);
+			JSONObject object = new JSONObject();
+			object.put("positions",dataarr);
+			System.out.println(object);
+			model.addAttribute("loc",object);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -44,3 +57,4 @@ public class SearchController {
 //	}
 
 }
+

@@ -79,7 +79,9 @@ function ck(){
 			<div id="title" class="card-header">아이디찾기</div>
 			<div id="login_box">
 				<div class="form-group">
-					<input type="text" class="form-control" id="nickname" placeholder="이름">
+
+					<input type="text" class="form-control" id="nickname" placeholder="닉네임">
+
 				</div>
 				<div style="display: block" class="form-group">
 					<input type="text" class="form-control test" id="telephone"
@@ -87,7 +89,8 @@ function ck(){
 				</div>
 				<div class="form-group">
 					<button id="next" type="button"
-						class="btn btn-primary btn-lg btn-block">다음</button>
+
+						class="btn">다음</button>
 				</div>
 			</div>
 		</form>
@@ -102,12 +105,12 @@ function ck(){
 			</div>
 			<div id="pwnext" style="display: inline-block;">
 				<a href="/project/login/passSearch"><button id="button"
-						type="button" class="btn btn-primary btn-lg btn-block">비밀번호찾기</button></a>
+						type="button" class="btn">비밀번호찾기</button></a>
 			</div>
 
 			<div id="loginnext" style="display: inline-block;">
 				<a href="/project/login"><button id="button1" type="button"
-						class="btn btn-primary btn-lg btn-block">로그인하기</button></a>
+						class="btn">로그인하기</button></a>
 			</div>
 		</form>
 	</div>

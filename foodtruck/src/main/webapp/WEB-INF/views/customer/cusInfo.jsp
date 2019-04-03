@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>당신의 푸드트럭</title>
+
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -81,7 +82,9 @@
 						</div>
 					</div>
 				</div>
+
 			<br> 닉네임: 쏜째 <button href="#layer2" class="btn-example" ">변경</button>
+
 			<div class="dim-layer">
 				<div class="dimBg"></div>
 				<div id="layer2" class="pop-layer">
@@ -154,6 +157,7 @@
 						    $('#close').click(function() {
 						     $('#pop').hide();
 						    });
+
 					});
 </script>
 </html>

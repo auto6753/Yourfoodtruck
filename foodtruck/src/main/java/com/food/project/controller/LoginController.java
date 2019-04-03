@@ -7,6 +7,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
+import com.food.project.service.SellerService;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Controller
+
 @RequestMapping(value = "/login")
 public class LoginController {
 	private LoginService loginservice;
@@ -33,10 +38,10 @@ public class LoginController {
 	public String logout(Locale locale, Model model,HttpSession session) {
 		System.out.println("로그아웃");
 		session.removeAttribute("sessionid");
+		session.removeAttribute("seller");
 		return "redirect:/";
 	}
 	
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
 	public String loginCheck(Locale locale, Model model,CustomerVO cus,HttpSession session) {
@@ -51,7 +56,15 @@ public class LoginController {
 		}else if(password.equals(c.getPassword())){
 			System.out.println(c.getEmail());
 			System.out.println(c.getPassword());
-			session.setAttribute("sessionid", c);
+			FoodTruckVO fd = new FoodTruckVO();
+			fd = loginservice.getFoodTruck(email);
+			System.out.println("ㅇ");
+			if(fd == null){
+				session.setAttribute("sessionid", c);
+			}else {
+				session.setAttribute("sessionid", c);
+				session.setAttribute("seller", fd);
+			}
 			System.out.println("success");
 			return "success";
 			
@@ -63,6 +76,7 @@ public class LoginController {
 	@RequestMapping(value = "/idSearchck", method = RequestMethod.GET)
 	@ResponseBody
 	public String idSearchck(Model model,CustomerVO vo) {
+
 		//데이터를 받아
 		//받은데이터로 DB랑 검사
 		//ajax -> LoginController.java ->  MemberService -> MemberServiceimplement.java - > MemberMapper.java-> MemberMapper.xml 
@@ -80,6 +94,7 @@ public class LoginController {
 	}
 	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
 	public String idSearch(Locale locale, Model model) {
+
 		return "login/idSearch";
 	}	
 
