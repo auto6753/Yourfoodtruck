@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.food.project.domain.CustomerVO;
 import com.food.project.service.LoginService;
 
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
+
 	private LoginService service;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)

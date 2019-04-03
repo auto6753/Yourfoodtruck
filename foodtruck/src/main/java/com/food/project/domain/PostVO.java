@@ -4,6 +4,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
+
 public class PostVO{
 	private String post_code;
 	private String post_regdate;
