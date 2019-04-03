@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
+import com.food.project.service.SellerService;
 
 import lombok.AllArgsConstructor;
 
@@ -37,6 +39,7 @@ public class LoginController {
 	public String logout(Locale locale, Model model,HttpSession session) {
 		System.out.println("로그아웃");
 		session.removeAttribute("sessionid");
+		session.removeAttribute("seller");
 		return "redirect:/";
 	}
 	
@@ -54,7 +57,15 @@ public class LoginController {
 		}else if(password.equals(c.getPassword())){
 			System.out.println(c.getEmail());
 			System.out.println(c.getPassword());
-			session.setAttribute("sessionid", c);
+			FoodTruckVO fd = new FoodTruckVO();
+			fd = loginservice.getFoodTruck(email);
+			System.out.println("ㅇ");
+			if(fd == null){
+				session.setAttribute("sessionid", c);
+			}else {
+				session.setAttribute("sessionid", c);
+				session.setAttribute("seller", fd);
+			}
 			System.out.println("success");
 			return "success";
 			

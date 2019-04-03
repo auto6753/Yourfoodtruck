@@ -1,6 +1,7 @@
 package com.food.project.service;
 
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 
 public interface LoginService {
 	public void insertCustomer(CustomerVO vo);
@@ -11,4 +12,6 @@ public interface LoginService {
 
 	public CustomerVO idSearch(CustomerVO vo);
 	public CustomerVO passSearch(CustomerVO vo);
+	
+	public FoodTruckVO getFoodTruck(String email);
 }

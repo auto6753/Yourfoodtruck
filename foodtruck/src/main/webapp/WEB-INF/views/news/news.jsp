@@ -64,35 +64,32 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>번호</th>
 					<th>제목</th>
-					<th>작성자</th>
 					<th>등록일</th>
 					<th>조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-
-				<tr>
-					<td>1</td>
-					<td>푸드트럭 공지사항</td>
-					<td>오영준</td>
-					<td>2019.04.01</td>
-					<td>50</td>
-
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>푸드트럭 공지사항</td>
-					<td>오영준</td>
-					<td>2019.04.01</td>
-					<td>50</td>
-
-				</tr>
-
-
-
+			<c:forEach var="i" items="${postList}">
+			<tr>
+				<td>${i.post_title }</td>
+				<td>${i.post_regdate}</td>
+				<td>${i.post_visit}</td>
+			</tr>
+			</c:forEach>
 			</tbody>
+					<!-- <td>푸드트럭 공지사항</td>
+					<td>오영준</td>
+					<td>2019.04.01</td>
+					<td>50</td>
+				</tr>
+				<tr>
+					<td>푸드트럭 공지사항</td>
+					<td>오영준</td>
+					<td>2019.04.01</td>
+					<td>50</td>
+				</tr> -->
+			
 
 
 
@@ -129,17 +126,17 @@
 
 		<button type="button" class="btn btn-primary" >등록</button>
 	</div>
-/*${postList}
+<%-- /*${postList}
 <button id="test">테스트</button>
-*/
+*/ --%>
 
 </body>
 </html>
-<script>
+<!-- <script>
 	$(function() {
 		$('#test').click(function() {
 			location.href="/project/news/specific";
 		});
 	});
-</script>
+</script> -->
 
