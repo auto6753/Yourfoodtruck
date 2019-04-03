@@ -1,6 +1,7 @@
 package com.food.project.mapper;
 
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 
 public interface LoginMapper {
 
@@ -22,4 +23,6 @@ public interface LoginMapper {
 	//비밀번호 찾기
 	public CustomerVO passSearch(CustomerVO vo);
 
+	//트럭등록 여부
+	public FoodTruckVO getFoodTruck(String email);
 }

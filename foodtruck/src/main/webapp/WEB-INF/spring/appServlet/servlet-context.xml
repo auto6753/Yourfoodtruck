@@ -38,9 +38,16 @@
 		base-package="com.food.project" />
 	<interceptors>
 		<interceptor>
-			<mapping path="/customer/**"/>
+			<mapping path="/customer/**" />
 			<exclude-mapping path="/login/**" />
-			<beans:bean id="commonInterceptor" class="com.food.project.interceptor.CommonInterceptor"/>
+			<beans:bean id="commonInterceptor"
+				class="com.food.project.interceptor.CommonInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/seller/**" />
+			<exclude-mapping path="/login/**" />
+			<beans:bean id="sellerInterceptor"
+				class="com.food.project.interceptor.SellerInterceptor" />
 		</interceptor>
 	</interceptors>
 </beans:beans>

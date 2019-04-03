@@ -1,13 +1,27 @@
 package com.food.project.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.LocationVO;
+import com.food.project.domain.MenuVO;
+import com.food.project.service.MemberService;
+import com.food.project.service.SellerService;
+
+import lombok.AllArgsConstructor;
+
 @Controller
+@AllArgsConstructor
 @RequestMapping(value = "/seller", method = RequestMethod.GET)
 public class SellerController {
+	private SellerService sellerservice;
 	
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
@@ -47,4 +61,29 @@ public class SellerController {
 	public String layout(Model model) {
 		return "seller/layout/layout";
 	}
+	
+	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
+	public String seorder(Model model) {
+		
+		return "seller/order/seorder";
+	}
+	
+	@RequestMapping(value="/cuorder", method=RequestMethod.GET) 
+	public String cuorder(Model model,HttpServletRequest request) {
+		FoodTruckVO vo = new FoodTruckVO();
+		vo = (FoodTruckVO) request.getSession().getAttribute("seller");
+		String truckcode = vo.getTruck_code();
+		System.out.println(truckcode);
+		ArrayList<MenuVO> menulist = new ArrayList<>();
+
+		menulist = sellerservice.getmenu(truckcode);
+		for(int i=0;i<menulist.size();i++)
+			System.out.println(menulist.get(i).getMenu_name());
+
+		model.addAttribute("menulist", menulist); 
+		 //vo2 = sellerservice.getmenu(truckcode);
+		 System.out.println();
+		return "seller/order/cuorder";
+	}
+	
 }
