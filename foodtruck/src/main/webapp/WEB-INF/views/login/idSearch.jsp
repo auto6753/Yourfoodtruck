@@ -79,7 +79,9 @@ function ck(){
 			<div id="title" class="card-header">아이디찾기</div>
 			<div id="login_box">
 				<div class="form-group">
+
 					<input type="text" class="form-control" id="nickname" placeholder="닉네임">
+
 				</div>
 				<div style="display: block" class="form-group">
 					<input type="text" class="form-control test" id="telephone"
@@ -87,6 +89,7 @@ function ck(){
 				</div>
 				<div class="form-group">
 					<button id="next" type="button"
+
 						class="btn">다음</button>
 				</div>
 			</div>

@@ -1,6 +1,7 @@
 package com.food.project.controller;
 
 import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
+
 
 	private LoginService service;
 	
@@ -56,6 +58,12 @@ public class CustomerController {
 	public String goodbyeForm(Locale locale, Model model) {
 		return "customer/goodbyeForm";
 	}
+
+	@RequestMapping(value = "/callListdetail", method = RequestMethod.GET)
+	public String callListdetail(Locale locale, Model model) {
+		return "customer/callListdetail";
+	}
+	
 	
 	//회원탈퇴
 	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
