@@ -7,41 +7,10 @@
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/news/news.css"/>"/>
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
-<script>
-
-
-</script>
-<style>
-#title {
-	width: 100%;
-	margin: 0 auto;
-	font-size: 200%;
-	border-top: solid gray;
-	border-bottom: solid gray;
-	border-width: thin;
-}
-
-#title {
-	color: rgb(0, 123, 255);
-}
-
-#next {
-	display: table;
-	magin-top: 250px;
-	margin-left: auto;
-	margin-right: auto;
-}
-#add{
-	float: right;
-}
-
-</style>
 
 </head>
 
@@ -55,7 +24,7 @@
 				<form class="form-inline">
 					<input id="searchbox" class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
-					<button type="button" class="btn btn-primary">검색</button>
+					<button id="search"type="button" class="btn">검색</button>
 
 				</form>
 			</nav>
@@ -92,7 +61,6 @@
 			
 
 
-
 		</table>
 
 
@@ -102,16 +70,13 @@
 		<div>
 			<nav id="next" aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">«</span> <span
-							class="sr-only">Previous</span>
+					<li class="page"><a class="page-link" href="#"> <span>«</span>
+						
 					</a></li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">»</span> <span
-							class="sr-only">Next</span>
+					<li class="page-item"><a class="page-link" href="#"><span>1</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>2</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>3</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>»</span>
 					</a></li>
 				</ul>
 			</nav>
@@ -122,13 +87,14 @@
 
 		</div>
 	</div>
-	<div id="add" class="form-group">
+	<div class="form-group">
 
-		<button type="button" class="btn btn-primary" >등록</button>
+		<a href="/project/news/addNews"><button id="add" type="button" class="btn" >등록</button></a>
+
 	</div>
-<%-- /*${postList}
-<button id="test">테스트</button>
-*/ --%>
+<%-- ${postList}
+<button id="test">테스트</button> --%>
+
 
 </body>
 </html>
