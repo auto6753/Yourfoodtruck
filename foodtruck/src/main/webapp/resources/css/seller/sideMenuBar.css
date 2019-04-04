@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.navBox {
-	border: 1px solid;
-}
-
 .menu a {
 	cursor:pointer;
 }
@@ -14,8 +10,4 @@
 
 li {
 	list-style: none;
-}
-
-ul {
-	padding-left: 0;
 }

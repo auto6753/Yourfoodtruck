@@ -12,7 +12,6 @@
 
 </head>
 <body>
-	<nav class="navBox container">
 				<ul>
 					<li class="menu"><a>푸드트럭 등록</a></li>
 					<li class="menu"><a>메뉴 등록</a></li>
@@ -29,6 +28,5 @@
 					<li class="menu"><a>모집공고</a></li>
 					<li class="menu"><a>허가구역 조회</a></li>
 				</ul>
-	</nav>
 </body>
 </html>
