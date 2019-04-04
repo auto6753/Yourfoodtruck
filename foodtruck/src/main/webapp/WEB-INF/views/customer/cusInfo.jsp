@@ -16,8 +16,7 @@
 		<h1>회원정보</h1>
 
 		<div class="img col">
-			<img class="img2"
-				src="${pageContext.request.contextPath}/resources/image/뉴스.jpg">
+	<img src="/project/resources/image/customer.svg" class="img2">
 			<button id="pop_bt" class="bt1">프로필수정</button>
 			<div id="pop" style="display:none;">
 				<div style="height:370px">
