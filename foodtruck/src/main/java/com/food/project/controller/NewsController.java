@@ -40,12 +40,10 @@ public class NewsController {
 		return "news/news";
 	}
 	
-
 	@RequestMapping(value = "/eventOn", method = RequestMethod.GET)
 	public String eventOn(Locale locale, Model model) {
 		return "event/event";
 	}
-
 
 	
 //	@RequestMapping(value = "/eventOff", method = RequestMethod.GET)
