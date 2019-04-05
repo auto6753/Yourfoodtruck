@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
+import com.food.project.service.FoodTruckService;
 import com.food.project.service.LocationService;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class SearchController {
 	
 	LocationService locservice;
+	FoodTruckService ftservice;
 	
 
 	@SuppressWarnings("unchecked")
@@ -29,8 +32,9 @@ public class SearchController {
 	public String search(Locale locale, Model model) {
 		
 		try{
+			ArrayList<FoodTruckVO> ft = ftservice.getFoodTruckList();
 			ArrayList<LocationVO> a=locservice.getLoc();
-			JSONObject positions = new JSONObject();
+			JSONArray truckArr = new JSONArray();
 			JSONArray dataarr = new JSONArray();
 				for (LocationVO s : a) {
 					JSONObject data = new JSONObject();
@@ -38,10 +42,14 @@ public class SearchController {
 					data.put("lng",s.getLng_x());
 					dataarr.add(data);
 				}
+				for(FoodTruckVO d : ft) {
+					truckArr.add(d);
+				}
 			JSONObject object = new JSONObject();
 			object.put("positions",dataarr);
 			System.out.println(object);
 			model.addAttribute("loc",object);
+			model.addAttribute("foodtruckList",truckArr);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
