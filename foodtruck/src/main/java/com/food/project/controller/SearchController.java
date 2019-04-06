@@ -5,12 +5,10 @@ import java.util.Locale;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.service.FoodTruckService;
@@ -31,8 +29,6 @@ public class SearchController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String search(Locale locale, Model model) {
-		JSONParser parser = new JSONParser();
-		
 		try{
 			ArrayList<FoodTruckVO> ft = ftservice.getFoodTruckList();
 			ArrayList<LocationVO> a=locservice.getLoc();
@@ -58,12 +54,8 @@ public class SearchController {
 					data.put("email",d.getEmail());
 					truckArr.add(data);
 				}
-			JSONObject object = new JSONObject();
-			object.put("positions",dataarr);
-			System.out.println(object);
-			model.addAttribute("loc",object);
 			model.addAttribute("foodtruckList",truckArr);
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
