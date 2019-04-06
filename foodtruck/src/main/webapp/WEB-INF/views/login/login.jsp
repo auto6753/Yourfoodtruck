@@ -72,12 +72,16 @@
 			<div class="form-group">
 				<input id="pw" type="password" class="form-control"  placeholder="비밀번호" name="m_passwd" value="">
 			</div>
-			<button id="login"  class="btn btn-primary btn-lg btn-block" >로그인</button>
-			<br> <span class="txt_find"> <a
+			<button id="login" class="btn">로그인</button>
+			
+			<div id="linkp">
+			<span class="txt_find"> <a
 				href="/project/login/idSearch" class="link_find">아이디찾기</a> <a
 				href="/project/login/passSearch" class="link_find">비밀번호찾기</a> <a
 				href="/project/login/register" class="link_find">회원가입</a>
 			</span>
+			</div>
+			
 		</div>
 	<!-- </form> -->
 </body>

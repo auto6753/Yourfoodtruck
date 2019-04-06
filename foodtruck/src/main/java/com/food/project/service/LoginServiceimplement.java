@@ -2,6 +2,7 @@ package com.food.project.service;
 
 import org.springframework.stereotype.Service;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.mapper.LoginMapper;
 
 import lombok.AllArgsConstructor;
@@ -9,8 +10,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class LoginServiceimplement implements LoginService {
-	LoginMapper mapper;
-	
+	private LoginMapper mapper;
 	@Override
 	public void insertCustomer(CustomerVO vo) {	mapper.insertCustomer(vo);	}
 
@@ -28,5 +28,8 @@ public class LoginServiceimplement implements LoginService {
 
 	@Override
 	public CustomerVO passSearch(CustomerVO vo) {	return mapper.passSearch(vo);	}
+
+	@Override
+	public FoodTruckVO getFoodTruck(String email) {    return mapper.getFoodTruck(email);  }
 
 }

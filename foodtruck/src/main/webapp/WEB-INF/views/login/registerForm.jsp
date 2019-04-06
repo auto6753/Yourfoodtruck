@@ -113,7 +113,7 @@
 									<!-- <button type="submit" class="btn btn-primary btn-block">
 										회원가입완료</button> -->
 									<input id="register" type="submit"
-										class="btn btn-primary btn-block" value="회원가입" />
+										class="btn" value="회원가입" />
 								</div>
 							</form>
 						</article>

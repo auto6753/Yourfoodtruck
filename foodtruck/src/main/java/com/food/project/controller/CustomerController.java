@@ -1,7 +1,6 @@
 package com.food.project.controller;
 
 import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -10,15 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.food.project.service.MemberService;
-
+import com.food.project.domain.CustomerVO;
+import com.food.project.service.LoginService;
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
-	private MemberService service;
+	private LoginService service;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
@@ -57,9 +55,11 @@ public class CustomerController {
 	
 	//회원탈퇴
 	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
-	public String goodbye(Locale locale, Model model,@RequestParam("m_mail") String m_mail,HttpServletRequest request) {
+	public String goodbye(Locale locale, Model model,HttpServletRequest request) {
+		CustomerVO c = new CustomerVO();
+		c=(CustomerVO) request.getSession().getAttribute("sessionid");
 		request.getSession().removeAttribute("sessionid");
-		service.deletemem(m_mail);	
+		service.delete(c.getEmail());	
 		return "customer/goodbye";
 	}
 }

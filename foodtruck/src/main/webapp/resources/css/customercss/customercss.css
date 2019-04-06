@@ -1,5 +1,5 @@
 @charset "UTF-8";
-#container {
+#container3 {
 	width: 220px;
 	height: 220px;
 	margin: 0 auto;
@@ -111,15 +111,6 @@ svg{
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-}
-
-#top-right {
-	text-align: right;
-}
-
-#top-right {
-	margin-top: 50px;
-	margin-left: 26%;
 }
 
 .test{
