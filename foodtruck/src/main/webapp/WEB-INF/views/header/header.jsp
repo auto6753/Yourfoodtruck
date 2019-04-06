@@ -42,8 +42,6 @@ a{
 		</button>
 		<div style="text-align: right;" class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-
-
 				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li>
@@ -58,7 +56,6 @@ a{
 				<span class="badge badge-light"><a href="/project/login/register">회원가입</a></span>
 				</c:if>
 				<c:if test="${not empty sessionScope.sessionid}">
-				
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
