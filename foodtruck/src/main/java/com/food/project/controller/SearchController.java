@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class SearchController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String search(Locale locale, Model model) {
+		JSONParser parser = new JSONParser();
 		
 		try{
 			ArrayList<FoodTruckVO> ft = ftservice.getFoodTruckList();
@@ -43,7 +45,18 @@ public class SearchController {
 					dataarr.add(data);
 				}
 				for(FoodTruckVO d : ft) {
-					truckArr.add(d);
+					JSONObject data=new JSONObject();
+					data.put("truck_code",d.getTruck_code());
+					data.put("crn",d.getCrn());
+					data.put("trucknum",d.getTrucknum());
+					data.put("account",d.getAccount());
+					data.put("layout",d.getLayout());
+					data.put("hours",d.getHours());
+					data.put("weekend_hour",d.getWeekend_hours());
+					data.put("brandname",d.getBrandname());
+					data.put("truck_regdate",d.getTruck_regdate().toString());
+					data.put("email",d.getEmail());
+					truckArr.add(data);
 				}
 			JSONObject object = new JSONObject();
 			object.put("positions",dataarr);

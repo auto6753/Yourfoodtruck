@@ -11,8 +11,8 @@
 <div style="margin-top: 180px; border: solid 1px;"></div>
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!-- 	<div class="option"> -->
-<c:forEach var="test" items="${loc}">
-${test.lat_y} // ${test.lng_x }
+<c:forEach var="test" items="${truckList}">
+${test.truck_code} + ${test.email}
 </c:forEach>
 <form id="fr">
 	검색 : <input type="text" value="" id="keyword" size="15"> <input
@@ -190,6 +190,14 @@ ${test.lat_y} // ${test.lng_x }
 			/* fragment.appendChild(itemEl); */
 		}
 	}
+	$(function() {
+		var foodtruckList =JSON.parse('${foodtruckList}');
+		console.log(typeof foodtruckList);
+		for(var i=0;i<foodtruckList.length;i++) {
+			console.log(foodtruckList[i].email);
+		}
+		
+	});
 </script>
 <style>
 #map {
