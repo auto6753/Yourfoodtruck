@@ -23,7 +23,6 @@ public class SearchController {
 	
 	LocationService locservice;
 	FoodTruckService ftservice;
-	
 
 	@SuppressWarnings("unchecked")
 
@@ -55,7 +54,6 @@ public class SearchController {
 					truckArr.add(data);
 				}
 			model.addAttribute("foodtruckList",truckArr);
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

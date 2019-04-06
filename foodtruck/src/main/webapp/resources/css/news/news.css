@@ -1,0 +1,43 @@
+@charset "UTF-8";
+p{
+	color: rgb(255, 94, 24);
+}
+#table{
+	width:70%;
+}
+#search{
+	width:70%;
+}
+#search2{
+	width:24%;
+}
+#title {
+	width: 100%;
+	margin: 0 auto;
+	font-size: 200%;
+	border-top: solid gray;
+	border-bottom: solid gray;
+	border-width: thin;
+	
+}
+
+/* #title {
+	color: rgb(0, 123, 255);
+} */
+
+#next {
+	display: table;
+	magin-top: 250px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#search{
+	background-color: rgb(255, 94, 24);
+}
+#add{
+	float:right;
+	background-color: rgb(255, 94, 24);
+}
+span{
+	color: rgb(255, 94, 24);
+}
