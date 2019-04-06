@@ -1,7 +1,6 @@
 package com.food.project.controller;
 
 import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -10,18 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
 import com.food.project.domain.CustomerVO;
 import com.food.project.service.LoginService;
-
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
-
-
 	private LoginService service;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -58,12 +52,6 @@ public class CustomerController {
 	public String goodbyeForm(Locale locale, Model model) {
 		return "customer/goodbyeForm";
 	}
-
-	@RequestMapping(value = "/callListdetail", method = RequestMethod.GET)
-	public String callListdetail(Locale locale, Model model) {
-		return "customer/callListdetail";
-	}
-	
 	
 	//회원탈퇴
 	@RequestMapping(value = "/goodbye", method = RequestMethod.GET)
