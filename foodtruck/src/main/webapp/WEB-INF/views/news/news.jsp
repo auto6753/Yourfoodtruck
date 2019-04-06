@@ -59,15 +59,10 @@
 					<td>2019.04.01</td>
 					<td>50</td>
 				</tr> -->
-			
-
 
 		</table>
 
 	</div>
-
-
-
 		<div>
 			<nav id="next" aria-label="Page navigation example">
 				<ul class="pagination">
@@ -81,10 +76,6 @@
 					</a></li>
 				</ul>
 			</nav>
-
-
-
-
 
 		</div>
 	</div>
@@ -106,4 +97,3 @@
 		});
 	});
 </script> -->
-

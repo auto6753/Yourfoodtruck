@@ -22,15 +22,14 @@
 
 #top-right {
 	margin-top: 50px;
-	color: rgb(255, 94, 24);
 }
 
 .test{
 	margin-bottom: 90px;
 }
-
-
-
+a{
+	color: rgb(255, 94, 24);
+}
 
 </style>
 <!-- Navigation -->
@@ -46,8 +45,6 @@
 		</button>
 		<div style="text-align: right;" class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-
-
 				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li>
