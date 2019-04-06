@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div id="title" class="card-header">
-		<p>푸드트럭NEWS</p>
+		<p id="title2">푸드트럭NEWS</p>
 	</div>
 
 	<form id="all">
@@ -33,8 +33,8 @@
 				<p>이번주 공지사항 입니다.
 				항상 감사드리고 푸드트럭 많이 방문해주세요!</p>
 				<p class="lead">
-					<button type="submit" class="btn btn-primary">수정</button>
-					<button type="submit" class="btn btn-primary">삭제</button>
+					<button type="submit" class="btn">수정</button>
+					<button type="submit" class="btn">삭제</button>
 				</p>
 			</div>
 

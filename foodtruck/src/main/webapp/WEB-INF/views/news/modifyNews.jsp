@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="title" class="card-header">
-		<p>푸드트럭NEWS</p>
+		<p id="title2">푸드트럭NEWS</p>
 	</div>
 	<form id="all">
 	<div id="box">
@@ -38,8 +38,8 @@
 			<textarea class="form-control" id="exampleFormControlTextarea1"
 				rows="6">오늘의 공지입니다. 확인바랍니다.</textarea>
 		</div>
-		<button type="submit" class="btn btn-primary">수정완료</button>
-		<button type="submit" class="btn btn-primary">취소</button>
+		<button type="submit" class="btn">수정완료</button>
+		<button type="submit" class="btn">취소</button>
 		</div>
 	</form>
 

@@ -18,18 +18,19 @@
 	<div id="title" class="card-header">
 		<p>푸드트럭NEWS</p>
 	</div>
-	<div>
+	<div id="main">
 		<div id="search">
 			<nav class="navbar navbar-light bg-light">
 				<form class="form-inline">
 					<input id="searchbox" class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
-					<button id="search"type="button" class="btn">검색</button>
-
+					
+					<button id="search2"type="button" class="btn">검색</button>
+					
 				</form>
 			</nav>
 		</div>
-
+		<div id="table">
 		<table class="table">
 			<thead>
 				<tr>
@@ -63,7 +64,7 @@
 
 		</table>
 
-
+	</div>
 
 
 

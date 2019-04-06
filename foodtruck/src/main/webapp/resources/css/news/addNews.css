@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+#title2{
+	color: rgb(255, 94, 24);
+	
+}
 #title {
 	width: 100%;
 	margin: 0 auto;
@@ -19,4 +22,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	
+}
+button{
+	background-color: rgb(255, 94, 24);
 }

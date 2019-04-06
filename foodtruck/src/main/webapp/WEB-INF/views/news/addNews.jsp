@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="title" class="card-header">
-		<p>푸드트럭NEWS</p>
+		<p id="title2">푸드트럭NEWS</p>
 	</div>
 	<form id="all">
 		<div id="box">
@@ -36,8 +36,8 @@
 				<textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="6"></textarea>
 			</div>
-			<button type="submit" class="btn btn-primary">등록</button>
-			<button type="submit" class="btn btn-primary">취소</button>
+			<button type="submit" class="btn">등록</button>
+			<button type="submit" class="btn">취소</button>
 		</div>
 	</form>
 
