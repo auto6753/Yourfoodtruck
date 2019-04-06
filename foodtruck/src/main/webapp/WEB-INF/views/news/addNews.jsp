@@ -36,8 +36,8 @@
 				<textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="6"></textarea>
 			</div>
-			<button type="submit" class="btn">등록</button>
-			<button type="submit" class="btn">취소</button>
+			<button type="submit" class="btn btn-primary">등록</button>
+			<button type="submit" class="btn btn-primary">취소</button>
 		</div>
 	</form>
 

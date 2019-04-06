@@ -15,4 +15,6 @@ public class FoodTruckVO {
 	private String brandname;
 	private Date truck_regdate;
 	private String email;
+
 }
+

@@ -189,7 +189,6 @@ function change(){
       ps.keywordSearch(keyword, placesSearchCB); //나온데이터를 placesSerachCB 호출?
       
    }
-
    function placesSearchCB(data, status) {
       if (status === daum.maps.services.Status.OK) {
 

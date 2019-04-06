@@ -3,6 +3,7 @@
 #title2{
 	color: rgb(255, 94, 24);
 }  
+
 #title {
 	width: 100%;
 	margin: 0 auto;
@@ -11,6 +12,7 @@
 	border-bottom: solid gray;
 	border-width: thin;
 }
+
 
 /* #title {
 	color: rgb(0, 123, 255);
@@ -26,8 +28,8 @@
 #titles{
 	font-size: 200%;
 }
+
 button{
 	background-color: rgb(255, 94, 24);
 }
-
 
