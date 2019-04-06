@@ -7,7 +7,7 @@
 	height: 600px;
 	border: 1px solid darkgray;
 }
-h1{
+h3{
 	text-align: center;
 	margin-top: 5px;
 }
@@ -119,14 +119,3 @@ a.btn-layerClose:hover {
   background-color: #1f326a;
   color: #fff;
 }
-#pop{
-    width:300px; height:400px; background:#3d3d3d; color:#fff; 
-    position:absolute; top: 0px; left:-300px; text-align:center; 
-    border:2px solid #000;
-   }
-
-#close{
-	margin-bottom: 30px;
-    width:100px;
-   }
-

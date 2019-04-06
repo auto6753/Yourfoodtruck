@@ -11,6 +11,9 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+#main{
+	width: 120%;
+}
 
 #top-right {
 	/* //text-align: right; */
@@ -33,7 +36,7 @@ a{
 <div class="test">
 <nav style="padding-left: 20%;"
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-	<div style="margin-left: 0; " class="container" >
+	<div id="main" style="margin-left: 0; " class="container" >
 		<a class="navbar-brand" href="/project/rehome">당신의 푸드트럭!</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -56,6 +59,7 @@ a{
 				<span class="badge badge-light"><a href="/project/login/register">회원가입</a></span>
 				</c:if>
 				<c:if test="${not empty sessionScope.sessionid}">
+				
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	

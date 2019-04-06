@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 #container3 {
 	width: 220px;
 	height: 220px;
@@ -113,7 +112,6 @@ svg{
 	-o-background-size: cover;
 	background-size: cover;
 }
-
 
 .test{
 	margin-bottom: 90px;

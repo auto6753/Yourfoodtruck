@@ -1,7 +1,6 @@
 package com.food.project.domain;
 
-import java.sql.Date;
-
+import java.util.Date;
 import lombok.Data;
 
 @Data
@@ -16,5 +15,4 @@ public class FoodTruckVO {
 	private String brandname;
 	private Date truck_regdate;
 	private String email;
-	
 }

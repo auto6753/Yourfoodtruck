@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>내 문의내역</title>
-<jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/help/myQuestion.css"/>"/>
 </head>
 <body>
