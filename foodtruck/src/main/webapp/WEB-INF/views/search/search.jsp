@@ -11,9 +11,6 @@
 <div style="margin-top: 180px; border: solid 1px;"></div>
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!-- 	<div class="option"> -->
-<c:forEach var="test" items="${truckList}">
-${test.truck_code} + ${test.email}
-</c:forEach>
 <form id="fr">
    <select id="select" onchange="change()">
       <option value='map'>지도</option>
@@ -29,7 +26,6 @@ ${test.truck_code} + ${test.email}
 
 <div id="map" style="width: 60%; height: 50%; margin: 0 auto;">
 </div>
-<script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <!-- <script type="text/javascript"
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=clusterer"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services"></script> -->
@@ -460,17 +456,12 @@ function change(){
 			/* fragment.appendChild(itemEl); */
 		}
 	}
-	$(function() {
+	/* $(function() {
 		var foodtruckList =JSON.parse('${foodtruckList}');
 		console.log(typeof foodtruckList);
 		for(var i=0;i<foodtruckList.length;i++) {
 			console.log(foodtruckList[i].email);
 		}
 		
-	});
+	}); */
 </script>
-<style>
-#map {
-   height: 50%;
-}
-</style>

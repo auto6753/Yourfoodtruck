@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/seller", method = RequestMethod.GET)
+@RequestMapping(value = "/seller")
 public class SellerController {
   
 	private static final int MENU_PER_LINE = 4; // 1줄당 메뉴 개수
