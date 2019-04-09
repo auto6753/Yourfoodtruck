@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!------ Include the above in your HEAD tag ---------->
@@ -215,7 +215,232 @@ $(document).ready(function(){
 				<th>수량</th>
 				<th>가격</th>
 			</tr>
-		</thead>
+		</thead> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>주문관리</title>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/news/news.css"/>" />
+
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+
+</head>
+<style>
+#logo {
+	text-align: center;
+	font-weight: bold;
+	font-size: 290%;
+}
+
+div a {
+	color: rgb(255, 94, 24);
+}
+
+#box {
+	border: 2px solid;
+	border-radius: 10px;
+	color: rgb(255, 94, 24);
+	width: 70%;
+	height: 1100px;
+	margin: 0 auto;
+	margin-top: 40px;
+	
+}
+#box2{
+	border: 2px solid;
+	color: rgb(255, 94, 24);
+	width:85%;
+	height:650px;
+	margin:0 auto;
+	position:relative;
+	margin-top: 70px;
+	overflow: auto;
+	
+	
+}
+#box3{
+	border: 2px solid;
+	color: rgb(255, 94, 24);
+	width: 85%;
+	height: 200px;
+	margin:0 auto;
+	position: relative;
+	margin-top:40px;
+	overflow: auto;
+}
+
+#click {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 49.8%;
+	float: left;
+}
+
+#click2 {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 49.8%;
+	float: right;
+}  
+#click3{
+	
+	width:85%;
+	text-align: center;
+	margin: 0 auto;
+	
+	
+	
+	
+	
+}
+#c1{
+	
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width:28%;
+	height:50px;
+	font-size:60%;
+	margin-top:40px;
+	
+}
+#c2{
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width:28%;
+	height:50px;
+	font-size:60%;
+	margin-top:40px;
+	
+}
+#c3{
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width:28%;
+	height:50px;
+	font-size:50%;
+	margin-top:40px;
+}
+
+#food{
+	
+	width:50%;
+	height:250px;
+	
+}
+#food1{
+	
+	width:50%;
+	height:250px;
+	
+}
+#food2{
+	
+	width:50%;
+	height:250px;
+	
+}
+
+#foodlist {
+	text-align:center;
+	margin: 0 auto;
+	margin-top:30px;
+} 
+
+
+
+
+
+
+
+
+/* #foodlist button {
+	width: 35%;
+	height: 0;
+	padding-bottom: 10%;
+	align: center;
+} */
+
+
+</style>
+
+<body>
+	<div id="logo">
+		<a href="/project/rehome">당신의 푸드트럭</a>
+	</div>
+	<div>
+		<div id="box">
+			<button id="click" class="btn">food</button>
+			<button id="click2" class="btn">drink</button>
+	 		<div id="box2" >
+	 			<div id="foodlist">
+	 			<button id="food" class="btn" ></button>
+	 			<p>고추장불고기</p>
+	 			<p>4500원</p>
+	 			<button id="food1" class="btn"></button>
+	 			<p>닭강정</p>
+	 			<p>4000원</p>
+	 			<button id="food2" class="btn"></button>
+	 			<p>회오리감자</p>
+	 			<p>3000원</p>
+	 			
+	 			</div>
+	 		</div>
+	 		
+	 		<div id="box3">
+	 			<table>
+	 				<thead>
+	 					<tr>
+	 					<th width="50%">
+	 						<div id="list">메뉴</div>
+	 					</th>
+	 					<th width="25%">
+	 						<div id="list">수량</div>
+	 					</th>	
+	 					<th width="25%">
+	 						<div id="list">가격</div>
+	 					</th>
+	 					</tr>
+	 				</thead>
+	 				<tbody>
+	 				<tr>
+	 					<td>1</td>
+	 					<td>1</td>
+	 					<td>1</td>
+	 				</tr>
+	 					
+	 					
+	 					
+	 						 				
+	 					
+	 						
+	 						
+	 					
+	 				</tbody>
+	 			</table>
+	 		
+	 		</div>
+	 		<div id="click3">
+	 			<button id="c1" class="btn">카드결제</button>
+	 			<button id="c2"class="btn">현금결제</button>
+	 			<button id="c3"class="btn">카카오페이</button>
+	 		</div>
+	 	</div>
+	 	
+
+	</div>
+
+
+
+
+
+</body>
+</html>
 		<tbody>	
 		</tbody>
 	</table>
