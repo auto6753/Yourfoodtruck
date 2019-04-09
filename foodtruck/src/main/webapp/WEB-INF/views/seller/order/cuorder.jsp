@@ -216,8 +216,7 @@ $(document).ready(function(){
 				<th>가격</th>
 			</tr>
 		</thead>
-		<tbody>
-		
+		<tbody>	
 		</tbody>
 	</table>
 </form>

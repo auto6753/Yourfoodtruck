@@ -62,7 +62,6 @@
 					</a></li>
 				</ul>
 			</nav>
-
 		</div>
 	</div>
 	<div class="form-group">

@@ -30,7 +30,6 @@
 a{
 	color: rgb(255, 94, 24);
 }
-
 </style>
 <!-- Navigation -->
 <div class="test">
