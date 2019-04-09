@@ -12,22 +12,27 @@ public class PaymentServiceImplement implements PaymentService {
 
 	PaymentMapper mapper;
 	@Override
-	public ArrayList<PaymentVO> getPaymentList(String payment_code) {
-		return mapper.getPaymentList(payment_code);
+	public ArrayList<PaymentVO> getPaymentList(String payment_telephone) {
+		return mapper.getPaymentList(payment_telephone);
 	}
 
+//	@Override
+//	public int insertPaymentList(ArrayList<PaymentVO> payment_list) {
+//		int result=0;
+//		try{
+//			for(PaymentVO vo:payment_list) {
+//				mapper.insertPaymentList(vo);
+//			}
+//			result=1;
+//		}catch(Exception e){
+//		}
+//		return result;
+//		
+//	}
+
 	@Override
-	public int insertPaymentList(ArrayList<PaymentVO> payment_list) {
-		int result=0;
-		try{
-			for(PaymentVO vo:payment_list) {
-				mapper.insertPaymentList(vo);
-			}
-			result=1;
-		}catch(Exception e){
-		}
-		return result;
-		
+	public ArrayList<PaymentVO> getAllList() {
+		return mapper.getAllList();
 	}
 
 }
