@@ -48,26 +48,12 @@
 			</tr>
 			</c:forEach>
 			</tbody>
-					<!-- <td>푸드트럭 공지사항</td>
-					<td>오영준</td>
-					<td>2019.04.01</td>
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>푸드트럭 공지사항</td>
-					<td>오영준</td>
-					<td>2019.04.01</td>
-					<td>50</td>
-				</tr> -->
-
 		</table>
-
 	</div>
 		<div>
 			<nav id="next" aria-label="Page navigation example">
 				<ul class="pagination">
 					<li class="page"><a class="page-link" href="#"> <span>«</span>
-						
 					</a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>1</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>2</span></a></li>

@@ -109,35 +109,85 @@ input:disabled {
 </style>
 <script>
 $(document).ready(function(){
+	var list  = new Array();
+	var is = false;
+	var allprice = 0;
 	$("#test").on('click',"div",function(){
-		var a= $(this).find('p')
+		var a= $(this).find('p');
 		var name = a.html();
 		var price = a.next().html();
 		var code = a.next().eq(1).val();
-		alert(name + price + code);
-		/* console.log(a.html());
-		console.log(a.next().html());
-		console.log(a.next().eq(1).val()); */
+		var count = 1;
 		
-	$("tbody").append("<tr><td>"+name+"</td><td>"+"<div style='display: inline-block;' class='qty mt-5'><span class='minus bg-dark'>-</span><input type='number' class='count' name='qty' value='1'/><span class='plus bg-dark'>+</span></div>"+"</td><td>"+price+"</td>");
+		//클릭한 상품이 현재 목록에 있는지 확인
+		for(var i=0;i<list.length;i++){
+			 if(list[i].code == code){ //있으면 수량만 더하기 
+				list[i].count +=1;
+			 	list[i].price = list[i].count * price;
+				var k = list[i].code;
+				//해당 값 수정
+				$("#"+k).html("<tr id='"+k+"'><td>"+list[i].name+"</td><td>"+list[i].count+"</td><td>"+list[i].price+"</td>");
+				allprice += parseInt(price);
+				$("#allprice").html(allprice);
+				is=true; // 상품이 있기때문에 true 로 바꿔서 추가못하게 함
+			}
+		}
+		if(!is){ //상품이 없어서 추가하고 어팬드
+			var temp = {
+					 code: code,
+					 count: count,
+					 price: parseInt(price),
+					 name:name
+			}
+			list.push(temp);
+			var k = temp.code;
+			allprice += parseInt(temp.price);
+			$("#allprice").html(allprice);
+			$("tbody").append("<tr id='"+k+"'><td>"+temp.name+"</td><td>"+temp.count+"</td><td>"+temp.count*temp.price+"</td>");
+		}
+		if(is){ //초기화
+			//alert(is);
+			is=false;
+		}
 	});
 	$("#cancle1").click(function(){
 		$("tbody").empty();
-		var a= $("tbody");
-		
+		var a= $("tbody"); //tebody 태그 없앰;
+		allprice=0;
+		$("#allprice").html(allprice);
+		list  = new Array(); //list초기화
 	});		
-	    $('.count').prop('disabled', true);
-			$(document).on('click','.plus',function(){
-			$('.count').val(parseInt($('.count').val()) + 1 );
-		});
-    	$(document).on('click','.minus',function(){
-			$('.count').val(parseInt($('.count').val()) - 1 );
-				if ($('.count').val() == 0) {
-					$('.count').val(1);
-				}
-	    	});
+	$("#kakaopay").click(function(){
+		console.log(list);
+		console.log(JSON.parse(JSON.stringify(list)));
+		if(typeof list[0] == 'undefined'){
+			alert("주문목록이업서여");
+		}else{
+	/* 		$.ajax({
+				url:'',
+				type:'post',
+				data :JSON.stringify(list)
+			}); */
+			alert("카카오페이결제 총 결제금액"+allprice);
+		}
+	});
+	$("#cash").click(function(){
+		console.log(list);
+		if(typeof list[0] == 'undefined'){
+			alert("주문목록이업서여");
+		}else{
+		alert("현금결제 총 결제금액"+allprice);
+		}
 		
-	
+	});
+	$("#card").click(function(){
+		console.log(list);
+		if(typeof list[0] == 'undefined'){
+			alert("주문목록이업서여");
+		}else{
+		alert("카드결제 총 결제금액"+allprice);
+		}
+	});
 });
 </script>
 <div id="test" class="box"
@@ -157,6 +207,7 @@ $(document).ready(function(){
 	<div class="row">
 		<h2>주문목록</h2>
 	</div>
+<form>
 	<table class="table table-fixed table-striped">
 		<thead>
 			<tr>
@@ -165,13 +216,14 @@ $(document).ready(function(){
 				<th>가격</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody>	
 		</tbody>
 	</table>
+</form>
 </div>
-총가격					<div style="display: inline-block;" class="qty mt-5">
-                        <span class="minus bg-dark">-</span>
-                        <input type="number" class="count" name="qty" value="1">
-                        <span class="plus bg-dark">+</span>
-                    </div>
+총가격
+<p id="allprice">0</p><br>			
 <button id="cancle1">취소</button>
+<button id="card">카드 결제</button>
+<button id="cash">현금 결제</button>
+<button id="kakaopay">카카오페이 결제</button>
