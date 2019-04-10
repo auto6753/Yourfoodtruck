@@ -13,31 +13,36 @@
 }
 
 #top-right {
-	text-align: right;
+	/* //text-align: right; */
+	padding: 0 auto;
 }
 
 #top-right {
 	margin-top: 50px;
-	margin-left: 26%;
 }
 
 .test{
 	margin-bottom: 90px;
 }
+a{
+	color: rgb(255, 94, 24);
+}
+
 </style>
 <!-- Navigation -->
 <div class="test">
-<nav
+<nav style="padding-left: 20%;"
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-	<div class="container">
+	<div style="margin-left: 0; " class="container" >
 		<a class="navbar-brand" href="/project/rehome">당신의 푸드트럭!</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive" aria-controls="navbarResponsive"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
+		<div style="text-align: right;" class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
+
 
 				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
@@ -53,8 +58,15 @@
 				<span class="badge badge-light"><a href="/project/login/register">회원가입</a></span>
 				</c:if>
 				<c:if test="${not empty sessionScope.sessionid}">
+				
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
+					<c:if test="${empty sessionScope.seller}">	
+					<span id="" class="badge badge-light"><a href="#">트럭등록</a></span>
+					</c:if>
+					<c:if test="${not empty sessionScope.seller}">
+					<span id="" class="badge badge-light"><a href="/project/seller">트럭관리</a></span>
+					</c:if>
 					<span id="" class="badge badge-light"><a href="/project/login/logout">로그아웃</a></span>
 				</c:if>
 			</div>

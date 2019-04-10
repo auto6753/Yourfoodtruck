@@ -86,7 +86,7 @@ function check(){
 					<input type="text" class="form-control" id="mail" placeholder="아이디">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="이름">
+					<input type="text" class="form-control" id="name" placeholder="닉네임">
 				</div>
 				<div style="display: block" class="form-group">
 					<input type="text" class="form-control test" id="pnumber"
@@ -94,7 +94,7 @@ function check(){
 				</div>
 				<div class="form-group">
 					<button id="next" type="button"
-						class="btn btn-primary btn-lg btn-block">다음</button>
+						class="btn">다음</button>
 				</div>
 			</div>
 		</form>
@@ -111,7 +111,7 @@ function check(){
 
 			<div id="loginnext" style="display: inline-block;">
 				<a href="/project/login"><button id="button1" type="button"
-						class="btn btn-primary btn-lg btn-block">로그인하기</button></a>
+						class="btn">로그인하기</button></a>
 			</div>
 		</form>
 	</div>

@@ -14,7 +14,10 @@ public class TruckController {
 	public String info(Locale locale, Model model) {
 		return "truck/truckInfo";
 	}
-	
+	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
+	public String callForm(Locale locale, Model model) {
+		return "truck/callForm";
+	}
 //	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
 //	public String callForm(Locale locale, Model model) {
 //		return "truck/callForm";

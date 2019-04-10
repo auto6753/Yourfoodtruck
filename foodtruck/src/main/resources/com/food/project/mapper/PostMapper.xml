@@ -5,7 +5,8 @@
 
 	<!-- 게시글 리스트 불러오기 -->
 	<select id="getPostList" resultType="com.food.project.domain.PostVO">
-		select * from post order by post_regdate
+
+		select post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate, to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,post_content,post_title,post_visit,post_url,post_class from post order by post_regdate
 	</select>
 	
 	<!-- 게시글 불러오기 -->

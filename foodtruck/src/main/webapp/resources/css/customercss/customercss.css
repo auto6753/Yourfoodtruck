@@ -1,5 +1,6 @@
 @charset "UTF-8";
-#container {
+
+#container3 {
 	width: 220px;
 	height: 220px;
 	margin: 0 auto;
@@ -86,7 +87,13 @@
 	text-align: center;
 	padding-top: 30px;
 }
-svg{
+.img2{
+	margin: 0 auto;
+	margin-top: 15px;
+	width:200px; 
+	height: 180px;
+}
+.img1{
 	margin-top: 15px;
 	width:200px; 
 	height: 200px;
@@ -113,15 +120,12 @@ svg{
 	background-size: cover;
 }
 
-#top-right {
-	text-align: right;
-}
-
-#top-right {
-	margin-top: 50px;
-	margin-left: 26%;
-}
 
 .test{
 	margin-bottom: 90px;
 }
+h4{
+	text-align: center;
+	margin-top: 5px;
+}
+
