@@ -86,14 +86,11 @@ public class SearchController {
 			System.out.println(list2);
 			
 			//model.addAttribute("loc",list2);
-			
-			
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		//model.addAttribute("loc",locservice.getLoc());
+		model.addAttribute("loc",locservice.getLoc());
 		return "search/search";
 	}
 	

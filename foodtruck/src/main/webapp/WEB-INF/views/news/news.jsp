@@ -53,8 +53,7 @@
 		<div>
 			<nav id="next" aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="page"><a class="page-link" href="#"> <span>«</span>
-					</a></li>
+					<li class="page"><a class="page-link" href="#"> <span>«</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>1</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>2</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>3</span></a></li>

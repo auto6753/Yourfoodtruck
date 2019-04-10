@@ -31,6 +31,7 @@
 		name="driverClassName" /> <property value="jdbc:oracle:thin:@39.127.7.90:1521:orcl" 
 		name="url" /> <property value="six" name="username" /> <property value="1234" 
 		name="password" /> </bean>  
+	
 
 
 	<!-- Sql session factory -->

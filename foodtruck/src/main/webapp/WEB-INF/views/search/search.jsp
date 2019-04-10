@@ -1,13 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../header/header.jsp"></jsp:include>
-
 <style>
 #fr {
    margin-left: 40%;
 }
 </style>
-
 <div style="margin-top: 180px; border: solid 1px;"></div>
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!--    <div class="option"> -->
@@ -30,15 +28,14 @@ ${test.lat_y} // ${test.lng_x }
    <div id="pagination"></div> -->
 <!-- </div> -->
 
+
 <div id="map" style="width: 60%; height: 50%; margin: 0 auto;">
 </div>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <!-- <script type="text/javascript"
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=clusterer"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services"></script> -->
-<script type="text/javascript"
-
-   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services,clusterer,drawing"></script>
 <script>
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
    mapOption = {
@@ -89,7 +86,6 @@ console.log(test2);  */
 //}
    //console.log(obj.positions[i].lng);
    //var positions = obj;
-
    //console.log(positions);
    
 markers=[]; //마커를 넣을배열 생성
@@ -112,8 +108,6 @@ markers=[]; //마커를 넣을배열 생성
        markers.push(marker); 
 } 
  clusterer.addMarkers(markers);
- 
-
    /*$.get('resources/js/food.json', function(data) {
     // 데이터에서 좌표 값을 가지고 마커를 표시합니다
     // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
@@ -145,12 +139,8 @@ markers=[]; //마커를 넣을배열 생성
 /*        for(var i=0;i<data.positions.length;i++){
           daum.maps.event.addListener(marker[i], 'mouseover', makeOverListener(map, marker[i], infowindow[i]));
               daum.maps.event.addListener(marker[i], 'mouseout', makeOutListener(infowindow[i]));
-          } 
-          
-
-      
-    
-    });*/ 
+          }
+   });*/ 
        function makeClickListener(map, marker, infowindow) {
            return function() {
                infowindow.open(map, marker);
@@ -158,7 +148,6 @@ markers=[]; //마커를 넣을배열 생성
        }
    
     // 키워드로 장소를 검색합니다
-
 function change(){
     var select= $("#select option:selected").val();
     if(select == "map"){
@@ -175,13 +164,11 @@ function change(){
     
     $("#submit").click(function() {
        searchPlaces();
-
     });
    
    // 키워드 검색을 요청하는 함수입니다
    function searchPlaces() {
       var keyword = document.getElementById('keyword').value;
-
       if (!keyword.replace(/^\s+|\s+$/g, '')) {
          alert('키워드를 입력해주세요!');
          return false;
@@ -194,7 +181,6 @@ function change(){
 
    function placesSearchCB(data, status) {
       if (status === daum.maps.services.Status.OK) {
-
          // 정상적으로 검색이 완료됐으면
          // 검색 목록과 마커를 표출합니다
          /* console.log(data); */
@@ -207,7 +193,6 @@ function change(){
          
          // 페이지 번호를 표출합니다
          /* displayPagination(pagination); */
-
       } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 
          alert('검색 결과가 존재하지 않습니다.');
@@ -215,7 +200,6 @@ function change(){
          return;
 
       } else if (status === daum.maps.services.Status.ERROR) {
-
          alert('검색 결과 중 오류가 발생했습니다.');
          result = false;
          return;
@@ -299,9 +283,7 @@ function change(){
       xarry[i] = 33.49953018214999+i;
       yarry[i] = 126.53117057093789+i;
    }
-   
-
-   //좌표와 좌표사이의 거리계산 
+     //좌표와 좌표사이의 거리계산 
    function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
        function deg2rad(deg) {
            return deg * (Math.PI/180)
@@ -315,7 +297,7 @@ function change(){
        var d = R * c; // Distance in km
        return d;
    }
-   
+  
 </script>
 <style>
 #map {
