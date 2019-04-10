@@ -58,7 +58,7 @@ public class SearchController {
 			e.printStackTrace();
 		}
 		
-		//model.addAttribute("loc",locservice.getLoc());
+		model.addAttribute("loc",locservice.getLoc());
 		return "search/search";
 	}
 	
