@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.food.project.domain.FoodTruckVO;
-import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
-import com.food.project.service.MemberService;
 import com.food.project.service.SellerService;
 
 import lombok.AllArgsConstructor;
@@ -21,8 +19,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping(value = "/seller", method = RequestMethod.GET)
 public class SellerController {
-  
-	private static final int MENU_PER_LINE = 4; // 1줄당 메뉴 개수
 	private SellerService sellerservice;
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
@@ -32,30 +28,30 @@ public class SellerController {
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
-		String[] menuList = {"김밥", "볶음밥", "오므라이스", "냉면", "돈가스"}; // DB에 등록된 메뉴
+		int menuNum = 17;
 		
-		int menu = menuList.length; // DB에 등록된 메뉴 개수
-		int lineNext; // 줄 바꿈 횟수
-		int chkremain; // 나머지 존재 여부 확인
-		
-		lineNext = (menu / MENU_PER_LINE) - 1;
-		chkremain = menu % MENU_PER_LINE;
-		
-		if(chkremain > 0 || menu == 0) {
-			lineNext++;
-		}
-		
-		model.addAttribute("menuList", menuList);
-		model.addAttribute("menu", menu);
-		model.addAttribute("lineNext", lineNext);
-		model.addAttribute("MENU_PER_LINE", MENU_PER_LINE);
-		
+		model.addAttribute("menuNum", menuNum);
 		return "seller/menu/menu";
+	}
+	
+	@RequestMapping(value="/addMenu", method=RequestMethod.GET) 
+	public String addMenu(Model model) {
+		return "seller/menu/addMenu";
+	}
+	
+	@RequestMapping(value="/editMenu", method=RequestMethod.GET) 
+	public String editMenu(Model model) {
+		return "seller/menu/editMenu";
 	}
 	
 	@RequestMapping(value="/location", method=RequestMethod.GET) 
 	public String location(Model model) {
 		return "seller/loc/location";
+	}
+	
+	@RequestMapping(value="/jusoPopup", method=RequestMethod.POST) 
+	public String jusoPopup(Model model) {
+		return "seller/loc/jusoPopup";
 	}
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET) 
@@ -86,9 +82,9 @@ public class SellerController {
 	public String side(Model model) {
 		return "seller/sideMenuBar/sideMenuBar";
 	}
+	
 	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
 	public String seorder(Model model) {
-		
 		return "seller/order/seorder";
 	}
 	
