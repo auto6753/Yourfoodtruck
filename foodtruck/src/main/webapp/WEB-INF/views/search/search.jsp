@@ -284,6 +284,7 @@ function change(){
       yarry[i] = 126.53117057093789+i;
    }
      //좌표와 좌표사이의 거리계산 
+
    function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
        function deg2rad(deg) {
            return deg * (Math.PI/180)
