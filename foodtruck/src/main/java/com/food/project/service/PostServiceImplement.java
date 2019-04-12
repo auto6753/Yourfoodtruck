@@ -24,7 +24,7 @@ public class PostServiceImplement implements PostService {
 	public PostVO getPost(String post_code) {	return mapper.getPost(post_code);}
 	//게시글 등록
 	@Override
-	public int insertPost(PostVO vo) {	return mapper.insertPost(vo);}
+	public void insertPost(PostVO vo) {	mapper.insertPost(vo);}
 	//게시글 수정
 	@Override
 	public int updatePost(PostVO vo) {	return mapper.updatePost(vo);}

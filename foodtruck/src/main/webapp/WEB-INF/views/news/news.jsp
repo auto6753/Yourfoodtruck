@@ -11,17 +11,18 @@
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script>
 
+</script>
 </head>
 
 <body>
 	<div id="title" class="card-header">
 		<p>푸드트럭NEWS</p>
 	</div>
-	<div id="main">
 		<div id="search">
 			<nav class="navbar navbar-light bg-light">
-				<form class="form-inline">
+		   		<form class="form-inline">
 					<input id="searchbox" class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
 					
@@ -30,6 +31,8 @@
 				</form>
 			</nav>
 		</div>
+	
+	
 		<div id="table">
 		<table class="table">
 			<thead>
@@ -41,7 +44,7 @@
 			</thead>
 			<tbody>
 			<c:forEach var="i" items="${postList}">
-			<tr>
+			<tr id="${i.post_code }" onclick="test();">
 				<td>${i.post_title }</td>
 				<td>${i.post_regdate}</td>
 				<td>${i.post_visit}</td>
@@ -50,35 +53,27 @@
 			</tbody>
 		</table>
 	</div>
-		<div>
+		<div id="alll">
 			<nav id="next" aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="page"><a class="page-link" href="#"> <span>«</span>
-					</a></li>
+					<li class="page"><a class="page-link" href="#"> <span>«</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>1</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>2</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>3</span></a></li>
-					<li class="page-item"><a class="page-link" href="#"><span>»</span>
-					</a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>4</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>5</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>»</span></a></li>
+					<a href="/project/news/addNews"><button id="addb"type="button" class="btn" >등록</button></a>
+			
 				</ul>
 			</nav>
+			
 		</div>
-	</div>
-	<div class="form-group">
+		
+	
 
-		<a href="/project/news/addNews"><button id="add" type="button" class="btn" >등록</button></a>
-
-	</div>
-<%-- ${postList}
-<button id="test">테스트</button> --%>
 
 
 </body>
 </html>
-<!-- <script>
-	$(function() {
-		$('#test').click(function() {
-			location.href="/project/news/specific";
-		});
-	});
-</script> -->
+

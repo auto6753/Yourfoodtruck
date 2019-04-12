@@ -21,6 +21,7 @@ public class NewsController {
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(Model model) {
 		model.addAttribute("postList",service.getPostList());
+		
 		return "news/news";
 	}
 	
@@ -32,13 +33,29 @@ public class NewsController {
 		return "news/specific";
 	}
 	@RequestMapping(value= "/news/addNews", method= RequestMethod.GET)
-	public String addNews(Model model, PostVO vo) {
+	public String addNews(Model model) {
+		
+		
 		/*
 		 * vo.setPost_class(0); service.insertPost(vo);
 		 * model.addAttribute("postList",service.getPostList());
 		 */
 		return "news/addNews";
 	}
+	@RequestMapping(value= "/news/addNews", method= RequestMethod.POST)
+	public String addNews(Model model, PostVO vo) {
+		
+		
+		
+		service.insertPost(vo);
+		
+		
+		 vo.setPost_class(0); 
+		 //model.addAttribute("postList",service.getPostList());
+		
+		return "redirect:/news";
+	}
+	
 	@RequestMapping(value = "/news/modifyNews", method = RequestMethod.GET)
 	public String modifyNews(Model model,PostVO vo) {
 //		String post_code2="190401001";

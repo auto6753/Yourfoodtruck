@@ -5,12 +5,10 @@
 }  
 
 #title {
-	width: 100%;
+	width: 85%;
 	margin: 0 auto;
 	font-size: 200%;
-	border-top: solid gray;
-	border-bottom: solid gray;
-	border-width: thin;
+	
 }
 
 
@@ -29,6 +27,7 @@
 	font-size: 200%;
 }
 
-button{
+#d{
 	background-color: rgb(255, 94, 24);
+	color: white;
 }

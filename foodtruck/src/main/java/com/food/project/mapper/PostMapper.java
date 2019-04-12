@@ -13,7 +13,7 @@ public interface PostMapper {
 	//게시글 불러오기
 	public PostVO getPost(String post_code);
 	//게시글 등록하기
-	public int insertPost(PostVO vo);
+	public void insertPost(PostVO vo);
 	//게시글 수정하기
 	public int updatePost(PostVO vo);
 	//게시글 삭제하기

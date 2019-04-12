@@ -33,8 +33,8 @@
 				<p>이번주 공지사항 입니다.
 				항상 감사드리고 푸드트럭 많이 방문해주세요!</p>
 				<p class="lead">
-					<button type="submit" class="btn">수정</button>
-					<button type="submit" class="btn">삭제</button>
+					<button id="d" type="submit" class="btn">수정</button>
+					<button id="d" type="submit" class="btn">삭제</button>
 				</p>
 			</div>
 
