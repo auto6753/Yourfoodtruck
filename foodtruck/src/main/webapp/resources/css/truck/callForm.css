@@ -32,7 +32,7 @@ h1, h3{
 	float: left;
 	text-align: center;
 }
-#h4{
+#name{
 	margin-top: 25px;
 }
 input{
@@ -51,20 +51,20 @@ input{
 	float:left;
 	text-align: center;
 }
-#h4-1{
+#place{
 	margin-top: 35px;
 }
-#h4-2{
+#date{
 	margin-top: 50px;"
 }
-#h4-3{
+#time{
 	 margin-bottom: 90px; 
 	 margin-top:40px;
 }
-#h4-4{
+#place{
 	margin-bottom: 80px;
 }
-#h4-5{
+#content{
 	margin-top: 60px;
 }
 #btn1{
@@ -81,36 +81,36 @@ textarea{
 	width: 100%; 
 	margin-top: 20px;
 }
-#i1{
+#inname{
 	margin-top: 20px; 
 	width: 100%; 
 	display: inline;
 }
-#i2{
+#intel{
 	margin-top: 20px; 
 	width: 100%x; 
 	display: inline;
 }
-#i3{
+#inplace{
 	width: 100%;  
 	display: inline;
 }
-#i4{
+#Startdate, #Enddate{
 	width:197px; 
 	display: inline;
 }
-#i5{
+#Starttime, #Endtime{
 	width:197px; 
 	display: inline;
 }
-#i6{
+#postnum{
 	width: 260PX; 
 	display: inline;
 }
-#i7{
+#loadaddr{
 	top: 5px;
 }
-#i8{
+#cost{
 	width: 100%;
 }
 #div1{

@@ -29,6 +29,7 @@
 	<select id="getmember" resultType="com.food.project.domain.MemberVO">
 		select m_mail,m_passwd,m_name from member where m_mail = #{m_mail}
 	</select>
+	
 	<select id="getname" resultType="com.food.project.domain.MemberVO">
 		select m_nicname from member where m_nicname = #{m_nicname}
 	</select>

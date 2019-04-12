@@ -56,7 +56,7 @@
 		}).open();
 	}
 	$(document).ready(function(){
-		$("#test").click(function(){
+		$("#btn2").click(function(){
 			var personname = $("#i1").val();
 			var tel = $("#i2").val();
 			var festivalname = $("#i3").val();
@@ -96,49 +96,48 @@
 		<h1>호출요청하기</h1>
 		<div id="height" class="col">
 			<div id="sg" class="col">
-				<h4 id="h4">신청자명</h4>
+				<h4 id="name">신청자명</h4>
 
 				<h4>휴대전화</h4>
 
-				<h4 id="h4-1">행사장명</h4>
+				<h4 id="place">행사장명</h4>
 
-				<h4 id="h4-2">행사일</h4>
+				<h4 id="date">행사일</h4>
 
-				<h4 id="h4-3">행사시간</h4>
+				<h4 id="time">행사시간</h4>
 
-				<h4 id="h4-4">행사장소</h4>
+				<h4 id="place">행사장소</h4>
 
 				<h4>푸드트럭 섭외비용</h4>
 
-				<h4 id="h4-5">추가요구사항</h4>
+				<h4 id="content">추가요구사항</h4>
 
 
 			</div>
 
 			<div id="sj" class="col">
-				<input id="i1" class="form-control">
-				<input class="form-control" type="tel" name="tlno" id="i2" placeholder="전화번호 입력" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13">
-				<input id="i3" placeholder="행사장명 입력(20자 이내)" class="form-control"> 
-				<input id="i4" class="form-control" type="date"> ~ <input id="i4-1" class="form-control" type="date"> 
-				<input id="i5" type="time" class="form-control"> ~ <input id="i5-1" type="time" class="form-control">
+				<input id="inname" class="form-control">
+				<input class="form-control" type="tel" name="tlno" id="intel" placeholder="전화번호 입력" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13">
+				<input id="inplace" placeholder="행사장명 입력(20자 이내)" class="form-control"> 
+				<input id="Startdate" class="form-control" type="date"> ~ <input id="Enddate" class="form-control" type="date"> 
+				<input id="Starttime" type="time" class="form-control"> ~ <input id="Endtime" type="time" class="form-control">
 
 				<div id="div3" class="form-group col"> 
-					<input id="i6" class="form-control" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly">
+					<input id="postnum" class="form-control" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly">
 					<button id="btn3" type="button" class="btn btn-default" onclick="execPostCode();">
 						<i class="fa fa-search"></i> 우편번호 찾기</button>
 				</div>
 				<div id="div1" class="form-group col">
-					<input id="i7" class="form-control" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
+					<input id="loadaddr" class="form-control" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
 				</div>
 				<div id="div2" class="form-group col">
-					<input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text" />
+					<input class="form-control" placeholder="상세주소" name="addr3" id="addrdetail" type="text" />
 				</div>
-				<input id="i8" class="form-control">
+				<input id="cost" class="form-control">
 				<textarea id="content" class="form-control" cols="30" rows="5"
 					placeholder="관객연령대, 관객 예상수, 행사컨셉 등을 상세히 기술해주세요."></textarea>
 			</div>
 			<div id="oj">
-			<button id="test">확인</button>
 				<button id="btn1" class="btn btn-default">선수금지불</button>
 				
 				<button id="btn2" class="btn btn-default">호출요청</button>

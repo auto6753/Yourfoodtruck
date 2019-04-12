@@ -8,7 +8,6 @@
 		like #{truckcode} order by loc.loc_time desc) where rownum=1; </select> -->
 	<!-- select * from( select loc.* from location loc where truck_code = #{truck_code} 
 		order by loc.loc_time desc) where rownum=1; -->
-
 	<select id="getLoc" resultType="Map">
 		<!-- select * from location where lat_y is not null -->
 		select lc.lat_y lay_y,lc.lng_x lng_x,lc.loc_time loc_time,ft.* from location lc join foodtruck ft
