@@ -11,48 +11,65 @@
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-
+<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
 <script>
+let sock = new SockJS("<c:url value="/project/echo"/>");
+sock.onmessage = onMessage;
+sock.onclose = onClose;
+
+// 메시지 전송
+function sendMessage() {
+	sock.send(JSON.stringify(list));
+}
+
+// 서버로부터 메시지를 받았을 때
+function onMessage(msg) {
+}
+
+// 서버와 연결을 끊었을 때
+function onClose(evt) {
+	$("#data").append("연결 끊김");
+}
+var list = new Array();
 	$(document).ready(
 			function() {
-				var list = new Array();
 				var is = false;
-				var allprice = 0;
+				var alltotal_price = 0;
 				$("#foodlist").on('click',"button",function() {
 							//var a=$(this).find('p');
 							var a = $(this);
 							//var name = a.html();
 							var name = a.next().html();
-							var price = a.nextAll().eq(1).html();
-							var code = a.nextAll().eq(2).val();
-							var count = 1;
+							var total_price = a.nextAll().eq(1).html();
+							var menu_code = a.nextAll().eq(2).val();
+							var amount = 1;
 							//클릭한 상품이 현재 목록에 있는지 확인
 							for (var i = 0; i < list.length; i++) {
-								if (list[i].code == code) { //있으면 수량만 더하기 
-									list[i].count += 1;
-									list[i].price = list[i].count * price;
-									var k = list[i].code;
+								if (list[i].menu_code == menu_code) { //있으면 수량만 더하기 
+									list[i].amount += 1;
+									list[i].total_price = list[i].amount * total_price;
+									var k = list[i].menu_code;
 									//해당 값 수정
 									console.log($("#" + k).html());
-									$("#" + k).html("<td>"+list[i].name+"</td><td>"+list[i].count+"</td><td>"+ list[i].price+"</td>");
+									$("#" + k).html("<td>"+list[i].name+"</td><td>"+list[i].amount+"</td><td>"+ list[i].total_price+"</td>");
 									console.log($("#" + k).html());
-									allprice += parseInt(price);
-									$("#allprice").html(allprice);
+									alltotal_price += parseInt(total_price);
+									$("#allprice").html(alltotal_price);
 									is = true; // 상품이 있기때문에 true 로 바꿔서 추가못하게 함
 								}
 							}
 							if (!is) { //상품이 없어서 추가하고 어팬드
 								var temp = {
-									code : code,
-									count : count,
-									price : parseInt(price),
+									menu_code : menu_code,
+									amount : amount,
+									total_price : parseInt(total_price),
 									name : name
 								}
 								list.push(temp);
-								var k = temp.code;
-								allprice += parseInt(temp.price);
-								$("#allprice").html(allprice);
-								$("tbody").append("<tr id='"+k+"'><td>" + temp.name+ "</td><td>" + temp.count+ "</td><td>" + temp.price + "</td>");
+								var k = temp.menu_code;
+								alltotal_price += parseInt(temp.total_price);
+								$("#allprice").html(total_price);
+								$("tbody").append("<tr id='"+k+"'><td>" + temp.name+ "</td><td>" + temp.amount+ "</td><td>" + temp.total_price + "</td>");
 				
 							}
 							if (is) { //초기화
@@ -63,8 +80,8 @@
 				$("#cancle1").click(function() {
 					$("tbody").empty();
 					var a = $("tbody"); //tebody 태그 없앰;
-					allprice = 0;
-					$("#allprice").html(allprice);
+					alltotal_price = 0;
+					$("#allprice").html(alltotal_price);
 					list = new Array(); //list초기화
 				});
 				$("#kakaopay").click(function() {
@@ -73,8 +90,13 @@
 					if (typeof list[0] == 'undefined') {
 						alert("주문목록이업서여");
 					} else {
-
-						alert("카카오페이결제 총 결제금액" + allprice);
+						for(var a in list) {
+							list[a].payment_class=0;
+							list[a].truck_code='${sessionScope.seller.truck_code}';
+							list[a].payment_telephone='010-1111-4875';
+						}
+						console.log(list);
+						sendMessage();
 					}
 				});
 				$("#cash").click(function() {
@@ -82,6 +104,13 @@
 					if (typeof list[0] == 'undefined') {
 						alert("주문목록이업서여");
 					} else {
+						for(var a in list) {
+							list[a].payment_class=1;
+							list[a].truck_code='${sessionScope.seller.truck_code}';
+							list[a].payment_telephone='010-1111-4875';
+						}
+						console.log(list);
+						sendMessage();
 						alert("현금결제 총 결제금액" + allprice);
 					}
 
@@ -91,6 +120,13 @@
 					if (typeof list[0] == 'undefined') {
 						alert("주문목록이업서여");
 					} else {
+						for(var a in list) {
+							list[a].payment_class=2;
+							list[a].truck_code='${sessionScope.seller.truck_code}';
+							list[a].payment_telephone='010-1111-4875';
+						}
+						console.log(list);
+						sendMessage();
 						alert("카드결제 총 결제금액" + allprice);
 					}
 
