@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.FoodtruckMapper">
+	<select id="getFoodTruckList" resultType="com.food.project.domain.FoodTruckVO">
+		select * from foodtruck
+	</select>
+	<select id="getFoodTruck" resultType="com.food.project.domain.FoodTruckVO">
+		select * from foodtruck where truck_code=#{truck_code}
+	</select>
+	<insert id="insertFoodTruck" parameterType="com.food.project.domain.FoodTruckVO">
+		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,email)
+		values(#{truck_code},#{crn},#{trucknum},#{account},layout,#{hours},#{weekend_hours},#{brandname},sysdate,#{email})
+	</insert>
+</mapper>

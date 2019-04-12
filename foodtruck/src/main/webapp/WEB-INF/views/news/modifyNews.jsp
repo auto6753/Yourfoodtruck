@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="title" class="card-header">
-		<p>푸드트럭NEWS</p>
+		<p id="title2">푸드트럭NEWS</p>
 	</div>
 	<form id="all">
 	<div id="box">

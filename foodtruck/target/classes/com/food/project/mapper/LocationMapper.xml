@@ -8,10 +8,14 @@
 		like #{truckcode} order by loc.loc_time desc) where rownum=1; </select> -->
 	<!-- select * from( select loc.* from location loc where truck_code = #{truck_code} 
 		order by loc.loc_time desc) where rownum=1; -->
-	<select id="getLoc" resultType="com.food.project.domain.LocationVO">
 
-		select * from location where lat_y is not null
-
+	<select id="getLoc" resultType="Map">
+		<!-- select * from location where lat_y is not null -->
+		select lc.lat_y lay_y,lc.lng_x lng_x,lc.loc_time loc_time,ft.* from location lc join foodtruck ft
+	on lc.truck_code=ft.truck_code
+	where(ft.truck_code,lc.loc_time) in (
+	select truck_code,max(loc_time) from location
+	group by truck_code)
 	</select>
 	<!-- 위치넣기 -->
 	<!-- <insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO"> 

@@ -1,4 +1,3 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -18,26 +17,6 @@ $(document).ready(function() {
 });
 </script>
 
-<style>
-#with{
-	margin-top: 100px;
-	margin-left:450px;
-	width: 1000px;
-	height: 850px;
-	border: 1px solid darkgray;
-}
-#drawal{
-	margin-left: 150px;
-	width: 700px;
-	height: 400px;
-	border: 1px solid darkgray;
-}
-#check{
-	margin-left:150px;
-	margin-top:10px;
-	height: 150px
-}
-</style>
 </head>
 <body>
 <div id="with" class="col" >

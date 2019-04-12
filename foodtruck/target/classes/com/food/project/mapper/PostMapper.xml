@@ -16,8 +16,8 @@
 	
 	<!-- 게시글 등록하기 -->
 	<insert id="insertPost" parameterType="com.food.project.domain.PostVO">
-		insert into post(post_code,post_regdate,post_content,post_title,post_visit,post_url,post_class)
-		values (#{post_code},#{post_regdate},#{post_content},#{post_title},#{post_visit},#{post_url},#{post_class})
+		insert into post(post_code,post_content,post_title,post_visit,post_url,post_class)
+		values (concat(to_char(sysdate,'yymmdd'),to_char(post_sequence.NEXTVAL,'FM00000')),#{post_content},#{post_title},#{post_visit},#{post_url},#{post_class})
 	</insert>
 	
 	<!-- 게시글 수정하기 -->

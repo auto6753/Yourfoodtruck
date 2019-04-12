@@ -11,6 +11,9 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+#main{
+	width: 120%;
+}
 
 #top-right {
 	/* //text-align: right; */
@@ -27,13 +30,12 @@
 a{
 	color: rgb(255, 94, 24);
 }
-
 </style>
 <!-- Navigation -->
 <div class="test">
 <nav style="padding-left: 20%;"
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-	<div style="margin-left: 0; " class="container" >
+	<div id="main" style="margin-left: 0; " class="container" >
 		<a class="navbar-brand" href="/project/rehome">당신의 푸드트럭!</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -42,8 +44,6 @@ a{
 		</button>
 		<div style="text-align: right;" class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-
-
 				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li>

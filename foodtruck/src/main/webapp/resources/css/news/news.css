@@ -3,6 +3,15 @@ p{
 	color: rgb(255, 94, 24);
 }
 
+#table{
+	width:70%;
+}
+#search{
+	width:70%;
+}
+#search2{
+	width:24%;
+}
 #title {
 	width: 100%;
 	margin: 0 auto;
@@ -13,9 +22,10 @@ p{
 	
 }
 
-#title {
+
+/* #title {
 	color: rgb(0, 123, 255);
-}
+} */
 
 #next {
 	display: table;
