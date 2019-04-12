@@ -13,49 +13,6 @@
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document).ready(function(){
-	 $('#btn1').click(function() {
-	     $('#pop').show();
-	     
-	    });
-	    $('#close').click(function() {
-	     $('#pop').hide();
-	    });
-});
-	function autoHypenPhone(str) {
-		str = str.replace(/[^0-9]/g, '');
-		var tmp = '';
-		if (str.length < 4) {
-			return str;
-		} else if (str.length < 7) {
-			tmp += str.substr(0, 3);
-			tmp += '-';
-			tmp += str.substr(3);
-			return tmp;
-		} else if (str.length < 11) {
-			tmp += str.substr(0, 3);
-			tmp += '-';
-			tmp += str.substr(3, 3);
-			tmp += '-';
-			tmp += str.substr(6);
-			return tmp;
-		} else {
-			tmp += str.substr(0, 3);
-			tmp += '-';
-			tmp += str.substr(3, 4);
-			tmp += '-';
-			tmp += str.substr(7);
-			return tmp;
-		}
-		return str;
-	}
-
-	var cellPhone = document.getElementById('cellPhone');
-	cellPhone.onkeyup = function(event) {
-		event = event || window.event;
-		var _val = this.value.trim();
-		this.value = autoHypenPhone(_val);
-	}
 	function execPostCode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -98,6 +55,39 @@ $(document).ready(function(){
 			}
 		}).open();
 	}
+	$(document).ready(function(){
+		$("#test").click(function(){
+			var personname = $("#i1").val();
+			var tel = $("#i2").val();
+			var festivalname = $("#i3").val();
+			var startdate = $("#i4").val();
+			var enddate = $("#i4-1").val();
+			var starttime = $("#i5").val();
+			var endtime = $("#i5-1").val();
+			var placenum = $("#i6").val();
+			var placeload = $("#i7").val();
+			var placedetail = $("#addr3").val();
+			var cost = $("#i8").val();
+			var content = $("#content").val();
+			
+			var place = placenum +" " + placeload+ " " + placedetail;
+			console.log(place);
+			alert(personname);
+			console.log(tel+festivalname+startdate+enddate+starttime+endtime+placenum+placeload+placedetail+cost+content);
+			$.ajax({
+				
+			})
+		});
+		
+	 $('#btn1').click(function() {
+	     $('#pop').show();
+	     
+	    });
+	    
+	    $('#close').click(function() {
+	     $('#pop').hide();
+	    });
+});
 	
 </script>
 </head>
@@ -126,36 +116,29 @@ $(document).ready(function(){
 			</div>
 
 			<div id="sj" class="col">
-				<input id="i1" class="form-control"> <input id="i2"
-					class="form-control" type="text" name="cellPhone" id="cellPhone"
-					placeholder="핸드폰 번호 입력" maxlength="13" /> <input id="i3"
-					placeholder="행사장명 입력(20자 이내)" class="form-control"> <input
-					id="i4" class="form-control" type="date"> ~ <input id="i4"
-					class="form-control" type="date"> <input id="i5"
-					type="time" class="form-control"> ~ <input id="i5"
-					type="time" class="form-control">
+				<input id="i1" class="form-control">
+				<input class="form-control" type="tel" name="tlno" id="i2" placeholder="전화번호 입력" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13">
+				<input id="i3" placeholder="행사장명 입력(20자 이내)" class="form-control"> 
+				<input id="i4" class="form-control" type="date"> ~ <input id="i4-1" class="form-control" type="date"> 
+				<input id="i5" type="time" class="form-control"> ~ <input id="i5-1" type="time" class="form-control">
 
-				<div id="div3" class="form-group col">
-					<input id="i6" class="form-control" placeholder="우편번호" name="addr1"
-						id="addr1" type="text" readonly="readonly">
-					<button id="btn3" type="button" class="btn btn-default"
-						onclick="execPostCode();">
-						<i class="fa fa-search"></i> 우편번호 찾기
-					</button>
+				<div id="div3" class="form-group col"> 
+					<input id="i6" class="form-control" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly">
+					<button id="btn3" type="button" class="btn btn-default" onclick="execPostCode();">
+						<i class="fa fa-search"></i> 우편번호 찾기</button>
 				</div>
 				<div id="div1" class="form-group col">
-					<input id="i7" class="form-control" placeholder="도로명 주소"
-						name="addr2" id="addr2" type="text" readonly="readonly" />
+					<input id="i7" class="form-control" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
 				</div>
 				<div id="div2" class="form-group col">
-					<input class="form-control" placeholder="상세주소" name="addr3"
-						id="addr3" type="text" />
+					<input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text" />
 				</div>
 				<input id="i8" class="form-control">
-				<textarea class="form-control" cols="30" rows="5"
+				<textarea id="content" class="form-control" cols="30" rows="5"
 					placeholder="관객연령대, 관객 예상수, 행사컨셉 등을 상세히 기술해주세요."></textarea>
 			</div>
 			<div id="oj">
+			<button id="test">확인</button>
 				<button id="btn1" class="btn btn-default">선수금지불</button>
 				
 				<button id="btn2" class="btn btn-default">호출요청</button>

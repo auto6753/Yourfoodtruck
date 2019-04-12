@@ -50,6 +50,8 @@ h1{
 	height: 400px;
 	position:absolute; top: 250px; left:83px; text-align:center; 
     border:2px solid darkgray;
+    text-align: center;
+    overflow-y: scroll;
 }
 #review{
 	margin:0 auto;
@@ -94,4 +96,33 @@ h1{
 	display: inline-block;
 	border: 1px solid darkgray;
 	margin: 0 auto;
+}
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating a:first-child {margin-left:0;}
+.star_rating a.on {color:#777;}
+
+.col-md-3{
+	
+	margin: 4%;
+	height: 250px;
+	border: 1px solid darkgray;
+	text-align: center;
+	
+}
+.img{
+	width: 200px !important;
+}
+
+.row{
+
+	text-align: center;
+	
 }
