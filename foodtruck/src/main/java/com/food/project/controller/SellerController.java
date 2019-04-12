@@ -1,25 +1,21 @@
 package com.food.project.controller;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.service.MemberService;
 import com.food.project.service.SellerService;
-
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/seller", method = RequestMethod.GET)
+@RequestMapping(value = "/seller")
 public class SellerController {
   
 	private static final int MENU_PER_LINE = 4; // 1줄당 메뉴 개수
