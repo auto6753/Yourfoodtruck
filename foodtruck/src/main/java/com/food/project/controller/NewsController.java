@@ -31,7 +31,6 @@ public class NewsController {
 //		model.addAttribute("replyList",service.getReply(post_code2));
 		return "news/specific";
 	}
-	
 	@RequestMapping(value= "/news/addNews", method= RequestMethod.GET)
 	public String addNews(Model model, PostVO vo) {
 		/*
@@ -47,14 +46,10 @@ public class NewsController {
 //		model.addAttribute("replyList",service.getReply(post_code2));
 		return "news/modifyNews";
 	}
-	
-
 	@RequestMapping(value = "/eventOn", method = RequestMethod.GET)
 	public String eventOn(Locale locale, Model model) {
 		return "event/event";
 	}
-
-
 	
 //	@RequestMapping(value = "/eventOff", method = RequestMethod.GET)
 //	public String eventOff(Locale locale, Model model) {
