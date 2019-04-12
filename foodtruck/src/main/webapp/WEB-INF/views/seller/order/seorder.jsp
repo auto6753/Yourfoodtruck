@@ -23,7 +23,6 @@
 body {
 	font-family: "Open Sans", sans-serif;
 }
-
 .wrap {
 	width: 1000px;
 	height: 300px;
