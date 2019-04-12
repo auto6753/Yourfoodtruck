@@ -13,20 +13,20 @@
 	<div class="addMenuTitle">
 		<h2>메뉴등록</h2>
 	</div>
-	<form action="fileUpload.jsp" method="post" enctype="multipart/form-data">
+	<form action="" method="post" enctype="multipart/form-data">
 		<table class="addMenuTable">
 			<tr>
-				<td class="itemName">메뉴명</td>
-				<td><input class="inputText" type="text" name="menuName"/></td>
+				<td class="itemName"><label for="menuName">메뉴명</label></td>
+				<td><input id="menuName" class="inputText" type="text" name="menuName"/></td>
 			</tr>
 			<tr>
-				<td class="itemName">가격(원)</td>
-				<td><input class="inputText" type="text" name="unitPrice"/></td>
+				<td class="itemName"><label for="unitPrice">가격(원)</label></td>
+				<td><input id="unitPrice" class="inputText" type="text" name="unitPrice"/></td>
 			</tr>
 			<tr>
 				<td class="itemName">이미지</td>
 				<td>
-					<input type="file" id="filename" name="filename" onchange="previewImage(this,'previewId'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp">
+					<input type="file" id="filename" name="filename" onchange="previewImage(this,'previewId'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp"/>
 				</td>
 			</tr>
 				

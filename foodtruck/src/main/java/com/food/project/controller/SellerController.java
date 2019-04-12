@@ -56,8 +56,19 @@ public class SellerController {
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET) 
 	public String event(Model model) {
+		int onGoingEventNum = 5;
+		int endEventNum = 13;
+		
+		model.addAttribute("onGoingEventNum", onGoingEventNum);
+		model.addAttribute("endEventNum", endEventNum);
 		return "seller/event/event";
 	}
+	
+	@RequestMapping(value="/addEvent", method=RequestMethod.GET) 
+	public String addEvent(Model model) {
+		return "seller/event/addEvent";
+	}
+	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
 	public String passenger(Model model) {
 		return "seller/psg/psgpush";

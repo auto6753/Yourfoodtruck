@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.addMenuTitle {
+	text-align: center;
+}
+
+.addMenuTable .itemName {
+	padding: 0 20px 0 20px;
+	text-align: center;
+}
+
+.inputText {
+	width: 100%;
+}
+
+.btns {
+	margin-top: 10px;
+	text-align: center;
+}

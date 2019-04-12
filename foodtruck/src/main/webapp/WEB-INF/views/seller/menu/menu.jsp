@@ -17,7 +17,8 @@
 			<div class="container">
 				<div class="row">
 					<c:forEach var="i" begin="1" end="${menuNum}">
-							<div class="col-md-3">
+							<div class="col-md-3 menuf">
+								<div class="menut">
 								<div class="imgBox">
 									<img class="img editMenu" src="${pageContext.request.contextPath}/resources/image/food1.png"/>
 								</div>
@@ -26,6 +27,7 @@
 								<div class="delChk">
 									<input type="checkbox" name="delChk" id="${i}" class="delChk" value="${i}"/>
 									<div class="status" style="display:inline-block">선택해제됨</div>
+								</div>
 								</div>
 							</div>
 					</c:forEach>
