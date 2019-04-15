@@ -20,6 +20,9 @@ public interface LoginMapper {
 	//아이디찾기
 	public CustomerVO idSearch(CustomerVO vo);
 	
+	//전화번호 찾기
+	public CustomerVO getTelephone(String telephone);
+	
 	//비밀번호 찾기
 	public CustomerVO passSearch(CustomerVO vo);
 

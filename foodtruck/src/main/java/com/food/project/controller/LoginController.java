@@ -143,14 +143,16 @@ public class LoginController {
 	
 	@RequestMapping(value = "/idck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idck(Locale locale, Model model,@RequestParam("m_mail") String email,@RequestParam("m_nicname") String nickname) {
+	public String idck(Locale locale, Model model,@RequestParam("email") String email,@RequestParam("nickname") String nickname,@RequestParam("telephone") String telephone) {
 		System.out.println(email);
 		CustomerVO mail = loginservice.getCustomer(email);
 		CustomerVO name = loginservice.getName(nickname);
+		CustomerVO phone=loginservice.getTelephone(telephone);
 		if(mail == null) {	//이메일 같은게 없을때
-			if(name == null){ //닉네임 같은게 없을때
+			if(name == null && phone==null){ //닉네임 같은게 없을때
 				return "success";
-			}
+			} else if(name == null && phone!=null)
+				return "telephone";
 			return "nicname";
 		}
 			return "email";
