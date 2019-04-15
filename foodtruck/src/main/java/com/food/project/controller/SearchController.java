@@ -1,6 +1,9 @@
 package com.food.project.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -84,7 +87,6 @@ public class SearchController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		model.addAttribute("loc",arry);
 		return "search/search";
 	}

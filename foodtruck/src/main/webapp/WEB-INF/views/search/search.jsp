@@ -2,19 +2,44 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <style>
+ 	.wrap {/* position: absolute; left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden; */font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    /* .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')} */
+    .info .link {color: #5085BB;}
+
 #fr {
-   margin-left: 40%;
+	margin-left: 40%;
+}
+
+.profile-teaser-left {
+	float: left;
+	width: 20%;
+	margin-right: 1%;
+}
+
+.profile-img img {
+	width: 100%;
+	height: auto;
+}
+
+.profile-teaser-main {
+	float: left;
+	width: 79%;
 }
 </style>
 <div style="margin-top: 180px; border: solid 1px;"></div>
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!--    <div class="option"> -->
-<div id="list" style="display: none">
-   <%-- <c:forEach var="test" items="${loc}">
-${test.lat_y} // ${test.lng_x }
-</c:forEach> --%>
-</div>
-
 <form id="fr">
    <select id="select" onchange="change()">
       <option value='map'>지도</option>
@@ -22,6 +47,34 @@ ${test.lat_y} // ${test.lng_x }
    </select> 검색 : <input type="text" value="" id="keyword" size="15"> <input
       id="submit" type="button" value="검색하기">
 </form>
+<div id="list" style="display: none">
+	<%-- <c:forEach var="test" items="${loc}">
+${test.lat_y} // ${test.lng_x }
+</c:forEach> --%>
+	<div class="container">
+		<div class="row">
+			<div id="list-group" class="list-group">
+				<!--             <div class="list-group-item clearfix">
+                <div class="profile-teaser-left">
+                    <div class="profile-img"><img src="https://static.pexels.com/photos/21011/pexels-photo-large.jpg"/></div>
+                </div>
+                <div class="profile-teaser-main">
+                    <h2 class="profile-name">무슨트럭</h2>
+                    <div class="profile-info">
+                        <div class="info"><span class="">영업시간:</span> 09~17</div>
+                        <div class="info"><span class="">트럭번호:</span> 13가1234</div><br>
+                        <div class="info"><span class="">★★★★☆</span> 9.4</div>
+                        <div class="info"><span class="">댓글</span> 400</div>
+                    </div>
+                    <button style="float: right;">탑승하기</button>
+                    <button style="float: right;">호출하기</button>
+                </div>
+            </div>item -->
+
+			</div>
+		</div>
+	</div>
+</div>
 <!--    </div>
    <hr>
    <ul id="placesList"></ul>
@@ -29,13 +82,13 @@ ${test.lat_y} // ${test.lng_x }
 <!-- </div> -->
 
 
-<div id="map" style="width: 60%; height: 50%; margin: 0 auto;">
-</div>
+<div id="map" style="width: 60%; height: 50%; margin: 0 auto;"></div>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <!-- <script type="text/javascript"
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=clusterer"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services"></script> -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1d1757d7f3887c30f0142b09e5ff2be&libraries=services,clusterer,drawing"></script>
 <script>
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
    mapOption = {
@@ -57,12 +110,10 @@ ${test.lat_y} // ${test.lng_x }
       minLevel : 10
    // 클러스터 할 최소 지도 레벨 
    });
-   
    var result = false; //검색결과가 있으면 true 없으면 false
    //JSON.stringify
    //JSON.parse
    var a = '${loc}'; //
-   
    console.log(a);
    var obj = JSON.parse(a);
    obj = JSON.parse(a);
@@ -70,15 +121,16 @@ ${test.lat_y} // ${test.lng_x }
    //resources/js/food.json
    // 데이터를 가져오기 위해 jQuery를 사용합니다
    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+   console.log(obj);
    
-   for(var i=0;i<obj.positions.length;i++){
-      console.log(obj.positions[i].lng);
-   }
+ /*   for(var i=0;i<obj.length;i++){
+      console.log(obj.data[i].lng);
+   } */
 var test2=[];
-for(var i=0;i<obj.positions.length;i++){
+for(var i=0;i<obj.length;i++){
    var a={};
-   a.latlng = new daum.maps.LatLng(obj.positions[i].lat,obj.positions[i].lng);
-   test2.push(a);
+   a.latlng = new daum.maps.LatLng(obj[i].lay_y,obj[i].lng_x);
+   test2.push(a);	
    
 }
 /* console.log(JSON.parse(JSON.stringify(test2)));
@@ -88,23 +140,55 @@ console.log(test2);  */
    //var positions = obj;
    //console.log(positions);
    
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+daum.maps.event.addListener(map, 'zoom_changed', function() {        
+    
+    // 지도의 현재 레벨을 얻어옵니다
+    var level = map.getLevel();
+	infowindow.close();
+});
+// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+
+   
 markers=[]; //마커를 넣을배열 생성
+var imageSrc = '/project/resources/image/트럭사진.png';// 마커이미지의 주소입니다    
+
+
  for (var i = 0; i < test2.length; i ++) {
+	 var imageSize = new daum.maps.Size(54, 59);
+	 var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
+	 	
        var marker;
        marker = new daum.maps.Marker({
         map: map, // 마커를 표시할 지도
-        position: test2[i].latlng, // 마커를 표시할 위치
+        position: test2[i].latlng,
+        image : markerImage,// 마커를 표시할 위치
         clickable: true
     });
        
        var infowindow = new daum.maps.InfoWindow({
-           content: i+"푸드트럭", // 인포윈도우에 표시할 내용
+           content: '<div class="wrap">' + 
+           '    <div class="info">' + 
+           '        <div class="title">' + obj[i].brandname + 
+           '        </div>' + 
+           '        <div class="body">' + 
+           '            <div class="img">' +
+           '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+           '           </div>' + 
+           '            <div class="desc">' + 
+           '                <div class="ellipsis">트럭번호 : ' +obj[i].trucknum+'</div>' + 
+           '                <div class="jibun ellipsis">운행시간 : '+ obj[i].hours + '</div>' +  
+           '            </div>' + 
+           '        </div>' + 
+           '    </div>' +    
+           '</div>', // 인포윈도우에 표시할 내용
            removable : true
        });
 
-       daum.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));    
-       
-       
+       daum.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));         
+    	    
+    	    // 지도의 현재 레벨을 얻어옵니다
        markers.push(marker); 
 } 
  clusterer.addMarkers(markers);
@@ -131,7 +215,7 @@ markers=[]; //마커를 넣을배열 생성
    
     // 클러스터러에 마커들을 추가합니다
       for(var i=0;i<data.positions.legnth;i++){
-         infowindow.open(map, marker[i]); 
+         infowindow.open(map, marker[i]);
        }   
     
     clusterer.addMarkers(marker);
@@ -146,7 +230,7 @@ markers=[]; //마커를 넣을배열 생성
                infowindow.open(map, marker);
            };
        }
-   
+  
     // 키워드로 장소를 검색합니다
 function change(){
     var select= $("#select option:selected").val();
@@ -159,6 +243,7 @@ function change(){
        $("#keyword").val("");
       $("#map").css("display", 'none');
       $("#list").css("display", 'block');
+      $("#list-group").empty();
    }
 }
     
@@ -231,6 +316,7 @@ function change(){
          map.setBounds(bounds);
          
       }
+   
        var select= $("#select option:selected").val(); 
        if(select =="list") {//선택한값이 list라면
           var position = getposition();
@@ -243,32 +329,40 @@ function change(){
          console.log(lng);
          console.log(lat);
          
-         var list = [];
-         for(var i=0;i<obj.positions.length;i++){
-            var a = getDistanceFromLatLonInKm(lat,lng,obj.positions[i].lat,obj.positions[i].lng); 
-            a = a.toPrecision(3); //소숫점자리 제한
-            a = a*1000; // 정수로만듬
-            alert(a);
-            if(a<=3000){ //3km내 반경안에있으면 리스트추가
-               //alert("추가");
-               list.push(a+"m");//${"list[i].name"}
-            }else{
-               //alert("안추가");
-            }
+         var list2 = [];
+         for(var i=0;i<obj.length;i++){
+             var a = getDistanceFromLatLonInKm(lat,lng,obj[i].lay_y,obj[i].lng_x); 
+             a = a.toPrecision(3); //소숫점자리 제한
+             a = a*1000; // 정수로만듬
+             alert(a);
+             if(a<=3000){ //3km내 반경안에있으면 리스트추가
+                alert("추가");
+                //JSON.stringfiy(obj[i]);
+                //console.log(JSON.stringfiy(obj[i]));
+                list2.push(obj[i]);//${"list[i].name"}
+                
+             }else{
+                //alert("안추가");
+             }
+          }
+         $("#list-group").empty();
+         if(list2[0] == null){
+      	 	$("#list-group").append("해당지역 중심부 부터 3km 내에 푸드트럭이 존재하지 않습니다");
+      	 	alert("fail");
+         }else{ 
+         	for(var i=0;i<list2.length;i++){
+         		alert("ok");
+             	$("#list-group").append("<div class='list-group-item clearfix'><div class='profile-teaser-left'><div class='profile-img'><img src='https://static.pexels.com/photos/21011/pexels-photo-large.jpg'/></div></div><div class='profile-teaser-main'><h2 class='profile-name'>"+list2[i].brandname+"</h2><div class='profile-info'><div class='info'><span class=''>영업시간:</span>" + list2[i].hours+"</div><div class='info'><span class=''>트럭번호:</span>" + list2[i].trucknum+"</div><br><div class='info'><span class=''>★★★★☆</span> 9.4</div><div class='info'><span class=''>댓글</span> 400</div> </div> <button style='float: right;'>탑승하기</button><button style='float: right;'>호출하기</button> </div></div>");
+      	    }
          }
-         for(var i=0;i<list.length;i++){
-            alert(list[i]+"m 안에있다")
-         }
-       }
-      
+         
    }
+ }
    function getposition(){
          var position = map.getCenter();
          return position;
    }
-   
-   
-   
+ 
    var lat1 = 33.49953018214999;
    var lag1 = 126.53117057093789;//제주시청
    
@@ -284,7 +378,6 @@ function change(){
       yarry[i] = 126.53117057093789+i;
    }
      //좌표와 좌표사이의 거리계산 
-
    function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
        function deg2rad(deg) {
            return deg * (Math.PI/180)
@@ -299,6 +392,7 @@ function change(){
        return d;
    }
   
+<script>
 </script>
 <style>
 #map {
