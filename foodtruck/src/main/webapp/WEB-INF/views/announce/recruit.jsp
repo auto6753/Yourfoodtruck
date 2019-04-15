@@ -25,7 +25,6 @@ dd
 		console.log(typeof datatest);
 		$("#forReceive").append(jsonString + "<br/>");
 	}
-
 	// 서버와 연결을 끊었을 때
 	function onClose(evt) {
 		$("#forReceive").append("연결 끊김");

@@ -66,6 +66,7 @@ public class SearchController {
 			
 			List<Map<String, Object>> list = locservice.getLoc();
 			JSONArray arry = new JSONArray();
+			JSONObject datalist= new JSONObject();
 			for(Map<String, Object> a : list) {
 				JSONObject data=new JSONObject();
 				data.put("truck_code", a.get("TRUCK_CODE"));
@@ -79,18 +80,20 @@ public class SearchController {
 				data.put("hours", a.get("HOURS"));
 				data.put("layout", a.get("LAYOUT"));
 				arry.add(data);
+				
 			}
-			JSONObject list2 = new JSONObject();
-			list2.put("positions", arry);
+			//JSONObject list2 = new JSONObject();
+			//list2.put("positions", arry);
+			System.out.println(arry);
+			//System.out.println(arry);	
 			
-			System.out.println(list2);
-			
-			//model.addAttribute("loc",list2);
+			model.addAttribute("loc",arry);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("loc",locservice.getLoc());
+		//model.addAttribute("loc",locservice.getLoc());
+		//model.addAttribute("loc",list2);
 		return "search/search";
 	}
 	
