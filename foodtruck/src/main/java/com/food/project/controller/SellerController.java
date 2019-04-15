@@ -95,11 +95,7 @@ public class SellerController {
 		String truckcode = vo.getTruck_code();
 		System.out.println(truckcode);
 		ArrayList<MenuVO> menulist = new ArrayList<>();
-
 		menulist = sellerservice.getmenu(truckcode);
-		for(int i=0;i<menulist.size();i++)
-			System.out.println(menulist.get(i).getMenu_name());
-
 		model.addAttribute("menulist", menulist); 
 		 //vo2 = sellerservice.getmenu(truckcode);
 		 System.out.println();

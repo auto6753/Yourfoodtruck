@@ -1,6 +1,9 @@
 package com.food.project.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import com.food.project.domain.PaymentVO;
 import com.food.project.mapper.PaymentMapper;
@@ -16,23 +19,24 @@ public class PaymentServiceImplement implements PaymentService {
 		return mapper.getPaymentList(payment_telephone);
 	}
 
-//	@Override
-//	public int insertPaymentList(ArrayList<PaymentVO> payment_list) {
-//		int result=0;
-//		try{
-//			for(PaymentVO vo:payment_list) {
-//				mapper.insertPaymentList(vo);
-//			}
-//			result=1;
-//		}catch(Exception e){
-//		}
-//		return result;
-//		
-//	}
-
 	@Override
 	public ArrayList<PaymentVO> getAllList() {
 		return mapper.getAllList();
+	}
+
+	@Override
+	public int insertPaymentList(List<Map<String, Object>> list) {
+		int result=0;
+		for(Map<String,Object> pay:list) {
+			result=mapper.insertPaymentList(pay);
+			if(result==0)break;
+		}
+		if(result!=0) {
+			result=1;
+			return result;
+		}else {
+			return result;
+		}
 	}
 
 }

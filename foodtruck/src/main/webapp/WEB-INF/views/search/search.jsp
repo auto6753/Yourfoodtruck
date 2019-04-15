@@ -36,18 +36,16 @@
 	float: left;
 	width: 79%;
 }
-
-
 </style>
 <div style="margin-top: 180px; border: solid 1px;"></div>
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!--    <div class="option"> -->
 <form id="fr">
-	<select id="select" onchange="change()">
-		<option value='map'>지도</option>
-		<option value='list'>목록</option>
-	</select> 검색 : <input type="text" value="" id="keyword" size="15"> <input
-		id="submit" type="button" value="검색하기">
+   <select id="select" onchange="change()">
+      <option value='map'>지도</option>
+      <option value='list'>목록</option>
+   </select> 검색 : <input type="text" value="" id="keyword" size="15"> <input
+      id="submit" type="button" value="검색하기">
 </form>
 <div id="list" style="display: none">
 	<%-- <c:forEach var="test" items="${loc}">
@@ -112,7 +110,6 @@ ${test.lat_y} // ${test.lng_x }
       minLevel : 10
    // 클러스터 할 최소 지도 레벨 
    });
-
    var result = false; //검색결과가 있으면 true 없으면 false
    //JSON.stringify
    //JSON.parse
@@ -192,7 +189,6 @@ var imageSrc = '/project/resources/image/트럭사진.png';// 마커이미지의
        daum.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));         
     	    
     	    // 지도의 현재 레벨을 얻어옵니다
-       
        markers.push(marker); 
 } 
  clusterer.addMarkers(markers);
@@ -396,11 +392,10 @@ function change(){
        return d;
    }
   
-</script>
 <script>
 </script>
 <style>
 #map {
-	height: 50%;
+   height: 50%;
 }
 </style>

@@ -8,6 +8,11 @@
 	<select id="getPaymentList" resultType="com.food.project.domain.PaymentVO">
 		select * from payment where payment_telephone =#{payment_telephone}
 	</select>
-<!-- 	<insert id="insertPaymentList" parameterType="com.food.project.domain.PaymentVO">
-	</insert> -->
+	<insert id="insertPaymentList" parameterType="Map">
+		insert into payment(payment_code, truck_code, menu_code,
+			amount, total_price, payment_class,payment_telephone)
+		values(to_char(sysdate,'yymmdd')||to_char(payment_sequence.NEXTVAL,'fm000000'),
+			#{truck_code},#{menu_code},#{amount},
+			#{total_price},#{payment_class},#{payment_telephone})
+	</insert>
 </mapper>
