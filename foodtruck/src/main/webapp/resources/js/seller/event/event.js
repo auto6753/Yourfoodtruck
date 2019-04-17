@@ -90,7 +90,7 @@
 			});
 		}
 
-		$el.find('a.btn-layerClose').click(function() {
+		$el.find('button.btn-layerClose').click(function() {
 			isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
 			return false;
 		});
@@ -135,7 +135,6 @@
 	});
 
 	function previewImage(targetObj, previewId) {
-
 		var preview = document.getElementById(previewId); // div id
 		var ua = window.navigator.userAgent;
 
@@ -174,18 +173,20 @@
 				var imageType = /image.*/; // 이미지 파일일 경우에만 뿌려줌
 				if (!file.type.match(imageType))
 					continue;
-
+				
 				var prevImg = document.getElementById("prev_" + previewId); // 이전에 미리보기가 있다면 삭제
 				if (prevImg) {
 					preview.removeChild(prevImg);
 				}
+				
+				$("#noImage").css("display", "none");
 
 				var img = document.createElement("img"); // 크롬은 div에 이미지가 뿌려지지 않기 때문에 자식 Element를 생성
 				img.id = "prev_" + previewId;
 				img.classList.add("obj");
 				img.file = file;
-				img.style.width = '250px'; // 기본 설정된 div의 안에 뿌려지는 효과를 주기 위해서 div 크기와 같은 크기로 지정
-				img.style.height = '250px';
+				img.style.width = '400px'; // 기본 설정된 div의 안에 뿌려지는 효과를 주기 위해서 div 크기와 같은 크기로 지정
+				img.style.height = '300px';
 
 				preview.appendChild(img);
 

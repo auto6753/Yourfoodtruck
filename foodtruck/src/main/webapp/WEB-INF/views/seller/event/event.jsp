@@ -101,19 +101,21 @@
 					<div class="ctxt mb20">
 						<form action="" method="post" name="form">
 							<div id="upload">
-								<div id="previewId"></div>
+								<div id="previewId">
+									<img id="noImage" src="${pageContext.request.contextPath}/resources/image/icon/noimage.png"/>
+								</div>
 								<input type="file" id="filename" name="filename" onchange="previewImage(this,'previewId'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp"/>
 							</div>
-							<table id="table" border="1">
+							<table id="table">
 								<tr>
-									<td valign="top"><label for="eventName">이벤트명</label></td>
-									<td valign="top"><input type="text" id="eventName" name="eventName" required/></td>
+									<td class="titleStyle" valign="top"><label for="eventName">이벤트명</label></td>
+									<td class="contentStyle" valign="top"><input type="text" id="eventName" name="eventName" required/></td>
 								</tr>
 								<tr>
 									<td valign="top"><label>기간</label></td>
 									<td valign="top">
-										<input type="datetime-local" id="beginDate" name="beginDate"/>
-										<input type="datetime-local" id="endDate" name="endDate" required/>
+										<input type="datetime-local" id="beginDate" class="date" name="beginDate"/>
+										<input type="datetime-local" id="endDate" class="date" name="endDate" required/>
 									</td>
 								</tr>
 								<tr>
@@ -146,8 +148,11 @@
 											<input type="button" value="삭제" onclick="remove_item(this)">
 										</div>
 
-										<div id="field"></div> <input type="button" value="추가" onclick="add_item()"><br>
-										
+										<div id="field"></div>
+										<button>
+											<img src="${pageContext.request.contextPath}/resources/image/icon/addmenu.png">
+										</button>
+										<br>
 										
 									</td>
 								</tr>
@@ -170,12 +175,21 @@
 										<div><input type="checkbox" name="payment" value="kakaoPay"/>카카오페이</div>
 									</td>
 								</tr>
+								<tr>
+									<td valign="top"><label>중복적용</label></td>
+									<td valign="top">
+										<div><input type="radio" name="duplicate" value="yes"/>가능</div>
+										<div><input type="radio" name="duplicate" value="no"/>불가</div>
+									</td>
+								</tr>
 							</table>
 						</form>
 					</div>
 					
 					<div class="btn-r">
-						<button type="submit" class="btn-layerClose">등록</button>
+						<button class="btn-layerClose">등록</button>
+						<button class="btn-layerClose">리셋</button>
+						<button class="btn-layerClose">취소</button>
 					</div>
 					<!--// content-->
 				</div>

@@ -133,16 +133,41 @@ a { text-decoration:none; color:#000; }
 }
 
 .menuWidth {
-	width: 32.5%;
+	width: 25%;
 }
 
 .showByte {
 	margin-top: 5px;
 	float: right;
+	margin-right: 60px;
 }
 
 .titleStyle {
 	width: 80px;
+}
+
+.titleStyle {
+	width: 120px;
+}
+
+.contentStyle {
+	width: 590px;
+}
+
+.date {
+	width: 30%;
+}
+
+button.addMenuBtn {
+	background-color: #ffffff;
+	border: none;
+	outline: 0;
+}
+
+#noImage {
+	width: 400px;
+	height: auto;
+	vertical-align: top;
 }
 
 #addEvent {
@@ -150,11 +175,11 @@ a { text-decoration:none; color:#000; }
 }
 
 #eventName,#target{
-	width: 100%;
+	width: 90%;
 }
 
 #details {
-	width: 100%;
+	width: 90%;
 	height: 147px;
 }
 
@@ -164,12 +189,21 @@ a { text-decoration:none; color:#000; }
 }
 
 #previewId {
-	width: 400px;
-	height: 300px;
+	width: 405px;
+	height: 305px;
+	border: 3px #ff9248 solid;
+	margin-right: 14px;
+	overflow: hidden
+}
+
+#layer2 {
+	overflow-y: scroll;
 }
 
 table {
 	display: inline-block;
+	border: 3px #ff9248 solid;
+	padding: 30px 0 10px 0;
 }
 
 td {
@@ -200,8 +234,8 @@ textarea {
 	width: 100%;
 	margin: 10px 0 20px;
 	padding-top: 10px;
-	border-top: 1px solid #DDD;
-	text-align: right;
+	border-top: 1px solid #ff9248;
+	text-align: center;
 }
 
 .pop-layer {
@@ -209,10 +243,10 @@ textarea {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 1000px;
-	height: auto;
+	width: 1217px;
+	height: 746px;
 	background-color: #fff;
-	border: 5px solid #3571B5;
+	border: 5px solid #ff9248 /*#3571B5*/;
 	z-index: 10;
 }
 
@@ -244,17 +278,18 @@ textarea {
 
 button.btn-layerClose {
 	display: inline-block;
-	height: 25px;
+	width: 80px;
+	height: 40px;
 	padding: 0 14px 0;
-	border: 1px solid #304a8a;
-	background-color: #3f5a9d;
-	font-size: 13px;
+	border: 1px solid #ff5000;
+	background-color: #ff6700;
+	font-size: 20px;
 	color: #fff;
 	line-height: 25px;
 }
 
 button.btn-layerClose:hover {
-	border: 1px solid #091940;
-	background-color: #1f326a;
+	border: 1px solid #ff3f00;
+	background-color: #ff4800;
 	color: #fff;
 }
