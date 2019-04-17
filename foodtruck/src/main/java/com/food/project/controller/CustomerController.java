@@ -1,7 +1,9 @@
 package com.food.project.controller;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,15 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
+import com.food.project.service.CallListService;
 import com.food.project.service.LoginService;
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
+
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
 	private LoginService service;
-	
+	CallListService callList;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
 		return "customer/mypage";
@@ -39,8 +46,17 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/callList", method = RequestMethod.GET)
-	public String callList(Locale locale, Model model) {
-		return "customer/callList";
+	public String callList(Locale locale, Model model ,HttpSession session) {
+		
+		String id = (String) session.getAttribute("sessionid");
+		String truck_code = null;
+		String email = null;
+		
+		ArrayList<CallListVO> cl = callList.getCallList(truck_code, email);
+		model.addAttribute("Calllist", cl);
+
+		 return "customer/callList";
+		 
 	}
 	
 	@RequestMapping(value = "/cusInfo", method = RequestMethod.GET)

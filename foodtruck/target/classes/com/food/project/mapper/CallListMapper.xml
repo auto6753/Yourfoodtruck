@@ -6,6 +6,10 @@
 		select * from call_list where truck_code=#{truck_code} and email=#{email}
 		order by festival_date desc
 	</select>
+	<select id="getMyCallList" resultType="com.food.project.domain.CallListVO">
+		select * from call_list where email=#{email}
+		order by festival_date desc
+	</select>
 	<insert id="insertCallList" parameterType="com.food.project.domain.CallListVO">
 		insert into call_list(email,truck_code,place,festival_date,price,progress,festival_name,deposit_date,advance_rate)
 		values(#{email},#{truck_code},#{place},#{festival_date},#{price},#{progress},#{festival_name},#{deposit_date},#{advance_rate})

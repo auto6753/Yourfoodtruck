@@ -251,7 +251,7 @@
 				</div>
 				</div>
 				<div id="truckinfobody">
-				<div id="truckruntime1"><h3>영업시간: 10:00 ~ 20:000</h3></div>
+				<div id="truckruntime1"><h3>영업시간: 10:00 ~ 20:00</h3></div>
 				<div id="cacheinfo1"><h3>결제수단: 현금, 카드, 모바일페이</h3></div>
 				<div id="managerinfo1"><h3>상호명: 닭치고닭꼬치
 					<br>사업자등록번호 513-05-57154</h3>
@@ -286,7 +286,7 @@
 		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 		// marker.setMap(null);
 	</script>
-	<div id="locationdetail">
+	<div id="locationdetail" style="text-align:left;">
 		지하철<br>
 		-1호선을 타고 월평역에서 하차하여 약 20분정도 걸어오셔야 합니다.
 		<br>
@@ -294,9 +294,9 @@
 
 
 		버스<br>
-유성구청 정류장(도보1분거리) : 간선104, 지석121, <br> 
-마을5한빛아파트 정류장(도보5분거리) : 간선105, 115, 지선117, 급행1002,<br> 
-마을1유림공원 정류장(도보10분거리) : 간선102, 106, 108, 113, 706
+-유성구청 정류장(도보1분거리) : 간선104, 지석121, <br> 
+-마을5한빛아파트 정류장(도보5분거리) : 간선105, 115, 지선117, 급행1002,<br> 
+-마을1유림공원 정류장(도보10분거리) : 간선102, 106, 108, 113, 706
 
 
 
@@ -312,6 +312,17 @@
 				 <br>
 				 	<h2><span style="color: #C90000;">4월은 꼬치의 계절!</span></h2><br>
 				 	<h5><span style="color: #FF0000;">더욱 커진 닭다리살의 꼬치를 지금 만나보세요!</span> </h5><br>
+				 	<h6><span style="color: #FF0000;">2019.04.06 ~ 04.30</span></h6><br>
+				 </div>
+ 			</div>
+ 			<div id="eventborder">
+				 <div id="eventbody">
+				 	<img id="eventimage" src='${pageContext.request.contextPath}/resources/image/food101.jpg'>
+				 </div>
+				 <div id="eventcontent">
+				 <br>
+				 	<h2><span style="color: #C90000;">NEW 떡볶이와 닭꼬치를 한번에!</span></h2><br>
+				 	<h5><span style="color: #FF0000;">더욱 커진 닭다리살과 디지게 매운 떡볶이를 한번에 만나보세요!</span> </h5><br>
 				 	<h6><span style="color: #FF0000;">2019.04.06 ~ 04.30</span></h6><br>
 				 </div>
  			</div>
