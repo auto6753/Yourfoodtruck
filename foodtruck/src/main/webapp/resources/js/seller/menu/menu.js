@@ -7,7 +7,7 @@ $(document).ready(function(){
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);
 		
-		window.open("addMenu", "addMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY + "resizalbe=no");
+		window.open("addMenu", "addMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
 	});
 	
 	$("#delMenu").click(function(){

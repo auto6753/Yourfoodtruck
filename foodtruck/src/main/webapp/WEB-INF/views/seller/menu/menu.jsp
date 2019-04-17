@@ -20,7 +20,7 @@
 							<div class="col-md-3 menuf">
 								<div class="menut">
 								<div class="imgBox">
-									<img class="img editMenu" src="${pageContext.request.contextPath}/resources/image/food1.png"/>
+									<img class="img editMenu" src="${pageContext.request.contextPath}/resources/image/icon/food.png"/>
 								</div>
 								<div>메뉴명 ${i}</div>
 								<div>가격 ${i}</div>

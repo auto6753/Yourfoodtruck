@@ -69,6 +69,11 @@ public class SellerController {
 		return "seller/event/addEvent";
 	}
 	
+	@RequestMapping(value="/addEvent2", method=RequestMethod.GET) 
+	public String addEvent2(Model model) {
+		return "seller/event/addEvent2";
+	}
+	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
 	public String passenger(Model model) {
 		return "seller/psg/psgpush";
