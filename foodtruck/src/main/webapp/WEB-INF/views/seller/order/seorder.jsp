@@ -52,52 +52,44 @@ wrap {
 		<div id="forReceive"></div>
 	</div>
 	<button id="test">테스트</button>
+	<input type="hidden" id="bfss" value="">
 </body>
 <script>
+var first=true;
 var config = {
-		apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
-		authDomain : "fir-test-f3fea.firebaseapp.com",
-		databaseURL : "https://fir-test-f3fea.firebaseio.com",
-		projectId : "fir-test-f3fea",
-		storageBucket : "fir-test-f3fea.appspot.com",
-		messagingSenderId : "960564228551"
+	apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
+	authDomain : "fir-test-f3fea.firebaseapp.com",
+	databaseURL : "https://fir-test-f3fea.firebaseio.com",
+	projectId : "fir-test-f3fea",
+	storageBucket : "fir-test-f3fea.appspot.com",
+	messagingSenderId : "960564228551"
 };
 firebase.initializeApp(config);
-console.log('${sessionScope.sessionid.password}');
-var email='${sessionScope.sessionid.email}';
-var password='${sessionScope.sessionid.password}';
- firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-// Handle Errors here.
-	var errorCode = error.code;
-	var errorMessage = error.message;
-	alert(errorMessage);
-	// ...
-});
-var uid;
-firebase.auth().onAuthStateChanged(function(user) {
-	  if (user) {
-	    console.log(user);
-	    console.log(firebase.auth());
-	    uid=firebase.auth().currentUser.uid;
-	    console.log(uid);
-	  } else {
-	    console.log('error');
-	  }
-});
-var test44;
-var receiveRef=firebase.database().ref('/PaymentTest2/qJK5GuH9U2RO00RaXIvXbxj1HMg2/010-1111-4875');
+var _uid='${requestScope._uid}';
+console.log(_uid);
+var beforeSnapshot='';
+
+var orderedList;
 $(function() {
-	receiveRef.once('value').then(function(snapshot) {
-		snapshot.once('value').then(function(child) {
-			child
-		});
-		console.log(snapshot.val());
-		test44=snapshot.val();
-		console.log();
-		var bb=JSON.stringify(snapshot.val());
-		console.log(bb);
+	var ref=firebase.database().ref('/PaymentTest2/'+ _uid +'/').limitToFirst(15);
+	ref.once('value').then(function(snapshot) {
+		first=false;
+	}).catch(function(err) {
+		console.log(err.errorMessage);
 	});
-});
+	ref.on('value',function(snapshot) {
+		if(beforeSnapshot!=snapshot.val()){
+			var result=snapshot.val();
+			console.log('-------------------');
+			console.log(result);
+			for(var menus in result) {
+				console.log(menus+":"+JSON.stringify(result[menus]));
+			}
+		}
+		alert("주문");
+	});
+})
+
 
 $('#test').click(function() {
 	/* var a=$('#forReceive').children(1);

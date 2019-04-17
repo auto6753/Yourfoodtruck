@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
-import com.food.project.service.SellerService;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
