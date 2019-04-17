@@ -391,8 +391,6 @@ function change(){
        var d = R * c; // Distance in km
        return d;
    }
-  
-<script>
 </script>
 <style>
 #map {

@@ -19,7 +19,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
 <style type="text/css">
 body {
 	font-family: "Open Sans", sans-serif;
@@ -51,30 +54,53 @@ wrap {
 	<button id="test">테스트</button>
 </body>
 <script>
-let sock = new SockJS("<c:url value="/project/echo"/>");
-sock.onmessage = onMessage;
-sock.onclose = onClose;
+var config = {
+		apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
+		authDomain : "fir-test-f3fea.firebaseapp.com",
+		databaseURL : "https://fir-test-f3fea.firebaseio.com",
+		projectId : "fir-test-f3fea",
+		storageBucket : "fir-test-f3fea.appspot.com",
+		messagingSenderId : "960564228551"
+};
+firebase.initializeApp(config);
+console.log('${sessionScope.sessionid.password}');
+var email='${sessionScope.sessionid.email}';
+var password='${sessionScope.sessionid.password}';
+ firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+// Handle Errors here.
+	var errorCode = error.code;
+	var errorMessage = error.message;
+	alert(errorMessage);
+	// ...
+});
+var uid;
+firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+	    console.log(user);
+	    console.log(firebase.auth());
+	    uid=firebase.auth().currentUser.uid;
+	    console.log(uid);
+	  } else {
+	    console.log('error');
+	  }
+});
+var test44;
+var receiveRef=firebase.database().ref('/PaymentTest2/qJK5GuH9U2RO00RaXIvXbxj1HMg2/010-1111-4875');
+$(function() {
+	receiveRef.once('value').then(function(snapshot) {
+		snapshot.once('value').then(function(child) {
+			child
+		});
+		console.log(snapshot.val());
+		test44=snapshot.val();
+		console.log();
+		var bb=JSON.stringify(snapshot.val());
+		console.log(bb);
+	});
+});
 
-// 메시지 전송
-function sendMessage() {
-}
-
-// 서버로부터 메시지를 받았을 때
-function onMessage(msg) {
-	console.log(msg);
-	var jsonString=msg.data;
-	var datatest = JSON.parse(msg.data);
-	console.log(datatest);
-	console.log(typeof datatest);
-	$("#forReceive").append("<span class='result'>" + jsonString + "</span><br/>");
-}
-
-// 서버와 연결을 끊었을 때
-function onClose(evt) {
-	$("#forReceive").append("연결 끊김");
-}
 $('#test').click(function() {
-	var a=$('#forReceive').children(1);
+	/* var a=$('#forReceive').children(1);
 	console.log(a.html());
 	var test=JSON.parse(a.html());
 	console.log(test);
@@ -89,7 +115,7 @@ $('#test').click(function() {
 		},error:function(err) {
 			console.log(err);
 		}
-	}); 
+	});  */
 });
 </script>
 </html>
