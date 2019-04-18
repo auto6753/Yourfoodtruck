@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +41,10 @@ public class SellerController {
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
+		System.out.println("셀러메인");
 		return "seller/sellerMain";
 	}
+	
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
@@ -98,6 +102,7 @@ public class SellerController {
 	public String side(Model model) {
 		return "seller/sideMenuBar/sideMenuBar";
 	}
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
 	public String seorder(Model model, HttpSession session) {
 		FirebaseApp defaultApp = null;
@@ -170,6 +175,11 @@ public class SellerController {
 //			e.printStackTrace();
 //		}
 		return "seller/order/cuorder";
+	}
+	
+	@RequestMapping(value="/truckinfo", method=RequestMethod.GET) 
+	public String truckinfo(Model model) {
+		return "seller/truckinfo/truckinfo";
 	}
 	
 }

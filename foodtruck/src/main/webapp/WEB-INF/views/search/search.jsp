@@ -90,6 +90,8 @@ ${test.lat_y} // ${test.lng_x }
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1d1757d7f3887c30f0142b09e5ff2be&libraries=services,clusterer,drawing"></script>
 <script>
+
+	
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
    mapOption = {
       center : new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -270,7 +272,7 @@ function change(){
          // 검색 목록과 마커를 표출합니다
          /* console.log(data); */
          this.result = true;
-         alert(result);
+         //alert(result);
          console.log(status);
          /* console.log(pagination); */
          
@@ -334,9 +336,9 @@ function change(){
              var a = getDistanceFromLatLonInKm(lat,lng,obj[i].lay_y,obj[i].lng_x); 
              a = a.toPrecision(3); //소숫점자리 제한
              a = a*1000; // 정수로만듬
-             alert(a);
+             //alert(a);
              if(a<=3000){ //3km내 반경안에있으면 리스트추가
-                alert("추가");
+                //alert("추가");
                 //JSON.stringfiy(obj[i]);
                 //console.log(JSON.stringfiy(obj[i]));
                 list2.push(obj[i]);//${"list[i].name"}
@@ -348,16 +350,34 @@ function change(){
          $("#list-group").empty();
          if(list2[0] == null){
       	 	$("#list-group").append("해당지역 중심부 부터 3km 내에 푸드트럭이 존재하지 않습니다");
-      	 	alert("fail");
+      	 	//alert("fail");
          }else{ 
          	for(var i=0;i<list2.length;i++){
-         		alert("ok");
-             	$("#list-group").append("<div class='list-group-item clearfix'><div class='profile-teaser-left'><div class='profile-img'><img src='https://static.pexels.com/photos/21011/pexels-photo-large.jpg'/></div></div><div class='profile-teaser-main'><h2 class='profile-name'>"+list2[i].brandname+"</h2><div class='profile-info'><div class='info'><span class=''>영업시간:</span>" + list2[i].hours+"</div><div class='info'><span class=''>트럭번호:</span>" + list2[i].trucknum+"</div><br><div class='info'><span class=''>★★★★☆</span> 9.4</div><div class='info'><span class=''>댓글</span> 400</div> </div> <button style='float: right;'>탑승하기</button><button style='float: right;'>호출하기</button> </div></div>");
-      	    }
+         		//alert("ok");
+         		//var truckcode = ""+list2[i].truck_code;
+         		var a='d';
+         		var c=1;
+         		var truck=list2[i].truck_code;
+             	$("#list-group").append("<div class='list-group-item clearfix'><div class='profile-teaser-left'><div class='profile-img'><a href='/project/truck/ff?truck_code="+list2[i].truck_code+"'><img src='https://static.pexels.com/photos/21011/pexels-photo-large.jpg'/></a></div></div><div class='profile-teaser-main'><div class='infobox' style='cursor:pointer'><h2 class='profile-name'>"+list2[i].brandname+"</h2><div class='info'><span class=''>영업시간:</span>" + list2[i].hours+"</div><div class='info'><span class=''>트럭번호:</span>" + list2[i].trucknum+"</div></div><br><div class='info'><span class=''>★★★★☆</span> 9.4</div><div class='info'><span class=''>댓글 " + list2[i].total_review + "</span> </div> </div> <button style='float: right;'>탑승하기</button><button style='float: right;'>호출하기</button> </div></div>");
+
+         	}
+        	
          }
          
    }
  }
+
+	  
+   /* handler(a){
+	 	return function(e){
+			alert(a);
+	 	}
+  } */
+	/* function move(){
+	  alert($(this));
+	  console.log($(this).html());
+  }	 */
+
    function getposition(){
          var position = map.getCenter();
          return position;

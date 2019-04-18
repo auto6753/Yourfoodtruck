@@ -6,5 +6,5 @@ import com.food.project.domain.FoodTruckVO;
 public interface FoodTruckService {
 	public ArrayList<FoodTruckVO> getFoodTruckList();
 	public FoodTruckVO getFoodTruck(String truck_code);
-	public int insertFoodTruck(FoodTruckVO vo);
+	public FoodTruckVO insertFoodTruck(FoodTruckVO vo);
 }

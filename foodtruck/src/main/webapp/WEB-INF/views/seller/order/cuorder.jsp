@@ -8,7 +8,146 @@
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/news/news.css"/>" />
+<!-- <script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+<script>
+let sock = new SockJS("<c:url value="/project/echo"/>");
+sock.onmessage = onMessage;
+sock.onclose = onClose;
 
+// 메시지 전송
+function sendMessage() {
+	sock.send(JSON.stringify(list));
+}
+
+// 서버로부터 메시지를 받았을 때
+function onMessage(msg) {
+}
+
+// 서버와 연결을 끊었을 때
+function onClose(evt) {
+	$("#data").append("연결 끊김");
+}
+var list = new Array();
+	$(document).ready(function() {
+				var is = false;
+				var alltotal_price = 0;
+				$("#foodlist").on('click',"button",function() {
+							//var a=$(this).find('p');
+							var a = $(this);
+							//var name = a.html();
+							var name = a.next().html();
+							var total_price = a.nextAll().eq(1).html();
+							var menu_code = a.nextAll().eq(2).val();
+							var amount = 1;
+							//클릭한 상품이 현재 목록에 있는지 확인
+							for (var i = 0; i < list.length; i++) {
+								if (list[i].menu_code == menu_code) { //있으면 수량만 더하기 
+									list[i].amount += 1;
+									list[i].total_price = list[i].amount * total_price;
+									var k = list[i].menu_code;
+									//해당 값 수정
+									console.log($("#" + k).html());
+									$("#" + k).html("<td>"+list[i].name+"</td><td>"+list[i].amount+"</td><td>"+ list[i].total_price+"</td>");
+									console.log($("#" + k).html());
+									alltotal_price += parseInt(total_price);
+									$("#allprice").html(alltotal_price);
+									is = true; // 상품이 있기때문에 true 로 바꿔서 추가못하게 함
+								}
+							}
+							if (!is) { //상품이 없어서 추가하고 어팬드
+								var temp = {
+									menu_code : menu_code,
+									amount : amount,
+									total_price : parseInt(total_price),
+									name : name
+								}
+								list.push(temp);
+								var k = temp.menu_code;
+								alltotal_price += parseInt(temp.total_price);
+								$("#allprice").html(total_price);
+								$("tbody").append("<tr id='"+k+"'><td>" + temp.name+ "</td><td>" + temp.amount+ "</td><td>" + temp.total_price + "</td>");
+				
+							}
+							if (is) { //초기화
+								//alert(is);
+								is = false;
+							}
+						});
+				$("#cancle1").click(function() {
+					$("tbody").empty();
+					var a = $("tbody"); //tebody 태그 없앰;
+					alltotal_price = 0;
+					$("#allprice").html(alltotal_price);
+					list = new Array(); //list초기화
+				});
+				$("#kakaopay").click(function() {
+					console.log(list);
+					$("#order").css("display","none");
+					$("#kakaotel").css("display","block");
+					console.log(JSON.parse(JSON.stringify(list)));
+					if (typeof list[0] == 'undefined') {
+						alert("주문목록이업서여");
+					} else {
+						for(var a in list) {
+							list[a].payment_class=0;
+							list[a].truck_code='${sessionScope.seller.truck_code}';
+							list[a].payment_telephone='010-1111-4875';
+						}
+						console.log(list);
+						sendMessage();
+					}
+				});
+				$("#cash").click(function() {
+					console.log(list);
+					$("#order").css("display","none");
+					$("#cashtel").css("display","block");
+					if (typeof list[0] == 'undefined') {
+						alert("주문목록이업서여");
+					} else {
+						for(var a in list) {
+							list[a].payment_class=1;
+							list[a].truck_code='${sessionScope.seller.truck_code}';
+							list[a].payment_telephone='010-1111-4875';
+						}
+						console.log(list);
+						sendMessage();
+						alert("현금결제 총 결제금액" + allprice);
+					}
+
+				});
+				
+				$("#card").click(function() {
+					$("#order").css("display","none");
+					$("#cashtel").css("display","block");
+					console.log(list);
+					if (typeof list[0] == 'undefined') {
+						alert("주문목록이업서여");
+					} else {
+						for(var a in list) {
+							list[a].payment_class=2;
+							list[a].truck_code='${sessionScope.seller.truck_code}';
+							list[a].payment_telephone='010-1111-4875';
+						}
+						console.log(list);
+						sendMessage();
+						alert("카드결제 총 결제금액" + allprice);
+					}
+
+				});
+				$("#back").click(function() {
+					$("#box").css("scroll","top");
+					$("#order").css("display","block");
+					$("#cashtel").css("display","none");
+				});
+				$("#back2").click(function() {
+					$("#box").css("scroll","top");
+					$("#order").css("display","block");
+					$("#kakaotel").css("display","none");
+				});
+			});
+</script> -->
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.ajax-cross-origin.min.js"/>"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
@@ -103,11 +242,13 @@ div a {
 	margin-top: 30px;
 }
 
-h3 {
+.panel-title {
 	padding-top: 1%;
 	margin-left: 7.2%;
 }
+h3{
 
+}
 </style>
 <body>
 	<input type="hidden" id="sessionEmail" value="${sessionScope.sessionid.email}">
@@ -156,6 +297,25 @@ h3 {
 					<button id="cash" class="btn c1">현금결제</button>
 					<button id="kakaopay" class="btn c1">카카오페이</button>
 					<button id="cancle1" class="btn c1">취소</button>
+				</div>
+			</div>
+			</div>
+			<div id="cashtel" style="display: none;text-align: center; width:100%; margin-top: 50%; height: 50%;">
+				<div style="display:inline-block; width: 90%;height:35%;">
+					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
+					<input id="cashtel" type="tel" style="width:100%;" ><br>
+					<button id="cashok" class="btn c1">확인</button>
+					<button id="cashcancle" class="btn c1">취소</button>
+					<button id="back" class="btn c1">뒤로가기</button>
+				</div>
+			</div>
+			<div id="kakaotel" style="display:none;text-align: center; width:100%; margin-top: 50%; height: 50%;">
+				<div style="display:inline-block; width: 90%;height:35%;">
+					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
+					<input id="kakaotel" type="tel" style="width:100%;" ><br>
+					<button id="kakaohok" class="btn c1">확인</button>
+					<button id="kakaocancle" class="btn c1">취소</button>
+					<button id="back2" class="btn c1">뒤로가기</button>
 				</div>
 			</div>
 		</div>

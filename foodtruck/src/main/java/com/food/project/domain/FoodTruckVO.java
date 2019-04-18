@@ -15,4 +15,7 @@ public class FoodTruckVO {
 	private String brandname;
 	private Date truck_regdate;
 	private String email;
+	private int paytype;
+	private String truck_url;
+	private String bank;
 }

@@ -19,7 +19,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
@@ -27,34 +27,135 @@
 body {
 	font-family: "Open Sans", sans-serif;
 }
+
 .wrap {
-	width: 1000px;
+	width: 1300px;
 	height: 300px;
 	overflow-x: scroll;
-	white-space: nowrap
+	white-space: nowrap;
+	overflow-y: hidden;
 }
 
-.wrap div {
+.list {
 	width: 300px;
 	height: 100%;
 	display: inline-block;
+	border: solid 3px;
 }
 
 wrap {
 	white-space: nowrap;
 }
 
+.menu {
+	
+}
 
+.head {
+	
+}
+
+h4 {
+	text-align: center;
+}
+
+.num {
+	color: darkgreen;
+	float: left;
+	font-size: 1.8em;
+}
+
+.num+span {
+	float: right;
+}
+
+.num+span+div {
+	border: solid 3px;
+}
 </style>
 </head>
 <body>
 	<div class="wrap">
+		<%-- <c:forEach var="i" items="list">
+				<div class="list"></div>
+					<h4>${i.number }</h4>
+					<span class="num">01</span> <span>주문시간</span>
+					<div style="margin-top:15%;">
+						<span>경과시간</span>
+					</div>
+					<div class="menu" style="height: :140px; overflow-y:scroll;overflow-x:hidden;">
+					
+					
+					</div>
+		</c:forEach> --%>
+		
+			<%-- <div class="list" style="">
+			<div class="head">
+				<h4>01064364393</h4>
+				<span class="num">01</span> <span class="">주문시간</span>
+				<div style="margin-top: 15%;">
+					<span>경과시간</span>
+				</div>
+			</div>
+			<div class="menu"
+				style="height: 140px; overflow-y: scroll; overflow-x: hidden;">
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+			</div>
+			<button class="pay">결제확인1</button>
+			<input type="hidden" value="01064364393">
+			<input type="hidden" value="${sessionScope.seller.truck_code }">
+			<button class="release">출고확인</button>
+		</div> --%>
+
 		<div id="forReceive"></div>
 	</div>
 	<button id="test">테스트</button>
 	<input type="hidden" id="bfss" value="">
 </body>
 <script>
+  	$(".pay").click(function() {
+		var a = $(this);
+		var istrue = a.hasClass("pay");
+		if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				a.removeClass("pay");
+				console.log(a);
+				a.css("background-color", "red");
+				
+				var query = {
+						payment_telephone:a.next().val(),
+						truck_code:a.next().next().val()
+				};
+				$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				});
+			} 
+		}
+	});
 var first=true;
 var config = {
 	apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
