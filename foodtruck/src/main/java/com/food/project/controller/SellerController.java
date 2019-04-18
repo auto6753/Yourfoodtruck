@@ -28,7 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import lombok.AllArgsConstructor;
-import net.sf.json.JSONObject;
+
 
 @Controller
 @AllArgsConstructor
@@ -112,7 +112,7 @@ public class SellerController {
 		FileInputStream serviceAccount;
 		try {
 			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("Z:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
 				FirebaseOptions options = new FirebaseOptions.Builder()
 						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")

@@ -76,20 +76,7 @@ h4 {
 </head>
 <body>
 	<div class="wrap">
-		<%-- <c:forEach var="i" items="list">
-				<div class="list"></div>
-					<h4>${i.number }</h4>
-					<span class="num">01</span> <span>주문시간</span>
-					<div style="margin-top:15%;">
-						<span>경과시간</span>
-					</div>
-					<div class="menu" style="height: :140px; overflow-y:scroll;overflow-x:hidden;">
-					
-					
-					</div>
-		</c:forEach> --%>
-		
-			<%-- <div class="list" style="">
+			<%--  <div class="list" style="">
 			<div class="head">
 				<h4>01064364393</h4>
 				<span class="num">01</span> <span class="">주문시간</span>
@@ -97,8 +84,7 @@ h4 {
 					<span>경과시간</span>
 				</div>
 			</div>
-			<div class="menu"
-				style="height: 140px; overflow-y: scroll; overflow-x: hidden;">
+			<div class="menu" style="height: 140px; overflow-y: scroll; overflow-x: hidden;">
 				<p>dsf</p>
 				<p>dsf</p>
 				<p>dsf</p>
@@ -122,40 +108,14 @@ h4 {
 			<input type="hidden" value="01064364393">
 			<input type="hidden" value="${sessionScope.seller.truck_code }">
 			<button class="release">출고확인</button>
-		</div> --%>
-
-		<div id="forReceive"></div>
+		</div>
+ --%>
+		<!-- <div id="forReceive"></div> -->
 	</div>
 	<button id="test">테스트</button>
 	<input type="hidden" id="bfss" value="">
 </body>
 <script>
-  	$(".pay").click(function() {
-		var a = $(this);
-		var istrue = a.hasClass("pay");
-		if (istrue) {
-			var result = confirm('결제확인하시겠습니까?');
-			if (result) {
-				a.removeClass("pay");
-				console.log(a);
-				a.css("background-color", "red");
-				
-				var query = {
-						payment_telephone:a.next().val(),
-						truck_code:a.next().next().val()
-				};
-				$.ajax({					
-					type:"post",
-					url:"/project/pay/payck",
-					async: false,
-					data:query,
-					success:function(data){
-						console.log(data);
-					}
-				});
-			} 
-		}
-	});
 var first=true;
 var config = {
 	apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
@@ -171,7 +131,71 @@ console.log(_uid);
 var beforeSnapshot='';
 
 var forDblist=new Array();
+
+function pay(a){
+		//var istrue = a.hasClass("pay");
+		//console.log(istrue);
+		//if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				//a.removeClass("pay");
+				console.log(a);
+				console.log($("#"+a).html());
+				//console.log(a.html());
+				$("#"+a).css("background-color", "red");
+				var telephone = $("#"+a).next().val();
+				var truckcode = $("#"+a).next().next().val();
+				console.log(telephone);
+				console.log(truckcode);
+					var query = {
+						payment_telephone:telephone,
+						truck_code:truckcode
+				}; 
+			 	$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				}); 
+			//} 
+		//}
+	//});
+	}
+}
 $(function() {
+	//$("#list").on('click',".pay",function() {
+ 	/* $(".pay").click(function() {
+		var a = $(this);
+		var istrue = a.hasClass("pay");
+		console.log(istrue);
+		if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				a.removeClass("pay");
+				console.log(a);
+				a.css("background-color", "red");
+				var query = {
+						payment_telephone:a.next().val(),
+						truck_code:a.next().next().val()
+				};
+				$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				});
+			} 
+		}
+	}); */
+	var isfirst = true;
+	
+	
 	var ref=firebase.database().ref('/PaymentTest2/'+ _uid +'/').limitToFirst(15);
 	ref.once('value').then(function(snapshot) {
 		first=false;
@@ -180,7 +204,41 @@ $(function() {
 	});
 	var index;
 	ref.on('value',function(snapshot) {
-		if(beforeSnapshot!=snapshot.val()){
+		
+		if(isfirst){
+			var result=snapshot.val();
+			for(var menus in result) {
+				console.log('=====결과를 전화번호별로 구분=====');
+				console.log(menus);
+				console.log(result[menus]);
+				var orderList=result[menus];
+				
+				for(var order in orderList) {
+					console.log('=======전화번호별 거래내용들을 보여줌(같은번호로 했을떄 한개만)=======');
+					console.log(orderList[order]);//전화번호별 거래내역
+					console.log("'"+order+"'");//전화번호
+					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
+					
+					console.log(order_index);
+					var telephone = '"'+orderList[order][0].payment_telephone+'"';
+					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>' +orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release">출고확인</button></div>');			
+					if(order_index >1) {
+						for(var i=0;i<order_index;i++) {
+							$('.menu').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
+/* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
+							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
+						}	
+					}else{
+						$('.menu').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
+/* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
+						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
+					}
+					break;
+				}		
+			}
+			isfirst=false;
+		}else{
+			$('.wrap').html("");
 			var result=snapshot.val();
 			for(var menus in result) {
 				console.log('=====결과를 전화번호별로 구분=====');
@@ -193,22 +251,21 @@ $(function() {
 					console.log(orderList[order]);//전화번호별 거래내역
 					console.log(order);//전화번호
 					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
+					
 					console.log(order_index);
-					$('#forReceive').append('<span class="orderInfo">' + order+'</span><br/>');
+					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>' + orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div></div>');
 					if(order_index >1) {
 						for(var i=0;i<order_index;i++) {
-							$('#forReceive').append('<span class="orderInfo">'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'</span><br/>');
-							$('#forReceive').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
-							$('#forReceive').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>');
-						}
-						$('#forReceive').append('<hr/>');	
+							$('.menu').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
+/* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
+							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
+						}	
 					}else{
-						$('#forReceive').append('<span class="orderInfo">'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'</span><br/>');
-						$('#forReceive').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
-						$('#forReceive').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');
-						$('#forReceive').append('<hr/>');	
+						$('.menu').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
+/* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
+						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
 					}
-					break;   
+					break;
 				}		
 			}
 		}

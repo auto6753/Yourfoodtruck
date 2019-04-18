@@ -42,7 +42,6 @@ $(document).ready(function() {
 			alltotal_price += parseInt(temp.total_price);
 			$("#allprice").html(alltotal_price);
 			$("tbody").append("<tr id='"+k+"'><td>" + temp.name+ "</td><td>" + temp.amount+ "</td><td>" + temp.total_price + "</td>");
-
 		}
 		if (is) { // 초기화
 			// alert(is);
@@ -57,49 +56,38 @@ $(document).ready(function() {
 			list = new Array(); // list초기화
 	});
 	$("#kakaopay").click(function() {
-		var date = new Date();
-		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
-		var day=date.getDate();	var hour=date.getHours();
-		var minute=date.getMinutes(); var sec=date.getSeconds();
-		if((day+'').length<2)	day="0"+day;
-		if((month+'').length=1)	month="0"+month;					var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
 		if (typeof list[0] == 'undefined') {
 			alert("주문목록이업서여");
 		} else {
-			for(var a=0 ;a< list.length; a++) {
-				list[a].payment_class=0;
-				list[a].truck_code=$('#sessionTruckCode').val();
-				list[a].payment_telephone='010-1111-7975';	
-				var ref=firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a);
-				ref.set(list[a]);
-			}
+			$("#order").css("display","none");
+			$("#kakaotel").css("display","block");
 			console.log(list);
-			alert("주문등록 완료!");
+			//alert("주문등록 완료!");
 		}			
 	});
 	$("#cash").click(function() {
-		var date = new Date();
-		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
-		var day=date.getDate();	var hour=date.getHours();
-		var minute=date.getMinutes(); var sec=date.getSeconds();
-		if((day+'').length<2)	day="0"+day;
-		if((month+'').length=1)	month="0"+month;
-		console.log(date.toString());
-		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
 		if (typeof list[0] == 'undefined') {
 			alert("주문목록이업서여");
 		} else {
-			for(var a=0 ;a< list.length; a++) {
-				list[a].payment_class=1;
-				list[a].truck_code=$('#sessionTruckCode').val();
-				list[a].payment_telephone='010-1111-6475';
-				firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
-			}
+			$("#order").css("display","none");
+			$("#cashtel").css("display","block");
 			console.log(list);
-			alert("주문등록 완료!");
+			//alert("주문등록 완료!");
 		}
 	});
 	$("#card").click(function() {
+		if (typeof list[0] == 'undefined') {
+			alert("주문목록이업서여");
+		} else {
+			$("#order").css("display","none");
+			$("#cashtel").css("display","block");
+			console.log(list);
+			//alert("주문등록 완료!");
+		}
+	});
+	
+	$("#cashok").click(function(){
+		var payment_telephone = $("#cashtelephone").val();
 		var date = new Date();
 		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
 		var day=date.getDate();	var hour=date.getHours();
@@ -108,17 +96,87 @@ $(document).ready(function() {
 		if((month+'').length=1)	month="0"+month;
 		console.log(date.toString());
 		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
-		if (typeof list[0] == 'undefined') {
-			alert("주문목록이업서여");
-		} else {
-			for(var a=0 ;a< list.length; a++) {
-				list[a].payment_class=2;
-				list[a].truck_code=$('#sessionTruckCode').val();
-				list[a].payment_telephone='010-1221-2875';
-				firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
-			}
-			console.log(list);
-			alert("주문등록 완료!");
+		for(var a=0 ;a< list.length; a++) {
+			list[a].payment_class=2;
+			list[a].truck_code=$('#sessionTruckCode').val();
+			list[a].payment_telephone=payment_telephone;
+			firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
 		}
+		$("#cashtelephone").val("");
+		$("tbody").empty();
+		var a = $("tbody"); //tebody 태그 없앰;
+		alltotal_price = 0;
+		$("#allprice").html(alltotal_price);
+		list = new Array(); //list초기화
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#cashtel").css("display","none");
 	});
+	
+	$("#kakaohok").click(function(){
+		var payment_telephone =""+$("#kakaotelephone").val();
+		var date = new Date();
+		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
+		var day=date.getDate();	var hour=date.getHours();
+		var minute=date.getMinutes(); var sec=date.getSeconds();
+		if((day+'').length<2)	day="0"+day;
+		if((month+'').length=1)	month="0"+month;
+		console.log(date.toString());
+		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
+		
+		for(var a=0 ;a< list.length; a++) {
+			list[a].payment_class=3;
+			list[a].truck_code=$('#sessionTruckCode').val();
+			list[a].payment_telephone=payment_telephone;
+			firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
+		}
+		$("#kakaotelephone").val("");
+		$("tbody").empty();
+		var a = $("tbody"); //tebody 태그 없앰;
+		alltotal_price = 0;
+		$("#allprice").html(alltotal_price);
+		list = new Array(); //list초기화
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#kakaotel").css("display","none");
+	});
+	$("#back").click(function() {
+		$("#cashtelephone").val("");
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#cashtel").css("display","none");
+	});
+	$("#back2").click(function() {
+		$("#kakaotelephone").val("");
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#kakaotel").css("display","none");
+	});
+	
+	$("#kakaocancle").click(function() {
+		$("#kakaotelephone").val("");
+		$("tbody").empty();
+		var a = $("tbody"); //tebody 태그 없앰;
+		alltotal_price = 0;
+		$("#allprice").html(alltotal_price);
+		list = new Array(); //list초기화
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#kakaotel").css("display","none");
+		
+		
+	});
+	$("#cashcancle").click(function() {
+		$("#cashtelephone").val("");
+		$("tbody").empty();
+		var a = $("tbody"); //tebody 태그 없앰;
+		alltotal_price = 0;
+		$("#allprice").html(alltotal_price);
+		list = new Array(); //list초기화
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#cashtel").css("display","none");
+	});
+	
+	
 });

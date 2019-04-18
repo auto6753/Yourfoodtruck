@@ -46,17 +46,7 @@ public class PaymentController {
 	public String payck(Model model,PaymentVO vo) {
 		System.out.println(vo.getTruck_code());
 		System.out.println(vo.getPayment_telephone());
-		
 		return "success";
 	}
-	@RequestMapping(value="/insertOrder",method=RequestMethod.POST)
-	public void insertOrder(Model model, HttpServletRequest request) {
-	}
-	@RequestMapping(value="/afterOrder",method=RequestMethod.POST)
-	public String afterOrder() {
-		return "seller/order/afterOrder";
-	}
-	
-	
 	
 }

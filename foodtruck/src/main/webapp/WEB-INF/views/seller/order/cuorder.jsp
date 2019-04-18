@@ -148,15 +148,17 @@ var list = new Array();
 				});
 			});
 </script> -->
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.ajax-cross-origin.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.ajax-cross-origin.min.js"/>"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+<script
+	src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
 </head>
 <style>
-
 #logo {
 	text-align: center;
 	font-weight: bold;
@@ -188,8 +190,15 @@ div a {
 	overflow: auto;
 	-ms-overflow-style: none;
 }
-#box2::-webkit-scrollbar {display:none;}
-#box3::-webkit-scrollbar {display:none;}
+
+#box2::-webkit-scrollbar {
+	display: none;
+}
+
+#box3::-webkit-scrollbar {
+	display: none;
+}
+
 #box3 {
 	border: 2px solid;
 	color: rgb(255, 94, 24);
@@ -246,16 +255,21 @@ div a {
 	padding-top: 1%;
 	margin-left: 7.2%;
 }
-h3{
 
+h3 {
+	
 }
 </style>
 <body>
-	<input type="hidden" id="sessionEmail" value="${sessionScope.sessionid.email}">
-	<input type="hidden" id="sessionPw" value="${sessionScope.sessionid.password}">
-	<input type="hidden" id="sessionTruckCode" value="${sessionScope.seller.truck_code}">
-	<input type="hidden" id="orderTarget" value="${requestScope.orderTarget}">
-	<input type="hidden" id="ref" >
+	<input type="hidden" id="sessionEmail"
+		value="${sessionScope.sessionid.email}">
+	<input type="hidden" id="sessionPw"
+		value="${sessionScope.sessionid.password}">
+	<input type="hidden" id="sessionTruckCode"
+		value="${sessionScope.seller.truck_code}">
+	<input type="hidden" id="orderTarget"
+		value="${requestScope.orderTarget}">
+	<input type="hidden" id="ref">
 	<div id="cuorder">
 		<div id="logo">
 			<a href="/project/rehome">현재 푸드트럭</a>
@@ -264,82 +278,83 @@ h3{
 			<div id="box">
 				<button id="click" class="btn">food</button>
 				<button id="click2" class="btn">drink</button>
-				<div id="box2">
-					<div id="foodlist">
-						<c:forEach var="s" items="${menulist}">
-							<button class="btn food"></button>
-							<p>${s.menu_name }</p>
-							<p>${s.unit_price }</p>
-							<input type="hidden" value="${s.menu_code }">
-						</c:forEach>
+				<div id="order">
+					<div id="box2">
+						<div id="foodlist">
+							<c:forEach var="s" items="${menulist}">
+								<button class="btn food"></button>
+								<p>${s.menu_name }</p>
+								<p>${s.unit_price }</p>
+								<input type="hidden" value="${s.menu_code }">
+							</c:forEach>
+						</div>
+					</div>
+					<h3 class="panel-title">주문목록</h3>
+					<div id="box3" class="">
+						<table class="table table-hover" id="">
+							<thead>
+								<tr>
+									<th style="width: 30%">이름</th>
+									<th style="width: 40%">수량</th>
+									<th style="width: 30%">가격</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div style="text-align: right; margin-right: 10%;">
+						<span style="font-size: 30px;">총 가격:</span><span
+							style="font-size: 30px" id="allprice">0</span>
+					</div>
+					<div id="click3">
+						<button id="card" class="btn c1">카드결제</button>
+						<button id="cash" class="btn c1">현금결제</button>
+						<button id="kakaopay" class="btn c1">카카오페이</button>
+						<button id="cancle1" class="btn c1">취소</button>
 					</div>
 				</div>
-				<h3 class="panel-title">주문목록</h3>
-				<div id="box3" class="">
-					<table class="table table-hover" id="">
-						<thead>
-							<tr>
-								<th style="width: 30%">이름</th>
-								<th style="width: 40%">수량</th>
-								<th style="width: 30%">가격</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-				<div style="text-align: right; margin-right: 10%;">
-					<span style="font-size: 30px;">총 가격:</span><span
-						style="font-size: 30px" id="allprice">0</span>
-				</div>
-				<div id="click3">
-					<button id="card" class="btn c1">카드결제</button>
-					<button id="cash" class="btn c1">현금결제</button>
-					<button id="kakaopay" class="btn c1">카카오페이</button>
-					<button id="cancle1" class="btn c1">취소</button>
-				</div>
-			</div>
-			</div>
-			<div id="cashtel" style="display: none;text-align: center; width:100%; margin-top: 50%; height: 50%;">
-				<div style="display:inline-block; width: 90%;height:35%;">
+				<div id="cashtel"style="display: none; text-align: center; width: 100%; margin-top: 50%; height: 50%;">
+				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
-					<input id="cashtel" type="tel" style="width:100%;" ><br>
+					<input id="cashtelephone" type="tel" style="width: 100%;"><br>
 					<button id="cashok" class="btn c1">확인</button>
 					<button id="cashcancle" class="btn c1">취소</button>
-					<button id="back" class="btn c1">뒤로가기</button>
+					<button id="back" class="btn c1">주문추가</button>
 				</div>
 			</div>
-			<div id="kakaotel" style="display:none;text-align: center; width:100%; margin-top: 50%; height: 50%;">
-				<div style="display:inline-block; width: 90%;height:35%;">
+			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 50%; height: 50%;">
+				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
-					<input id="kakaotel" type="tel" style="width:100%;" ><br>
+					<input id="kakaotelephone" type="tel" style="width: 100%;"><br>
 					<button id="kakaohok" class="btn c1">확인</button>
 					<button id="kakaocancle" class="btn c1">취소</button>
-					<button id="back2" class="btn c1">뒤로가기</button>
+					<button id="back2" class="btn c1">주문추가</button>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>
-	<div id="seorder">
-	</div>
-<script>
-var config = {
-	apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
-	authDomain : "fir-test-f3fea.firebaseapp.com",
-	databaseURL : "https://fir-test-f3fea.firebaseio.com",
-	projectId : "fir-test-f3fea",
-	storageBucket : "fir-test-f3fea.appspot.com",
-	messagingSenderId : "960564228551"
-};
-firebase.initializeApp(config);
-var _uid=null;
-var text;
-var email='${sessionScope.sessionid.email}';
-console.log(email);
-var password='${sessionScope.sessionid.password}';
-console.log(password);
-firebase.auth().signInWithEmailAndPassword(email, password);
-</script>
-<script type="text/javascript" src="<c:url value="/resources/js/seller/order.js"/>"></script>
+	<div id="seorder"></div>
+	<script>
+		var config = {
+			apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
+			authDomain : "fir-test-f3fea.firebaseapp.com",
+			databaseURL : "https://fir-test-f3fea.firebaseio.com",
+			projectId : "fir-test-f3fea",
+			storageBucket : "fir-test-f3fea.appspot.com",
+			messagingSenderId : "960564228551"
+		};
+		firebase.initializeApp(config);
+		var _uid = null;
+		var text;
+		var email = '${sessionScope.sessionid.email}';
+		console.log(email);
+		var password = '${sessionScope.sessionid.password}';
+		console.log(password);
+		firebase.auth().signInWithEmailAndPassword(email, password);
+	</script>
+	<script type="text/javascript"
+		src="<c:url value="/resources/js/seller/order.js"/>"></script>
 </body>
 </html>
