@@ -6,6 +6,7 @@
 	width: 1200px;
 	height: 600px;
 	border: 1px solid darkgray;
+	border-radius: 10px;
 }
 h1{
 	text-align: center;
@@ -15,6 +16,7 @@ h1{
 	width: 250px;
 	height: 250px;
 	border: 1px solid darkgray;
+	border-radius: 10px;
 }
 .img{
 	margin-top: 20px;
@@ -22,10 +24,13 @@ h1{
 	height: 300px;
 	text-align: center;
 	float:left;
+	border-radius: 10px;
+}
 .bt1{
 	margin: 0 auto;
 	margin-top: 10px;
 	width:250px;
+	border-radius: 10px;
 }
 .div2{
 	margin-left: 100px;
@@ -34,16 +39,19 @@ h1{
 	width: 600px;
 	height: 400px;
 	float: left;
+	border-radius: 10px;
 }
  
 
 .pop-layer .pop-container {
   padding: 20px 25px;
+  border-radius: 10px;
 }
 
 .pop-layer p.ctxt {
   color: #666;
   line-height: 25px;
+  border-radius: 10px;
 }
 
 .pop-layer .btn-r {
@@ -52,6 +60,7 @@ h1{
   padding-top: 10px;
   border-top: 1px solid #DDD;
   text-align: right;
+  border-radius: 10px;
 }
 
 .pop-layer {
@@ -64,6 +73,7 @@ h1{
   background-color: #fff;
   border: 5px solid #3571B5;
   z-index: 10;
+  border-radius: 10px;
 }
 .pop-layer2 {
   display: none;
@@ -75,6 +85,7 @@ h1{
   background-color: #fff;
   border: 5px solid #3571B5;
   z-index: 10;
+  border-radius: 10px;
 }
 
 .dim-layer {
@@ -86,6 +97,7 @@ h1{
   width: 100%;
   height: 100%;
   z-index: 100;
+  border-radius: 10px;
 }
 
 .dim-layer .dimBg, .pop-layer .dimBg {
@@ -94,13 +106,14 @@ h1{
   left: 0;
   width: 100%;
   height: 100%;
-
+	border-radius: 10px;
   filter: alpha(opacity=50);
 }
 
 
 .dim-layer .pop-layer {
   display: block;
+  border-radius: 10px;
 }
 
 a.btn-layerClose {
@@ -112,23 +125,31 @@ a.btn-layerClose {
   font-size: 13px;
   color: #fff;
   line-height: 25px;
+  border-radius: 10px;
 }
 
 a.btn-layerClose:hover {
   border: 1px solid #091940;
   background-color: #1f326a;
   color: #fff;
+  border-radius: 10px;
 }
 #pop{
     width:300px; height:400px; background:white; 
     position:absolute; top: -25px; left:-300px; text-align:center; 
     border:2px solid #000;
+    border-radius: 10px;
    }
 
 #close{
 	margin-bottom: 30px;
     width:100px;
+    border-radius: 10px;
    }
+.btn-example{
+	width:50px;
+    border-radius: 10px;
+}
 
 *{margin:0;padding:0;}
   ul,li{list-style:none;}
@@ -151,3 +172,4 @@ a.btn-layerClose:hover {
   #pos2:checked~.pos>label:nth-child(2){background:#666;}
   #pos3:checked~.pos>label:nth-child(3){background:#666;}
   #pos4:checked~.pos>label:nth-child(4){background:#666;}
+ 

@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../header/header.jsp"></jsp:include>
-<link rel="stylesheet" href="<c:url value ="/resources/css/customercss/cusInfo.css"/>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,7 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="<c:url value ="/resources/css/customercss/cusInfo.css"/>" />
 </head>
 <body>
 	<div id="with" class="col">

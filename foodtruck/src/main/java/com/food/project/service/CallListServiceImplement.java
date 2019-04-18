@@ -20,6 +20,10 @@ public class CallListServiceImplement implements CallListService {
 		return mapper.getCallList(truck_code, email);
 	}
 	@Override
+	public ArrayList<CallListVO> getMyCallList(String email) {
+		return mapper.getMyCallList(email);
+	}
+	@Override
 	public int insertCallList(CallListVO vo) {
 		return mapper.insertCallList(vo);
 	}

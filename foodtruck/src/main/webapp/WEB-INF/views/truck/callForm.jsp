@@ -100,7 +100,7 @@
 
 				<h4>휴대전화</h4>
 
-				<h4 id="place">행사장명</h4>
+				<h4 id="festivalname">행사장명</h4>
 
 				<h4 id="date">행사일</h4>
 
@@ -108,9 +108,9 @@
 
 				<h4 id="place">행사장소</h4>
 
-				<h4>푸드트럭 섭외비용</h4>
+				<h4 id="truckcost">푸드트럭 섭외비용</h4>
 
-				<h4 id="content">추가요구사항</h4>
+				<h4 id="pluscontent">추가요구사항</h4>
 
 
 			</div>
