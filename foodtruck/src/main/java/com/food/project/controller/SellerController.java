@@ -98,7 +98,6 @@ public class SellerController {
 	public String side(Model model) {
 		return "seller/sideMenuBar/sideMenuBar";
 	}
-	@SuppressWarnings("null")
 	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
 	public String seorder(Model model, HttpSession session) {
 		FirebaseApp defaultApp = null;

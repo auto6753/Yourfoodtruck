@@ -114,7 +114,7 @@ $(document).ready(function() {
 			for(var a=0 ;a< list.length; a++) {
 				list[a].payment_class=2;
 				list[a].truck_code=$('#sessionTruckCode').val();
-				list[a].payment_telephone='010-1111-2875';
+				list[a].payment_telephone='010-1221-2875';
 				firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
 			}
 			console.log(list);
