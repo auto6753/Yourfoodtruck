@@ -64,7 +64,6 @@ public class SearchController {
 			//list=locservice.getLoc();
 			
 			List<Map<String, Object>> list = locservice.getLoc();
-			
 			for(Map<String, Object> a : list) {
 				JSONObject data=new JSONObject();
 				data.put("truck_code", a.get("TRUCK_CODE"));
@@ -81,8 +80,6 @@ public class SearchController {
 				data.put("avg_review",a.get("AVG_REVIEW"));
 				arry.add(data);
 			}
-			//System.out.println(list2);
-			
 			//model.addAttribute("loc",list2);
 		}catch(Exception e) {
 			e.printStackTrace();

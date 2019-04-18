@@ -34,7 +34,9 @@
 	<select id="getName" resultType="com.food.project.domain.CustomerVO">
 		select nickname from customer where nickname = #{nickname}
 	</select>
-	
+	<select id="getTelephone" resultType="com.food.project.domain.CustomerVO">
+		select telephone from customer where telephone=#{telephone}
+	</select>
 	<delete id="delete">
 		delete from customer where email = #{email}
 	</delete>
