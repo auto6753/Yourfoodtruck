@@ -31,9 +31,9 @@ body {
 .wrap {
 	width: 1300px;
 	height: 300px;
-	overflow-x: scroll;
+	/* overflow-x: scroll; */
 	white-space: nowrap;
-	overflow-y: hidden;
+	/* overflow-y: hidden; */
 }
 
 .list {
@@ -172,6 +172,7 @@ var beforeSnapshot='';
 
 var forDblist=new Array();
 $(function() {
+	var isFirst=true;
 	var ref=firebase.database().ref('/PaymentTest2/'+ _uid +'/').limitToFirst(15);
 	ref.once('value').then(function(snapshot) {
 		first=false;
@@ -180,7 +181,40 @@ $(function() {
 	});
 	var index;
 	ref.on('value',function(snapshot) {
-		if(beforeSnapshot!=snapshot.val()){
+		if(isFirst){
+			var result=snapshot.val();
+			for(var menus in result) {
+				console.log('=====결과를 전화번호별로 구분=====');
+				console.log(menus);
+				console.log(result[menus]);
+				var orderList=result[menus];
+				
+				for(var order in orderList) {
+					console.log('=======전화번호별 거래내용들을 보여줌(같은번호로 했을떄 한개만)=======');
+					console.log(orderList[order]);//전화번호별 거래내역
+					console.log(order);//전화번호
+					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
+					console.log(order_index);
+					$('#forReceive').append('<span class="orderInfo">' + order+'</span><br/>');
+					if(order_index >1) {
+						for(var i=0;i<order_index;i++) {
+							$('#forReceive').append('<span class="orderInfo">'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'</span><br/>');
+							$('#forReceive').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
+							$('#forReceive').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>');
+						}
+						$('#forReceive').append('<hr/>');	
+					}else{
+						$('#forReceive').append('<span class="orderInfo">'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'</span><br/>');
+						$('#forReceive').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
+						$('#forReceive').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');
+						$('#forReceive').append('<hr/>');	
+					}
+					break;   
+				}		
+			}
+			isFirst=false;
+		}else{
+			$('#forReceive').html("");
 			var result=snapshot.val();
 			for(var menus in result) {
 				console.log('=====결과를 전화번호별로 구분=====');

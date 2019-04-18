@@ -319,7 +319,6 @@ h3{
 				</div>
 			</div>
 		</div>
-	</div>
 	<div id="seorder">
 	</div>
 <script>

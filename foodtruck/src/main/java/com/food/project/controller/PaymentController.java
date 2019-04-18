@@ -49,13 +49,6 @@ public class PaymentController {
 		
 		return "success";
 	}
-	@RequestMapping(value="/insertOrder",method=RequestMethod.POST)
-	public void insertOrder(Model model, HttpServletRequest request) {
-	}
-	@RequestMapping(value="/afterOrder",method=RequestMethod.POST)
-	public String afterOrder() {
-		return "seller/order/afterOrder";
-	}
 	
 	
 	
