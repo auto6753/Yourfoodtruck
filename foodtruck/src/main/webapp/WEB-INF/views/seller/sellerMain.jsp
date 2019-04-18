@@ -14,6 +14,7 @@
 		<li class="nav-item"><a class="nav-link" href="/project/seller/callmanage">호출관리</a></li>
 		<li class="nav-item"><a class="nav-link" href="/project/seller/order">주문관리</a></li>
 		<li class="nav-item"><a class="nav-link" href="/project/seller/layout">레이아웃</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/truckinfo">정보관리</a></li>
 	</ul>
 </div>
 <div class="revenue border">

@@ -41,6 +41,14 @@ public class PaymentController {
 	public String afterOrder() {
 		return "seller/order/afterOrder";
 	}
+	@RequestMapping(value="/payck",method=RequestMethod.POST)
+	@ResponseBody
+	public String payck(Model model,PaymentVO vo) {
+		System.out.println(vo.getTruck_code());
+		System.out.println(vo.getPayment_telephone());
+		
+		return "success";
+	}
 	
 	
 }

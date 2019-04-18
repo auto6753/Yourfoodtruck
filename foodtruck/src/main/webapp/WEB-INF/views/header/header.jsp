@@ -63,7 +63,7 @@ a{
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
-					<span id="" class="badge badge-light"><a href="#">트럭등록</a></span>
+					<span id="" class="badge badge-light"><a href="/project/truck/register">트럭등록</a></span>
 					</c:if>
 					<c:if test="${not empty sessionScope.seller}">
 					<span id="" class="badge badge-light"><a href="/project/seller">트럭관리</a></span>

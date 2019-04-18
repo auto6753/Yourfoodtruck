@@ -64,11 +64,12 @@ public class SearchController {
 			//list=locservice.getLoc();
 			
 			List<Map<String, Object>> list = locservice.getLoc();
+			
 			for(Map<String, Object> a : list) {
 				JSONObject data=new JSONObject();
 				data.put("truck_code", a.get("TRUCK_CODE"));
 				data.put("account", a.get("ACCOUNT"));
-				data.put("lay_y", a.get("LAY_Y"));
+				data.put("lay_y", a.get("LAT_Y"));
 				data.put("lng_x", a.get("LNG_X"));
 				data.put("brandname", a.get("BRANDNAME"));
 				data.put("trucknum", a.get("TRUCKNUM"));
@@ -80,7 +81,6 @@ public class SearchController {
 				data.put("avg_review",a.get("AVG_REVIEW"));
 				arry.add(data);
 			}
-			
 			//System.out.println(list2);
 			
 			//model.addAttribute("loc",list2);

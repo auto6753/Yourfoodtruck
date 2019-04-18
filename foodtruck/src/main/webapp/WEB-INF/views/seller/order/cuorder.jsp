@@ -31,8 +31,7 @@ function onClose(evt) {
 	$("#data").append("연결 끊김");
 }
 var list = new Array();
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 				var is = false;
 				var alltotal_price = 0;
 				$("#foodlist").on('click',"button",function() {
@@ -86,6 +85,8 @@ var list = new Array();
 				});
 				$("#kakaopay").click(function() {
 					console.log(list);
+					$("#order").css("display","none");
+					$("#kakaotel").css("display","block");
 					console.log(JSON.parse(JSON.stringify(list)));
 					if (typeof list[0] == 'undefined') {
 						alert("주문목록이업서여");
@@ -101,6 +102,8 @@ var list = new Array();
 				});
 				$("#cash").click(function() {
 					console.log(list);
+					$("#order").css("display","none");
+					$("#cashtel").css("display","block");
 					if (typeof list[0] == 'undefined') {
 						alert("주문목록이업서여");
 					} else {
@@ -115,7 +118,10 @@ var list = new Array();
 					}
 
 				});
+				
 				$("#card").click(function() {
+					$("#order").css("display","none");
+					$("#cashtel").css("display","block");
 					console.log(list);
 					if (typeof list[0] == 'undefined') {
 						alert("주문목록이업서여");
@@ -130,6 +136,16 @@ var list = new Array();
 						alert("카드결제 총 결제금액" + allprice);
 					}
 
+				});
+				$("#back").click(function() {
+					$("#box").css("scroll","top");
+					$("#order").css("display","block");
+					$("#cashtel").css("display","none");
+				});
+				$("#back2").click(function() {
+					$("#box").css("scroll","top");
+					$("#order").css("display","block");
+					$("#kakaotel").css("display","none");
 				});
 			});
 </script>
@@ -221,18 +237,21 @@ div a {
 	margin-top: 30px;
 }
 
-h3 {
+.panel-title {
 	padding-top: 1%;
 	margin-left: 7.2%;
 }
+h3{
 
+}
 </style>
 <body>
 	<div id="logo">
 		<a href="/project/rehome">현재 푸드트럭</a>
 	</div>
-	<div>
-		<div id="box">
+	<div style="">
+		<div id="box" style="">
+		<div id="order">
 			<button id="click" class="btn">food</button>
 			<button id="click2" class="btn">drink</button>
 			<div id="box2">
@@ -246,7 +265,7 @@ h3 {
 				</div>
 			</div>
 			<h3 class="panel-title">주문목록</h3>
-			<div id="box3" class="">
+			<div id="box3">
 				<table class="table table-hover" id="">
 					<thead>
 						<tr>
@@ -264,10 +283,29 @@ h3 {
 					style="font-size: 30px" id="allprice">0</span>
 			</div>
 			<div id="click3">
-				<button id="card" class="btn c1">카드결제</button>
-				<button id="cash" class="btn c1">현금결제</button>
+				<button id="card" class="btn c1 pay">카드결제</button>
+				<button id="cash" class="btn c1 pay">현금결제</button>
 				<button id="kakaopay" class="btn c1">카카오페이</button>
 				<button id="cancle1" class="btn c1">취소</button>
+			</div>
+			</div>
+			<div id="cashtel" style="display: none;text-align: center; width:100%; margin-top: 50%; height: 50%;">
+				<div style="display:inline-block; width: 90%;height:35%;">
+					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
+					<input id="cashtel" type="tel" style="width:100%;" ><br>
+					<button id="cashok" class="btn c1">확인</button>
+					<button id="cashcancle" class="btn c1">취소</button>
+					<button id="back" class="btn c1">뒤로가기</button>
+				</div>
+			</div>
+			<div id="kakaotel" style="display:none;text-align: center; width:100%; margin-top: 50%; height: 50%;">
+				<div style="display:inline-block; width: 90%;height:35%;">
+					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
+					<input id="kakaotel" type="tel" style="width:100%;" ><br>
+					<button id="kakaohok" class="btn c1">확인</button>
+					<button id="kakaocancle" class="btn c1">취소</button>
+					<button id="back2" class="btn c1">뒤로가기</button>
+				</div>
 			</div>
 		</div>
 	</div>

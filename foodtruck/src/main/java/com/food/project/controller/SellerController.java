@@ -2,6 +2,9 @@ package com.food.project.controller;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +26,10 @@ public class SellerController {
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
+		System.out.println("셀러메인");
 		return "seller/sellerMain";
 	}
+	
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
@@ -82,8 +87,29 @@ public class SellerController {
 	public String side(Model model) {
 		return "seller/sideMenuBar/sideMenuBar";
 	}
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
 	public String seorder(Model model) {
+		
+		JSONObject data = new JSONObject();
+		JSONObject number = new JSONObject();
+		JSONArray arr = new JSONArray();
+		data.put("truck_code", 123);
+		data.put("menu_code", 4443);
+		data.put("amount", 3);
+		data.put("total_price",6000);
+		data.put("payment_class",1);
+		arr.add(data);
+		data.put("truck_code", 123);
+		data.put("menu_code", 4443);
+		data.put("amount", 3);
+		data.put("total_price",6000);
+		data.put("payment_class",1);
+		arr.add(data);
+		System.out.println(arr);
+		number.put("01064364393", arr);
+		System.out.println(number);
+		model.addAttribute("list", number);
 		
 		return "seller/order/seorder";
 	}
@@ -100,6 +126,11 @@ public class SellerController {
 		 //vo2 = sellerservice.getmenu(truckcode);
 		 System.out.println();
 		return "seller/order/cuorder";
+	}
+	
+	@RequestMapping(value="/truckinfo", method=RequestMethod.GET) 
+	public String truckinfo(Model model) {
+		return "seller/truckinfo/truckinfo";
 	}
 	
 }

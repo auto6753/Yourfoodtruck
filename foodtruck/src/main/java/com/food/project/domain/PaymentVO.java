@@ -11,4 +11,5 @@ public class PaymentVO {
 	private int total_price;
 	private int payment_class;
 	private String payment_telephone;
+	
 }
