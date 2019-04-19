@@ -84,7 +84,7 @@
 					src='${pageContext.request.contextPath}/resources/image/food1.png'>
 				<div id="cross">
 					<br>
-					<h1 id="truckname">닭치고 닭꼬치</h1>
+					<h1 id="truckname">${tlist.brandname }</h1>
 					<br>
 					<button id="ride">탑승하기</button>
 					<button id="call">호출하기</button>
@@ -251,10 +251,10 @@
 				</div>
 				</div>
 				<div id="truckinfobody">
-				<div id="truckruntime1"><h3>영업시간: 10:00 ~ 20:00</h3></div>
-				<div id="cacheinfo1"><h3>결제수단: 현금, 카드, 모바일페이</h3></div>
-				<div id="managerinfo1"><h3>상호명: 닭치고닭꼬치
-					<br>사업자등록번호 513-05-57154</h3>
+				<div id="truckruntime1"><h3>영업시간: ${tlist.hours }</h3></div>
+				<div id="cacheinfo1"><h3>결제수단: 현금, 카드, 모바일페이 ${tlist.paytype }</h3></div>
+				<div id="managerinfo1"><h3>상호명: ${tlist.brandname}
+					<br>사업자등록번호 ${tlist.crn }</h3>
 				</div>
 				</div>
 			</div>

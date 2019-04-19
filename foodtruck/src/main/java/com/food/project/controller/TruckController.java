@@ -23,8 +23,10 @@ import lombok.AllArgsConstructor;
 public class TruckController {
 	private FoodTruckService service;
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String info(Model model,@RequestParam("truck_code") String truck_code) {
-		service.getFoodTruck(truck_code);
+	public String info(Model model ,@RequestParam("truck_code") String truck_code ) {
+
+		FoodTruckVO ss= service.getFoodTruck(truck_code);
+		model.addAttribute("tlist", ss); //트럭정보
 		
 		return "truck/truckInfo";
 	}
