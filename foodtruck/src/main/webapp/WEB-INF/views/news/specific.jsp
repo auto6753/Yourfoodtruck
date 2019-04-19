@@ -15,7 +15,39 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 
+<script>
+$(document).ready(function(){
+	$("#delete").click(function(){
+		var post_code = ${specific.post_code};
+		
+		var query = {
+			 post_code : post_code
+		}
+		$.ajax({
+			url: "/project/news/delete",
+			type: "post",
+			data: query,
+			success : function(data){
+				
+				location.href="/project/news";
+			}
+		});
+	});
+	$("#d").click(function(){
+		var post_code = ${specific.post_code};
+		/* alert(post_code); */
+		
+		
+		$(location).attr('href','/project/news/modifyNewsck?post_code='+post_code);
+		
+	});
+	
+	
+});
 
+
+	
+</script>
 
 
 
@@ -25,16 +57,17 @@
 		<p id="title2">푸드트럭NEWS</p>
 	</div>
 
-	<form id="all">
+	<form id="all" >
 		<div id="box">
 			<div class="jumbotron">
-				<h1 id="titles"class="display-10">4월정기점검안내</h1>
+				<h1 id="titles"class="display-10">${specific.post_title}</h1>
 				<hr class="my-4">
-				<p>이번주 공지사항 입니다.
-				항상 감사드리고 푸드트럭 많이 방문해주세요!</p>
+				<p>${specific.post_content}</p>
 				<p class="lead">
-					<button type="submit" class="btn">수정</button>
-					<button type="submit" class="btn">삭제</button>
+					<input id="d" type="button"   value="수정" class="btn" onClick="">
+					<!-- <button id="d" type="submit" class="btn" onClick="">수정</button>  -->
+					<button id="delete" class="btn">삭제</button>
+					<a href="/project/news"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
 				</p>
 			</div>
 
