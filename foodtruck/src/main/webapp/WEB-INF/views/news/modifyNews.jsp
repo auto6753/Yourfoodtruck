@@ -18,28 +18,27 @@
 
 
 
-
-
 </head>
 <body>
 	<div id="title" class="card-header">
 		<p id="title2">푸드트럭NEWS</p>
 	</div>
-	<form id="all">
+	<form id="all" action="/project/news/modifyNews" method="post" >
 	<div id="box">
 		<div class="form-group">
+			<input type="hidden"  name="post_code" value="${specificcontent.post_code}">
 			<label for="exampleInputEmail1">제목</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1"
-				rows="1">공지사항</textarea>
-		
+			<textarea name="post_title" class="form-control" id="exampleFormControlTextarea1"
+				rows="1"> ${specificcontent.post_title} </textarea>
+				
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">내용</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1"
-				rows="6">오늘의 공지입니다. 확인바랍니다.</textarea>
+			<textarea name="post_content" class="form-control" id="exampleFormControlTextarea1"
+				rows="12">${specificcontent.post_content} </textarea>
 		</div>
-		<button id="d" type="submit" class="btn">수정완료</button>
-		<button id="d" type="submit" class="btn">취소</button>
+		<input id="success" type="submit" class="btn" value="완료">
+		<input type="button" id="d" type="reset" class="btn" value="취소" onClick="history.go(-1)" >
 		</div>
 	</form>
 

@@ -61,7 +61,7 @@ function ck(){
 			</div>
 			<div class="form-group">
 				<label for="exampleFormControlTextarea1">내용</label>
-				<input name="post_content" type="text" id="content"class="form-control" id="exampleFormControlTextarea1" rows="6">
+				<textarea name="post_content"  id="content" class="form-control" id="exampleFormControlTextarea1" rows="12"></textarea>
 				
 			</div>		
 			

@@ -5,45 +5,50 @@ p{
 #title {
 
 	font-size: 200%;
-	width:85%;
+	width:100%;
 	margin: 0 auto;
 }
 
-#search{
+#searchall{
 	margin: 0 auto;
-	width:85%;
+	width:100%;
+}
+.form-inline{
+	width:100%;
 }
 
 #searchbox{
-	width:60%;
+	width:35%;
 }
-#search2{
-	width: 20%;
+#searchbutton{
+	
 	background-color: rgb(255, 94, 24);
 	color:white;
+}
+#pageadd{
+	margin-left: 2px;
 }
 /* #add{
 	margin: 0 auto;
 	
 } */
 
-#addb{
+#pageadd{
+	
 	background-color: rgb(255, 94, 24);
 	color: white;
-	
 
-	
 	
 }
 #table{
-	width:85%;
+	width:100%;
 	margin: 0 auto;
 }
-#alll{
-	width:85%;
-	margin: 0 auto;
+#nextall{
+	width:100%;
 	
-}
+} 
+
 
 
 span{
