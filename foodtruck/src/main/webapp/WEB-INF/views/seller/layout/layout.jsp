@@ -2,4 +2,11 @@
 <%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../../header/header.jsp"></jsp:include>
-레이아웃설정
+<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-9">레이아웃 content</div>
+		</div>
+</div>

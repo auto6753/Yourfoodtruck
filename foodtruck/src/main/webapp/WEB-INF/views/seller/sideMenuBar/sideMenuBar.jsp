@@ -13,20 +13,18 @@
 </head>
 <body>
 				<ul>
-					<li class="menu"><a>푸드트럭 등록</a></li>
-					<li class="menu"><a>메뉴 등록</a></li>
-					<li class="menu"><a>위치 등록</a></li>
-					<li class="menu"><a>이벤트 관리</a></li>
-					<li class="menu"><a>푸드트럭 호출 관리</a></li>
-					<li class="menu"><a>주문관리창</a></li> 
-					<li class="menu"><a>레이아웃</a>
+					<li class="menu"><a href="/project/seller/">메인</a></li>
+					<li class="menu"><a href="/project/seller/menu">메뉴 등록</a></li>
+					<li class="menu"><a href="/project/seller/location">위치 등록</a></li>
+					<li class="menu"><a href="/project/seller/event">이벤트 관리</a></li>
+					<li class="menu"><a href="/project/seller/callmanage">푸드트럭 호출 관리</a></li>
+					<li class="menu"><a href="/project/seller/order">주문관리창</a></li> 
+					<li class="menu"><a href="/project/seller/layout">레이아웃</a>
 						<ul class="hide">
 							<li><a>타입 A</a></li>
 							<li><a>타입 B</a></li>
 						</ul>
 					</li>
-					<li class="menu"><a>모집공고</a></li>
-					<li class="menu"><a>허가구역 조회</a></li>
 				</ul>
 </body>
 </html>
