@@ -3,6 +3,15 @@
  */
 
 $(document).ready(function(){
+	$(".menut").click(function(){
+		var current = $(this).css("background-color");
+		if(current == "rgb(128, 128, 128)") {
+			$(this).css("background-color", "");
+		} else {
+			$(this).css("background-color", "gray");
+		}
+	});
+	
 	$("#addMenu").click(function(){
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);

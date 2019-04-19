@@ -145,7 +145,6 @@
 												<div class="status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
-										<div style="border:1px solid black; width:174.81px; height:184.84px; z-index:-1; position:relative; bottom:184.84px;">b</div>
 									</div>
 								</c:forEach>
 							</div>
