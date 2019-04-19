@@ -2,4 +2,11 @@
 <%@ page contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../../header/header.jsp"></jsp:include>
-호출관리
+<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-9">호출관리 content</div>
+		</div>
+</div>

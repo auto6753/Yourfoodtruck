@@ -10,11 +10,17 @@
 		order by loc.loc_time desc) where rownum=1; -->
 	<select id="getLoc" resultType="Map">
 		<!-- select * from location where lat_y is not null -->
-		select lc.lat_y lay_y,lc.lng_x lng_x,lc.loc_time loc_time,ft.* from location lc join foodtruck ft
+	select lc.lat_y lat_y,lc.lng_x lng_x,ft.*,rv.total_review,rv.avg_review
+	from location lc
+	join foodtruck ft
 	on lc.truck_code=ft.truck_code
-	where(ft.truck_code,lc.loc_time) in (
-	select truck_code,max(loc_time) from location
-	group by truck_code)
+	full outer join (select truck_code, count(*) total_review,
+	avg(review_score) avg_review from review
+	group by truck_code) rv
+	on lc.truck_code=rv.truck_code
+	where(ft.truck_code,lc.loc_time) in
+		(select truck_code,max(loc_time) from location
+		group by truck_code)
 	</select>
 	<!-- 위치넣기 -->
 	<!-- <insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO"> 

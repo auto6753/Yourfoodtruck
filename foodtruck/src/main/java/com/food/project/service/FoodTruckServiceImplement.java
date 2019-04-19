@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class FoodTruckServiceImplement implements FoodTruckService {
 	FoodtruckMapper mapper;
-	
+	LoginService lmapper;
 	@Override
 	public ArrayList<FoodTruckVO> getFoodTruckList() {
 		return mapper.getFoodTruckList();
@@ -24,10 +24,13 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	}
 
 	@Override
-	public int insertFoodTruck(FoodTruckVO vo) {
-		return mapper.insertFoodTruck(vo);
-	}
+	public FoodTruckVO insertFoodTruck(FoodTruckVO vo) {
+		mapper.insertFoodTruck(vo);
+		
+		return lmapper.getFoodTruck(vo.getEmail());
+	} 
 
+	
 
 	
 

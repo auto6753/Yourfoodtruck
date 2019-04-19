@@ -8,8 +8,13 @@
 	<select id="getFoodTruck" resultType="com.food.project.domain.FoodTruckVO">
 		select * from foodtruck where truck_code=#{truck_code}
 	</select>
+	
+	<select id="getFoodTruckE" parameterType="String" resultType="com.food.project.domain.FoodTruckVO">
+		select * from foodtruck where email=#{email}
+	</select>
+
 	<insert id="insertFoodTruck" parameterType="com.food.project.domain.FoodTruckVO">
 		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,email)
-		values(#{truck_code},#{crn},#{trucknum},#{account},layout,#{hours},#{weekend_hours},#{brandname},sysdate,#{email})
+		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{email})
 	</insert>
 </mapper>

@@ -13,16 +13,22 @@ public interface PostMapper {
 	//게시글 불러오기
 	public PostVO getPost(String post_code);
 	//게시글 등록하기
-	public int insertPost(PostVO vo);
+	public void insertPost(PostVO vo);
+	//상세보기정보 수정페이지로 넘기기
+	public PostVO getSpecific(PostVO vo);
 	//게시글 수정하기
-	public int updatePost(PostVO vo);
+	public void updatePost(PostVO vo);
 	//게시글 삭제하기
-	public int deletePost(String post_code,int post_class);
+	public int deletePost(PostVO vo);
 	
 	
 	//댓글 가져오기
 	public ArrayList<ReplyVO> getReply(String post_code);
 	//댓글 등록하기
 	public int insertReply(ReplyVO vo);
+	//조회수
+	public void updatePostvisit(String post_code);
+	
+	
 
 }

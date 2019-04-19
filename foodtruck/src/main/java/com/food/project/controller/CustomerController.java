@@ -25,6 +25,7 @@ import lombok.AllArgsConstructor;
 
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
+
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
