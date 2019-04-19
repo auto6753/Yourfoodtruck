@@ -1,6 +1,10 @@
 package com.food.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import com.food.project.domain.LocationVO;
 import com.food.project.mapper.LocationMapper;
@@ -11,6 +15,12 @@ import lombok.AllArgsConstructor;
 public class LocationServiceImplement implements LocationService {
 	
 	LocationMapper mapper;
+
+	@Override
+	public List<Map<String, Object>> getLoc() {
+		// TODO Auto-generated method stub
+		return mapper.getLoc();
+	}
 	
 //	@Override
 //	public void insertLoc(LocationVO vo) {
@@ -22,9 +32,9 @@ public class LocationServiceImplement implements LocationService {
 //		return mapper.getLocation(vo, email);
 //	}
 
-	@Override
-	public ArrayList<LocationVO> getLoc() {
+	//@Override
+	/*public ArrayList<LocationVO> getLoc() {
 		return mapper.getLoc();
-	}
+	}*/
 
 }

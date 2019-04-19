@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/help", method = RequestMethod.GET)
+@RequestMapping(value = "/help")
 public class HelpController {
 
 //	@Autowired
@@ -22,6 +22,13 @@ public class HelpController {
 	public String questionReg(Locale locale, Model model) {
 		return "help/questionReg";
 	}
+	
+	@RequestMapping(value = "/questionReg", method = RequestMethod.POST)
+	public String registerQna() {
+		System.out.println("for Test");
+		return "help/helpMain";
+	}
+	
 	
 	@RequestMapping(value = "/myQuestion", method = RequestMethod.GET)
 	public String myQuestion(Locale locale, Model model) {

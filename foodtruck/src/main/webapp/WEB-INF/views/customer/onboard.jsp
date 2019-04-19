@@ -15,6 +15,7 @@
 		<div class="album py-5 bg-light">
 		<div class="container">
 		<div class="row">
+		<c:forEach var="i" items="${onboard}">
 		<div class="col-md-4">
 		<div class="card mb-4 shadow-sm">
 		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
@@ -23,7 +24,8 @@
 		</svg>
 		<div class="card-body">
 		<p class="card-text">
-			푸드트럭설명
+			${i.brandname}
+			${i.onboard_date}
 		</p>
 		<div class="d-flex justify-content-between align-items-center">
 		<div class="btn-group">
@@ -35,106 +37,10 @@
 		</div>
 		</div>
 		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
+		</c:forEach>
 		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
+	
+
 		
 		</div>
 		</div>

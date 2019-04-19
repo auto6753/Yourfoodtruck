@@ -6,9 +6,13 @@ import lombok.Data;
 
 @Data
 public class CallListVO {
+	private String name;
 	private String email;
 	private String truck_code;
 	private String place;
+	private Date start_time;
+	private Date end_time;
+	private Date reporting_date;
 	private Date festival_date;
 	private int price;
 	private int progress;

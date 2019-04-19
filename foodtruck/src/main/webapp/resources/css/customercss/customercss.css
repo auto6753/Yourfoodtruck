@@ -86,7 +86,13 @@
 	text-align: center;
 	padding-top: 30px;
 }
-svg{
+.img2{
+	margin: 0 auto;
+	margin-top: 15px;
+	width:200px; 
+	height: 180px;
+}
+.img1{
 	margin-top: 15px;
 	width:200px; 
 	height: 200px;
@@ -112,6 +118,12 @@ svg{
 	-o-background-size: cover;
 	background-size: cover;
 }
+
+
 .test{
 	margin-bottom: 90px;
+}
+h4{
+	text-align: center;
+	margin-top: 5px;
 }

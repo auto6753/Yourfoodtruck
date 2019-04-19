@@ -1,22 +1,34 @@
 package com.food.project.controller;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.OnboardVO;
+import com.food.project.service.CallListService;
 import com.food.project.service.LoginService;
+import com.food.project.service.OnboardService;
+
+
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
+
 @RequestMapping(value = "/customer", method = RequestMethod.GET)
 public class CustomerController {
+
 	private LoginService service;
+	CallListService callList;
+	OnboardService onboard;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
@@ -24,7 +36,21 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/onboard", method = RequestMethod.GET)
-	public String onboard(Locale locale, Model model) {
+	public String onboard(Locale locale, Model model, HttpSession session) {
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		System.out.println(vo.getEmail());
+		
+		ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail());
+		for(int i=0; i < ob.size(); i++) {
+			System.out.println(ob);
+		}
+		model.addAttribute("onboard", ob);
+		/*
+		 * ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail()); for(int i
+		 * =0;i<ob.size();i++) { System.out.println(ob); }
+		 * model.addAttribute("Onboard",ob);
+		 * 
+		 */
 		return "customer/onboard";
 	}
 	
@@ -39,8 +65,22 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/callList", method = RequestMethod.GET)
-	public String callList(Locale locale, Model model) {
-		return "customer/callList";
+	public String callList(Locale locale, Model model ,HttpSession session) {
+		
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		System.out.println(vo.getEmail());
+		//String email = null;
+		
+		ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
+		
+		for(int i = 0;i<cl.size();i++) {
+			System.out.println(cl);
+		}
+		
+		model.addAttribute("CallList", cl);
+
+		 return "customer/callList";
+		 
 	}
 	
 	@RequestMapping(value = "/cusInfo", method = RequestMethod.GET)

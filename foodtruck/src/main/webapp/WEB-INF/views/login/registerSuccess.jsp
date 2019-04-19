@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>당신의 푸드트럭</title>
 <%-- <jsp:include page="../header/header.jsp"></jsp:include> --%>
@@ -46,8 +47,6 @@ button{
 <a href="/project/login"><button style="margin-left: 10px; height: 60px; width:200px;">로그인</button></a>
 </div>
 </div>
-
 </div>
-
 </body>
 </html>

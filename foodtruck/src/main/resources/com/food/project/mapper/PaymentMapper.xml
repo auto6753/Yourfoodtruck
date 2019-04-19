@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.PaymentMapper">
+	<select id="getAllList" resultType="com.food.project.domain.PaymentVO">
+		select * from payment
+	</select>
+	<select id="getPaymentList" resultType="com.food.project.domain.PaymentVO">
+		select * from payment where payment_telephone =#{payment_telephone}
+	</select>
+	<insert id="insertPaymentList" parameterType="Map">
+		insert into payment(payment_code, truck_code, menu_code,
+			amount, total_price, payment_class,payment_telephone)
+		values(to_char(sysdate,'yymmdd')||to_char(payment_sequence.NEXTVAL,'fm000000'),
+			#{truck_code},#{menu_code},#{amount},
+			#{total_price},#{payment_class},#{payment_telephone})
+	</insert>
+</mapper>
