@@ -1,20 +1,17 @@
 package com.food.project.controller;
 
+import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
@@ -25,57 +22,67 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
-
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/seller")
+@RequestMapping(value = "/seller", method = RequestMethod.GET)
 public class SellerController {
-  
-	private static final int MENU_PER_LINE = 4; // 1줄당 메뉴 개수
 	private SellerService sellerservice;
-	
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
-		System.out.println("셀러메인");
 		return "seller/sellerMain";
 	}
 	
-	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
-		String[] menuList = {"김밥", "볶음밥", "오므라이스", "냉면", "돈가스"}; // DB에 등록된 메뉴
+		int menuNum = 17;
 		
-		int menu = menuList.length; // DB에 등록된 메뉴 개수
-		int lineNext; // 줄 바꿈 횟수
-		int chkremain; // 나머지 존재 여부 확인
-		
-		lineNext = (menu / MENU_PER_LINE) - 1;
-		chkremain = menu % MENU_PER_LINE;
-		
-		if(chkremain > 0 || menu == 0) {
-			lineNext++;
-		}
-		
-		model.addAttribute("menuList", menuList);
-		model.addAttribute("menu", menu);
-		model.addAttribute("lineNext", lineNext);
-		model.addAttribute("MENU_PER_LINE", MENU_PER_LINE);
-		
+		model.addAttribute("menuNum", menuNum);
 		return "seller/menu/menu";
 	}
 	
+	@RequestMapping(value="/addMenu", method=RequestMethod.GET) 
+	public String addMenu(Model model) {
+		return "seller/menu/addMenu";
+	}
+	
+	@RequestMapping(value="/editMenu", method=RequestMethod.GET) 
+	public String editMenu(Model model) {
+		return "seller/menu/editMenu";
+	}
+  
 	@RequestMapping(value="/location", method=RequestMethod.GET) 
 	public String location(Model model) {
 		return "seller/loc/location";
 	}
 	
+	@RequestMapping(value="/jusoPopup", method=RequestMethod.POST) 
+	public String jusoPopup(Model model) {
+		return "seller/loc/jusoPopup";
+	}
+	
 	@RequestMapping(value="/event", method=RequestMethod.GET) 
 	public String event(Model model) {
+		int onGoingEventNum = 5;
+		int endEventNum = 13;
+		
+		model.addAttribute("onGoingEventNum", onGoingEventNum);
+		model.addAttribute("endEventNum", endEventNum);
 		return "seller/event/event";
 	}
+	
+	@RequestMapping(value="/addEvent", method=RequestMethod.GET) 
+	public String addEvent(Model model) {
+		return "seller/event/addEvent";
+	}
+	
+	@RequestMapping(value="/addEvent2", method=RequestMethod.GET) 
+	public String addEvent2(Model model) {
+		return "seller/event/addEvent2";
+	}
+	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
 	public String passenger(Model model) {
 		return "seller/psg/psgpush";
@@ -100,6 +107,7 @@ public class SellerController {
 	public String side(Model model) {
 		return "seller/sideMenuBar/sideMenuBar";
 	}
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
 	public String seorder(Model model, HttpSession session) {
@@ -179,5 +187,4 @@ public class SellerController {
 	public String truckinfo(Model model) {
 		return "seller/truckinfo/truckinfo";
 	}
-	
 }

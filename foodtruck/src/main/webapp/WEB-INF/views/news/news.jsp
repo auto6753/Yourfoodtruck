@@ -48,15 +48,11 @@
 		   		<form class="form-inline">
 					<input id="searchbox" class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
-					
 					<button id="searchbutton"type="button" class="btn">검색</button>
 					<a href="/project/news/addNews"><button id="pageadd"type="button" class="btn" >등록</button></a>
 				</form>
 			</nav>
-			
 		</div>
-	
-	
 		<div id="table">
 		<table class="table">
 			<thead>
@@ -88,17 +84,9 @@
 					<li class="page-item"><a class="page-link" href="#"><span>4</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>5</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>»</span></a></li>
-					
-			
 				</ul>
 			</nav>
-
 		</div>
-		
-	
-
-
-
 </body>
 </html>
 

@@ -14,7 +14,6 @@
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
 <script>
 $(document).ready(function(){
 	$("#delete").click(function(){
@@ -48,9 +47,6 @@ $(document).ready(function(){
 
 	
 </script>
-
-
-
 </head>
 <body>
 	<div id="title" class="card-header">
@@ -70,8 +66,6 @@ $(document).ready(function(){
 					<a href="/project/news"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
 				</p>
 			</div>
-
-
 		</div>
 	</form>
 

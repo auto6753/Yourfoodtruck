@@ -15,9 +15,16 @@ width:100%;
 text-align: center;
 }
 </style>
-<div id="button">
-<a href="cuorder"><button id="cuorder" >현장 고객용</button></a>
-<a href="seorder"><button id="seorder" >현장 상인용</button></a>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+		</div>
+		<div class="col-md-9">
+			<div id="button">
+				<a href="cuorder"><button id="cuorder" >현장 고객용</button></a>
+				<a href="seorder"><button id="seorder" >현장 상인용</button></a>
+			</div>
+		</div>
+	</div>
 </div>
-<script>
-</script>
