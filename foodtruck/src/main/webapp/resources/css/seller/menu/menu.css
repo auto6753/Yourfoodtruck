@@ -13,6 +13,7 @@
 .menuf {
 	margin-bottom: 3%;
 	padding: 0 !important;
+	float: left;
 }
 
 .imgBox {
@@ -31,14 +32,9 @@
 	display: inline-block;
 }
 
-.btnBox {
-	height: 50%;
-}
-
 .user-btn {
-	width: 100%;
-	margin-bottom: 20%;
-	display: block;
+	width: 10%;
+	display: inline-block;
 	
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -108,4 +104,40 @@
 	border: 1px solid lightgray;
 	margin: auto;
 	padding: 10% 0;
+	cursor: pointer;
+}
+
+.menut:hover {
+	background-color: red;
+}
+
+.paddingZero {
+	padding: 0 !important;
+}
+
+ul,li { list-style:none; }
+a { text-decoration:none; color:#000; }
+.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; width:100%; display:inline-block; margin-bottom: 5px !important;}
+.tab li { float:left; width:20%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; font-weight:bold;}
+.tab li { display:inline-block; padding:20px; cursor:pointer; }
+.tab li.on { background-color:#eee; color:#f00; font-weight:bold;}
+.tab_con { clear:both; margin-top:5px; padding:0 !important;}
+.tab_con div { display:none; /*line-height:100px;*/ text-align:center; }
+
+.menuTitle {
+	font-weight: bold;
+	font-size: 35px;
+	height: 35px;
+	margin: 23px 0 17px;
+	color: #666;
+	text-align: center;
+}
+
+.changeToBlock {
+	display: block !important;
+}
+
+#menuBtns {
+	text-align: right;
+	margin-bottom: 7px;
 }

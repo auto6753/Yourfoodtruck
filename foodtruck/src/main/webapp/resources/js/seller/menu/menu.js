@@ -21,23 +21,11 @@ $(document).ready(function(){
 		
 		$("#addMenu").toggle(); // 메뉴등록  hide
 
-		// show/hide 시, inline-block으로 변경된 display 속성을 block으로 변경
-		var display1 = $("#chkAllMenu").css("display");
-		var display2 = $("#unchkAllMenu").css("display");
-		var display3 = $("#goBack").css("display");
-		var display4 = $("#delMenu2").css("display");
-		
-		if (display1 == "inline-block" && display2 == "inline-block") {
-			$("#chkAllMenu").css("padding", "6px 9px");
-			$("#unchkAllMenu").css("padding", "6px 9px");
-			$("#goBack").css("padding", "6px 9px");
-			$("#delMenu2").css("padding", "6px 9px");
-			
-			$("#chkAllMenu").css("display", "block");
-			$("#unchkAllMenu").css("display", "block");
-			$("#goBack").css("display", "block");
-			$("#delMenu2").css("display", "block");
-		}
+		// show/hide 시, 전체선택과 전체해제 버튼의 padding을 다음과 같이 설정
+		$("#chkAllMenu").css("padding", "6px 9px");
+		$("#unchkAllMenu").css("padding", "6px 9px");
+		$("#goBack").css("padding", "6px 9px");
+		$("#delMenu2").css("padding", "6px 9px");
 	});
 	
 	$("#delMenu2").click(function(){
@@ -93,3 +81,41 @@ $(document).ready(function(){
 		window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
 	});
 });
+
+$(function () {	
+	tab('#tab',0);	
+});
+
+function tab(e, num){
+    var num = num || 0;
+    var menu = $(e).children();
+    var con = $(e+'_con').children();
+    var select = $(menu).eq(num);
+    var i = num;
+
+    select.addClass('on');
+    con.eq(num).show();
+    con.eq(num).find('*').not(".delChk").css("display", "inline-block");
+    // 왜??
+
+    menu.click(function(){
+        if(select!==null){
+            select.removeClass("on");
+            con.eq(i).hide();
+        }
+        
+        select = $(this);
+        i = $(this).index();
+        
+        select.addClass('on');
+        con.eq(i).show();
+        con.eq(i).find('*').not(".delChk").css("display", "inline-block");
+        
+        if($(".delChk").css("display") == "none") {
+        	$(".delChk").css("display", "none");
+        } else {
+        	$(".delChk").css("display", "inline-block");
+        }
+       $(".menuBox").scrollTop(0);
+    });
+}

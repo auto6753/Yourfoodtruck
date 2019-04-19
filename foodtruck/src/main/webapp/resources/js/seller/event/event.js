@@ -102,6 +102,42 @@
 	}
 	// 딤처리 팝업 레이어(끝)
 	
+	// 딤처리 팝업 레이어(시작)
+	function layer_popup2(el) {
+
+		var $el = $(el); //레이어의 id를 $el 변수에 저장
+		var isDim = $el.prev().hasClass('dimBg2'); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+		isDim ? $('.dim-layer2').fadeIn() : $el.fadeIn();
+
+		var $elWidth = ~~($el.outerWidth()), $elHeight = ~~($el.outerHeight()), docWidth = $(
+				document).width(), docHeight = $(document).height();
+
+		// 화면의 중앙에 레이어를 띄운다.
+		if ($elHeight < docHeight || $elWidth < docWidth) {
+			$el.css({
+				marginTop : -$elHeight / 2,
+				marginLeft : -$elWidth / 2
+			})
+		} else {
+			$el.css({
+				top : 0,
+				left : 0
+			});
+		}
+
+		$el.find('button.btn-layerClose').click(function() {
+			isDim ? $('.dim-layer2').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+			return false;
+		});
+
+		$('.layer .dimBg2').click(function() {
+			$('.dim-layer2').fadeOut();
+			return false;
+		});
+	}
+	// 딤처리 팝업 레이어(끝)
+	
 	// 메뉴 input 추가
 	function add_item(){
 		// pre_set 에 있는 내용을 읽어와서 처리..
@@ -116,9 +152,16 @@
 	}
 	
 	$(document).ready(function(){
+		$(".imgUploadBtn").click(function(){
+			document.getElementById("uploadImg").click();
+		});
 		
-		$(".edit").click(function(){
-			
+		$("#addEventBtn").click(function(){
+			alert("이벤트가 등록되었습니다.");
+		});
+		
+		$("#editEventBtn").click(function(){
+			alert("이벤트가 수정되었습니다.");
 		});
 		
 		$(".delete").click(function(){
@@ -126,10 +169,22 @@
 			var delCheck = confirm(eventName + " 을(를) 정말 삭제하시겠습니까?");
 		});
 		
+		$(".deleteEventDiv").click(function(){
+			//var eventName = $(this).parent().next().next().text();
+			var delCheck = confirm(" 을(를) 정말 삭제하시겠습니까?");
+		});
+		
 		// 딤처리 팝업 레이어(시작)
 		$('.btn-example').click(function() {
 			var $href = $(this).attr('href');
 			layer_popup($href);
+		});
+		// 딤처리 팝업 레이어(끝)
+		
+		// 딤처리 팝업 레이어(시작)
+		$('.btn-example2').click(function() {
+			var $href = $(this).attr('href');
+			layer_popup2($href);
 		});
 		// 딤처리 팝업 레이어(끝)
 	});

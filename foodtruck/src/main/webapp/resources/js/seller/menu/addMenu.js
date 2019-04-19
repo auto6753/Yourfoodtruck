@@ -52,6 +52,8 @@ function previewImage(targetObj, previewId) {
 			if (prevImg) {
 				preview.removeChild(prevImg);
 			}
+			
+			$("#noImage").css("display", "none");
 
 			var img = document.createElement("img"); // 크롬은 div에 이미지가 뿌려지지 않기 때문에 자식 Element를 생성
 			img.id = "prev_" + previewId;

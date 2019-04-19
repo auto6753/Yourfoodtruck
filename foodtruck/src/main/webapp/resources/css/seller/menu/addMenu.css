@@ -24,3 +24,10 @@
 	border: 1px gray solid;
 	margin: auto;
 }
+
+#noImage {
+	width: 250px;
+	height: auto;
+	vertical-align: top;
+	margin: 89px 0;
+}
