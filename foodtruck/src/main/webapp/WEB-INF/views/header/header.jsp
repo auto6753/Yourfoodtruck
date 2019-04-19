@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 .carousel-item {
 	height: 65vh;
@@ -10,6 +11,9 @@
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+#main{
+	width: 120%;
 }
 
 #top-right {
@@ -27,13 +31,12 @@
 a{
 	color: rgb(255, 94, 24);
 }
-
 </style>
 <!-- Navigation -->
 <div class="test">
 <nav style="padding-left: 20%;"
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-	<div style="margin-left: 0; " class="container" >
+	<div id="main" style="margin-left: 0; " class="container" >
 		<a class="navbar-brand" href="/project/rehome">당신의 푸드트럭!</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -42,8 +45,6 @@ a{
 		</button>
 		<div style="text-align: right;" class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-
-
 				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li>
@@ -62,7 +63,7 @@ a{
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
 					<span id="" class="badge badge-light"><a href="/project/customer">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
-					<span id="" class="badge badge-light"><a href="#">트럭등록</a></span>
+					<span id="" class="badge badge-light"><a href="/project/truck/register">트럭등록</a></span>
 					</c:if>
 					<c:if test="${not empty sessionScope.seller}">
 					<span id="" class="badge badge-light"><a href="/project/seller">트럭관리</a></span>

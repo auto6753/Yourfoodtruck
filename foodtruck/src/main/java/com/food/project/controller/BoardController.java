@@ -1,7 +1,5 @@
 package com.food.project.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.food.project.domain.BoardSearchVO;
-import com.food.project.domain.PostVO;
 
 @Controller
 public class BoardController{

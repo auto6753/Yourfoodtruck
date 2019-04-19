@@ -1,7 +1,5 @@
 @charset "UTF-8";
-
 #container3 {
-  dev-yj-3
 	width: 220px;
 	height: 220px;
 	margin: 0 auto;
@@ -114,8 +112,6 @@ svg{
 	-o-background-size: cover;
 	background-size: cover;
 }
-
-
 .test{
 	margin-bottom: 90px;
 }

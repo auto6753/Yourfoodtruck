@@ -11,25 +11,49 @@
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script>
+	$(document).ready(function(){
+		$('.boardTitle').on('click', function(){
+		var a = $(this);
+		var postCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
+		
+		/* query ={
+				post_code : postCode
+		}
+		$.ajax({
+			type:"post",
+			url:"/project/news/specificck",
+			data:query,
+			success:function(data){
+				//location.href="/project/news/specific";
+				
+			}//get 방식 주소치는거랑 똑같음
+		}); */
+		$(location).attr('href','/project/news/specificck?post_code='+postCode);
+		
+		
+		});
+		
+	});
 
+</script>
 </head>
 
 <body>
 	<div id="title" class="card-header">
 		<p>푸드트럭NEWS</p>
 	</div>
-	<div>
-		<div id="search">
+		<div id="searchall">
 			<nav class="navbar navbar-light bg-light">
-				<form class="form-inline">
+		   		<form class="form-inline">
 					<input id="searchbox" class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
-					<button id="search"type="button" class="btn">검색</button>
-
+					<button id="searchbutton"type="button" class="btn">검색</button>
+					<a href="/project/news/addNews"><button id="pageadd"type="button" class="btn" >등록</button></a>
 				</form>
 			</nav>
 		</div>
-
+		<div id="table">
 		<table class="table">
 			<thead>
 				<tr>
@@ -41,66 +65,28 @@
 			<tbody>
 			<c:forEach var="i" items="${postList}">
 			<tr>
-				<td>${i.post_title }</td>
+				<td class="boardTitle" >${i.post_title }</td>
+				<input type="hidden" value="${i.post_code }">
 				<td>${i.post_regdate}</td>
 				<td>${i.post_visit}</td>
 			</tr>
 			</c:forEach>
 			</tbody>
-					<!-- <td>푸드트럭 공지사항</td>
-					<td>오영준</td>
-					<td>2019.04.01</td>
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>푸드트럭 공지사항</td>
-					<td>오영준</td>
-					<td>2019.04.01</td>
-					<td>50</td>
-				</tr> -->
-			
 		</table>
-
-
-
-
-
-		<div>
+	</div>
+		<div id="nextall">
 			<nav id="next" aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="page"><a class="page-link" href="#"> <span>«</span>
-						
-					</a></li>
+					<li class="page"><a class="page-link" href="#"> <span>«</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>1</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>2</span></a></li>
 					<li class="page-item"><a class="page-link" href="#"><span>3</span></a></li>
-					<li class="page-item"><a class="page-link" href="#"><span>»</span>
-					</a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>4</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>5</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"><span>»</span></a></li>
 				</ul>
 			</nav>
-
-
-
-
-
 		</div>
-	</div>
-	<div class="form-group">
-
-		<a href="/project/news/addNews"><button id="add" type="button" class="btn" >등록</button></a>
-
-	</div>
-<%-- ${postList}
-<button id="test">테스트</button> --%>
-
-
 </body>
 </html>
-<!-- <script>
-	$(function() {
-		$('#test').click(function() {
-			location.href="/project/news/specific";
-		});
-	});
-</script> -->
 

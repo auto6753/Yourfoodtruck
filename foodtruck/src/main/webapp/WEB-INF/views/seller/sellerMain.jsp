@@ -45,6 +45,21 @@
 				</script>
 			</div>
 		</div>
+<!-- <link rel="stylesheet" href="<c:url value="/resources/css/seller/seller.css"/>">
+<div class="title border">
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item active"><a class="nav-link" href="/project/seller">관리페이지 메인
+			<span class="sr-only">(current)</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/menu">메뉴관리</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/location">위치관리</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/event">이벤트관리</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/psgpush">탑승자알림</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/callmanage">호출관리</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/order">주문관리</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/layout">레이아웃</a></li>
+		<li class="nav-item"><a class="nav-link" href="/project/seller/truckinfo">정보관리</a></li>
+	</ul> -->
 </div>
 
 <!--  -->

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -9,447 +9,312 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bootstrap Product list for Ecommerce Website</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
 <style type="text/css">
 body {
 	font-family: "Open Sans", sans-serif;
 }
-h2 {
-	color: #000;
-	font-size: 26px;
-	font-weight: 300;
-	text-align: center;
-	text-transform: uppercase;
-	position: relative;
-	margin: 30px 0 80px;
+
+.wrap {
+	width: 1300px;
+	height: 300px;
+	overflow-x: scroll;
+	white-space: nowrap;
+	overflow-y: hidden;
 }
-h2 b {
-	color: #ffc000;
-}
-h2::after {
-	content: "";
-	width: 100px;
-	position: absolute;
-	margin: 0 auto;
-	height: 4px;
-	background: rgba(0, 0, 0, 0.2);
-	left: 0;
-	right: 0;
-	bottom: -20px;
-}
-.carousel {
-	margin: 50px auto;
-	padding: 0 70px;
-}
-.carousel .item {
-	min-height: 330px;
-    text-align: center;
-	overflow: hidden;
-}
-.carousel .item .img-box {
-	height: 160px;
-	width: 100%;
-	position: relative;
-}
-.carousel .item img {	
-	max-width: 100%;
-	max-height: 100%;
+
+.list {
+	width: 300px;
+	height: 100%;
 	display: inline-block;
-	position: absolute;
-	bottom: 0;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
+	border: solid 3px;
 }
-.carousel .item h4 {
-	font-size: 18px;
-	margin: 10px 0;
+
+wrap {
+	white-space: nowrap;
 }
-.carousel .item .btn {
-	color: #333;
-    border-radius: 0;
-    font-size: 11px;
-    text-transform: uppercase;
-    font-weight: bold;
-    background: none;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    margin-top: 5px;
-    line-height: 16px;
+
+.menu {
+	
 }
-.carousel .item .btn:hover, .carousel .item .btn:focus {
-	color: #fff;
-	background: #000;
-	border-color: #000;
-	box-shadow: none;
+
+.head {
+	
 }
-.carousel .item .btn i {
-	font-size: 14px;
-    font-weight: bold;
-    margin-left: 5px;
-}
-.carousel .thumb-wrapper {
+
+h4 {
 	text-align: center;
 }
-.carousel .thumb-content {
-	padding: 15px;
+
+.num {
+	color: darkgreen;
+	float: left;
+	font-size: 1.8em;
 }
-.carousel .carousel-control {
-	height: 100px;
-    width: 40px;
-    background: none;
-    margin: auto 0;
-    background: rgba(0, 0, 0, 0.2);
+
+.num+span {
+	float: right;
 }
-.carousel .carousel-control i {
-    font-size: 30px;
-    position: absolute;
-    top: 50%;
-    display: inline-block;
-    margin: -16px 0 0 0;
-    z-index: 5;
-    left: 0;
-    right: 0;
-    color: rgba(0, 0, 0, 0.8);
-    text-shadow: none;
-    font-weight: bold;
-}
-.carousel .item-price {
-	font-size: 13px;
-	padding: 2px 0;
-}
-.carousel .item-price strike {
-	color: #999;
-	margin-right: 5px;
-}
-.carousel .item-price span {
-	color: #86bd57;
-	font-size: 110%;
-}
-.carousel .carousel-control.left i {
-	margin-left: -3px;
-}
-.carousel .carousel-control.left i {
-	margin-right: -3px;
-}
-.carousel .carousel-indicators {
-	bottom: -50px;
-}
-.carousel-indicators li, .carousel-indicators li.active {
-	width: 10px;
-	height: 10px;
-	margin: 4px;
-	border-radius: 50%;
-	border-color: transparent;
-}
-.carousel-indicators li {	
-	background: rgba(0, 0, 0, 0.2);
-}
-.carousel-indicators li.active {	
-	background: rgba(0, 0, 0, 0.6);
-}
-.star-rating li {
-	padding: 0;
-}
-.star-rating i {
-	font-size: 14px;
-	color: #ffc000;
+
+.num+span+div {
+	border: solid 3px;
 }
 </style>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Trending <b>Products</b></h2>
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-			<!-- Carousel indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>   
-			<!-- Wrapper for carousel items -->
-			<div class="carousel-inner">
-				<div class="item carousel-item active">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Apple iPad</h4>
-									<p class="item-price"><strike>$400.00</strike> <span>$369.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Sony Headphone</h4>
-									<p class="item-price"><strike>$25.00</strike> <span>$23.99</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>		
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Macbook Air</h4>
-									<p class="item-price"><strike>$899.00</strike> <span>$649.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>								
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Nikon DSLR</h4>
-									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item carousel-item">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Sony Play Station</h4>
-									<p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Macbook Pro</h4>
-									<p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Bose Speaker</h4>
-									<p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Samsung Galaxy S8</h4>
-									<p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>						
-					</div>
-				</div>
-				<div class="item carousel-item">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Apple iPhone</h4>
-									<p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Canon DSLR</h4>
-									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Google Pixel</h4>
-									<p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>	
-						<div class="col-sm-3">
-							<div class="thumb-wrapper">
-								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
-								</div>
-								<div class="thumb-content">
-									<h4>Apple Watch</h4>
-									<p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary">Add to Cart</a>
-								</div>						
-							</div>
-						</div>
-					</div>
+	<div class="wrap">
+			<%--  <div class="list" style="">
+			<div class="head">
+				<h4>01064364393</h4>
+				<span class="num">01</span> <span class="">주문시간</span>
+				<div style="margin-top: 15%;">
+					<span>경과시간</span>
 				</div>
 			</div>
-			<!-- Carousel controls -->
-			<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
-				<i class="fa fa-angle-left"></i>
-			</a>
-			<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
-				<i class="fa fa-angle-right"></i>
-			</a>
+			<div class="menu" style="height: 140px; overflow-y: scroll; overflow-x: hidden;">
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+				<p>dsf</p>
+			</div>
+			<button class="pay">결제확인1</button>
+			<input type="hidden" value="01064364393">
+			<input type="hidden" value="${sessionScope.seller.truck_code }">
+			<button class="release">출고확인</button>
 		</div>
-		</div>
+ --%>
+		<!-- <div id="forReceive"></div> -->
 	</div>
-</div>
+	<button id="test">테스트</button>
+	<input type="hidden" id="bfss" value="">
 </body>
-</html>                                		                            
+<script>
+  	$(".pay").click(function() {
+		var a = $(this);
+		var istrue = a.hasClass("pay");
+		if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				a.removeClass("pay");
+				console.log(a);
+				a.css("background-color", "red");
+				
+				var query = {
+						payment_telephone:a.next().val(),
+						truck_code:a.next().next().val()
+				};
+				$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				});
+			} 
+		}
+	});
+var first=true;
+var config = {
+	apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
+	authDomain : "fir-test-f3fea.firebaseapp.com",
+	databaseURL : "https://fir-test-f3fea.firebaseio.com",
+	projectId : "fir-test-f3fea",
+	storageBucket : "fir-test-f3fea.appspot.com",
+	messagingSenderId : "960564228551"
+};
+firebase.initializeApp(config);
+var _uid='${requestScope._uid}';
+console.log(_uid);
+var beforeSnapshot='';
+
+var forDblist=new Array();
+
+function pay(a){
+		//var istrue = a.hasClass("pay");
+		//console.log(istrue);
+		//if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				//a.removeClass("pay");
+				console.log(a);
+				console.log($("#"+a).html());
+				//console.log(a.html());
+				$("#"+a).css("background-color", "red");
+				var telephone = $("#"+a).next().val();
+				var truckcode = $("#"+a).next().next().val();
+				console.log(telephone);
+				console.log(truckcode);
+					var query = {
+						payment_telephone:telephone,
+						truck_code:truckcode
+				}; 
+			 	$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				}); 
+			//} 
+		//}
+	//});
+	}
+}
+$(function() {
+	//$("#list").on('click',".pay",function() {
+ 	/* $(".pay").click(function() {
+		var a = $(this);
+		var istrue = a.hasClass("pay");
+		console.log(istrue);
+		if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				a.removeClass("pay");
+				console.log(a);
+				a.css("background-color", "red");
+				var query = {
+						payment_telephone:a.next().val(),
+						truck_code:a.next().next().val()
+				};
+				$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				});
+			} 
+		}
+	}); */
+	var isfirst = true;
+	
+	
+	var ref=firebase.database().ref('/PaymentTest2/'+ _uid +'/').limitToFirst(15);
+	ref.once('value').then(function(snapshot) {
+		first=false;
+	}).catch(function(err) {
+		console.log(err.errorMessage);
+	});
+	var index;
+	ref.on('value',function(snapshot) {
+		if(isfirst){
+			var result=snapshot.val();
+			for(var menus in result) {
+				console.log('=====결과를 전화번호별로 구분=====');
+				console.log(menus);
+				console.log(result[menus]);
+				var orderList=result[menus];
+				
+				for(var order in orderList) {
+					console.log('=======전화번호별 거래내용들을 보여줌(같은번호로 했을떄 한개만)=======');
+					console.log(orderList[order]);//전화번호별 거래내역
+					console.log("'"+order+"'");//전화번호
+					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
+					
+					console.log(order_index);
+			
+					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release">출고확인</button></div>');			
+					if(order_index >1) {
+						for(var i=0;i<order_index;i++) {			
+							$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
+/* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
+							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
+						}	
+					}else{
+						$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
+/* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
+						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
+					}
+					break;
+				}		
+			}
+			isfirst=false;
+		}else{
+			$('.wrap').html("");
+			var result=snapshot.val();
+			for(var menus in result) {
+				console.log('=====결과를 전화번호별로 구분=====');
+				console.log(menus);
+				console.log(result[menus]);
+				var orderList=result[menus];
+				
+				for(var order in orderList) {
+					console.log('=======전화번호별 거래내용들을 보여줌(같은번호로 했을떄 한개만)=======');
+					console.log(orderList[order]);//전화번호별 거래내역
+					console.log(order);//전화번호
+					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
+					
+					console.log(order_index);
+					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release">출고확인</button></div>');
+					if(order_index >1) {
+						for(var i=0;i<order_index;i++) {
+							$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
+/* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
+							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
+						}	
+					}else{
+						$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
+/* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
+						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
+					}
+					break;
+				}		
+			}
+		}
+	});
+});
+
+
+/*$('#test').click(function() {
+	 var a=$('#forReceive').children(1);
+	console.log(a.html());
+	var test=JSON.parse(a.html());
+	console.log(test);
+	 $.ajax({
+		type:"POST",
+		url:"/project/pay/insertPayment",
+		data:JSON.stringify(test),
+		contentType:"application/json;charset=UTF-8",
+		traditional:true,
+		success:function(data) {
+			console.log('success');
+		},error:function(err) {
+			console.log(err);
+		}
+	});  
+});*/
+</script>
+</html>

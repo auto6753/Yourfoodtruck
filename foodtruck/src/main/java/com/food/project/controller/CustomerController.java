@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
 import com.food.project.domain.CustomerVO;
 import com.food.project.service.LoginService;
-
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
