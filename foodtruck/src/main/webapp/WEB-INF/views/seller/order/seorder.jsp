@@ -220,16 +220,16 @@ $(function() {
 					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
 					
 					console.log(order_index);
-					var telephone = '"'+orderList[order][0].payment_telephone+'"';
-					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>' +orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release">출고확인</button></div>');			
+			
+					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release">출고확인</button></div>');			
 					if(order_index >1) {
-						for(var i=0;i<order_index;i++) {
-							$('.menu').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
+						for(var i=0;i<order_index;i++) {			
+							$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
 /* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
 						}	
 					}else{
-						$('.menu').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
+						$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
 /* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
 					}
@@ -253,15 +253,15 @@ $(function() {
 					var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
 					
 					console.log(order_index);
-					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>' + orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div></div>');
+					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release">출고확인</button></div>');
 					if(order_index >1) {
 						for(var i=0;i<order_index;i++) {
-							$('.menu').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
+							$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][i].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][i].total_price+'</p>');
 /* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
 						}	
 					}else{
-						$('.menu').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
+						$('#'+orderList[order][0].payment_telephone+'').append('<p>'+orderList[order][0].name+'&nbsp;'+orderList[order][0].amount+'&nbsp;'+orderList[order][0].total_price+'</p>');
 /* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
 					}
