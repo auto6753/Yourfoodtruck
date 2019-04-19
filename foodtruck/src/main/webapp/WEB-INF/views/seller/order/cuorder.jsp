@@ -148,10 +148,8 @@ var list = new Array();
 				});
 			});
 </script> -->
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery.ajax-cross-origin.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.ajax-cross-origin.min.js"/>"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
@@ -255,7 +253,6 @@ div a {
 	padding-top: 1%;
 	margin-left: 7.2%;
 }
-
 h3 {
 	
 }

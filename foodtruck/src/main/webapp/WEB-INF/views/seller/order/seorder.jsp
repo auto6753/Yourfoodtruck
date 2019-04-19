@@ -116,6 +116,32 @@ h4 {
 	<input type="hidden" id="bfss" value="">
 </body>
 <script>
+  	$(".pay").click(function() {
+		var a = $(this);
+		var istrue = a.hasClass("pay");
+		if (istrue) {
+			var result = confirm('결제확인하시겠습니까?');
+			if (result) {
+				a.removeClass("pay");
+				console.log(a);
+				a.css("background-color", "red");
+				
+				var query = {
+						payment_telephone:a.next().val(),
+						truck_code:a.next().next().val()
+				};
+				$.ajax({					
+					type:"post",
+					url:"/project/pay/payck",
+					async: false,
+					data:query,
+					success:function(data){
+						console.log(data);
+					}
+				});
+			} 
+		}
+	});
 var first=true;
 var config = {
 	apiKey : "AIzaSyDgw_gFc9MB7Rc8Z7WjJUOqeWT6YQOqvxU",
@@ -204,7 +230,6 @@ $(function() {
 	});
 	var index;
 	ref.on('value',function(snapshot) {
-		
 		if(isfirst){
 			var result=snapshot.val();
 			for(var menus in result) {

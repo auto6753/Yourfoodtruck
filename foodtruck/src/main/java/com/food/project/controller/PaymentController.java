@@ -48,5 +48,4 @@ public class PaymentController {
 		System.out.println(vo.getPayment_telephone());
 		return "success";
 	}
-	
 }
