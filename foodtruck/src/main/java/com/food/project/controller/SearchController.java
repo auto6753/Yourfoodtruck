@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.food.project.domain.FoodTruckVO;
-import com.food.project.domain.LocationVO;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.LocationService;
 
@@ -30,7 +28,8 @@ public class SearchController {
 	@SuppressWarnings("unchecked")
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String search(Locale locale, Model model) {
+	public String search(Model model) {
+		JSONArray arry= new JSONArray();
 		try{
 //			ArrayList<FoodTruckVO> ft = ftservice.getFoodTruckList();
 //			ArrayList<LocationVO> a=locservice.getLoc();
@@ -65,12 +64,11 @@ public class SearchController {
 			//list=locservice.getLoc();
 			
 			List<Map<String, Object>> list = locservice.getLoc();
-			JSONArray arry = new JSONArray();
 			for(Map<String, Object> a : list) {
 				JSONObject data=new JSONObject();
 				data.put("truck_code", a.get("TRUCK_CODE"));
 				data.put("account", a.get("ACCOUNT"));
-				data.put("lay_y", a.get("LAY_Y"));
+				data.put("lay_y", a.get("LAT_Y"));
 				data.put("lng_x", a.get("LNG_X"));
 				data.put("brandname", a.get("BRANDNAME"));
 				data.put("trucknum", a.get("TRUCKNUM"));
@@ -78,19 +76,15 @@ public class SearchController {
 				data.put("crn", a.get("CRN"));
 				data.put("hours", a.get("HOURS"));
 				data.put("layout", a.get("LAYOUT"));
+				data.put("total_review",a.get("TOTAL_REVIEW"));
+				data.put("avg_review",a.get("AVG_REVIEW"));
 				arry.add(data);
 			}
-			JSONObject list2 = new JSONObject();
-			list2.put("positions", arry);
-			
-			System.out.println(list2);
-			
 			//model.addAttribute("loc",list2);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		model.addAttribute("loc",locservice.getLoc());
+		model.addAttribute("loc",arry);
 		return "search/search";
 	}
 	
