@@ -18,6 +18,7 @@ public class SellerServiceImplement implements SellerService {
 	public ArrayList<MenuVO> getmenu(String truckcode) {
 		// TODO Auto-generated method stub
 		System.out.println("D");
+		
 		return sellermapper.getmenu(truckcode);
 	}
 

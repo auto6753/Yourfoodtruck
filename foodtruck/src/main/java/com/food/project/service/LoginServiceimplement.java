@@ -32,4 +32,8 @@ public class LoginServiceimplement implements LoginService {
 	@Override
 	public FoodTruckVO getFoodTruck(String email) {    return mapper.getFoodTruck(email);  }
 
+	@Override
+	public CustomerVO getTelephone(String telephone) {	return mapper.getTelephone(telephone);
+	}
+
 }

@@ -6,6 +6,7 @@ import com.food.project.domain.FoodTruckVO;
 public interface FoodtruckMapper {
 	public ArrayList<FoodTruckVO> getFoodTruckList();
 	public FoodTruckVO getFoodTruck(String truck_code);
-	public int insertFoodTruck(FoodTruckVO vo);
-
+	public void insertFoodTruck(FoodTruckVO vo);
+	public FoodTruckVO getFoodTruckE(String email);
+	
 }

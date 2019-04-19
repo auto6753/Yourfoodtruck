@@ -19,3 +19,5 @@ text-align: center;
 <a href="cuorder"><button id="cuorder" >현장 고객용</button></a>
 <a href="seorder"><button id="seorder" >현장 상인용</button></a>
 </div>
+<script>
+</script>

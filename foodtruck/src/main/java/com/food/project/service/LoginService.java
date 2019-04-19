@@ -6,7 +6,7 @@ import com.food.project.domain.FoodTruckVO;
 public interface LoginService {
 	public void insertCustomer(CustomerVO vo);
 	public CustomerVO getCustomer(String email);
-
+	public CustomerVO getTelephone(String telephone);
 	public CustomerVO getName(String nickname);
 	public void delete(String email);
 
