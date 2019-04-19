@@ -34,7 +34,6 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-
 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
 		<dependency>
 			<groupId>org.springframework</groupId>

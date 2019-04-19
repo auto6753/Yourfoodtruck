@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/seller", method = RequestMethod.GET)
+@RequestMapping(value = "/seller")
 public class SellerController {
 	private SellerService sellerservice;
 

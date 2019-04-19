@@ -3,7 +3,6 @@ package com.food.project.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.stereotype.Service;
 import com.food.project.domain.PaymentVO;
 import com.food.project.mapper.PaymentMapper;
@@ -38,5 +37,4 @@ public class PaymentServiceImplement implements PaymentService {
 			return result;
 		}
 	}
-
 }
