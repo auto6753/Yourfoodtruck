@@ -15,4 +15,10 @@
 			#{truck_code},#{menu_code},#{amount},
 			#{total_price},#{payment_class},#{payment_telephone})
 	</insert>
+	<update id="updatePaymentList" parameterType="map">
+		update payment set payment_class= payment_class+3
+		where truck_code=#{truck_code}
+		and payment_telephone=#{payment_telephone}
+		and payment_code like #{payment_code}||'%'
+	</update>
 </mapper>
