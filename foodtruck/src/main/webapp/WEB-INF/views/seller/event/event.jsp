@@ -200,15 +200,16 @@
 								</tr>
 							</table>
 						</form>
+						<div class="btn-r fixedStyle">
+						<button id="addEventBtn" class="btnCommonStyle">등록</button>
+						<button class="btnCommonStyle resetBtn">리셋</button>
+						<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
+						</div>
 					</div>
 					
 					<div class="blankBox"></div>
 					
-					<div class="btn-r fixedStyle">
-						<button id="addEventBtn" class="btnCommonStyle">등록</button>
-						<button class="btnCommonStyle resetBtn">리셋</button>
-						<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
-					</div>
+					
 		
 					<!--// content-->
 				</div>

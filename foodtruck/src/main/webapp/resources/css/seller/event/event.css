@@ -241,14 +241,13 @@ a { text-decoration:none; color:#000; }
 
 .fixedStyle {
 	position: fixed;
-	top: 840px;
-	left: 381px;
-	background-color: white;
-	margin-top: 0 !important;
-	margin-bottom: 0 !important;
-	padding: 17px !important;
-	width: 1140px !important;
-	height: 75px;
+    top: 87%;
+    background-color: white;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 17px !important;
+    width: 60% !important;
+    height: 75px;
 }
 
 .color666 {
@@ -419,7 +418,8 @@ textarea {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 1217px;
+	/* width: 1217px; */
+	width: 64%;
 	height: 870px;
 	background-color: #fff;
 	border: 5px solid #ff9248 /*#3571B5*/;
