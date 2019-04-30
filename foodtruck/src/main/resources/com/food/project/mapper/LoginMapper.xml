@@ -54,5 +54,7 @@
 	<select id="getFoodTruck" resultType="com.food.project.domain.FoodTruckVO" parameterType="String">
 		select * from foodtruck where email=#{email}
 	</select>
-	
+	<update id="updatePassword" parameterType="com.food.project.domain.CustomerVO">
+		update customer set password=#{password} where email=#{email}
+	</update>
 </mapper>

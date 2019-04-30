@@ -29,6 +29,7 @@ public class CustomerController {
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
+
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
@@ -84,7 +85,16 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/cusInfo", method = RequestMethod.GET)
-	public String cusInfo(Locale locale, Model model) {
+	public String cusInfo(Locale locale, Model model, HttpSession session) {
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		System.out.println(vo.getEmail());
+		
+		CustomerVO cus = service.getCustomer(vo.getEmail());
+		System.out.println(cus);
+		model.addAttribute("cusinfo", cus);
+		
+		service.updatePassword(vo.getEmail());
+		
 		return "customer/cusInfo";
 	}
 	

@@ -50,14 +50,14 @@
 			
 		
 		<div class="div2 col">
- 			<br> 아이디: BaekSunJae<br> 비밀번호: ***********
+ 			<br> 아이디:${cusinfo.email} <br>비밀번호:${cusinfo.password}
  			<button href="#layer1" class="btn-example" >변경</button>
 
 			
 				<div class="pop-layer" id="layer1">
 					<div class="pop-container">
 						<div class="pop-conts">
-						아이디:BaekSunJae<br> <input placeholder="현재 비밀번호">
+						아이디:${cusinfo.email}<br> <input id ="" placeholder="현재 비밀번호">
 							<input placeholder="새 비밀번호">
 							<p>8~64자 영문, 숫자, 특수문자를 조합해주세요.</p>
 							<input placeholder="비밀번호 확인"> <br> <br>
@@ -68,7 +68,8 @@
 						</div>
 					</div>
 				</div>
-			<br> 닉네임: 쏜째 <button href="#layer2" class="btn-example" ">변경</button>
+			<br> 닉네임: ${cusinfo.nickname} 
+			<button href="#layer2" class="btn-example" ">변경</button>
 			<div class="dim-layer">
 				<div class="dimBg"></div>
 				<div id="layer2" class="pop-layer">
@@ -85,8 +86,7 @@
 					</div>
 				</div>
 			</div>
-			<br> 성별: 남<br> 생년월일: 1997.02.11<br> 휴대전화:
-			010-5467-8794<br>
+			<br> 성별: 남<br> 생년월일: 1997.02.11<br> 휴대전화:${cusinfo.telephone}
 
 		</div>
 	</div>
@@ -142,6 +142,7 @@
 						    $('#close').click(function() {
 						     $('#pop').hide();
 						    });
+						    
 						    
 					});
 </script>

@@ -28,4 +28,6 @@ public interface LoginMapper {
 
 	//트럭등록 여부
 	public FoodTruckVO getFoodTruck(String email);
+
+	public CustomerVO updatePassword(String email);
 }

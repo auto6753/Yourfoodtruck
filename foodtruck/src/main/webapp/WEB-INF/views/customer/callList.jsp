@@ -30,7 +30,7 @@
 					<td>${i.place}</td>
 					<td>${i.festival_name}</td>
 					<td>${i.festival_date}</td>
-					<td>${i.start_time} ~ ${i.end_time}</td>
+					<td>${i.festival_time}</td>
 					<td>${i.reporting_date}</td>
 					<td>${i.progress}</td>									
 				</tr>

@@ -10,21 +10,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.PostVO;
+import com.food.project.service.CallListService;
 import com.food.project.service.FoodTruckService;
 
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/truck", method = RequestMethod.GET)
+@RequestMapping(value = "/truck")
 public class TruckController {
 	private FoodTruckService service;
+	private CallListService callList;
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String info(Model model,@RequestParam("truck_code") String truck_code) {
-		service.getFoodTruck(truck_code);
+	public String info(Model model/* ,@RequestParam("truck_code") String truck_code */) {
+//		service.getFoodTruck(truck_code);
 		
 		return "truck/truckInfo";
 	}
@@ -55,8 +60,22 @@ public class TruckController {
 //		return "";
 //	}
 
-//	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
-//	public String callForm(Locale locale, Model model) {
-//		return "truck/callForm";
-//	}
+	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
+	public String callForm(Locale locale) {
+		
+		
+		/* callList.insertCallList(vo); */
+		 
+		return "truck/callForm";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/callList", method = RequestMethod.POST)
+	public String callList(Locale locale, CallListVO vo) {
+		
+		System.out.print(vo);
+		/* callList.insertCallList(vo); */
+	
+		
+		return "success";
+	}
 }
