@@ -5,6 +5,8 @@ $(document).ready(function() {
 	$("#cancelBtn").click(function() {
 		window.close();
 	});
+	
+	
 });
 
 function previewImage(targetObj, previewId) {

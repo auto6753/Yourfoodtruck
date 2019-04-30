@@ -13,7 +13,6 @@
 	<div class="addMenuTitle">
 		<h2>메뉴등록</h2>
 	</div>
-	<form action="" method="post" enctype="multipart/form-data">
 		<table class="addMenuTable">
 			<tr>
 				<td class="itemName">이미지</td>
@@ -25,7 +24,7 @@
 			<tr>
 				<td class="itemName"></td>
 				<td>
-					<div id="previewId">
+					<div id="previewId"> <!-- 이미지 미리보기 영역데스 --> 
 						<img id="noImage" src="${pageContext.request.contextPath}/resources/image/icon/noimage.png"/>
 					</div>
 				</td>
@@ -33,13 +32,13 @@
 			<tr>
 				<td class="itemName"><label>카테고리</label></td>
 				<td>
-					<select name="category" required>
+					<select id="category" name="category" required>
 						<option value="" selected>카테고리</option>
-						<option value="c1">카테고리A</option>
-						<option value="c2">카테고리B</option>
-						<option value="c3">카테고리C</option>
-						<option value="c4">카테고리D</option>
-						<option value="c5">카테고리E</option>
+						<option value="1">카테고리A</option>
+						<option value="2">카테고리B</option>
+						<option value="3">카테고리C</option>
+						<option value="4">카테고리D</option>
+						<option value="5">카테고리E</option>
 					</select>
 				</td>
 			</tr>
@@ -53,23 +52,68 @@
 			</tr>
 			<tr> <!-- 여기부터 -->
 				<td class="itemName" valign="top"><label class="labelStyle" for="details">상세내용</label></td>
-				<td><textarea id="details" name="details" required onFocus="clearMessage(this.form);" onKeyUp="checkByte(this.form);">내용을 입력해 주세요.
+				<td><textarea id="details" name="details"> <!-- required onFocus="clearMessage(this.form);" onKeyUp="checkByte(this.form);" -->
+					d
 					</textarea>
-					<div class="showByte">
+			<!-- 		<div class="showByte">
 						<input type="text" name="messagebyte" value="0" size="1" maxlength="2" readonly>
 						<font color="#000000">/ 1000 byte</font>
-					</div>
+					</div> -->
 				</td>
 			</tr> <!-- 여기까지 검토할 것 -->
 			<tr>
 				<td colspan="2">
 					<div class="btns">
-						<input type="submit" value="등록">
+						<button class="addmenu" id="add">등록</button>
 						<button id="cancelBtn">취소</button>
 					</div>
 				</td>
 			</tr>
 		</table>
-	</form>
+
+<script>
+$(document).ready(function(){
+	$("#add").click(function(){
+		
+		var files = $("#filename")[0].files;
+		var file = files[0];
+			
+		var category = $("#category option:selected").val();
+		var menuname = $("#menuName").val();
+		var price = $("#unitPrice").val();
+		//var desc =$("#details").text();
+		var category = parseInt(category);
+		
+		console.log(file);
+		console.log(category);
+		console.log(menuname);
+		console.log(price);
+		//console.log(desc);
+		var formData = new FormData();
+		formData.append("file", file);
+		formData.append("menu_category", category);
+		formData.append("menu_name", menuname);
+		formData.append("unit_price", price);
+		var query = {
+			formData:formData,
+		/* 	menu_category:category,
+			menu_name:menuname,
+			unitPrice:price */
+		}
+		$.ajax({
+			type:"post",
+			url:"/project/upload/upload",
+			data:formData,
+            processData: false,
+            contentType: false,
+			success:function(data){
+				//alert(data);
+				opener.parent.location.reload();
+				window.close();
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>

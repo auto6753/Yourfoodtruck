@@ -83,11 +83,39 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(".imgBox").click(function(){
+/*	$(".imgBox").click(function(){
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);
+		window.name = "parentForm";
+		openWin = window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+		//openWin.("#menuname").val()=$(this).val();
 		
-		window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+		openWin.document.getElementById("menuname").value="1";
+         
+		
+		
+	});*/
+	
+	$(".menuf").on("click",".menut",function(){
+		var a = $(this);
+		
+		console.log("------");
+		console.log(a.find("div").children().attr('src'));
+		console.log(a.find("div").next().html());
+		console.log(a.find("div").next().next().html());
+		console.log(a.find("div").next().next().next().val());
+		a.find("div").children().addClass("1"); //src
+		a.find("div").next().addClass("2"); // 메뉴이름
+		a.find("div").next().next().addClass("3"); //메뉴가격
+		a.find("div").next().next().next().addClass("4"); //메뉴코드
+		
+		var popupX = (window.screen.width / 2) - (430 / 2);
+		var popupY = (window.screen.height / 2) - (600 / 2);
+		window.name = "parentForm";
+		openWin = window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+		//openWin.("#menuname").val()=$(this).val();
+		
+		//openWin.document.getElementById("menuname").value="1";
 	});
 });
 
