@@ -105,10 +105,15 @@
 						<form action="" method="post" name="form">
 							<div id="upload">
 								<div id="previewId">
-									<img id="noImage" src="${pageContext.request.contextPath}/resources/image/icon/noimage.png"/>
+									<div id="imgControlBox">
+										<input type="file" id="uploadImg" name="uploadImg" onchange="previewImage(this,'previewId'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp"/>
+										<img class="imgUploadBtn" src="${pageContext.request.contextPath}/resources/image/icon/upload.png"/>
+										<img id="setDefaultBtn" class="setDefaultBtn" src="${pageContext.request.contextPath}/resources/image/icon/defaultimgbtn.png"/>
+										<img id="delUploadImg" class="delUploadImg" src="${pageContext.request.contextPath}/resources/image/icon/delete.png"/>
+									</div>
+									<img id="noImage" src="${pageContext.request.contextPath}/resources/image/seller/event/noimage.png"/>
+									<img id="defaultImg" src="${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png"/>
 								</div>
-								<input type="file" id="uploadImg" name="uploadImg" onchange="previewImage(this,'previewId'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp"/>
-								<img class="imgUploadBtn" src="${pageContext.request.contextPath}/resources/image/icon/upload.png" onclick="document.all.uploadImg.click();"/>
 							</div>
 							<table id="table">
 								<tr>
@@ -130,19 +135,10 @@
 								<tr>
 									<td valign="top"><label class="labelStyle">메뉴</label></td>
 									<td valign="top">
-										<div>
-											<select class="menuWidth" name="menu1" required>
-												<option value="" selected>메뉴</option>
-												<option value="menu1">메뉴1</option>
-												<option value="menu2">메뉴2</option>
-												<option value="menu3">메뉴3</option>
-											</select>
-											<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
-											<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
-										</div>
+										
 
 										<div id="pre_set" style="display: none; float:top;">
-											<select class="menuWidth" name="menu1" required>
+											<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
 												<option value="" selected>메뉴</option>
 												<option value="menu1">메뉴1</option>
 												<option value="menu2">메뉴2</option>
@@ -156,7 +152,18 @@
 											</a>
 										</div>
 
-										<div id="field"></div>
+										<div id="field">
+											<div id="default">
+												<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
+													<option value="" selected>메뉴</option>
+													<option value="menu1">메뉴1</option>
+													<option value="menu2">메뉴2</option>
+													<option value="menu3">메뉴3</option>
+												</select>
+												<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
+												<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
+											</div>
+										</div>
 										<a href="#" class="addmenuBtn" onclick="add_item()">
 											<img class="addmenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/addmenu.svg"/> <!-- 기본 -->
 											<img class="addmenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/addmenu2.svg"/> <!-- 마우스오버 -->
@@ -200,7 +207,7 @@
 					<div class="btn-r fixedStyle">
 						<button id="addEventBtn" class="btnCommonStyle">등록</button>
 						<button class="btnCommonStyle resetBtn">리셋</button>
-						<button class="btnCommonStyle btn-layerClose">취소</button>
+						<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
 					</div>
 		
 					<!--// content-->
@@ -224,11 +231,17 @@
 						</div>
 						<form action="" method="post" name="form">
 							<div id="upload">
-								<div id="previewId">
-									<img id="noImage" src="${pageContext.request.contextPath}/resources/image/icon/noimage.png"/>
+								<div id="previewId2">
+									<div id="imgControlBox2">
+										<input type="file" id="uploadImg2" name="uploadImg2" onchange="previewImage2(this,'previewId2'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp"/>
+										<img class="imgUploadBtn2" src="${pageContext.request.contextPath}/resources/image/icon/upload.png"/>
+										<img id="setDefaultBtn2" class="setDefaultBtn" src="${pageContext.request.contextPath}/resources/image/icon/defaultimgbtn.png"/>
+										<img id="delUploadImg2" class="delUploadImg" src="${pageContext.request.contextPath}/resources/image/icon/delete.png"/>
+									</div>
+									<img id="noImage2" src="${pageContext.request.contextPath}/resources/image/seller/event/noimage.png"/>
+									<img id="defaultImg2" src="${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png"/>
 								</div>
-								<input type="file" id="uploadImg" name="uploadImg" onchange="previewImage(this,'previewId'); fileCheck(this);" accept=".jpg, .jpeg, .png, .gif, .bmp"/>
-								<img class="imgUploadBtn" src="${pageContext.request.contextPath}/resources/image/icon/upload.png"/>
+
 							</div>
 							<table id="table">
 								<tr>
@@ -250,8 +263,8 @@
 								<tr>
 									<td valign="top"><label class="labelStyle">메뉴</label></td>
 									<td valign="top">
-										<div>
-											<select class="menuWidth" name="menu1" required>
+										<div id="pre_set2" style="display: none; float:top;">
+											<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
 												<option value="" selected>메뉴</option>
 												<option value="menu1">메뉴1</option>
 												<option value="menu2">메뉴2</option>
@@ -259,25 +272,25 @@
 											</select>
 											<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
 											<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
-										</div>
-
-										<div id="pre_set" style="display: none; float:top;">
-											<select class="menuWidth" name="menu1" required>
-												<option value="" selected>메뉴</option>
-												<option value="menu1">메뉴1</option>
-												<option value="menu2">메뉴2</option>
-												<option value="menu3">메뉴3</option>
-											</select>
-											<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
-											<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
-											<a href="#" class="deleteMenuBtn" onclick="remove_item(this)">
+											<a href="#" class="deleteMenuBtn" onclick="remove_item2(this)">
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu.svg"/>
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu2.svg"/>
 											</a>
 										</div>
 
-										<div id="field"></div>
-										<a href="#" class="addmenuBtn" onclick="add_item()">
+										<div id="field2">
+											<div>
+												<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
+													<option value="" selected>메뉴</option>
+													<option value="menu1">메뉴1</option>
+													<option value="menu2">메뉴2</option>
+													<option value="menu3">메뉴3</option>
+												</select>
+												<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
+												<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
+											</div>
+										</div>
+										<a href="#" class="addmenuBtn" onclick="add_item2()">
 											<img class="addmenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/addmenu.svg"/> <!-- 기본 -->
 											<img class="addmenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/addmenu2.svg"/> <!-- 마우스오버 -->
 										</a>
@@ -320,7 +333,7 @@
 					<div class="btn-r fixedStyle">
 						<button id="editEventBtn" class="btnCommonStyle">수정</button>
 						<button class="btnCommonStyle resetBtn">리셋</button>
-						<button class="btnCommonStyle btn-layerClose">취소</button>
+						<button id="cancelEdit" class="btnCommonStyle btn-layerClose">취소</button>
 					</div>
 		
 					<!--// content-->

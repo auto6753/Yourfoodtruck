@@ -255,8 +255,21 @@ a { text-decoration:none; color:#000; }
 	color: #666;
 }
 
-.imgUploadBtn {
+.imgUploadBtn,.imgUploadBtn2 {
+	width: 27px;
 	cursor: pointer;
+	margin-right: 7px;
+}
+
+.setDefaultBtn {
+	height: 32px;
+	cursor: pointer;
+}
+
+.delUploadImg {
+	width: 27px;
+	cursor: pointer;
+	float: right;
 }
 
 .deleteEventDiv {
@@ -266,11 +279,35 @@ a { text-decoration:none; color:#000; }
 	right: 15px;
 }
 
-#noImage {
+#imgControlBox {
+	width: 405px;
+	height: 50px;
+	border: none;
+	padding: 15px;
+	display: none;
+/* 	top: -305px; */
+}
+
+#imgControlBox2 {
+	width: 405px;
+	height: 50px;
+	border: none;
+	padding: 15px;
+	display: none;
+/* 	top: -305px; */
+}
+
+#noImage,#noImage2 {
 	width: 400px;
 	height: auto;
 	vertical-align: top;
 	margin: 94.5px 0;
+}
+
+#defaultImg,#defaultImg2 {
+	width: 400px;
+	height: auto;
+	z-index: -1;
 }
 
 #addEvent {
@@ -293,12 +330,16 @@ a { text-decoration:none; color:#000; }
 	vertical-align: top;
 }
 
-#previewId {
+#previewId,#previewId2 {
 	width: 405px;
 	height: 305px;
 	border: 3px #ff9248 solid;
 	margin-right: 14px;
 	overflow: hidden
+}
+
+#prev_previewId,#prev_previewId2 {
+	z-index: -1;
 }
 
 #layer1 {
@@ -309,7 +350,7 @@ a { text-decoration:none; color:#000; }
 	overflow-y: scroll;
 }
 
-#uploadImg {
+#uploadImg,#uploadImg2 {
 	display: none;
 }
 
