@@ -21,6 +21,7 @@
 	<resources mapping="/resources/image/**" location="/resources/image/" />
 	<resources mapping="/resources/js/**"  location="/resources/js/" />
 	<resources mapping="/resources/css/**" location="/resources/css/" />
+	<resources mapping="firebase-messaging-sw.js" location="/" />
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 

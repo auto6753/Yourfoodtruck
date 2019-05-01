@@ -84,7 +84,38 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
-	public String passenger(Model model) {
+	public String passenger(Model model,HttpSession session) {
+		FirebaseApp defaultApp = null;
+		CustomerVO vo=new CustomerVO();
+		vo=(CustomerVO) session.getAttribute("sessionid");
+		String email=vo.getEmail();
+		FileInputStream serviceAccount;
+		try {
+			if(defaultApp==null) {
+				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+				FirebaseOptions options = new FirebaseOptions.Builder()
+						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+						.build();
+				defaultApp = FirebaseApp.initializeApp(options);
+				System.out.println("First"+defaultApp.getName());
+				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
+				System.out.println(userRecord.getUid());
+				model.addAttribute("_uid",userRecord.getUid());
+				defaultApp.delete();
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (FirebaseAuthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "seller/psg/psgpush";
 	}
 	

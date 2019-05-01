@@ -50,7 +50,7 @@
 				};
 				$.ajax({
 					type:"post",
-					url:"/project/login",
+					url:"/login",
 					data: query,
 					success:function(data){
 						if("idfail"==data){
@@ -59,7 +59,7 @@
 							alert("비밀번호가 틀렸습니다");
 						}else{
 							/* window.location.href="/project/rehome";  */
-							window.location.replace("/project");
+							window.location.replace("/");
 						}
 					}
 				/* 	 complete : function(data) {
