@@ -108,7 +108,7 @@ $(document).ready(function(){
 		a.find("div").next().addClass("2"); // 메뉴이름
 		a.find("div").next().next().addClass("3"); //메뉴가격
 		a.find("div").next().next().next().addClass("4"); //메뉴코드
-		
+		a.find("div").next().next().next().next().addClass("5");
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);
 		window.name = "parentForm";

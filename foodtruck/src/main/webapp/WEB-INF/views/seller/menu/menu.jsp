@@ -36,25 +36,26 @@
 				<div class="tab_con" id="tab_con">
 					<div class="col-md-12 menuBox">
 						<div class="container">
-							<div class="row mbox" >
+							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
-								<c:if test="${i.menu_category ==1}">
-									<div class="col-md-3 menuf">
-										<div class="menut">
-											<div class="imgBox">
-												<img class="img editMenu changeToBlock"
-													src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+									<c:if test="${i.menu_category ==1}">
+										<div class="col-md-3 menuf">
+											<div class="menut">
+												<div class="imgBox">
+													<img class="img editMenu changeToBlock"
+														src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+												</div>
+												<div class="changeToBlock">${i.menu_name }</div>
+												<div class="changeToBlock">${i.unit_price }원</div>
+												<input type="hidden" value="${i.menu_code}" /> <input
+													type="hidden" value="${i.menu_category}" />
 											</div>
-											<div class="changeToBlock">${i.menu_name }</div>
-											<div class="changeToBlock">${i.unit_price }원</div>
-											<input type="hidden" value="${i.menu_code}" />
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
 													class="delChk" value="" />
 												<div class="status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
-									</div>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -62,25 +63,26 @@
 					</div>
 					<div class="col-md-12 menuBox">
 						<div class="container">
-							<div class="row mbox" >
+							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
-								<c:if test="${i.menu_category ==2}">
-									<div class="col-md-3 menuf">
-										<div class="menut">
-											<div class="imgBox">
-												<img class="img editMenu changeToBlock"
-													src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+									<c:if test="${i.menu_category ==2}">
+										<div class="col-md-3 menuf">
+											<div class="menut">
+												<div class="imgBox">
+													<img class="img editMenu changeToBlock"
+														src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+												</div>
+												<div class="changeToBlock">${i.menu_name }</div>
+												<div class="changeToBlock">${i.unit_price }원</div>
+												<input type="hidden" value="${i.menu_code}" /> <input
+													type="hidden" value="${i.menu_category}" />
 											</div>
-											<div class="changeToBlock">${i.menu_name }</div>
-											<div class="changeToBlock">${i.unit_price }원</div>
-											<input type="hidden" value="${i.menu_code}" />
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
 													class="delChk" value="" />
 												<div class="status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
-									</div>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -88,25 +90,26 @@
 					</div>
 					<div class="col-md-12 menuBox">
 						<div class="container">
-							<div class="row mbox" >
+							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
-								<c:if test="${i.menu_category ==3}">
-									<div class="col-md-3 menuf">
-										<div class="menut">
-											<div class="imgBox">
-												<img class="img editMenu changeToBlock"
-													src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+									<c:if test="${i.menu_category ==3}">
+										<div class="col-md-3 menuf">
+											<div class="menut">
+												<div class="imgBox">
+													<img class="img editMenu changeToBlock"
+														src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+												</div>
+												<div class="changeToBlock">${i.menu_name }</div>
+												<div class="changeToBlock">${i.unit_price }원</div>
+												<input type="hidden" value="${i.menu_code}" /> <input
+													type="hidden" value="${i.menu_category}" />
 											</div>
-											<div class="changeToBlock">${i.menu_name }</div>
-											<div class="changeToBlock">${i.unit_price }원</div>
-											<input type="hidden" value="${i.menu_code}" />
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
 													class="delChk" value="" />
 												<div class="status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
-									</div>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -114,25 +117,26 @@
 					</div>
 					<div class="col-md-12 menuBox">
 						<div class="container">
-							<div class="row mbox" >
+							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
-								<c:if test="${i.menu_category ==4}">
-									<div class="col-md-3 menuf">
-										<div class="menut">
-											<div class="imgBox">
-												<img  class="img editMenu changeToBlock"
-													src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+									<c:if test="${i.menu_category ==4}">
+										<div class="col-md-3 menuf">
+											<div class="menut">
+												<div class="imgBox">
+													<img class="img editMenu changeToBlock"
+														src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+												</div>
+												<div class="changeToBlock">${i.menu_name }</div>
+												<div class="changeToBlock">${i.unit_price }원</div>
+												<input type="hidden" value="${i.menu_code}" /> <input
+													type="hidden" value="${i.menu_category}" />
 											</div>
-											<div class="changeToBlock">${i.menu_name }</div>
-											<div class="changeToBlock">${i.unit_price }원</div>
-											<input type="hidden" value="${i.menu_code}" />
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
-													class="delChk" value="${i}" />
+													class="delChk" value="" />
 												<div class="status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
-									</div>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -140,25 +144,26 @@
 					</div>
 					<div class="col-md-12 menuBox">
 						<div class="container">
-							<div class="row mbox" >
+							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
 									<c:if test="${i.menu_category ==5}">
-									<div class="col-md-3 menuf">
-										<div class="menut">
-											<div class="imgBox">
-												<img class="img editMenu changeToBlock"
-													src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+										<div class="col-md-3 menuf">
+											<div class="menut">
+												<div class="imgBox">
+													<img class="img editMenu changeToBlock"
+														src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
+												</div>
+												<div class="changeToBlock">${i.menu_name }</div>
+												<div class="changeToBlock">${i.unit_price }원</div>
+												<input type="hidden" value="${i.menu_code}" /> <input
+													type="hidden" value="${i.menu_category}" />
 											</div>
-											<div class="changeToBlock">${i.menu_name }</div>
-											<div class="changeToBlock">${i.unit_price }원</div>
-											<input type="hidden" value="${i.menu_code}" />
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
 													class="delChk" value="" />
 												<div class="status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
-									</div>
 									</c:if>
 								</c:forEach>
 							</div>

@@ -75,6 +75,7 @@ public class UploadController {
 		return a;
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/upload/delete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String delete(HttpSession session, MenuVO mvo) throws Exception {
 		System.out.println("와랏!");
@@ -110,16 +111,25 @@ public class UploadController {
 
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/upload/modify", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String modify(MultipartFile file, HttpSession session, MenuVO mvo, @RequestParam("status") String status)
-			throws Exception {
-		System.out.println("와랏!");
+	public String modify(MultipartFile file, HttpSession session, MenuVO mvo /*@RequestParam("status") String status*/) throws Exception {
+		//System.out.println("와랏!");
+		System.out.println(mvo);
+		//System.out.println(uploadPath);
+		//String path = "/project/resources/image/upload/";
+		
 		String surl = mvo.getMenu_surl();
 		String url = mvo.getMenu_url();
-
-		if (file.isEmpty()) {
-			System.out.println(surl);
+		//String surl ="";
+		//String url ="";
+		if (file!=null) {
+			//System.out.println(surl);
+			//System.out.println(url);
+			url = uploadPath + url;
+			surl = uploadPath + surl;
 			System.out.println(url);
+			System.out.println(surl);
 			File file1 = new File(url);
 			if (file1.exists()) { // 파일존재여부확인
 				if (file1.delete()) {
@@ -136,6 +146,31 @@ public class UploadController {
 			if (sfile.exists()) { // 파일존재여부확인
 				if (sfile.delete()) {
 					System.out.println("파일삭제 성공");
+					
+					logger.info("originalName : " + file.getOriginalFilename());
+					logger.info("size : " + file.getSize());
+					logger.info("contentType : " + file.getContentType());
+
+					System.out.println("ㅇ");
+					System.out.println(session.getAttribute("seller"));
+					FoodTruckVO vo4 = (FoodTruckVO) session.getAttribute("seller");
+					 //System.out.println(vo4.getEmail());
+					 //String email = vo4.getEmail();
+					ResponseEntity<String> a = new ResponseEntity<String>(
+							UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+							HttpStatus.OK);
+					String str = a.getBody();
+					System.out.println(str);
+					String[] array = str.split("\\\\");
+					System.out.println(array[0]);
+					System.out.println(array[1]);
+					System.out.println(array[0] + "\\" + array[1].substring(2));
+					mvo.setMenu_surl(str);
+					mvo.setMenu_url(array[0] + "\\" + array[1].substring(2));
+				   //mvo.setTruck_code(vo4.getTruck_code());
+					System.out.println(mvo);
+					service.updatemenu(mvo);
+					System.out.println("-ㄴㅁㅇ-");
 				} else {
 					System.out.println("파일삭제 실패");
 				}
@@ -143,31 +178,6 @@ public class UploadController {
 			} else {
 				System.out.println("파일이 존재하지 않습니다.");
 			}
-		
-//		logger.info("originalName : " + file.getOriginalFilename());
-//		logger.info("size : " + file.getSize());
-//		logger.info("contentType : " + file.getContentType());
-//
-//		System.out.println("ㅇ");
-//		System.out.println(session.getAttribute("seller"));
-//		FoodTruckVO vo4 = (FoodTruckVO) session.getAttribute("seller");
-//		// System.out.println(vo.getEmail());
-//		// String email = vo.getEmail();
-//		ResponseEntity<String> a = new ResponseEntity<String>(
-//				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
-//				HttpStatus.OK);
-//
-//		String str = a.getBody();
-//		System.out.println(str);
-//		String[] array = str.split("\\\\");
-//		System.out.println(array[0]);
-//		System.out.println(array[1]);
-//		System.out.println(array[0] + "\\" + array[1].substring(2));
-//		mvo.setMenu_surl(str);
-//		mvo.setMenu_url(array[0] + "\\" + array[1].substring(2));
-//		mvo.setTruck_code(vo4.getTruck_code());
-//		System.out.println(mvo);
-//		service.insertmenu(mvo);
 		}
 		else {
 			System.out.println("파일안보냄");
