@@ -26,7 +26,7 @@
 						</div>
 						<div class="col-md-12 tab_con" id="tab_con">
 							<div class="eventBox"> <!-- 진행중인 이벤트 내용 -->
-								<c:forEach var="i" begin="1" end="${onGoingEventNum}">
+								<c:forEach var="event" items="${eventList}">
 									<div class="col-md-6 max-width event"> <!-- 행당 2개 이벤트 배치 -->
 										<div class="manageEvent">
 											<div>
@@ -40,19 +40,19 @@
 										</div>
 										
 										<div class="eventItem">이벤트명</div>
-										<div class="eventItemContent eventName">내용 ${i}</div>
+										<div class="eventItemContent eventName">${event.event_name}</div>
 										
 										<div class="eventItem">기간</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">${event.event_start} ${event.event_end}</div>
 										
 										<div class="eventItem">메뉴</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">내용</div>
 										
 										<div class="eventItem">할인가격</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">내용</div>
 										
 										<div class="eventItem">상세내용</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">${event.event_content}</div>
 									</div>
 								</c:forEach>
 							</div>
@@ -124,7 +124,7 @@
 									<td valign="top"><label class="labelStyle">기간</label></td>
 									<td valign="top">
 										<input type="datetime-local" id="beginDate" class="date" name="beginDate"/>
-										<span>&nbsp;</span>
+										<span>~</span>
 										<input type="datetime-local" id="endDate" class="date" name="endDate" required/>
 									</td>
 								</tr>
@@ -199,18 +199,15 @@
 									</td>
 								</tr>
 							</table>
+							<input type="submit" id="submitAddEvent" style="display:none;"/>
 						</form>
 						<div class="btn-r fixedStyle">
-						<button id="addEventBtn" class="btnCommonStyle">등록</button>
-						<button class="btnCommonStyle resetBtn">리셋</button>
-						<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
+							<button id="addEventBtn" class="btnCommonStyle" onclick="addEventBtn();">등록</button>
+							<button class="btnCommonStyle resetBtn">리셋</button>
+							<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
 						</div>
 					</div>
-					
 					<div class="blankBox"></div>
-					
-					
-		
 					<!--// content-->
 				</div>
 			</div>
@@ -253,7 +250,7 @@
 									<td valign="top"><label class="labelStyle">기간</label></td>
 									<td valign="top">
 										<input type="datetime-local" id="beginDate" class="date" name="beginDate"/>
-										<span>&nbsp;</span>
+										<span>~</span>
 										<input type="datetime-local" id="endDate" class="date" name="endDate" required/>
 									</td>
 								</tr>
@@ -326,17 +323,15 @@
 									</td>
 								</tr>
 							</table>
+							<input type="submit" id="submitEditEvent" style="display:none;"/>
 						</form>
+						<div class="btn-r fixedStyle">
+							<button id="editEventBtn" class="btnCommonStyle" onclick="editEventBtn();">수정</button>
+							<button class="btnCommonStyle resetBtn">리셋</button>
+							<button id="cancelEdit" class="btnCommonStyle btn-layerClose">취소</button>
+						</div>
 					</div>
-					
 					<div class="blankBox"></div>
-					
-					<div class="btn-r fixedStyle">
-						<button id="editEventBtn" class="btnCommonStyle">수정</button>
-						<button class="btnCommonStyle resetBtn">리셋</button>
-						<button id="cancelEdit" class="btnCommonStyle btn-layerClose">취소</button>
-					</div>
-		
 					<!--// content-->
 				</div>
 			</div>

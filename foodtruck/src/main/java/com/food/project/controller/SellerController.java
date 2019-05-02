@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.service.EventService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -29,6 +28,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/seller")
 public class SellerController {
 	private SellerService sellerservice;
+	private EventService eventService;
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
@@ -64,12 +64,17 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET) 
-	public String event(Model model) {
-		int onGoingEventNum = 5;
-		int endEventNum = 13;
+	public String event(Model model, HttpSession session) {
+//		int onGoingEventNum = 5;
+//		int endEventNum = 13;
+//		
+//		model.addAttribute("onGoingEventNum", onGoingEventNum);
+//		model.addAttribute("endEventNum", endEventNum);
+		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
+		String truckCode = vo.getTruck_code();
+		System.out.println(eventService.getEvent(truckCode));
+		model.addAttribute("eventList", eventService.getEvent(truckCode));
 		
-		model.addAttribute("onGoingEventNum", onGoingEventNum);
-		model.addAttribute("endEventNum", endEventNum);
 		return "seller/event/event";
 	}
 	

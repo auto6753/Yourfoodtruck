@@ -2,7 +2,16 @@
  * 
  */
 //	var index = 1;
+	function addEventBtn() {
+		document.getElementById("submitAddEvent").click();
 
+	}
+	
+	function editEventBtn() {
+		document.getElementById("submitEditEvent").click();
+
+	}
+	
 	function changeAttr(selectTag) {
 		var selectVal = $(selectTag).val();
 		
@@ -294,6 +303,8 @@
 		});
 		
 		
+		
+		
 		tab('#tab',0);
 		
 		$(".imgUploadBtn").click(function(){
@@ -305,11 +316,11 @@
 		});
 		
 		$("#addEventBtn").click(function(){
-			alert("이벤트가 등록되었습니다.");
+//			alert("이벤트가 등록되었습니다.");
 		});
 		
 		$("#editEventBtn").click(function(){
-			alert("이벤트가 수정되었습니다.");
+//			alert("이벤트가 수정되었습니다.");
 		});
 		
 		$(".delete").click(function(){
