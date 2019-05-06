@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 @RequestMapping(value="/pay")
-public class PaymentController {
+public class M_PaymentController {
 	
 	private PaymentService payService;
 	@SuppressWarnings("unchecked")

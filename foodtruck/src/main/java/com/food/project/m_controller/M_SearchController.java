@@ -19,14 +19,13 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/search", method = RequestMethod.GET)
-public class SearchController {
+@RequestMapping(value = "/m.search", method = RequestMethod.GET)
+public class M_SearchController {
 	
 	LocationService locservice;
 	FoodTruckService ftservice;
 
 	@SuppressWarnings("unchecked")
-
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String search(Model model) {
 		JSONArray arry= new JSONArray();
@@ -84,8 +83,7 @@ public class SearchController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("loc",arry);
-		return "search/search";
+		return arry.toString();
 	}
 	
 //	@RequestMapping(value = "/searchResult", method = RequestMethod.GET)

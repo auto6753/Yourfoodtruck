@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.food.project.domain.BoardSearchVO;
 
 @Controller
-public class BoardController{
+public class M_BoardController{
 
 	@RequestMapping(value = "/board/**/boardList")
     public String boardList(HttpServletRequest req, ModelMap modelMap, @ModelAttribute("boardSearchVO") BoardSearchVO boardSearchVO) {

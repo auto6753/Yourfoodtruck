@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/help")
-public class HelpController {
+public class M_HelpController {
 
 //	@Autowired
 //	private PageMapper pageMapper;

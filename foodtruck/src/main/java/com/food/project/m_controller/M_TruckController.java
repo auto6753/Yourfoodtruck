@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/truck", method = RequestMethod.GET)
-public class TruckController {
+public class M_TruckController {
 	private FoodTruckService service;
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String info(Model model ,@RequestParam("truck_code") String truck_code ) {

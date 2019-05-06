@@ -19,61 +19,66 @@ import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @AllArgsConstructor
 @Controller
 
-@RequestMapping(value = "/login")
-public class LoginController {
+@RequestMapping(value = "/m.login")
+public class M_LoginController {
 	private LoginService loginservice;
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
-		return "login/login";
-	}
-	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Locale locale, Model model,HttpSession session) {
-		System.out.println("로그아웃");
-		session.removeAttribute("sessionid");
-		session.removeAttribute("seller");
-		return "redirect:/";
-	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
-	public String loginCheck(Locale locale, Model model,CustomerVO cus,HttpSession session) {
+	public String loginCheck(CustomerVO cus) {
 		String email = cus.getEmail();
 		String password = cus.getPassword();
 		System.out.println(email+password);
 		CustomerVO c = new CustomerVO();
 		c = loginservice.getCustomer(email);
+		JSONObject sessionInfo = new JSONObject();
+		JSONObject userInfo = new JSONObject();
+		JSONObject truckInfo = new JSONObject();
 		
+		//로그인 결과(아이디 불일치)
 		if(c==null) {
-			return "idfail";
+			sessionInfo.put("result","idfail");
+			return sessionInfo.toString();
+			
+		//로그인 결과(성공)
 		}else if(password.equals(c.getPassword())){
 			System.out.println(c.getEmail());
 			System.out.println(c.getPassword());
+			userInfo.put("email", email);
+			userInfo.put("password",password);
+			sessionInfo.put("user",userInfo);
 			FoodTruckVO fd = new FoodTruckVO();
 			fd = loginservice.getFoodTruck(email);
-			System.out.println("ㅇ");
-			if(fd == null){
-				session.setAttribute("sessionid", c);
-			}else {
-				session.setAttribute("sessionid", c);
-				session.setAttribute("seller", fd);
-			}
-			System.out.println("success");
-			return "success";
 			
+			//푸드트럭 정보가 없으면 그냥 사용자정보만 리턴
+			if(fd == null){
+				sessionInfo.put("result","success");
+				return  sessionInfo.toString();
+				
+			//트럭정보가 있으면 트럭정보도 리턴
+			}else {
+				truckInfo.fromObject(fd);
+				sessionInfo.put("result","success");
+				sessionInfo.put("foodtruck",truckInfo);
+				return sessionInfo.toString();
+			}
+			
+		//로그인 결과(비밀번호 불일치)
 		}else {
-			return "pwfail";
+			sessionInfo.put("result","pwfail");
+			return sessionInfo.toString();
 		}	
 	}
 
 	@RequestMapping(value = "/idSearchck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idSearchck(Model model,CustomerVO vo) {
+	public String idSearchck(CustomerVO vo) {
 
 		//데이터를 받아
 		//받은데이터로 DB랑 검사
@@ -90,11 +95,6 @@ public class LoginController {
 		}
 		
 	}
-	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
-	public String idSearch(Locale locale, Model model) {
-
-		return "login/idSearch";
-	}	
 
 	/*
 	 * @RequestMapping(value = "/idSearch1", method = RequestMethod.POST) public
@@ -104,7 +104,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/passSearchck", method = RequestMethod.POST)
 	@ResponseBody
-	public String passSearchck(Locale locale, Model model , CustomerVO vo) {
+	public String passSearchck(CustomerVO vo) {
 		CustomerVO ck = loginservice.passSearch(vo);
 		 if (ck == null) {
 			 return "false";
@@ -113,34 +113,9 @@ public class LoginController {
 				
 	}
 
-	@RequestMapping(value = "/passSearch", method = RequestMethod.GET)
-	public String passSearch(Locale locale, Model model) {
-		return "login/passSearch";
-	}
-
-	@RequestMapping(value = "/registerAgree", method = RequestMethod.GET)
-	public String registerAgree(Locale locale, Model model) {
-		return "login/registerAgree";
-	}
-
-	@RequestMapping(value = "/registerForm", method = RequestMethod.POST)
-	public String registerForm(Locale locale, Model model, HttpServletRequest request) {
-		String a = request.getParameter("accept1");
-		if (a == null) {
-			return "login/registerAgree";
-		} else{
-			return "login/registerForm";
-		}
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Locale locale, Model model) {
-		return "login/registerAgree";
-	}
-	
 	@RequestMapping(value = "/idck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idck(Locale locale, Model model,@RequestParam("email") String email,@RequestParam("nickname") String nickname,@RequestParam("telephone") String telephone) {
+	public String idck(@RequestParam("email") String email,@RequestParam("nickname") String nickname,@RequestParam("telephone") String telephone) {
 		System.out.println(email);
 		CustomerVO mail = loginservice.getCustomer(email);
 		CustomerVO name = loginservice.getName(nickname);
@@ -156,14 +131,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(Locale locale, Model model,CustomerVO cus) {
+	@ResponseBody
+	public String insert(CustomerVO cus) {
 		cus.setRegdate(new Date());
 		loginservice.insertCustomer(cus);
-		return "redirect:/login/registerSuccess";
+		return "success";
 	}
-	@RequestMapping(value = "/registerSuccess", method = RequestMethod.GET)
-	public String joinsuccess() {	
-		return "/login/registerSuccess";
-	}
-	
 }

@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-public class NewsController {
+public class M_NewsController {
 	PostService service;
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)

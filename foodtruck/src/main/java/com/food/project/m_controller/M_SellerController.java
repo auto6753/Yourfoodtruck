@@ -26,14 +26,9 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/seller")
-public class SellerController {
+@RequestMapping(value = "/m.seller")
+public class M_SellerController {
 	private SellerService sellerservice;
-
-	@RequestMapping(value="", method=RequestMethod.GET) 
-	public String sellerMain(Model model) {
-		return "seller/sellerMain";
-	}
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
@@ -41,26 +36,6 @@ public class SellerController {
 		
 		model.addAttribute("menuNum", menuNum);
 		return "seller/menu/menu";
-	}
-	
-	@RequestMapping(value="/addMenu", method=RequestMethod.GET) 
-	public String addMenu(Model model) {
-		return "seller/menu/addMenu";
-	}
-	
-	@RequestMapping(value="/editMenu", method=RequestMethod.GET) 
-	public String editMenu(Model model) {
-		return "seller/menu/editMenu";
-	}
-  
-	@RequestMapping(value="/location", method=RequestMethod.GET) 
-	public String location(Model model) {
-		return "seller/loc/location";
-	}
-	
-	@RequestMapping(value="/jusoPopup", method=RequestMethod.POST) 
-	public String jusoPopup(Model model) {
-		return "seller/loc/jusoPopup";
 	}
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET) 
@@ -71,72 +46,6 @@ public class SellerController {
 		model.addAttribute("onGoingEventNum", onGoingEventNum);
 		model.addAttribute("endEventNum", endEventNum);
 		return "seller/event/event";
-	}
-	
-	@RequestMapping(value="/addEvent", method=RequestMethod.GET) 
-	public String addEvent(Model model) {
-		return "seller/event/addEvent";
-	}
-	
-	@RequestMapping(value="/addEvent2", method=RequestMethod.GET) 
-	public String addEvent2(Model model) {
-		return "seller/event/addEvent2";
-	}
-	
-	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
-	public String passenger(Model model,HttpSession session) {
-		FirebaseApp defaultApp = null;
-		CustomerVO vo=new CustomerVO();
-		vo=(CustomerVO) session.getAttribute("sessionid");
-		String email=vo.getEmail();
-		FileInputStream serviceAccount;
-		try {
-			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
-				FirebaseOptions options = new FirebaseOptions.Builder()
-						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-						.build();
-				defaultApp = FirebaseApp.initializeApp(options);
-				System.out.println("First"+defaultApp.getName());
-				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
-				System.out.println(userRecord.getUid());
-				model.addAttribute("_uid",userRecord.getUid());
-				defaultApp.delete();
-			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (FirebaseAuthException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return "seller/psg/psgpush";
-	}
-	
-	@RequestMapping(value="/callmanage", method=RequestMethod.GET) 
-	public String call(Model model) {
-		return "seller/call/callmanage";
-	}
-	
-	@RequestMapping(value="/order", method=RequestMethod.GET) 
-	public String order(Model model) {
-		return "seller/order/orderMain";
-	}
-	
-	@RequestMapping(value="/layout", method=RequestMethod.GET) 
-	public String layout(Model model) {
-		return "seller/layout/layout";
-	}
-	
-	@RequestMapping(value="/side", method=RequestMethod.GET) 
-	public String side(Model model) {
-		return "seller/sideMenuBar/sideMenuBar";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -212,10 +121,5 @@ public class SellerController {
 //			e.printStackTrace();
 //		}
 		return "seller/order/cuorder";
-	}
-	
-	@RequestMapping(value="/truckinfo", method=RequestMethod.GET) 
-	public String truckinfo(Model model) {
-		return "seller/truckinfo/truckinfo";
 	}
 }

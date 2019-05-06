@@ -28,7 +28,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Controller
-public class AnnounceController {
+public class M_AnnounceController {
 	PostService postService;
 	@RequestMapping(value = "/announce", method = RequestMethod.GET)
 	public String recruit(Model model) {
