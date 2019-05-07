@@ -26,13 +26,19 @@
 		name="url" /> <property value="yj" name="username" /> <property value="yj" 
 		name="password" /> </bean> -->
 	
-		<!-- Oracl JDBC Conncetion Pool 6조 서버 -->
-	
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+		<!-- Oracl JDBC Conncetion Pool 6조 탁근서버 -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
 		destroy-method="close"> <property value="oracle.jdbc.driver.OracleDriver" 
-		name="driverClassName" /> <property value="jdbc:oracle:thin:@foodtruck.ch3ibezwcd0i.ap-northeast-2.rds.amazonaws.com:1521:ORCL" 
-		name="url" /> <property value="foodtruck" name="username" /> <property value="dudwlsvnem" 
-		name="password" /> </bean>
+		name="driverClassName" /> <property value="jdbc:oracle:thin:@39.127.7.90:1521:orcl" 
+		name="url" /> <property value="six" name="username" /> <property value="1234" 
+		name="password" /> </bean> -->
+		
+		<!-- AWS DB Server  -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+      destroy-method="close"> <property value="oracle.jdbc.driver.OracleDriver" 
+      name="driverClassName" /> <property value="jdbc:oracle:thin:@foodtruck.ch3ibezwcd0i.ap-northeast-2.rds.amazonaws.com:1521:ORCL" 
+      name="url" /> <property value="foodtruck" name="username" /> <property value="dudwlsvnem" 
+      name="password" /> </bean>
 	
 	<websocket:handlers>
 		<websocket:mapping path="/project/echo" handler="echoHandler" />
