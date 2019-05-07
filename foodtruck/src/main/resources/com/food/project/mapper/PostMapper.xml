@@ -2,10 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.PostMapper">
-
+	
+	<!-- 페이징용 sql문 -->
+	<sql id="search">
+		where post_class=#{post_class}
+		and post_title like '%'||#{keyword}||'%'	
+	</sql>
+	<sql id="pagingHeader">
+		select * from (
+			select rownum rn, a.* from(
+	</sql>
+	<sql id="pagingFooter">
+			) a
+		) where rn between #{start} and #{end}
+	</sql>
 	<!-- 게시글 리스트 불러오기 -->
 	<select id="getPostList" resultType="com.food.project.domain.PostVO">
-		select post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate, to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,post_content,post_title,post_visit,post_url,post_class from post order by post_regdate DESC
+		select post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate, to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,post_content,post_title,post_visit,post_url,post_class
+		from post
+		where post_class=#{post_class}
+		order by post_regdate DESC
+	<!-- 페이징 하고나서 페이지 불러오기 -->
+	</select>
+	<select id="allList" resultType="map" parameterType="map">
+		<!-- 목록 조회 및 페이징 전체 쿼리 -->
+		<include refid="pagingHeader"></include>
+			select rownum,post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate,
+			to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,
+			post_content,post_title,post_visit,post_url,post_class
+			from post
+			<include refid="search"></include>
+			order by post_regdate desc
+		<include refid="pagingFooter"></include>
 	</select>
 	<!-- 조회수 -->
 	<update id="updatePostvisit" parameterType="com.food.project.domain.PostVO">
@@ -49,4 +77,12 @@
 		insert into post_reply(post_code,reply_regdate,reply_content,reply_num)
 		values(#{post_code},#{reply_regdate},#{reply_content},reply_seq.NEXTVAL)
 	</insert>
+	<!-- 총 게시물 갯수 가져오기 -->
+	<select id="totalPage" resultType="map">
+		select count(*) tot_page from post where post_class=#{post_class}
+	</select>
+	<select id="totalPage2" resultType="map" parameterType="map">
+		select count(*) tot_page from post
+		where post_class=#{post_class} and post_title like '%'||#{keyword}||'%'
+	</select>
 </mapper>

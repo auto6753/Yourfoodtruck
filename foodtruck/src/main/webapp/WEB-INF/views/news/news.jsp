@@ -29,7 +29,7 @@
             
          }//get 방식 주소치는거랑 똑같음
       }); */
-      $(location).attr('href','/project/news/specificck?post_code='+postCode);
+      $(location).attr('href','/news/specificck?post_code='+postCode);
       });
       
    });

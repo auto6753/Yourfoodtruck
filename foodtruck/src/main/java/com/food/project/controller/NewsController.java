@@ -20,8 +20,8 @@ public class NewsController {
 	PostService service;
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
-	public String news(Model model ) {
-		model.addAttribute("postList",service.getPostList());
+	public String news(Model model) {
+		model.addAttribute("postList",service.getPostList(0));
 		
 		return "news/news";
 	}

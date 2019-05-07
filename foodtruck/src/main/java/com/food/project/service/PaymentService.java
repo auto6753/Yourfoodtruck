@@ -9,4 +9,5 @@ public interface PaymentService {
 	public ArrayList<PaymentVO> getAllList();
 	public ArrayList<PaymentVO> getPaymentList(String payment_telephone);
 	public int insertPaymentList(List<Map<String,Object>> list);
+	public int updatePaymentList(PaymentVO vo);
 }

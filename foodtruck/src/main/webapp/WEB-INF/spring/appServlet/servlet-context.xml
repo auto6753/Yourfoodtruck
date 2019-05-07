@@ -21,6 +21,9 @@
 	<resources mapping="/resources/image/**" location="/resources/image/" />
 	<resources mapping="/resources/js/**" location="/resources/js/" />
 	<resources mapping="/resources/css/**" location="/resources/css/" />
+	<resources mapping="firebase-messaging-sw.js" location="/" />
+
+
 	<!-- upload path  -->
 	<!-- <beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:\Users\bon300-21\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
@@ -42,12 +45,6 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<beans:bean id="echoHandler" class="com.food.project.socket.EchoHandler" />
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/project/echo" />
-		<websocket:sockjs />
-	</websocket:handlers>
-
 	<context:component-scan
 		base-package="com.food.project" />
 	<interceptors>

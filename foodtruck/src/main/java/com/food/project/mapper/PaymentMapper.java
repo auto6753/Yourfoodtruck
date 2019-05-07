@@ -8,5 +8,6 @@ public interface PaymentMapper {
 	public ArrayList<PaymentVO> getAllList();
 	public ArrayList<PaymentVO> getPaymentList(String payment_telephone);
 	public int insertPaymentList(Map<String,Object> list);
+	public int updatePaymentList(PaymentVO vo);
 
 }

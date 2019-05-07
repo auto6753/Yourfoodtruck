@@ -23,12 +23,12 @@ $(document).ready(function(){
 			 post_code : post_code
 		}
 		$.ajax({
-			url: "/project/news/delete",
+			url: "/news/delete",
 			type: "post",
 			data: query,
 			success : function(data){
 				
-				location.href="/project/news";
+				location.href="/news";
 			}
 		});
 	});
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		/* alert(post_code); */
 		
 		
-		$(location).attr('href','/project/news/modifyNewsck?post_code='+post_code);
+		$(location).attr('href','/news/modifyNewsck?post_code='+post_code);
 		
 	});
 	

@@ -34,7 +34,7 @@ function ck() {
 		}
 		console.log(query);
 		$.ajax({
-			url : "/project/login/idck",
+			url : "/login/idck",
 			type : "get",
 			data : query,
 			success : function(data) {

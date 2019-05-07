@@ -53,7 +53,7 @@ function ck(){
 	<div id="title" class="card-header">
 		<p id="title2">푸드트럭NEWS</p>
 	</div>
-	<form id="all" action="/project/news/addNews" method="post" onsubmit="return ck();" onreset="historyBack();" >
+	<form id="all" action="/news/addNews" method="post" onsubmit="return ck();" onreset="historyBack();" >
 		<div id="box">
 			<div class="form-group">
 				<label for="exampleInputEmail1">제목</label> <input name="post_title" id="titles" type="text"

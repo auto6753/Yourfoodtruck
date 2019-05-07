@@ -61,7 +61,7 @@ function chk(){
 </head>
 <body>
 	<div id="logo">
-		<a href="/project/rehome">당신의 푸드트럭</a>
+		<a href="/rehome">당신의 푸드트럭</a>
 	</div>
 
 	<div id="all">
