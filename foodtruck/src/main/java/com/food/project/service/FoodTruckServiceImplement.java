@@ -42,7 +42,6 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 		// TODO Auto-generated method stub
 		return mapper.getReviewList(truck_code);
 	} 
-
 	
 
 	

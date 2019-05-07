@@ -8,6 +8,7 @@ public class MenuVO {
 	private String menu_code;
 	private String menu_name;
 	private String menu_url;
+	private String menu_surl;
 	private int menu_category;
 	private int unit_price;
 	private String menu_desc;

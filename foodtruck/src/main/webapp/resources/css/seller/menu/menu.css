@@ -8,8 +8,11 @@
 	padding-top: 2%;
 	display: inline-block;
 	overflow-y: scroll;
+}	
+.mbox{
+	    width: 100%;
+	
 }
-
 .menuf {
 	margin-bottom: 3%;
 	padding: 0 !important;

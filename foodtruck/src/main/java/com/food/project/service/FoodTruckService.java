@@ -10,5 +10,4 @@ public interface FoodTruckService {
 	public FoodTruckVO insertFoodTruck(FoodTruckVO vo);
 	public void insertReview(ReviewVO vo);
 	public ArrayList<ReviewVO> getReviewList(String truck_code);
-	
 }
