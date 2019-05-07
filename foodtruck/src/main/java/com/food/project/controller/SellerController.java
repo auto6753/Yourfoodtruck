@@ -36,10 +36,10 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
-	public String menu(Model model) {
-		int menuNum = 17;
-		
-		model.addAttribute("menuNum", menuNum);
+	public String menu(Model model,HttpSession session) {
+		//int menuNum = 17;
+		FoodTruckVO vo =(FoodTruckVO)session.getAttribute("seller");
+		model.addAttribute("menuNum", sellerservice.getmenu(vo.getTruck_code()));
 		return "seller/menu/menu";
 	}
 	
