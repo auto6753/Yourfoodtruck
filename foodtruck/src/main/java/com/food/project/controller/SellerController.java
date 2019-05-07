@@ -29,6 +29,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/seller")
 public class SellerController {
 	private SellerService sellerservice;
+	private EventService eventService;
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
