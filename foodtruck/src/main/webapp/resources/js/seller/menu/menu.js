@@ -64,7 +64,6 @@ $(document).ready(function(){
 		$(".delChk").prop("checked", false);
 		$(".status").removeClass("selected");
 		$(".status").text("선택해제됨");
-		
 	});
 	
 	$("#goBack").click(function(){
@@ -148,7 +147,6 @@ function tab(e, num){
     select.addClass('on');
     con.eq(num).show();
     con.eq(num).find('*').not(".delChk").css("display", "inline-block");
-    
     // 왜??
 
     menu.click(function(){

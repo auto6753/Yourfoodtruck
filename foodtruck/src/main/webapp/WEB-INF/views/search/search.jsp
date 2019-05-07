@@ -331,7 +331,6 @@ function change(){
          console.log(lng);
          console.log(lat);
          
-         
          var list2 = [];
          for(var i=0;i<obj.length;i++){
              var a = getDistanceFromLatLonInKm(lat,lng,obj[i].lay_y,obj[i].lng_x); 
