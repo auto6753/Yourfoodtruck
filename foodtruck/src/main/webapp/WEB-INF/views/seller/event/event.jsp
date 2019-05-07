@@ -102,7 +102,7 @@
 					<!--content //-->
 					<div class="ctxt mb20">
 						<div class="addEventTitle">이벤트 등록</div>
-						<form action="" method="post" name="form">
+						
 							<div id="upload">
 								<div id="previewId">
 									<div id="imgControlBox">
@@ -200,9 +200,9 @@
 								</tr>
 							</table>
 							<input type="submit" id="submitAddEvent" style="display:none;"/>
-						</form>
+						
 						<div class="btn-r fixedStyle">
-							<button id="addEventBtn" class="btnCommonStyle" onclick="addEventBtn();">등록</button>
+							<button id="addEventBtn" class="btnCommonStyle">등록</button>
 							<button class="btnCommonStyle resetBtn">리셋</button>
 							<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
 						</div>
@@ -242,6 +242,7 @@
 
 							</div>
 							<table id="table">
+									<input type="hidden" id="eventCode"/>
 								<tr>
 									<td class="titleStyle" valign="top"><label class="labelStyle" for="eventName">이벤트명</label></td>
 									<td class="contentStyle" valign="top"><input type="text" id="eventName" name="eventName" required/></td>

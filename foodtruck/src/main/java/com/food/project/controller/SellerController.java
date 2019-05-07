@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
@@ -63,29 +65,15 @@ public class SellerController {
 		return "seller/loc/jusoPopup";
 	}
 	
-	@RequestMapping(value="/event", method=RequestMethod.GET) 
-	public String event(Model model, HttpSession session) {
-//		int onGoingEventNum = 5;
-//		int endEventNum = 13;
-//		
-//		model.addAttribute("onGoingEventNum", onGoingEventNum);
-//		model.addAttribute("endEventNum", endEventNum);
+	@RequestMapping(value="/event", method={RequestMethod.GET, RequestMethod.POST}) 
+	public String event(Model model, HttpSession session, HttpServletRequest request) {
 		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
 		String truckCode = vo.getTruck_code();
-		System.out.println(eventService.getEvent(truckCode));
 		model.addAttribute("eventList", eventService.getEvent(truckCode));
+		String a = request.getParameter("eventName");
+		System.out.println(a);
 		
 		return "seller/event/event";
-	}
-	
-	@RequestMapping(value="/addEvent", method=RequestMethod.GET) 
-	public String addEvent(Model model) {
-		return "seller/event/addEvent";
-	}
-	
-	@RequestMapping(value="/addEvent2", method=RequestMethod.GET) 
-	public String addEvent2(Model model) {
-		return "seller/event/addEvent2";
 	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 

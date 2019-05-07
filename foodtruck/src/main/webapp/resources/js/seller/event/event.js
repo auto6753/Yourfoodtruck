@@ -85,7 +85,7 @@
 	
 	// 딤처리 팝업 레이어(시작)
 	function layer_popup(el) {
-
+		
 		var $el = $(el); //레이어의 id를 $el 변수에 저장
 		var isDim = $el.prev().hasClass('dimBg'); //dimmed 레이어를 감지하기 위한 boolean 변수
 
@@ -106,6 +106,7 @@
 				left : 0
 			});
 		}
+		
 
 		$el.find('button.btn-layerClose').click(function() {
 			isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
@@ -316,6 +317,22 @@
 		});
 		
 		$("#addEventBtn").click(function(){
+			var eventName = $("#eventName").val();
+			var beginDate = $("#beginDate").val();
+			var endDate = $("#endDate").val();
+			var target = $("#target").val();
+			
+			
+			$.ajax({
+				type: "post",
+				url: "event",
+				data: {
+					"eventName": eventName
+				},
+				success: function(data){
+					 alert("success");
+				}
+			});
 //			alert("이벤트가 등록되었습니다.");
 		});
 		
