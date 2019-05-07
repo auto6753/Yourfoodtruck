@@ -29,8 +29,8 @@
 					<td>${i.name}</td>
 					<td>${i.place}</td>
 					<td>${i.festival_name}</td>
-					<td>${i.festival_date}</td>
-					<td>${i.start_time} ~ ${i.end_time}</td>
+					<td>${i.festival_startdate}~${i.festival_enddate}</td>
+					<td>${i.festival_starttime}~${i.festival_endtime}</td>
 					<td>${i.reporting_date}</td>
 					<td>${i.progress}</td>									
 				</tr>

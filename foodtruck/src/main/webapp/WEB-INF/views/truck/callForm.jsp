@@ -11,7 +11,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
 <script>
 	function execPostCode() {
 		new daum.Postcode({
@@ -55,27 +55,36 @@
 			}
 		}).open();
 	}
-	$(document).ready(function(){
+	 $(document).ready(function(){
 		$("#btn2").click(function(){
-			var personname = $("#i1").val();
-			var tel = $("#i2").val();
-			var festivalname = $("#i3").val();
-			var startdate = $("#i4").val();
-			var enddate = $("#i4-1").val();
-			var starttime = $("#i5").val();
-			var endtime = $("#i5-1").val();
-			var placenum = $("#i6").val();
-			var placeload = $("#i7").val();
-			var placedetail = $("#addr3").val();
-			var cost = $("#i8").val();
+			var personname = $("#inname").val();
+			var tel = $("#intel").val();
+			var festivalname = $("#inplace").val();
+			var startdate = $("#Startdate").val();
+			var enddate = $("#Enddate").val();
+			var starttime = $("#Starttime").val();
+			var endtime = $("#Endtime").val();
+			var placenum = $("#postnum").val();
+			var placeload = $("#loadaddr").val();
+			var placedetail = $("#addrdetail").val();
+			var cost = $("#cost").val();
 			var content = $("#content").val();
+
 			
 			var place = placenum +" " + placeload+ " " + placedetail;
+
+
 			console.log(place);
-			alert(personname);
-			console.log(tel+festivalname+startdate+enddate+starttime+endtime+placenum+placeload+placedetail+cost+content);
 			$.ajax({
-				
+				type: "post",
+				url: "/project/truck/callList",
+				data: {name:personname, calltel:tel, festival_name:festivalname, festival_startdate:startdate,festival_enddate:enddate, festival_starttime: starttime, festival_endtime: endtime, place:place, price:cost, content: content},
+				success:function(data){
+					console.log(data);
+				},
+				error:function(error){
+					alert(error);
+				}
 			})
 		});
 		
@@ -123,12 +132,12 @@
 				<input id="Starttime" type="time" class="form-control"> ~ <input id="Endtime" type="time" class="form-control">
 
 				<div id="div3" class="form-group col"> 
-					<input id="postnum" class="form-control" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly">
+					<input id="postnum" class="form-control" placeholder="우편번호" name="addr1"  type="text" readonly="readonly">
 					<button id="btn3" type="button" class="btn btn-default" onclick="execPostCode();">
 						<i class="fa fa-search"></i> 우편번호 찾기</button>
 				</div>
 				<div id="div1" class="form-group col">
-					<input id="loadaddr" class="form-control" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
+					<input id="loadaddr" class="form-control" placeholder="도로명 주소" name="addr2"  type="text" readonly="readonly" />
 				</div>
 				<div id="div2" class="form-group col">
 					<input class="form-control" placeholder="상세주소" name="addr3" id="addrdetail" type="text" />

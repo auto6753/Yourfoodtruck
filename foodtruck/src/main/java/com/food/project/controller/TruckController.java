@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.ReviewVO;
@@ -22,7 +23,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "/truck", method = RequestMethod.GET)
+@RequestMapping(value = "/truck")
 public class TruckController {
 	private FoodTruckService service;
 	private FoodtruckMapper mapper;
@@ -100,8 +101,22 @@ public class TruckController {
 //		return "";
 //	}
 
-//	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
-//	public String callForm(Locale locale, Model model) {
-//		return "truck/callForm";
-//	}
+	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
+	public String callForm(Locale locale) {
+		
+		
+		/* callList.insertCallList(vo); */
+		 
+		return "truck/callForm";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/callList", method = RequestMethod.POST)
+	public String callList(Locale locale, CallListVO vo) {
+		
+		System.out.print(vo);
+		/* callList.insertCallList(vo); */
+	
+		
+		return "success";
+	}
 }

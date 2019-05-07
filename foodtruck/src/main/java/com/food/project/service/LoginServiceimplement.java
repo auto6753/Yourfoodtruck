@@ -35,5 +35,8 @@ public class LoginServiceimplement implements LoginService {
 	@Override
 	public CustomerVO getTelephone(String telephone) {	return mapper.getTelephone(telephone);
 	}
+	@Override
+	public CustomerVO updatePassword(String email) {	return mapper.updatePassword(email);
+	}
 
 }

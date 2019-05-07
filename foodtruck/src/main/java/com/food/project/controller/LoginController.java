@@ -104,12 +104,18 @@ public class LoginController {
 	
 	@RequestMapping(value = "/passSearchck", method = RequestMethod.POST)
 	@ResponseBody
-	public String passSearchck(Locale locale, Model model , CustomerVO vo) {
+	public String passSearchck(Locale locale, Model model , CustomerVO vo,HttpSession session) {
+		System.out.println(vo.getPassword());
+		
+		//CustomerVO vo2= (CustomerVO) session.getAttribute("sessionid");
+		
+		//vo2.getPassword();
 		CustomerVO ck = loginservice.passSearch(vo);
 		 if (ck == null) {
 			 return "false";
 		 }else
 			 return ck.getPassword();
+		 
 				
 	}
 
