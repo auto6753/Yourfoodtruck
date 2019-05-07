@@ -38,23 +38,33 @@ $(document).ready(function(){
 	});
 	
 	$("#delMenu2").click(function(){
-		var checked = $('input:checkbox[name=delChk]:checked').length;
+		//var checked2 = $('input:checkbox[name=delChk]:checked').
+		var checked = $('input:checkbox[name=delChk]:checked').parent('div');
+
 		
-		if(checked == 0) {
+		console.log(checked);
+		//alert(checked);
+		
+		if(checked.length == 0) {
 			alert("선택된 메뉴가 없습니다.\n삭제할 메뉴를 선택해 주세요!");
 		}
 	});
 
 	$("#chkAllMenu").click(function(){
-		$(".delChk").prop("checked", true);
-		$(".status").addClass("selected");
-		$(".status").text("선택됨");
+	
+		var i = $(".on").index() +1;
+		//	alert(i);
+		$(".delChk"+i).prop("checked", true);
+		$(".status"+i).addClass("selected");
+		$(".status"+i).text("선택됨");
+		
 	});
 
 	$("#unchkAllMenu").click(function unchkAllMenu(){
 		$(".delChk").prop("checked", false);
 		$(".status").removeClass("selected");
 		$(".status").text("선택해제됨");
+		
 	});
 	
 	$("#goBack").click(function(){
@@ -123,6 +133,11 @@ $(function () {
 	tab('#tab',0);	
 });
 
+function unckbox(){
+	$(".delChk").prop("checked", false);
+	$(".status").removeClass("selected");
+	$(".status").text("선택해제됨");
+}
 function tab(e, num){
     var num = num || 0;
     var menu = $(e).children();
@@ -133,6 +148,7 @@ function tab(e, num){
     select.addClass('on');
     con.eq(num).show();
     con.eq(num).find('*').not(".delChk").css("display", "inline-block");
+    
     // 왜??
 
     menu.click(function(){
@@ -154,5 +170,7 @@ function tab(e, num){
         	$(".delChk").css("display", "inline-block");
         }
        $(".menuBox").scrollTop(0);
+       unckbox();
+      
     });
 }
