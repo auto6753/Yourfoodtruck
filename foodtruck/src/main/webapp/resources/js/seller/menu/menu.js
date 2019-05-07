@@ -38,17 +38,26 @@ $(document).ready(function(){
 	});
 	
 	$("#delMenu2").click(function(){
-		var checked = $('input:checkbox[name=delChk]:checked').length;
+		//var checked2 = $('input:checkbox[name=delChk]:checked').
+		var checked = $('input:checkbox[name=delChk]:checked').parent('div');
+
 		
-		if(checked == 0) {
+		console.log(checked);
+		//alert(checked);
+		
+		if(checked.length == 0) {
 			alert("선택된 메뉴가 없습니다.\n삭제할 메뉴를 선택해 주세요!");
 		}
 	});
 
 	$("#chkAllMenu").click(function(){
-		$(".delChk").prop("checked", true);
-		$(".status").addClass("selected");
-		$(".status").text("선택됨");
+	
+		var i = $(".on").index() +1;
+		//	alert(i);
+		$(".delChk"+i).prop("checked", true);
+		$(".status"+i).addClass("selected");
+		$(".status"+i).text("선택됨");
+		
 	});
 
 	$("#unchkAllMenu").click(function unchkAllMenu(){
@@ -83,11 +92,39 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(".imgBox").click(function(){
+/*	$(".imgBox").click(function(){
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);
+		window.name = "parentForm";
+		openWin = window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+		//openWin.("#menuname").val()=$(this).val();
 		
-		window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+		openWin.document.getElementById("menuname").value="1";
+         
+		
+		
+	});*/
+	
+	$(".menuf").on("click",".menut",function(){
+		var a = $(this);
+		
+		console.log("------");
+		console.log(a.find("div").children().attr('src'));
+		console.log(a.find("div").next().html());
+		console.log(a.find("div").next().next().html());
+		console.log(a.find("div").next().next().next().val());
+		a.find("div").children().addClass("1"); //src
+		a.find("div").next().addClass("2"); // 메뉴이름
+		a.find("div").next().next().addClass("3"); //메뉴가격
+		a.find("div").next().next().next().addClass("4"); //메뉴코드
+		a.find("div").next().next().next().next().addClass("5");
+		var popupX = (window.screen.width / 2) - (430 / 2);
+		var popupY = (window.screen.height / 2) - (600 / 2);
+		window.name = "parentForm";
+		openWin = window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+		//openWin.("#menuname").val()=$(this).val();
+		
+		//openWin.document.getElementById("menuname").value="1";
 	});
 });
 
@@ -95,6 +132,11 @@ $(function () {
 	tab('#tab',0);	
 });
 
+function unckbox(){
+	$(".delChk").prop("checked", false);
+	$(".status").removeClass("selected");
+	$(".status").text("선택해제됨");
+}
 function tab(e, num){
     var num = num || 0;
     var menu = $(e).children();
@@ -126,5 +168,7 @@ function tab(e, num){
         	$(".delChk").css("display", "inline-block");
         }
        $(".menuBox").scrollTop(0);
+       unckbox();
+      
     });
 }

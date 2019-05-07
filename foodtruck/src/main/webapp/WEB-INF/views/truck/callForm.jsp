@@ -145,7 +145,6 @@
 				<input id="cost" class="form-control">
 				<textarea id="content" class="form-control" cols="30" rows="5"
 					placeholder="관객연령대, 관객 예상수, 행사컨셉 등을 상세히 기술해주세요."></textarea>
-					
 			</div>
 			<div id="oj">
 				<button id="btn1" class="btn btn-default">선수금지불</button>

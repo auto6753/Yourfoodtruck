@@ -52,7 +52,6 @@
 		<div class="div2 col">
  			<br> 아이디:${cusinfo.email} <br>비밀번호
  			<button href="#layer1" class="btn-example">변경</button>
-
 			
 				<div class="pop-layer" id="layer1">
 					<div class="pop-container">
@@ -93,8 +92,6 @@
 </body>
 <script>
 	$(document).ready(function() {
-					
-						
 						$('.btn-example').click(function() {
 							var $href = $(this).attr('href');
 							layer_popup($href);

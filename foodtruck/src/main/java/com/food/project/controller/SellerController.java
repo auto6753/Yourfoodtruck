@@ -36,10 +36,10 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
-	public String menu(Model model) {
-		int menuNum = 17;
-		
-		model.addAttribute("menuNum", menuNum);
+	public String menu(Model model,HttpSession session) {
+		//int menuNum = 17;
+		FoodTruckVO vo =(FoodTruckVO)session.getAttribute("seller");
+		model.addAttribute("menuNum", sellerservice.getmenu(vo.getTruck_code()));
 		return "seller/menu/menu";
 	}
 	
@@ -63,13 +63,14 @@ public class SellerController {
 		return "seller/loc/jusoPopup";
 	}
 	
-	@RequestMapping(value="/event", method=RequestMethod.GET) 
-	public String event(Model model) {
-		int onGoingEventNum = 5;
-		int endEventNum = 13;
+	@RequestMapping(value="/event", method={RequestMethod.GET, RequestMethod.POST}) 
+	public String event(Model model, HttpSession session, HttpServletRequest request) {
+		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
+		String truckCode = vo.getTruck_code();
+		model.addAttribute("eventList", eventService.getEvent(truckCode));
+		String a = request.getParameter("eventName");
+		System.out.println(a);
 		
-		model.addAttribute("onGoingEventNum", onGoingEventNum);
-		model.addAttribute("endEventNum", endEventNum);
 		return "seller/event/event";
 	}
 	
