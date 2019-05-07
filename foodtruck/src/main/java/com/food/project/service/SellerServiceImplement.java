@@ -22,4 +22,17 @@ public class SellerServiceImplement implements SellerService {
 		return sellermapper.getmenu(truckcode);
 	}
 
+	@Override
+	public void insertmenu(MenuVO vo) {
+		// TODO Auto-generated method stub
+		sellermapper.insertmenu(vo);
+		
+	}
+
+	@Override
+	public void updatemenu(MenuVO vo) {
+		sellermapper.updatemenu(vo);
+		
+	}
+
 }
