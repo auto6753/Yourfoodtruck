@@ -268,7 +268,7 @@ h3 {
 	<input type="hidden" id="ref">
 	<div id="cuorder">
 		<div id="logo">
-			<a href="/project/rehome">현재 푸드트럭</a>
+			<a href="/rehome">현재 푸드트럭</a>
 		</div>
 		<div>
 			<div id="box">

@@ -25,7 +25,7 @@
 <body>
 
 	<div id="logo">
-		<a href="/project/rehome">당신의 푸드트럭</a>
+		<a href="/rehome">당신의 푸드트럭</a>
 	</div>
 	<div id="all">
 		<div id="member" class="card-header">회원가입</div>
@@ -36,7 +36,7 @@
 					<div id="card" class="card">
 
 						<article class="card-body">
-							<form id="target" name="fr" action="/project/login/insert"
+							<form id="target" name="fr" action="/login/insert"
 								onsubmit="return ck();" method="post">
 								<!-- onsubmit="return ck();" -->
 								<div class="form-group">

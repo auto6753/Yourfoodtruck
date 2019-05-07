@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value="/pay")
+@RequestMapping(value="/m.pay")
 public class M_PaymentController {
 	
 	private PaymentService payService;

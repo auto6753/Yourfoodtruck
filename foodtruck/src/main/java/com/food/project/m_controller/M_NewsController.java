@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 public class M_NewsController {
 	PostService service;
 	
-	@RequestMapping(value = "/news", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.news", method = RequestMethod.GET)
 	public String news(Model model) {
 		model.addAttribute("postList",service.getPostList(0));
 		
@@ -35,7 +35,7 @@ public class M_NewsController {
 //		return "news/specific";
 //	}
 	
-	@RequestMapping(value = "/news/specificck", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.news/specificck", method = RequestMethod.GET)
 	public String specificck(Model model,@RequestParam("post_code") String post_code) {
 		
 		/* System.out.println(post_code); */
@@ -47,7 +47,7 @@ public class M_NewsController {
 		return "news/specific";
 	}
 	
-	@RequestMapping(value= "/news/addNews", method= RequestMethod.GET)
+	@RequestMapping(value= "/m.news/addNews", method= RequestMethod.GET)
 	public String addNews(Model model) {
 		
 		
@@ -57,7 +57,7 @@ public class M_NewsController {
 		 */
 		return "news/addNews";
 	}
-	@RequestMapping(value= "/news/addNews", method= RequestMethod.POST)
+	@RequestMapping(value= "/m.news/addNews", method= RequestMethod.POST)
 	public String addNews(Model model, PostVO vo) {
 		
 		
@@ -68,10 +68,10 @@ public class M_NewsController {
 		 vo.setPost_class(0);//뉴스와 이벤트 구분해주는것 ex)뉴스는 0 , 이벤트는 1 
 		 //model.addAttribute("postList",service.getPostList());
 		
-		return "redirect:/news";
+		return "redirect:/m.news";
 	}
 	
-	@RequestMapping(value = "/news/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/m.news/delete", method = RequestMethod.POST)
 	@ResponseBody//다시 js에 있는 ajax 로 돌아가는거
 	public String delete(Model model , PostVO vo) {
 		
@@ -84,7 +84,7 @@ public class M_NewsController {
 		
 		return "";
 	}
-	@RequestMapping(value = "/news/modifyNewsck", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.news/modifyNewsck", method = RequestMethod.GET)
 	public String modifyNewsck(Model model,PostVO vo) {
 
 		PostVO vo1 = service.getSpecific(vo);
@@ -94,7 +94,7 @@ public class M_NewsController {
 		return "news/modifyNews";
 	}
 	
-	@RequestMapping(value = "/news/modifyNews", method = RequestMethod.POST)
+	@RequestMapping(value = "/m.news/modifyNews", method = RequestMethod.POST)
 	public String modifyNews(Model model,PostVO vo) {
 //		String post_code2="190401001"; 
 //		model.addAttribute("post",service.getPost(post_code2));
@@ -108,7 +108,7 @@ public class M_NewsController {
 		return "redirect:/news";
 	}
 	
-	@RequestMapping(value = "/eventOn", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.eventOn", method = RequestMethod.GET)
 	public String eventOn(Locale locale, Model model) {
 		return "event/event";
 	}

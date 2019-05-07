@@ -23,12 +23,12 @@ $(document).ready(function(){
 			 post_code : post_code
 		}
 		$.ajax({
-			url: "/project/news/delete",
+			url: "/news/delete",
 			type: "post",
 			data: query,
 			success : function(data){
 				
-				location.href="/project/news";
+				location.href="/news";
 			}
 		});
 	});
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		/* alert(post_code); */
 		
 		
-		$(location).attr('href','/project/news/modifyNewsck?post_code='+post_code);
+		$(location).attr('href','/news/modifyNewsck?post_code='+post_code);
 		
 	});
 	
@@ -63,7 +63,7 @@ $(document).ready(function(){
 					<input id="d" type="button"   value="수정" class="btn" onClick="">
 					<!-- <button id="d" type="submit" class="btn" onClick="">수정</button>  -->
 					<button id="delete" class="btn">삭제</button>
-					<a href="/project/news"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
+					<a href="/news"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
 				</p>
 			</div>
 		</div>

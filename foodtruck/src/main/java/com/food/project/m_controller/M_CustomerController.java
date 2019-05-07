@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 
-@RequestMapping(value = "/customer", method = RequestMethod.GET)
+@RequestMapping(value = "/m.customer", method = RequestMethod.GET)
 public class M_CustomerController {
 
 	private LoginService service;

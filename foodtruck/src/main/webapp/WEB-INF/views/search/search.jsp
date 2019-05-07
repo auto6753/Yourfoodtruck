@@ -154,7 +154,7 @@ daum.maps.event.addListener(map, 'zoom_changed', function() {
 
    
 markers=[]; //마커를 넣을배열 생성
-var imageSrc = '/project/resources/image/트럭사진.png';// 마커이미지의 주소입니다    
+var imageSrc = '/resources/image/트럭사진.png';// 마커이미지의 주소입니다    
 
 
  for (var i = 0; i < test2.length; i ++) {

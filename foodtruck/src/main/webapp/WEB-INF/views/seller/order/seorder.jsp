@@ -80,7 +80,7 @@ function pay(a){
 		console.log(list);
  		$.ajax({
 			type:"POST",
-			url:"/project/pay/insertPayment",
+			url:"/pay/insertPayment",
 			data:JSON.stringify(list),
 			contentType:"application/json;charset=UTF-8",
 			traditional:true,
@@ -121,7 +121,7 @@ function release(a) {
 		};
 		$.ajax({
 			type:"POST",
-			url:"/project/pay/updatePayment",
+			url:"/pay/updatePayment",
 			data:JSON.stringify(data),
 			contentType:"application/json;charset=UTF-8",
 			traditional:true,

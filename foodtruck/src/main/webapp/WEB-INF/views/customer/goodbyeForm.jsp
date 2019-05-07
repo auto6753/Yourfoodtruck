@@ -12,7 +12,7 @@
 <script>
 $(document).ready(function() {
 	$(".goodbye").click(function(){
-		location.href="/project/customer/goodbye";
+		location.href="/customer/goodbye";
 	});
 });
 </script>

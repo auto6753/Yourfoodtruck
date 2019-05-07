@@ -12,7 +12,7 @@ import com.food.project.domain.BoardSearchVO;
 @Controller
 public class M_BoardController{
 
-	@RequestMapping(value = "/board/**/boardList")
+	@RequestMapping(value = "/m.board/**/boardList")
     public String boardList(HttpServletRequest req, ModelMap modelMap, @ModelAttribute("boardSearchVO") BoardSearchVO boardSearchVO) {
 		String jspPath =req.getRequestURI();
 		 

@@ -25,7 +25,7 @@
 					<input id="d" type="button"   value="수정" class="btn" onClick="">
 					<!-- <button id="d" type="submit" class="btn" onClick="">수정</button>  -->
 					<button id="delete" class="btn">삭제</button>
-					<a href="/project/area/?post_code=${post_code}&curPage=${curPage}&keyword=${keyword}"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
+					<a href="/area/?post_code=${post_code}&curPage=${curPage}&keyword=${keyword}"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
 				</p>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 <script>
 $(document).ready(function(){
 	var ht=location.search;
-	$('#back').parent().attr("href","/project/area"+ht);
+	$('#back').parent().attr("href","/area"+ht);
 	$("#delete").click(function(){
 		var post_code = ${areaspecific.post_code};
 		
@@ -41,18 +41,18 @@ $(document).ready(function(){
 			 post_code : post_code
 		}
 		$.ajax({
-			url: "/project/area/delete",
+			url: "/area/delete",
 			type: "post",
 			data: query,
 			success : function(data){
-				location.href="/project/area";
+				location.href="/area";
 			}
 		});
 	});
 	$("#d").click(function(){
 		var post_code = ${areaspecific.post_code};
 		/* alert(post_code); */
-		$(location).attr('href','/project/area/modifyAreack?post_code='+post_code+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
+		$(location).attr('href','/area/modifyAreack?post_code='+post_code+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
 	});
 });
 </script>

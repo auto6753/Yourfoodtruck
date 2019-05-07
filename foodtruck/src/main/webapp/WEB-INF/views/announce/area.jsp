@@ -16,14 +16,14 @@
 	
 	<div id="searchall">
 		<nav class="navbar navbar-light bg-light">
-			<form class="form-inline" action="/project/area" method="post">
+			<form class="form-inline" action="/area" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
 				<input name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
 				<input type="submit" value="조회" class="btn">
 				<c:if test="${not empty sessionScope.sessionid}">
-				<a href="/project/area/addArea"><button id="pageadd" type="button" class="btn">등록</button></a>
+				<a href="/area/addArea"><button id="pageadd" type="button" class="btn">등록</button></a>
 				</c:if>
 			</form>
 		</nav>
@@ -64,7 +64,7 @@
 	</div>
 <script>
 	function list(page) {
-		location.href="/project/area?curPage="+page+"&keyword=${map.keyword}";
+		location.href="/area?curPage="+page+"&keyword=${map.keyword}";
 	}
    $(document).ready(function(){
       $('.boardTitle').on('click', function(){
@@ -82,10 +82,10 @@
             
          }//get 방식 주소치는거랑 똑같음
       }); */
-      $(location).attr('href','/project/area/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
+      $(location).attr('href','/area/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
       });
       $('#title').click(function() {
-    	 location.href="/project/area"; 
+    	 location.href="/area"; 
       });
    });
 </script>	

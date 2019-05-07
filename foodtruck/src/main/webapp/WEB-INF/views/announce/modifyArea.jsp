@@ -15,7 +15,7 @@
 	<div id="title" class="card-header">
 		<p id="title2">허가구역 안내</p>
 	</div>
-	<form id="all" action="/project/area/modifyArea" method="post" >
+	<form id="all" action="/area/modifyArea" method="post" >
 	<div id="box">
 		<div class="form-group">
 			<input type="hidden"  name="post_code" value="${areaspecificcontent.post_code}">

@@ -44,15 +44,6 @@ public class M_HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-	@ResponseBody
-	@RequestMapping(value = "/pushToken", method = RequestMethod.POST)
-	public String token(HttpServletRequest request) {
-//		model.addAttribute("content",main(model));
-		String token=request.getParameter("token");
-		System.out.println(token);
-		request.getSession().setAttribute("userToken",token);
-		return "ok";
-	}
 //	@SuppressWarnings({ "null", "unused" })
 //	@ResponseBody
 //	@RequestMapping(value="/pushTest")

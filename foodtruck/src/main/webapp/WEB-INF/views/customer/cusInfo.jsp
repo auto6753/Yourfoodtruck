@@ -16,7 +16,7 @@
 		<h1>회원정보</h1>
 
 		<div class="img col">
-	<img src="/project/resources/image/customer.svg" class="img2" id="image">
+	<img src="/resources/image/customer.svg" class="img2" id="image">
 			<button id="pop_bt" class="bt1">프로필수정</button>
 			<div id="pop" style="display:none;">
 				<div style="height:370px">
@@ -28,10 +28,10 @@
   <input type="radio" name="pos" id="pos3">
   <input type="radio" name="pos" id="pos4">
   <ul>
-    <li><img src="/project/resources/image/customer2.svg" class="img2"></li>
-    <li><img src="/project/resources/image/customer3.svg" class="img2"></li>
-    <li><img src="/project/resources/image/customer4.svg" class="img2"></li>
-    <li><img src="/project/resources/image/customer5.svg" class="img2"></li>
+    <li><img src="/resources/image/customer2.svg" class="img2"></li>
+    <li><img src="/resources/image/customer3.svg" class="img2"></li>
+    <li><img src="/resources/image/customer4.svg" class="img2"></li>
+    <li><img src="/resources/image/customer5.svg" class="img2"></li>
   </ul>
   <p class="pos">
     <label for="pos1"></label>

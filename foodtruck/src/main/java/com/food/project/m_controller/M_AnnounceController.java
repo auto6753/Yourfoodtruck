@@ -30,14 +30,14 @@ import lombok.AllArgsConstructor;
 @Controller
 public class M_AnnounceController {
 	PostService postService;
-	@RequestMapping(value = "/announce", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.announce", method = RequestMethod.GET)
 	public String recruit(Model model) {
 		return "announce/recruit";
 	}
 	
 	
 	//허가구역 관리 컨트롤러
-	@RequestMapping(value = "/area")
+	@RequestMapping(value = "/m.area")
 	public String area(Model model,@RequestParam(defaultValue="2") int post_class,
 			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
 		int totPage=0;
@@ -64,7 +64,7 @@ public class M_AnnounceController {
 		model.addAttribute("map",map);
 		return "announce/area";
 	}
-	@RequestMapping(value = "/area/specificck", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.area/specificck", method = RequestMethod.GET)
 	public String specificck(Model model,@RequestParam("post_code") String post_code) {
 		
 		/* System.out.println(post_code); */
@@ -75,27 +75,27 @@ public class M_AnnounceController {
 		return "announce/areaspecific";
 	}
 	
-	@RequestMapping(value= "/area/addArea", method= RequestMethod.GET)
+	@RequestMapping(value= "/m.area/addArea", method= RequestMethod.GET)
 	public String addArea(Model model) {
 		return "announce/addArea";
 	}
 	
 	
-	@RequestMapping(value= "/area/addArea", method= RequestMethod.POST)
+	@RequestMapping(value= "/m.area/addArea", method= RequestMethod.POST)
 	public String addArea(Model model, PostVO vo) {
 		vo.setPost_class(2);
 		postService.insertPost(vo);
 		return "redirect:/area";
 	}
 	
-	@RequestMapping(value = "/area/modifyAreack", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.area/modifyAreack", method = RequestMethod.GET)
 	public String modifyAreack(Model model,PostVO vo) {
 		PostVO vo1 = postService.getSpecific(vo);
 		model.addAttribute( "areaspecificcontent" , vo1);
 		return "announce/modifyArea";
 	}
 	
-	@RequestMapping(value = "/area/modifyArea", method = RequestMethod.POST)
+	@RequestMapping(value = "/m.area/modifyArea", method = RequestMethod.POST)
 	public String modifyArea(Model model,PostVO vo) {
 		vo.setPost_class(2);
 		postService.updatePost(vo);
@@ -103,7 +103,7 @@ public class M_AnnounceController {
 	}
 	
 	
-	@RequestMapping(value = "/area/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/m.area/delete", method = RequestMethod.GET)
 	@ResponseBody
 	public String areaDelete(Model model,PostVO vo) {
 		postService.deletePost(vo);
