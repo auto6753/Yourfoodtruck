@@ -40,14 +40,6 @@
       name="url" /> <property value="foodtruck" name="username" /> <property value="dudwlsvnem" 
       name="password" /> </bean>
 	
-	<websocket:handlers>
-		<websocket:mapping path="/project/echo" handler="echoHandler" />
-			<websocket:handshake-interceptors>
-			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-		</websocket:handshake-interceptors>
-	</websocket:handlers>
-
-	<bean id="echoHandler" class="com.food.project.socket.EchoHandler" />
 	
 
 
