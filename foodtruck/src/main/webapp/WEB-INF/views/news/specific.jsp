@@ -62,7 +62,7 @@ $(document).ready(function(){
 				<p class="lead">
 					<input id="d" type="button"   value="수정" class="btn" onClick="">
 					<!-- <button id="d" type="submit" class="btn" onClick="">수정</button>  -->
-					<button id="delete" class="btn">삭제</button>
+					<input type="button" id="delete" class="btn" value="삭제">      
 					<a href="/project/news"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
 				</p>
 			</div>
