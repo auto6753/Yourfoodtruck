@@ -17,4 +17,14 @@
 		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,email)
 		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{email})
 	</insert>
+	<insert id="insertReview" parameterType="com.food.project.domain.ReviewVO">
+		insert into review(truck_code,email,review_regdate,review_score,review_content,review_reply_content,review_reply_regdate,review_code)
+		values (#{truck_code},#{email},sysdate,#{review_score},#{review_content},#{review_reply_content , jdbcType=VARCHAR},#{review_reply_regdate ,jdbcType=VARCHAR},'rv'||to_char(sysdate,'yymmdd')||to_char(review_sequence.NEXTVAL,'fm00000'))
+	</insert>
+	<select id="getReviewList" resultType="com.food.project.domain.ReviewVO" parameterType="String">
+		select truck_code,email, review_regdate ,review_score,review_content,review_reply_content,review_reply_regdate, review_code from review where truck_code = #{truck_code} order by review_regdate DESC
+
+	</select>
+	
+	
 </mapper>
