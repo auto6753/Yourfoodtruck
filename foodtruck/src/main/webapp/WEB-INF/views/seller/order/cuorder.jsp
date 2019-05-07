@@ -268,7 +268,7 @@ h3 {
 	<input type="hidden" id="ref">
 	<div id="cuorder">
 		<div id="logo">
-			<a href="/project/rehome">현재 푸드트럭</a>
+			<a href="/rehome">현재 푸드트럭</a>
 		</div>
 		<div>
 			<div id="box">
@@ -278,7 +278,7 @@ h3 {
 					<div id="box2">
 						<div id="foodlist">
 							<c:forEach var="s" items="${menulist}">
-								<button class="btn food"></button>
+								<!-- <button class="btn food"> --><img class="btn food" src="${pageContext.request.contextPath}/resources/image/upload/${s.menu_url}"><!-- </button> -->
 								<p>${s.menu_name }</p>
 								<p>${s.unit_price }</p>
 								<input type="hidden" value="${s.menu_code }">

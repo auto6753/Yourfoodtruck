@@ -37,4 +37,12 @@ public class PaymentServiceImplement implements PaymentService {
 			return result;
 		}
 	}
+
+	@Override
+	public int updatePaymentList(PaymentVO vo) {
+		int result=0;
+		System.out.println(vo.getPayment_class());
+		result=mapper.updatePaymentList(vo);
+		return result;
+	}
 }

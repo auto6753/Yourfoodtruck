@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="title-padding">1:1 문의</h3>
-			<form action="/project/help/questionReg" method="post"></form>
+			<form action="/help/questionReg" method="post"></form>
 				<div class="form-group">
 					<label for="title" class="text-padding-2">제목</label>
 					<input type="text" id="title" class="form-control width-control"/>
@@ -82,7 +82,7 @@ function helpCheck() {
 }
 $(function() {
 	$('#cancel').click(function() {
-		location.href="/project/help";
+		location.href="/help";
 	});
 	
 });

@@ -1,6 +1,7 @@
 package com.food.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ public class PaymentController {
 	public void payment(@RequestBody String param) {
 		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
 		paymentMap = JSONArray.fromObject(param);
+		System.out.println(paymentMap);
 		int a=payService.insertPaymentList(paymentMap);
 		if(a==0) System.out.println("Error");
 		else System.out.println("Success");
@@ -48,4 +50,23 @@ public class PaymentController {
 		System.out.println(vo.getPayment_telephone());
 		return "success";
 	}
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/updatePayment")
+	@ResponseBody
+	public void updatePayment(@RequestBody String param,PaymentVO vo) {
+		Map<String,Object> paymentMap = new HashMap<String,Object>();
+		paymentMap = JSONObject.fromObject(param);
+		vo.setTruck_code((String)paymentMap.get("truck_code"));
+		vo.setPayment_telephone((String)paymentMap.get("payment_telephone"));
+		vo.setPayment_code((String)paymentMap.get("payment_code"));
+		vo.setPayment_class(
+				(int)paymentMap.get("payment_class"));
+		
+		System.out.println(paymentMap);
+		int a=payService.updatePaymentList(vo);
+		if(a==0) System.out.println("Error");
+		else System.out.println("Success");
+	}
+	
+	
 }

@@ -28,7 +28,7 @@
 				}
 				$.ajax({
 					type:"get",
-					url:"/project/login/idSearchck",
+					url:"/login/idSearchck",
 					data:query,
 					success:function(data){
 						if(data == "false"){
@@ -72,7 +72,7 @@ function ck(){
 <body>
 
 	<div id="logo">
-		<a href="/project/rehome">당신의 푸드트럭</a>
+		<a href="/rehome">당신의 푸드트럭</a>
 	</div>
 
 	<div id="idsearch">
@@ -102,12 +102,12 @@ function ck(){
 				
 			</div>
 			<div id="pwnext" style="display: inline-block;">
-				<a href="/project/login/passSearch"><button id="button"
+				<a href="/login/passSearch"><button id="button"
 						type="button" class="btn">비밀번호찾기</button></a>
 			</div>
 
 			<div id="loginnext" style="display: inline-block;">
-				<a href="/project/login"><button id="button1" type="button"
+				<a href="/login"><button id="button1" type="button"
 						class="btn">로그인하기</button></a>
 			</div>
 		</form>

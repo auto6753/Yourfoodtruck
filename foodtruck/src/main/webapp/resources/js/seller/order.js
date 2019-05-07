@@ -97,7 +97,7 @@ $(document).ready(function() {
 		console.log(date.toString());
 		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
 		for(var a=0 ;a< list.length; a++) {
-			list[a].payment_class=2;
+			list[a].payment_class=1;
 			list[a].truck_code=$('#sessionTruckCode').val();
 			list[a].payment_telephone=payment_telephone;
 			firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
@@ -125,7 +125,7 @@ $(document).ready(function() {
 		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
 		
 		for(var a=0 ;a< list.length; a++) {
-			list[a].payment_class=3;
+			list[a].payment_class=0;
 			list[a].truck_code=$('#sessionTruckCode').val();
 			list[a].payment_telephone=payment_telephone;
 			firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);

@@ -12,7 +12,7 @@
 <script>
 $(document).ready(function() {
 	$(".main").click(function(){
-		location.href="/project/";
+		location.href="/";
 	});
 });
 </script>

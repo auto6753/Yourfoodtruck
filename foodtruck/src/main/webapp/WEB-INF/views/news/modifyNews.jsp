@@ -23,7 +23,7 @@
 	<div id="title" class="card-header">
 		<p id="title2">푸드트럭NEWS</p>
 	</div>
-	<form id="all" action="/project/news/modifyNews" method="post" >
+	<form id="all" action="/news/modifyNews" method="post" >
 	<div id="box">
 		<div class="form-group">
 			<input type="hidden"  name="post_code" value="${specificcontent.post_code}">

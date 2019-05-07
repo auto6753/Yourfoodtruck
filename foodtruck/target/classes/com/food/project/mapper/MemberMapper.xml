@@ -35,9 +35,8 @@
 	</select>
 	
 	<delete id="deletmem">
-		delete from member where m_mail = #{m_mail}
+		delete from customer where email = #{m_mail}
 	</delete>
-	
 <!--아이디 서치 -->
 	<select id="idSearch" resultType="com.food.project.domain.MemberVO">
 		select m_mail from member where m_name like #{m_name} and hp LIKE #{hp}
@@ -46,4 +45,7 @@
 	<select id="passSearch" resultType="com.food.project.domain.MemberVO">
 		select m_passwd from member where m_mail like #{m_mail} and m_name like #{m_name} and hp like #{hp}
 	</select>
+	<update id="updateEmail" parameterType="com.food.project.domain.PostVO">
+		update post set post_moddate = sysdate, post_content=#{post_content},post_title=#{post_title} where post_code=#{post_code , jdbcType=VARCHAR}<!-- post_url=#{post_url} -->
+	</update>
 </mapper>

@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
@@ -23,12 +24,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 
-@RequestMapping(value = "/customer", method = RequestMethod.GET)
+@RequestMapping(value = "/customer")
 public class CustomerController {
 
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
+	private Object password;
+
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
@@ -82,9 +85,22 @@ public class CustomerController {
 		 return "customer/callList";
 		 
 	}
-	
-	@RequestMapping(value = "/cusInfo", method = RequestMethod.GET)
-	public String cusInfo(Locale locale, Model model) {
+
+	@RequestMapping(value = "/cusInfo", method= {RequestMethod.POST, RequestMethod.GET})
+	public String cusInfo(Locale locale, Model model, HttpSession session, @RequestParam("password") String password) {
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		System.out.println(vo.getEmail());
+		
+		CustomerVO cus = service.getCustomer(vo.getEmail());
+		System.out.println(cus);
+		model.addAttribute("cusinfo", cus);
+		
+		/* String ps = .getPassword(password)); */
+		 
+		
+		System.out.println(vo.getPassword());
+		/* service.updatePassword(vo.getPassword()); */
+		 
 		return "customer/cusInfo";
 	}
 	
@@ -99,7 +115,8 @@ public class CustomerController {
 		CustomerVO c = new CustomerVO();
 		c=(CustomerVO) request.getSession().getAttribute("sessionid");
 		request.getSession().removeAttribute("sessionid");
-		service.delete(c.getEmail());	
+		service.delete(c.getEmail());
+		
 		return "customer/goodbye";
 	}
 }

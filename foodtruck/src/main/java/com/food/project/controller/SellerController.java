@@ -36,10 +36,10 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
-	public String menu(Model model) {
-		int menuNum = 17;
-		
-		model.addAttribute("menuNum", menuNum);
+	public String menu(Model model,HttpSession session) {
+		//int menuNum = 17;
+		FoodTruckVO vo =(FoodTruckVO)session.getAttribute("seller");
+		model.addAttribute("menuNum", sellerservice.getmenu(vo.getTruck_code()));
 		return "seller/menu/menu";
 	}
 	
@@ -63,13 +63,14 @@ public class SellerController {
 		return "seller/loc/jusoPopup";
 	}
 	
-	@RequestMapping(value="/event", method=RequestMethod.GET) 
-	public String event(Model model) {
-		int onGoingEventNum = 5;
-		int endEventNum = 13;
+	@RequestMapping(value="/event", method={RequestMethod.GET, RequestMethod.POST}) 
+	public String event(Model model, HttpSession session, HttpServletRequest request) {
+		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
+		String truckCode = vo.getTruck_code();
+		model.addAttribute("eventList", eventService.getEvent(truckCode));
+		String a = request.getParameter("eventName");
+		System.out.println(a);
 		
-		model.addAttribute("onGoingEventNum", onGoingEventNum);
-		model.addAttribute("endEventNum", endEventNum);
 		return "seller/event/event";
 	}
 	
@@ -84,7 +85,38 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
-	public String passenger(Model model) {
+	public String passenger(Model model,HttpSession session) {
+		FirebaseApp defaultApp = null;
+		CustomerVO vo=new CustomerVO();
+		vo=(CustomerVO) session.getAttribute("sessionid");
+		String email=vo.getEmail();
+		FileInputStream serviceAccount;
+		try {
+			if(defaultApp==null) {
+				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+				FirebaseOptions options = new FirebaseOptions.Builder()
+						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+						.build();
+				defaultApp = FirebaseApp.initializeApp(options);
+				System.out.println("First"+defaultApp.getName());
+				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
+				System.out.println(userRecord.getUid());
+				model.addAttribute("_uid",userRecord.getUid());
+				defaultApp.delete();
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (FirebaseAuthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "seller/psg/psgpush";
 	}
 	

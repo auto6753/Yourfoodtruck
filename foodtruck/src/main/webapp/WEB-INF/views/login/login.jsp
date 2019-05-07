@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div id="logo">
-		<a href="/project/rehome">당신의 푸드트럭</a>
+		<a href="/rehome">당신의 푸드트럭</a>
 	</div>
 	<!-- <form id="form"> --> <!-- 폼으로 묶으면 처음에 ajax 결과 반환이 안됨 -->
 		<div id="login_box">
@@ -30,9 +30,9 @@
 			
 			<div id="linkp">
 			<span class="txt_find"> <a
-				href="/project/login/idSearch" class="link_find">아이디찾기</a> <a
-				href="/project/login/passSearch" class="link_find">비밀번호찾기</a> <a
-				href="/project/login/register" class="link_find">회원가입</a>
+				href="/login/idSearch" class="link_find">아이디찾기</a> <a
+				href="/login/passSearch" class="link_find">비밀번호찾기</a> <a
+				href="/login/register" class="link_find">회원가입</a>
 			</span>
 			</div>
 			
@@ -50,7 +50,7 @@
 				};
 				$.ajax({
 					type:"post",
-					url:"/project/login",
+					url:"/login",
 					data: query,
 					success:function(data){
 						if("idfail"==data){
@@ -59,7 +59,7 @@
 							alert("비밀번호가 틀렸습니다");
 						}else{
 							/* window.location.href="/project/rehome";  */
-							window.location.replace("/project");
+							window.location.replace("/");
 						}
 					}
 				/* 	 complete : function(data) {
