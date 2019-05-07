@@ -5,17 +5,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
-import com.food.project.service.EventService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -30,7 +29,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/seller")
 public class SellerController {
 	private SellerService sellerservice;
-	private EventService eventService;
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
@@ -38,10 +36,10 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
-	public String menu(Model model) {
-		int menuNum = 17;
-		
-		model.addAttribute("menuNum", menuNum);
+	public String menu(Model model,HttpSession session) {
+		//int menuNum = 17;
+		FoodTruckVO vo =(FoodTruckVO)session.getAttribute("seller");
+		model.addAttribute("menuNum", sellerservice.getmenu(vo.getTruck_code()));
 		return "seller/menu/menu";
 	}
 	
@@ -74,6 +72,16 @@ public class SellerController {
 		System.out.println(a);
 		
 		return "seller/event/event";
+	}
+	
+	@RequestMapping(value="/addEvent", method=RequestMethod.GET) 
+	public String addEvent(Model model) {
+		return "seller/event/addEvent";
+	}
+	
+	@RequestMapping(value="/addEvent2", method=RequestMethod.GET) 
+	public String addEvent2(Model model) {
+		return "seller/event/addEvent2";
 	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
