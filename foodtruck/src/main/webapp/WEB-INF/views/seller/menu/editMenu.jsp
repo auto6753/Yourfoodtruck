@@ -86,7 +86,7 @@ $(document).ready(function(){
 		   var price = price.substr(0,price.length-1);
 		   //alert(price);
 		   var ssurl = $(".1", opener.document).attr('src');
-		   var surl = ssurl.replace("/project/resources/image/upload/","");
+		   var surl = ssurl.replace("/resources/image/upload/","");
 		   //alert(surl);
 		  // alert(url);
 		   var url = ssurl.replace("\\s_","\\");
@@ -125,7 +125,7 @@ $(document).ready(function(){
 					
 		 			$.ajax({
 						type:"post",
-						url:"/project/upload/modify",
+						url:"/upload/modify",
 						data:query,
 			            async:false,
 						success:function(data){
@@ -158,7 +158,7 @@ $(document).ready(function(){
 					formData.append("menu_code",menu_code);
 		 			$.ajax({
 						type:"post",
-						url:"/project/upload/modify",
+						url:"/upload/modify",
 						data:formData,
 			            processData: false,
 			            contentType: false,

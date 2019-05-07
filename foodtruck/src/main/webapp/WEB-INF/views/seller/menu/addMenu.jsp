@@ -102,7 +102,7 @@ $(document).ready(function(){
 		}
 		$.ajax({
 			type:"post",
-			url:"/project/upload/upload",
+			url:"/upload/upload",
 			data:formData,
             processData: false,
             contentType: false,
