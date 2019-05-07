@@ -5,7 +5,7 @@ var list = new Array();
 $(document).ready(function() {
 	var is = false;
 	var alltotal_price = 0;
-	$("#foodlist").on('click',"button",function() {
+	$("#foodlist").on('click',"img",function() {
 		// var a=$(this).find('p');
 		var a = $(this);
 		// var name = a.html();
