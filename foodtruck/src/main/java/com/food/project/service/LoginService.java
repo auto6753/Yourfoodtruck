@@ -2,6 +2,7 @@ package com.food.project.service;
 
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.PostVO;
 
 public interface LoginService {
 	public void insertCustomer(CustomerVO vo);
@@ -14,4 +15,5 @@ public interface LoginService {
 	public CustomerVO passSearch(CustomerVO vo);
 	
 	public FoodTruckVO getFoodTruck(String email);
+	public CustomerVO updatePassword(String email);
 }

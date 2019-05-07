@@ -302,7 +302,7 @@ function change(){
 
       // 검색 결과 목록에 추가된 항목들을 제거합니다
       /* removeAllChildNods(listEl); */
-
+			
       // 지도에 표시되고 있는 마커를 제거합니다
       /* removeMarker(); */
 
@@ -321,7 +321,7 @@ function change(){
    
        var select= $("#select option:selected").val(); 
        if(select =="list") {//선택한값이 list라면
-          var position = getposition();
+         var position = getposition();
          console.log(position);
          var posit = JSON.stringify(position);
          var sub = posit.split(',');
@@ -359,7 +359,6 @@ function change(){
          		var c=1;
          		var truck=list2[i].truck_code;
              	$("#list-group").append("<div class='list-group-item clearfix'><div class='profile-teaser-left'><div class='profile-img'><a href='/project/truck/?truck_code="+list2[i].truck_code+"'><img src='https://static.pexels.com/photos/21011/pexels-photo-large.jpg'/></a></div></div><div class='profile-teaser-main'><div class='infobox' style='cursor:pointer'><h2 class='profile-name'>"+list2[i].brandname+"</h2><div class='info'><span class=''>영업시간:</span>" + list2[i].hours+"</div><div class='info'><span class=''>트럭번호:</span>" + list2[i].trucknum+"</div></div><br><div class='info'><span class=''>★★★★☆</span> 9.4</div><div class='info'><span class=''>댓글 " + list2[i].total_review + "</span> </div> </div> <button style='float: right;'>탑승하기</button><button style='float: right;'>호출하기</button> </div></div>");
-
          	}
         	
          }

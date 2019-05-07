@@ -38,7 +38,7 @@ public class NewsController {
 	@RequestMapping(value = "/news/specificck", method = RequestMethod.GET)
 	public String specificck(Model model,@RequestParam("post_code") String post_code) {
 		
-		/* System.out.println(post_code); */
+		/* System.out.println(post_code); */          
 		PostVO ck = service.getPost(post_code);
 		service.updatePostvisit(post_code);
 		/* System.out.println(ck); */
