@@ -30,7 +30,6 @@ public class CustomerController {
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
-	private Object password;
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)

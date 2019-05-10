@@ -4,6 +4,20 @@
 <mapper namespace="com.food.project.mapper.EventMapper">
 
 	<select id="getEvent" resultType="com.food.project.domain.EventVO" parameterType="String">
-		SELECT EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT FROM EVENT WHERE TRUCK_CODE = #{truckcode} ORDER BY REG_DATE DESC
+		SELECT EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT FROM EVENT WHERE TRUCK_CODE = #{truckcode} ORDER BY EVENT_REG_DATE DESC
 	</select>
+	
+	<insert id="addEvent" parameterType="com.food.project.domain.EventVO" >
+		
+		insert into event(event_code, truck_code, event_name, event_content, event_start, event_end, event_target, event_combinable, event_reg_date, event_payment)
+		values('E'||to_char(sysdate,'yymmdd')||to_char(event_code_sequence.NEXTVAL,'fm000'), #{truck_code}, #{event_name}, #{event_content}, #{event_start}, #{event_end}, #{event_target}, #{event_combinable}, sysdate, #{event_payment})
+		<selectKey keyProperty="event_code" resultType="com.food.project.domain.EventMenuVO" order="AFTER">
+    		select 'E'||to_char(sysdate,'yymmdd')||to_char(event_code_sequence.CURRVAL,'fm000') event_code
+    		FROM dual
+  		</selectKey>
+	</insert>
+	<insert id="addEventMenu" parameterType="com.food.project.domain.EventMenuVO">
+		insert into event_menu(event_code,menu_code,discount)
+		values(#{event_code},#{menu_code},#{discount})
+	</insert>
 </mapper>

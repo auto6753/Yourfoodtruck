@@ -2,22 +2,38 @@
  * 
  */
 //	var index = 1;
-	function addEventBtn() {
-		document.getElementById("submitAddEvent").click();
-
+	function digit_check(evt){
+    var code = evt.which?evt.which:event.keyCode;
+	    if(code < 48 || code > 57){
+	        return false;
+	    }
 	}
-	
-	function editEventBtn() {
-		document.getElementById("submitEditEvent").click();
 
+	function showDiscResult(disc) {
+		var discount = $(disc).val();
+		var price = $(disc).prev().val();
+		var discResult = price - discount;
+		$(disc).next().val(discResult);
+		
+		if(discResult < 0) {
+			alert("할인액은 단가를 초과할 수 없습니다.");
+			$(disc).val("");
+			$(disc).next().val(price);
+		}
 	}
 	
 	function changeAttr(selectTag) {
 		var selectVal = $(selectTag).val();
 		
 		if(selectVal != "" && selectVal != null && selectVal != undefined){
+			var unit_price = $('#'+selectVal).val();
+			$(selectTag).next().val(unit_price);
+			$(selectTag).next().next().next().val(unit_price);
 			$(selectTag).next().next().attr("disabled", false);
-		} else {
+		}else {
+			$(selectTag).next().val("");
+			$(selectTag).next().next().val("");
+			$(selectTag).next().next().next().val("");
 			$(selectTag).next().next().attr("disabled", true);
 		}
 	}
@@ -190,6 +206,9 @@
 	}
 	
 	$(document).ready(function(){
+		
+		
+		
 		$("#previewId").mouseenter(function(){
 			$("#imgControlBox").fadeIn();
 			$("#noImage,#defaultImg,#prev_previewId").css("position", "relative");
@@ -283,7 +302,7 @@
 			}
 		});
 		
-		$("#cancelAdd, #cancelEdit").click(function(){
+		$("#cancelAdd").click(function(){
 			$("form").each(function(){
 				this.reset();
 				// input type="file"의 경우, IE10을 제외한 모든 브라우저에서 지원
@@ -303,9 +322,6 @@
 			});
 		});
 		
-		
-		
-		
 		tab('#tab',0);
 		
 		$(".imgUploadBtn").click(function(){
@@ -317,20 +333,58 @@
 		});
 		
 		$("#addEventBtn").click(function(){
-			var eventName = $("#eventName").val();
-			var beginDate = $("#beginDate").val();
-			var endDate = $("#endDate").val();
-			var target = $("#target").val();
 			
+			
+			var eventName = $("#eventName").val(); // 이벤트명
+			var beginDate = new Date($("#beginDate").val()).getTime(); // 이벤트 시작일
+			var endDate = new Date($("#endDate").val()).getTime(); // 이벤트 종료일
+			var target = $("#target").val(); // 이벤트 대상
+			console.log(beginDate);
+			
+			
+			var eventMenuNum = $("#field").children().length; // 이벤트 메뉴의 개수
+			var menuCode = new Array(); // 메뉴코드 배열
+			var discount = new Array(); // 할인액 배열
+			
+			for(var i=0; i<eventMenuNum; i++) {
+				menuCode[i] = $("#field").children().eq(i).children().eq(0).val(); // 메뉴코드를 배열에 추가
+				discount[i] = $("#field").children().eq(i).children().eq(2).val(); // 할인액을 배열에 추가
+			}
+			
+			var details = $("#details").val(); // 이벤트 상세내용
+			
+			// 이벤트 결제수단 코드 생성
+			var payment1 = $("#pCash").prop("checked"); // 현금 결제에 대한 true/false 값
+			var payment2 = $("#pCard").prop("checked"); // 카드 결제에 대한 true/false 값
+			var payment3 = $("#pKakao").prop("checked"); // 카카오페이 결제에 대한 true/false 값
+			
+			// true=1, false=0
+			var pResult1 = payment1 ? "1" : "0";
+			var pResult2 = payment2 ? "1" : "0";
+			var pResult3 = payment3 ? "1" : "0";
+			
+			// true/false 1,0 조합
+			var payment = pResult1 + pResult2 + pResult3; // 이벤트 결제수단 (코드)
+			
+			var duplicate = $('input[name="duplicate"]:checked').val(); // 이벤트 중복적용 여부(0 또는 1)
 			
 			$.ajax({
 				type: "post",
 				url: "event",
 				data: {
-					"eventName": eventName
+					"event_name": eventName,
+					"event_start": beginDate,
+					"event_end": endDate,
+					"event_target": target,
+					"menuCode[]": menuCode,
+					"discount[]": discount,
+					"event_content": details,
+					"event_payment": payment,
+					"event_combinable": duplicate
 				},
 				success: function(data){
 					 alert("success");
+					 $('#layer1').hide();
 				}
 			});
 //			alert("이벤트가 등록되었습니다.");
