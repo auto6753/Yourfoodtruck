@@ -33,10 +33,12 @@ public class LoginServiceimplement implements LoginService {
 	public FoodTruckVO getFoodTruck(String email) {    return mapper.getFoodTruck(email);  }
 
 	@Override
-	public CustomerVO getTelephone(String telephone) {	return mapper.getTelephone(telephone);
-	}
+	public CustomerVO getTelephone(String telephone) {	return mapper.getTelephone(telephone);}
 	@Override
-	public CustomerVO updatePassword(String email) {	return mapper.updatePassword(email);
-	}
+	public void updatePassword(CustomerVO vo) {	 mapper.updatePassword(vo); }
+	@Override
+	public void updateNickname(CustomerVO vo) {	 mapper.updateNickname(vo); }
+
+
 
 }

@@ -15,5 +15,7 @@ public interface LoginService {
 	public CustomerVO passSearch(CustomerVO vo);
 	
 	public FoodTruckVO getFoodTruck(String email);
-	public CustomerVO updatePassword(String email);
+	public void updatePassword(CustomerVO vo);
+	public void updateNickname(CustomerVO vo);
+	
 }
