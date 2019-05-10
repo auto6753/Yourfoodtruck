@@ -6,6 +6,8 @@ import lombok.Data;
 
 @Data
 public class EventVO {
+	private String event_code;
+	private Date event_reg_date;
 	private String truck_code;
 	private String event_name;
 	private Date event_start;

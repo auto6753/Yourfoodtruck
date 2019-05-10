@@ -334,7 +334,6 @@
 		
 		$("#addEventBtn").click(function(){
 			
-			
 			var eventName = $("#eventName").val(); // 이벤트명
 			var beginDate = new Date($("#beginDate").val()).getTime(); // 이벤트 시작일
 			var endDate = new Date($("#endDate").val()).getTime(); // 이벤트 종료일

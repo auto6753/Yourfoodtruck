@@ -27,13 +27,16 @@ public class EventServiceImplement implements EventService {
 	public void addEvent(Map<String,Object> evo) {
 		// TODO Auto-generated method stub
 		//이벤트 테이블에 insert 하면서 이벤트 코드 가져오기
-		EventMenuVO event_code=eventMapper.addEvent((EventVO)evo.get("event"));
-		System.out.println(event_code.getEvent_code());
+		eventMapper.addEvent((EventVO)evo.get("event"));
+		
+		EventVO vo=(EventVO)evo.get("event");
+		vo=eventMapper.getEvent_code(vo.getTruck_code());
+		String event_code=vo.getEvent_code();
 		
 		if(evo.get("eventMenu")!=null) {
 			ArrayList<EventMenuVO> emvos= (ArrayList<EventMenuVO>)evo.get("eventMenu");
 			for(int i=0; i<emvos.size();i++) {
-				emvos.get(i).setEvent_code(event_code.getEvent_code());
+				emvos.get(i).setEvent_code(event_code);
 				eventMapper.addEventMenu(emvos.get(i));
 			}
 		}
