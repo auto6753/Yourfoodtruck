@@ -91,11 +91,12 @@ public class SellerController {
 		evo.setTruck_code(truckCode);
 		evo.setEvent_name(request.getParameter("event_name"));
 		String event_start=request.getParameter("event_start");
-		System.out.println(event_start);
+		String event_end=request.getParameter("event_end");
+		System.out.println(event_start +", "+ event_end);
 		Long longdata=Long.parseLong(event_start);
-		System.out.println(event_start+"  ," +longdata);
 		evo.setEvent_start(new Date(longdata));
-		evo.setEvent_end(new Date(Long.parseLong(request.getParameter("event_end"))));
+		longdata=Long.parseLong(event_end);
+		evo.setEvent_end(new Date(longdata));
 		evo.setEvent_target(request.getParameter("event_target"));
 		evo.setEvent_content(request.getParameter("event_content"));
 		evo.setEvent_payment(Integer.parseInt(request.getParameter("event_payment")));
@@ -112,10 +113,11 @@ public class SellerController {
 			emvo.setDiscount(Integer.parseInt(discount[i]));
 			emvos.add(emvo);
 		}
-		
+		System.out.println(evo.getTruck_code());
 		Map<String, Object> mapvo = new HashMap<>();
 		mapvo.put("event", evo);
 		mapvo.put("eventMenu", emvos);
+		mapvo.put("truck_code",evo.getTruck_code());
 		eventService.addEvent(mapvo);
 		
 		return "success";

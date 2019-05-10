@@ -3,24 +3,32 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.EventMapper">
 
-	<select id="getEvent" resultType="com.food.project.domain.EventVO" parameterType="String">
-		SELECT EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT
+	<select id="getEvent"
+		resultType="com.food.project.domain.EventVO" parameterType="String">
+		SELECT
+		EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT
 		FROM EVENT WHERE
 		TRUCK_CODE = #{truck_code} ORDER BY EVENT_REG_DATE DESC
 	</select>
-	
-	<select id="getEvent_code" resultType="com.food.project.domain.EventVO" parameterType="String">
+	<select id="getEvent_code" resultType="com.food.project.domain.EventVO">
 		SELECT a.event_code
-		FROM (select event_code from event where truck_code=#{truck_code}
-        	order by event_reg_date desc) a
-        where rownum=1;
+		FROM (select event_code from event where
+		truck_code=#{truck_code} order by event_reg_date desc) a
+		where rownum=1;
 	</select>
-	
-	<insert id="addEvent" parameterType="com.food.project.domain.EventVO" >
-		insert into event(event_code, truck_code, event_name, event_content, event_start, event_end, event_target, event_combinable, event_reg_date, event_payment)
-		values('E'||to_char(sysdate,'yymmdd')||to_char(event_code_sequence.NEXTVAL,'fm000'), #{truck_code}, #{event_name}, #{event_content}, #{event_start}, #{event_end}, #{event_target}, #{event_combinable}, sysdate, #{event_payment}) 
+	<insert id="addEvent"
+		parameterType="com.food.project.domain.EventVO">
+		insert into
+		event(event_code, truck_code, event_name, event_content, event_start,
+		event_end, event_target, event_combinable, event_reg_date,
+		event_payment)
+		values('E'||to_char(sysdate,'yymmdd')||to_char(event_code_sequence.NEXTVAL,'fm000'),
+		#{truck_code}, #{event_name}, #{event_content}, #{event_start},
+		#{event_end}, #{event_target}, #{event_combinable}, sysdate,
+		#{event_payment})
 	</insert>
-	<insert id="addEventMenu" parameterType="com.food.project.domain.EventMenuVO">
+	<insert id="addEventMenu"
+		parameterType="com.food.project.domain.EventMenuVO">
 		insert into event_menu(event_code,menu_code,discount)
 		values(#{event_code},#{menu_code},#{discount})
 	</insert>

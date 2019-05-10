@@ -10,5 +10,5 @@ public interface EventMapper {
 	public ArrayList<EventVO> getEvent(String truckcode);
 	public void addEvent(EventVO vo);
 	public void addEventMenu(EventMenuVO vo);
-	public EventVO getEvent_code(String truckcode);
+	public EventVO getEvent_code(EventVO vo);
 }
