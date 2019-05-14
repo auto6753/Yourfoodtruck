@@ -30,11 +30,79 @@ import lombok.AllArgsConstructor;
 @Controller
 public class AnnounceController {
 	PostService postService;
-	@RequestMapping(value = "/announce", method = RequestMethod.GET)
-	public String recruit(Model model) {
+	
+	//모집공고 컨트롤러
+	@RequestMapping(value = "/announce")
+	public String recruit(Model model,@RequestParam(defaultValue="1") int post_class,
+			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
+		int totPage=0;
+		PostPager postPager;
+		if(keyword.isEmpty()) {
+			totPage=postService.totalPage(post_class);
+			System.out.println("인자 1개"+totPage);
+			postPager=new PostPager(totPage,curPage);
+		}else {
+			totPage=postService.totalPage2(post_class,keyword);
+			System.out.println("인자 2개"+totPage);
+			postPager=new PostPager(totPage,curPage);
+		}
+		int start=postPager.getPageBegin();
+		int end=postPager.getPageEnd();
+		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,post_class);
+		System.out.println(postPager.toString());
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("totPage",totPage);
+		map.put("keyword",keyword);
+		map.put("postPager",postPager);
+		model.addAttribute("announcepostList",postService.getPostList(1));
+		model.addAttribute("announceList",areaList);
+		model.addAttribute("map",map);
 		return "announce/recruit";
 	}
 	
+	@RequestMapping(value = "/announce/specificck", method = RequestMethod.GET)
+	public String announceSpecificck(Model model,@RequestParam("post_code") String post_code) {
+		
+		/* System.out.println(post_code); */
+		PostVO ck = postService.getPost(post_code);
+		postService.updatePostvisit(post_code);
+		/* System.out.println(ck); */
+		model.addAttribute( "announceSpecific" , ck);
+		return "announce/announceSpecific";
+	}
+	@RequestMapping(value= "/announce/addAnnounce", method= RequestMethod.GET)
+	public String addAnnounce(Model model) {
+		return "announce/addAnnounce";
+	}
+	
+	
+	@RequestMapping(value= "/announce/addAnnounce", method= RequestMethod.POST)
+	public String addAnnounce(Model model, PostVO vo) {
+		vo.setPost_class(1);
+		postService.insertPost(vo);
+		return "redirect:/announce";
+	}
+	@RequestMapping(value = "/announce/modifyAnnounceck", method = RequestMethod.GET)
+	public String modifyAnnounceck(Model model,PostVO vo) {
+		PostVO vo1 = postService.getSpecific(vo);
+		model.addAttribute( "announcespecificcontent" , vo1);
+		return "announce/modifyAnnounce";
+	}
+	
+	@RequestMapping(value = "/announce/modifyAnnounce", method = RequestMethod.POST)
+	public String modifyAnnounce(Model model,PostVO vo) {
+		vo.setPost_class(1);
+		postService.updatePost(vo);
+		return "redirect:/announce";
+	}
+	
+	
+	@RequestMapping(value = "/announce/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public String announceDelete(Model model,PostVO vo) {
+		postService.deletePost(vo);
+		return "";
+	}
 	
 	//허가구역 관리 컨트롤러
 	@RequestMapping(value = "/area")

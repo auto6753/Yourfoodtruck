@@ -16,7 +16,7 @@
 	$(document).ready(
 			function() {
 				$("#call").click(function() {
-					location.href = "/project/truck/callForm";
+					location.href = "/truck/callForm";
 				});
 				$("#btn1").click(
 						function() {
