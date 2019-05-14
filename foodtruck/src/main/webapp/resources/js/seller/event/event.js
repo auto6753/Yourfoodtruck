@@ -2,6 +2,7 @@
  * 
  */
 //	var index = 1;
+
 	function digit_check(evt){
     var code = evt.which?evt.which:event.keyCode;
 	    if(code < 48 || code > 57){
@@ -394,8 +395,27 @@
 		});
 		
 		$(".delete").click(function(){
-			var eventName = $(this).parent().next().next().text();
+			var eventCode = $(this).parent().next().val();
+			var eventName = $(this).parent().next().next().next().text();
 			var delCheck = confirm(eventName + " 을(를) 정말 삭제하시겠습니까?");
+			if(delCheck) {
+				$.ajax({
+					type: "post",
+					url: "delEvent",
+					data: {
+						"eventCode": eventCode
+					},
+					success: function(data) {
+						location.reload();
+						alert("삭제가 완료되었습니다.");
+					},
+					error: function(data) {
+						alert("errror: 삭제 실패");
+					}
+				});
+			} else {
+				alert("삭제가 취소되었습니다.");
+			}
 		});
 		
 		$(".deleteEventDiv").click(function(){

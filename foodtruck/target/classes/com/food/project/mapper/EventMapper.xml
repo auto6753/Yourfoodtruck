@@ -6,16 +6,22 @@
 	<select id="getEvent"
 		resultType="com.food.project.domain.EventVO" parameterType="String">
 		SELECT
-		EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT
+		EVENT_CODE, EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT
 		FROM EVENT WHERE
 		TRUCK_CODE = #{truck_code} ORDER BY EVENT_REG_DATE DESC
 	</select>
+	
+<!-- 	<select id="getEventMenu">
+		select a.event_code, a.menu_code from event_menu a, event b where a.event_code = b.event_code and b.truck_code = #{truckCode};
+	</select> -->
+	
 	<select id="getEvent_code" resultType="com.food.project.domain.EventVO">
 		SELECT a.event_code
 		FROM (select event_code from event where
 		truck_code=#{truck_code} order by event_reg_date desc) a
-		where rownum=1;
+		where rownum=1
 	</select>
+	
 	<insert id="addEvent"
 		parameterType="com.food.project.domain.EventVO">
 		insert into
@@ -27,9 +33,18 @@
 		#{event_end}, #{event_target}, #{event_combinable}, sysdate,
 		#{event_payment})
 	</insert>
+	
 	<insert id="addEventMenu"
 		parameterType="com.food.project.domain.EventMenuVO">
 		insert into event_menu(event_code,menu_code,discount)
 		values(#{event_code},#{menu_code},#{discount})
 	</insert>
+	
+	<delete id="delEvent">
+		delete from event where event_code = #{eventCode}
+	</delete>
+	
+	<delete id="delEventMenu">
+		delete from event_menu where event_code = #{eventCode}
+	</delete>
 </mapper>

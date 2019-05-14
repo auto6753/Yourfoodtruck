@@ -75,8 +75,12 @@ public class SellerController {
 	public String eventGet(Model model, HttpSession session, HttpServletRequest request) {
 		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
 		String truckCode = foodtruckvo.getTruck_code();
+		
+//		ArrayList<EventVO> test = eventService.getEventMenu(truckCode);
+		
 		model.addAttribute("eventList", eventService.getEvent(truckCode));
 		model.addAttribute("menuList", sellerservice.getmenu(truckCode));
+//		model.addAttribute("eventMenu", eventService.getEventMenu(eventCode))
 		
 		return "seller/event/event";
 	}
@@ -119,6 +123,16 @@ public class SellerController {
 		mapvo.put("eventMenu", emvos);
 		mapvo.put("truck_code",evo.getTruck_code());
 		eventService.addEvent(mapvo);
+		
+		return "success";
+	}
+	
+	@RequestMapping(value="/delEvent", method=RequestMethod.POST)
+	@ResponseBody
+	public String delEvent(Model model, HttpServletRequest request) {
+		String eventCode = request.getParameter("eventCode");
+		eventService.deleteEventMenu(eventCode);
+		eventService.deleteEvent(eventCode);
 		
 		return "success";
 	}

@@ -38,7 +38,7 @@
 												<img src="${pageContext.request.contextPath}/resources/image/icon/delete-16.png"/>
 											</div>
 										</div>
-										
+										<input class="delEvent" type="hidden" value="${event.event_code}"/>
 										<div class="eventItem">이벤트명</div>
 										<div class="eventItemContent eventName">${event.event_name}</div>
 										

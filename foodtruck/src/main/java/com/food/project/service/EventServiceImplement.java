@@ -31,20 +31,35 @@ public class EventServiceImplement implements EventService {
 		
 		EventVO vo=new EventVO();
 		vo.setTruck_code((String)evo.get("truck_code"));
-		System.out.println(vo.getTruck_code());
 		vo =eventMapper.getEvent_code(vo);
-		System.out.println(vo);
 		String event_code=vo.getEvent_code();
-		System.out.println(event_code);
 		
-//		if(evo.get("eventMenu")!=null) {
-//			ArrayList<EventMenuVO> emvos= (ArrayList<EventMenuVO>)evo.get("eventMenu");
-//			for(int i=0; i<emvos.size();i++) {
-//				emvos.get(i).setEvent_code(event_code);
-//				eventMapper.addEventMenu(emvos.get(i));
-//			}
-//		}
+		if(evo.get("eventMenu")!=null) {
+			ArrayList<EventMenuVO> emvos= (ArrayList<EventMenuVO>)evo.get("eventMenu");
+			for(int i=0; i<emvos.size();i++) {
+				emvos.get(i).setEvent_code(event_code);
+				eventMapper.addEventMenu(emvos.get(i));
+			}
+		}
 		
+	}
+
+	@Override
+	public void deleteEvent(String eventCode) {
+		// TODO Auto-generated method stub
+		eventMapper.delEvent(eventCode);
+	}
+
+	@Override
+	public void deleteEventMenu(String eventCode) {
+		// TODO Auto-generated method stub
+		eventMapper.delEventMenu(eventCode);
+	}
+
+	@Override
+	public ArrayList<EventVO> getEventMenu(String truckCode) {
+		// TODO Auto-generated method stub
+		return eventMapper.getEventMenu(truckCode);
 	}
 
 }

@@ -11,10 +11,4 @@
 		insert into menu(menu_code,menu_name,menu_category,menu_url,unit_price,truck_code,menu_surl)
 		values (concat(to_char(sysdate,'yymm'),to_char(MENU_SEQUENCE.NEXTVAL,'FM00000')),#{menu_name},#{menu_category},#{menu_url},#{unit_price},#{truck_code},#{menu_surl})
 	</insert>
-	
-	<update id="updatemenu" parameterType="com.food.project.domain.MenuVO">
-		update menu set menu_url =#{menu_url},menu_surl =#{menu_surl},menu_category =#{menu_category}, unit_price=#{unit_price},menu_name=#{menu_name} where menu_code = #{menu_code}
-	</update>
-	
-	
 </mapper>
