@@ -14,4 +14,5 @@ public class EventVO {
 	private String event_content;
 	// 결제수단
 	private int combinable;
+	private String brandname;
 }

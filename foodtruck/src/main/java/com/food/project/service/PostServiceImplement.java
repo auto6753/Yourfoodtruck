@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.food.project.domain.PostVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.PostMapper;
 
 import lombok.AllArgsConstructor;
@@ -75,7 +76,8 @@ public class PostServiceImplement implements PostService {
 		return tot_page;
 	}
 	
-	
+	@Override
+	public ArrayList<ReviewVO> getReview(String email) { return mapper.getReview(email);}
 
 	
 

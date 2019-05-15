@@ -32,7 +32,9 @@ p{
    margin: 0 auto;
    
 }  */
-
+.pagination{
+	margin-left: 40%;
+}
 #pageadd{
    
    background-color: rgb(255, 94, 24);

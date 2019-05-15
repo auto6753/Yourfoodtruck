@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.food.project.domain.PostVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.ReviewVO;
 import com.food.project.paging.PostPager;
 public interface PostMapper {
 	
@@ -36,6 +37,6 @@ public interface PostMapper {
 	public Map<String,Object> totalPage(int post_class);
 	public Map<String,Object> totalPage2(Map<String,Object> map);
 	
-	
+	public ArrayList<ReviewVO> getReview(String email);
 
 }

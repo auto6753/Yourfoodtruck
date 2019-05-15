@@ -8,6 +8,30 @@
 <title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value ="/resources/css/customercss/onboard.css"/>"/>
+<script>
+$(document).ready(function(){
+	$("#delete").click(function(){
+		var truckcode = $("#truckcode").val();
+		
+		alert(truckcode);
+		
+		$.ajax({
+			type : "post",
+			url : "/customer/onboard",
+			data : {
+				"truckcode" : truckcode
+			},
+			success : function(data) {
+				alert("하차되었습니다.");
+				location.reload();
+			},
+			error : function(err) {
+				alert("오류발생");
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 <div id="with" class = "col">
@@ -27,10 +51,11 @@
 			${i.brandname}
 			${i.onboard_date}
 		</p>
+		<input id="truckcode" type="hidden" value="${i.truck_code}"/>
 		<div class="d-flex justify-content-between align-items-center">
 		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
+		<button class="btn btn-sm btn-outline-secondary">상세정보</button>
+		<button class="btn btn-sm btn-outline-secondary" id="delete">하차</button>
 		
 		</div>
 		</div>

@@ -170,7 +170,7 @@ $(function() {
 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
 						}	
 					}else{
-						$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][0].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
+						$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][0].name+'</span>&nbsp;<span>'+orderList[order][0].amount+'</span>&nbsp;<span>'+orderList[order][0].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][0].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][0].payment_class+'"></p>');
 /* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
 					}
@@ -207,7 +207,7 @@ $(function() {
 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
 						}	
 					}else{
-						$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][0].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
+						$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][0].name+'</span>&nbsp;<span>'+orderList[order][0].amount+'</span>&nbsp;<span>'+orderList[order][0].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][0].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][0].payment_class+'"></p>');
 /* 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
 						$('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');	 */
 					}

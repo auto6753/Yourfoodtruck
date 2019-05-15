@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +37,7 @@ import com.google.firebase.messaging.Message;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value="/m")
 public class M_HomeController {
 
 
@@ -43,7 +46,14 @@ public class M_HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-
+	@CrossOrigin()
+	@ResponseBody
+	@RequestMapping(value="", method = RequestMethod.GET)
+	public String appHome(HttpServletRequest request) {
+		System.out.println();
+		System.out.println(request);
+		return "main/main.html";
+	}
 //	@SuppressWarnings({ "null", "unused" })
 //	@ResponseBody
 //	@RequestMapping(value="/pushTest")

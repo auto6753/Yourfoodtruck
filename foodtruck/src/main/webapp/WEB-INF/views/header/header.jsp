@@ -49,7 +49,7 @@ a{
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="/search">트럭검색</a></li>
-				<li class="nav-item"><a class="nav-link" href="/announce">모집공고</a></li>
+				<li class="nav-item"><a class="nav-link" href="/area">모집공고</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li>
 				<li class="nav-item"><a class="nav-link" href="/help">고객센터</a></li>
 			</ul>

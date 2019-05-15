@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="title" class="card-header">
-		<p id="title2">허가구역 추가하기</p>
+		<p id="title2">허가구역 안내</p>
 	</div>
 	<form id="all" action="/area/addArea" method="post" onsubmit="return ck();" onreset="historyBack();" >
 		<div id="box">

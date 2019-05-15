@@ -6,4 +6,9 @@
 	<select id="getEvent" resultType="com.food.project.domain.EventVO" parameterType="String">
 		SELECT EVENT_NAME, EVENT_START, EVENT_END, EVENT_CONTENT FROM EVENT WHERE TRUCK_CODE = #{truckcode} ORDER BY REG_DATE DESC
 	</select>
+	<select id="getMainevent" resultType="com.food.project.domain.EventVO">
+		select e.truck_code, e.event_name, e.event_start, e.event_end, f.brandname
+		from event e join foodtruck f
+		on (e.truck_code = f.truck_code)		
+	</select>
 </mapper>

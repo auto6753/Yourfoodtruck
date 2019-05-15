@@ -43,8 +43,8 @@ button{
 <h1>당신의 푸드트럭의 회원이 되신것을 환영합니다!</h1>
 <h2>당신이 원하는 푸드트럭을 이용해보세요!</h2>
 <div>
-<a href="/project/rehome"><button style="margin-top:50px; margin-left: 300px; height: 60px; width:200px;">첫 화면</button></a>
-<a href="/project/login"><button style="margin-left: 10px; height: 60px; width:200px;">로그인</button></a>
+<a href="/rehome"><button style="margin-top:50px; margin-left: 300px; height: 60px; width:200px;">첫 화면</button></a>
+<a href="/login"><button style="margin-left: 10px; height: 60px; width:200px;">로그인</button></a>
 </div>
 </div>
 </div>
