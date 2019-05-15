@@ -13,10 +13,29 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9df56b013af05d5db1fb3350de0a4265"></script>
 <script type="text/javascript">
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
+				var score = "${sumscore}";
+				
+				if(score > 0 &&  score < 2) {
+					
+					$('.sumscore').append('<p>★☆☆☆☆</p>');
+				}else if (score > 2 && score <3){
+					
+					$('.sumscore').append('<p>★★☆☆☆</p>');
+				}else if (score > 3 && score <4){
+					
+					$('.sumscore').append('<p>★★★☆☆</p>');0
+				}else if (score > 4 && score <5){
+					
+					$('.sumscore').append('<p>★★★★☆</p>');
+				}else if ( score == 5){
+					$('.sumscore').append('<p>★★★★★</p>');
+				}
+				
 				$("#call").click(function() {
-					location.href = "/project/truck/callForm";
+					var truck_code = "${tlist.truck_code}";
+					location.href = "/truck/callForm/?truck_code="+truck_code;
+					
 				});
 				$("#btn1").click(
 						function() {
@@ -84,12 +103,13 @@
 					$("#creatbtn").show();
 				});
 
-			});
-	$(document).ready(function() {
+			
+
 		$("#credit").click(function() {
 			var reviewcontent = $("#reviewcotent").val();
 
 			var truckcode = "${tlist.truck_code}";
+			alert(truckcode);
 			var reviewscore = $("input:radio[name='star']:checked").val();
 		
 			var query = {
@@ -99,10 +119,11 @@
 			}
 			$.ajax({
 
-				url : "/project/truck/reviewwrite",
+				url : "/truck/reviewwrite",
 				data : query,
 				type : "post",
 				success : function(data) {
+					
 					location.reload();
 
 				}
@@ -111,8 +132,8 @@
 		});
 
 		
-	});
-	$(document).ready(function(){
+
+
 		$(".delete").click(function(){
 			var a = $(this);
 			var b = a.next().val();
@@ -129,7 +150,7 @@
 			}
 			$.ajax({
 				
-				url: "/project/truck/reviewdelete",
+				url: "/truck/reviewdelete",
 				type: "post" ,
 				data: query,
 				success : function(data){
@@ -141,7 +162,9 @@
 		
 			
 		});
+
 	});
+	
 </script>
 </head>
 <body>
@@ -152,7 +175,7 @@
 					src='${pageContext.request.contextPath}/resources/image/food1.png'>
 				<div id="cross">
 					<br>
-					<h1 id="truckname">닭치고 닭꼬치</h1>
+					<h1 id="truckname">${tlist.brandname}</h1>
 					<br>
 					<button id="ride">탑승하기</button>
 					<button id="call">호출하기</button>
@@ -216,23 +239,26 @@
 
 			</div>
 
-
+		
 			<div id="review" style="visibility: hidden;">
+			
 				<div class="col-md-12">
+				
 					<div id="creatbtngroup">
+					<c:if test="${not empty sessionScope.sessionid }"> 
 						<button id="creatbtn">리뷰작성하기</button>
+					
 						<button id="creatbtncancle" style="display: none;">리뷰작성취소</button>
+					</c:if>	
 					</div>
+					
 					<div>
-						<h4>
-							이거슨 닭인가!! 치킨인가!!<span style="color: red;">닭치고닭꼬치</span>
-						</h4>
-						<h5 style="color: blue;">4</h5>
-						<p class="star_rating">
-							<a href="#" class="on">★</a> <a href="#" class="on">★</a> <a
-								href="#" class="on">★</a> <a href="#" class="on">★</a> <a
-								href="#">★</a>
+					
+					
+						<p class="sumscore" style="color: #ff6622;">${sumscore}
+							
 						</p>
+						
 					</div>
 				</div>
 				<div id="reviewwhole" class="col-md-12" style="display: none;">
@@ -299,9 +325,10 @@
 						</div>
 						<div class="content" id="content">
 							<p>${i.review_content} </p>
-							
+						<c:if test="${sessionScope.sessionid.email == i.email}"> 	
 							<input class="delete" type="button" value="삭제">
 							<input type="hidden" value="${i.review_code}">
+						</c:if>
 						</div>
 
 
@@ -327,14 +354,36 @@
 				</div>
 				<div id="truckinfobody">
 					<div id="truckruntime1">
-						<h3>영업시간: 10:00 ~ 20:00</h3>
+					
+						<h3>${tlist.truck_desc}</h3>
 					</div>
 					<div id="cacheinfo1">
-						<h3>결제수단: 현금, 카드, 모바일페이</h3>
+						<c:if test="${tlist.paytype == 1 }">
+						<h3>결제수단: 카카오페이</h3>
+						</c:if>
+						<c:if test="${tlist.paytype == 3 }">
+						<h3>결제수단: 카드</h3>
+						</c:if>
+						<c:if test="${tlist.paytype == 5 }">
+						<h3>결제수단: 현금</h3>
+						</c:if>
+						<c:if test="${tlist.paytype == 4 }">
+						<h3>결제수단: 카드 카카오페이</h3>
+						</c:if>
+						<c:if test="${tlist.paytype == 6 }">
+						<h3>결제수단: 현금 카카오페이</h3>
+						</c:if>
+						<c:if test="${tlist.paytype == 8 }">
+						<h3>결제수단: 현금 카드</h3>
+						</c:if>
+						<c:if test="${tlist.paytype == 9 }">
+						<h3>결제수단: 현금 카드 카카오페이</h3>
+						</c:if>
 					</div>
 					<div id="managerinfo1">
 						<h3>
-							상호명: 닭치고닭꼬치 <br>사업자등록번호 513-05-57154
+							상호명:&nbsp;${tlist.brandname} <br>사업자등록번호:&nbsp;${tlist.account}
+			
 						</h3>
 					</div>
 				</div>

@@ -1,17 +1,19 @@
 package com.food.project.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class EventVO {
+	private String event_code;
+	private Date event_reg_date;
+	private String truck_code;
 	private String event_name;
 	private Date event_start;
 	private Date event_end;
-	private String target;
-	// 메뉴, 할인액
+	private String event_target; 
 	private String event_content;
-	// 결제수단
-	private int combinable;
+	private int event_payment;
+	private int event_combinable;
 }

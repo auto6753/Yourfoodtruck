@@ -1,10 +1,12 @@
 package com.food.project.controller;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,39 +29,82 @@ import lombok.AllArgsConstructor;
 public class TruckController {
 	private FoodTruckService service;
 	private FoodtruckMapper mapper;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String info(Model model ,@RequestParam("truck_code") String truck_code ) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
-
+		
 		FoodTruckVO ss= service.getFoodTruck(truck_code); //클릭한 푸드트럭으로 해당 푸드트럭의 정보를 select 
 		
+		System.out.println(ss);
+
 		model.addAttribute("tlist", ss); //푸드트럭 정보를 tlist 에 담아서 truck/truckInfo 페이지로 넘김 
-		model.addAttribute("reviewList",service.getReviewList(truck_code)); //클릭한 푸드트럭의 코드로 해당 푸드트럭의 댓글을 조회해서 reviewList에 담고 truck/truckInfo 로 넘겨줌
+		
+		ArrayList<ReviewVO> d = service.getReviewList(truck_code); //클릭한 푸드트럭의 코드로 해당 푸드트럭의 댓글을 조회해서 reviewList에 담고 truck/truckInfo 로 넘겨줌
+		
+	
+		float count = d.size();
+		float score = 0;
+		float result = 0;
+		for(int i = 0;i<d.size();i++) {
+			score += d.get(i).getReview_score();
+		}
+		
+		result = score / count;
+		result = (float) (Math.round(result*100)/100.0);
+		 
+		
+		model.addAttribute("reviewList", d);
+		model.addAttribute("sumscore", result);
+		
+		
+		
 		
 		return "truck/truckInfo";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
-		System.out.println("ㅇ");
 		return "truck/register/registerForm";
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String register(Model model,FoodTruckVO fd,HttpServletRequest request,HttpSession session) {
-	
+		String[] pay = request.getParameterValues("pay"); //value값들을 []배열로 pay에 담는다 
+		
+		System.out.println(pay);
+		System.out.println("ㄴㄹㄴㅇㄹㄹ");
+		
+		int sum = 0;
+		
+		for(int i=0; i<pay.length; i++) {
+			/*
+			 * System.out.println(pay[i] ); System.out.println("ㅋ");
+			 */
+			
+			sum += Integer.parseInt(pay[i]);
+		}
+		
+		fd.setPaytype(sum);
+		
+		
+		
+		
+		
 		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
 		fd.setEmail(vo.getEmail());
 		fd.setLayout(0);
-		//System.out.println(fd);
-		FoodTruckVO vo2= service.insertFoodTruck(fd);
+		
+		FoodTruckVO vo2 = service.insertFoodTruck(fd);
 		System.out.println(vo2);
-		//System.out.println(session);
+		
+		
 		session.setAttribute("seller", vo2);
+		
 		return "redirect:/seller";
 	}
 
 	//리뷰작성
 	@RequestMapping(value = "/reviewwrite", method = RequestMethod.POST)
-	@ResponseBody
+	@ResponseBody               
 	public String reviewwrite(Model model , ReviewVO vo , HttpSession session) {
 	
 	
@@ -102,8 +147,11 @@ public class TruckController {
 //	}
 
 	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
-	public String callForm(Locale locale) {
+	public String callForm(Model model,@RequestParam("truck_code") String truck_code) {
 		
+		
+		FoodTruckVO fd = service.getFoodTruck(truck_code);
+		model.addAttribute("truck", fd);
 		
 		/* callList.insertCallList(vo); */
 		 

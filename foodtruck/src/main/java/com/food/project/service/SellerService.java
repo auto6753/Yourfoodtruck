@@ -9,8 +9,6 @@ import com.food.project.domain.MenuVO;
 public interface SellerService {
 
 	public ArrayList<MenuVO> getmenu(String truckcode);
-	
 	public void insertmenu(MenuVO vo);
-	
 	public void updatemenu(MenuVO vo);
 }

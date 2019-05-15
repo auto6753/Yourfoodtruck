@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.food.project.domain.PostVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.ReviewVO;
 
 public interface PostService {
 
@@ -42,7 +43,7 @@ public interface PostService {
 	public int totalPage(int post_class);
 	public int totalPage2(@Param("post_class")int post_class, @Param("keyword") String keyword);
 	
-	
+	public ArrayList<ReviewVO> getReview(String email);
 	
 	
 }

@@ -7,15 +7,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import net.sf.json.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.PaymentVO;
+import com.food.project.service.CallListService;
 import com.food.project.service.PaymentService;
 import lombok.AllArgsConstructor;
 
@@ -24,6 +28,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value="/pay")
 public class PaymentController {
 	
+	private CallListService callService;
 	private PaymentService payService;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/insertPayment")
@@ -68,5 +73,18 @@ public class PaymentController {
 		else System.out.println("Success");
 	}
 	
+	// 푸드트럭 호출 결제
+	@ResponseBody
+	@RequestMapping(value = "/CallPayment", method=RequestMethod.POST)
+	public String CllePayment(Model model,CallListVO vo) {
+		//System.out.println(num);
+		System.out.println(vo);
+		callService.insertCallList(vo);
+	
+		System.out.println("결제하고 인서트하러왔다");
+		
+		
+		return "success";
+	}
 	
 }

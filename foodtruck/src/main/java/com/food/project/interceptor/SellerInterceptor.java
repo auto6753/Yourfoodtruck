@@ -13,7 +13,7 @@ public class SellerInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("seller") == null) {
-			response.sendRedirect("/project/login");
+			response.sendRedirect("/login");
 			return false;
 		} else
 			return true;
