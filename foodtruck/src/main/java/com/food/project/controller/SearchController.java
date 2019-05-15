@@ -79,6 +79,7 @@ public class SearchController {
 				data.put("total_review",a.get("TOTAL_REVIEW"));
 				data.put("avg_review",a.get("AVG_REVIEW"));
 				arry.add(data);
+				
 			}
 			//model.addAttribute("loc",list2);
 		}catch(Exception e) {

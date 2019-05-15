@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.CallListMapper">
-	<select id="getCallList" resultType="com.food.project.domain.CallListVO">
-		select * from call_list where truck_code=#{truck_code} and email=#{email}
-		order by festival_startdate desc
+	<select id="getCallList" resultType="com.food.project.domain.CallListVO" parameterType="String">
+		select * from call_list where truck_code=#{truck_code}
+		
+	</select>
+	
+	<select id="getCallList2" resultType="map" parameterType="String">
+	select b.brandname,a.name,a.pay_status,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate ,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code = a.truck_code and a.email=#{email}
 	</select>
 	<select id="getMyCallList" parameterType="String" resultType="com.food.project.domain.CallListVO">
 		select * from call_list where email=#{email}
 		order by festival_startdate desc
-	</select>
-	<select id="getMyCallList" parameterType="String" resultType="com.food.project.domain.CallListVO">
-		select * from call_list where email=#{email}
-		order by festival_date desc
 	</select>
 	<insert id="insertCallList" parameterType="com.food.project.domain.CallListVO">
-		insert into call_list(name,place,festival_date,price,festival_name,festival_time,calltel,content)
-		values(#{name},#{place},#{festival_startdate},#{festival_enddate},#{price},#{festival_name},#{festival_starttime},#{festival_enddate},#{calltel},#{content)
+		insert into call_list(merchant_uid,name,pay_status,zip_code,place,festival_startdate,festival_enddate,festival_name,festival_starttime,festival_endtime,calltel,content,email,truck_code,price)
+		values(#{merchant_uid},#{name},#{pay_status},#{zip_code},#{place},#{festival_startdate},#{festival_enddate},#{festival_name},#{festival_starttime},#{festival_endtime},#{calltel},#{content},#{email},#{truck_code},#{price})
 	</insert>
 </mapper>

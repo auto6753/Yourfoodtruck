@@ -16,7 +16,9 @@
 	$(document).ready(
 			function() {
 				$("#call").click(function() {
-					location.href = "/project/truck/callForm";
+					var truck_code = "${tlist.truck_code}";
+					location.href = "/truck/callForm/?truck_code="+truck_code;
+					
 				});
 				$("#btn1").click(
 						function() {

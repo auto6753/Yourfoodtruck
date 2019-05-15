@@ -24,7 +24,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("sessionid") == null) {
-			response.sendRedirect("/project/login");
+			response.sendRedirect("/login");
 			return false;
 		} else {
 			return true;

@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -31,6 +34,7 @@ import lombok.AllArgsConstructor;
 public class SellerController {
 	private SellerService sellerservice;
 	private EventService eventService;
+	private CallListService callService;
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
@@ -60,7 +64,7 @@ public class SellerController {
 		return "seller/loc/location";
 	}
 	
-	@RequestMapping(value="/jusoPopup", method=RequestMethod.POST) 
+	@RequestMapping(value="/jusoPopup", method= {RequestMethod.GET, RequestMethod.POST}) 
 	public String jusoPopup(Model model) {
 		return "seller/loc/jusoPopup";
 	}
@@ -123,7 +127,11 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/callmanage", method=RequestMethod.GET) 
-	public String call(Model model) {
+	public String call(Model model,HttpSession session) {
+		FoodTruckVO vo = (FoodTruckVO)session.getAttribute("seller");
+		model.addAttribute("callList", callService.getCallList(vo.getTruck_code()));
+		System.out.println("콜");
+		System.out.println(callService.getCallList(vo.getTruck_code()));
 		return "seller/call/callmanage";
 	}
 	

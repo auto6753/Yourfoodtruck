@@ -69,7 +69,6 @@
 	<script>
 $(document).ready(function(){
 			//var i = $("#category option:eq(1)").prop("selected", true);
-		
 			
 		   istrue = false;
 		   isfile = false;
