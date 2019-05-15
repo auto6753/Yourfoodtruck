@@ -7,6 +7,7 @@ public class EventMenuVO {
 	
 	private String event_code;
 	private String menu_code;
+	private String menu_name;
 	private int discount;
 	
 }

@@ -26,7 +26,7 @@
 						</div>
 						<div class="col-md-12 tab_con" id="tab_con">
 							<div class="eventBox"> <!-- 진행중인 이벤트 내용 -->
-								<c:forEach var="event" items="${eventList}">
+								<c:forEach var="event" items="${eventList}" varStatus="status">
 									<div class="col-md-6 max-width event"> <!-- 행당 2개 이벤트 배치 -->
 										<div class="manageEvent">
 											<div>
@@ -46,10 +46,10 @@
 										<div class="eventItemContent">${event.event_start} ${event.event_end}</div>
 										
 										<div class="eventItem">메뉴</div>
-										<div class="eventItemContent">내용</div>
+										<div class="eventItemContent">${eventMenuList[status.index].menu_name}</div>
 										
 										<div class="eventItem">할인가격</div>
-										<div class="eventItemContent">내용</div>
+										<div class="eventItemContent">${eventMenuList[status.index].discount}</div>
 										
 										<div class="eventItem">상세내용</div>
 										<div class="eventItemContent">${event.event_content}</div>

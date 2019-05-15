@@ -1,7 +1,6 @@
 package com.food.project.service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -18,9 +17,9 @@ public class EventServiceImplement implements EventService {
 	private EventMapper eventMapper;
 
 	@Override
-	public ArrayList<EventVO> getEvent(String truckcode) {
+	public ArrayList<EventVO> getEvent(String truck_code) {
 		// TODO Auto-generated method stub
-		return eventMapper.getEvent(truckcode);
+		return eventMapper.getEvent(truck_code);
 	}
 
 	@Override
@@ -57,9 +56,9 @@ public class EventServiceImplement implements EventService {
 	}
 
 	@Override
-	public ArrayList<EventVO> getEventMenu(String truckCode) {
+	public ArrayList<EventMenuVO> getEventMenu(String truckcode) {
 		// TODO Auto-generated method stub
-		return eventMapper.getEventMenu(truckCode);
+		return eventMapper.getEventMenu(truckcode);
 	}
 
 }

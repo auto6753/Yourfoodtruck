@@ -11,9 +11,9 @@
 		TRUCK_CODE = #{truck_code} ORDER BY EVENT_REG_DATE DESC
 	</select>
 	
-<!-- 	<select id="getEventMenu">
-		select a.event_code, a.menu_code from event_menu a, event b where a.event_code = b.event_code and b.truck_code = #{truckCode};
-	</select> -->
+	<select id="getEventMenu" resultType="com.food.project.domain.EventMenuVO">
+		select e.event_code, m.menu_name, em.discount from menu m, event_menu em, event e where e.event_code = em.event_code and em.menu_code = m.menu_code and e.truck_code = #{truckCode}
+	</select>
 	
 	<select id="getEvent_code" resultType="com.food.project.domain.EventVO">
 		SELECT a.event_code

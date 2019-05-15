@@ -3,6 +3,7 @@ package com.food.project.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.EventMenuListVO;
 import com.food.project.domain.EventMenuVO;
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
@@ -76,11 +78,33 @@ public class SellerController {
 		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
 		String truckCode = foodtruckvo.getTruck_code();
 		
-//		ArrayList<EventVO> test = eventService.getEventMenu(truckCode);
+		ArrayList<EventMenuVO> test = new ArrayList<>();
+		test = eventService.getEventMenu(truckCode);
+		ArrayList<EventMenuListVO> eventMenuList = new ArrayList<>();
+		HashSet<String> eventCode = new HashSet<>();
+		
+		
+		for(int i=0; i<test.size(); i++) {
+			
+			if(eventCode.add(test.get(i).getEvent_code())) {
+				EventMenuListVO vo = new EventMenuListVO();
+				vo.setEvent_code(test.get(i).getEvent_code());
+				vo.addMenu(test.get(i).getMenu_name(), test.get(i).getDiscount());
+				eventMenuList.add(vo);
+		
+			} else {
+				for(int j=0; j<eventMenuList.size(); j++) {
+					if(eventMenuList.get(j).getEvent_code().equals(test.get(i).getEvent_code())) {
+						eventMenuList.get(j).addMenu(test.get(i).getMenu_name(), test.get(i).getDiscount());
+					}
+				}
+			}
+			System.out.println(eventMenuList);
+		}
 		
 		model.addAttribute("eventList", eventService.getEvent(truckCode));
 		model.addAttribute("menuList", sellerservice.getmenu(truckCode));
-//		model.addAttribute("eventMenu", eventService.getEventMenu(eventCode))
+		model.addAttribute("eventMenuList", eventMenuList);
 		
 		return "seller/event/event";
 	}
