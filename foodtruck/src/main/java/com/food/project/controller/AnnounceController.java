@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.client.ClientProtocolException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +33,7 @@ public class AnnounceController {
 	@RequestMapping(value = "/announce")
 	public String recruit(Model model,@RequestParam(defaultValue="1") int post_class,
 			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
-		
-		//========================================크롤링 하기=======================================
-		
-		
+		//========================================크롤링 해보기=====================================
 		//========================================페이징 하기=======================================
 		int totPage=0;
 		PostPager postPager;
