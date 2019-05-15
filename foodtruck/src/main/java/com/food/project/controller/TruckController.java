@@ -64,7 +64,6 @@ public class TruckController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
-		
 		return "truck/register/registerForm";
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)

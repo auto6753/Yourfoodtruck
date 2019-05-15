@@ -1,20 +1,26 @@
 package com.food.project.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.EventMenuListVO;
+import com.food.project.domain.EventMenuVO;
+import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.service.CallListService;
@@ -75,15 +81,92 @@ public class SellerController {
 		return "seller/loc/jusoPopup";
 	}
 	
-	@RequestMapping(value="/event", method={RequestMethod.GET, RequestMethod.POST}) 
-	public String event(Model model, HttpSession session, HttpServletRequest request) {
-		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
-		String truckCode = vo.getTruck_code();
+	@RequestMapping(value="/event", method=RequestMethod.GET) 
+	public String eventGet(Model model, HttpSession session, HttpServletRequest request) {
+		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
+		String truckCode = foodtruckvo.getTruck_code();
+		
+		ArrayList<EventMenuVO> test = new ArrayList<>();
+		test = eventService.getEventMenu(truckCode);
+		ArrayList<EventMenuListVO> eventMenuList = new ArrayList<>();
+		HashSet<String> eventCode = new HashSet<>();
+		
+		
+		for(int i=0; i<test.size(); i++) {
+			
+			if(eventCode.add(test.get(i).getEvent_code())) {
+				EventMenuListVO vo = new EventMenuListVO();
+				vo.setEvent_code(test.get(i).getEvent_code());
+				vo.addMenu(test.get(i).getMenu_name(), test.get(i).getDiscount());
+				eventMenuList.add(vo);
+		
+			} else {
+				for(int j=0; j<eventMenuList.size(); j++) {
+					if(eventMenuList.get(j).getEvent_code().equals(test.get(i).getEvent_code())) {
+						eventMenuList.get(j).addMenu(test.get(i).getMenu_name(), test.get(i).getDiscount());
+					}
+				}
+			}
+			System.out.println(eventMenuList);
+		}
+		
 		model.addAttribute("eventList", eventService.getEvent(truckCode));
-		String a = request.getParameter("eventName");
-		System.out.println(a);
+		model.addAttribute("menuList", sellerservice.getmenu(truckCode));
+		model.addAttribute("eventMenuList", eventMenuList);
 		
 		return "seller/event/event";
+	}
+	
+	@RequestMapping(value="/event", method=RequestMethod.POST)
+	@ResponseBody
+	public String eventPost(Model model, HttpServletRequest request) {
+		FoodTruckVO foodtruckvo = (FoodTruckVO) request.getSession().getAttribute("seller");
+		String truckCode = foodtruckvo.getTruck_code();
+		
+		EventVO evo = new EventVO();
+		evo.setTruck_code(truckCode);
+		evo.setEvent_name(request.getParameter("event_name"));
+		String event_start=request.getParameter("event_start");
+		String event_end=request.getParameter("event_end");
+		System.out.println(event_start +", "+ event_end);
+		Long longdata=Long.parseLong(event_start);
+		evo.setEvent_start(new Date(longdata));
+		longdata=Long.parseLong(event_end);
+		evo.setEvent_end(new Date(longdata));
+		evo.setEvent_target(request.getParameter("event_target"));
+		evo.setEvent_content(request.getParameter("event_content"));
+		evo.setEvent_payment(Integer.parseInt(request.getParameter("event_payment")));
+		evo.setEvent_combinable(Integer.parseInt(request.getParameter("event_combinable")));
+		
+		ArrayList<EventMenuVO> emvos = new ArrayList<>();
+		
+		String[] menuCode = request.getParameterValues("menuCode[]"); // 메뉴코드
+		String[] discount = request.getParameterValues("discount[]"); // 할인액
+		
+		for(int i=0; menuCode.length>i; i++) {
+			EventMenuVO emvo = new EventMenuVO();
+			emvo.setMenu_code(menuCode[i]);
+			emvo.setDiscount(Integer.parseInt(discount[i]));
+			emvos.add(emvo);
+		}
+		System.out.println(evo.getTruck_code());
+		Map<String, Object> mapvo = new HashMap<>();
+		mapvo.put("event", evo);
+		mapvo.put("eventMenu", emvos);
+		mapvo.put("truck_code",evo.getTruck_code());
+		eventService.addEvent(mapvo);
+		
+		return "success";
+	}
+	
+	@RequestMapping(value="/delEvent", method=RequestMethod.POST)
+	@ResponseBody
+	public String delEvent(Model model, HttpServletRequest request) {
+		String eventCode = request.getParameter("eventCode");
+		eventService.deleteEventMenu(eventCode);
+		eventService.deleteEvent(eventCode);
+		
+		return "success";
 	}
 	
 	@RequestMapping(value="/addEvent", method=RequestMethod.GET) 

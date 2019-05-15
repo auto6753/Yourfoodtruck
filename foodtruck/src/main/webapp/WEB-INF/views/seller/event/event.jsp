@@ -26,7 +26,7 @@
 						</div>
 						<div class="col-md-12 tab_con" id="tab_con">
 							<div class="eventBox"> <!-- 진행중인 이벤트 내용 -->
-								<c:forEach var="event" items="${eventList}">
+								<c:forEach var="event" items="${eventList}" varStatus="status">
 									<div class="col-md-6 max-width event"> <!-- 행당 2개 이벤트 배치 -->
 										<div class="manageEvent">
 											<div>
@@ -38,7 +38,7 @@
 												<img src="${pageContext.request.contextPath}/resources/image/icon/delete-16.png"/>
 											</div>
 										</div>
-										
+										<input class="delEvent" type="hidden" value="${event.event_code}"/>
 										<div class="eventItem">이벤트명</div>
 										<div class="eventItemContent eventName">${event.event_name}</div>
 										
@@ -46,10 +46,10 @@
 										<div class="eventItemContent">${event.event_start} ${event.event_end}</div>
 										
 										<div class="eventItem">메뉴</div>
-										<div class="eventItemContent">내용</div>
+										<div class="eventItemContent">${eventMenuList[status.index].menu_name}</div>
 										
 										<div class="eventItem">할인가격</div>
-										<div class="eventItemContent">내용</div>
+										<div class="eventItemContent">${eventMenuList[status.index].discount}</div>
 										
 										<div class="eventItem">상세내용</div>
 										<div class="eventItemContent">${event.event_content}</div>
@@ -102,7 +102,7 @@
 					<!--content //-->
 					<div class="ctxt mb20">
 						<div class="addEventTitle">이벤트 등록</div>
-						
+							<form action="">
 							<div id="upload">
 								<div id="previewId">
 									<div id="imgControlBox">
@@ -134,18 +134,23 @@
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">메뉴</label></td>
-									<td valign="top">
-										
-
+									<td valign="top" class="menuWrapper">
+										<div>
+											<div class="menuWidth menuCol">이름</div>
+											<div class="menuWidth2 menuCol">단가(원)</div>
+											<div class="menuWidth2 menuCol">할인액(원)</div>
+											<div class="menuWidth2 menuCol">할인가(원)</div>
+										</div>
 										<div id="pre_set" style="display: none; float:top;">
 											<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
-												<option value="" selected>메뉴</option>
-												<option value="menu1">메뉴1</option>
-												<option value="menu2">메뉴2</option>
-												<option value="menu3">메뉴3</option>
+												<option value="" selected>&nbsp;&nbsp;------- 메뉴 -------</option>
+												<c:forEach var="i" items="${menuList}">
+													<option value="${i.menu_code}">${i.menu_name}</option>
+												</c:forEach>
 											</select>
-											<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
-											<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
+											<input type="text" class="menuWidth2" name="price" placeholder="단가" disabled/>
+											<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this);" onkeypress="return digit_check(event);" required disabled/>
+											<input type="text" class="menuWidth2" name="dResult" placeholder="할인가" required disabled/>
 											<a href="#" class="deleteMenuBtn" onclick="remove_item(this)">
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu.svg"/>
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu2.svg"/>
@@ -155,15 +160,20 @@
 										<div id="field">
 											<div id="default">
 												<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
-													<option value="" selected>메뉴</option>
-													<option value="menu1">메뉴1</option>
-													<option value="menu2">메뉴2</option>
-													<option value="menu3">메뉴3</option>
+													<option value="" selected>&nbsp;&nbsp;------- 메뉴 -------</option>
+													<c:forEach var="i" items="${menuList}">
+														<option value="${i.menu_code}">${i.menu_name}</option>
+														
+													</c:forEach>
 												</select>
-												<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
-												<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
+												<input type="text" class="menuWidth2" name="price" placeholder="단가" disabled/>
+												<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this.value);" onkeypress="return digit_check(event);" required disabled/>
+												<input type="text" class="menuWidth2" name="dResult" placeholder="할인가" required disabled/>
 											</div>
 										</div>
+										<c:forEach var="i" items="${menuList}">
+											<input id="${i.menu_code}" type="hidden" value="${i.unit_price}"/>
+										</c:forEach>
 										<a href="#" class="addmenuBtn" onclick="add_item()">
 											<img class="addmenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/addmenu.svg"/> <!-- 기본 -->
 											<img class="addmenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/addmenu2.svg"/> <!-- 마우스오버 -->
@@ -186,21 +196,20 @@
 								<tr>
 									<td valign="top"><label class="labelStyle">결제수단</label></td>
 									<td class="color666" valign="top">
-										<div><input type="checkbox" name="payment" value="cash"/> 현금</div>
-										<div><input type="checkbox" name="payment" value="card"/> 카드</div>
-										<div><input type="checkbox" name="payment" value="kakaoPay"/> 카카오페이</div>
+										<div><input type="checkbox" id="pCash" name="payment" value="cash"/> 현금</div>
+										<div><input type="checkbox" id="pCard" name="payment" value="card"/> 카드</div>
+										<div><input type="checkbox" id="pKakao" name="payment" value="kakaoPay"/> 카카오페이</div>
 									</td>
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">중복적용</label></td>
 									<td class="color666" valign="top">
-										<div><input type="radio" name="duplicate" value="yes"/> 가능</div>
-										<div><input type="radio" name="duplicate" value="no"/> 불가</div>
+										<div><input type="radio" name="duplicate" value="1"/> 가능</div>
+										<div><input type="radio" name="duplicate" value="0"/> 불가</div>
 									</td>
 								</tr>
 							</table>
-							<input type="submit" id="submitAddEvent" style="display:none;"/>
-						
+						</form>
 						<div class="btn-r fixedStyle">
 							<button id="addEventBtn" class="btnCommonStyle">등록</button>
 							<button class="btnCommonStyle resetBtn">리셋</button>
@@ -227,7 +236,7 @@
 						<div class="deleteEventDiv">
 							<img id="deleteEvent" src="${pageContext.request.contextPath}/resources/image/icon/deleteevent.svg"/>
 						</div>
-						<form action="" method="post" name="form">
+						<form action="">
 							<div id="upload">
 								<div id="previewId2">
 									<div id="imgControlBox2">
@@ -242,7 +251,7 @@
 
 							</div>
 							<table id="table">
-									<input type="hidden" id="eventCode"/>
+									
 								<tr>
 									<td class="titleStyle" valign="top"><label class="labelStyle" for="eventName">이벤트명</label></td>
 									<td class="contentStyle" valign="top"><input type="text" id="eventName" name="eventName" required/></td>
@@ -269,7 +278,7 @@
 												<option value="menu2">메뉴2</option>
 												<option value="menu3">메뉴3</option>
 											</select>
-											<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
+											<input type="text" class="menuWidth" name="price" placeholder="단가" disabled/>
 											<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
 											<a href="#" class="deleteMenuBtn" onclick="remove_item2(this)">
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu.svg"/>
@@ -285,7 +294,7 @@
 													<option value="menu2">메뉴2</option>
 													<option value="menu3">메뉴3</option>
 												</select>
-												<input type="text" class="menuWidth" name="price" placeholder="판매가" disabled/>
+												<input type="text" class="menuWidth" name="price" placeholder="단가" disabled/>
 												<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
 											</div>
 										</div>
@@ -324,7 +333,6 @@
 									</td>
 								</tr>
 							</table>
-							<input type="submit" id="submitEditEvent" style="display:none;"/>
 						</form>
 						<div class="btn-r fixedStyle">
 							<button id="editEventBtn" class="btnCommonStyle" onclick="editEventBtn();">수정</button>
