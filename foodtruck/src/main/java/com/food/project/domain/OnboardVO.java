@@ -10,5 +10,5 @@ public class OnboardVO {
 	private String brandname;
 	private String email;
 	private String truck_code;
-
+	private String hours;
 }
