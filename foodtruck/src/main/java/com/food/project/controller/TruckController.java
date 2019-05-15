@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,10 @@ import lombok.AllArgsConstructor;
 public class TruckController {
 	private FoodTruckService service;
 	private FoodtruckMapper mapper;
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String info(Model model ,@RequestParam("truck_code") String truck_code , HttpSession session ) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
-		System.out.println("fsdfsdfdfs");
-		
-		
 	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String info(Model model ,@RequestParam("truck_code") String truck_code ) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
+		
 		FoodTruckVO ss= service.getFoodTruck(truck_code); //클릭한 푸드트럭으로 해당 푸드트럭의 정보를 select 
 		
 		System.out.println(ss);
@@ -149,8 +148,11 @@ public class TruckController {
 //	}
 
 	@RequestMapping(value = "/callForm", method = RequestMethod.GET)
-	public String callForm(Locale locale) {
+	public String callForm(Model model,@RequestParam("truck_code") String truck_code) {
 		
+		
+		FoodTruckVO fd = service.getFoodTruck(truck_code);
+		model.addAttribute("truck", fd);
 		
 		/* callList.insertCallList(vo); */
 		 

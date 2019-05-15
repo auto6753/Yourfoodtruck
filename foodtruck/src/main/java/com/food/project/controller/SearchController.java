@@ -79,6 +79,7 @@ public class SearchController {
 				data.put("total_review",a.get("TOTAL_REVIEW"));
 				data.put("avg_review",a.get("AVG_REVIEW"));
 				arry.add(data);
+				
 			}
 //			for(int i=0; i<list.size();i++) {
 //				JSONObject data = new JSONObject();

@@ -2,9 +2,16 @@ package com.food.project.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +27,7 @@ import com.food.project.service.CallListService;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
+import com.google.gson.JsonArray;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
@@ -118,20 +126,45 @@ public class CustomerController {
 		return "customer/review";
 	}
 	
-	
-	@RequestMapping(value = "/callList", method = RequestMethod.GET)
-	public String callList(Locale locale, Model model, HttpSession session) {
-
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/callList" ,method = RequestMethod.GET)
+	public String callList(Locale locale, Model model ,HttpSession session) {
+		
 		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
 		System.out.println(vo.getEmail());
-		// String email = null;
-
+		//String email = null;
+		
+		//System.out.println("z"+callList.getCallList2(vo.getEmail()));
+		
+		List<Map<String, Object>> list = callList.getCallList2(vo.getEmail());
+		JSONArray arry= new JSONArray();
+        for(Map<String, Object> a : list) {
+           JSONObject data=new JSONObject();
+           data.put("festival_name", a.get("FESTIVAL_NAME"));
+           data.put("brandname", a.get("BRANDNAME"));
+           data.put("festival_startdate", a.get("FESTIVAL_STARTDATE"));
+           data.put("festival_enddate", a.get("FESTIVAL_ENDDATE"));
+           data.put("progress", a.get("PROGRESS"));
+           data.put("place", a.get("PLACE"));
+           data.put("festival_endtime", a.get("FESTIVAL_ENDTIME"));
+           data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
+           data.put("name", a.get("NAME"));
+		   data.put("pay_status",a.get("PAY_STATUS"));
+           arry.add(data);
+        }
+		
+		
+		//System.out.println(list);
+		System.out.println(arry);
 		ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
-
-		for (int i = 0; i < cl.size(); i++) {
-			System.out.println(cl);
-		}
-
+		 
+	
+		
+//		for(int i = 0;i<cl.size();i++) {
+//			System.out.println(cl);
+//		}
+//		
+		model.addAttribute("CallList2", arry);
 		model.addAttribute("CallList", cl);
 
 		return "customer/callList";
