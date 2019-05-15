@@ -6,7 +6,7 @@
 		select * from foodtruck
 	</select>
 	<select id="getFoodTruck" resultType="com.food.project.domain.FoodTruckVO">
-		select * from foodtruck where truck_code=#{truck_code}
+		select * from foodtruck where truck_code=#{truck_code}                              
 	</select>
 	
 	<select id="getFoodTruckE" parameterType="String" resultType="com.food.project.domain.FoodTruckVO">
@@ -14,8 +14,8 @@
 	</select>
 
 	<insert id="insertFoodTruck" parameterType="com.food.project.domain.FoodTruckVO">
-		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,email)
-		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{email})
+		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,paytype,email,truck_desc)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{paytype},#{email},#{truck_desc})
 	</insert>
 	<insert id="insertReview" parameterType="com.food.project.domain.ReviewVO">
 		insert into review(truck_code,email,review_regdate,review_score,review_content,review_reply_content,review_reply_regdate,review_code)
@@ -25,6 +25,15 @@
 		select truck_code,email, review_regdate ,review_score,review_content,review_reply_content,review_reply_regdate, review_code from review where truck_code = #{truck_code} order by review_regdate DESC
 
 	</select>
+	<update id="updateTruckinfo" parameterType="com.food.project.domain.FoodTruckVO">
+		update foodtruck set brandname=#{brandname},crn=#{crn},trucknum=#{trucknum},account=#{account},paytype=#{paytype},truck_desc=#{truck_desc} where truck_code=#{truck_code ,jdbcType=VARCHAR}
+	</update>
+	<select id="selectReviewList" resultType="com.food.project.domain.MyreviewlistDTO" parameterType="String">
+		select a.brandname, b.review_code, b.review_content, b.review_score, TO_CHAR(b.review_regdate, 'YYYY-MM-DD') review_regdate from review b , foodtruck a where a.truck_code = b.truck_code and b.email = #{email} order by b.review_regdate DESC
+		<!--푸드트럭에서 brandname이랑 리뷰여러가지랑 조인  -->
+
+	</select>
+	
 	
 	
 </mapper>

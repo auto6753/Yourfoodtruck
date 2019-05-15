@@ -10,6 +10,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </head>
 <body>
+<button id="toRecruit">모집공고 보기</button>
 	<div id="title" class="card-header">
 		<p>허가구역 안내</p>
 	</div>
@@ -87,6 +88,9 @@
       $('#title').click(function() {
     	 location.href="/area"; 
       });
+      $('#toRecruit').click(function() {
+     	 location.href="/announce"; 
+       });
    });
 </script>	
 </body>

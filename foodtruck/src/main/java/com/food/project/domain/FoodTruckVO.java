@@ -18,4 +18,11 @@ public class FoodTruckVO {
 	private int paytype;
 	private String truck_url;
 	private String bank;
+	private String truck_desc;
+	
+	/* private int a; */
+	
+	/*
+	 * public void aa(int fff) { a=fff; } public int aaa() { return a; }
+	 */
 }
