@@ -18,15 +18,15 @@ $(document).ready(function(){
 	$(this).click(function(e){
 	console.log(e);
 	var target = e.target;
-	var temp= $(target).attr('class'));
+	var temp= $(target).attr('class');
 	if(temp=='cancel1'){
 		alert(temp);
-	}else if(temp=='cancel2'){
-		
-	}else if(temp=='cancel2'){
-		
-	}else if(temp=='cancel2'){
-		
+	}else if(temp=='confirm2'){
+		alert(temp);
+	}else if(temp=='cancel3'){
+		alert(temp);
+	}else if(temp=='confirm4'){
+		alert(temp);
 	}
 	
 	});
@@ -42,12 +42,12 @@ $(document).ready(function(){
 		var a=$(this);
 		console.log(a);
 	});
-	$(".cancle3").click(function(){
+	$(".cancel3").click(function(){
 		alert("ㅇ");
 		var a=$(this);
 		console.log(a);
 	});
-	$(".confirm2").click(function(){
+	$(".confirm4").click(function(){
 		alert("ㅇ");
 		var a=$(this);
 		console.log(a);
@@ -92,16 +92,16 @@ $(document).ready(function(){
 		var pay_status;
 		
 		if(a[i].progress ==1){
-			progress="진행중<button onclick='cancel1();' class='cancel1'>취소</button>";
+			progress="진행중<button class='cancel1'>취소</button>";
 			agreement="대기";
 		}else if(a[i].progress ==2){
 			progress="진행중<button class='confirm2'>확인</button>";
 			agreement="승인";
 		}else if(a[i].progress ==3){
-			progress="트럭 미확인<button class='cancle3'>취소</button>";	
+			progress="트럭 미확인<button class='cancel3'>취소</button>";	
 			agreement="승인";
 		}else if(a[i].progress ==4){
-			progress="트럭 확인<button calss='confirm4'>확인</button>";	
+			progress="트럭 확인<button class='confirm4'>확인</button>";	
 			agreement="승인";
 		}else if(a[i].progress ==5){
 			progress="거래종료";	
