@@ -47,4 +47,9 @@
 	<delete id="delEventMenu">
 		delete from event_menu where event_code = #{eventCode}
 	</delete>
+	<select id="getMainevent" resultType="com.food.project.domain.EventVO">
+		select e.truck_code, e.event_name, e.event_start, e.event_end, f.brandname
+		from event e join foodtruck f
+		on (e.truck_code = f.truck_code)      
+	</select>
 </mapper>

@@ -60,5 +60,11 @@ public class EventServiceImplement implements EventService {
 		// TODO Auto-generated method stub
 		return eventMapper.getEventMenu(truckcode);
 	}
+	@Override
+	public ArrayList<EventVO> getMainevent() {
+		// TODO Auto-generated method stub
+		return eventMapper.getMainevent();
+	}
+
 
 }
