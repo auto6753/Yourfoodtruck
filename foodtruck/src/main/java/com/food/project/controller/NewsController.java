@@ -1,6 +1,8 @@
 package com.food.project.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -16,6 +18,7 @@ import com.food.project.domain.EventVO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PostVO;
 import com.food.project.paging.PostPager;
+import com.food.project.service.EventService;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +27,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class NewsController {
 	PostService postService;
+	EventService eventService;
 	
 	@RequestMapping(value = "/news")
 	public String news(Model model,@RequestParam(defaultValue="0") int post_class,
@@ -115,22 +119,22 @@ public class NewsController {
 		ArrayList<EventVO> eve = new ArrayList<EventVO>();
 		ArrayList<EventVO> ievent = new ArrayList<>();
 		ArrayList<EventVO> eevent = new ArrayList<>();
-		eve = event.getMainevent();
+		eve = eventService.getMainevent();
 			
 		for(int i=0; i < eve.size(); i++) {
-		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
-		int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
-		System.out.println(sysdate);
-		Date enddate = eve.get(i).getEvent_end();
-		String edate = date.format(enddate);
-		int end_date = Integer.parseInt(edate);
-		System.out.println(end_date);
+			SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+			int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
+			System.out.println(sysdate);
+			Date enddate = eve.get(i).getEvent_end();
+			String edate = date.format(enddate);
+			int end_date = Integer.parseInt(edate);
+			System.out.println(end_date);
 		
-		if(end_date > sysdate) {
-			ievent.add(eve.get(i));
-		}else {
-			eevent.add(eve.get(i));
-		}
+			if(end_date > sysdate) {
+				ievent.add(eve.get(i));
+			}else {
+				eevent.add(eve.get(i));
+			}
 		}		
 		
 		model.addAttribute("ievent",ievent);

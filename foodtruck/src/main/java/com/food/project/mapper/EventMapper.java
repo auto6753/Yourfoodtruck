@@ -14,4 +14,5 @@ public interface EventMapper {
 	public void delEvent(String eventCode);
 	public void delEventMenu(String eventCode);
 	public ArrayList<EventMenuVO> getEventMenu(String truckCode);
+	public ArrayList<EventVO> getMainevent();
 }
