@@ -17,129 +17,36 @@
 		<div class="album py-5 bg-light">
 		<div class="container">
 		<div class="row">
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
+		<c:if test="${onSale != null }">
+		<c:forEach var="i" items="${onSale }">
+			<div class="col-md-4" id="${i.truck_code}">
+				<div class="card mb-4 shadow-sm">
+					<svg class="bd-placeholder-img card-img-top" width="100%"
+						height="225" xmlns="http://www.w3.org/2000/svg"
+						preserveAspectRatio="xMidYMid slice" focusable="false"
+						role="img" aria-label="Placeholder: Thumbnail">
+						<rect width="100%" height="100%" fill="#55595c"></rect>
+							<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
+					</svg>
+						<div class="card-body">
+							<p class="card-text">
+							${i.brandname}
+							${i.onboard_date}
+							</p>
+							<input id="truckcode" type="hidden" value="${i.truck_code}"/>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary" id="delete">하차</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+			</c:if>
 		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="card mb-4 shadow-sm">
-		<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		<rect width="100%" height="100%" fill="#55595c"></rect>
-		<text x="50%" y="50%" fill="#eceeef" dy=".3m">Thumbnail</text>
-		</svg>
-		<div class="card-body">
-		<p class="card-text">
-			푸드트럭설명
-		</p>
-		<div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-		<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
-		<button type="button" class="btn btn-sm btn-outline-secondary">하차</button>
-		
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		</div>
-		</div>
+	</div>
 
 	</div>
 	<div class="sunjae">
@@ -166,5 +73,29 @@
 </div>
 
 </div>
+<script>
+	$(function(){
+			$("#delete").click(function(){
+				var truckcode = $("#truckcode").val();
+				
+				alert(truckcode);
+				
+				$.ajax({
+					type : "post",
+					url : "/customer/onboard",
+					data : {
+						"truckcode" : truckcode
+					},
+					success : function(data) {
+						alert("하차되었습니다.");
+						location.reload();
+					},
+					error : function(err) {
+						alert("오류발생");
+					}
+				});
+			});
+		});
+</script>
 </body>
 </html>

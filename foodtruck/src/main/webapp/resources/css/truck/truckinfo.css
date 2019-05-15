@@ -283,6 +283,10 @@ h1 {
 	text-align: right;
 	color: #ff6622;
 }
+.sumscore{
+	margin-top: 20px;
+	font-size: 150%;
+}
 .delete{
 	width:7%;
 	margin-left:92%;

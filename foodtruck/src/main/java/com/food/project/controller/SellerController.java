@@ -16,14 +16,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.EventMenuListVO;
 import com.food.project.domain.EventMenuVO;
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
+import com.food.project.service.FoodTruckService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -39,6 +41,8 @@ import lombok.AllArgsConstructor;
 public class SellerController {
 	private SellerService sellerservice;
 	private EventService eventService;
+	private CallListService callService;
+	private FoodTruckService truckService;
 
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model) {
@@ -57,6 +61,10 @@ public class SellerController {
 	public String addMenu(Model model) {
 		return "seller/menu/addMenu";
 	}
+	@RequestMapping(value="/infoModify", method=RequestMethod.GET) 
+	public String infoModify(Model model) {
+		return "seller/truckinfo/truckinfo";
+	}
 	
 	@RequestMapping(value="/editMenu", method=RequestMethod.GET) 
 	public String editMenu(Model model) {
@@ -68,7 +76,7 @@ public class SellerController {
 		return "seller/loc/location";
 	}
 	
-	@RequestMapping(value="/jusoPopup", method=RequestMethod.POST) 
+	@RequestMapping(value="/jusoPopup", method= {RequestMethod.GET, RequestMethod.POST}) 
 	public String jusoPopup(Model model) {
 		return "seller/loc/jusoPopup";
 	}
@@ -208,7 +216,11 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/callmanage", method=RequestMethod.GET) 
-	public String call(Model model) {
+	public String call(Model model,HttpSession session) {
+		FoodTruckVO vo = (FoodTruckVO)session.getAttribute("seller");
+		model.addAttribute("callList", callService.getCallList(vo.getTruck_code()));
+		System.out.println("콜");
+		System.out.println(callService.getCallList(vo.getTruck_code()));
 		return "seller/call/callmanage";
 	}
 	
@@ -303,7 +315,39 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/truckinfo", method=RequestMethod.GET) 
-	public String truckinfo(Model model) {
+	public String truckinfo(Model model , HttpSession session) {
+		
+		FoodTruckVO vo = (FoodTruckVO)session.getAttribute("seller");
+		
+		String kk = vo.getTruck_code();
+		
+		FoodTruckVO vo2 = truckService.getFoodTruck(kk);//=앞에 변수 담는거
+		
+		
+		model.addAttribute("truckinfo" ,vo2);
+		
 		return "seller/truckinfo/truckinfo";
 	}
+	@RequestMapping(value="/truckinfomodify", method=RequestMethod.POST) 
+	public String truckinfomodify(Model model ,HttpServletRequest request, FoodTruckVO vo ) {
+		
+		System.out.println(vo);
+		String[] pay = request.getParameterValues("paytype");//truckinfo.jsp에 있는 체크박스 value가 paytype인걸을 배열로 묶는것
+		System.out.println("2");
+		int sum = 0;
+		
+		for(int i=0; i<pay.length; i++) {
+			
+			sum += Integer.parseInt(pay[i]);
+		}
+		vo.setPaytype(sum);
+		System.out.println("3");
+		
+		truckService.updateTruckinfo(vo);
+		System.out.println("4");
+		return "redirect:/seller";
+		
+		
+	
+}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.FoodtruckMapper;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,19 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	public ArrayList<ReviewVO> getReviewList(String truck_code) {
 		// TODO Auto-generated method stub
 		return mapper.getReviewList(truck_code);
+	}
+
+	@Override
+	public void updateTruckinfo(FoodTruckVO vo) {
+		
+		mapper.updateTruckinfo(vo);
+		
+	}
+
+	@Override
+	public ArrayList<MyreviewlistDTO> selectReview(String tt) {
+		// TODO Auto-generated method stub
+		return mapper.selectReviewList(tt);
 	} 
 	
 

@@ -52,8 +52,7 @@
 			</tr>
 			<tr> <!-- 여기부터 -->
 				<td class="itemName" valign="top"><label class="labelStyle" for="details">상세내용</label></td>
-				<td><textarea id="details" name="details"> <!-- required onFocus="clearMessage(this.form);" onKeyUp="checkByte(this.form);" -->
-					d
+				<td><textarea id="details" name="details">
 					</textarea>
 			<!-- 		<div class="showByte">
 						<input type="text" name="messagebyte" value="0" size="1" maxlength="2" readonly>
@@ -102,7 +101,7 @@ $(document).ready(function(){
 		}
 		$.ajax({
 			type:"post",
-			url:"/project/upload/upload",
+			url:"/upload/upload",
 			data:formData,
             processData: false,
             contentType: false,

@@ -19,5 +19,13 @@ public class OnboardServiceimplement implements OnboardService{
 	public ArrayList<OnboardVO> getOnboard(String email) {
 		return mapper.getOnboard(email);
 	}
+	@Override
+	public void DeleteOnboard(String truck_code) {
+		mapper.DeleteOnboard(truck_code);
+	}
+	@Override
+	public ArrayList<OnboardVO> getOnSale(String email) {
+		return mapper.getOnSale(email);
+	}
 	
 }

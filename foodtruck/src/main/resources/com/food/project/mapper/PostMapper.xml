@@ -85,4 +85,7 @@
 		select count(*) tot_page from post
 		where post_class=#{post_class} and post_title like '%'||#{keyword}||'%'
 	</select>
+	<select id="getReview" resultType="com.food.project.domain.ReviewVO">
+		select * from review where email = #{email}
+	</select>
 </mapper>

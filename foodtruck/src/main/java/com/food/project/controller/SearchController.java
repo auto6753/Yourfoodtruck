@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import net.sf.json.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,6 +63,7 @@ public class SearchController {
 			//list=locservice.getLoc();
 			
 			List<Map<String, Object>> list = locservice.getLoc();
+			JSONArray test=new JSONArray();
 			for(Map<String, Object> a : list) {
 				JSONObject data=new JSONObject();
 				data.put("truck_code", a.get("TRUCK_CODE"));
@@ -79,7 +79,17 @@ public class SearchController {
 				data.put("total_review",a.get("TOTAL_REVIEW"));
 				data.put("avg_review",a.get("AVG_REVIEW"));
 				arry.add(data);
+				
 			}
+//			for(int i=0; i<list.size();i++) {
+//				JSONObject data = new JSONObject();
+//				System.out.println(list.get(i).toString());
+//				data.fromObject(list.get(i));
+//				//data.fromObject(list.get(i).toString());
+//				test.add(data);
+//			}
+//			test.fromObject(list);
+//			System.out.println(test);
 			//model.addAttribute("loc",list2);
 		}catch(Exception e) {
 			e.printStackTrace();
