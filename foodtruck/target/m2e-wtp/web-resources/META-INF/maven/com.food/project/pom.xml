@@ -15,12 +15,12 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
-		<!-- html파싱하는 jsoup -->
-		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<!-- html파싱하는 selenium -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.11.3</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
 		</dependency>
 		<!-- 이미지 업로드 -->
 		<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->

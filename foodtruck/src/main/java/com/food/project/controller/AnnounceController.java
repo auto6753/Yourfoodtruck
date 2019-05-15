@@ -1,15 +1,11 @@
 package com.food.project.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +21,7 @@ import com.food.project.service.PaymentService;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
 
 @AllArgsConstructor
 @Controller
@@ -35,6 +32,11 @@ public class AnnounceController {
 	@RequestMapping(value = "/announce")
 	public String recruit(Model model,@RequestParam(defaultValue="1") int post_class,
 			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
+		
+		//========================================크롤링 하기=======================================
+		
+		
+		//========================================페이징 하기=======================================
 		int totPage=0;
 		PostPager postPager;
 		if(keyword.isEmpty()) {
