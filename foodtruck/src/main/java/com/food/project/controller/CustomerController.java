@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.domain.ReviewVO;
 import com.food.project.service.CallListService;
+import com.food.project.service.FoodTruckService;
 import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
 
@@ -28,6 +32,7 @@ import lombok.AllArgsConstructor;
 public class CustomerController {
 
 	private LoginService service;
+	private FoodTruckService review;
 	CallListService callList;
 	OnboardService onboard;
 
@@ -61,10 +66,27 @@ public class CustomerController {
 		return "customer/onSale";
 	}
 	
-	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public String review(Locale locale, Model model) {
+	
+	@RequestMapping(value = "review", method = RequestMethod.GET)
+	public String reviewList(Locale locale, Model model , HttpSession session) {
+		
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		System.out.println(vo);
+		
+	
+		String tt = vo.getEmail();
+		
+		
+		ArrayList<MyreviewlistDTO> vo2 = review.selectReview(tt);
+		
+		
+		model.addAttribute("rlist" ,vo2);
+		System.out.println(vo2);
+	
+		
 		return "customer/review";
 	}
+	
 	
 	@RequestMapping(value = "/callList", method = RequestMethod.GET)
 	public String callList(Locale locale, Model model ,HttpSession session) {

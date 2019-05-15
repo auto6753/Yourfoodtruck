@@ -13,6 +13,7 @@
 <body>
 				<ul>
 					<li class="menu"><a href="/seller/">메인</a></li>
+					<li class="menu"><a href="/seller/truckinfo">트럭정보 수정</a></li>
 					<li class="menu"><a href="/seller/menu">메뉴 등록</a></li>
 					<li class="menu"><a href="/seller/location">위치 등록</a></li>
 					<li class="menu"><a href="/seller/event">이벤트 관리</a></li>
