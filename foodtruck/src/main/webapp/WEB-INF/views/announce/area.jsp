@@ -10,6 +10,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </head>
 <body>
+<button id="toRecruit">모집공고 보기</button>
 	<div id="title" class="card-header">
 		<p>허가구역 안내</p>
 	</div>
@@ -19,9 +20,9 @@
 			<form class="form-inline" action="/area" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
-				<input placeholder="Search" aria-label="Search"id="searchbox" class="form-control mr-sm-2"name="keyword" value="${map.keyword}">
+				<input name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
-				<input type="submit" id="searchbutton" value="조회" class="btn">
+				<input type="submit" value="조회" class="btn">
 				<c:if test="${not empty sessionScope.sessionid}">
 				<a href="/area/addArea"><button id="pageadd" type="button" class="btn">등록</button></a>
 				</c:if>
@@ -54,19 +55,18 @@
 	<div id="nextall">
 		<nav id="next" aria-label="Page navigation example">
 			<ul class="pagination">
-				
 				<li class="page"><a class="page-link" href="javascript:list('1')"><span>&lt;&lt;</span></a></li>
 				<c:forEach var="num" begin="${map.postPager.blockBegin}" end="${map.postPager.blockEnd}">
 					<li class="page-item"><a class="page-link" href="javascript:list('${num}')"><span>${num}</span></a></li>
 				</c:forEach>			
-				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
+				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>»</span></a></li>
 			</ul>
 		</nav>
 	</div>
 <script>
 	function list(page) {
 		location.href="/area?curPage="+page+"&keyword=${map.keyword}";
-	} 
+	}
    $(document).ready(function(){
       $('.boardTitle').on('click', function(){
       var a = $(this);
@@ -88,6 +88,9 @@
       $('#title').click(function() {
     	 location.href="/area"; 
       });
+      $('#toRecruit').click(function() {
+     	 location.href="/announce"; 
+       });
    });
 </script>	
 </body>

@@ -36,7 +36,6 @@ public class CustomerController {
 	CallListService callList;
 	OnboardService onboard;
 
-
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {

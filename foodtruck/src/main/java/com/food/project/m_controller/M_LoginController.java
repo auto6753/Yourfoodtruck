@@ -52,6 +52,7 @@ public class M_LoginController {
 			System.out.println(c.getPassword());
 			userInfo.put("email", email);
 			userInfo.put("password",password);
+			userInfo.put("nickname",c.getNickname());
 			sessionInfo.put("user",userInfo);
 			FoodTruckVO fd = new FoodTruckVO();
 			fd = loginservice.getFoodTruck(email);
