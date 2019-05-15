@@ -47,9 +47,13 @@
                <input id="searchbox" class="form-control mr-sm-2" type="search"
                   placeholder="Search" aria-label="Search">
                
-               <button id="searchbutton"type="button" class="btn">검색</button>
-               <a href="/project/news/addNews"><button id="pageadd"type="button" class="btn" >등록</button></a>
+               <button id="searchbutton"type="button" class="btn">조회</button>
+               <c:if test="${not empty sessionScope.sessionid }">
+               <a href="/news/addNews"><button id="pageadd"type="button" class="btn" >등록</button></a>
+            	</c:if>
             </form>
+            
+            
          </nav>
          
       </div>

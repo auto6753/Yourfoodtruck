@@ -20,11 +20,11 @@
 			<div class="jumbotron">
 				<h1 id="titles"class="display-10">${areaspecific.post_title}</h1>
 				<hr class="my-4">
-				<p>${specific.post_content}</p>
+				<p>${areaspecific.post_content}</p>
 				<p class="lead">
 					<input id="d" type="button"   value="수정" class="btn" onClick="">
 					<!-- <button id="d" type="submit" class="btn" onClick="">수정</button>  -->
-					<button id="delete" class="btn">삭제</button>
+					<input type="button" id="delete" class="btn" value="삭제">
 					<a href="/area/?post_code=${post_code}&curPage=${curPage}&keyword=${keyword}"><input id="back" type="button"   value="목록" class="btn" onClick=""></a> 
 				</p>
 			</div>

@@ -103,9 +103,9 @@ public class AnnounceController {
 	}
 	
 	
-	@RequestMapping(value = "/area/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/area/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public String areaDelete(Model model,PostVO vo) {
+	public String delete(Model model,PostVO vo) {
 		postService.deletePost(vo);
 		return "";
 	}
