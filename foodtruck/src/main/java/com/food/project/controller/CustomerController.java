@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.domain.ReviewVO;
 import com.food.project.service.CallListService;
 import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
+import com.food.project.service.PostService;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -27,7 +30,8 @@ public class CustomerController {
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
-
+	PostService post;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
 		return "customer/mypage";
@@ -90,7 +94,9 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public String review(Locale locale, Model model) {
+	public String review(Locale locale, Model model, HttpSession session) {
+		
+		
 		return "customer/review";
 	}
 
@@ -122,12 +128,7 @@ public class CustomerController {
 		CustomerVO cus = service.getCustomer(vo.getEmail()); 
 		System.out.println(cus);
 		model.addAttribute("cusinfo", cus);
-		
-		
-		/* service.updatePassword(pass); */
-		
-		/* service.updatePassword(pass); */
-		
+
 		return "customer/cusInfo";
 	}
 	

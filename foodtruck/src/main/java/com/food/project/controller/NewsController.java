@@ -1,5 +1,8 @@
 package com.food.project.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
@@ -9,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.EventVO;
+import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PostVO;
+import com.food.project.service.EventService;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +24,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class NewsController {
 	PostService service;
+	EventService event;
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(Model model) {
@@ -110,7 +117,34 @@ public class NewsController {
 	
 	@RequestMapping(value = "/eventOn", method = RequestMethod.GET)
 	public String eventOn(Locale locale, Model model) {
-		return "event/event";
+		ArrayList<EventVO> eve = new ArrayList<EventVO>();
+		ArrayList<EventVO> ievent = new ArrayList<>();
+		ArrayList<EventVO> eevent = new ArrayList<>();
+		eve = event.getMainevent();
+			
+		for(int i=0; i < eve.size(); i++) {
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+		int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
+		System.out.println(sysdate);
+		Date enddate = eve.get(i).getEvent_end();
+		String edate = date.format(enddate);
+		int end_date = Integer.parseInt(edate);
+		System.out.println(end_date);
+		
+		if(end_date > sysdate) {
+			ievent.add(eve.get(i));
+		}else {
+			eevent.add(eve.get(i));
+		}
+		}		
+		
+		model.addAttribute("ievent",ievent);
+		model.addAttribute("eevent",eevent);
+		
+		
+		
+		
+		return "event/mainevent";
 	}
 	
 //	@RequestMapping(value = "/eventOff", method = RequestMethod.GET)
