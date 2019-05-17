@@ -30,6 +30,10 @@ $(document).ready(function(){
 			}
 		});
 	});
+	$("#detail").click(function(){
+		var truck_code = $("#truckcode").val();
+				location.href = "/truck/?truck_code="+truck_code;
+	});
 });
 </script>
 </head>
@@ -54,7 +58,7 @@ $(document).ready(function(){
 		<input id="truckcode" type="hidden" value="${i.truck_code}"/>
 		<div class="d-flex justify-content-between align-items-center">
 		<div class="btn-group">
-		<button class="btn btn-sm btn-outline-secondary">상세정보</button>
+		<button class="btn btn-sm btn-outline-secondary" id="detail">상세정보</button>
 		<button class="btn btn-sm btn-outline-secondary" id="delete">하차</button>
 		
 		</div>

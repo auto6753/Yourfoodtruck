@@ -9,16 +9,24 @@
 	where o.email = #{email}
 	</select>
 	<insert id="insertOnboard" parameterType="com.food.project.domain.OnboardVO">
-		insert into onboard(email,truck_code,onboard_date)
-		values(#{email},#{truck_code},#{onboard_date})
+		insert into onboard(truck_code, email, onboard_date)
+		values(#{truck_code}, #{email}, #{onboard_date})
 	</insert>
-	<insert id="DeleteOnboard">
+	<delete id="DeleteOnboard">
 		delete from onboard where truck_code=#{truck_code}
-	</insert>
+	</delete>
 	<select id="getOnSale" resultType="com.food.project.domain.OnboardVO" >
 		select o.truck_code, f.hours, f.brandname, o.onboard_date
 		from onboard o join foodtruck f
 		on (o.truck_code = f.truck_code)
 		where o.email = #{email}
 	</select>
+	<select id="rideck" resultType="com.food.project.domain.OnboardVO" >
+		select truck_code, email
+		from onboard 
+		where email = #{email} and truck_code= #{truck_code}
+	</select>
+	<delete id="Deleteride">
+		delete from onboard where truck_code=#{truck_code} and email=#{email}
+	</delete>
 </mapper>

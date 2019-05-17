@@ -1,7 +1,9 @@
 package com.food.project.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -104,8 +106,85 @@ public class CustomerController {
 		
 		return "customer/onSale";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/insertOnboard", method = RequestMethod.POST) 
+	  public String insertOnboard(Locale locale, Model model, HttpSession session, HttpServletRequest request){ 
+		System.out.println("왔나?");
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		OnboardVO br = new OnboardVO();
+		
+		String ee=vo.getEmail();
+		
+
+		String truckc = request.getParameter("truck_code");
+		String sysd = request.getParameter("onboard_date");
+		System.out.println(ee); 
+		System.out.println(truckc); 
+		System.out.println(sysd);
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-mm-dd"); 
 	
-	
+		try {
+			transFormat.parse(sysd);
+			System.out.println();
+			System.out.println(transFormat.format(transFormat.parse(sysd)));
+			
+			Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
+			br.setOnboard_date(test);
+			System.out.println("넘어오나여?");
+			
+			
+			
+			System.out.println("넣어나여?");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		br.setEmail(ee); 
+		br.setTruck_code(truckc);
+		System.out.println("넣어나여?");
+		onboard.insertOnboard(br);
+		System.out.println("되라");
+		
+		
+			  return""; 
+		  }
+	@ResponseBody
+	@RequestMapping(value = "/ridech", method = RequestMethod.POST) 
+	  public String ridech(Locale locale, Model model, HttpSession session, HttpServletRequest request){
+		String email = request.getParameter("email");
+		if(email==null) {
+			System.out.println("Dddd");
+		}
+		String truckcode=request.getParameter("truck_code");
+		System.out.println(email);
+		OnboardVO on = new OnboardVO();
+		on.setEmail(email);
+		on.setTruck_code(truckcode);
+		
+		ArrayList<OnboardVO> ss = onboard.rideck(on);
+		System.out.println(ss);
+		JSONObject onBoard = new JSONObject();
+		onBoard.put("email",ss.get(0).getEmail());
+		System.out.println("ㅇㅇㅇㅇㅇㅇ");
+
+		return onBoard.toString();
+		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/Deleteride", method = RequestMethod.POST) 
+	  public String Deleteride(Locale locale, Model model, HttpSession session, HttpServletRequest request){
+		String email = request.getParameter("email");
+		String truckcode=request.getParameter("truck_code");
+		
+		OnboardVO on = new OnboardVO();
+		on.setEmail(email);
+		on.setTruck_code(truckcode);
+		onboard.Deleteride(on);
+		
+		return "success";
+	}
 	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String reviewList(Locale locale, Model model , HttpSession session) {
 		

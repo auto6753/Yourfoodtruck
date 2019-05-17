@@ -27,5 +27,16 @@ public class OnboardServiceimplement implements OnboardService{
 	public ArrayList<OnboardVO> getOnSale(String email) {
 		return mapper.getOnSale(email);
 	}
-	
+	@Override
+	public void insertOnboard(OnboardVO br) {
+		mapper.insertOnboard(br);
+	}
+	@Override
+	public ArrayList<OnboardVO> rideck(OnboardVO on) {
+		return mapper.rideck(on);
+	}
+	@Override
+	public void Deleteride(OnboardVO on) {
+		mapper.Deleteride(on);
+	}
 }

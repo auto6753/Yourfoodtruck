@@ -32,7 +32,7 @@ public class TruckController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String info(Model model ,@RequestParam("truck_code") String truck_code ) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
-		
+		System.out.println("ddd");
 		FoodTruckVO ss= service.getFoodTruck(truck_code); //클릭한 푸드트럭으로 해당 푸드트럭의 정보를 select 
 		
 		System.out.println(ss);
