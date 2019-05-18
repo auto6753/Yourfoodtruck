@@ -1,6 +1,7 @@
 package com.food.project.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,7 @@ import com.food.project.domain.EventMenuListVO;
 import com.food.project.domain.EventMenuVO;
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
@@ -34,6 +39,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
+import oracle.sql.DATE;
 
 @Controller
 @AllArgsConstructor
@@ -73,6 +79,15 @@ public class SellerController {
   
 	@RequestMapping(value="/location", method=RequestMethod.GET) 
 	public String location(Model model) {
+		return "seller/loc/location";
+	}
+	@RequestMapping(value="/location", method=RequestMethod.POST) 
+	public String location2(Model model, LocationVO vo) {
+		
+		sellerservice.insertlocaction(vo);
+		System.out.println(vo);
+		
+		//vo.setLoc_time(Timestamp.valueOf(DATE.getCurrentDate()));
 		return "seller/loc/location";
 	}
 	

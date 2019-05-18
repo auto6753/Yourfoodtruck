@@ -150,13 +150,14 @@ public class CustomerController {
            data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
            data.put("name", a.get("NAME"));
 		   data.put("pay_status",a.get("PAY_STATUS"));
+		   data.put("request_date",a.get("REQUEST_DATE"));
            arry.add(data);
         }
 		
 		
 		//System.out.println(list);
 		System.out.println(arry);
-		ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
+		//ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
 		 
 	
 		
@@ -165,7 +166,7 @@ public class CustomerController {
 //		}
 //		
 		model.addAttribute("CallList2", arry);
-		model.addAttribute("CallList", cl);
+		//model.addAttribute("CallList", cl);
 
 		return "customer/callList";
 

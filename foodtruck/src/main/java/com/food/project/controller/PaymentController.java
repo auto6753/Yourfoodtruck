@@ -1,6 +1,7 @@
 package com.food.project.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.PaymentVO;
+import com.food.project.mapper.CallListMapper;
 import com.food.project.service.CallListService;
 import com.food.project.service.PaymentService;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class PaymentController {
 	
 	private CallListService callService;
 	private PaymentService payService;
+	private CallListMapper callmapper;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/insertPayment")
 	@ResponseBody
@@ -77,14 +80,26 @@ public class PaymentController {
 	@ResponseBody
 	@RequestMapping(value = "/CallPayment", method=RequestMethod.POST)
 	public String CllePayment(Model model,CallListVO vo) {
-		//System.out.println(num);
-		System.out.println(vo);
-		callService.insertCallList(vo);
-	
-		System.out.println("결제하고 인서트하러왔다");
 		
+		System.out.println(vo);
+		vo.setRequest_date(new Date());
+		
+		callService.insertCallList(vo);
+		System.out.println("결제하고 인서트하러왔다");
 		
 		return "success";
 	}
+	// 푸드트럭 결제 환불
+	@ResponseBody
+	@RequestMapping(value = "/Callrefund", method=RequestMethod.POST)
+	public String Cllerefund(Model model,CallListVO vo) {
+		//callService.
+		callmapper.deleteCall(vo.getMerchant_uid());
+		System.out.println(vo.getMerchant_uid());
+		System.out.println("환불하러왔다");
+		
+		return "d";
+	}
+	
 	
 }

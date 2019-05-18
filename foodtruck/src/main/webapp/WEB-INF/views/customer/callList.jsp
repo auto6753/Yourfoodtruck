@@ -20,18 +20,25 @@ $(document).ready(function(){
 	var target = e.target;
 	var temp= $(target).attr('class');
 	if(temp=='cancel1'){
-		alert(temp);
+		//alert(temp);
+		//var a= target.parents('tr');
+		confirm("아직 트럭이 승낙을 하지않았습니다. 취소를 하시겠습니까?");
+		console.log($(target).closest('tr').html());
 	}else if(temp=='confirm2'){
-		alert(temp);
+		//alert(temp);
+		confirm("트럭이 행사장에 도착하신게 맞습니까? 혹시 행사장에 아직 도착하지 않았다면 취소를 눌러주세요 확인을 누르시면 취소가 어려울수도 있으니 트럭이 행사장에 도착하였다면 확인을 눌러주세요");
+		console.log($(target).closest('tr').html());
 	}else if(temp=='cancel3'){
-		alert(temp);
+		confirm("이미 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네를 눌러주세요");
+		console.log($(target).closest('tr').html());
 	}else if(temp=='confirm4'){
-		alert(temp);
+		//alert(temp);
+		confirm("트럭이 행사장에 도착하였다면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.");
+		console.log($(target).closest('tr').html());
 	}
-	
 	});
 	
-	$(".cancel1").click(function(){
+	/* $(".cancel1").click(function(){
 		alert("ㅇ");
 		var a=$(this);
 		console.log(a);
@@ -51,7 +58,7 @@ $(document).ready(function(){
 		alert("ㅇ");
 		var a=$(this);
 		console.log(a);
-	});
+	}); */
 	
 	$(".page-item").click(function(){
 		alert("ㅁ");
@@ -67,9 +74,9 @@ $(document).ready(function(){
 	//a = JSON.parse(a);
 	console.log(typeof(a));
 	console.log(a);
-	var b=console.log(a.length);
+	//var c=console.log(a.length);
 	console.log(a[0].brandname);
-	for(var i=0;i<5;i++){
+	for(var i=0;i<a.length;i++){
 		var place = a[i].place;
 		var brandname = a[i].brandname;
 		var festival_name = a[i].festival_name
@@ -127,8 +134,7 @@ $(document).ready(function(){
 				 +"<td>"+place+"</td>"
 				 +"<td>"+festival_name+"</td>"
 				 +"<td>"+a[i].festival_startdate+"~"+a[i].festival_enddate+"</td>"
-				 +"<td>"+a[i].festival_starttime+"~"+a[i].festival_endtime+"</td>"
-				 +"<td>"+a[i].reporting_date+"</td>"
+				 +"<td>"+a[i].request_date+"</td>"
 				 +"<td>"+pay_status+"</td>"
 				 +"<td>"+agreement+"</td>"
 				 +"<td>"+progress+"</td></tr>"
@@ -167,7 +173,6 @@ $(document).ready(function(){
 				<th>위치</th>
 				<th>행사명</th>
 				<th>행사일정</th>
-				<th>시간</th>
 				<th>신청일</th>
 				<th>입금현황</th>
 				<th>승인상태</th>

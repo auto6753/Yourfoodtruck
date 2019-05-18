@@ -8,7 +8,8 @@
 	</select>
 	
 	<select id="getCallList2" resultType="map" parameterType="String">
-	select b.brandname,a.name,a.pay_status,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate ,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code = a.truck_code and a.email=#{email}
+	<!-- select b.brandname,a.name,TO_CHAR(a.request_date,'MM-DD') request_date ,a.pay_status,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate ,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code = a.truck_code and a.email=#{email} order by request_date -->
+	     select b.brandname,a.name,TO_CHAR(a.request_date,'MM-DD') request_date,a.pay_status,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate ,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code = a.truck_code and a.email=#{email} order by request_date desc
 	</select>
 	<select id="getMyCallList" parameterType="String" resultType="com.food.project.domain.CallListVO">
 		select * from call_list where email=#{email}

@@ -35,4 +35,5 @@ public class CallListServiceImplement implements CallListService {
 		return mapper.getCallList2(email);
 	}
 
+
 }
