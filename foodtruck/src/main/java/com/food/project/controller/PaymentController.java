@@ -32,7 +32,7 @@ public class PaymentController {
 	
 	private CallListService callService;
 	private PaymentService payService;
-	private CallListMapper callmapper;
+	//private CallListMapper callmapper;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/insertPayment")
 	@ResponseBody
@@ -94,11 +94,24 @@ public class PaymentController {
 	@RequestMapping(value = "/Callrefund", method=RequestMethod.POST)
 	public String Cllerefund(Model model,CallListVO vo) {
 		//callService.
-		callmapper.deleteCall(vo.getMerchant_uid());
+		//callmapper.deleteCall(vo.getMerchant_uid());
+		System.out.println(vo);
+		int a ;
+		if(vo.getPay_status() == 0) {
+			System.out.println("0");
+			 a = callService.updateCallVo(vo);
+		}else {
+			System.out.println("else");
+			 a = callService.updateCall(vo);
+		}
 		System.out.println(vo.getMerchant_uid());
 		System.out.println("환불하러왔다");
-		
-		return "d";
+		if(a==1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+
 	}
 	
 	

@@ -19,4 +19,11 @@
 		insert into call_list(merchant_uid,name,pay_status,zip_code,place,festival_startdate,festival_enddate,festival_name,festival_starttime,festival_endtime,calltel,content,email,truck_code,price)
 		values(#{merchant_uid},#{name},#{pay_status},#{zip_code},#{place},#{festival_startdate},#{festival_enddate},#{festival_name},#{festival_starttime},#{festival_endtime},#{calltel},#{content},#{email},#{truck_code},#{price})
 	</insert>
+	
+	<update id="updateCall" parameterType="com.food.project.domain.CallListVO">
+		update call_list set pay_status=#{pay_status},progress=#{progress} where merchant_uid=#{merchant_uid}
+	</update>
+		<update id="updateCallVo" parameterType="com.food.project.domain.CallListVO">
+		update call_list set progress=#{progress} where merchant_uid=#{merchant_uid}
+	</update>
 </mapper>
