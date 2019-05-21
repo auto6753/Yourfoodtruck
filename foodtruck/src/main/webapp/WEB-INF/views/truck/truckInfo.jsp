@@ -16,6 +16,9 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9df56b013af05d5db1fb3350de0a4265"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+				
+				
+				
 				var score = "${sumscore}";
 				
 				if(score > 0 &&  score < 2) {
@@ -179,7 +182,6 @@
 				
 				
 		
-			
 		});	
 	 $("#modifysuccess").click(function(){
 			var a = $(this);
@@ -222,7 +224,13 @@
 	        $('html, #review').animate({scrollTop : offset.top-575}, 400);
 		}
 	});
-	
+	/* $("#btn2").bind("click", function () { 
+		alert("버튼이 클릭됨");
+		
+	}); */
+	//$("#btn2").trigger("click");
+	//버튼 클릭이 아니라 코드에 의해서 click이벤트를 실행하고 싶다면?
+
 </script>
 </head>
 <body>

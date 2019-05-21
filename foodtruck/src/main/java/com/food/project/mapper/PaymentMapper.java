@@ -2,6 +2,10 @@ package com.food.project.mapper;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Update;
+
+import com.food.project.domain.CustomerVO;
 import com.food.project.domain.PaymentVO;
 
 public interface PaymentMapper {
@@ -9,5 +13,8 @@ public interface PaymentMapper {
 	public ArrayList<PaymentVO> getPaymentList(String payment_telephone);
 	public int insertPaymentList(Map<String,Object> list);
 	public int updatePaymentList(PaymentVO vo);
+	
+	public int updatePoint(CustomerVO vo);
+	//point update
 
 }

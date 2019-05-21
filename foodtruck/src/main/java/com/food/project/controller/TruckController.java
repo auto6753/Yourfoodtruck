@@ -34,8 +34,9 @@ public class TruckController {
 	private FoodtruckMapper mapper;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String info(Model model ,@RequestParam("truck_code") String truck_code ) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
-		
+	public String info(Model model ,@RequestParam("truck_code") String truck_code) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
+
+		//model.addAttribute("dd", hi);
 		FoodTruckVO ss= service.getFoodTruck(truck_code); //클릭한 푸드트럭으로 해당 푸드트럭의 정보를 select 
 		//System.out.println(send);
 		/* System.out.println(ss); */
@@ -102,13 +103,10 @@ public class TruckController {
 		
 		model.addAttribute("reviewList", d);
 		model.addAttribute("sumscore", result);
-		
-		
-		
-		
+
 		return "truck/truckInfo";
 	}
-
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
 		return "truck/register/registerForm";

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.mapper.SellerMapper;
 
@@ -31,6 +32,12 @@ public class SellerServiceImplement implements SellerService {
 	public void updatemenu(MenuVO vo) {
 		sellermapper.updatemenu(vo);
 		
+	}
+
+	@Override
+	public void insertlocaction(LocationVO vo) {
+		// TODO Auto-generated method stub
+		sellermapper.insertlocation(vo);
 	}
 
 }

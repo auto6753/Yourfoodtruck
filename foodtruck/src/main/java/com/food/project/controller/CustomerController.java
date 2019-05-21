@@ -151,6 +151,7 @@ public class CustomerController {
         for(Map<String, Object> a : list) {
            JSONObject data=new JSONObject();
            data.put("festival_name", a.get("FESTIVAL_NAME"));
+           data.put("merchant_uid", a.get("MERCHANT_UID"));
            data.put("brandname", a.get("BRANDNAME"));
            data.put("festival_startdate", a.get("FESTIVAL_STARTDATE"));
            data.put("festival_enddate", a.get("FESTIVAL_ENDDATE"));
@@ -160,13 +161,14 @@ public class CustomerController {
            data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
            data.put("name", a.get("NAME"));
 		   data.put("pay_status",a.get("PAY_STATUS"));
+		   data.put("request_date",a.get("REQUEST_DATE"));
            arry.add(data);
         }
 		
 		
 		//System.out.println(list);
 		System.out.println(arry);
-		ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
+		//ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
 		 
 	
 		
@@ -175,7 +177,7 @@ public class CustomerController {
 //		}
 //		
 		model.addAttribute("CallList2", arry);
-		model.addAttribute("CallList", cl);
+		//model.addAttribute("CallList", cl);
 
 		return "customer/callList";
 

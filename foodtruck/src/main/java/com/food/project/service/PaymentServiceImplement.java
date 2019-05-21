@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+
+import com.food.project.domain.CallListVO;
+import com.food.project.domain.CustomerVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.mapper.PaymentMapper;
 import lombok.AllArgsConstructor;
@@ -45,4 +48,14 @@ public class PaymentServiceImplement implements PaymentService {
 		result=mapper.updatePaymentList(vo);
 		return result;
 	}
+
+	@Override
+	public int updatePoint(CustomerVO vo) {
+		// TODO Auto-generated method stub
+		
+		return mapper.updatePoint(vo);
+	}
+
+
+	
 }

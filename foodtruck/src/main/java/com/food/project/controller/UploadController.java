@@ -31,7 +31,7 @@ public class UploadController {
 
 	@Resource(name = "uploadPath")
 	String uploadPath;
-
+	
 	// String uploadPath = "/resources/image/upload/";
 //	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.GET)
 //	public void uploadAjax() {

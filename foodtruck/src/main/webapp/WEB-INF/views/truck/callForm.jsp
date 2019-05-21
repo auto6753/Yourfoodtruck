@@ -51,7 +51,7 @@
 		var count = $(".input").length;
 		//console.log(list);
 		for(var i=0;i<count;i++){
-			alert(i);
+			//alert(i);
 			temp = $(".input").eq(i).val();
 			console.log(temp);
 			if(temp =="" || temp ==" "){
@@ -138,7 +138,7 @@
 			        this.value = autoHypenPhone(_val) ;
 			}
 		  
-		$("#btn2").click(function(){
+/* 		$("#btn2").click(function(){
 			
 			var personname = $("#inname").val();
 			var tel = $("#intel").val();
@@ -167,7 +167,7 @@
 					alert(error);
 				}
 			})
-		});
+		}); */
 		
 	 $('#btn1').click(function() {
 		 if(check()){
@@ -207,11 +207,12 @@
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : $("#truckname").val()+" 트럭호출",
 		    amount : $("#cost").val(),
-		    buyer_email : '',
+		    buyer_email : "",
 		    buyer_name : $("#inname").val(),
 		    buyer_tel : $("#intel").val()
 		    //m_redirect_url : 'https://www.yourdomain.com/payments/complete' 
 		}, function(rsp) {
+			console.log(rsp);
 		    if ( rsp.success ) {
 		    	alert(rsp.paid_amount);
 		    	var truckcode = $("#truck_code").val();
@@ -248,7 +249,7 @@
 		    			festival_startdate : startdate,
 		    			festival_enddate : enddate ,
 		    			price : rsp.paid_amount,
-		    			pat_status : 1,
+		    			pay_status : 1,
 		    			festival_name : festivalname ,
 		    			//deposit_name : ,
 		    			//advance_rate : content ,
