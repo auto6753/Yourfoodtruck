@@ -108,7 +108,9 @@ public class NewsController {
 	@RequestMapping(value = "/news/delete", method = RequestMethod.POST)
 	@ResponseBody//다시 js에 있는 ajax 로 돌아가는거
 	public String delete(Model model , PostVO vo) {
+		
 		postService.deletePost(vo);
+		
 		return "";
 	}
 	
