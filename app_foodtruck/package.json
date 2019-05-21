@@ -14,6 +14,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cordova-android": "^8.0.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-fcm-with-dependecy-updated": "^2.4.0"
   },
   "devDependencies": {
@@ -25,7 +27,8 @@
       "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

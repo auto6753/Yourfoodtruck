@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' https:; script-src https: 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: http:"> -->
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' https:; script-src https: 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: http:">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -49,7 +49,8 @@
 				$.ajax({
 					type:"post",
 					url:"http://39.127.7.90:8080/m.login",
-					data: query,
+					data: JSON.stringify(query),
+					contentType:"application/json; charset=UTF-8",
 					success:function(data){
 						if("idfail"==data){
 							alert("해당 아이디가없습니다");
@@ -62,6 +63,8 @@
 							/* window.location.href="/project/rehome";  */
 							location.href="../main/main.html";
 						}
+					},error:function(err){
+						alert(JSON.stringify(err));
 					}
 				/* 	 complete : function(data) {
 						 window.location.replace("/project");

@@ -3,6 +3,7 @@ package com.food.project.m_controller;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,16 +27,15 @@ import net.sf.json.JSONObject;
 
 @AllArgsConstructor
 @Controller
-
 @RequestMapping(value = "/m.login")
 public class M_LoginController {
 	private LoginService loginservice;
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
-	public String loginCheck(CustomerVO cus) {
-		String email = cus.getEmail();
-		String password = cus.getPassword();
+	public String loginCheck(@RequestBody Map<String,Object> map) {
+		String email = (String)map.get("email");
+		String password = (String)map.get("password");
 		System.out.println(email+password);
 		CustomerVO c = new CustomerVO();
 		c = loginservice.getCustomer(email);
