@@ -69,10 +69,7 @@ public class TruckController {
 		
 		model.addAttribute("reviewList", d);
 		model.addAttribute("sumscore", result);
-		
-		
-		
-		
+
 		return "truck/truckInfo";
 	}
 	@RequestMapping(value = "/send", method = RequestMethod.GET)

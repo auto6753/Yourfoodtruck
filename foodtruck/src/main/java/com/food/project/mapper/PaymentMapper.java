@@ -16,5 +16,4 @@ public interface PaymentMapper {
 	
 	public int updatePoint(CustomerVO vo);
 	//point update
-
 }

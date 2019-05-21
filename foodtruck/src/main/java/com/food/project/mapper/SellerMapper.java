@@ -21,6 +21,5 @@ public interface SellerMapper {
 	public void deletemenu(MenuVO vo);
 
 	public void insertlocation(LocationVO vo);
-	
-	
+
 }

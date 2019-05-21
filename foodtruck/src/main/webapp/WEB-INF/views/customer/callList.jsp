@@ -191,7 +191,6 @@ $(document).ready(function(){
 		<td>${i.reporting_date}</td>
 		<td>${i.progress}</td> */	
 function cancel(i){
-		
 		var merchant_uid = i;
 		alert(merchant_uid);
 			$.ajax({
@@ -250,7 +249,6 @@ function cancel(i){
 					    });
 				}
 			});
-
 	}
 	function update(i){
 		var a = i;

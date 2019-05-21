@@ -86,8 +86,8 @@ public class PaymentController {
 	// 푸드트럭 호출 결제
 	@ResponseBody
 	@RequestMapping(value = "/CallPayment", method=RequestMethod.POST)
+
 	public String CallPayment(Model model,CallListVO vo) {
-		
 		System.out.println(vo);
 		vo.setRequest_date(new Date());
 		
@@ -121,7 +121,6 @@ public class PaymentController {
 		}
 		
 		System.out.println(vo.getMerchant_uid());
-		
 		if(a==1) {
 			return "success";
 		}else {
@@ -136,7 +135,5 @@ public class PaymentController {
 		System.out.println(vo.getMerchant_uid());
 		return mapper.getCall(vo.getMerchant_uid());
 	}	
-	
-
 	
 }
