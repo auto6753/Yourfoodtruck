@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
 
 import com.food.project.domain.CallListVO;
 
@@ -20,4 +21,7 @@ public interface CallListMapper {
 	 * @Delete("delete call_list where merchant_uid =#{merchant_uid}") public void
 	 * deleteCall(String merchant_uid);
 	 */
+
+	@Select("select * from call_list where merchant_uid=#{merchant_uid}")
+	public CallListVO getCall(String merchant_uid);
 }

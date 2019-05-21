@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.CallListVO;
+import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.mapper.CallListMapper;
 import com.food.project.service.CallListService;
+import com.food.project.service.FoodTruckService;
+import com.food.project.service.LoginService;
 import com.food.project.service.PaymentService;
 import lombok.AllArgsConstructor;
 
@@ -32,6 +36,9 @@ public class PaymentController {
 	
 	private CallListService callService;
 	private PaymentService payService;
+	private CallListMapper mapper;
+	private FoodTruckService foodService;
+	
 	//private CallListMapper callmapper;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/insertPayment")
@@ -79,7 +86,7 @@ public class PaymentController {
 	// 푸드트럭 호출 결제
 	@ResponseBody
 	@RequestMapping(value = "/CallPayment", method=RequestMethod.POST)
-	public String CllePayment(Model model,CallListVO vo) {
+	public String CallPayment(Model model,CallListVO vo) {
 		
 		System.out.println(vo);
 		vo.setRequest_date(new Date());
@@ -89,10 +96,10 @@ public class PaymentController {
 		
 		return "success";
 	}
-	// 푸드트럭 결제 환불
+	// 푸드트럭 결제 환불 또는 진행상태 업데이트
 	@ResponseBody
 	@RequestMapping(value = "/Callrefund", method=RequestMethod.POST)
-	public String Cllerefund(Model model,CallListVO vo) {
+	public String Callrefund(Model model,CallListVO vo) {
 		//callService.
 		//callmapper.deleteCall(vo.getMerchant_uid());
 		System.out.println(vo);
@@ -104,8 +111,17 @@ public class PaymentController {
 			System.out.println("else");
 			 a = callService.updateCall(vo);
 		}
+		if(vo.getProgress()==5) {
+			CallListVO ck = mapper.getCall(vo.getMerchant_uid());
+			FoodTruckVO food = foodService.getFoodTruck(ck.getTruck_code());
+			CustomerVO cus = new CustomerVO();
+			cus.setEmail(food.getEmail());
+			cus.setPoint(ck.getPrice());
+			payService.updatePoint(cus);
+		}
+		
 		System.out.println(vo.getMerchant_uid());
-		System.out.println("환불하러왔다");
+		
 		if(a==1) {
 			return "success";
 		}else {
@@ -114,5 +130,13 @@ public class PaymentController {
 
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/GetPayment", method=RequestMethod.POST)
+	public CallListVO GetPayment(Model model,CallListVO vo) {
+		System.out.println(vo.getMerchant_uid());
+		return mapper.getCall(vo.getMerchant_uid());
+	}	
+	
+
 	
 }

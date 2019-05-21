@@ -2,6 +2,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+
 <style>
 .carousel-item {
 	height: 65vh;
@@ -58,9 +61,11 @@ a{
 				<span id="login" class="badge badge-light"><a href="/login">로그인</a></span>
 				<span class="badge badge-light"><a href="/login/register">회원가입</a></span>
 				</c:if>
-				<c:if test="${not empty sessionScope.sessionid}">
-				
+				<c:if test="${not empty sessionScope.sessionid}">	
 					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
+					<input id="sessione" type="hidden" value="${sessionScope.sessionid.email }">
+					<input id="sessionp" type="hidden" value="${sessionScope.sessionid.point}">
+					<span id="" class="badge badge-light"><a href="#">포인트 : ${sessionScope.sessionid.point} 원</a></span>
 					<span id="" class="badge badge-light"><a href="/customer">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
 					<span id="" class="badge badge-light"><a href="/truck/register">트럭등록</a></span>
@@ -72,9 +77,41 @@ a{
 				</c:if>
 			</div>
 		</div>
-
 	</div>
 </nav>
 </div>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script>
+$(document).ready(function(){
+	//alert("?");
+	
+	var email= $("#sessione").val();
+	var point= $("#sessionp").val();
+	//alert(a);
+	if(email==null){
+		return;
+	}else{
+		$.ajax({
+			type:"post",
+			url:"/login/pointck",
+			data:{
+				email:email,
+				point:point
+			},
+			success:function(data){
+				
+				if(data=="different"){
+					window.location.reload();
+				}
+				/* if(data.point==$("#sessionp").val()){
+					//alert("같음");
+				}else{
+					alert(data.point);
+					alert($("#sessionp").val());
+				} */
+			}
+		});
+	}
+
+});
+</script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>

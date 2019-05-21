@@ -141,6 +141,7 @@ public class CustomerController {
         for(Map<String, Object> a : list) {
            JSONObject data=new JSONObject();
            data.put("festival_name", a.get("FESTIVAL_NAME"));
+           data.put("merchant_uid", a.get("MERCHANT_UID"));
            data.put("brandname", a.get("BRANDNAME"));
            data.put("festival_startdate", a.get("FESTIVAL_STARTDATE"));
            data.put("festival_enddate", a.get("FESTIVAL_ENDDATE"));

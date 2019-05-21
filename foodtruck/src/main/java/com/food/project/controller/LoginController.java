@@ -221,4 +221,27 @@ public class LoginController {
 		return "/login/registerSuccess";
 	}
 	
+	//pointck
+	@ResponseBody
+	@RequestMapping(value = "/pointck", method = RequestMethod.POST)
+	public String pointck(Model model,CustomerVO vo,HttpSession session) {	
+		//System.out.println(vo.getEmail());
+		CustomerVO vo2 = loginservice.getCustomer(vo.getEmail());
+		
+		System.out.println("pointck");
+		System.out.println(vo2);
+		if(vo.getPoint()==vo2.getPoint()) {
+			System.out.println(vo.getPoint());
+			System.out.println(vo2.getPoint());
+			return "same";
+		}else {
+			session.removeAttribute("sessionid");
+			session.setAttribute("sessionid", vo2);
+			System.out.println("d");
+			return "different";
+		}
+		
+		
+	}
+	
 }
