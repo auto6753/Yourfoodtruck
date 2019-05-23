@@ -7,6 +7,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Update;
 import com.food.project.domain.CustomerVO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+
+import com.food.project.domain.CustomerVO;
 import com.food.project.domain.PaymentVO;
 
 public interface PaymentMapper {

@@ -69,6 +69,7 @@ public class PaymentServiceImplement implements PaymentService {
 	}
 
 	@Override
+
 	public String getCurMonth() {
 		// TODO Auto-generated method stub
 		return mapper.getCurMonth();
@@ -79,6 +80,15 @@ public class PaymentServiceImplement implements PaymentService {
 		// TODO Auto-generated method stub
 		return mapper.getTodaySales(truck_code);
 	}
+
+	public int updatePoint(CustomerVO vo) {
+		// TODO Auto-generated method stub
+		
+		return mapper.updatePoint(vo);
+	}
+
+
+
 	
 	@Override
 	public ArrayList<PaymentVO> getWeekSales(String truck_code) {
