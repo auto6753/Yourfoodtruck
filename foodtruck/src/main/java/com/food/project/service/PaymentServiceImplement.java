@@ -81,13 +81,6 @@ public class PaymentServiceImplement implements PaymentService {
 		return mapper.getTodaySales(truck_code);
 	}
 
-	public int updatePoint(CustomerVO vo) {
-		// TODO Auto-generated method stub
-		
-		return mapper.updatePoint(vo);
-	}
-
-
 
 	
 	@Override
