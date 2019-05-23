@@ -15,7 +15,7 @@ public interface FoodTruckService {
 	public FoodTruckVO getFoodTruck(String truck_code);
 	public FoodTruckVO insertFoodTruck(FoodTruckVO vo);
 	public void insertReview(ReviewVO vo);
-	public ArrayList<ReviewVO> getReviewList(String truck_code);
+	public ArrayList<ReviewDTO> getReviewList(String truck_code);
 	public void updateTruckinfo(FoodTruckVO vo);
 	public ArrayList<MyreviewlistDTO> selectReview(String tt);
 	public void updateReview(ReviewVO vo);
