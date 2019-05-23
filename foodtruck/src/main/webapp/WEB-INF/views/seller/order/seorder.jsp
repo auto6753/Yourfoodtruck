@@ -22,8 +22,8 @@
 <body>
 	<div class="wrap">
 	</div>
-	<button id="test">테스트</button>
-	<input type="hidden" id="bfss" value="">
+	<div class="result">
+	</div>
 </body>
 <script>
 var first=true;
@@ -78,6 +78,9 @@ function pay(a){
 			list.push(pay_list);
 		}
 		console.log(list);
+		for(var i=0; i<list.length;i++) {
+			firebase.database().ref('/PaymentResult/'+ _uid +'/'+telephone+'/'+a+'/'+i).set(list[i]);
+		}
  		$.ajax({
 			type:"POST",
 			url:"/pay/insertPayment",
@@ -90,6 +93,7 @@ function pay(a){
 				console.log(err);
 			}
 		});
+ 		parent_node.addClass('payed');
  		isChecked=true;
 	}
 }
@@ -131,8 +135,13 @@ function release(a) {
 				console.log(err);
 			}
 		});
+		$('.result').append(parent_node);
+		console.log(parent_node);
 		var delref=firebase.database().ref('/PaymentTest2/'+ _uid +'/'+telephone+'/'+a);
 		delref.remove();
+		parent_node.removeClass("payed");
+		parent_node.addClass('ended');
+		
 	}else if(!isChecked) {
 		alert("결제확인을 먼저 하십시오");
 	}

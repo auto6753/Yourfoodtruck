@@ -35,19 +35,10 @@
 			<thead>
 				<tr>
 					<th>제목</th>
-					<th>등록일</th>
-					<th>조회수</th>
+					<th>지역</th>
 				</tr>
 			</thead>
 			<tbody>
- 				<c:forEach var="row" items="${requestScope.announceList}">
- 				<tr>
- 					<td class="boardTitle">${row.POST_TITLE}</td>
- 					<input type="hidden" value="${row.POST_CODE}">
- 					<td>${row.POST_REGDATE}</td>
- 					<td>${row.POST_VISIT}</td>
- 				</tr>
- 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -67,10 +58,39 @@
 	function list(page) {
 		location.href="/announce?curPage="+page+"&keyword=${map.keyword}";
 	}
-   $(document).ready(function(){
-      $('.boardTitle').on('click', function(){
-      var a = $(this);
-      var postCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
+	$(document).ready(function(){
+		$.get('resources/json/result.json',function(data){
+			console.log(data);
+			for (var a in data.gonggo_list) {
+				console.log(a);
+				console.log(data.gonggo_list[a]);
+				console.log(data.gonggo_list[a].post_url);
+				//$('tbody').append('<tr></tr>');
+				//$('tr').append('<td class="boarTitle"></td>');
+				//$('td.boardTitle:eq(a)').append('<a href="'+data.gonggo_list[a].post_url+'"></a>');
+				$('tbody').append('<tr><td class="boardTitle"><a href="'+data.gonggo_list[a].post_url+'">'+data.gonggo_list[a].post_title+'</a></td><td>'+data.region+'<tr>');	
+			}
+			
+		});
+//		$.ajax({
+//			url:"http://39.127.7.90:5000/",
+//			success:function(data) {
+//				alert(data);
+//				jsonData=JSON.parse(JSON.stringify(data));
+//				console.log(jsonData);
+
+//				var size = jsonData.seoul.size();
+//				console.log(size);
+//				$('tbody').append('<tr><td class="boardTitle"><a href="'+jsonData.seoul.post_url+'">'+jsonData.seoul.postTitle+'</a></td></tr>');
+//			},error:function(err) {
+//				console.log(err);
+//				console.log(err.statusText);
+//			}
+//		});
+	 
+		$('.boardTitle').on('click', function(){
+		var a = $(this);
+		var postCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
       /* query ={
             post_code : postCode
       }
@@ -83,15 +103,15 @@
             
          }//get 방식 주소치는거랑 똑같음
       }); */
-      $(location).attr('href','/announce/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
-      });
-      $('#title').click(function() {
-    	 location.href="/announce"; 
-      });
-      $('#toArea').click(function() {
-    	 location.href="/area"; 
-      });
-   });
+		$(location).attr('href','/announce/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
+		 });
+		$('#title').click(function() {
+			location.href="/announce"; 
+		});
+		$('#toArea').click(function() {
+			location.href="/area"; 
+		});
+	});
 </script>	
 </body>
 </html>

@@ -175,43 +175,42 @@ public class LoginController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(Locale locale, Model model,CustomerVO cus) {
-	      FirebaseApp defaultApp = null;
-	      List<FirebaseApp> apps=FirebaseApp.getApps();
-	      FileInputStream serviceAccount;
-	      FirebaseOptions options=null;
-	      //파이어베이스 옵션 설정
-	      try {
-	         serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
-	         options = new FirebaseOptions.Builder()
-	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-	               .build();
-	      } catch (FileNotFoundException e1) {
-	         e1.printStackTrace();
-	      } catch (IOException e) {
-	         e.printStackTrace();
-	      }
-	      //이미 관리자 defaultApp이 있는지 검사
-	      if(apps!=null && !apps.isEmpty()) {
-	         for(FirebaseApp app:apps) {
-	            if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
-	               defaultApp = app;
-	         }
-	      }else {
-	         defaultApp = FirebaseApp.initializeApp(options);
-	      }
-	      CreateRequest request=new CreateRequest()
-	            .setEmail(cus.getEmail())
-	            .setEmailVerified(false)
-	            .setPassword(cus.getPassword());
-	      try {
-	         UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-	         System.out.println("Successfully created new user : " + userRecord.getUid());
-	      } catch (FirebaseAuthException e) {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }
-		
+		FirebaseApp defaultApp = null;
+		List<FirebaseApp> apps=FirebaseApp.getApps();
+		FileInputStream serviceAccount;
+		FirebaseOptions options=null;
+		//파이어베이스 옵션 설정
+		try {
+			serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+			options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+					.build();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//이미 관리자 defaultApp이 있는지 검사
+		if(apps!=null && !apps.isEmpty()) {
+			for(FirebaseApp app:apps) {
+				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+					defaultApp = app;
+			}
+		}else {
+			defaultApp = FirebaseApp.initializeApp(options);
+		}
+		CreateRequest request=new CreateRequest()
+				.setEmail(cus.getEmail())
+				.setEmailVerified(false)
+				.setPassword(cus.getPassword());
+		try {
+			UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+			System.out.println("Successfully created new user : " + userRecord.getUid());
+		} catch (FirebaseAuthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cus.setRegdate(new Date());
 		loginservice.insertCustomer(cus);
 		return "redirect:/login/registerSuccess";

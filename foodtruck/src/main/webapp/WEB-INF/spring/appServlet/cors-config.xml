@@ -12,8 +12,7 @@
 
 	<!-- servlet-context.xml에서 사용하면 cors 관련 세팅이 많아질수록 복잡해질것 같아 따로 분리하였다. -->
 	<mvc:cors>
-		<mvc:mapping path="/**"
-			allowed-origins="http://localhost, http://39.127.7.90:8080,http://39.127.7.90:4589" />
+		<mvc:mapping path="/**"/>
 	</mvc:cors>
 
 </beans:beans>

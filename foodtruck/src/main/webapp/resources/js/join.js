@@ -7,8 +7,6 @@
 //	messagingSenderId : "960564228551"
 //};
 //firebase.initializeApp(config);
-
-
 function ck() {
 	var isTrue = false;
 	if (fr.email.value == "") {
@@ -66,9 +64,6 @@ function ck() {
 					$('#target').submit();
 				}
 
-			},error:function(err) {
-				alert(err);
-				console.log(err);
 			}
 		});
 		

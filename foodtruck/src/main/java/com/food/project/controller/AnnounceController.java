@@ -18,11 +18,13 @@ import com.food.project.domain.CustomerVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.domain.PostVO;
 import com.food.project.paging.PostPager;
+import com.food.project.seleniumTest.SeleniumTest;
 import com.food.project.service.PaymentService;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @AllArgsConstructor
 @Controller
@@ -33,7 +35,6 @@ public class AnnounceController {
 	@RequestMapping(value = "/announce")
 	public String recruit(Model model,@RequestParam(defaultValue="1") int post_class,
 			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
-		//========================================크롤링 해보기=====================================
 		//========================================페이징 하기=======================================
 		int totPage=0;
 		PostPager postPager;
