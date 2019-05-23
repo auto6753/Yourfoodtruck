@@ -106,8 +106,8 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(value = "review", method = RequestMethod.GET)
-	public String reviewList(Locale locale, Model model , HttpSession session) {
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String review(Locale locale, Model model , HttpSession session) {
 		
 		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
 		System.out.println(vo);
@@ -120,11 +120,21 @@ public class CustomerController {
 		
 		
 		model.addAttribute("rlist" ,vo2);
+		
 		System.out.println(vo2);
 	
 		
 		return "customer/review";
 	}
+	/*
+	 * @RequestMapping(value = "/reviewList", method = RequestMethod.POST) public
+	 * String reviewList(Locale locale, Model model , HttpSession session) {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * return "customer/review"; }
+	 */
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/callList" ,method = RequestMethod.GET)
@@ -141,6 +151,7 @@ public class CustomerController {
         for(Map<String, Object> a : list) {
            JSONObject data=new JSONObject();
            data.put("festival_name", a.get("FESTIVAL_NAME"));
+           data.put("merchant_uid", a.get("MERCHANT_UID"));
            data.put("brandname", a.get("BRANDNAME"));
            data.put("festival_startdate", a.get("FESTIVAL_STARTDATE"));
            data.put("festival_enddate", a.get("FESTIVAL_ENDDATE"));

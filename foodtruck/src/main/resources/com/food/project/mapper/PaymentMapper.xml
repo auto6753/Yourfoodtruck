@@ -21,4 +21,8 @@
 		and payment_telephone=#{payment_telephone}
 		and payment_code like #{payment_code}||'%'
 	</update>
+	
+	<update id="updatePoint" parameterType="com.food.project.domain.CustomerVO">
+		update customer set point=point+#{point} where email=#{email}
+	</update>
 </mapper>

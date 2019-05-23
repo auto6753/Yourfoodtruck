@@ -12,5 +12,5 @@ public class CustomerVO {
 	private String telephone;
 	private int position;
 	private String nickname;
-
+	private int point;
 }

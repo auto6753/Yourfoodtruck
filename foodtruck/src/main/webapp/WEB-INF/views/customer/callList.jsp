@@ -27,21 +27,42 @@ $(document).ready(function(){
 	if(temp=='cancel1'){
 		//alert(temp);
 		//var a= target.parents('tr');
-		confirm("아직 트럭이 승낙을 하지않았습니다. 취소를 하시겠습니까?");
+		if(confirm("아직 트럭이 승낙을 하지않았습니다. 취소를 하시겠습니까?")){
 		console.log($(target).closest('tr').html());
-		
-		cancel(price,name,uid,reason);
+		var merchant_uid = $(target).closest('tr').find('input').val();
+		cancel(merchant_uid);
+		}
 	}else if(temp=='confirm2'){
 		//alert(temp);
-		confirm("트럭이 행사장에 도착하신게 맞습니까? 혹시 행사장에 아직 도착하지 않았다면 취소를 눌러주세요 확인을 누르시면 취소가 어려울수도 있으니 트럭이 행사장에 도착하였다면 확인을 눌러주세요");
+		if(confirm("트럭이 행사장에 도착하신게 맞습니까? 혹시 행사장에 아직 도착하지 않았다면 취소를 눌러주세요 확인을 누르시면 취소가 어려울수도 있으니 트럭이 행사장에 도착하였다면 확인을 눌러주세요")){
 		console.log($(target).closest('tr').html());
+		var meid = $(target).closest('tr').find('input').val();
+		var a = [meid,3];
+		update(a);
+		}
 	}else if(temp=='cancel3'){
-		confirm("이미 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네를 눌러주세요");
+		if(confirm("이미 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네를 눌러주세요")){
 		console.log($(target).closest('tr').html());
+		var meid = $(target).closest('tr').find('input').val();
+		var a = [meid,7];
+		update(a);
+		}
 	}else if(temp=='confirm4'){
 		//alert(temp);
-		confirm("트럭이 행사장에 도착하였다면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.");
+		if(confirm("트럭이 행사장에 도착하였다면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.")){
 		console.log($(target).closest('tr').html());
+		var meid = $(target).closest('tr').find('input').val();
+		var a = [meid,5];
+		update(a);
+		}
+	}else if(temp=='cancel2'){
+		//alert(temp);
+		//confirm("트럭이 행사장에 도착하였다면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.");
+		if(confirm("트럭이 승낙을 하였습니다. 취소를 하시겠습니까?")){
+		console.log($(target).closest('tr').find('input').val());
+		var merchant_uid = $(target).closest('tr').find('input').val();
+		cancel(merchant_uid);
+		}
 	}
 	});
 	
@@ -109,7 +130,7 @@ $(document).ready(function(){
 			progress="진행중<button class='cancel1'>취소</button>";
 			agreement="대기";
 		}else if(a[i].progress ==2){
-			progress="진행중<button class='confirm2'>확인</button>";
+			progress="진행중<button class='confirm2'>확인</button><button class='cancel2'>취소</button>";
 			agreement="승인";
 		}else if(a[i].progress ==3){
 			progress="트럭 미확인<button class='cancel3'>취소</button>";	
@@ -147,8 +168,8 @@ $(document).ready(function(){
 				 +"<td>"+a[i].request_date+"</td>"
 				 +"<td>"+pay_status+"</td>"
 				 +"<td>"+agreement+"</td>"
-				 +"<td>"+progress+"</td></tr>"
-				 +"<input type='hidden' >"+progress+"</td></tr>"
+				 +"<td>"+progress+"</td>"
+				 +"<input type='hidden' value='"+a[i].merchant_uid+"'></td></tr>"
 		);
 	}
 		/* 		"<tr>"+
@@ -170,56 +191,64 @@ $(document).ready(function(){
 		<td>${i.reporting_date}</td>
 		<td>${i.progress}</td> */	
 function cancel(i){
+		var merchant_uid = i;
+		alert(merchant_uid);
 			$.ajax({
-				
+				type:"post",
+				url:"/pay/GetPayment",
+				data:{
+					merchant_uid:i
+				},
+				success:function(data){	
+					console.log(data);
+					$.ajax({
+						 url:"http://localhost:3000/cardrefund",
+						 crossOrigin:true,
+					     "type": "POST",
+					      "contentType": "application/json",
+					      "data": JSON.stringify({
+					        "merchant_uid": ""+data.merchant_uid+"", // 주문번호
+					        "cancel_request_amount": ""+data.price+"", // 환불금액
+					        "reason": "행사측 단순 취소" // 환불사유
+					        //"refund_holder": "홍길동", // [가상계좌 환불시 필수입력] 환불 가상계좌 예금주
+					        //"refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 가상계좌 은행코드(ex. KG이니시스의 경우 신한은행은 88번)
+					        //"refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 가상계좌 번호
+					      }),
+					      "dataType": "json"
+					    }).done(function(result) { // 환불 성공시 로직 
+					    	console.log(result);
+					    	console.log(result.merchant_uid);
+					    	if(result=="error"){
+					    		console.log(result);
+					    		alert("취소 실패");
+					    	}else{
+					    		$.ajax({
+					   			 url:"/pay/Callrefund",
+					   			 async:false,
+					   			 type:"post",
+					   			 data:{
+					   				merchant_uid : result.merchant_uid,
+					   				progress :6,
+					   				pay_status : 3
+					   				
+					   			 },
+					   			 success:function(data){
+					   				if(data=='success'){
+										window.location.reload();
+					   				}else{
+					   					alert("실패");
+					   				}
+					   			 }
+					    		});
+					    	}
+					        
+					    }).fail(function(error) { // 환불 실패시 로직
+					      alert(error);
+					      console.log(error);
+					      alert("환불 실패1");
+					    });
+				}
 			});
-			
-		$.ajax({
-			 url:"http://localhost:3000/cardrefund",
-			 crossOrigin:true,
-		     "type": "POST",
-		      "contentType": "application/json",
-		      "data": JSON.stringify({
-		        "merchant_uid": ""+uid+"", // 주문번호
-		        "cancel_request_amount": ""+price+"", // 환불금액
-		        "reason": ""+reason+"" // 환불사유
-		        //"refund_holder": "홍길동", // [가상계좌 환불시 필수입력] 환불 가상계좌 예금주
-		        //"refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 가상계좌 은행코드(ex. KG이니시스의 경우 신한은행은 88번)
-		        //"refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 가상계좌 번호
-		      }),
-		      "dataType": "json"
-		    }).done(function(result) { // 환불 성공시 로직 
-		    	console.log(result);
-		    	console.log(result.merchant_uid);
-		    	if(result=="error"){
-		    		console.log(result);
-		    		alert("취소 실패");
-		    	}else{
-		    		$.ajax({
-		   			 url:"/pay/Callrefund",
-		   			 async:false,
-		   			 type:"post",
-		   			 data:{
-		   				merchant_uid : result.merchant_uid,
-		   				progress :6,
-		   				pay_status : 3
-		   				
-		   			 },
-		   			 success:function(data){
-		   				if(data=='success'){
-							window.location.reload();
-		   				}else{
-		   					alert("실패");
-		   				}
-		   			 }
-		    		});
-		    	}
-		        
-		    }).fail(function(error) { // 환불 실패시 로직
-		      alert(error);
-		      console.log(error);
-		      alert("환불 실패1");
-		    });
 	}
 	function update(i){
 		var a = i;

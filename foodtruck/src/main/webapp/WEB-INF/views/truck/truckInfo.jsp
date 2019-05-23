@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +29,7 @@
 					$('.sumscore').append('<p>★★☆☆☆</p>');
 				}else if (score > 3 && score <4){
 					
-					$('.sumscore').append('<p>★★★☆☆</p>');0
+					$('.sumscore').append('<p>★★★☆☆</p>');
 				}else if (score > 4 && score <5){
 					
 					$('.sumscore').append('<p>★★★★☆</p>');
@@ -102,17 +104,33 @@
 				});
 				$("#creatbtncancle").click(function() {
 					$("#reviewwhole").hide();
+					$("#reviewwhole2").hide();
 					$("#creatbtncancle").hide();
 					$("#creatbtn").show();
 				});
-
+				$(".modify").click(function(){
+					
+					var a =$(this);
+					var b = a.next().val();
+					a.closest("div").next().css("display","block");
+					a.closest("div").css("display","none");
+				
+				
+		
+				});
+				$("#imageplus").click(function(){
+					$("#reviewwhole").hide();
+					$("#reviewwhole2").show();
+					
+					
+				});
 			
 
 		$("#credit").click(function() {
-			var reviewcontent = $("#reviewcotent").val();
-
+			var reviewcontent = $("#reviewcontent").val();
+			
 			var truckcode = "${tlist.truck_code}";
-			alert(truckcode);
+			
 			var reviewscore = $("input:radio[name='star']:checked").val();
 		
 			var query = {
@@ -137,11 +155,12 @@
 		
 
 
-		$(".delete").click(function(){
+		$("#delete").click(function(){
 			var a = $(this);
 			var b = a.next().val();
 			console.log(b);
 			var truckcodes = "${tlist.truck_code}";
+			alert(truckcodes);
 			var reviewcode = b;
 			
 		
@@ -163,8 +182,47 @@
 				
 				
 		
+		});	
+	 $("#modifysuccess").click(function(){
+			var a = $(this);
+			var b = a.next().val();
+			var content = a.prev().val();
 			
-		});
+			
+			
+			
+			
+			var query = {
+					
+					review_code : b,
+					review_content : content
+					
+			}
+			
+			$.ajax({
+				url: "/truck/reviewmodify",
+				type: "post",
+				data: query,
+				success : function(data){
+					location.reload();
+					
+				}
+			
+			});
+			
+		
+		
+		}); 
+		
+		var a= "${test}";
+		if(a!=null){
+			$('#btn2').trigger('click');
+			var a = "${test2}";
+	        var offset = $("#"+a).offset();
+	        console.log(offset);
+	        //alert(offset);
+	        $('html, #review').animate({scrollTop : offset.top-575}, 400);
+		}
 	});
 	/* $("#btn2").bind("click", function () { 
 		alert("버튼이 클릭됨");
@@ -199,49 +257,19 @@
 				<button id="btn5" class="col-md-2">이벤트</button>
 			</div>
 			<div id="menu" class="container">
+				
 				<div class="row">
+				<c:forEach var="i"  items="${menu }">
 					<div class="col-md-3">
+					
 						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
+							src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_url }">
 						<div class="menuname">
-							<br> 핫도그 <br> 3000원
+							<br>${i.menu_name }<br> ${i.unit_price }
 						</div>
 					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/don.jpg'>
-						<div class="menuname">
-							<br> 돈까스 <br> 5000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food2.jpg'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food2.jpg'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food3.jpg'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
+					</c:forEach>
+					
 
 				</div>
 
@@ -298,19 +326,20 @@
 
 						</div>
 					</div>
-					<input id="reviewcotent" placeholder="리뷰를 작성해주세요."></input>
+					<input id="reviewcontent" placeholder="리뷰를 작성해주세요."></input>
 					<div id="reviewbtn">
-						<button id="credit">확인</button>
-						<button id="imageplus">사진첨부</button>
+						<button id="credit">작성</button>
 					</div>
 
 				</div>
+				
+				
 
 				<c:forEach var="i" items="${reviewList}">
 					<div class="col-md-12">
 						<div class="reviewbar">
-							<p style="line-height: 10px;">${i.email}
-								&nbsp;&nbsp; ${i.review_regdate}</p>
+							<p style="line-height: 10px;">[${i.nickname}]
+								&nbsp;&nbsp;  ${i.review_regdate}</p>
 						</div>
 						<div class="reviewbar2">
 							<c:if test="${i.review_score==1}">
@@ -332,17 +361,40 @@
 							
 						</div>
 						<div class="content" id="content">
-							<p>${i.review_content} </p>
-						<c:if test="${sessionScope.sessionid.email == i.email}"> 	
-							<input class="delete" type="button" value="삭제">
+					
+							<p id="${i.review_code}">${i.review_content} </p>
+							<c:if test="${sessionScope.sessionid.email == i.email}"> 	
+					
+							<input id="delete" type="button" value="삭제">
 							<input type="hidden" value="${i.review_code}">
+							<input class="modify" type="button" value="수정">
+							<input type="hidden" value="${i.review_code}">
+					
 						</c:if>
+						
+							</div>
+						
+						<div class="contentmodify" style="display: none">
+						
+						<c:if test="${sessionScope.sessionid.email == i.email}"> 
+						
+						<textarea class="textareaa" name="review_content" rows="2" value="${i.review_content }">${i.review_content }</textarea>
+								
+						
+							<input id="modifysuccess" type="submit" value="수정완료">
+							<input type="hidden" name="review_code" value="${i.review_code}">
+							
+							
+							
+							
+						</c:if>
+					
 						</div>
-
-
+						
+						
 					</div>
 				</c:forEach>
-			</div>
+				</div>
 
 
 
@@ -439,49 +491,33 @@
 				</div>
 			</div>
 			<div id="event" style="visibility: hidden;">
+				
 				<div id="eventborder">
+				<c:forEach var="i" items="${event }">
 					<div id="eventbody">
+					
 						<img id="eventimage"
 							src='${pageContext.request.contextPath}/resources/image/food10.PNG'>
 					</div>
 					<div id="eventcontent">
 						<br>
 						<h2>
-							<span style="color: #C90000;">4월은 꼬치의 계절!</span>
+							<span style="color: #C90000;">${i.event_name }</span>
 						</h2>
 						<br>
 						<h5>
-							<span style="color: #FF0000;">더욱 커진 닭다리살의 꼬치를 지금 만나보세요!</span>
+							<span style="color: #FF0000;">${i.event_content }</span>
 						</h5>
 						<br>
 						<h6>
-							<span style="color: #FF0000;">2019.04.06 ~ 04.30</span>
+							<span style="color: #FF0000;"><fmt:formatDate value="${i.event_start }" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${i.event_end }" pattern="yyyy.MM.dd"/></span>
 						</h6>
 						<br>
 					</div>
+					</c:forEach>
 				</div>
-				<div id="eventborder">
-					<div id="eventbody">
-						<img id="eventimage"
-							src='${pageContext.request.contextPath}/resources/image/food101.jpg'>
-					</div>
-					<div id="eventcontent">
-						<br>
-						<h2>
-							<span style="color: #C90000;">NEW 떡볶이와 닭꼬치를 한번에!</span>
-						</h2>
-						<br>
-						<h5>
-							<span style="color: #FF0000;">더욱 커진 닭다리살과 디지게 매운 떡볶이를 한번에
-								만나보세요!</span>
-						</h5>
-						<br>
-						<h6>
-							<span style="color: #FF0000;">2019.04.06 ~ 04.30</span>
-						</h6>
-						<br>
-					</div>
-				</div>
+			
+			
 			</div>
 		</div>
 	</div>

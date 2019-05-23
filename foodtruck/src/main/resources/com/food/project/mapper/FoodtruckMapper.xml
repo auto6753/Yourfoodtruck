@@ -21,19 +21,27 @@
 		insert into review(truck_code,email,review_regdate,review_score,review_content,review_reply_content,review_reply_regdate,review_code)
 		values (#{truck_code},#{email},sysdate,#{review_score},#{review_content},#{review_reply_content , jdbcType=VARCHAR},#{review_reply_regdate ,jdbcType=VARCHAR},'rv'||to_char(sysdate,'yymmdd')||to_char(review_sequence.NEXTVAL,'fm00000'))
 	</insert>
-	<select id="getReviewList" resultType="com.food.project.domain.ReviewVO" parameterType="String">
-		select truck_code,email, review_regdate ,review_score,review_content,review_reply_content,review_reply_regdate, review_code from review where truck_code = #{truck_code} order by review_regdate DESC
+	<select id="getReviewList" resultType="com.food.project.domain.ReviewDTO" parameterType="String">
+		select a.nickname, b.truck_code,b.email, b.review_regdate ,b.review_score,b.review_content,b.review_reply_content,b.review_reply_regdate, b.review_code from review b , customer a where truck_code = #{truck_code} and a.email = b.email order by review_regdate DESC
 
 	</select>
 	<update id="updateTruckinfo" parameterType="com.food.project.domain.FoodTruckVO">
 		update foodtruck set brandname=#{brandname},crn=#{crn},trucknum=#{trucknum},account=#{account},paytype=#{paytype},truck_desc=#{truck_desc} where truck_code=#{truck_code ,jdbcType=VARCHAR}
 	</update>
 	<select id="selectReviewList" resultType="com.food.project.domain.MyreviewlistDTO" parameterType="String">
-		select a.brandname, b.review_code, b.review_content, b.review_score, TO_CHAR(b.review_regdate, 'YYYY-MM-DD') review_regdate from review b , foodtruck a where a.truck_code = b.truck_code and b.email = #{email} order by b.review_regdate DESC
+		select a.brandname,a.truck_code , b.review_code, b.review_content, b.review_score, TO_CHAR(b.review_regdate, 'YYYY-MM-DD') review_regdate from review b , foodtruck a where a.truck_code = b.truck_code and b.email = #{email} order by b.review_regdate DESC
 		<!--푸드트럭에서 brandname이랑 리뷰여러가지랑 조인  -->
 
 	</select>
-	
+	<update id="updateReview" parameterType="com.food.project.domain.ReviewVO">
+		update review set review_content=#{review_content} where review_code=#{review_code ,jdbcType=VARCHAR}
+	</update>
+	<select id="selectMenu" resultType="com.food.project.domain.MenuVO" parameterType="String">
+		select menu_code , menu_name , menu_url , unit_price from menu where truck_code = #{truck_code}
+	</select>
+	<select id="getEvent" resultType="com.food.project.domain.EventVO" parameterType="String">
+		select event_code , event_start, event_end , event_name , event_content from event where truck_code = #{truck_code}
+	</select>
 	
 	
 </mapper>

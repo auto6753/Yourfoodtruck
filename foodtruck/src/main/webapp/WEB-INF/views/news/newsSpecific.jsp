@@ -15,7 +15,7 @@
 	<div id="title" class="card-header">
 		<p id="title2">푸드트럭NEWS</p>
 	</div>
-	<form id="all" >
+
 		<div id="box">
 			<div class="jumbotron">
 				<h1 id="titles"class="display-10">${newsSpecific.post_title}</h1>
@@ -29,7 +29,7 @@
 				</p>
 			</div>
 		</div>
-	</form>
+
 <script>
 $(document).ready(function(){
 	var ht=location.search;
@@ -45,7 +45,9 @@ $(document).ready(function(){
 			type: "post",
 			data: query,
 			success : function(data){
+			
 				location.href="/news";
+				
 			}
 		});
 	});
