@@ -17,11 +17,13 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
+		
+		
 				var email = "${sessionScope.sessionid.email}";
 				var truck_code = "${tlist.truck_code}";
 				//alert(email);
+			if(email!=""){
 				$.ajax({
 					type : "post",
 					url : "/customer/ridech",
@@ -44,6 +46,7 @@
 						console.log(err.statusText);
 					}
 				});
+			}
 				$("#ride").click(function() {
 					var email = "${sessionScope.sessionid.email}";
 					if (email == "") {
