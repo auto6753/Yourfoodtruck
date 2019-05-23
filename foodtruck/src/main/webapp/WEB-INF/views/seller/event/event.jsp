@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/event/event.css"/>" />
@@ -27,10 +27,11 @@
 						<div class="col-md-12 tab_con" id="tab_con">
 							<div class="eventBox"> <!-- 진행중인 이벤트 내용 -->
 								<c:forEach var="event" items="${eventList}" varStatus="status">
+								<c:if test="${curTime <= eventEndLong[status.index]}">
 									<div class="col-md-6 max-width event"> <!-- 행당 2개 이벤트 배치 -->
 										<div class="manageEvent">
 											<div>
-												<a href="#layer2" class="btn-example2">
+												<a href="#layer2" class="btn-example2 edit">
 													<img src="${pageContext.request.contextPath}/resources/image/icon/edit-property-16.png"/>
 												</a>
 											</div>
@@ -46,19 +47,37 @@
 										<div class="eventItemContent">${event.event_start} ${event.event_end}</div>
 										
 										<div class="eventItem">메뉴</div>
-										<div class="eventItemContent">${eventMenuList[status.index].menu_name}</div>
+										<div class="eventItemContent">
+											<c:set var="eventCode" value="${event.event_code}"></c:set>
+											<c:forEach var="eventMenuList" items="${eventMenuList}" varStatus="status">
+												<c:set var="eventCodes" value="${eventMenuList.event_code}"></c:set>
+												<c:if test="${eventCodes == eventCode}">
+													<c:out value="${eventMenuList.menu_name}"></c:out>
+												</c:if>
+											</c:forEach>
+										</div>
 										
 										<div class="eventItem">할인가격</div>
-										<div class="eventItemContent">${eventMenuList[status.index].discount}</div>
+										<div class="eventItemContent">
+											<c:set var="eventCode" value="${event.event_code}"></c:set>
+											<c:forEach var="eventMenuList" items="${eventMenuList}" varStatus="status">
+												<c:set var="eventCodes" value="${eventMenuList.event_code}"></c:set>
+												<c:if test="${eventCodes == eventCode}">
+													<c:out value="${eventMenuList.discount}"></c:out>
+												</c:if>
+											</c:forEach>
+										</div>
 										
 										<div class="eventItem">상세내용</div>
 										<div class="eventItemContent">${event.event_content}</div>
 									</div>
+									</c:if>
 								</c:forEach>
 							</div>
 
 							<div class="eventBox"> <!-- 종료된 이벤트 내용 -->
-								<c:forEach var="i" begin="1" end="${endEventNum}">
+								<c:forEach var="event" items="${eventList}" varStatus="status">
+									<c:if test="${curTime > eventEndLong[status.index]}">
 									<div class="col-md-6 max-width event"> <!-- 행당 2개 이벤트 배치 -->
 										<div class="manageEvent">
 											<div class="edit">
@@ -68,22 +87,39 @@
 												<img src="${pageContext.request.contextPath}/resources/image/icon/delete-16.png"/>
 											</div>
 										</div>
-										
+										<input class="delEvent" type="hidden" value="${event.event_code}"/>
 										<div class="eventItem">이벤트명</div>
-										<div class="eventItemContent eventName">내용 ${i}</div>
+										<div class="eventItemContent eventName">${event.event_name}</div>
 										
 										<div class="eventItem">기간</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">${event.event_start} ${event.event_end}</div>
 										
 										<div class="eventItem">메뉴</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">
+											<c:set var="eventCode" value="${event.event_code}"></c:set>
+											<c:forEach var="eventMenuList" items="${eventMenuList}" varStatus="status">
+												<c:set var="eventCodes" value="${eventMenuList.event_code}"></c:set>
+												<c:if test="${eventCodes == eventCode}">
+													<c:out value="${eventMenuList.menu_name}"></c:out>
+												</c:if>
+											</c:forEach>
+										</div>
 										
 										<div class="eventItem">할인가격</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">
+											<c:set var="eventCode" value="${event.event_code}"></c:set>
+											<c:forEach var="eventMenuList" items="${eventMenuList}" varStatus="status">
+												<c:set var="eventCodes" value="${eventMenuList.event_code}"></c:set>
+												<c:if test="${eventCodes == eventCode}">
+													<c:out value="${eventMenuList.discount}"></c:out>
+												</c:if>
+											</c:forEach>
+										</div>
 										
 										<div class="eventItem">상세내용</div>
-										<div class="eventItemContent">내용 ${i}</div>
+										<div class="eventItemContent">${event.event_content}</div>
 									</div>
+									</c:if>
 								</c:forEach>
 							</div>
 						</div>
@@ -270,16 +306,23 @@
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">메뉴</label></td>
-									<td valign="top">
+									<td valign="top" class="menuWrapper">
+										<div>
+											<div class="menuWidth menuCol">이름</div>
+											<div class="menuWidth2 menuCol">단가(원)</div>
+											<div class="menuWidth2 menuCol">할인액(원)</div>
+											<div class="menuWidth2 menuCol">할인가(원)</div>
+										</div>
 										<div id="pre_set2" style="display: none; float:top;">
 											<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
-												<option value="" selected>메뉴</option>
-												<option value="menu1">메뉴1</option>
-												<option value="menu2">메뉴2</option>
-												<option value="menu3">메뉴3</option>
+												<option value="" selected>&nbsp;&nbsp;------- 메뉴 -------</option>
+												<c:forEach var="i" items="${menuList}">
+													<option value="${i.menu_code}">${i.menu_name}</option>
+												</c:forEach>
 											</select>
-											<input type="text" class="menuWidth" name="price" placeholder="단가" disabled/>
-											<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
+											<input type="text" class="menuWidth2" name="price" placeholder="단가" disabled/>
+											<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this);" onkeypress="return digit_check(event);" required disabled/>
+											<input type="text" class="menuWidth2" name="dResult" placeholder="할인가" required disabled/>
 											<a href="#" class="deleteMenuBtn" onclick="remove_item2(this)">
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu.svg"/>
 												<img class="deleteMenuBtnImg" src="${pageContext.request.contextPath}/resources/image/icon/deletemenu2.svg"/>
@@ -287,15 +330,17 @@
 										</div>
 
 										<div id="field2">
-											<div>
+											<div id="default">
 												<select class="menuWidth" name="menu1" onchange="changeAttr(this);" required>
-													<option value="" selected>메뉴</option>
-													<option value="menu1">메뉴1</option>
-													<option value="menu2">메뉴2</option>
-													<option value="menu3">메뉴3</option>
+													<option value="" selected>&nbsp;&nbsp;------- 메뉴 -------</option>
+													<c:forEach var="i" items="${menuList}">
+														<option value="${i.menu_code}">${i.menu_name}</option>
+														
+													</c:forEach>
 												</select>
-												<input type="text" class="menuWidth" name="price" placeholder="단가" disabled/>
-												<input type="text" class="menuWidth" name="discount" placeholder="할인액" required disabled/>
+												<input type="text" class="menuWidth2" name="price" placeholder="단가" disabled/>
+												<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this.value);" onkeypress="return digit_check(event);" required disabled/>
+												<input type="text" class="menuWidth2" name="dResult" placeholder="할인가" required disabled/>
 											</div>
 										</div>
 										<a href="#" class="addmenuBtn" onclick="add_item2()">

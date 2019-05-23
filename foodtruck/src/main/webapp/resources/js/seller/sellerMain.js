@@ -2,6 +2,18 @@
  * 
  */
 
+function openMngSales(){
+	var popupX = (window.screen.width / 2) - (1400 / 2);
+	var popupY = (window.screen.height / 2) - (1000 / 2);
+	
+	var mngSales = window.open("/seller/mngSales", "매출관리", "width=1400, height=900, resizable=no, left=" + popupX + "," + "top=" + popupY);
+//	mngSales.document.write("");
+}
+
+
+
+
+
 var chartDrowFun = {
 
 	chartDrow : function() {
@@ -23,8 +35,8 @@ var chartDrowFun = {
 
 			// 그래프에 표시할 데이터
 			var dataRow = [];
-
-			for (var i = 0; i <= 29; i++) { // 랜덤 데이터 생성
+			
+			for (var i = 0; i <= 30; i++) { // 랜덤 데이터 생성
 				var total = Math.floor(Math.random() * 300) + 1;
 				var sales = Math.floor(Math.random() * total) + 1;
 

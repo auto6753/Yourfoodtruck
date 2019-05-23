@@ -14,5 +14,6 @@ public interface EventService {
 	public void deleteEventMenu(String eventCode);
 	public ArrayList<EventMenuVO> getEventMenu(String truckCode);
 	public ArrayList<EventVO> getMainevent();
+	public ArrayList<EventVO> getEventForEdit(String eventCode);
 	
 }

@@ -11,8 +11,9 @@ public interface EventMapper {
 	public void addEvent(EventVO vo);
 	public void addEventMenu(EventMenuVO vo);
 	public EventVO getEvent_code(EventVO vo);
-	public void delEvent(String eventCode);
-	public void delEventMenu(String eventCode);
-	public ArrayList<EventMenuVO> getEventMenu(String truckCode);
+	public void delEvent(String event_code);
+	public void delEventMenu(String event_code);
+	public ArrayList<EventMenuVO> getEventMenu(String truck_code);
 	public ArrayList<EventVO> getMainevent();
+	public ArrayList<EventVO> getEventForEdit(String event_code);
 }
