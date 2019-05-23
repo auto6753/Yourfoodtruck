@@ -61,14 +61,18 @@
 	$(document).ready(function(){
 		$.get('resources/json/result.json',function(data){
 			console.log(data);
-			for (var a in data.gonggo_list) {
-				console.log(a);
-				console.log(data.gonggo_list[a]);
-				console.log(data.gonggo_list[a].post_url);
-				//$('tbody').append('<tr></tr>');
-				//$('tr').append('<td class="boarTitle"></td>');
-				//$('td.boardTitle:eq(a)').append('<a href="'+data.gonggo_list[a].post_url+'"></a>');
-				$('tbody').append('<tr><td class="boardTitle"><a href="'+data.gonggo_list[a].post_url+'">'+data.gonggo_list[a].post_title+'</a></td><td>'+data.region+'<tr>');	
+			for (var a in data.list) {
+				console.log(data.list[a]);
+				//console.log(data.list[a]);
+				//console.log(data.gonggo_list[a].post_url);
+				for (var b in data.list[a].gonggo_list) {
+					$('tbody').append('<tr></tr>');
+					$('tr').append('<td class="boarTitle"></td>');
+					$('td.boardTitle:eq(b)').append('<a href="'+data.list[a].gonggo_list[b].post_url+'"></a>');
+					$('tbody').append('<tr><td class="boardTitle"><a href="'+data.list[a].gonggo_list[b].post_url+'">'+
+							data.list[a].gonggo_list[b].post_title+'</a></td><td>'+data.list[a].region+'<tr>');	
+				}
+				
 			}
 			
 		});
