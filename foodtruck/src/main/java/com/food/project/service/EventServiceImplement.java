@@ -66,5 +66,11 @@ public class EventServiceImplement implements EventService {
 		return eventMapper.getMainevent();
 	}
 
+	@Override
+	public ArrayList<EventVO> getEventForEdit(String eventCode) {
+		// TODO Auto-generated method stub
+		return eventMapper.getEventForEdit(eventCode);
+	}
+
 
 }

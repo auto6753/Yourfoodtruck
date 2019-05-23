@@ -418,6 +418,23 @@
 			}
 		});
 		
+		$(".edit").click(function(){
+			var eventCode = $(this).parent().parent().next().val();
+			$.ajax({
+				type: "post",
+				url: "editEvent",
+				data: {
+					"eventCode": eventCode
+				},
+				success: function(data) {
+					
+				},
+				error: function(data) {
+					alert("errror");
+				}
+			});
+		});
+		
 		$(".deleteEventDiv").click(function(){
 			//var eventName = $(this).parent().next().next().text();
 			var delCheck = confirm(" 을(를) 정말 삭제하시겠습니까?");

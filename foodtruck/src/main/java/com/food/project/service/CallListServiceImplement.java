@@ -34,5 +34,16 @@ public class CallListServiceImplement implements CallListService {
 		// TODO Auto-generated method stub
 		return mapper.getCallList2(email);
 	}
+	@Override
+	public int updateCall(CallListVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateCall(vo);
+	}
+	@Override
+	public int updateCallVo(CallListVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateCallVo(vo);
+	}
+
 
 }

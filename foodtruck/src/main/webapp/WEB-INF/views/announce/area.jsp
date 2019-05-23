@@ -20,9 +20,9 @@
 			<form class="form-inline" action="/area" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
-				<input name="keyword" value="${map.keyword}">
+				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
-				<input type="submit" value="조회" class="btn">
+				<input id="searchbutton" type="submit" value="조회" class="btn">
 				<c:if test="${not empty sessionScope.sessionid}">
 				<a href="/area/addArea"><button id="pageadd" type="button" class="btn">등록</button></a>
 				</c:if>
@@ -59,7 +59,7 @@
 				<c:forEach var="num" begin="${map.postPager.blockBegin}" end="${map.postPager.blockEnd}">
 					<li class="page-item"><a class="page-link" href="javascript:list('${num}')"><span>${num}</span></a></li>
 				</c:forEach>			
-				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>»</span></a></li>
+				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
 			</ul>
 		</nav>
 	</div>

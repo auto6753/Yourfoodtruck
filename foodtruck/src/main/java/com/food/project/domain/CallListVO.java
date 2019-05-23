@@ -25,7 +25,7 @@ public class CallListVO {
 	private int price;
 	private int progress;
 	private int pay_status;
-
+	private Date request_date;
 	private String festival_name;
 	private Date deposit_name;
 	private int advance_rate;

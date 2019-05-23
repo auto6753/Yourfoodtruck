@@ -3,8 +3,12 @@ package com.food.project.service;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
+
+import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.MenuVO;
 import com.food.project.domain.MyreviewlistDTO;
+import com.food.project.domain.ReviewDTO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.FoodtruckMapper;
 import lombok.AllArgsConstructor;
@@ -39,7 +43,7 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	}
 
 	@Override
-	public ArrayList<ReviewVO> getReviewList(String truck_code) {
+	public ArrayList<ReviewDTO> getReviewList(String truck_code) {
 		// TODO Auto-generated method stub
 		return mapper.getReviewList(truck_code);
 	}
@@ -55,7 +59,28 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	public ArrayList<MyreviewlistDTO> selectReview(String tt) {
 		// TODO Auto-generated method stub
 		return mapper.selectReviewList(tt);
-	} 
+	}
+
+	@Override
+	public void updateReview(ReviewVO vo) {
+		mapper.updateReview(vo);
+		
+	}
+
+	@Override
+	public ArrayList<MenuVO> selectMenu(String truck_code) {
+		// TODO Auto-generated method stub
+		return mapper.selectMenu(truck_code);
+	}
+
+	@Override
+	public ArrayList<EventVO> getEvent(String truck_code) {
+		// TODO Auto-generated method stub
+		return	mapper.getEvent(truck_code);
+	}
+
+
+
 	
 
 	
