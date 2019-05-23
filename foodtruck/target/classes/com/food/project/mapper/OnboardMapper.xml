@@ -3,22 +3,34 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.OnboardMapper">
 <select id="getOnboard" resultType="com.food.project.domain.OnboardVO">
-	select o.onboard_date, f.brandname, f.truck_code
+	select o.onboard_date, f.brandname, f.truck_code, o.onboard_state
 	from onboard o join foodtruck f
 	on (o.truck_code = f.truck_code)
 	where o.email = #{email}
 	</select>
 	<insert id="insertOnboard" parameterType="com.food.project.domain.OnboardVO">
-		insert into onboard(email,truck_code,onboard_date)
-		values(#{email},#{truck_code},#{onboard_date})
+		insert into onboard(truck_code, email, onboard_date, onboard_state)
+		values(#{truck_code}, #{email}, #{onboard_date}, #{onboard_state})
 	</insert>
-	<insert id="DeleteOnboard">
-		delete from onboard where truck_code=#{truck_code}
-	</insert>
+	<delete id="DeleteOnboard">
+		update onboard set onboard_state =#{onbaord_state} where truck_code=#{truck_code} and email=#{email}
+	</delete>
 	<select id="getOnSale" resultType="com.food.project.domain.OnboardVO" >
 		select o.truck_code, f.hours, f.brandname, o.onboard_date
 		from onboard o join foodtruck f
 		on (o.truck_code = f.truck_code)
 		where o.email = #{email}
 	</select>
+	<select id="rideck" resultType="com.food.project.domain.OnboardVO" >
+		select onboard_state
+		from onboard 
+		where email = #{email} and truck_code= #{truck_code}
+	</select>
+	<update id="updateOutdate"  parameterType="com.food.project.domain.OnboardVO">
+		update onboard set onboard_state=#{onboard_state} , out_date=#{out_date} where truck_code=#{truck_code} and email=#{email}
+	</update>
+	<update id="updateOnboarddate"  parameterType="com.food.project.domain.OnboardVO">
+		update onboard set onboard_state=#{onboard_state} , onboard_date=#{onboard_date} where truck_code=#{truck_code} and email=#{email}
+	</update>
+
 </mapper>

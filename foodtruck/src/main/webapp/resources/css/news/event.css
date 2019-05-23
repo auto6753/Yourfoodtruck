@@ -11,6 +11,7 @@
 	height: 700px;
 	overflow-y: scroll;
 	border: 1px solid #eee;
+
 }
 * { margin:0; padding:0; }
 ul,li { list-style:none; }
@@ -20,23 +21,24 @@ a { text-decoration:none; color:#000; }
 .tab li { display:inline-block; padding:20px; cursor:pointer; }
 .tab li.on { background-color:#eee; color:#f00; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
-.tab_con div { display:none; height:100px; text-align:center; }
+.tab_con div { display:none; height:300px; text-align:center;}
 
 img {
-	width: 260px;
+	width: 250px;
 	height: 180px;
 	border-radius: 10px;
 	margin: 10px auto;
 }
 .col-md-3 {
 	width: 400px;
-	margin: 2%;
-	height: 200px !important;
-	border: 1px solid darkgray;
-	text-align: center;
 	border-radius: 10px;
 	float: left;
+	margin-top: 10px;
 }
 .col{
 	padding: 0 !important;
+}
+.bace{
+	border: 1px solid darkgray;
+	border-radius: 10px;
 }

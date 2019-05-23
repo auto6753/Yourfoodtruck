@@ -14,54 +14,135 @@
 	href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9df56b013af05d5db1fb3350de0a4265"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-				
-				
-				
+	$(document).ready(function(){
+		var email= "${sessionScope.sessionid.email}";	
+		var truck_code = "${tlist.truck_code}";
+		//alert(email);
+				$.ajax({
+				type: "post",
+				url:"/customer/ridech",
+				data:{
+					"truck_code": truck_code, "email": email
+				},
+				success : function(data){
+					var json = JSON.parse(data);
+					console.log(json);
+					if(json.onboardstate!=1){
+						alert(json.onboard_state);
+						$('#ride').text('탑승하기');
+					}else{
+						$('#ride').text('하차하기');
+					}
+				},
+				error : function(err){
+					console.log(err);
+					console.log(err.statusText);
+				}
+			});
+			$("#ride").click(function() {
+				var email= "${sessionScope.sessionid.email}";
+				if(email==""){
+					alert("로그인이후 이용가능합니다.");
+				}else{
+					$("#ride").click(function() {
+						var email= "${sessionScope.sessionid.email}";
+						var truck_code="${tlist.truck_code}";
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth() + 1; //months from 1-12
+						var day = date.getDate();
+						
+						if((day+"").length < 2){
+							day = "0" + day;
+						}else if((month+"").length < 2){
+							month = "0" + month;
+						}
+						var today = year + "-" + month + "-" + day;
+						alert(today);
+						
+						
+						
+						if ($("#ride").text() == '탑승하기') {
+							$.ajax({
+								url:"/customer/insertOnboard",
+								type: "post",
+								data:{
+									"truck_code": truck_code, "onboard_date": today 
+								},success : function(data){
+									$('#ride').text('하차하기');
+								},error: function(err){
+									alert("안넘어감");
+								}
+							 });
+							
+						} else {
+							var truckname = $("#truckname").text();
+							check = confirm(truckname + "을 하차하시겠습니까?");
+							var truck_code = "${tlist.truck_code}";
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth() + 1; //months from 1-12
+							var day = date.getDate();
+							
+							if((day+"").length < 2){
+								day = "0" + day;
+							}else if((month+"").length < 2){
+								month = "0" + month;
+							}
+							var today = year + "-" + month + "-" + day;
+							alert(today);
+							
+							
+							$.ajax({
+								url:"/customer/Deleteride",
+								type:"post",
+								data:{
+									"truck_code": truck_code, "email": email, "out_date": today
+								},success : function(data){
+									$('#ride').text('탑승하기');
+								}
+							});
+						}
+					});
+				}
+			});			
+			
 				var score = "${sumscore}";
-				
-				if(score > 0 &&  score < 2) {
-					
+				if(score > 0 &&  score < 2) {		
 					$('.sumscore').append('<p>★☆☆☆☆</p>');
 				}else if (score > 2 && score <3){
-					
 					$('.sumscore').append('<p>★★☆☆☆</p>');
-				}else if (score > 3 && score <4){
-					
+				}else if (score > 3 && score <4){				
 					$('.sumscore').append('<p>★★★☆☆</p>');
 				}else if (score > 4 && score <5){
-					
 					$('.sumscore').append('<p>★★★★☆</p>');
 				}else if ( score == 5){
 					$('.sumscore').append('<p>★★★★★</p>');
 				}
-				
 				$("#call").click(function() {
 					var truck_code = "${tlist.truck_code}";
 					location.href = "/truck/callForm/?truck_code="+truck_code;
-					
 				});
 				$("#btn1").click(
 						function() {
 							$("#menu").css("visibility", "visible");
 							$("#review, #truckinfo, #location, #event").css(
 									"visibility", "hidden");
-
 						});
 				$("#btn2").click(
 						function() {
 							$("#review").css("visibility", "visible");
 							$("#menu, #truckinfo, #location, #event").css(
 									"visibility", "hidden");
-
 						});
 				$("#btn3").click(
 						function() {
 							$("#truckinfo").css("visibility", "visible");
 							$("#review, #menu, #location, #event").css(
 									"visibility", "hidden");
-
 						});
 				$("#btn4").click(
 						function() {
@@ -70,28 +151,12 @@
 									"visibility", "hidden");
 							/* $("#location").show();
 							$("#review, #truckinfo, #menu, #event").hide(); */
-
 						});
-				$("#btn5").click(
-						function() {
+				$("#btn5").click(function() {
 							$("#event").css("visibility", "visible");
 							$("#review, #truckinfo, #location, #menu").css(
 									"visibility", "hidden");
-
 						});
-				$("#ride").click(function() {
-					var check;
-
-					if ($(this).text() == '탑승하기') {
-						$(this).text('탑승중');
-					} else {
-						var truckname = $("#truckname").text();
-						check = confirm(truckname + "을 하차하시겠습니까?");
-						if (check == true) {
-							$(this).text('탑승하기');
-						}
-					}
-				});
 				$(".star_rating a").click(function() {
 					$(this).parent().children("a").removeClass("on");
 					$(this).addClass("on").prevAll("a").addClass("on");
@@ -108,8 +173,7 @@
 					$("#creatbtncancle").hide();
 					$("#creatbtn").show();
 				});
-				$(".modify").click(function(){
-					
+				$(".modify").click(function(){	
 					var a =$(this);
 					var b = a.next().val();
 					a.closest("div").next().css("display","block");
@@ -128,33 +192,23 @@
 
 		$("#credit").click(function() {
 			var reviewcontent = $("#reviewcontent").val();
-			
 			var truckcode = "${tlist.truck_code}";
 			
 			var reviewscore = $("input:radio[name='star']:checked").val();
-		
 			var query = {
 				truck_code : truckcode,
 				review_content : reviewcontent,
 				review_score : reviewscore
 			}
 			$.ajax({
-
 				url : "/truck/reviewwrite",
 				data : query,
 				type : "post",
 				success : function(data) {
-					
 					location.reload();
-
 				}
 			});
-
 		});
-
-		
-
-
 		$("#delete").click(function(){
 			var a = $(this);
 			var b = a.next().val();
@@ -162,22 +216,20 @@
 			var truckcodes = "${tlist.truck_code}";
 			alert(truckcodes);
 			var reviewcode = b;
-			
-		
 			var query = {
-					
 					truck_code : truckcodes,
-					review_code : reviewcode
-					
+					review_code : reviewcode		
 			}
-			$.ajax({
-				
+			$.ajax({	
 				url: "/truck/reviewdelete",
 				type: "post" ,
 				data: query,
 				success : function(data){
 					location.reload();
 				}
+			});			
+		});
+	});
 			});
 				
 				
@@ -230,15 +282,13 @@
 	}); */
 	//$("#btn2").trigger("click");
 	//버튼 클릭이 아니라 코드에 의해서 click이벤트를 실행하고 싶다면?
-
 </script>
 </head>
 <body>
 	<div id="with" class="col">
 		<div id="height" class="col">
 			<div style="float: left;" class="col">
-				<img
-					src='${pageContext.request.contextPath}/resources/image/food1.png'>
+				<img src='${pageContext.request.contextPath}/resources/image/food1.png'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>
