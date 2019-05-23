@@ -11,12 +11,10 @@
 		insert into menu(menu_code,menu_name,menu_category,menu_url,unit_price,truck_code,menu_surl)
 		values (concat(to_char(sysdate,'yymm'),to_char(MENU_SEQUENCE.NEXTVAL,'FM00000')),#{menu_name},#{menu_category},#{menu_url},#{unit_price},#{truck_code},#{menu_surl})
 	</insert>
-	
 	<update id="updatemenu" parameterType="com.food.project.domain.MenuVO">
 		update menu set menu_name =#{menu_name}, menu_category = #{menu_category}, menu_url=#{menu_url}, unit_price=#{unit_price}, menu_surl=#{menu_surl} where menu_code = #{menu_code}
 	</update>
 	<insert id="insertlocation" parameterType="com.food.project.domain.LocationVO">
 		insert into location (truck_code, loc_time, lat_y,lng_x)values(#{truck_code},systimestamp + interval '0 09:00:00' day to second,#{lat_y},#{lng_x})
 	</insert>
-	
 </mapper>
