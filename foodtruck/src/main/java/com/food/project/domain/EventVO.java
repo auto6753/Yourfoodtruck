@@ -16,4 +16,5 @@ public class EventVO {
 	private String event_content;
 	private int event_payment;
 	private int event_combinable;
+	private String brandname;
 }
