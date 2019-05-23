@@ -39,4 +39,12 @@ public class OnboardServiceimplement implements OnboardService{
 	public void Deleteride(OnboardVO on) {
 		mapper.Deleteride(on);
 	}
+	@Override
+	public void updateOutdate(OnboardVO on) {
+		mapper.updateOutdate(on);
+	}
+	@Override
+	public void updateOnboarddate(OnboardVO on) {
+		mapper.updateOnboarddate(on);
+	}
 }

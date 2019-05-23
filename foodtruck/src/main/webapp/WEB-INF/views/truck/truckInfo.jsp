@@ -28,7 +28,8 @@
 				success : function(data){
 					var json = JSON.parse(data);
 					console.log(json);
-					if(json.email==null){
+					if(json.onboardstate!=1){
+						alert(json.onboard_state);
 						$('#ride').text('탑승하기');
 					}else{
 						$('#ride').text('하차하기');
@@ -79,12 +80,25 @@
 							var truckname = $("#truckname").text();
 							check = confirm(truckname + "을 하차하시겠습니까?");
 							var truck_code = "${tlist.truck_code}";
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth() + 1; //months from 1-12
+							var day = date.getDate();
+							
+							if((day+"").length < 2){
+								day = "0" + day;
+							}else if((month+"").length < 2){
+								month = "0" + month;
+							}
+							var today = year + "-" + month + "-" + day;
+							alert(today);
+							
 							
 							$.ajax({
 								url:"/customer/Deleteride",
 								type:"post",
 								data:{
-									"truck_code": truck_code, "email": email
+									"truck_code": truck_code, "email": email, "out_date": today
 								},success : function(data){
 									$('#ride').text('탑승하기');
 								}
@@ -202,8 +216,7 @@
 	<div id="with" class="col">
 		<div id="height" class="col">
 			<div style="float: left;" class="col">
-				<img
-					src='${pageContext.request.contextPath}/resources/image/food1.png'>
+				<img src='${pageContext.request.contextPath}/resources/image/food1.png'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>

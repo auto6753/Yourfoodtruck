@@ -12,14 +12,27 @@
 $(document).ready(function(){
 	$("#delete").click(function(){
 		var truckcode = $("#truckcode").val();
+		var email= "${sessionScope.sessionid.email}";
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1; //months from 1-12
+		var day = date.getDate();
 		
+		if((day+"").length < 2){
+			day = "0" + day;
+		}else if((month+"").length < 2){
+			month = "0" + month;
+		}
+		var today = year + "-" + month + "-" + day;
+		alert(today);
 		alert(truckcode);
+		alert(email);
 		
 		$.ajax({
 			type : "post",
 			url : "/customer/onboard",
 			data : {
-				"truckcode" : truckcode
+				"truckcode" : truckcode, "email" : email, "out_date" : today
 			},
 			success : function(data) {
 				alert("하차되었습니다.");

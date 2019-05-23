@@ -12,4 +12,6 @@ public interface OnboardMapper {
 	public void insertOnboard(OnboardVO br);
 	public ArrayList<OnboardVO> rideck(OnboardVO on);
 	public void Deleteride(OnboardVO on);
+	public void updateOutdate(OnboardVO on);
+	public void updateOnboarddate(OnboardVO on);
 }
