@@ -36,7 +36,7 @@
 							<input id="truckcode" type="hidden" value="${i.truck_code}"/>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary" id="detail">상세정보</button>
 									<button type="button" class="btn btn-sm btn-outline-secondary" id="delete">하차</button>
 								</div>
 							</div>
@@ -77,14 +77,25 @@
 	$(function(){
 			$("#delete").click(function(){
 				var truckcode = $("#truckcode").val();
+				var email="${sessionScope.sessionid.email}";
+				var date = new Date();
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1; //months from 1-12
+				var day = date.getDate();
 				
+				if((day+"").length < 2){
+					day = "0" + day;
+				}else if((month+"").length < 2){
+					month = "0" + month;
+				}
+				var today = year + "-" + month + "-" + day;
 				alert(truckcode);
 				
 				$.ajax({
 					type : "post",
-					url : "/customer/onboard",
+					url :"/customer/onboard",
 					data : {
-						"truckcode" : truckcode
+						"truckcode" : truckcode, "email" : email, "out_date": today
 					},
 					success : function(data) {
 						alert("하차되었습니다.");
@@ -94,6 +105,10 @@
 						alert("오류발생");
 					}
 				});
+			});
+			$("#detail").click(function(){
+				var truck_code = $("#truckcode").val();
+						location.href = "/truck/?truck_code="+truck_code;
 			});
 		});
 </script>

@@ -15,6 +15,7 @@
 
 		<c:forEach var="i" items="${ievent}">
 					<div class="col-md-3">
+					<div class="bace">
 						<img class="img"
 							src='${pageContext.request.contextPath}/resources/image/food1.png'>
 						<div class="menuname">
@@ -23,12 +24,14 @@
 							${i.brandname }
 						</div>
 					</div>
+				</div>
 		</c:forEach>
 	</div>
 	<div class="col" id="endEvent">
 		
 		<c:forEach var="e" items="${eevent}">
 					<div class="col-md-3">
+					<div class="bace">
 						<img class="img"
 							src='${pageContext.request.contextPath}/resources/image/food1.png'>
 						<div class="menuname">
@@ -36,6 +39,7 @@
 							${e.event_start }~${e.event_end }<br>
 							${e.brandname }
 						</div>
+					</div>
 					</div>
 		</c:forEach>
 	</div>

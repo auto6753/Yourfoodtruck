@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,51 +14,135 @@
 	href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9df56b013af05d5db1fb3350de0a4265"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(){
+		var email= "${sessionScope.sessionid.email}";	
+		var truck_code = "${tlist.truck_code}";
+		//alert(email);
+				$.ajax({
+				type: "post",
+				url:"/customer/ridech",
+				data:{
+					"truck_code": truck_code, "email": email
+				},
+				success : function(data){
+					var json = JSON.parse(data);
+					console.log(json);
+					if(json.onboardstate!=1){
+						alert(json.onboard_state);
+						$('#ride').text('탑승하기');
+					}else{
+						$('#ride').text('하차하기');
+					}
+				},
+				error : function(err){
+					console.log(err);
+					console.log(err.statusText);
+				}
+			});
+			$("#ride").click(function() {
+				var email= "${sessionScope.sessionid.email}";
+				if(email==""){
+					alert("로그인이후 이용가능합니다.");
+				}else{
+					$("#ride").click(function() {
+						var email= "${sessionScope.sessionid.email}";
+						var truck_code="${tlist.truck_code}";
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth() + 1; //months from 1-12
+						var day = date.getDate();
+						
+						if((day+"").length < 2){
+							day = "0" + day;
+						}else if((month+"").length < 2){
+							month = "0" + month;
+						}
+						var today = year + "-" + month + "-" + day;
+						alert(today);
+						
+						
+						
+						if ($("#ride").text() == '탑승하기') {
+							$.ajax({
+								url:"/customer/insertOnboard",
+								type: "post",
+								data:{
+									"truck_code": truck_code, "onboard_date": today 
+								},success : function(data){
+									$('#ride').text('하차하기');
+								},error: function(err){
+									alert("안넘어감");
+								}
+							 });
+							
+						} else {
+							var truckname = $("#truckname").text();
+							check = confirm(truckname + "을 하차하시겠습니까?");
+							var truck_code = "${tlist.truck_code}";
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth() + 1; //months from 1-12
+							var day = date.getDate();
+							
+							if((day+"").length < 2){
+								day = "0" + day;
+							}else if((month+"").length < 2){
+								month = "0" + month;
+							}
+							var today = year + "-" + month + "-" + day;
+							alert(today);
+							
+							
+							$.ajax({
+								url:"/customer/Deleteride",
+								type:"post",
+								data:{
+									"truck_code": truck_code, "email": email, "out_date": today
+								},success : function(data){
+									$('#ride').text('탑승하기');
+								}
+							});
+						}
+					});
+				}
+			});			
+			
 				var score = "${sumscore}";
-				
-				if(score > 0 &&  score < 2) {
-					
+				if(score > 0 &&  score < 2) {		
 					$('.sumscore').append('<p>★☆☆☆☆</p>');
 				}else if (score > 2 && score <3){
-					
 					$('.sumscore').append('<p>★★☆☆☆</p>');
-				}else if (score > 3 && score <4){
-					
-					$('.sumscore').append('<p>★★★☆☆</p>');0
+				}else if (score > 3 && score <4){				
+					$('.sumscore').append('<p>★★★☆☆</p>');
 				}else if (score > 4 && score <5){
-					
 					$('.sumscore').append('<p>★★★★☆</p>');
 				}else if ( score == 5){
 					$('.sumscore').append('<p>★★★★★</p>');
 				}
-				
 				$("#call").click(function() {
 					var truck_code = "${tlist.truck_code}";
 					location.href = "/truck/callForm/?truck_code="+truck_code;
-					
 				});
 				$("#btn1").click(
 						function() {
 							$("#menu").css("visibility", "visible");
 							$("#review, #truckinfo, #location, #event").css(
 									"visibility", "hidden");
-
 						});
 				$("#btn2").click(
 						function() {
 							$("#review").css("visibility", "visible");
 							$("#menu, #truckinfo, #location, #event").css(
 									"visibility", "hidden");
-
 						});
 				$("#btn3").click(
 						function() {
 							$("#truckinfo").css("visibility", "visible");
 							$("#review, #menu, #location, #event").css(
 									"visibility", "hidden");
-
 						});
 				$("#btn4").click(
 						function() {
@@ -65,28 +151,12 @@
 									"visibility", "hidden");
 							/* $("#location").show();
 							$("#review, #truckinfo, #menu, #event").hide(); */
-
 						});
-				$("#btn5").click(
-						function() {
+				$("#btn5").click(function() {
 							$("#event").css("visibility", "visible");
 							$("#review, #truckinfo, #location, #menu").css(
 									"visibility", "hidden");
-
 						});
-				$("#ride").click(function() {
-					var check;
-
-					if ($(this).text() == '탑승하기') {
-						$(this).text('탑승중');
-					} else {
-						var truckname = $("#truckname").text();
-						check = confirm(truckname + "을 하차하시겠습니까?");
-						if (check == true) {
-							$(this).text('탑승하기');
-						}
-					}
-				});
 				$(".star_rating a").click(function() {
 					$(this).parent().children("a").removeClass("on");
 					$(this).addClass("on").prevAll("a").addClass("on");
@@ -99,80 +169,126 @@
 				});
 				$("#creatbtncancle").click(function() {
 					$("#reviewwhole").hide();
+					$("#reviewwhole2").hide();
 					$("#creatbtncancle").hide();
 					$("#creatbtn").show();
 				});
-
+				$(".modify").click(function(){	
+					var a =$(this);
+					var b = a.next().val();
+					a.closest("div").next().css("display","block");
+					a.closest("div").css("display","none");
+				
+				
+		
+				});
+				$("#imageplus").click(function(){
+					$("#reviewwhole").hide();
+					$("#reviewwhole2").show();
+					
+					
+				});
 			
 
 		$("#credit").click(function() {
-			var reviewcontent = $("#reviewcotent").val();
-
+			var reviewcontent = $("#reviewcontent").val();
 			var truckcode = "${tlist.truck_code}";
-			alert(truckcode);
+			
 			var reviewscore = $("input:radio[name='star']:checked").val();
-		
 			var query = {
 				truck_code : truckcode,
 				review_content : reviewcontent,
 				review_score : reviewscore
 			}
 			$.ajax({
-
 				url : "/truck/reviewwrite",
 				data : query,
 				type : "post",
 				success : function(data) {
-					
 					location.reload();
-
 				}
 			});
-
 		});
-
-		
-
-
-		$(".delete").click(function(){
+		$("#delete").click(function(){
 			var a = $(this);
 			var b = a.next().val();
 			console.log(b);
 			var truckcodes = "${tlist.truck_code}";
+			alert(truckcodes);
 			var reviewcode = b;
-			
-		
 			var query = {
-					
 					truck_code : truckcodes,
-					review_code : reviewcode
-					
+					review_code : reviewcode		
 			}
-			$.ajax({
-				
+			$.ajax({	
 				url: "/truck/reviewdelete",
 				type: "post" ,
 				data: query,
 				success : function(data){
 					location.reload();
 				}
+			});			
+		});
+	});
 			});
 				
 				
 		
+		});	
+	 $("#modifysuccess").click(function(){
+			var a = $(this);
+			var b = a.next().val();
+			var content = a.prev().val();
 			
-		});
-
+			
+			
+			
+			
+			var query = {
+					
+					review_code : b,
+					review_content : content
+					
+			}
+			
+			$.ajax({
+				url: "/truck/reviewmodify",
+				type: "post",
+				data: query,
+				success : function(data){
+					location.reload();
+					
+				}
+			
+			});
+			
+		
+		
+		}); 
+		
+		var a= "${test}";
+		if(a!=null){
+			$('#btn2').trigger('click');
+			var a = "${test2}";
+	        var offset = $("#"+a).offset();
+	        console.log(offset);
+	        //alert(offset);
+	        $('html, #review').animate({scrollTop : offset.top-575}, 400);
+		}
 	});
-	
+	/* $("#btn2").bind("click", function () { 
+		alert("버튼이 클릭됨");
+		
+	}); */
+	//$("#btn2").trigger("click");
+	//버튼 클릭이 아니라 코드에 의해서 click이벤트를 실행하고 싶다면?
 </script>
 </head>
 <body>
 	<div id="with" class="col">
 		<div id="height" class="col">
 			<div style="float: left;" class="col">
-				<img
-					src='${pageContext.request.contextPath}/resources/image/food1.png'>
+				<img src='${pageContext.request.contextPath}/resources/image/food1.png'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>
@@ -191,49 +307,19 @@
 				<button id="btn5" class="col-md-2">이벤트</button>
 			</div>
 			<div id="menu" class="container">
+				
 				<div class="row">
+				<c:forEach var="i"  items="${menu }">
 					<div class="col-md-3">
+					
 						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
+							src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_url }">
 						<div class="menuname">
-							<br> 핫도그 <br> 3000원
+							<br>${i.menu_name }<br> ${i.unit_price }
 						</div>
 					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/don.jpg'>
-						<div class="menuname">
-							<br> 돈까스 <br> 5000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food2.jpg'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food2.jpg'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food3.jpg'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
-					<div class="col-md-3">
-						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
-						<div class="menuname">
-							<br> 핫도그 <br> 3000원
-						</div>
-					</div>
+					</c:forEach>
+					
 
 				</div>
 
@@ -290,19 +376,20 @@
 
 						</div>
 					</div>
-					<input id="reviewcotent" placeholder="리뷰를 작성해주세요."></input>
+					<input id="reviewcontent" placeholder="리뷰를 작성해주세요."></input>
 					<div id="reviewbtn">
-						<button id="credit">확인</button>
-						<button id="imageplus">사진첨부</button>
+						<button id="credit">작성</button>
 					</div>
 
 				</div>
+				
+				
 
 				<c:forEach var="i" items="${reviewList}">
 					<div class="col-md-12">
 						<div class="reviewbar">
-							<p style="line-height: 10px;">${i.email}
-								&nbsp;&nbsp; ${i.review_regdate}</p>
+							<p style="line-height: 10px;">[${i.nickname}]
+								&nbsp;&nbsp;  ${i.review_regdate}</p>
 						</div>
 						<div class="reviewbar2">
 							<c:if test="${i.review_score==1}">
@@ -324,17 +411,40 @@
 							
 						</div>
 						<div class="content" id="content">
-							<p>${i.review_content} </p>
-						<c:if test="${sessionScope.sessionid.email == i.email}"> 	
-							<input class="delete" type="button" value="삭제">
+					
+							<p id="${i.review_code}">${i.review_content} </p>
+							<c:if test="${sessionScope.sessionid.email == i.email}"> 	
+					
+							<input id="delete" type="button" value="삭제">
 							<input type="hidden" value="${i.review_code}">
+							<input class="modify" type="button" value="수정">
+							<input type="hidden" value="${i.review_code}">
+					
 						</c:if>
+						
+							</div>
+						
+						<div class="contentmodify" style="display: none">
+						
+						<c:if test="${sessionScope.sessionid.email == i.email}"> 
+						
+						<textarea class="textareaa" name="review_content" rows="2" value="${i.review_content }">${i.review_content }</textarea>
+								
+						
+							<input id="modifysuccess" type="submit" value="수정완료">
+							<input type="hidden" name="review_code" value="${i.review_code}">
+							
+							
+							
+							
+						</c:if>
+					
 						</div>
-
-
+						
+						
 					</div>
 				</c:forEach>
-			</div>
+				</div>
 
 
 
@@ -431,49 +541,33 @@
 				</div>
 			</div>
 			<div id="event" style="visibility: hidden;">
+				
 				<div id="eventborder">
+				<c:forEach var="i" items="${event }">
 					<div id="eventbody">
+					
 						<img id="eventimage"
 							src='${pageContext.request.contextPath}/resources/image/food10.PNG'>
 					</div>
 					<div id="eventcontent">
 						<br>
 						<h2>
-							<span style="color: #C90000;">4월은 꼬치의 계절!</span>
+							<span style="color: #C90000;">${i.event_name }</span>
 						</h2>
 						<br>
 						<h5>
-							<span style="color: #FF0000;">더욱 커진 닭다리살의 꼬치를 지금 만나보세요!</span>
+							<span style="color: #FF0000;">${i.event_content }</span>
 						</h5>
 						<br>
 						<h6>
-							<span style="color: #FF0000;">2019.04.06 ~ 04.30</span>
+							<span style="color: #FF0000;"><fmt:formatDate value="${i.event_start }" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${i.event_end }" pattern="yyyy.MM.dd"/></span>
 						</h6>
 						<br>
 					</div>
+					</c:forEach>
 				</div>
-				<div id="eventborder">
-					<div id="eventbody">
-						<img id="eventimage"
-							src='${pageContext.request.contextPath}/resources/image/food101.jpg'>
-					</div>
-					<div id="eventcontent">
-						<br>
-						<h2>
-							<span style="color: #C90000;">NEW 떡볶이와 닭꼬치를 한번에!</span>
-						</h2>
-						<br>
-						<h5>
-							<span style="color: #FF0000;">더욱 커진 닭다리살과 디지게 매운 떡볶이를 한번에
-								만나보세요!</span>
-						</h5>
-						<br>
-						<h6>
-							<span style="color: #FF0000;">2019.04.06 ~ 04.30</span>
-						</h6>
-						<br>
-					</div>
-				</div>
+			
+			
 			</div>
 		</div>
 	</div>

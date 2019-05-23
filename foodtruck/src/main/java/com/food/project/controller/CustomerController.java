@@ -1,7 +1,9 @@
 package com.food.project.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -55,10 +57,18 @@ public class CustomerController {
 		System.out.println(vo.getEmail());
 
 		ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail());
+		int e = ob.get(0).getOnboard_state();
 		for (int i = 0; i < ob.size(); i++) {
 			System.out.println(ob);
+			System.out.println(e);
+			if(e == 1) {
+				model.addAttribute("onboard", ob);
+			}else {
+				System.out.println("탑승목록이 없음");
+			}
+			
 		}
-		model.addAttribute("onboard", ob);
+		
 		/*
 		 * ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail()); for(int i
 		 * =0;i<ob.size();i++) { System.out.println(ob); }
@@ -71,12 +81,37 @@ public class CustomerController {
 	@RequestMapping(value = "/onboard", method = RequestMethod.POST)
 	public String onboardPOST(Locale locale, Model model, HttpSession session, HttpServletRequest request) {
 		String truckcode = request.getParameter("truckcode");
-		
+		int i = 0;
+		String email = request.getParameter("email");
+		String sysd = request.getParameter("out_date");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-mm-dd");
+		OnboardVO br = new OnboardVO();
 		System.out.println(truckcode);
+		System.out.println(email);
+		br.setTruck_code("truckcode");
+		br.setEmail("email");
+		br.setOnboard_state(i);
+		try {
+			transFormat.parse(sysd);
+			System.out.println(transFormat.format(transFormat.parse(sysd)));
+			
+			Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
+			br.setOut_date(test);
+			System.out.println("넘어오나여?");
+			
+			
+			
+			System.out.println("넣어나여?");
+
+	
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		onboard.updateOutdate(br);
+
 		
-		onboard.DeleteOnboard(truckcode);
-		
-		return "";
+		return "success";
 	}
 	@RequestMapping(value = "/onSale", method = RequestMethod.GET)
 	public String onSale(Locale locale, Model model, HttpSession session) {
@@ -98,14 +133,139 @@ public class CustomerController {
 				result.add(sale.get(i));
 			}
 		}
-		System.out.println(sale);
-		model.addAttribute("onSale", result);
+		ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail());
+		int e = ob.get(0).getOnboard_state();
+		if(e == 1) {
+			model.addAttribute("onSale", result);
+		}else {
+			System.out.println("탑승목록이 없음");
+		}
 		
 		
 		return "customer/onSale";
 	}
-	
-	
+
+	@ResponseBody
+	@RequestMapping(value = "/insertOnboard", method = RequestMethod.POST) 
+	  public String insertOnboard(Locale locale, Model model, HttpSession session, HttpServletRequest request){ 
+		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		OnboardVO br = new OnboardVO();
+		
+		String ee=vo.getEmail();
+		int i = 1;
+		
+		String truckc = request.getParameter("truck_code");
+		String sysd = request.getParameter("onboard_date");
+		System.out.println(ee); 
+		System.out.println(truckc); 
+		System.out.println(sysd);
+		br.setEmail(ee); 
+		br.setTruck_code(truckc);
+		ArrayList<OnboardVO> dd = new ArrayList<OnboardVO>();
+		dd = onboard.rideck(br);
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-mm-dd"); 
+		
+		if(dd.get(0).getOnboard_state() == 0) {
+
+			try {
+				transFormat.parse(sysd);
+				System.out.println(transFormat.format(transFormat.parse(sysd)));
+				
+				Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
+				br.setOnboard_date(test);
+				System.out.println("넘어오나여?");
+				
+				
+				
+				System.out.println("넣어나여?");
+
+		
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int eee= 1;
+			br.setEmail(ee);
+			br.setTruck_code(truckc);
+			br.setOnboard_state(eee);
+			onboard.updateOnboarddate(br);
+			
+		}else {
+		try {
+			transFormat.parse(sysd);
+			System.out.println();
+			System.out.println(transFormat.format(transFormat.parse(sysd)));
+			
+			Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
+			br.setOnboard_date(test);
+			System.out.println("넘어오나여?");
+			
+			
+			
+			System.out.println("넣어나여?");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		br.setOnboard_state(i);
+		System.out.println("넣어나여?");
+		onboard.insertOnboard(br);
+		System.out.println("되라");
+		}
+			return "";
+			 
+		  }
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "/ridech", method = RequestMethod.POST) 
+	  public String ridech(Locale locale, Model model, HttpSession session, HttpServletRequest request){
+		String email = request.getParameter("email");
+		String truckcode=request.getParameter("truck_code");
+		System.out.println(email);
+		OnboardVO on = new OnboardVO();
+		on.setEmail(email);
+		on.setTruck_code(truckcode);
+		
+		ArrayList<OnboardVO> ss = onboard.rideck(on);
+		System.out.println(ss);
+		JSONObject onBoard = new JSONObject();
+		onBoard.put("onboardstate",ss.get(0).getOnboard_state());
+		System.out.println("ㅇㅇㅇㅇㅇㅇ");
+		System.out.println(ss.get(0).getOnboard_state());
+
+		return onBoard.toString();
+		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/Deleteride", method = RequestMethod.POST) 
+	  public String Deleteride(Locale locale, Model model, HttpSession session, HttpServletRequest request){
+		System.out.println("Dddd");
+		String email = request.getParameter("email");
+		String truckcode=request.getParameter("truck_code");
+		String sysd = request.getParameter("out_date");
+		System.out.println(sysd);
+		int i = 0;
+		OnboardVO on = new OnboardVO();
+		on.setEmail(email);
+		on.setTruck_code(truckcode);
+		on.setOnboard_state(i);
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-mm-dd");
+		
+		
+		try {
+			transFormat.parse(sysd);
+			Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
+			on.setOut_date(test);
+			System.out.println(test);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("DDDDDDDD");
+		onboard.updateOutdate(on);
+		return "success";
+	}
 	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String reviewList(Locale locale, Model model , HttpSession session) {
 		
@@ -120,11 +280,21 @@ public class CustomerController {
 		
 		
 		model.addAttribute("rlist" ,vo2);
+		
 		System.out.println(vo2);
 	
 		
 		return "customer/review";
 	}
+	/*
+	 * @RequestMapping(value = "/reviewList", method = RequestMethod.POST) public
+	 * String reviewList(Locale locale, Model model , HttpSession session) {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * return "customer/review"; }
+	 */
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/callList" ,method = RequestMethod.GET)
@@ -141,6 +311,7 @@ public class CustomerController {
         for(Map<String, Object> a : list) {
            JSONObject data=new JSONObject();
            data.put("festival_name", a.get("FESTIVAL_NAME"));
+           data.put("merchant_uid", a.get("MERCHANT_UID"));
            data.put("brandname", a.get("BRANDNAME"));
            data.put("festival_startdate", a.get("FESTIVAL_STARTDATE"));
            data.put("festival_enddate", a.get("FESTIVAL_ENDDATE"));
@@ -150,13 +321,14 @@ public class CustomerController {
            data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
            data.put("name", a.get("NAME"));
 		   data.put("pay_status",a.get("PAY_STATUS"));
+		   data.put("request_date",a.get("REQUEST_DATE"));
            arry.add(data);
         }
 		
 		
 		//System.out.println(list);
 		System.out.println(arry);
-		ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
+		//ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
 		 
 	
 		
@@ -165,7 +337,7 @@ public class CustomerController {
 //		}
 //		
 		model.addAttribute("CallList2", arry);
-		model.addAttribute("CallList", cl);
+		//model.addAttribute("CallList", cl);
 
 		return "customer/callList";
 

@@ -7,19 +7,124 @@
 	src="/resources/js/seller/jquery.ajax-cross-origin.min.js"></script>
 <script>
 $(function(){
-	var IMP = window.IMP; // 생략가능
+	var IMP = window.IMP;  //생략가능
 	IMP.init('imp91176976');
-	$("#dd").click(function(){
+	$(this).click(function(e){
+		//console.log(e);
+		var target = e.target;
+		var temp= $(target).attr('class');	
+		if(temp=='cancel1'){
+			//alert(temp);
+			//var a= target.parents('tr');
+			if(confirm("취소를 하시겠습니까?")){
+			var mid = $(target).closest('tr').find('input').val();
+			var temp = $(target).closest('tr').find('input');
+			var name = temp.closest('td').next().children().html();
+			var price = $(target).closest('tr').find('span').html();
+			console.log(price);
+			//var price;
+			//var name = price.next();
+			console.log(name);
+			console.log(mid);
+			//var mid;
+			var reason ="트럭측의 취소";
+			cancel(price,name,mid,reason);
+			}	
+		}else if(temp=='confirm2'){
+			//alert(temp);
+			if(confirm("행사장에 도착하신게 맞습니까? 혹시 행사장에 아직 도착하지 않았다면 취소를 눌러주세요 확인을 누르시면 취소가 어려울수도 있으니 행사장에 도착하였다면 호출하신분과 만나뵙고 확인을 눌러주세요")){
+			console.log($(target).closest('tr').find('input').val());
+			var meid = $(target).closest('tr').find('input').val();
+			var a = [meid,4];
+			update(a);
+			}
+		}else if(temp=='cancel3'){
+			if(confirm("이미 호출하신분이 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네 를 눌러주세요")){
+			console.log($(target).closest('tr').find('input').val());
+			var meid = $(target).closest('tr').find('input').val();
+			var a = [meid,7];
+			update(a);
+			}
+		}else if(temp=='confirm3'){
+			//alert(temp);
+			if(confirm("행사장에 도착하고 호출하신분과 만나뵈었으면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.")){
+			console.log($(target).parents('tr').find('input').val());
+			var meid = $(target).closest('tr').find('input').val();
+			var a = [meid,5];
+			update(a);
+			}
+		}else if(temp=='agree'){
+			//alert(temp);
+			if(confirm("해당 호출에 대해서 승인을 하시겠습니까?")){
+			console.log($(target).closest('tr').find('input').val());
+			var meid = $(target).closest('tr').find('input').val();
+			var a = [meid,2];
+			update(a);
+			}
+		}else if(temp=='cancel4'){
+			//alert(temp);
+			if(confirm("이미 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네 를 눌러주세요")){
+			console.log($(target).closest('tr').find('input').val());
+			var meid = $(target).closest('tr').find('input').val();
+			var a = [meid,7];
+			update(a);
+			}
+		}else if(temp=='cancel2'){
+			//alert(temp);
+			if(confirm("승낙을 하셨는데 취소를 하시겠습니까?")){
+			console.log($(target).closest('tr').find('input').val());
+			var mid = $(target).closest('tr').find('input').val();
+			var temp = $(target).closest('tr').find('input');
+			var name = temp.closest('td').next().children().html();
+			var price = $(target).closest('tr').find('span').html();
+			console.log(price);
+			//var price;
+			//var name = price.next();
+			console.log(name);
+			console.log(mid);
+			//var mid;
+			var reason ="트럭측의 취소";
+			cancel(price,name,mid,reason);
+			}
+		}
+		});
+	//$("#dd").click(function(){
 		//alert("클릭");
+		
+	function update(i){
+		var a = i;
+		console.log(i[0]);
+		console.log(i[1]);
+		console.log(i);
+		$.ajax({
+			url:"/pay/Callrefund",
+			type:"post",
+			data:{
+				merchant_uid:i[0],
+				progress :i[1]
+			},
+			success:function(data){
+				if(data=='success'){
+					window.location.reload();
+				}else{
+					alert("실패");
+				}
+				
+			}
+		});
+		
+	}
+	function cancel(price,name,uid,reason){
+		
 		$.ajax({
 			 url:"http://localhost:3000/cardrefund",
 			 crossOrigin:true,
 		     "type": "POST",
 		      "contentType": "application/json",
 		      "data": JSON.stringify({
-		        "merchant_uid": "merchant_1557396551185", // 주문번호
-		        "cancel_request_amount": 200, // 환불금액
-		        "reason": "테스트 결제 환불" // 환불사유
+		        "merchant_uid": ""+uid+"", // 주문번호
+		        "cancel_request_amount": ""+price+"", // 환불금액
+		        "reason": ""+reason+"" // 환불사유
 		        //"refund_holder": "홍길동", // [가상계좌 환불시 필수입력] 환불 가상계좌 예금주
 		        //"refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 가상계좌 은행코드(ex. KG이니시스의 경우 신한은행은 88번)
 		        //"refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 가상계좌 번호
@@ -27,14 +132,39 @@ $(function(){
 		      "dataType": "json"
 		    }).done(function(result) { // 환불 성공시 로직 
 		    	console.log(result);
-		        alert("환불 성공");
+		    	console.log(result.merchant_uid);
+		    	if(result=="error"){
+		    		console.log(result);
+		    		alert("취소 실패");
+		    	}else{
+		    		$.ajax({
+		   			 url:"/pay/Callrefund",
+		   			 async:false,
+		   			 type:"post",
+		   			 data:{
+		   				merchant_uid : result.merchant_uid,
+		   				progress :6,
+		   				pay_status : 3
+		   				
+		   			 },
+		   			 success:function(data){
+		   				if(data=='success'){
+							window.location.reload();
+		   				}else{
+		   					alert("실패");
+		   				}
+		   			 }
+		    		});
+		    	}
+		        
 		    }).fail(function(error) { // 환불 실패시 로직
 		      alert(error);
 		      console.log(error);
 		      alert("환불 실패1");
 		    });
-	});
-	$("#test").click(function(){
+	}
+	//});
+/* 	$("#test").click(function(){
 		//alert("클릭");
 		$.ajax({
 			url:"localhost:3000/test",
@@ -58,26 +188,26 @@ $(function(){
 		    //m_redirect_url : 'https://www.yourdomain.com/payments/complete' 
 		}, function(rsp) {
 		    if ( rsp.success ) {
-		    	/* $.ajax({
-		    		type:"post",
-		    		url:"",
-		    		async:false,
-		    		data:{
-		    			imp_uid:rsp.imp_uid,
-		    			merchant_uid : merchant_uid,
-		    			paid_amount: rsp.paid_amount,
-		    			apply_num : rsp.apply_num
-		    		},
-		    		success:function(data){
-		    			if(data=="success")
-		    				location.reload();
-		    			else
-		    				alert(data);
-		    		},
-		    		error:function(err){
-		    			alert(err);
-		    		}
-		    	}); */
+		    	 //$.ajax({
+		    		//type:"post",
+		    		//url:"",
+		    		//async:false,
+		    		//data:{
+		    		//	imp_uid:rsp.imp_uid,
+		    		//	merchant_uid : merchant_uid,
+		    		//	paid_amount: rsp.paid_amount,
+		    		//	apply_num : rsp.apply_num
+		    		//},
+		    		//success:function(data){
+		    	//		if(data=="success")
+		    	//			location.reload();
+		    	//		else
+		    	//			alert(data);
+		    	//	},
+		    	//	error:function(err){
+		    	//		alert(err);
+		    	//	}
+		    	}); 
 		        var msg = '결제가 완료되었습니다.';
 		        msg += '고유ID : ' + rsp.imp_uid;
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
@@ -89,7 +219,7 @@ $(function(){
 		    }
 		    alert(msg);
 		});
-	});
+	}); */ 
 });
 
 </script>
@@ -119,42 +249,47 @@ $(function(){
 				<tr>
 					<!-- 요청된 호출 수만큼 <tr> 태그 생성 -->
 					<td>
+					<input type="hidden" value="${i.merchant_uid}"/>
 					행사일 : ${i.festival_startdate } ~ ${i.festival_enddate } <br>
 					행사시간 : ${i.festival_starttime } ~ ${i.festival_endtime } <br>
 					행사장소 : ${i.place} <br>
-					섭외비용 : ${i.price } 원<br>
+					섭외비용 : <span>${i.price }</span> 원<br>
 					요구사항 : ${i.content } <br>
 					</td>
 					<td>
-					신청자명 : ${i.name } <br>
-					전화번호 : ${i.calltel }
+					신청자명 : <span>${i.name }</span> <br>
+					전화번호 :${i.calltel }
 					</td>
 					<c:if test="${i.pay_status ==1}">
-					<td>결제완료<br>
+					<td>결제 : 결제 완료<br>
 					</c:if>
 					<c:if test="${i.pay_status ==2}">
-					<td>미결제<br>
+					<td>결제 : 미결제<br>
 					</c:if>
-					<c:if test="${i.pay_status ==0}">
-					<td>취소<br>
-					</c:if>
-					<c:if test="${i.agreement ==2}">
-					<button>승인하기</button><br>
-					</c:if>
-					<c:if test="${i.agreement ==1}">
-					승인이 완료된 호출입니다.<br>
-					</c:if>
-					<c:if test="${i.agreement ==0}">
-					취소된 호출입니다.<br>
+					<c:if test="${i.pay_status ==3}">
+					<td>결제 : 취소<br>
 					</c:if>
 					<c:if test="${i.progress ==1}">
-					진행중<br><button>도착</button><br></td>
+					상태 : 진행중<br><button class="agree">승인</button><button class="cancel1">취소</button></td>
 					</c:if>
 					<c:if test="${i.progress ==2}">
-					거래가 완료된 호출입니다.<br></td>
+					상태 : 진행중<br><button class="confirm2">확인</button><button class="cancel2">취소</button>
+					</td>
 					</c:if>
-					<c:if test="${i.progress ==0}">
-					취소<br></td>
+					<c:if test="${i.progress ==3}">
+					상태 : 행사측 확인완료<br><button class="confirm3">확인</button><button class="cancel3">취소</button></td>
+					</c:if>
+					<c:if test="${i.progress ==4}">
+					상태 : 행사측 미확인<br><button class="cancel4">취소</button></td>
+					</c:if>
+					<c:if test="${i.progress ==5}">
+					상태 : 거래종료<br></td>
+					</c:if>
+					<c:if test="${i.progress ==6}">
+					상태 : 취소<br></td>
+					</c:if>
+					<c:if test="${i.progress ==7}">
+					취소 신청을 하셨습니다.<br></td>
 					</c:if>
 				</tr>
 			</c:forEach>
@@ -165,4 +300,3 @@ $(function(){
 		<button id="test">test</button>
 	</div>
 </div>
-

@@ -180,7 +180,8 @@ var imageSrc = '/resources/image/트럭사진.png';// 마커이미지의 주소�
            '           </div>' + 
            '            <div class="desc">' + 
            '                <div class="ellipsis">트럭번호 : ' +obj[i].trucknum+'</div>' + 
-           '                <div class="jibun ellipsis">운행시간 : '+ obj[i].hours + '</div>' +  
+           '                <div class="jibun ellipsis">운행시간 : '+ obj[i].hours + '</div>' + 
+           '                <a href="/truck/?truck_code='+obj[i].truck_code+'"<div class="">트럭페이지</div></a>' + 
            '            </div>' + 
            '        </div>' + 
            '    </div>' +    

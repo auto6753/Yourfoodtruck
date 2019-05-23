@@ -17,6 +17,7 @@ label.star {
 	transition: all .2s;
 }
 
+
 input.star:checked ~ label.star:before {
 	content: '\f005';
 	color: #F62;
@@ -238,10 +239,65 @@ h1 {
 	margin: 0 auto;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	width: 880px;
+	width: 96%;
 	height: 200px;
 	button-text-align: right;
 	border-radius: 10px;
+}
+.col-md-122 {
+	border: 1px solid darkgray;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 96%;
+	height: 200px;
+	button-text-align: right;
+	border-radius: 10px;
+}
+#star1 {
+	text-align: center;
+	 margin: 15px auto; 
+	 margin-right: 2%;
+	width: 23%;
+	height: 160px;
+	float: left;
+	border: 1px solid darkgray;
+	border-radius: 10px;
+}
+#starcontent1 {
+	margin: 10px auto;
+	margin-top: 40px;
+	text-align: center;
+}
+
+#reviewcontent1 {
+	margin: 15px auto;
+	
+	float: left;
+	width: 45%;
+	height: 130px;
+	border: 1px solid darkgray;
+	border-radius: 10px;
+}
+#reviewbtn1 {
+	float: right;
+	margin-right: 20px;
+}
+#previewId {
+	margin: 15px auto;
+	width: 25%;
+	margin-right: 2%;
+	margin-left: 2%;
+	height: 160px;
+	float:left;
+	border: 1px gray solid;
+	
+}
+#noImage {
+	width: 260px;
+	height: auto;
+	vertical-align: top;
+	margin: 45px 0;
 }
 
 #creatbtngroup {
@@ -283,22 +339,39 @@ h1 {
 	text-align: right;
 	color: #ff6622;
 }
+
 .sumscore{
 	margin-top: 20px;
 	font-size: 150%;
 }
-.delete{
+#delete{
 	width:7%;
-	margin-left:92%;
-	margin-top:60px;
+	margin-top: 50px;
+	margin-left: 85%;
 }
+#modify{
+	width:7%;
+	margin-top: 50px;
+}
+.textareaa{
+	width:80%;
+}
+
+
 
 #content {
 	margin-top: 50px;
 	text-align: left;
-	width: 848px;
+	width: 100%;
 	hegiht: 150px;
 }
+
+.contentmodify{
+	margin-top: 50px;
+	text-align: left;
+	width: 100%;
+	hegiht: 150px;
+} 
 
 #star {
 	text-align: center;
@@ -310,7 +383,7 @@ h1 {
 	border-radius: 10px;
 }
 
-#reviewcotent {
+#reviewcontent {
 	margin: 15px auto;
 	margin-left: 10px;
 	float: left;
