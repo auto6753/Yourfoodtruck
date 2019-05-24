@@ -123,3 +123,25 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function() {
+		$.get('resources/json/result.json',function(){})
+		.done(function(result) {
+			console.log(result);
+			$.ajax({
+				type:"post",
+				url:"/announce/jsonToDB",
+				contentType:"application/json;charset=UTF-8",
+				data:JSON.stringify(result),
+				success:function(good) {
+					if(good =="Yes")alert("json데이터 들어감")
+					else if(good=="No")alert("안들어가도댐");
+				},error:function(err) {
+					console.log('json저장 실패');
+					console.log(err);
+				}
+			});
+		});
+	});
+	
+	</script>

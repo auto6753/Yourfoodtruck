@@ -36,9 +36,16 @@
 				<tr>
 					<th>제목</th>
 					<th>지역</th>
+					<th>등록일</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="row" items="${requestScope.announceList}">
+				<tr>
+					<td class="boardTitle"><a href="${row.POST_URL}">${row.POST_TITLE}</a></td>
+					<td>${row.POST_CONTENT}</td>
+					<td>${row.POST_REGDATE}</td>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -58,24 +65,6 @@
 	function list(page) {
 		location.href="/announce?curPage="+page+"&keyword=${map.keyword}";
 	}
-	$(document).ready(function(){
-		$.get('resources/json/result.json',function(data){
-			console.log(data);
-			for (var a in data.list) {
-				console.log(data.list[a]);
-				//console.log(data.list[a]);
-				//console.log(data.gonggo_list[a].post_url);
-				for (var b in data.list[a].gonggo_list) {
-					$('tbody').append('<tr></tr>');
-					$('tr').append('<td class="boarTitle"></td>');
-					$('td.boardTitle:eq(b)').append('<a href="'+data.list[a].gonggo_list[b].post_url+'"></a>');
-					$('tbody').append('<tr><td class="boardTitle"><a href="'+data.list[a].gonggo_list[b].post_url+'">'+
-							data.list[a].gonggo_list[b].post_title+'</a></td><td>'+data.list[a].region+'<tr>');	
-				}
-				
-			}
-			
-		});
 //		$.ajax({
 //			url:"http://39.127.7.90:5000/",
 //			success:function(data) {
@@ -107,8 +96,6 @@
             
          }//get 방식 주소치는거랑 똑같음
       }); */
-		$(location).attr('href','/announce/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
-		 });
 		$('#title').click(function() {
 			location.href="/announce"; 
 		});

@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,6 +105,44 @@ public class AnnounceController {
 	public String announceDelete(Model model,PostVO vo) {
 		postService.deletePost(vo);
 		return "";
+	}
+	
+	@RequestMapping(value = "/announce/jsonToDB", method = RequestMethod.POST)
+	@ResponseBody
+	public String jsonToDB(@RequestBody String param) {
+		String result=postService.deleteAnnounce();
+		if(result.equals("empty")) {
+			Map<String,Object> jsonData = new HashMap<>();
+			jsonData=JSONObject.fromObject(param);
+			Object gonggo_list = new ArrayList<Map<String,Object>>();
+			gonggo_list= (jsonData.get("list"));
+			List<Map<String,Object>> test = new ArrayList<Map<String,Object>>();
+			test=JSONArray.fromObject(gonggo_list.toString());
+			//System.out.println(test);
+			for(Map<String,Object> s : test) {
+				//System.out.println(s);
+				Object lists = new ArrayList<Map<String,Object>>();
+				lists= s.get("gonggo_list");
+				List<Map<String,Object>> listsArrayList = new ArrayList<Map<String,Object>>(); 
+				listsArrayList = JSONArray.fromObject(lists.toString());
+				if (listsArrayList.size()!=0) {
+					for(Map<String,Object> post : listsArrayList) {
+						PostVO vo = new PostVO();
+						vo.setPost_title((String)post.get("post_title"));
+						vo.setPost_url((String)post.get("post_url"));
+						vo.setPost_content((String)s.get("region"));
+						vo.setPost_class(1);
+						postService.insertPost(vo);
+					}
+				}
+			}
+			return "Yes";
+		}else if(result.equals("not_empty")) {
+			
+			return "No";
+		}else {
+			return "No";
+		}
 	}
 	
 	//허가구역 관리 컨트롤러

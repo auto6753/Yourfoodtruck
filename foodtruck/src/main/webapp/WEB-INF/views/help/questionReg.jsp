@@ -77,7 +77,7 @@ function helpCheck() {
 		return false;
 	}else {
 		alert('완료');
-		location.href="/project/help";
+		location.href="/help";
 	}
 }
 $(function() {
