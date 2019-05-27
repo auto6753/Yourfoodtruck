@@ -69,6 +69,7 @@ public class UploadController {
 		System.out.println(mvo);
 		service.insertmenu(mvo);
 
+		System.out.println("ㅋ");
 		// mvo.setMenu_url(menu_url);
 		// System.out.println(a.getBody());
 
@@ -185,4 +186,5 @@ public class UploadController {
 		}
 		return "zz";
 	}
+	
 }

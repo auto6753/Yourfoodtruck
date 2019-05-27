@@ -27,11 +27,11 @@
 		insert into
 		event(event_code, truck_code, event_name, event_content, event_start,
 		event_end, event_target, event_combinable, event_reg_date,
-		event_payment)
+		event_payment,event_url)
 		values('E'||to_char(sysdate,'yymmdd')||to_char(event_code_sequence.NEXTVAL,'fm000'),
 		#{truck_code}, #{event_name}, #{event_content}, #{event_start},
 		#{event_end}, #{event_target}, #{event_combinable}, sysdate,
-		#{event_payment})
+		#{event_payment},#{event_url})
 	</insert>
 	
 	<insert id="addEventMenu"
@@ -49,7 +49,7 @@
 	</delete>
 	
 	<select id="getMainevent" resultType="com.food.project.domain.EventVO">
-		select e.truck_code, e.event_name, e.event_start, e.event_end, f.brandname
+		select e.truck_code, e.event_name, e.event_start, e.event_end,e.event_url, f.brandname
 		from event e join foodtruck f
 		on (e.truck_code = f.truck_code)      
 	</select>

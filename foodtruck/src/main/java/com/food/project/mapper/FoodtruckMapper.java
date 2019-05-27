@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.MainPageRankDTO;
 import com.food.project.domain.MenuVO;
 import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.ReviewDTO;
@@ -27,5 +28,7 @@ public interface FoodtruckMapper {
 	public ArrayList<MenuVO> selectMenu(String truck_code);
 	public ArrayList<EventVO> getEvent(String truck_code);
 	
+	
+	public ArrayList<MainPageRankDTO> getRank();
 	
 }

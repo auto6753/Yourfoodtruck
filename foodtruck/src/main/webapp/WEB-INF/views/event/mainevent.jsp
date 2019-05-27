@@ -17,7 +17,7 @@
 					<div class="col-md-3">
 					<div class="bace">
 						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
+							src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
 						<div class="menuname">
 							${i.event_name } <br>
 							${i.event_start }~${i.event_end }<br>

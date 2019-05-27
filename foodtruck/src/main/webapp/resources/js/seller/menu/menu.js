@@ -28,7 +28,7 @@ $(document).ready(function(){
 		$("#goBack").toggle(); // 취소 show
 		$("#delMenu2").toggle(); // 삭제2 show
 		
-		$("#addMenu").toggle(); // 메뉴등록  hide
+		$("#addMenu").toggle(); // 메뉴등록 hide
 
 		// show/hide 시, 전체선택과 전체해제 버튼의 padding을 다음과 같이 설정
 		$("#chkAllMenu").css("padding", "6px 9px");
@@ -38,14 +38,42 @@ $(document).ready(function(){
 	});
 	
 	$("#delMenu2").click(function(){
-		//var checked2 = $('input:checkbox[name=delChk]:checked').
-		var checked = $('input:checkbox[name=delChk]:checked').parent('div');
-
+		// var checked2 = $('input:checkbox[name=delChk]:checked').
+		var checked = $('input:checkbox[name=delChk]:checked').parent('div').prev().children('input[name=menu_code]');
+		var checkedimg = $('input:checkbox[name=delChk]:checked').parent('div').prev().find('img');
 		
-		console.log(checked);
-		//alert(checked);
-		
-		if(checked.length == 0) {
+		var menu_codes = new Array();
+		// console.log(checked.length);
+		// alert("ㅋ");
+		// console.log(checked[1].prev().find('input').val());
+		// alert(checked);
+		if(checked.length >= 1) {
+			for(var i=0;i<checked.length;i++){
+				// console.log($(checked[i]).val());
+				// console.log($(checkedimg[i]).attr("src"));
+				var surl = $(checkedimg[i]).attr("src").replace("/resources/image/upload/","");
+				console.log(surl);
+				var url = surl.replace("\\s_","\\");
+				console.log(url);
+				var object = new Object();
+				object.url=url;
+				object.surl=surl;
+				object.menu_code=($(checked[i]).val());
+				menu_codes.push(object);
+			}
+			$.ajax({
+				url:"/seller/delMenuMenu",
+				type:"post",
+				async :false,
+				contentType:"application/json;charset=UTF-8",
+				data:JSON.stringify(menu_codes),
+				success:function(data){
+					alert(data);
+				}
+			});
+			console.log(menu_codes);
+			console.log(typeof(menu_codes));
+		}else{
 			alert("선택된 메뉴가 없습니다.\n삭제할 메뉴를 선택해 주세요!");
 		}
 	});
@@ -53,7 +81,7 @@ $(document).ready(function(){
 	$("#chkAllMenu").click(function(){
 	
 		var i = $(".on").index() +1;
-		//	alert(i);
+		// alert(i);
 		$(".delChk"+i).prop("checked", true);
 		$(".status"+i).addClass("selected");
 		$(".status"+i).text("선택됨");
@@ -92,18 +120,19 @@ $(document).ready(function(){
 		}
 	});
 	
-/*	$(".imgBox").click(function(){
-		var popupX = (window.screen.width / 2) - (430 / 2);
-		var popupY = (window.screen.height / 2) - (600 / 2);
-		window.name = "parentForm";
-		openWin = window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
-		//openWin.("#menuname").val()=$(this).val();
-		
-		openWin.document.getElementById("menuname").value="1";
-         
-		
-		
-	});*/
+/*
+ * $(".imgBox").click(function(){ var popupX = (window.screen.width / 2) - (430 /
+ * 2); var popupY = (window.screen.height / 2) - (600 / 2); window.name =
+ * "parentForm"; openWin = window.open("editMenu", "editMenu", "width=430,
+ * height=460, left=" + popupX + "," + "top=" + popupY);
+ * //openWin.("#menuname").val()=$(this).val();
+ * 
+ * openWin.document.getElementById("menuname").value="1";
+ * 
+ * 
+ * 
+ * });
+ */
 	
 	$(".menuf").on("click",".menut",function(){
 		var a = $(this);
@@ -113,18 +142,18 @@ $(document).ready(function(){
 		console.log(a.find("div").next().html());
 		console.log(a.find("div").next().next().html());
 		console.log(a.find("div").next().next().next().val());
-		a.find("div").children().addClass("1"); //src
+		a.find("div").children().addClass("1"); // src
 		a.find("div").next().addClass("2"); // 메뉴이름
-		a.find("div").next().next().addClass("3"); //메뉴가격
-		a.find("div").next().next().next().addClass("4"); //메뉴코드
+		a.find("div").next().next().addClass("3"); // 메뉴가격
+		a.find("div").next().next().next().addClass("4"); // 메뉴코드
 		a.find("div").next().next().next().next().addClass("5"); 
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);
 		window.name = "parentForm";
 		openWin = window.open("editMenu", "editMenu", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
-		//openWin.("#menuname").val()=$(this).val();
+		// openWin.("#menuname").val()=$(this).val();
 		
-		//openWin.document.getElementById("menuname").value="1";
+		// openWin.document.getElementById("menuname").value="1";
 	});
 });
 

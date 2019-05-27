@@ -79,7 +79,6 @@ $(document).ready(function(){
 		<button class="btn btn-sm btn-outline-secondary detail">상세정보</button>
 		<button class="btn btn-sm btn-outline-secondary delete">하차</button>
 		<input class="truckcode" type="hidden" value="${i.truck_code}"/>
-		
 		</div>
 		</div>
 		</div>
@@ -88,8 +87,6 @@ $(document).ready(function(){
 		</c:forEach>
 		
 	
-
-		
 		</div>
 		</div>
 

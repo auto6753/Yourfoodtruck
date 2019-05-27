@@ -335,6 +335,11 @@
 		
 		$("#addEventBtn").click(function(){
 			
+			
+			
+			var files = $("#uploadImg")[0].files;
+			var file = files[0];
+			
 			var eventName = $("#eventName").val(); // 이벤트명
 			var beginDate = new Date($("#beginDate").val()).getTime(); // 이벤트 시작일
 			var endDate = new Date($("#endDate").val()).getTime(); // 이벤트 종료일
@@ -368,20 +373,35 @@
 			
 			var duplicate = $('input[name="duplicate"]:checked').val(); // 이벤트 중복적용 여부(0 또는 1)
 			
+			var formData = new FormData();
+			formData.append("file", file);
+			formData.append("event_name", eventName);
+			formData.append("event_start", beginDate);
+			formData.append("event_end", endDate);
+			formData.append("event_target", target);
+			formData.append("menuCode[]", menuCode);
+			formData.append("discount[]", discount);
+			formData.append("event_content", details);
+			formData.append("event_payment", payment);
+			formData.append("event_combinable", duplicate);
+			
 			$.ajax({
 				type: "post",
 				url: "event",
-				data: {
-					"event_name": eventName,
-					"event_start": beginDate,
-					"event_end": endDate,
-					"event_target": target,
-					"menuCode[]": menuCode,
-					"discount[]": discount,
-					"event_content": details,
-					"event_payment": payment,
-					"event_combinable": duplicate
-				},
+//				data: {
+//					"event_name": eventName,
+//					"event_start": beginDate,
+//					"event_end": endDate,
+//					"event_target": target,
+//					"menuCode[]": menuCode,
+//					"discount[]": discount,
+//					"event_content": details,
+//					"event_payment": payment,
+//					"event_combinable": duplicate
+//				},
+				data:formData,
+	            processData: false,
+	            contentType: false,
 				success: function(data){
 					 alert("success");
 					 $('#layer1').hide();
@@ -398,6 +418,7 @@
 			var eventCode = $(this).parent().next().val();
 			var eventName = $(this).parent().next().next().next().text();
 			var delCheck = confirm(eventName + " 을(를) 정말 삭제하시겠습니까?");
+			
 			if(delCheck) {
 				$.ajax({
 					type: "post",

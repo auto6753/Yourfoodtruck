@@ -52,32 +52,63 @@
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
     </ol>
+    
     <div class="carousel-inner" role="listbox">
       <!-- Slide One - Set the background image for this slide in the line below -->
-      <div class="carousel-item active" style="background-image: url('resources/image/food1.png')">
+      <c:forEach var="i" items="${mainimage }">
+      <c:if test="${i.rank==1 }" >
+       
+      <div class="carousel-item active" style="background-image: url('resources/image/upload/${i.truck_url}')">
         <div class="carousel-caption d-none d-md-block">
-          <h3 class="display-4">닭치고 닭꼬치</h3>
-          <!-- <p class="lead">닭치고 닭꼬치</p> -->
+          <h3 class="display-4">${i.brandname }</h3>
+          <input type="hidden" value="${i.truck_code }"/>
         </div>
       </div>
-    
-      
-      <!-- Slide Two - Set the background image for this slide in the line below -->
+     
+      </c:if>
+      <c:if test="${i.rank>1 }" >
+      <div class="carousel-item" style="background-image: url('resources/image/upload/${i.truck_url}')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3 class="display-4">${i.brandname }</h3>
+          <input type="hidden" value="${i.truck_code }"/>
+           <!-- <p class="lead">김밥천국</p> -->
+        </div>
+      </div>
+      </c:if>
+    </c:forEach>
+   </div>
+     <!--  </div>
+      Slide Two - Set the background image for this slide in the line below
       <div class="carousel-item" style="background-image: url('resources/image/food2.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">타코 트럭</h3>
-          <!-- <p class="lead">오니기리</p> -->
+          <p class="lead">오니기리</p>
         </div>
       </div>
-      <!-- Slide Three - Set the background image for this slide in the line below -->
+      Slide Three - Set the background image for this slide in the line below
       <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">커피 트럭</h3>
-          <!-- <p class="lead">김밥천국</p> -->
+          <p class="lead">김밥천국</p>
         </div>
       </div>
-    </div>
+            <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3 class="display-4">커피 트럭</h3>
+          <p class="lead">김밥천국</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3 class="display-4">커피 트럭</h3>
+          <p class="lead">김밥천국</p>
+        </div>
+      </div>
+    </div> -->
+    
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -88,6 +119,7 @@
         </a>
   </div>
 </header>
+	
 	<div>
 		<div style="display: inline">
 			<!-- <button style="width:50%; float: right" type="button" class="btn btn-outline-secondary">주간 맛트럭</button> -->
@@ -123,3 +155,15 @@
 			</div>
 		</div>
 	</div>
+<script>
+$(document).ready(function(){
+
+	$(document.body).on('click','.carousel-item',function(){
+		var a = $(this);
+		var b=a.find('input').val();
+		console.log(b);
+		location.href="/truck/?truck_code="+b;
+	});
+		
+});
+</script>
