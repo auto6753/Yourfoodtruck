@@ -10,9 +10,10 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </head>
 <body>
-<button id="toRecruit">모집공고 보기</button>
+
 	<div id="title" class="card-header">
-		<p>허가구역 안내</p>
+		<p>허가구역 안내 <button id="toRecruit" class="btn">모집공고 보기</button></p>
+		
 	</div>
 	
 	<div id="searchall">
@@ -85,9 +86,9 @@
       }); */
       $(location).attr('href','/area/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
       });
-      $('#title').click(function() {
+     /*  $('#title').click(function() {
     	 location.href="/area"; 
-      });
+      }); */
       $('#toRecruit').click(function() {
      	 location.href="/announce"; 
        });

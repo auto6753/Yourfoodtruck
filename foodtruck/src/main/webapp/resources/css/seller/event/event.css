@@ -340,7 +340,9 @@ a { text-decoration:none; color:#000; }
 #addEvent {
 	float: right;
 }
-
+#main1{
+	margin-top: 50px;
+}
 #eventName,#target{
 	width: 90%;
 	color: #666;

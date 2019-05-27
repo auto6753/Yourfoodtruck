@@ -32,7 +32,12 @@ $("input:checkbox[id='ck3']").prop("checked", true);
 	$("input:checkbox[id='ck1']").prop("checked", true);
 	$("input:checkbox[id='ck2']").prop("checked", true);
 }
-
+$("#truckphoto").click(function(){
+	var popupX = (window.screen.width / 2) - (430 / 2);
+	var popupY = (window.screen.height / 2) - (600 / 2);
+	
+	window.open("truckphoto", "truckphoto", "width=430, height=460, left=" + popupX + "," + "top=" + popupY);
+});
 	 /* $(".user-btn").click(function(){
 		var truckcode = "${truckinfo.truck_code}";
 		
@@ -94,6 +99,7 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 								<div id="card" class="card">
 
 									<article class="card-body">
+										
 
 										<input type="hidden"  name="truck_code" value="${truckinfo.truck_code}">
 										<div class="form-group">
@@ -114,6 +120,7 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 											<label>계좌번호</label> 
 											<input name="account" type="text" class="form-control" value="${truckinfo.account}">
 										</div>
+										
 										<div class="form-group">
 											<label>고객 결제수단 &nbsp;: &nbsp;&nbsp;</label> 
 											<input type="checkbox" id="ck1" name="paytype" value="5"> 
@@ -124,6 +131,22 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 											<label for="ck3">카카오페이</label>
 
 										</div>
+										<div class="form-group">
+											<label>운영시간</label>
+											<input id="Starttime" name="truck_starttime" type="time" class="form-control" value="${truckinfo.truck_starttime }"> ~ 
+											<input id="Endtime" name="truck_endtime"type="time" class="form-control"value="${truckinfo.truck_endtime }">
+										
+										</div>
+										
+										<div class="menut">
+												<div class="imgBox">
+													<img class="img editMenu changeToBlock"
+														src="${pageContext.request.contextPath}/resources/image/upload/${truckinfo.truck_surl}" />
+												</div>
+												
+										</div>
+											<button class="user-btn"type="button"  id="truckphoto" name="truckphoto" >메인이미지 등록/수정</button>
+										
 										<div class="form-group">
 											<label>[추가 기입 사항]</label>
 											<textarea class="form-control" rows="3" name="truck_desc">${truckinfo.truck_desc }</textarea>
@@ -140,7 +163,9 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 									</article>
 								</div>
 							</div>
+							
 						</div>
+						
 					</div>
 					</form>
 				</div>

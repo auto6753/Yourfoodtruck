@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/event/event.css"/>" />
@@ -14,7 +15,7 @@
 			<div class="col-md-3">
 				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-xs-12 col-md-9 content">
+			<div class="col-xs-12 col-md-9 content" id="main1">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 eventBar paddingZero">
@@ -44,7 +45,9 @@
 										<div class="eventItemContent eventName">${event.event_name}</div>
 										
 										<div class="eventItem">기간</div>
-										<div class="eventItemContent">${event.event_start} ${event.event_end}</div>
+										<div class="eventItemContent"><fmt:formatDate
+										value="${event.event_start }" pattern="yyyy.MM.dd" /> ~ <fmt:formatDate
+										value="${event.event_end }" pattern="yyyy.MM.dd" /></div>
 										
 										<div class="eventItem">메뉴</div>
 										<div class="eventItemContent">

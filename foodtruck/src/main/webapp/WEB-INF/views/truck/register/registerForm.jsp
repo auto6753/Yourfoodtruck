@@ -120,6 +120,12 @@
 									
 								</div>
 								<div class="form-group">
+											<label>운영시간</label>
+											<input id="Starttime" name="truck_starttime" type="time" class="form-control">~
+											<input id="Endtime" name="truck_endtime"type="time" class="form-control">
+										
+								</div>
+								<div class="form-group">
 									<label>[추가 기입 사항]</label> 
 									<textarea class="form-control" rows="3" name="truck_desc"></textarea>
 								</div>

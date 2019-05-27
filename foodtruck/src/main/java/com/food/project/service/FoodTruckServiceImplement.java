@@ -79,6 +79,12 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 		return	mapper.getEvent(truck_code);
 	}
 
+	@Override
+	public void updatetruckphoto(FoodTruckVO mvo) {
+		
+		mapper.updatetruckphoto(mvo);
+	}
+
 
 
 	
