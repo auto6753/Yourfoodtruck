@@ -3,18 +3,18 @@
  */
 
 $(document).ready(function(){
-	var mCashSales = Number($("#mCashSales").val());
-	var nCashSales = Number($("#nCashSales").val());
-	var totalCashSales = Number($("#totalCashSales").val());
-	var mCardSales = Number($("#mCardSales").val());
-	var nCardSales = Number($("#nCardSales").val());
-	var totalCardSales = Number($("#totalCardSales").val());
-	var mKakaoSales = Number($("#mKakaoSales").val());
-	var nKakaoSales = Number($("#nKakaoSales").val());
-	var totalKakaoSales = Number($("#totalKakaoSales").val());
-	var mTotalSales = Number($("#mTotalSales").val());
-	var nTotalSales = Number($("#nTotalSales").val());
-	var totalSales = Number($("#totalSales").val());
+	var mCashSalesYear = Number($("#mCashSalesYear").val());
+	var nCashSalesYear = Number($("#nCashSalesYear").val());
+	var totalCashSalesYear = Number($("#totalCashSalesYear").val());
+	var mCardSalesYear = Number($("#mCardSalesYear").val());
+	var nCardSalesYear = Number($("#nCardSalesYear").val());
+	var totalCardSalesYear = Number($("#totalCardSalesYear").val());
+	var mKakaoSalesYear = Number($("#mKakaoSalesYear").val());
+	var nKakaoSalesYear = Number($("#nKakaoSalesYear").val());
+	var totalKakaoSalesYear = Number($("#totalKakaoSalesYear").val());
+	var mTotalSalesYear = Number($("#mTotalSalesYear").val());
+	var nTotalSalesYear = Number($("#nTotalSalesYear").val());
+	var totalSalesYear = Number($("#totalSalesYear").val());
 	
     google.charts.load('current', {'packages':['bar']});
     google.charts.setOnLoadCallback(drawChart);
@@ -24,10 +24,10 @@ $(document).ready(function(){
       
       var data = google.visualization.arrayToDataTable([
           ['Year', '전체', '회원', '비회원'],
-          ['합계', totalSales, mTotalSales, nTotalSales],
-          ['현금', totalCashSales, mCashSales, nCashSales],
-          ['카드', totalCardSales, mCardSales, nCardSales],
-          ['카카오페이', totalKakaoSales, mKakaoSales, nKakaoSales]
+          ['합계', totalSalesYear, mTotalSalesYear, nTotalSalesYear],
+          ['현금', totalCashSalesYear, mCashSalesYear, nCashSalesYear],
+          ['카드', totalCardSalesYear, mCardSalesYear, nCardSalesYear],
+          ['카카오페이', totalKakaoSalesYear, mKakaoSalesYear, nKakaoSalesYear]
       ]);
 
       var options = {

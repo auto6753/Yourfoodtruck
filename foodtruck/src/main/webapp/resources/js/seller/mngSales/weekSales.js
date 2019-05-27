@@ -3,18 +3,18 @@
  */
 
 $(document).ready(function(){
-	var mCashSales = Number($("#mCashSales").val());
-	var nCashSales = Number($("#nCashSales").val());
-	var totalCashSales = Number($("#totalCashSales").val());
-	var mCardSales = Number($("#mCardSales").val());
-	var nCardSales = Number($("#nCardSales").val());
-	var totalCardSales = Number($("#totalCardSales").val());
-	var mKakaoSales = Number($("#mKakaoSales").val());
-	var nKakaoSales = Number($("#nKakaoSales").val());
-	var totalKakaoSales = Number($("#totalKakaoSales").val());
-	var mTotalSales = Number($("#mTotalSales").val());
-	var nTotalSales = Number($("#nTotalSales").val());
-	var totalSales = Number($("#totalSales").val());
+	var mCashSalesWeek = Number($("#mCashSalesWeek").val());
+	var nCashSalesWeek = Number($("#nCashSalesWeek").val());
+	var totalCashSalesWeek = Number($("#totalCashSalesWeek").val());
+	var mCardSalesWeek = Number($("#mCardSalesWeek").val());
+	var nCardSalesWeek = Number($("#nCardSalesWeek").val());
+	var totalCardSalesWeek = Number($("#totalCardSalesWeek").val());
+	var mKakaoSalesWeek = Number($("#mKakaoSalesWeek").val());
+	var nKakaoSalesWeek = Number($("#nKakaoSalesWeek").val());
+	var totalKakaoSalesWeek = Number($("#totalKakaoSalesWeek").val());
+	var mTotalSalesWeek = Number($("#mTotalSalesWeek").val());
+	var nTotalSalesWeek = Number($("#nTotalSalesWeek").val());
+	var totalSalesWeek = Number($("#totalSalesWeek").val());
 	
     google.charts.load('current', {'packages':['bar']});
     google.charts.setOnLoadCallback(drawChart);
@@ -24,10 +24,10 @@ $(document).ready(function(){
       
       var data = google.visualization.arrayToDataTable([
           ['Year', '전체', '회원', '비회원'],
-          ['합계', totalSales, mTotalSales, nTotalSales],
-          ['현금', totalCashSales, mCashSales, nCashSales],
-          ['카드', totalCardSales, mCardSales, nCardSales],
-          ['카카오페이', totalKakaoSales, mKakaoSales, nKakaoSales]
+          ['합계', totalSalesWeek, mTotalSalesWeek, nTotalSalesWeek],
+          ['현금', totalCashSalesWeek, mCashSalesWeek, nCashSalesWeek],
+          ['카드', totalCardSalesWeek, mCardSalesWeek, nCardSalesWeek],
+          ['카카오페이', totalKakaoSalesWeek, mKakaoSalesWeek, nKakaoSalesWeek]
       ]);
 
       var options = {

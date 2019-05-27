@@ -174,7 +174,7 @@ $(function() {
 					$('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release" onclick="release(\''+order+'\')">출고확인</button></div>');			
 					if(order_index >1) {
 						for(var i=0;i<order_index;i++) {			
-							$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][0].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
+							$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][i].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
 /* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
 						}	
@@ -211,7 +211,7 @@ $(function() {
 							+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release"  onclick="release(\''+order+'\')">출고확인</button></div>');
 					if(order_index >1) {
 						for(var i=0;i<order_index;i++) {
-							$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][0].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
+							$('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][i].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
 /* 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
 							$('.menu').append('<span class="orderInfo">'+orderList[order][i].payment_telephone+'</span><br/>'); */
 						}	
