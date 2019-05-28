@@ -31,8 +31,8 @@
 .test{
 	margin-bottom: 90px;
 }
-a{
-	color: rgb(255, 94, 24);
+#top-right a{
+	color: rgb(255, 94, 24)!important;
 }
 </style>
 <!-- Navigation -->

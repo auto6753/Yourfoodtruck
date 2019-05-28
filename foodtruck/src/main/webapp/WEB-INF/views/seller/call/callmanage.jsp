@@ -11,109 +11,87 @@
 	$(function() {
 		var IMP = window.IMP; //생략가능
 		IMP.init('imp91176976');
-		$(this)
-				.click(
-						function(e) {
-							//console.log(e);
-							var target = e.target;
-							var temp = $(target).attr('class');
-							if (temp == 'cancel1') {
-								//alert(temp);
-								//var a= target.parents('tr');
-								if (confirm("취소를 하시겠습니까?")) {
-									var mid = $(target).closest('tr').find(
-											'input').val();
-									var temp = $(target).closest('tr').find(
-											'input');
-									var name = temp.closest('td').next()
-											.children().html();
-									var price = $(target).closest('tr').find(
-											'span').html();
-									console.log(price);
-									//var price;
-									//var name = price.next();
-									console.log(name);
-									console.log(mid);
-									//var mid;
-									var reason = "트럭측의 취소";
-									cancel(price, name, mid, reason);
-								}
-							} else if (temp == 'confirm2') {
-								//alert(temp);
-								if (confirm("행사장에 도착하신게 맞습니까? 혹시 행사장에 아직 도착하지 않았다면 취소를 눌러주세요 확인을 누르시면 취소가 어려울수도 있으니 행사장에 도착하였다면 호출하신분과 만나뵙고 확인을 눌러주세요")) {
-									console.log($(target).closest('tr').find(
-											'input').val());
-									var meid = $(target).closest('tr').find(
-											'input').val();
-									var a = [ meid, 4 ];
-									update(a);
-								}
-							} else if (temp == 'cancel3') {
-								if (confirm("이미 호출하신분이 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네 를 눌러주세요")) {
-									console.log($(target).closest('tr').find(
-											'input').val());
-									var meid = $(target).closest('tr').find(
-											'input').val();
-									var a = [ meid, 7 ];
-									update(a);
-								}
-							} else if (temp == 'confirm3') {
-								//alert(temp);
-								if (confirm("행사장에 도착하고 호출하신분과 만나뵈었으면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.")) {
-									console.log($(target).parents('tr').find(
-											'input').val());
-									var meid = $(target).closest('tr').find(
-											'input').val();
-									var a = [ meid, 5 ];
-									update(a);
-								}
-							} else if (temp == 'agree') {
-								//alert(temp);
-								if (confirm("해당 호출에 대해서 승인을 하시겠습니까?")) {
-									console.log($(target).closest('tr').find(
-											'input').val());
-									var meid = $(target).closest('tr').find(
-											'input').val();
-									var a = [ meid, 2 ];
-									update(a);
-								}
-							} else if (temp == 'cancel4') {
-								//alert(temp);
-								if (confirm("이미 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네 를 눌러주세요")) {
-									console.log($(target).closest('tr').find(
-											'input').val());
-									var meid = $(target).closest('tr').find(
-											'input').val();
-									var a = [ meid, 7 ];
-									update(a);
-								}
-							} else if (temp == 'cancel2') {
-								//alert(temp);
-								if (confirm("승낙을 하셨는데 취소를 하시겠습니까?")) {
-									console.log($(target).closest('tr').find(
-											'input').val());
-									var mid = $(target).closest('tr').find(
-											'input').val();
-									var temp = $(target).closest('tr').find(
-											'input');
-									var name = temp.closest('td').next()
-											.children().html();
-									var price = $(target).closest('tr').find(
-											'span').html();
-									console.log(price);
-									//var price;
-									//var name = price.next();
-									console.log(name);
-									console.log(mid);
-									//var mid;
-									var reason = "트럭측의 취소";
-									cancel(price, name, mid, reason);
-								}
-							}
-						});
+		$(this).click(function(e) {
+		//console.log(e);
+			var target = e.target;
+			var temp = $(target).attr('class');
+			if (temp == 'cancel1') {
+				//alert(temp);
+				//var a= target.parents('tr');
+				if (confirm("취소를 하시겠습니까?")) {
+					var mid = $(target).closest('tr').find('input').val();
+					var temp = $(target).closest('tr').find('input');
+					var name = temp.closest('td').next().children().html();
+					var price = $(target).closest('tr').find('span').html();
+					console.log(price);
+					//var price;
+					//var name = price.next();
+					console.log(name);
+					console.log(mid);
+					//var mid;
+					var reason = "트럭측의 취소";
+					cancel(price, name, mid, reason);
+				}
+			} else if (temp == 'confirm2') {
+				//alert(temp);
+				if (confirm("행사장에 도착하신게 맞습니까? 혹시 행사장에 아직 도착하지 않았다면 취소를 눌러주세요 확인을 누르시면 취소가 어려울수도 있으니 행사장에 도착하였다면 호출하신분과 만나뵙고 확인을 눌러주세요")) {
+					console.log($(target).closest('tr').find('input').val());
+					var meid = $(target).closest('tr').find('input').val();
+					var a = [ meid, 4 ];
+					update(a);
+				}
+			} else if (temp == 'cancel3') {
+				if (confirm("이미 호출하신분이 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네 를 눌러주세요")) {
+					console.log($(target).closest('tr').find('input').val());
+					var meid = $(target).closest('tr').find('input').val();
+					var a = [ meid, 7 ];
+					update(a);
+				}
+			} else if (temp == 'confirm3') {
+				//alert(temp);
+				if (confirm("행사장에 도착하고 호출하신분과 만나뵈었으면 확인을 눌러주세요 확인을 누르면 거래가 완료됩니다.")) {
+					console.log($(target).parents('tr').find('input').val());
+					var meid = $(target).closest('tr').find('input').val();
+					var a = [ meid, 5 ];
+					update(a);
+				}
+			} else if (temp == 'agree') {
+				//alert(temp);
+				if (confirm("해당 호출에 대해서 승인을 하시겠습니까?")) {
+					console.log($(target).closest('tr').find('input').val());
+					var meid = $(target).closest('tr').find('input').val();
+					var a = [ meid, 2 ];
+					update(a);
+				}
+			} else if (temp == 'cancel4') {
+				//alert(temp);
+				if (confirm("이미 확인을 하셨기 때문에 취소가 바로 되지 않습니다. 상대방과 충분히 합의후에 취소신청을 하셨다면 네 를 눌러주세요")) {
+					console.log($(target).closest('tr').find('input').val());
+					var meid = $(target).closest('tr').find('input').val();
+					var a = [ meid, 7 ];
+					update(a);
+				}
+			} else if (temp == 'cancel2') {
+				//alert(temp);
+				if (confirm("승낙을 하셨는데 취소를 하시겠습니까?")) {
+					console.log($(target).closest('tr').find('input').val());
+					var mid = $(target).closest('tr').find('input').val();
+					var temp = $(target).closest('tr').find('input');
+					var name = temp.closest('td').next().children().html();
+					var price = $(target).closest('tr').find('span').html();
+					console.log(price);
+					//var price;
+					//var name = price.next();
+					console.log(name);
+					console.log(mid);
+					//var mid;
+					var reason = "트럭측의 취소";
+					cancel(price, name, mid, reason);
+				}
+			}
+		});
 		//$("#dd").click(function(){
 		//alert("클릭");
-
 		function update(i) {
 			var a = i;
 			console.log(i[0]);

@@ -80,14 +80,9 @@
 	</div>
 </header>
 <div>
-	<div style="display: inline">
-		<!-- <button style="width:50%; float: right" type="button" class="btn btn-outline-secondary">주간 맛트럭</button> -->
-		<button style="width: 50%; float: right" type="button"
-			class="btn btn-warning">주간 맛트럭</button>
-	</div>
 	<div style="display: inline;">
 		<!-- <button style="width:50%" type="button" class="btn btn-outline-secondary">월간 맛트럭</button> -->
-		<button style="width: 50%" type="button" class="btn btn-warning">월간
+		<button style="width: 100%" type="button" class="btn btn-warning">월간
 			맛트럭</button>
 	</div>
 </div>
@@ -135,7 +130,7 @@
 				data:JSON.stringify(result),
 				success:function(good) {
 					if(good =="Yes")alert("json데이터 들어감")
-					else if(good=="No")alert("안들어가도댐");
+					//else if(good=="No")alert("안들어가도댐");
 				},error:function(err) {
 					console.log('json저장 실패');
 					console.log(err);

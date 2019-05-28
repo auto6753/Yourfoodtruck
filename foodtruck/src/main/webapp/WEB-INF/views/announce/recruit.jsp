@@ -24,9 +24,6 @@
 				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="1">
 				<input id="searchbutton"type="submit" value="조회" class="btn" id="search">
-				<c:if test="${not empty sessionScope.sessionid}">
-				<a href="/announce/addAnnounce"><button id="pageadd" type="button" class="btn">등록</button></a>
-				</c:if>
 			</form>
 		</nav>
 	</div>
