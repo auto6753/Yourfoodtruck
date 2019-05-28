@@ -5,8 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
+import java.io.File;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
@@ -18,12 +20,14 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +45,8 @@ import com.food.project.domain.OnboardCountDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.domain.UploadFileUtils;
+import com.food.project.mapper.EventMapper;
+import com.food.project.mapper.SellerMapper;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.FoodTruckService;
@@ -55,6 +61,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
 
+
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/seller")
@@ -66,6 +73,8 @@ public class SellerController {
 	private CallListService callService;
 	private FoodTruckService truckService;
 	private PaymentService paymentService;
+	private EventMapper eventmapper;
+	//private SellerMapper sellermapper;
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	@Resource(name = "uploadPath")
 	String uploadPath;
@@ -771,6 +780,50 @@ public class SellerController {
 	public String editMenu(Model model) {
 		return "seller/menu/editMenu";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delMenuMenu", method=RequestMethod.POST) 
+	public String delMenu(Model model,@RequestBody String param) {
+		//System.out.println(menu_codes);
+		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
+	    paymentMap = JSONArray.fromObject(param);
+		System.out.println(paymentMap.size());
+		for(int i =0;i<paymentMap.size();i++) {
+			String menu_code = (String) paymentMap.get(i).get("menu_code");
+			String url = uploadPath +(String) paymentMap.get(i).get("url");
+			String surl = uploadPath + (String) paymentMap.get(i).get("surl");
+			System.out.println(menu_code);
+			System.out.println(url);
+			System.out.println(surl);
+			sellerservice.deletemenu(menu_code);
+			File file = new File(url);
+			if (file.exists()) { // 파일존재여부확인
+				if (file.delete()) {
+					System.out.println("파일삭제 성공");
+				} else {
+					System.out.println("파일삭제 실패");
+				}
+
+			} else {
+				System.out.println("파일이 존재하지 않습니다.");
+			}
+			
+			File sfile = new File(surl);
+			if (sfile.exists()) { // 파일존재여부확인
+				if (sfile.delete()) {
+					System.out.println("success");
+				} else {
+					System.out.println("fail");
+				}
+
+			} else {
+				System.out.println("undefine");
+			}
+			
+		}
+//		System.out.println("z");
+		return "z";
+	}
   
 	@RequestMapping(value="/location", method=RequestMethod.GET) 
 	public String location(Model model) {
@@ -840,9 +893,26 @@ public class SellerController {
 	
 	@RequestMapping(value="/event", method=RequestMethod.POST)
 	@ResponseBody
-	public String eventPost(Model model, HttpServletRequest request) {
+	public String eventPost(Model model, HttpServletRequest request,MultipartFile file) throws IOException, Exception {
 		FoodTruckVO foodtruckvo = (FoodTruckVO) request.getSession().getAttribute("seller");
 		String truckCode = foodtruckvo.getTruck_code();
+		
+		CustomerVO e = (CustomerVO) request.getSession().getAttribute("sessionid");
+		logger.info("originalName : " + file.getOriginalFilename());
+		logger.info("size : " + file.getSize());
+		logger.info("contentType : " + file.getContentType());
+		FoodTruckVO vo4 = new FoodTruckVO();
+		String em = e.getEmail()+"/event";
+		vo4.setEmail(em);
+		//vo4.setEmail();
+		
+		ResponseEntity<String> upload = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+				HttpStatus.OK);
+		String str = upload.getBody();
+		String[] array = str.split("\\\\");
+		System.out.println(array[0]);
+		System.out.println(array[1]);
+		System.out.println(array[0] + "\\" + array[1].substring(2));
 		
 		EventVO evo = new EventVO();
 		evo.setTruck_code(truckCode);
@@ -857,22 +927,37 @@ public class SellerController {
 		evo.setEvent_content(request.getParameter("event_content"));
 		evo.setEvent_payment(Integer.parseInt(request.getParameter("event_payment")));
 		evo.setEvent_combinable(Integer.parseInt(request.getParameter("event_combinable")));
-		
+		evo.setEvent_url(array[0] + "\\" + array[1].substring(2));
 		ArrayList<EventMenuVO> emvos = new ArrayList<>();
+		System.out.println(event_start);
+		System.out.println(event_end);
 		
-		String[] menuCode = request.getParameterValues("menuCode[]"); // 메뉴코드
-		String[] discount = request.getParameterValues("discount[]"); // 할인액
+		String[] menuCode1 = request.getParameterValues("menuCode[]"); // 메뉴코드
+		String[] discount1 = request.getParameterValues("discount[]"); // 할인액
 		
-		for(int i=0; menuCode.length>i; i++) {
+		String menuCode2 = menuCode1[0];
+		String discount2 = discount1[0];
+		String[] menuCode = menuCode2.split(",");
+		String[] discount = discount2.split(",");
+//		System.out.println(menuCode[0]);
+//		System.out.println(discount[0]);
+		System.out.println("?");
+		
+		for(int i=0; i<menuCode.length; i++) {
+			System.out.println("??");
 			EventMenuVO emvo = new EventMenuVO();
 			emvo.setMenu_code(menuCode[i]);
 			emvo.setDiscount(Integer.parseInt(discount[i]));
 			emvos.add(emvo);
 		}
+		System.out.println("???");
 		Map<String, Object> mapvo = new HashMap<>();
+		
 		mapvo.put("event", evo);
 		mapvo.put("eventMenu", emvos);
 		mapvo.put("truck_code",evo.getTruck_code());
+		//mapvo.put("event_url",)
+		System.out.println("????");
 		eventService.addEvent(mapvo);
 		
 		return "success";
@@ -882,6 +967,37 @@ public class SellerController {
 	@ResponseBody
 	public String delEvent(Model model, HttpServletRequest request) {
 		String eventCode = request.getParameter("eventCode");
+		
+		
+		EventVO ev = eventmapper.getEvent1_code(eventCode);
+		String url = uploadPath+ev.getEvent_url();
+		String surl = url.replace("/event\\", "/event\\s_");
+		System.out.println(url);
+		System.out.println(surl);
+		File file = new File(url);
+		if (file.exists()) { // 파일존재여부확인
+			if (file.delete()) {
+				System.out.println("파일삭제 성공");
+			} else {
+				System.out.println("파일삭제 실패");
+			}
+
+		} else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+		
+		File sfile = new File(surl);
+		if (sfile.exists()) { // 파일존재여부확인
+			if (sfile.delete()) {
+				System.out.println("success");
+			} else {
+				System.out.println("fail");
+			}
+
+		} else {
+			System.out.println("undefine");
+		}
+		
 		eventService.deleteEventMenu(eventCode);
 		eventService.deleteEvent(eventCode);
 		

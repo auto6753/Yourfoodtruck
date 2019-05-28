@@ -10,10 +10,10 @@ import com.food.project.mapper.SellerMapper;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class SellerServiceImplement implements SellerService {
-	private SellerMapper sellermapper;
+	SellerMapper sellermapper;
 
 	@Override
 	public ArrayList<MenuVO> getmenu(String truckcode) {
@@ -25,7 +25,9 @@ public class SellerServiceImplement implements SellerService {
 	@Override
 	public void insertmenu(MenuVO vo) {
 		// TODO Auto-generated method stub
+		//System.out.println("?업로드?");
 		sellermapper.insertmenu(vo);
+		//System.out.println("?업2로2드?");
 	}
 
 	@Override
@@ -39,5 +41,18 @@ public class SellerServiceImplement implements SellerService {
 		// TODO Auto-generated method stub
 		sellermapper.insertlocation(vo);
 	}
+
+	@Override
+	public void deletemenu(String menu_code) {
+		// TODO Auto-generated method stub
+		sellermapper.deletemenu(menu_code);
+	}
+
+//	@Override
+//	public void deletemenu(String menu_code) {
+//		// TODO Auto-generated method stub
+//		//System.out.println(menu_code);
+//		sellermapper.deletemenu(menu_code);
+//	}
 
 }

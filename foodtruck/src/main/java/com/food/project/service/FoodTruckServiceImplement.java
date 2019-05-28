@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.MainPageRankDTO;
 import com.food.project.domain.MenuVO;
 import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.ReviewDTO;
@@ -80,8 +81,13 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	}
 
 	@Override
+	public ArrayList<MainPageRankDTO> getRank() {
+		// TODO Auto-generated method stub
+		return mapper.getRank();
+  }
+  
+  @Override
 	public void updatetruckphoto(FoodTruckVO mvo) {
-		
 		mapper.updatetruckphoto(mvo);
 	}
 

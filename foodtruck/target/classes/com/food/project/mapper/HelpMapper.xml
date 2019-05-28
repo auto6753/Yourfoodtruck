@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.HelpMapper">
+	<insert id="insertHelp" parameterType="com.food.project.domain.HelpVO">
+		insert into question(question_code,question_title,question_content,email,answer_email,qu_category)
+		values(HELP_CODE_SEQUENCE.NEXTVAL,#{question_title},#{question_content},#{email},#{answer_email},#{qu_category})
+	</insert>
+	
+	<select id="getHelpList" parameterType="com.food.project.domain.HelpVO" resultType="com.food.project.domain.HelpVO">
+		select * from question where email = #{email}	
+	</select>
+</mapper>

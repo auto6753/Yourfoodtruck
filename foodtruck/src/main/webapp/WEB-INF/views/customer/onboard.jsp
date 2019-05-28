@@ -10,8 +10,12 @@
 <link rel="stylesheet" href="<c:url value ="/resources/css/customercss/onboard.css"/>"/>
 <script>
 $(document).ready(function(){
-	$("#delete").click(function(){
-		var truckcode = $("#truckcode").val();
+	$(".delete").click(function(){
+		alert("d");
+		var a = $(this);
+		//var truckcode = $("#truckcode").val();
+		var truckcode = a.next().val();
+		alert(truckcode);
 		var email= "${sessionScope.sessionid.email}";
 		var date = new Date();
 		var year = date.getFullYear();
@@ -43,8 +47,10 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$("#detail").click(function(){
-		var truck_code = $("#truckcode").val();
+	$(".detail").click(function(){
+		//var truck_code = $("#truckcode").val();
+		var a = $(this);
+		var truck_code = a.next().next().val();
 				location.href = "/truck/?truck_code="+truck_code;
 	});
 });
@@ -69,12 +75,11 @@ $(document).ready(function(){
 			${i.brandname}
 			${i.onboard_date}
 		</p>
-		<input id="truckcode" type="hidden" value="${i.truck_code}"/>
 		<div class="d-flex justify-content-between align-items-center">
 		<div class="btn-group">
-		<button class="btn btn-sm btn-outline-secondary" id="detail">상세정보</button>
-		<button class="btn btn-sm btn-outline-secondary" id="delete">하차</button>
-		
+		<button class="btn btn-sm btn-outline-secondary detail">상세정보</button>
+		<button class="btn btn-sm btn-outline-secondary delete">하차</button>
+		<input class="truckcode" type="hidden" value="${i.truck_code}"/>
 		</div>
 		</div>
 		</div>
@@ -83,8 +88,6 @@ $(document).ready(function(){
 		</c:forEach>
 		
 	
-
-		
 		</div>
 		</div>
 

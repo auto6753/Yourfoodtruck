@@ -47,8 +47,8 @@
 												</div>
 												<div class="changeToBlock">${i.menu_name }</div>
 												<div class="changeToBlock">${i.unit_price }원</div>
-												<input type="hidden" value="${i.menu_code}" /> 
-												<input type="hidden" value="${i.menu_category}" />
+												<input name="menu_code" type="hidden" value="${i.menu_code}" />
+                        <input type="hidden" value="${i.menu_category}" />
 											</div>
 											<div class="delChk">
 												<input type="checkbox" name="delChk" class="${i.menu_category}" value="" />
