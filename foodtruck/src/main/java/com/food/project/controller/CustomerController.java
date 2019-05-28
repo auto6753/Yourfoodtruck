@@ -159,8 +159,7 @@ public class CustomerController {
 		System.out.println(ee); 
 		System.out.println(truckc); 
 		System.out.println(sysd);
-		br.setEmail(ee); 
-		br.setTruck_code(truckc);
+		
 		ArrayList<OnboardVO> dd = new ArrayList<OnboardVO>();
 		dd = onboard.rideck(br);
 		
@@ -209,6 +208,8 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 		br.setOnboard_state(i);
+		br.setEmail(ee); 
+		br.setTruck_code(truckc);
 		System.out.println("넣어나여?");
 		onboard.insertOnboard(br);
 		System.out.println("되라");

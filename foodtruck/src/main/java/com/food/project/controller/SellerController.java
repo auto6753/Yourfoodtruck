@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -28,10 +29,13 @@ import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuSalesVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.domain.OnboardCountDTO;
+import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.FoodTruckService;
+import com.food.project.service.OnboardService;
 import com.food.project.service.PaymentService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -47,13 +51,16 @@ import net.sf.json.JSONArray;
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/seller")
+
+
 public class SellerController {
 	private SellerService sellerservice;
 	private EventService eventService;
 	private CallListService callService;
 	private FoodTruckService truckService;
 	private PaymentService paymentService;
-
+	private OnboardService onboard;
+	
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model, HttpSession session) {
 		return "seller/sellerMain";
@@ -426,9 +433,41 @@ public class SellerController {
 	public String addEvent2(Model model) {
 		return "seller/event/addEvent2";
 	}
+	@ResponseBody
+	@RequestMapping(value="/CountOnboard", method=RequestMethod.POST) 
+	public String countonboard(Model model, HttpServletRequest request) {
+
+		
+		
+		return "seller/psg/psgpush";
+	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
-	public String passenger(Model model,HttpSession session) {
+	public String passenger(Model model,HttpSession session, HttpServletRequest request) {
+		
+		//차트용 탑승자 데이터 가져오기
+		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
+		String truck_code = foodtruckvo.getTruck_code();
+		int i = 1;
+		System.out.println("Ddddddddddddddddddddd");
+		System.out.println(truck_code);
+		OnboardVO br = new OnboardVO();
+		br.setTruck_code(truck_code);
+		br.setOnboard_state(i);
+		ArrayList<HashMap<String,Object>> on = onboard.CountOnboard(br);
+		ArrayList<HashMap<String,Object>> result = onboard.CountOnboard(br);
+		for(HashMap<String,Object> temp:on) {
+			HashMap<String,Object> data = new HashMap<>();
+			data.put("count_data",temp.get("COUNT"));
+			result.add(data);
+		}
+		
+		System.out.println("제발 되라");
+		System.out.println(result);
+		model.addAttribute("On", result);
+		
+		
+		//푸시알림용 파이어베이스 adminSDK설정
 		FirebaseApp defaultApp = null;
 		CustomerVO vo=new CustomerVO();
 		vo=(CustomerVO) session.getAttribute("sessionid");
