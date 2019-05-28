@@ -108,15 +108,15 @@ public class PaymentServiceImplement implements PaymentService {
 	}
 
 	@Override
-	public ArrayList<PaymentVO> getByDaySales(String truck_code, String inputFirstYear, String inputLastYear, int day) {
+	public ArrayList<PaymentVO> getByDaySales(String truck_code, String inputFirstYear, String inputLastYear) {
 		// TODO Auto-generated method stub
-		return mapper.getByDaySales(truck_code, inputFirstYear, inputLastYear, day);
+		return mapper.getByDaySales(truck_code, inputFirstYear, inputLastYear);
 	}
 
 	@Override
-	public ArrayList<PaymentVO> getByTimeSales(String truck_code, String inputFirstDate, String inputLastDate, int hour) {
+	public ArrayList<PaymentVO> getByTimeSales(String truck_code, String inputFirstYear, String inputLastYear) {
 		// TODO Auto-generated method stub
-		return mapper.getByTimeSales(truck_code, inputFirstDate, inputLastDate, hour);
+		return mapper.getByTimeSales(truck_code, inputFirstYear, inputLastYear);
 	}
 
 	@Override
