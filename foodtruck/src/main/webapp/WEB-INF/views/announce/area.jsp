@@ -21,6 +21,23 @@
 			<form class="form-inline" action="/area" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
+				<select id="forSido"name="sido" onchange="changeSido()" value="${sido}">
+					<option value="1">서울</option>
+					<option value="2">부산</option>
+					<option value="3">대구</option>
+					<option value="4">인천</option>
+					<option value="5">광주</option>
+					<option value="6">대전</option>
+					<option value="9">경기</option>
+					<option value="10">강원</option>
+					<option value="11">충북</option>
+					<option value="12">충남</option>
+					<option value="13">전북</option>
+					<option value="14">전남</option>
+					<option value="15">경북</option>
+					<option value="16">경남</option>
+					<option value="17">제주</option>
+				</select>				
 				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
 				<input id="searchbutton" type="submit" value="조회" class="btn">
@@ -35,18 +52,24 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>제목</th>
-					<th>등록일</th>
-					<th>조회수</th>
+					<th>지역</th>
+					<th>구역명</th>
+					<th>주소</th>
+					<th>관할구역</th>
+					<th>문의전화번호</th>
 				</tr>
 			</thead>
 			<tbody>
  				<c:forEach var="row" items="${requestScope.areaList}">
  				<tr>
- 					<td class="boardTitle">${row.POST_TITLE}</td>
- 					<input type="hidden" value="${row.POST_CODE}">
- 					<td>${row.POST_REGDATE}</td>
- 					<td>${row.POST_VISIT}</td>
+ 					<td>${row.SIDO_NAME}</td>
+ 					<td class="boardTitle">${row.AREA_NAME}
+ 						<input type="hidden" class="latitude" value="${row.LATITUDE}">
+ 						<input type="hidden" class="longitude" value="${row.LONGITUDE}">
+ 					</td>
+ 					<td>${row.ADDR}</td>
+ 					<td>${row.GOVERN_NAME}</td>
+ 					<td>${row.GOVERN_PHONE}</td>
  				</tr>
  				</c:forEach>
 			</tbody>
@@ -66,33 +89,23 @@
 	</div>
 <script>
 	function list(page) {
-		location.href="/area?curPage="+page+"&keyword=${map.keyword}";
+		location.href = "/area?sido="+${sido}+"&curPage=" + page + "&keyword=${map.keyword}";
+		
 	}
-   $(document).ready(function(){
-      $('.boardTitle').on('click', function(){
-      var a = $(this);
-      var postCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
-      /* query ={
-            post_code : postCode
-      }
-      $.ajax({
-         type:"post",
-         url:"/project/news/specificck",
-         data:query,
-         success:function(data){
-            //location.href="/project/news/specific";
-            
-         }//get 방식 주소치는거랑 똑같음
-      }); */
-      $(location).attr('href','/area/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
-      });
-     /*  $('#title').click(function() {
-    	 location.href="/area"; 
-      }); */
-      $('#toRecruit').click(function() {
-     	 location.href="/announce"; 
-       });
-   });
+	function changeSido() {
+		var sido = $('#forSido').val();
+		location.href="/area?sido="+sido;
+	}
+	$(document).ready(function() {
+		console.log("${sido}");
+		$('#forSido').val("${sido}");
+		$('#title').click(function() {
+			location.href = "/area";
+		});
+		$('#toRecruit').click(function() {
+			location.href = "/announce";
+		});
+	});
 </script>	
 </body>
 </html>

@@ -1,9 +1,12 @@
 package com.food.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.food.project.domain.OnboardCountDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.mapper.OnboardMapper;
@@ -46,5 +49,10 @@ public class OnboardServiceimplement implements OnboardService{
 	@Override
 	public void updateOnboarddate(OnboardVO on) {
 		mapper.updateOnboarddate(on);
+	}
+	@Override
+	public ArrayList<HashMap<String,Object>> CountOnboard(OnboardVO br) {
+		ArrayList<HashMap<String,Object>> mdf=mapper.CountOnboard(br);
+		return mapper.CountOnboard(br);
 	}
 }

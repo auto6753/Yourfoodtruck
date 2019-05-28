@@ -42,8 +42,8 @@
 	<script>
 /* 		function fastLogin1() {
 			var query = {
-					email : "bsj@naver.com",
-					password : "qwer1234"
+					email : "songtak456@naver.com",
+					password : "song1234"
 				};
 				$.ajax({
 					type : "post",

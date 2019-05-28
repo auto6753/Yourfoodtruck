@@ -77,6 +77,8 @@
 										$('#ride').text('하차하기');
 									},
 									error : function(err) {
+										console.log(err);
+										console.log(err.statusText);
 										alert("안넘어감");
 									}
 								});

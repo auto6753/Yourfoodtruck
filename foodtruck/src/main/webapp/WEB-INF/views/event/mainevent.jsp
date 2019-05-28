@@ -5,21 +5,23 @@
 
 <link rel="stylesheet"
 	href="<c:url value ="/resources/css/news/event.css"/>" />
-	<div id="with" class="col">
-<ul class="tab" id="tab">
-	<li>진행중인 이벤트</li>
-	<li>종료된 이벤트</li>
-	
-</ul>
+<div id="with" class="col">
+	<ul class="tab" id="tab">
+		<li>진행중인 이벤트</li>
+		<li>종료된 이벤트</li>
 
-<div class="tab_con" id="tab_con">
-	<div class="col" id="ingEvent">
+	</ul>
 
-		<c:forEach var="i" items="${ievent}">
-					<div class="col-md-3">
+	<div class="tab_con" id="tab_con">
+		<div class="col" id="ingEvent">
+
+			<c:forEach var="i" items="${ievent}">
+				<div class="col-md-3">
 					<div class="bace">
+						<input type="hidden" class="truckcode" value="${i.truck_code}" />
 						<img class="img"
 							src='${pageContext.request.contextPath}/resources/image/food1.png'>
+
 						<div class="menuname">
 							${i.event_name } <br>
 							<fmt:formatDate value="${i.event_start }" pattern="yyyy.MM.dd" />~<fmt:formatDate
@@ -28,29 +30,36 @@
 						</div>
 					</div>
 				</div>
-		</c:forEach>
-	</div>
-	<div class="col" id="endEvent">
-		
-		<c:forEach var="e" items="${eevent}">
-					<div class="col-md-3">
+			</c:forEach>
+		</div>
+		<div class="col" id="endEvent">
+
+			<c:forEach var="e" items="${eevent}">
+				<div class="col-md-3">
 					<div class="bace">
+						<input type="hidden" class="truckcode"  value="${e.truck_code}" />
 						<img class="img"
 							src='${pageContext.request.contextPath}/resources/image/food1.png'>
 						<div class="menuname">
-							${e.event_name } <br>
-							${e.event_start }~${e.event_end }<br>
+							${e.event_name } <br> ${e.event_start }~${e.event_end }<br>
 							${e.brandname }
 						</div>
 					</div>
-					</div>
-		</c:forEach>
+				</div>
+			</c:forEach>
+		</div>
 	</div>
-</div>
 </div>
 <script>
  	$(function() {
 		tab('#tab', 0);
+		$(".col-md-3").click(function(){
+			var a= $(this);
+			var b = a.children("div");
+			var c = b.children("input");
+			var truck_code = c.val();
+			location.href = "/truck/?truck_code="+truck_code;
+		});
 	});
 	function tab(e, num){
 	    var num = num || 0;

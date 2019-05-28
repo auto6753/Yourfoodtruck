@@ -65,6 +65,9 @@
 	<delete id="deletePost" parameterType="com.food.project.domain.PostVO" >
 		delete from post where post_code=#{post_code}
 	</delete>
+	<delete id="deleteAnnounce">
+		delete from post where post_class=1
+	</delete>
 	
 	
 	<!-- 댓글 등록하기 -->
