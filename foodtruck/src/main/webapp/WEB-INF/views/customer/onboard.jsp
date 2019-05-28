@@ -30,9 +30,9 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type : "post",
-			url : "/customer/onboard",
+			url : "/customer/Deleteride",
 			data : {
-				"truckcode" : truckcode, "email" : email, "out_date" : today
+				"truck_code" : truckcode, "email" : email, "out_date" : today
 			},
 			success : function(data) {
 				alert("하차되었습니다.");
@@ -65,6 +65,7 @@ $(document).ready(function(){
 		</svg>
 		<div class="card-body">
 		<p class="card-text">
+
 			${i.brandname}
 			${i.onboard_date}
 		</p>

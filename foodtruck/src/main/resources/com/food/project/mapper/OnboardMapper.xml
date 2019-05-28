@@ -32,5 +32,9 @@
 	<update id="updateOnboarddate"  parameterType="com.food.project.domain.OnboardVO">
 		update onboard set onboard_state=#{onboard_state} , onboard_date=#{onboard_date} where truck_code=#{truck_code} and email=#{email}
 	</update>
-
+	<select id="CountOnboard" resultType="HashMap">
+		select to_char(onboard_date, 'yy-mm-dd') as onboard_date, count(*) as count_total
+		from onboard where onboard_state=#{onboard_state} and truck_code=#{truck_code}
+		group by onboard_date order by onboard_date desc
+	</select>
 </mapper>
