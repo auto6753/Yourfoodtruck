@@ -17,11 +17,13 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
+		
+		
 				var email = "${sessionScope.sessionid.email}";
 				var truck_code = "${tlist.truck_code}";
 				//alert(email);
+			if(email!=""){
 				$.ajax({
 					type : "post",
 					url : "/customer/ridech",
@@ -44,6 +46,7 @@
 						console.log(err.statusText);
 					}
 				});
+			}
 				$("#ride").click(function() {
 					var email = "${sessionScope.sessionid.email}";
 					if (email == "") {
@@ -77,6 +80,8 @@
 										$('#ride').text('하차하기');
 									},
 									error : function(err) {
+										console.log(err);
+										console.log(err.statusText);
 										alert("안넘어감");
 									}
 								});
@@ -96,7 +101,7 @@
 									month = "0" + month;
 								}
 								var today = year + "-" + month + "-" + day;
-								alert(today);
+								/* alert(today); */
 
 								$.ajax({
 									url : "/customer/Deleteride",
@@ -220,7 +225,7 @@
 					var b = a.next().val();
 					console.log(b);
 					var truckcodes = "${tlist.truck_code}";
-					alert(truckcodes);
+					/* alert(truckcodes); */
 					var reviewcode = b;
 					var query = {
 						truck_code : truckcodes,
@@ -289,7 +294,7 @@
 		<div id="height" class="col">
 			<div style="float: left;" class="col">
 				<img
-					src='${pageContext.request.contextPath}/resources/image/food1.png'>
+					src='${pageContext.request.contextPath}/resources/image/upload/${tlist.truck_url}'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>

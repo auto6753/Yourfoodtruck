@@ -8,11 +8,13 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+
 </head>
 <body>
-	<button id="toArea">허가구역 보기</button>
+	
 	<div id="title" class="card-header">
-		<p>모집공고 안내</p>
+		<p>모집공고 안내 <button id="toArea" class="btn">허가구역 보기</button></p>
+		
 	</div>
 	
 	<div id="searchall">
@@ -20,9 +22,9 @@
 			<form class="form-inline" action="/announce" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
-				<input name="keyword" value="${map.keyword}">
+				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="1">
-				<input type="submit" value="조회" class="btn">
+				<input id="searchbutton"type="submit" value="조회" class="btn" id="search">
 				<c:if test="${not empty sessionScope.sessionid}">
 				<a href="/announce/addAnnounce"><button id="pageadd" type="button" class="btn">등록</button></a>
 				</c:if>
@@ -36,13 +38,19 @@
 				<tr>
 					<th>제목</th>
 					<th>지역</th>
+					<th>등록일</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="row" items="${requestScope.announceList}">
+				<tr>
+					<td class="boardTitle"><a href="${row.POST_URL}">${row.POST_TITLE}</a></td>
+					<td>${row.POST_CONTENT}</td>
+					<td>${row.POST_REGDATE}</td>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	
 	<div id="nextall">
 		<nav id="next" aria-label="Page navigation example">
 			<ul class="pagination">
@@ -58,56 +66,14 @@
 	function list(page) {
 		location.href="/announce?curPage="+page+"&keyword=${map.keyword}";
 	}
-	$(document).ready(function(){
-		$.get('resources/json/result.json',function(data){
-			console.log(data);
-			for (var a in data.gonggo_list) {
-				console.log(a);
-				console.log(data.gonggo_list[a]);
-				console.log(data.gonggo_list[a].post_url);
-				//$('tbody').append('<tr></tr>');
-				//$('tr').append('<td class="boarTitle"></td>');
-				//$('td.boardTitle:eq(a)').append('<a href="'+data.gonggo_list[a].post_url+'"></a>');
-				$('tbody').append('<tr><td class="boardTitle"><a href="'+data.gonggo_list[a].post_url+'">'+data.gonggo_list[a].post_title+'</a></td><td>'+data.region+'<tr>');	
-			}
-			
-		});
-//		$.ajax({
-//			url:"http://39.127.7.90:5000/",
-//			success:function(data) {
-//				alert(data);
-//				jsonData=JSON.parse(JSON.stringify(data));
-//				console.log(jsonData);
-
-//				var size = jsonData.seoul.size();
-//				console.log(size);
-//				$('tbody').append('<tr><td class="boardTitle"><a href="'+jsonData.seoul.post_url+'">'+jsonData.seoul.postTitle+'</a></td></tr>');
-//			},error:function(err) {
-//				console.log(err);
-//				console.log(err.statusText);
-//			}
-//		});
-	 
+	$(function() {
 		$('.boardTitle').on('click', function(){
-		var a = $(this);
-		var postCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
-      /* query ={
-            post_code : postCode
-      }
-      $.ajax({
-         type:"post",
-         url:"/project/news/specificck",
-         data:query,
-         success:function(data){
-            //location.href="/project/news/specific";
-            
-         }//get 방식 주소치는거랑 똑같음
-      }); */
-		$(location).attr('href','/announce/specificck?post_code='+postCode+"&curPage=${map.postPager.curPage}&keyword=${map.keyword}");
-		 });
+			var a = $(this);
+			var postCode= a.next().val();
+		});//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
 		$('#title').click(function() {
 			location.href="/announce"; 
-		});
+		}); */
 		$('#toArea').click(function() {
 			location.href="/area"; 
 		});

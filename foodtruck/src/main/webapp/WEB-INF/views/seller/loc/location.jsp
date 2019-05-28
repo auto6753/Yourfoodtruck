@@ -58,20 +58,26 @@
 				</form>
 			</div>
 	</div> --%>
-			<form id="fr">
-				검색 : <input type="text" value="" id="keyword" size="15"> <input
-					id="submit" type="button" value="검색하기">
-			</form>
-			<div id="map" style="width: 100%; height: 350px;"></div>
+			<div class="search">
+				<input type="text" value="" id="keyword" >
+				<input id="submit" type="button" value="검색하기">
+				<div id="map" ></div>
+			</div>
+			
+			
+			
+			
+			<div id="result">
 			<p>
 				<em>자신의 위치를 눌러주세요</em>
 			</p>
 			<form action="/seller/location" method="post"> 
-			<div id="clickLatlng"><button id="store" style="display: none"> 저장</button></div>
+			<div id="clickLatlng"><button id="store" style="display: none"> 검색위치로등록</button></div>
 			<input id="lat_y" name="lat_y" type="hidden">
 			<input id="lng_x" name="lng_x" type="hidden">
 			<input id="truck_code" name="truck_code" value="${sessionScope.seller.truck_code }" type="hidden">
 			</form>
+			</div>
 		</div>
 	</div>
 	<script>

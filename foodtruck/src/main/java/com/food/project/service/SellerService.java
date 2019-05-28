@@ -13,5 +13,5 @@ public interface SellerService {
 	public void insertmenu(MenuVO vo);
 	public void updatemenu(MenuVO vo);
 	public void insertlocaction(LocationVO vo);
-	
+	public void deletemenu(String menu_code);
 }

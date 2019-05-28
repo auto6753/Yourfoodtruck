@@ -77,9 +77,49 @@ public class SearchController {
 				data.put("email", a.get("EMAIL"));
 				data.put("crn", a.get("CRN"));
 				data.put("hours", a.get("HOURS"));
+				data.put("truck_starttime" , a.get("TRUCK_STARTTIME"));
+				data.put("truck_endtime" , a.get("TRUCK_ENDTIME"));
 				data.put("layout", a.get("LAYOUT"));
 				data.put("total_review",a.get("TOTAL_REVIEW"));
 				data.put("avg_review",a.get("AVG_REVIEW"));
+				if(a.get("TRUCK_SURL")==null) {
+					data.put("truck_surl","트럭사진.png");
+				}else {
+					//data.put("truck_surl",a.get("TRUCK_SURL"));
+					System.out.println("독도");
+					System.out.println(a.get("TRUCK_SURL"));
+					String z=(String) a.get("TRUCK_SURL");
+					//String temp[] = a.get("TRUCK_SURL).split("\\"));
+					String temp[] = z.split("\\\\");
+					String temp1=temp[0];
+					String temp2=temp[1];
+					System.out.println(temp1);
+					System.out.println(temp2);
+					String temp3 = temp1+"/"+temp2;
+					System.out.println(temp3);
+					data.put("truck_surl",temp3);
+					//data.put("truck_surl","test6@naver.com/ebd1ba13-7aba-4716-8a13-2c35ffe80a75_mug_obj_152024802935945730");
+				}
+				if(a.get("TRUCK_URL")==null) {
+					data.put("truck_url","트럭사진.png");
+				}else {
+					//data.put("truck_surl",a.get("TRUCK_SURL"));
+					System.out.println("독도2");
+					System.out.println(a.get("TRUCK_URL"));
+					String z=(String) a.get("TRUCK_URL");
+					//String temp[] = a.get("TRUCK_SURL).split("\\"));
+					String temp[] = z.split("\\\\");
+					String temp1=temp[0];
+					String temp2=temp[1];
+					System.out.println(temp1);
+					System.out.println(temp2);
+					String temp3 = temp1+"/"+temp2;
+					System.out.println(temp3);
+					data.put("truck_url",temp3);
+					//data.put("truck_surl","test6@naver.com/ebd1ba13-7aba-4716-8a13-2c35ffe80a75_mug_obj_152024802935945730");
+				}
+				
+				
 				arry.add(data);
 				
 			}
@@ -98,6 +138,11 @@ public class SearchController {
 		}
 		model.addAttribute("loc",arry);
 		return "search/search";
+	}
+
+	private String[] split(Object object, String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 //	@RequestMapping(value = "/searchResult", method = RequestMethod.GET)

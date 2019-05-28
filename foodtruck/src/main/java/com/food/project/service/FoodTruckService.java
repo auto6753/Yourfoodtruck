@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.MainPageRankDTO;
 import com.food.project.domain.MenuVO;
 import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.PostVO;
@@ -21,6 +22,8 @@ public interface FoodTruckService {
 	public void updateReview(ReviewVO vo);
 	public ArrayList<MenuVO> selectMenu(String truck_code);
 	public ArrayList<EventVO> getEvent(String truck_code);
+	public ArrayList<MainPageRankDTO> getRank();
+	public void updatetruckphoto(FoodTruckVO mvo);
 	
 	
 }

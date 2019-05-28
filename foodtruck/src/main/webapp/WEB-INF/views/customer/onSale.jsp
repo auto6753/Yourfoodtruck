@@ -33,11 +33,12 @@
 							${i.brandname}
 							${i.onboard_date}
 							</p>
-							<input id="truckcode" type="hidden" value="${i.truck_code}"/>
+							
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary" id="detail">상세정보</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary" id="delete">하차</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary detail">상세정보</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary delete">하차</button>
+									<input id="truckcode" type="hidden" value="${i.truck_code}"/>
 								</div>
 							</div>
 						</div>
@@ -75,8 +76,11 @@
 </div>
 <script>
 	$(function(){
-			$("#delete").click(function(){
-				var truckcode = $("#truckcode").val();
+			$(".delete").click(function(){
+				var a = $(this);
+				
+				//var truckcode = $("#truckcode").val();
+				var truckcode= a.next().val();
 				var email="${sessionScope.sessionid.email}";
 				var date = new Date();
 				var year = date.getFullYear();
@@ -106,8 +110,10 @@
 					}
 				});
 			});
-			$("#detail").click(function(){
-				var truck_code = $("#truckcode").val();
+			$(".detail").click(function(){
+				var a = $(this);
+				//var truck_code = $("#truckcode").val();
+				  var truck_code = a.next().next().val();
 						location.href = "/truck/?truck_code="+truck_code;
 			});
 		});

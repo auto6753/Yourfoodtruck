@@ -25,7 +25,7 @@ public interface PostMapper {
 	public void updatePost(PostVO vo);
 	//게시글 삭제하기
 	public int deletePost(PostVO vo);
-	
+	public void deleteAnnounce();
 	
 	//댓글 가져오기
 	public ArrayList<ReplyVO> getReply(String post_code);
