@@ -21,6 +21,7 @@ import com.food.project.domain.PaymentVO;
 import com.food.project.domain.PostVO;
 import com.food.project.paging.PostPager;
 import com.food.project.seleniumTest.SeleniumTest;
+import com.food.project.service.AreaService;
 import com.food.project.service.PaymentService;
 import com.food.project.service.PostService;
 
@@ -32,6 +33,7 @@ import net.sf.json.JSONObject;
 @Controller
 public class AnnounceController {
 	PostService postService;
+	AreaService areaService;
 	
 	//모집공고 컨트롤러
 	@RequestMapping(value = "/announce")
@@ -147,76 +149,30 @@ public class AnnounceController {
 	
 	//허가구역 관리 컨트롤러
 	@RequestMapping(value = "/area")
-	public String area(Model model,@RequestParam(defaultValue="2") int post_class,
+	public String area(Model model,@RequestParam(defaultValue="1") int sido,
 			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
 		int totPage=0;
 		PostPager postPager;
 		if(keyword.isEmpty()) {
-			totPage=postService.totalPage(post_class);
+			totPage=areaService.totalPage(sido);
 			System.out.println("인자 1개"+totPage);
 			postPager=new PostPager(totPage,curPage);
 		}else {
-			totPage=postService.totalPage2(post_class,keyword);
+			totPage=areaService.totalPage2(sido,keyword);
 			System.out.println("인자 2개"+totPage);
 			postPager=new PostPager(totPage,curPage);
 		}
 		int start=postPager.getPageBegin();
 		int end=postPager.getPageEnd();
-		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,post_class);
-		System.out.println(postPager.toString());
+		ArrayList<Map<String,Object>> areaList=areaService.allList(start,end,keyword,sido);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("totPage",totPage);
 		map.put("keyword",keyword);
 		map.put("postPager",postPager);
-		model.addAttribute("areapostList",postService.getPostList(2));
 		model.addAttribute("areaList",areaList);
 		model.addAttribute("map",map);
+		model.addAttribute("sido",sido);
 		return "announce/area";
-	}
-	@RequestMapping(value = "/area/specificck", method = RequestMethod.GET)
-	public String specificck(Model model,@RequestParam("post_code") String post_code) {
-		
-		/* System.out.println(post_code); */
-		PostVO ck = postService.getPost(post_code);
-		postService.updatePostvisit(post_code);
-		/* System.out.println(ck); */
-		model.addAttribute( "areaspecific" , ck);
-		return "announce/areaspecific";
-	}
-	
-	@RequestMapping(value= "/area/addArea", method= RequestMethod.GET)
-	public String addArea(Model model) {
-		return "announce/addArea";
-	}
-	
-	
-	@RequestMapping(value= "/area/addArea", method= RequestMethod.POST)
-	public String addArea(Model model, PostVO vo) {
-		vo.setPost_class(2);
-		postService.insertPost(vo);
-		return "redirect:/area";
-	}
-	
-	@RequestMapping(value = "/area/modifyAreack", method = RequestMethod.GET)
-	public String modifyAreack(Model model,PostVO vo) {
-		PostVO vo1 = postService.getSpecific(vo);
-		model.addAttribute( "areaspecificcontent" , vo1);
-		return "announce/modifyArea";
-	}
-	
-	@RequestMapping(value = "/area/modifyArea", method = RequestMethod.POST)
-	public String modifyArea(Model model,PostVO vo) {
-		vo.setPost_class(2);
-		postService.updatePost(vo);
-		return "redirect:/area";
-	}
-	
-	
-	@RequestMapping(value = "/area/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public String areaDelete(Model model,PostVO vo) {
-		postService.deletePost(vo);
-		return "";
 	}
 
 }

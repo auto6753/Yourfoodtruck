@@ -49,7 +49,6 @@
 			</tbody>
 		</table>
 	</div>
-	
 	<div id="nextall">
 		<nav id="next" aria-label="Page navigation example">
 			<ul class="pagination">
@@ -65,37 +64,11 @@
 	function list(page) {
 		location.href="/announce?curPage="+page+"&keyword=${map.keyword}";
 	}
-//		$.ajax({
-//			url:"http://39.127.7.90:5000/",
-//			success:function(data) {
-//				alert(data);
-//				jsonData=JSON.parse(JSON.stringify(data));
-//				console.log(jsonData);
-
-//				var size = jsonData.seoul.size();
-//				console.log(size);
-//				$('tbody').append('<tr><td class="boardTitle"><a href="'+jsonData.seoul.post_url+'">'+jsonData.seoul.postTitle+'</a></td></tr>');
-//			},error:function(err) {
-//				console.log(err);
-//				console.log(err.statusText);
-//			}
-//		});
-	 
+	$(function() {
 		$('.boardTitle').on('click', function(){
-		var a = $(this);
-		var postCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
-      /* query ={
-            post_code : postCode
-      }
-      $.ajax({
-         type:"post",
-         url:"/project/news/specificck",
-         data:query,
-         success:function(data){
-            //location.href="/project/news/specific";
-            
-         }//get 방식 주소치는거랑 똑같음
-      }); */
+			var a = $(this);
+			var postCode= a.next().val();
+		});//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
 		$('#title').click(function() {
 			location.href="/announce"; 
 		});
