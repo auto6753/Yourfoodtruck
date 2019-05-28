@@ -4,15 +4,17 @@
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <style>
 #cuorder, #seorder{
-margin-top:13%;
+
 display: inline-block;
 width: 15em;
 height: 13em;
 }
 #button{
+
 margin :0 auto;
 width:100%;
 text-align: center;
+margin-top: 100px;
 }
 </style>
 <div class="container">

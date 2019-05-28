@@ -8,11 +8,13 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+
 </head>
 <body>
-	<button id="toArea">허가구역 보기</button>
+	
 	<div id="title" class="card-header">
-		<p>모집공고 안내</p>
+		<p>모집공고 안내 <button id="toArea" class="btn">허가구역 보기</button></p>
+		
 	</div>
 	
 	<div id="searchall">
@@ -20,9 +22,9 @@
 			<form class="form-inline" action="/announce" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
-				<input name="keyword" value="${map.keyword}">
+				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="1">
-				<input type="submit" value="조회" class="btn">
+				<input id="searchbutton"type="submit" value="조회" class="btn" id="search">
 				<c:if test="${not empty sessionScope.sessionid}">
 				<a href="/announce/addAnnounce"><button id="pageadd" type="button" class="btn">등록</button></a>
 				</c:if>
@@ -71,7 +73,7 @@
 		});//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
 		$('#title').click(function() {
 			location.href="/announce"; 
-		});
+		}); */
 		$('#toArea').click(function() {
 			location.href="/area"; 
 		});

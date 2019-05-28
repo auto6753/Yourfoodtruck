@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../header/header.jsp"></jsp:include>
+
 <link rel="stylesheet"
 	href="<c:url value ="/resources/css/news/event.css"/>" />
 <div id="with" class="col">
@@ -21,7 +23,9 @@
 							src='${pageContext.request.contextPath}/resources/image/food1.png'>
 
 						<div class="menuname">
-							${i.event_name } <br> ${i.event_start }~${i.event_end }<br>
+							${i.event_name } <br>
+							<fmt:formatDate value="${i.event_start }" pattern="yyyy.MM.dd" />~<fmt:formatDate
+										value="${i.event_end }" pattern="yyyy.MM.dd" /><br>
 							${i.brandname }
 						</div>
 					</div>

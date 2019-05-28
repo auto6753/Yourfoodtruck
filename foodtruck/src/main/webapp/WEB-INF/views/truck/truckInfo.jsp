@@ -98,7 +98,7 @@
 									month = "0" + month;
 								}
 								var today = year + "-" + month + "-" + day;
-								alert(today);
+								/* alert(today); */
 
 								$.ajax({
 									url : "/customer/Deleteride",
@@ -222,7 +222,7 @@
 					var b = a.next().val();
 					console.log(b);
 					var truckcodes = "${tlist.truck_code}";
-					alert(truckcodes);
+					/* alert(truckcodes); */
 					var reviewcode = b;
 					var query = {
 						truck_code : truckcodes,
@@ -291,7 +291,7 @@
 		<div id="height" class="col">
 			<div style="float: left;" class="col">
 				<img
-					src='${pageContext.request.contextPath}/resources/image/food1.png'>
+					src='${pageContext.request.contextPath}/resources/image/upload/${tlist.truck_url}'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>

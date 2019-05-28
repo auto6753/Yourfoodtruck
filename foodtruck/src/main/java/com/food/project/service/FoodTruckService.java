@@ -21,6 +21,7 @@ public interface FoodTruckService {
 	public void updateReview(ReviewVO vo);
 	public ArrayList<MenuVO> selectMenu(String truck_code);
 	public ArrayList<EventVO> getEvent(String truck_code);
+	public void updatetruckphoto(FoodTruckVO mvo);
 	
 	
 }
