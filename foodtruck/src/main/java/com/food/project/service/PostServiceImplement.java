@@ -50,6 +50,15 @@ public class PostServiceImplement implements PostService {
 	//게시글 삭제
 	@Override
 	public void deletePost(PostVO vo) { mapper.deletePost(vo);}
+	@Override
+	public String deleteAnnounce() {
+		ArrayList<PostVO> hasAnnounce = mapper.getPostList(1);
+		if(hasAnnounce.isEmpty()) {
+			return "empty";
+		}else {
+			return "not_empty";
+		}
+	}
 	//댓글 가져오기
 	@Override
 	public ArrayList<ReplyVO> getReply(String post_code) {	return mapper.getReply(post_code);}

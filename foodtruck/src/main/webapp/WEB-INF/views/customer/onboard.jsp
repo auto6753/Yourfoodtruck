@@ -71,6 +71,7 @@ $(document).ready(function(){
 		</svg>
 		<div class="card-body">
 		<p class="card-text">
+
 			${i.brandname}
 			${i.onboard_date}
 		</p>

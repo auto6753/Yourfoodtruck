@@ -1,8 +1,10 @@
 package com.food.project.mapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-
+import com.food.project.domain.OnboardCountDTO;
 import com.food.project.domain.OnboardVO;
 
 public interface OnboardMapper {
@@ -14,4 +16,5 @@ public interface OnboardMapper {
 	public void Deleteride(OnboardVO on);
 	public void updateOutdate(OnboardVO on);
 	public void updateOnboarddate(OnboardVO on);
+	public ArrayList<HashMap<String,Object>> CountOnboard(OnboardVO br);
 }

@@ -19,6 +19,9 @@ public class FoodTruckVO {
 	private String truck_url;
 	private String bank;
 	private String truck_desc;
+	private String truck_starttime;
+	private String truck_endtime;
+	private String truck_surl;
 	
 	/* private int a; */
 	

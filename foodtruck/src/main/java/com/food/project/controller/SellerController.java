@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -40,6 +41,8 @@ import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuSalesVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.domain.OnboardCountDTO;
+import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
 import com.food.project.domain.UploadFileUtils;
 import com.food.project.mapper.EventMapper;
@@ -47,6 +50,7 @@ import com.food.project.mapper.SellerMapper;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.FoodTruckService;
+import com.food.project.service.OnboardService;
 import com.food.project.service.PaymentService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -56,13 +60,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
-import oracle.sql.DATE;
-import net.sf.json.JSONArray;
 
 
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/seller")
+
+
 public class SellerController {
 	private SellerService sellerservice;
 	private EventService eventService;
@@ -74,6 +78,7 @@ public class SellerController {
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	@Resource(name = "uploadPath")
 	String uploadPath;
+	private OnboardService onboard;
 	
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model, HttpSession session) {
@@ -104,9 +109,9 @@ public class SellerController {
 		String curMonth; // 현재 월
 		
 		ArrayList<PaymentVO> todaySales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
+		ArrayList<PaymentVO> weekSales = new ArrayList<>(); // 주간 매출 쿼리 결과를 담을 ArrayList
 		ArrayList<PaymentVO> monthSales = new ArrayList<>(); // 월간 매출 쿼리 결과를 담을 ArrayList
 		ArrayList<PaymentVO> yearSales = new ArrayList<>(); // 연간 매출 쿼리 결과를 담을 ArrayList
-		ArrayList<PaymentVO> weekSales = new ArrayList<>(); // 주간 매출 쿼리 결과를 담을 ArrayList
 		ArrayList<PaymentVO> selPeriodSales = new ArrayList<>(); // 선택된 기간 내 매출 쿼리 결과를 담을 ArrayList
 		Map<String, ArrayList<PaymentVO>> byDaySalesMap = new HashMap<>(); // 요일별 매출 쿼리 결과가 담긴 각 ArrayList를 담을 Map
 		Map<Integer, ArrayList<PaymentVO>> byTimeSalesMap = new HashMap<>(); // 선택된 기간 내 시간별 매출 쿼리 결과가 담긴 각 ArrayList를 담을 Map
@@ -124,13 +129,13 @@ public class SellerController {
 		String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Map의 Key
 		for(int day=1; day<=7; day++) {
 			ArrayList<PaymentVO> byDaySales = new ArrayList<>(); // 요일별 매출 쿼리 결과를 담을 ArrayList
-			byDaySales = paymentService.getByDaySales(truck_code, inputFirstYear, inputLastYear, day); // 요일별 매출 쿼리 후 결과를 byDaySales에 추가
+			byDaySales = paymentService.getByDaySales(truck_code, inputFirstYear, inputLastYear); // 요일별 매출 쿼리 후 결과를 byDaySales에 추가
 			byDaySalesMap.put(days[day-1], byDaySales); // 요일별 매출 쿼리 결과가 담긴 각 ArrayList를 Map에 추가
 		}
 		
 		for(int hour=0; hour<24; hour++) {
 			ArrayList<PaymentVO> byTimeSales = new ArrayList<>(); // 선택된 기간 내 시간별 매출 쿼리 결과를 담을 ArrayList
-			byTimeSales = paymentService.getByTimeSales(truck_code, inputFirstDate, inputLastDate, hour); // 선택된 기간 내 시간별 매출 쿼리 후 결과를 byTimeSales에 추가
+			byTimeSales = paymentService.getByTimeSales(truck_code, inputFirstDate, inputLastDate); // 선택된 기간 내 시간별 매출 쿼리 후 결과를 byTimeSales에 추가
 			byTimeSalesMap.put(hour, byTimeSales); // 선택된 기간 내 시간별 매출 쿼리 결과가 담긴 각 ArrayList를 Map에 추가
 		}
 		
@@ -144,23 +149,6 @@ public class SellerController {
 		model.addAttribute("yearSales", yearSales);
 		model.addAttribute("selPeriodSales", selPeriodSales);
 		
-//		System.out.println(todaySales);
-//		System.out.println(weekSales);
-//		System.out.println(monthSales);
-//		System.out.println(yearSales.get(0));
-//		System.out.println(selPeriodSales);
-//		System.out.println("아래부터는 요일별 매출 쿼리 결과");
-//		System.out.println(byDaySalesMap.get("Sun"));
-//		System.out.println(byDaySalesMap.get("Mon"));
-//		System.out.println(byDaySalesMap.get("Tue"));
-//		System.out.println(byDaySalesMap.get("Wed"));
-//		System.out.println(byDaySalesMap.get("Thu"));
-//		System.out.println(byDaySalesMap.get("Fri"));
-//		System.out.println(byDaySalesMap.get("Sat"));
-//		for(int i=0; i<24; i++) {
-//			System.out.println(i + "시: " + byTimeSalesMap.get(i));
-//		}
-		
 		return "seller/mngSales/mngSales";
 	}
 	
@@ -170,12 +158,14 @@ public class SellerController {
 		
 		// 매출 쿼리를 위해 매개변수로 사용할 truck_code 값
 		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
-		String truck_code = vo.getTruck_code();
+		String truck_code = vo.getTruck_code(); 
 		
 		switch(pageName) {
 		case "todaySales":
 			ArrayList<PaymentVO> todaySales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
 			todaySales = paymentService.getTodaySales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
+			System.out.println("todaySales");
+
 			int mKakaoSales = 0, nKakaoSales = 0; // 카카오페이 매출액(회원, 비회원)
 			int totalKakaoSales = 0; // 카카오페이 매출총액(회원 + 비회원)
 			int mCashSales = 0, nCashSales = 0; // 현금 매출액(회원, 비회원)
@@ -184,6 +174,8 @@ public class SellerController {
 			int totalCardSales = 0; // 카드 매출총액(회원 + 비회원)
 			int mTotalSales = 0, nTotalSales = 0; // 총 매출액(회원, 비회원)
 			int totalSales = 0; // 총 매출액(회원 + 비회원)
+			
+			int totalAmount = 0; // 총 판매량
 			
 			String telephone = null; // payment 테이블의 payment_telephone 컬럼 값
 			String isMember = null; // 회원 조회 값
@@ -240,15 +232,16 @@ public class SellerController {
 					temp.setTotalPrice(todaySales.get(i).getTotal_price());
 					temp.setUnitPrice(todaySales.get(i).getTotal_price() / todaySales.get(i).getAmount());
 					menuSales.add(temp);
+					totalAmount = totalAmount + todaySales.get(i).getAmount();
 				} else {
 					for(int j=0; j<menuSales.size(); j++) {
 						if(menuSales.get(j).getMenu_code().equals(todaySales.get(i).getMenu_code())) {
-							menuSales.get(j).add(todaySales.get(i).getAmount(),todaySales.get(i).getTotal_price());
+							menuSales.get(j).add(todaySales.get(i).getAmount(), todaySales.get(i).getTotal_price());
+							totalAmount = totalAmount + todaySales.get(i).getAmount();
 						}
 					}
 				}
 			}
-			System.out.println("menuSales: " + menuSales);
 
 			mTotalSales = mKakaoSales + mCashSales + mCardSales;
 			nTotalSales = nKakaoSales + nCashSales + nCardSales;
@@ -258,33 +251,509 @@ public class SellerController {
 			totalCardSales = mCardSales + nCardSales;
 			totalKakaoSales = mKakaoSales + nKakaoSales;
 			
-			model.addAttribute("mKakaoSales", mKakaoSales);
-			model.addAttribute("mCashSales", mCashSales);
-			model.addAttribute("mCardSales", mCardSales);
-			model.addAttribute("mTotalSales", mTotalSales);
+			model.addAttribute("mCashSales", mCashSales); // 회원 현금 매출액
+			model.addAttribute("mCardSales", mCardSales); // 회원 카드 매출액
+			model.addAttribute("mKakaoSales", mKakaoSales); // 회원 카카오페이 매출액
+			model.addAttribute("mTotalSales", mTotalSales); // 회원 총 매출액
 			
-			model.addAttribute("nKakaoSales", nKakaoSales);
-			model.addAttribute("nCashSales", nCashSales);
-			model.addAttribute("nCardSales", nCardSales);
-			model.addAttribute("nTotalSales", nTotalSales);
+			model.addAttribute("nCashSales", nCashSales); // 비회원 현금 매출액
+			model.addAttribute("nCardSales", nCardSales); // 비회원 카드 매출액
+			model.addAttribute("nKakaoSales", nKakaoSales); // 비회원 카카오페이 매출액
+			model.addAttribute("nTotalSales", nTotalSales); // 비회원 총 매출액
 			
-			model.addAttribute("totalCashSales", totalCashSales);
-			model.addAttribute("totalCardSales", totalCardSales);
-			model.addAttribute("totalKakaoSales", totalKakaoSales);
+			model.addAttribute("totalCashSales", totalCashSales); // 현금 총 매출액
+			model.addAttribute("totalCardSales", totalCardSales); // 카드 총 매출액
+			model.addAttribute("totalKakaoSales", totalKakaoSales); // 카카오페이 총 매출액
 			
-			model.addAttribute("totalSales", totalSales);
+			model.addAttribute("totalSales", totalSales); // 회원 + 비회원 총 매출액
+			
+			model.addAttribute("menuSales", menuSales); // 메뉴별 판매량
+			model.addAttribute("totalAmount", totalAmount); // 총 판매량
 			
 			return "seller/mngSales/todaySales";
+			
 		case "weekSales":
+			ArrayList<PaymentVO> weekSales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
+			weekSales = paymentService.getTodaySales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
+
+			int mKakaoSalesWeek = 0, nKakaoSalesWeek = 0; // 카카오페이 매출액(회원, 비회원)
+			int totalKakaoSalesWeek = 0; // 카카오페이 매출총액(회원 + 비회원)
+			int mCashSalesWeek = 0, nCashSalesWeek = 0; // 현금 매출액(회원, 비회원)
+			int totalCashSalesWeek = 0; // 현금 매출총액(회원 + 비회원)
+			int mCardSalesWeek = 0, nCardSalesWeek = 0; // 카드 매출액(회원, 비회원)
+			int totalCardSalesWeek = 0; // 카드 매출총액(회원 + 비회원)
+			int mTotalSalesWeek = 0, nTotalSalesWeek = 0; // 총 매출액(회원, 비회원)
+			int totalSalesWeek = 0; // 총 매출액(회원 + 비회원)
+			
+			int totalAmountWeek = 0; // 총 판매량
+			
+			HashSet<String> menuCodesWeek = new HashSet<>();
+			ArrayList<MenuSalesVO> menuSalesWeek = new ArrayList<>();
+			
+			for(int i=0; i<weekSales.size(); i++) {
+				switch(weekSales.get(i).getPayment_class()) {
+				case 3: // 카카오페이
+					telephone = weekSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+						mKakaoSalesWeek = mKakaoSalesWeek + weekSales.get(i).getTotal_price();
+					} else { // 회원 조회 값이 없으면(= 비회원이면)
+						nKakaoSalesWeek = nKakaoSalesWeek + weekSales.get(i).getTotal_price();
+					}
+					break;
+				case 4: // 현금
+					telephone = weekSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCashSalesWeek = mCashSalesWeek + weekSales.get(i).getTotal_price();
+					} else {
+						nCashSalesWeek = nCashSalesWeek + weekSales.get(i).getTotal_price();
+					}
+					break;
+				case 5: // 카드
+					telephone = weekSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCardSalesWeek = mCardSalesWeek + weekSales.get(i).getTotal_price();
+					} else {
+						nCardSalesWeek = nCardSalesWeek + weekSales.get(i).getTotal_price();
+					}
+					break;
+					default:
+				}
+				
+				String menu_code = weekSales.get(i).getMenu_code();
+				String menu_name = weekSales.get(i).getMenu_name();
+				
+				if(menu_code == null) { weekSales.get(i).setMenu_code("999999999"); }
+				if(menu_name == null) { weekSales.get(i).setMenu_name("(삭제된 메뉴)"); }
+				
+				if(menuCodesWeek.add(weekSales.get(i).getMenu_code())) {
+					MenuSalesVO temp = new MenuSalesVO();
+					temp.setMenu_code(weekSales.get(i).getMenu_code());
+					temp.setMenu_name(weekSales.get(i).getMenu_name());
+					temp.setAmount(weekSales.get(i).getAmount());
+					temp.setTotalPrice(weekSales.get(i).getTotal_price());
+					temp.setUnitPrice(weekSales.get(i).getTotal_price() / weekSales.get(i).getAmount());
+					menuSalesWeek.add(temp);
+					totalAmountWeek = totalAmountWeek + weekSales.get(i).getAmount();
+				} else {
+					for(int j=0; j<menuSalesWeek.size(); j++) {
+						if(menuSalesWeek.get(j).getMenu_code().equals(weekSales.get(i).getMenu_code())) {
+							menuSalesWeek.get(j).add(weekSales.get(i).getAmount(), weekSales.get(i).getTotal_price());
+							totalAmountWeek = totalAmountWeek + weekSales.get(i).getAmount();
+						}
+					}
+				}
+			}
+
+			mTotalSalesWeek = mKakaoSalesWeek + mCashSalesWeek + mCardSalesWeek;
+			nTotalSalesWeek = nKakaoSalesWeek + nCashSalesWeek + nCardSalesWeek;
+			totalSalesWeek = mTotalSalesWeek + nTotalSalesWeek;
+			
+			totalCashSalesWeek = mCashSalesWeek + nCashSalesWeek;
+			totalCardSalesWeek = mCardSalesWeek + nCardSalesWeek;
+			totalKakaoSalesWeek = mKakaoSalesWeek + nKakaoSalesWeek;
+			
+			model.addAttribute("mCashSalesWeek", mCashSalesWeek); // 회원 현금 매출액
+			model.addAttribute("mCardSalesWeek", mCardSalesWeek); // 회원 카드 매출액
+			model.addAttribute("mKakaoSalesWeek", mKakaoSalesWeek); // 회원 카카오페이 매출액
+			model.addAttribute("mTotalSalesWeek", mTotalSalesWeek); // 회원 총 매출액
+			
+			model.addAttribute("nCashSalesWeek", nCashSalesWeek); // 비회원 현금 매출액
+			model.addAttribute("nCardSalesWeek", nCardSalesWeek); // 비회원 카드 매출액
+			model.addAttribute("nKakaoSalesWeek", nKakaoSalesWeek); // 비회원 카카오페이 매출액
+			model.addAttribute("nTotalSalesWeek", nTotalSalesWeek); // 비회원 총 매출액
+			
+			model.addAttribute("totalCashSalesWeek", totalCashSalesWeek); // 현금 총 매출액
+			model.addAttribute("totalCardSalesWeek", totalCardSalesWeek); // 카드 총 매출액
+			model.addAttribute("totalKakaoSalesWeek", totalKakaoSalesWeek); // 카카오페이 총 매출액
+			
+			model.addAttribute("totalSalesWeek", totalSalesWeek); // 회원 + 비회원 총 매출액
+			
+			model.addAttribute("menuSalesWeek", menuSalesWeek); // 메뉴별 판매량
+			model.addAttribute("totalAmountWeek", totalAmountWeek); // 총 판매량
+			
 			return "seller/mngSales/weekSales";
+			
 		case "monthSales":
+			ArrayList<PaymentVO> monthSales = new ArrayList<>(); // 월간 매출 쿼리 결과를 담을 ArrayList
+			monthSales = paymentService.getMonthSales(truck_code, "19", "05"); // 월간 매출 쿼리 후 결과를 monthSales에 추가
+
+			int mKakaoSalesMonth = 0, nKakaoSalesMonth = 0; // 카카오페이 매출액(회원, 비회원)
+			int totalKakaoSalesMonth = 0; // 카카오페이 매출총액(회원 + 비회원)
+			int mCashSalesMonth = 0, nCashSalesMonth = 0; // 현금 매출액(회원, 비회원)
+			int totalCashSalesMonth = 0; // 현금 매출총액(회원 + 비회원)
+			int mCardSalesMonth = 0, nCardSalesMonth = 0; // 카드 매출액(회원, 비회원)
+			int totalCardSalesMonth = 0; // 카드 매출총액(회원 + 비회원)
+			int mTotalSalesMonth = 0, nTotalSalesMonth = 0; // 총 매출액(회원, 비회원)
+			int totalSalesMonth = 0; // 총 매출액(회원 + 비회원)
+			
+			int totalAmountMonth = 0; // 총 판매량
+			
+			HashSet<String> menuCodesMonth = new HashSet<>();
+			ArrayList<MenuSalesVO> menuSalesMonth = new ArrayList<>();
+			
+			for(int i=0; i<monthSales.size(); i++) {
+				switch(monthSales.get(i).getPayment_class()) {
+				case 3: // 카카오페이
+					telephone = monthSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+						mKakaoSalesMonth = mKakaoSalesMonth + monthSales.get(i).getTotal_price();
+					} else { // 회원 조회 값이 없으면(= 비회원이면)
+						nKakaoSalesMonth = nKakaoSalesMonth + monthSales.get(i).getTotal_price();
+					}
+					break;
+				case 4: // 현금
+					telephone = monthSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCashSalesMonth = mCashSalesMonth + monthSales.get(i).getTotal_price();
+					} else {
+						nCashSalesMonth = nCashSalesMonth + monthSales.get(i).getTotal_price();
+					}
+					break;
+				case 5: // 카드
+					telephone = monthSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCardSalesMonth = mCardSalesMonth + monthSales.get(i).getTotal_price();
+					} else {
+						nCardSalesMonth = nCardSalesMonth + monthSales.get(i).getTotal_price();
+					}
+					break;
+					default:
+				}
+				
+				String menu_code = monthSales.get(i).getMenu_code();
+				String menu_name = monthSales.get(i).getMenu_name();
+				
+				if(menu_code == null) { monthSales.get(i).setMenu_code("999999999"); }
+				if(menu_name == null) { monthSales.get(i).setMenu_name("(삭제된 메뉴)"); }
+				
+				if(menuCodesMonth.add(monthSales.get(i).getMenu_code())) {
+					MenuSalesVO temp = new MenuSalesVO();
+					temp.setMenu_code(monthSales.get(i).getMenu_code());
+					temp.setMenu_name(monthSales.get(i).getMenu_name());
+					temp.setAmount(monthSales.get(i).getAmount());
+					temp.setTotalPrice(monthSales.get(i).getTotal_price());
+					temp.setUnitPrice(monthSales.get(i).getTotal_price() / monthSales.get(i).getAmount());
+					menuSalesMonth.add(temp);
+					totalAmountMonth = totalAmountMonth + monthSales.get(i).getAmount();
+				} else {
+					for(int j=0; j<menuSalesMonth.size(); j++) {
+						if(menuSalesMonth.get(j).getMenu_code().equals(monthSales.get(i).getMenu_code())) {
+							menuSalesMonth.get(j).add(monthSales.get(i).getAmount(), monthSales.get(i).getTotal_price());
+							totalAmountMonth = totalAmountMonth + monthSales.get(i).getAmount();
+						}
+					}
+				}
+			}
+
+			mTotalSalesMonth = mKakaoSalesMonth + mCashSalesMonth + mCardSalesMonth;
+			nTotalSalesMonth = nKakaoSalesMonth + nCashSalesMonth + nCardSalesMonth;
+			totalSalesMonth = mTotalSalesMonth + nTotalSalesMonth;
+			
+			totalCashSalesMonth = mCashSalesMonth + nCashSalesMonth;
+			totalCardSalesMonth = mCardSalesMonth + nCardSalesMonth;
+			totalKakaoSalesMonth = mKakaoSalesMonth + nKakaoSalesMonth;
+			
+			model.addAttribute("mCashSalesMonth", mCashSalesMonth); // 회원 현금 매출액
+			model.addAttribute("mCardSalesMonth", mCardSalesMonth); // 회원 카드 매출액
+			model.addAttribute("mKakaoSalesMonth", mKakaoSalesMonth); // 회원 카카오페이 매출액
+			model.addAttribute("mTotalSalesMonth", mTotalSalesMonth); // 회원 총 매출액
+			
+			model.addAttribute("nCashSalesMonth", nCashSalesMonth); // 비회원 현금 매출액
+			model.addAttribute("nCardSalesMonth", nCardSalesMonth); // 비회원 카드 매출액
+			model.addAttribute("nKakaoSalesMonth", nKakaoSalesMonth); // 비회원 카카오페이 매출액
+			model.addAttribute("nTotalSalesMonth", nTotalSalesMonth); // 비회원 총 매출액
+			
+			model.addAttribute("totalCashSalesMonth", totalCashSalesMonth); // 현금 총 매출액
+			model.addAttribute("totalCardSalesMonth", totalCardSalesMonth); // 카드 총 매출액
+			model.addAttribute("totalKakaoSalesMonth", totalKakaoSalesMonth); // 카카오페이 총 매출액
+			
+			model.addAttribute("totalSalesMonth", totalSalesMonth); // 회원 + 비회원 총 매출액
+			
+			model.addAttribute("menuSalesMonth", menuSalesMonth); // 메뉴별 판매량
+			model.addAttribute("totalAmountMonth", totalAmountMonth); // 총 판매량
+			
 			return "seller/mngSales/monthSales";
+			
 		case "yearSales":
+			ArrayList<PaymentVO> yearSales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
+			yearSales = paymentService.getYearSales(truck_code, "19"); // 금일 매출 쿼리 후 결과를 yearSales에 추가
+
+			int mKakaoSalesYear = 0, nKakaoSalesYear = 0; // 카카오페이 매출액(회원, 비회원)
+			int totalKakaoSalesYear = 0; // 카카오페이 매출총액(회원 + 비회원)
+			int mCashSalesYear = 0, nCashSalesYear = 0; // 현금 매출액(회원, 비회원)
+			int totalCashSalesYear = 0; // 현금 매출총액(회원 + 비회원)
+			int mCardSalesYear = 0, nCardSalesYear = 0; // 카드 매출액(회원, 비회원)
+			int totalCardSalesYear = 0; // 카드 매출총액(회원 + 비회원)
+			int mTotalSalesYear = 0, nTotalSalesYear = 0; // 총 매출액(회원, 비회원)
+			int totalSalesYear = 0; // 총 매출액(회원 + 비회원)
+			
+			int totalAmountYear = 0; // 총 판매량
+			
+			HashSet<String> menuCodesYear = new HashSet<>();
+			ArrayList<MenuSalesVO> menuSalesYear = new ArrayList<>();
+			
+			for(int i=0; i<yearSales.size(); i++) {
+				switch(yearSales.get(i).getPayment_class()) {
+				case 3: // 카카오페이
+					telephone = yearSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+						mKakaoSalesYear = mKakaoSalesYear + yearSales.get(i).getTotal_price();
+					} else { // 회원 조회 값이 없으면(= 비회원이면)
+						nKakaoSalesYear = nKakaoSalesYear + yearSales.get(i).getTotal_price();
+					}
+					break;
+				case 4: // 현금
+					telephone = yearSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCashSalesYear = mCashSalesYear + yearSales.get(i).getTotal_price();
+					} else {
+						nCashSalesYear = nCashSalesYear + yearSales.get(i).getTotal_price();
+					}
+					break;
+				case 5: // 카드
+					telephone = yearSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCardSalesYear = mCardSalesYear + yearSales.get(i).getTotal_price();
+					} else {
+						nCardSalesYear = nCardSalesYear + yearSales.get(i).getTotal_price();
+					}
+					break;
+					default:
+				}
+				
+				String menu_code = yearSales.get(i).getMenu_code();
+				String menu_name = yearSales.get(i).getMenu_name();
+				
+				if(menu_code == null) { yearSales.get(i).setMenu_code("999999999"); }
+				if(menu_name == null) { yearSales.get(i).setMenu_name("(삭제된 메뉴)"); }
+				
+				if(menuCodesYear.add(yearSales.get(i).getMenu_code())) {
+					MenuSalesVO temp = new MenuSalesVO();
+					temp.setMenu_code(yearSales.get(i).getMenu_code());
+					temp.setMenu_name(yearSales.get(i).getMenu_name());
+					temp.setAmount(yearSales.get(i).getAmount());
+					temp.setTotalPrice(yearSales.get(i).getTotal_price());
+					temp.setUnitPrice(yearSales.get(i).getTotal_price() / yearSales.get(i).getAmount());
+					menuSalesYear.add(temp);
+					totalAmountYear = totalAmountYear + yearSales.get(i).getAmount();
+				} else {
+					for(int j=0; j<menuSalesYear.size(); j++) {
+						if(menuSalesYear.get(j).getMenu_code().equals(yearSales.get(i).getMenu_code())) {
+							menuSalesYear.get(j).add(yearSales.get(i).getAmount(), yearSales.get(i).getTotal_price());
+							totalAmountYear = totalAmountYear + yearSales.get(i).getAmount();
+						}
+					}
+				}
+			}
+
+			mTotalSalesYear = mKakaoSalesYear + mCashSalesYear + mCardSalesYear;
+			nTotalSalesYear = nKakaoSalesYear + nCashSalesYear + nCardSalesYear;
+			totalSalesYear = mTotalSalesYear + nTotalSalesYear;
+			
+			totalCashSalesYear = mCashSalesYear + nCashSalesYear;
+			totalCardSalesYear = mCardSalesYear + nCardSalesYear;
+			totalKakaoSalesYear = mKakaoSalesYear + nKakaoSalesYear;
+			
+			model.addAttribute("mCashSalesYear", mCashSalesYear); // 회원 현금 매출액
+			model.addAttribute("mCardSalesYear", mCardSalesYear); // 회원 카드 매출액
+			model.addAttribute("mKakaoSalesYear", mKakaoSalesYear); // 회원 카카오페이 매출액
+			model.addAttribute("mTotalSalesYear", mTotalSalesYear); // 회원 총 매출액
+			
+			model.addAttribute("nCashSalesYear", nCashSalesYear); // 비회원 현금 매출액
+			model.addAttribute("nCardSalesYear", nCardSalesYear); // 비회원 카드 매출액
+			model.addAttribute("nKakaoSalesYear", nKakaoSalesYear); // 비회원 카카오페이 매출액
+			model.addAttribute("nTotalSalesYear", nTotalSalesYear); // 비회원 총 매출액
+			
+			model.addAttribute("totalCashSalesYear", totalCashSalesYear); // 현금 총 매출액
+			model.addAttribute("totalCardSalesYear", totalCardSalesYear); // 카드 총 매출액
+			model.addAttribute("totalKakaoSalesYear", totalKakaoSalesYear); // 카카오페이 총 매출액
+			
+			model.addAttribute("totalSalesYear", totalSalesYear); // 회원 + 비회원 총 매출액
+			
+			model.addAttribute("menuSalesYear", menuSalesYear); // 메뉴별 판매량
+			model.addAttribute("totalAmountYear", totalAmountYear); // 총 판매량
+			
 			return "seller/mngSales/yearSales";
+			
 		case "byDaySales":
+			ArrayList<PaymentVO> byDaySalesQuery = paymentService.getByDaySales(truck_code, "2018", "2019"); // 요일별 매출 쿼리 후 결과를 byDaySalesQuery에 추가
+			Map<Integer, ArrayList<PaymentVO>> byDaySales = new HashMap<>();
+			ArrayList<int[]> byDaySalesResult = new ArrayList<>();
+			
+			for(int i=0; i<7; i++) {
+				ArrayList<PaymentVO> temp = new ArrayList<>();
+				for(int j=0; j<byDaySalesQuery.size(); j++) {
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(byDaySalesQuery.get(j).getPayment_date());			     
+					int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
+					
+					if(dayNum == (i+1)) {
+						temp.add(byDaySalesQuery.get(j));
+					}
+				}
+				byDaySales.put(i, temp);
+			}
+			
+			for(int i=0; i<byDaySales.size(); i++) {
+				// {현금(회원), 현금(비회원), 현금(전체), 카드(회원), 카드(비회원), 카드(전체), 카카오페이(회원), 카카오페이(비회원), 카카오페이(전체), 회원 합계, 비회원 합계, 전체 합계}
+				int[] sales = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+				
+				for(int j=0; j<byDaySales.get(i).size(); j++) {
+					switch(byDaySales.get(i).get(j).getPayment_class()) {
+					case 3: // 카카오페이
+						telephone = byDaySales.get(i).get(j).getPayment_telephone();
+						isMember = paymentService.isMember(telephone);
+						
+						if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+							int value = sales[6] + byDaySales.get(i).get(j).getTotal_price();
+							sales[6] = value;
+							sales[8] = sales[8] + byDaySales.get(i).get(j).getTotal_price();
+						} else { // 회원 조회 값이 없으면(= 비회원이면)
+							int value = sales[7] + byDaySales.get(i).get(j).getTotal_price();
+							sales[7] = value;
+							sales[8] = sales[8] + byDaySales.get(i).get(j).getTotal_price();
+						}
+						break;
+					case 4: // 현금
+						telephone = byDaySales.get(i).get(j).getPayment_telephone();
+						isMember = paymentService.isMember(telephone);
+						
+						if(isMember != null) {
+							int value = sales[0] + byDaySales.get(i).get(j).getTotal_price();
+							sales[0] = value;
+							sales[2] = sales[2] + byDaySales.get(i).get(j).getTotal_price();
+						} else {
+							int value = sales[1] + byDaySales.get(i).get(j).getTotal_price();
+							sales[1] = value;
+							sales[2] = sales[2] + byDaySales.get(i).get(j).getTotal_price();
+						}
+						break;
+					case 5: // 카드
+						telephone = byDaySales.get(i).get(j).getPayment_telephone();
+						isMember = paymentService.isMember(telephone);
+						
+						if(isMember != null) {
+							int value = sales[3] + byDaySales.get(i).get(j).getTotal_price();
+							sales[3] = value;
+							sales[5] = sales[5] + byDaySales.get(i).get(j).getTotal_price();
+						} else {
+							int value = sales[4] + byDaySales.get(i).get(j).getTotal_price();
+							sales[4] = value;
+							sales[5] = sales[5] + byDaySales.get(i).get(j).getTotal_price();
+						}
+						break;
+						default:
+					}
+				}
+				sales[9] = sales[0] + sales[3] + sales[6];
+				sales[10] = sales[1] + sales[4] + sales[7];
+				sales[11] = sales[2] + sales[5] + sales[8];
+				
+				byDaySalesResult.add(sales);
+			}
+			model.addAttribute("byDaySalesResult", byDaySalesResult);
+			
 			return "seller/mngSales/byDaySales";
+			
 		case "byTimeSales":
+			ArrayList<PaymentVO> byTimeSalesQuery = paymentService.getByTimeSales(truck_code, "2018", "2019"); // 요일별 매출 쿼리 후 결과를 byDaySalesQuery에 추가
+			Map<Integer, ArrayList<PaymentVO>> byTimeSales = new HashMap<>();
+			ArrayList<int[]> byTimeSalesResult = new ArrayList<>();
+			System.out.println(byTimeSalesQuery);
+			for(int i=0; i<24; i++) {
+				ArrayList<PaymentVO> temp = new ArrayList<>();
+				for(int j=0; j<byTimeSalesQuery.size(); j++) {
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(byTimeSalesQuery.get(j).getPayment_date());			     
+					int hour = cal.get(Calendar.HOUR_OF_DAY) ;
+					System.out.println(hour + "시");
+					if(hour == i) {
+						temp.add(byTimeSalesQuery.get(j));
+					}
+				}
+				byTimeSales.put(i, temp);
+				
+			}
+			
+			for(int i=0; i<byTimeSales.size(); i++) {
+				// {현금(회원), 현금(비회원), 현금(전체), 카드(회원), 카드(비회원), 카드(전체), 카카오페이(회원), 카카오페이(비회원), 카카오페이(전체), 회원 합계, 비회원 합계, 전체 합계}
+				int[] sales = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+				
+				for(int j=0; j<byTimeSales.get(i).size(); j++) {
+					switch(byTimeSales.get(i).get(j).getPayment_class()) {
+					case 3: // 카카오페이
+						telephone = byTimeSales.get(i).get(j).getPayment_telephone();
+						isMember = paymentService.isMember(telephone);
+						
+						if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+							int value = sales[6] + byTimeSales.get(i).get(j).getTotal_price();
+							sales[6] = value;
+							sales[8] = sales[8] + byTimeSales.get(i).get(j).getTotal_price();
+						} else { // 회원 조회 값이 없으면(= 비회원이면)
+							int value = sales[7] + byTimeSales.get(i).get(j).getTotal_price();
+							sales[7] = value;
+							sales[8] = sales[8] + byTimeSales.get(i).get(j).getTotal_price();
+						}
+						break;
+					case 4: // 현금
+						telephone = byTimeSales.get(i).get(j).getPayment_telephone();
+						isMember = paymentService.isMember(telephone);
+						
+						if(isMember != null) {
+							int value = sales[0] + byTimeSales.get(i).get(j).getTotal_price();
+							sales[0] = value;
+							sales[2] = sales[2] + byTimeSales.get(i).get(j).getTotal_price();
+						} else {
+							int value = sales[1] + byTimeSales.get(i).get(j).getTotal_price();
+							sales[1] = value;
+							sales[2] = sales[2] + byTimeSales.get(i).get(j).getTotal_price();
+						}
+						break;
+					case 5: // 카드
+						telephone = byTimeSales.get(i).get(j).getPayment_telephone();
+						isMember = paymentService.isMember(telephone);
+						
+						if(isMember != null) {
+							int value = sales[3] + byTimeSales.get(i).get(j).getTotal_price();
+							sales[3] = value;
+							sales[5] = sales[5] + byTimeSales.get(i).get(j).getTotal_price();
+						} else {
+							int value = sales[4] + byTimeSales.get(i).get(j).getTotal_price();
+							sales[4] = value;
+							sales[5] = sales[5] + byTimeSales.get(i).get(j).getTotal_price();
+						}
+						break;
+						default:
+					}
+				}
+				sales[9] = sales[0] + sales[3] + sales[6];
+				sales[10] = sales[1] + sales[4] + sales[7];
+				sales[11] = sales[2] + sales[5] + sales[8];
+				
+				byTimeSalesResult.add(sales);
+			}
+			model.addAttribute("byTimeSalesResult", byTimeSalesResult);
+			
 			return "seller/mngSales/byTimeSales";
+			
 			default:
 				return "seller/mngSales/mngSales";
 		}
@@ -554,9 +1023,41 @@ public class SellerController {
 	public String addEvent2(Model model) {
 		return "seller/event/addEvent2";
 	}
+	@ResponseBody
+	@RequestMapping(value="/CountOnboard", method=RequestMethod.POST) 
+	public String countonboard(Model model, HttpServletRequest request) {
+
+		
+		
+		return "seller/psg/psgpush";
+	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
-	public String passenger(Model model,HttpSession session) {
+	public String passenger(Model model,HttpSession session, HttpServletRequest request) {
+		
+		//차트용 탑승자 데이터 가져오기
+		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
+		String truck_code = foodtruckvo.getTruck_code();
+		int i = 1;
+		System.out.println("Ddddddddddddddddddddd");
+		System.out.println(truck_code);
+		OnboardVO br = new OnboardVO();
+		br.setTruck_code(truck_code);
+		br.setOnboard_state(i);
+		ArrayList<HashMap<String,Object>> on = onboard.CountOnboard(br);
+		ArrayList<HashMap<String,Object>> result = onboard.CountOnboard(br);
+		for(HashMap<String,Object> temp:on) {
+			HashMap<String,Object> data = new HashMap<>();
+			data.put("count_data",temp.get("COUNT"));
+			result.add(data);
+		}
+		
+		System.out.println("제발 되라");
+		System.out.println(result);
+		model.addAttribute("On", result);
+		
+		
+		//푸시알림용 파이어베이스 adminSDK설정
 		FirebaseApp defaultApp = null;
 		CustomerVO vo=new CustomerVO();
 		vo=(CustomerVO) session.getAttribute("sessionid");
@@ -582,7 +1083,6 @@ public class SellerController {
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (FirebaseAuthException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -639,7 +1139,6 @@ public class SellerController {
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (FirebaseAuthException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "seller/order/seorder";
@@ -711,9 +1210,50 @@ public class SellerController {
 		vo.setPaytype(sum);
 		
 		truckService.updateTruckinfo(vo);
-		return "redirect:/seller";
+		return "redirect:/seller/truckinfo";
 		
 		
 	
 }
+	@RequestMapping(value="/truckphoto", method=RequestMethod.GET) 
+	public String truckphoto(Model model) {
+		return "seller/truckinfo/truckphoto";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public ResponseEntity<String> upload(MultipartFile file, HttpSession session, FoodTruckVO mvo) throws Exception {
+		System.out.println("와랏!");
+
+		logger.info("originalName : " + file.getOriginalFilename());
+		logger.info("size : " + file.getSize());
+		logger.info("contentType : " + file.getContentType());
+
+		System.out.println("ㅇ");
+		System.out.println(session.getAttribute("seller"));
+		FoodTruckVO vo4 = (FoodTruckVO) session.getAttribute("seller");
+		
+		// System.out.println(vo.getEmail());
+		// String email = vo.getEmail();
+		ResponseEntity<String> a = new ResponseEntity<String>(
+				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+				HttpStatus.OK);
+
+		String str = a.getBody();
+		System.out.println(str);
+		String[] array = str.split("\\\\");
+		System.out.println(array[0]);
+		System.out.println(array[1]);
+		System.out.println(array[0] + "\\" + array[1].substring(2));
+	
+		mvo.setTruck_url(array[0] + "\\" + array[1].substring(2));
+		mvo.setTruck_code(vo4.getTruck_code());
+		mvo.setTruck_surl(str);
+		System.out.println(mvo);
+		truckService.updatetruckphoto(mvo);
+
+		// mvo.setMenu_url(menu_url);
+		// System.out.println(a.getBody());
+
+		return a;
+	}
 }

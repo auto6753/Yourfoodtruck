@@ -84,6 +84,11 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	public ArrayList<MainPageRankDTO> getRank() {
 		// TODO Auto-generated method stub
 		return mapper.getRank();
+  }
+  
+  @Override
+	public void updatetruckphoto(FoodTruckVO mvo) {
+		mapper.updatetruckphoto(mvo);
 	}
 
 

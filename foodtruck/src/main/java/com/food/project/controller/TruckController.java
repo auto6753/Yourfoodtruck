@@ -138,6 +138,7 @@ public class TruckController {
 		
 		FoodTruckVO vo2 = service.insertFoodTruck(fd);
 		/* System.out.println(vo2); */
+		System.out.println(vo2);
 		
 		
 		session.setAttribute("seller", vo2);

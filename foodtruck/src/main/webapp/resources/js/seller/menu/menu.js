@@ -42,6 +42,10 @@ $(document).ready(function(){
 		var checked = $('input:checkbox[name=delChk]:checked').parent('div').prev().children('input[name=menu_code]');
 		var checkedimg = $('input:checkbox[name=delChk]:checked').parent('div').prev().find('img');
 		
+		//var checked2 = $('input:checkbox[name=delChk]:checked')
+		
+		//var a =$("input:checkbox[name=delChk]:checked").parent("div");
+		//alert(a);
 		var menu_codes = new Array();
 		// console.log(checked.length);
 		// alert("ㅋ");

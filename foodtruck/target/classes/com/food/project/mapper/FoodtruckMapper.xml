@@ -16,11 +16,9 @@
 		select * from foodtruck where email=#{email}
 	</select>
 
-	<insert id="insertFoodTruck"
-		parameterType="com.food.project.domain.FoodTruckVO">
-		insert into
-		foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,paytype,email,truck_desc)
-		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{paytype},#{email},#{truck_desc})
+	<insert id="insertFoodTruck" parameterType="com.food.project.domain.FoodTruckVO">
+		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,paytype,email,truck_desc,truck_starttime, truck_endtime)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{paytype},#{email},#{truck_desc},#{truck_starttime },#{truck_endtime })
 	</insert>
 	<insert id="insertReview"
 		parameterType="com.food.project.domain.ReviewVO">
@@ -40,11 +38,8 @@
 		#{truck_code} and a.email = b.email order by review_regdate DESC
 
 	</select>
-	<update id="updateTruckinfo"
-		parameterType="com.food.project.domain.FoodTruckVO">
-		update foodtruck set
-		brandname=#{brandname},crn=#{crn},trucknum=#{trucknum},account=#{account},paytype=#{paytype},truck_desc=#{truck_desc}
-		where truck_code=#{truck_code ,jdbcType=VARCHAR}
+	<update id="updateTruckinfo" parameterType="com.food.project.domain.FoodTruckVO">
+		update foodtruck set brandname=#{brandname},crn=#{crn},trucknum=#{trucknum},account=#{account},paytype=#{paytype},truck_desc=#{truck_desc},truck_starttime=#{truck_starttime},truck_endtime=#{truck_endtime} where truck_code=#{truck_code ,jdbcType=VARCHAR}
 	</update>
 	<select id="selectReviewList"
 		resultType="com.food.project.domain.MyreviewlistDTO"
@@ -91,5 +86,7 @@
 		select * from test_b
 	]]>
 	</select>
-
+	<update id="updatetruckphoto" parameterType="com.food.project.domain.FoodTruckVO">
+		update foodtruck set truck_url=#{truck_url}, truck_surl=#{truck_surl} where truck_code = #{truck_code} 
+	</update>
 </mapper>
