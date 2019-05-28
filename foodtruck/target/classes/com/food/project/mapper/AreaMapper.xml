@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.food.project.mapper.AreaMapper">
+	<sql id="search">
+		where sido=#{sido}
+		and area_name like '%'||#{keyword}||'%'	
+	</sql>
+	<sql id="pagingHeader">
+		select * from (
+			select rownum rn, a.* from(
+	</sql>
+	<sql id="pagingFooter">
+			) a
+		) where rn between #{start} and #{end}
+	</sql>
+	<select id="allList" resultType="map" parameterType="map">
+		<!-- 목록 조회 및 페이징 전체 쿼리 -->
+		<include refid="pagingHeader"></include>
+		select
+		CASE sido
+		WHEN 1 then '서울'
+		WHEN 2 then '부산'
+		WHEN 3 then '대구'
+		WHEN 4 then '인천'
+		WHEN 5 then '광주'
+		WHEN 6 then '대전'
+		WHEN 9 then '경기'
+		WHEN 10 then '강원'
+		WHEN 11 then '충북'
+		WHEN 12 then '충남'
+		WHEN 13 then '전북'
+		WHEN 14 then '전남'
+		WHEN 15 then '경북'
+		WHEN 16 then '경남'
+		WHEN 17 then '제주'
+		ELSE '모름'
+		END as sido_name,NVL2(road_addr,road_addr,origin_addr)
+		addr,area_name,latitude, longitude, govern_name,govern_phone
+		from permitted_area
+		<include refid="search"></include>
+		order by addr desc
+		<include refid="pagingFooter"></include>
+	</select>
+	
+	<!-- <select id="getArea" resultType="Map">
+		select
+		CASE sido
+		WHEN 1 then '서울'
+		WHEN 2 then '부산'
+		WHEN 3 then '대구'
+		WHEN 4 then '인천'
+		WHEN 5 then '광주'
+		WHEN 6 then '대전'
+		WHEN 9 then '경기'
+		WHEN 10 then '강원'
+		WHEN 11 then '충북'
+		WHEN 12 then '충남'
+		WHEN 13 then '전북'
+		WHEN 14 then '전남'
+		WHEN 15 then '경북'
+		WHEN 16 then '경남'
+		WHEN 17 then '제주'
+		ELSE '모름'
+		END as sido_name,NVL2(road_addr,road_addr,origin_addr)
+		addr,area_name,latitude, longitude, govern_name,govern_phone
+		from permitted_area
+		where sido=#{sido}
+		order by addr
+	</select> -->
+	<select id="totalPage" resultType="map">
+		select count(*) tot_page from permitted_area where sido=#{sido}
+	</select>
+	<select id="totalPage2" resultType="map" parameterType="map">
+		select count(*) tot_page from permitted_area
+		where sido=#{sido} and area_name like '%'||#{keyword}||'%'
+	</select>
+</mapper>
