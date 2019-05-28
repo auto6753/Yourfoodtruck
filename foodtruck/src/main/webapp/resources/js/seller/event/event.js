@@ -208,7 +208,8 @@
 	
 	$(document).ready(function(){
 		
-		
+		var isAddDefault=false;
+		var isEditDefault=false;
 		
 		$("#previewId").mouseenter(function(){
 			$("#imgControlBox").fadeIn();
@@ -252,6 +253,7 @@
 			$("#noImage").css("display", "none");
 			$("#uploadImg").val("");
 			$("#prev_previewId").remove();
+			isAddDefault=true;
 			
 			setTimeout(function() {
 				alert("기본이미지로 변경되었습니다.");
@@ -263,7 +265,7 @@
 			$("#noImage2").css("display", "none");
 			$("#uploadImg2").val("");
 			$("#prev_previewId2").remove();
-			
+			isEditDefault=true;
 			setTimeout(function() {
 				alert("기본이미지로 변경되었습니다.");
 			}, 1);
@@ -407,6 +409,9 @@
 					 $('#layer1').hide();
 				}
 			});
+			setTimeout(function() {
+				location.href="/seller/event";
+			},500);
 //			alert("이벤트가 등록되었습니다.");
 		});
 		
