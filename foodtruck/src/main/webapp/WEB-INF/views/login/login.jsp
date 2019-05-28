@@ -27,8 +27,8 @@
 				<input id="pw" type="password" class="form-control"  placeholder="비밀번호" name="m_passwd" value="" onkeyup="chkEnter(); chkShift(); chkSpace();"/>
 			</div>
 			<button id="login" class="btn">로그인</button>
-			<button id="testLogin" class="btn" onclick="fastLogin1();">bsj[shift]</button>
-			<button id="testLogin" class="btn" onclick="fastLogin2();">bsg[space]</button>
+			<!-- <button id="testLogin" class="btn" onclick="fastLogin1();">bsj[shift]</button>
+			<button id="testLogin" class="btn" onclick="fastLogin2();">bsg[space]</button> -->
 			<div id="linkp">
 			<span class="txt_find"> <a
 				href="/login/idSearch" class="link_find">아이디찾기</a> <a
@@ -40,10 +40,10 @@
 		</div>
 	<!-- </form> -->
 	<script>
-		function fastLogin1() {
+/* 		function fastLogin1() {
 			var query = {
-					email : "bsj@naver.com",
-					password : "qwer1234"
+					email : "songtak456@naver.com",
+					password : "song1234"
 				};
 				$.ajax({
 					type : "post",
@@ -55,13 +55,13 @@
 						} else if ("pwfail" == data) {
 							alert("비밀번호가 틀렸습니다");
 						} else {
-							/* window.location.href="/project/rehome";  */
+							window.location.href="/project/rehome";  
 							window.location.replace("/");
 						}
 					}
-				/* 	 complete : function(data) {
+				 complete : function(data) {
 						 window.location.replace("/project");
-				   } */
+				   } 
 
 				});
 		}
@@ -81,13 +81,13 @@
 						} else if ("pwfail" == data) {
 							alert("비밀번호가 틀렸습니다");
 						} else {
-							/* window.location.href="/project/rehome";  */
+							window.location.href="/project/rehome";  
 							window.location.replace("/");
 						}
 					}
-				/* 	 complete : function(data) {
+				 	 complete : function(data) {
 						 window.location.replace("/project");
-				   } */
+				   } 
 
 				});
 		}
@@ -112,7 +112,7 @@
 		
 		function login() {
 			
-		}
+		} */
 		
 		$(document).ready(function() {
 			$("#id").focus();

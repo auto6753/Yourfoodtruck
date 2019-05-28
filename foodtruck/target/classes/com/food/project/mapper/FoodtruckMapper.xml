@@ -14,8 +14,8 @@
 	</select>
 
 	<insert id="insertFoodTruck" parameterType="com.food.project.domain.FoodTruckVO">
-		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,paytype,email,truck_desc)
-		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{paytype},#{email},#{truck_desc})
+		insert into foodtruck(truck_code,crn,trucknum,account,layout,hours,weekend_hours,brandname,truck_regdate,paytype,email,truck_desc,truck_starttime, truck_endtime)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(truckcode_sequence.NEXTVAL,'FM00000')),#{crn},#{trucknum},#{account},#{layout},#{hours,jdbcType=VARCHAR},#{weekend_hours,jdbcType=VARCHAR},#{brandname},sysdate,#{paytype},#{email},#{truck_desc},#{truck_starttime },#{truck_endtime })
 	</insert>
 	<insert id="insertReview" parameterType="com.food.project.domain.ReviewVO">
 		insert into review(truck_code,email,review_regdate,review_score,review_content,review_reply_content,review_reply_regdate,review_code)
@@ -26,7 +26,7 @@
 
 	</select>
 	<update id="updateTruckinfo" parameterType="com.food.project.domain.FoodTruckVO">
-		update foodtruck set brandname=#{brandname},crn=#{crn},trucknum=#{trucknum},account=#{account},paytype=#{paytype},truck_desc=#{truck_desc} where truck_code=#{truck_code ,jdbcType=VARCHAR}
+		update foodtruck set brandname=#{brandname},crn=#{crn},trucknum=#{trucknum},account=#{account},paytype=#{paytype},truck_desc=#{truck_desc},truck_starttime=#{truck_starttime},truck_endtime=#{truck_endtime} where truck_code=#{truck_code ,jdbcType=VARCHAR}
 	</update>
 	<select id="selectReviewList" resultType="com.food.project.domain.MyreviewlistDTO" parameterType="String">
 		select a.brandname,a.truck_code , b.review_code, b.review_content, b.review_score, TO_CHAR(b.review_regdate, 'YYYY-MM-DD') review_regdate from review b , foodtruck a where a.truck_code = b.truck_code and b.email = #{email} order by b.review_regdate DESC
@@ -42,6 +42,8 @@
 	<select id="getEvent" resultType="com.food.project.domain.EventVO" parameterType="String">
 		select event_code , event_start, event_end , event_name , event_content from event where truck_code = #{truck_code}
 	</select>
-	
+	<update id="updatetruckphoto" parameterType="com.food.project.domain.FoodTruckVO">
+		update foodtruck set truck_url=#{truck_url}, truck_surl=#{truck_surl} where truck_code = #{truck_code} 
+	</update>
 	
 </mapper>

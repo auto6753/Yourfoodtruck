@@ -38,12 +38,12 @@ $(document).ready(function(){
 	});
 	
 	$("#delMenu2").click(function(){
-		//var checked2 = $('input:checkbox[name=delChk]:checked').
-		var checked = $('input:checkbox[name=delChk]:checked').parent('div');
-
 		
-		console.log(checked);
-		//alert(checked);
+		//var checked2 = $('input:checkbox[name=delChk]:checked')
+		
+		var a =$("input:checkbox[name=delChk]:checked").parent("div");
+		alert(a);
+			
 		
 		if(checked.length == 0) {
 			alert("선택된 메뉴가 없습니다.\n삭제할 메뉴를 선택해 주세요!");

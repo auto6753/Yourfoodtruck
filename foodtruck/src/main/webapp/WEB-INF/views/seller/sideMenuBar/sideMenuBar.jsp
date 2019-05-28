@@ -11,7 +11,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-				<ul>
+	
+				<ul class="sidebar">
 					<li class="menu"><a href="/seller/">메인</a></li>
 					<li class="menu"><a href="/seller/truckinfo">트럭정보 수정</a></li>
 					<li class="menu"><a href="/seller/menu">메뉴 등록</a></li>
@@ -27,5 +28,6 @@
 						</ul>
 					</li>
 				</ul>
+	
 </body>
 </html>

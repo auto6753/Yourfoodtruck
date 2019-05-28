@@ -7,16 +7,28 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.EventMenuListVO;
 import com.food.project.domain.EventMenuVO;
@@ -25,10 +37,14 @@ import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuSalesVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.domain.OnboardCountDTO;
+import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
+import com.food.project.domain.UploadFileUtils;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.FoodTruckService;
+import com.food.project.service.OnboardService;
 import com.food.project.service.PaymentService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -42,13 +58,19 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/seller")
+
+
 public class SellerController {
 	private SellerService sellerservice;
 	private EventService eventService;
 	private CallListService callService;
 	private FoodTruckService truckService;
 	private PaymentService paymentService;
-
+	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+	@Resource(name = "uploadPath")
+	String uploadPath;
+	private OnboardService onboard;
+	
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String sellerMain(Model model, HttpSession session) {
 		return "seller/sellerMain";
@@ -885,9 +907,41 @@ public class SellerController {
 	public String addEvent2(Model model) {
 		return "seller/event/addEvent2";
 	}
+	@ResponseBody
+	@RequestMapping(value="/CountOnboard", method=RequestMethod.POST) 
+	public String countonboard(Model model, HttpServletRequest request) {
+
+		
+		
+		return "seller/psg/psgpush";
+	}
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
-	public String passenger(Model model,HttpSession session) {
+	public String passenger(Model model,HttpSession session, HttpServletRequest request) {
+		
+		//차트용 탑승자 데이터 가져오기
+		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
+		String truck_code = foodtruckvo.getTruck_code();
+		int i = 1;
+		System.out.println("Ddddddddddddddddddddd");
+		System.out.println(truck_code);
+		OnboardVO br = new OnboardVO();
+		br.setTruck_code(truck_code);
+		br.setOnboard_state(i);
+		ArrayList<HashMap<String,Object>> on = onboard.CountOnboard(br);
+		ArrayList<HashMap<String,Object>> result = onboard.CountOnboard(br);
+		for(HashMap<String,Object> temp:on) {
+			HashMap<String,Object> data = new HashMap<>();
+			data.put("count_data",temp.get("COUNT"));
+			result.add(data);
+		}
+		
+		System.out.println("제발 되라");
+		System.out.println(result);
+		model.addAttribute("On", result);
+		
+		
+		//푸시알림용 파이어베이스 adminSDK설정
 		FirebaseApp defaultApp = null;
 		CustomerVO vo=new CustomerVO();
 		vo=(CustomerVO) session.getAttribute("sessionid");
@@ -1040,9 +1094,50 @@ public class SellerController {
 		vo.setPaytype(sum);
 		
 		truckService.updateTruckinfo(vo);
-		return "redirect:/seller";
+		return "redirect:/seller/truckinfo";
 		
 		
 	
 }
+	@RequestMapping(value="/truckphoto", method=RequestMethod.GET) 
+	public String truckphoto(Model model) {
+		return "seller/truckinfo/truckphoto";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public ResponseEntity<String> upload(MultipartFile file, HttpSession session, FoodTruckVO mvo) throws Exception {
+		System.out.println("와랏!");
+
+		logger.info("originalName : " + file.getOriginalFilename());
+		logger.info("size : " + file.getSize());
+		logger.info("contentType : " + file.getContentType());
+
+		System.out.println("ㅇ");
+		System.out.println(session.getAttribute("seller"));
+		FoodTruckVO vo4 = (FoodTruckVO) session.getAttribute("seller");
+		
+		// System.out.println(vo.getEmail());
+		// String email = vo.getEmail();
+		ResponseEntity<String> a = new ResponseEntity<String>(
+				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+				HttpStatus.OK);
+
+		String str = a.getBody();
+		System.out.println(str);
+		String[] array = str.split("\\\\");
+		System.out.println(array[0]);
+		System.out.println(array[1]);
+		System.out.println(array[0] + "\\" + array[1].substring(2));
+	
+		mvo.setTruck_url(array[0] + "\\" + array[1].substring(2));
+		mvo.setTruck_code(vo4.getTruck_code());
+		mvo.setTruck_surl(str);
+		System.out.println(mvo);
+		truckService.updatetruckphoto(mvo);
+
+		// mvo.setMenu_url(menu_url);
+		// System.out.println(a.getBody());
+
+		return a;
+	}
 }

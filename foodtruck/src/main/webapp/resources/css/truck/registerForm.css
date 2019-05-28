@@ -10,6 +10,12 @@ div a {
 	font-weight: bold;
 	font-size: 290%;
 }
+#Starttime{
+	width: 35%;
+}
+#Endtime{
+	width:35%;
+}
 /* #member {
 	margin-top: 50px;
 	width:80%;

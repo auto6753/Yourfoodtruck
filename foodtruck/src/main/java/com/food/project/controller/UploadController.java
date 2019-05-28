@@ -50,6 +50,7 @@ public class UploadController {
 
 		System.out.println("ㅇ");
 		System.out.println(session.getAttribute("seller"));
+		
 		FoodTruckVO vo4 = (FoodTruckVO) session.getAttribute("seller");
 		// System.out.println(vo.getEmail());
 		// String email = vo.getEmail();
