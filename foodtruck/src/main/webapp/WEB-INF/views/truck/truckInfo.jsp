@@ -17,276 +17,276 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		
-		
-				var email = "${sessionScope.sessionid.email}";
-				var truck_code = "${tlist.truck_code}";
-				//alert(email);
-			if(email!=""){
-				$.ajax({
-					type : "post",
-					url : "/customer/ridech",
-					data : {
-						"truck_code" : truck_code,
-						"email" : email
-					},
-					success : function(data) {
-						var json = JSON.parse(data);
-						console.log(json);
-						if (json.onboardstate != 1) {
-							alert(json.onboard_state);
-							$('#ride').text('탑승하기');
-						} else {
-							$('#ride').text('하차하기');
-						}
-					},
-					error : function(err) {
-						console.log(err);
-						console.log(err.statusText);
-					}
-				});
-			}
-				$("#ride").click(function() {
-					var email = "${sessionScope.sessionid.email}";
-					if (email == "") {
-						alert("로그인이후 이용가능합니다.");
-					} else {
-						$("#ride").click(function() {
-							var email = "${sessionScope.sessionid.email}";
-							var truck_code = "${tlist.truck_code}";
-							var date = new Date();
-							var year = date.getFullYear();
-							var month = date.getMonth() + 1; //months from 1-12
-							var day = date.getDate();
+   $(document).ready(function() {
+      
+      
+            var email = "${sessionScope.sessionid.email}";
+            var truck_code = "${tlist.truck_code}";
+            //alert(email);
+         if(email!=""){
+            $.ajax({
+               type : "post",
+               url : "/customer/ridech",
+               data : {
+                  "truck_code" : truck_code,
+                  "email" : email
+               },
+               success : function(data) {
+                  var json = JSON.parse(data);
+                  console.log(json);
+                  if (json.onboardstate != 1) {
+                     /* alert(json.onboard_state); */
+                     $('#ride').text('탑승하기');
+                  } else {
+                     $('#ride').text('하차하기');
+                  }
+               },
+               error : function(err) {
+                  console.log(err);
+                  console.log(err.statusText);
+               }
+            });
+         }
+            $("#ride").click(function() {
+               var email = "${sessionScope.sessionid.email}";
+               if (email == "") {
+                  alert("로그인이후 이용가능합니다.");
+               } else {
+                  /* $("#ride").click(function() { */
+                     var email = "${sessionScope.sessionid.email}";
+                     var truck_code = "${tlist.truck_code}";
+                     var date = new Date();
+                     var year = date.getFullYear();
+                     var month = date.getMonth() + 1; //months from 1-12
+                     var day = date.getDate();
 
-							if ((day + "").length < 2) {
-								day = "0" + day;
-							} else if ((month + "").length < 2) {
-								month = "0" + month;
-							}
-							var today = year + "-" + month + "-" + day;
-							alert(today);
+                     if ((day + "").length < 2) {
+                        day = "0" + day;
+                     } else if ((month + "").length < 2) {
+                        month = "0" + month;
+                     }
+                     var today = year + "-" + month + "-" + day;
+                     /* alert(today); */
 
-							if ($("#ride").text() == '탑승하기') {
-								$.ajax({
-									url : "/customer/insertOnboard",
-									type : "post",
-									data : {
-										"truck_code" : truck_code,
-										"onboard_date" : today
-									},
-									success : function(data) {
-										$('#ride').text('하차하기');
-									},
-									error : function(err) {
-										console.log(err);
-										console.log(err.statusText);
-										alert("안넘어감");
-									}
-								});
+                     if ($("#ride").text() == '탑승하기') {
+                        $.ajax({
+                           url : "/customer/insertOnboard",
+                           type : "post",
+                           data : {
+                              "truck_code" : truck_code,
+                              "onboard_date" : today
+                           },
+                           success : function(data) {
+                              $('#ride').text('하차하기');
+                           },
+                           error : function(err) {
+                              console.log(err);
+                              console.log(err.statusText);
+                           /*    alert("안넘어감"); */
+                           }
+                        });
 
-							} else {
-								var truckname = $("#truckname").text();
-								check = confirm(truckname + "을 하차하시겠습니까?");
-								var truck_code = "${tlist.truck_code}";
-								var date = new Date();
-								var year = date.getFullYear();
-								var month = date.getMonth() + 1; //months from 1-12
-								var day = date.getDate();
+                     } else {
+                        var truckname = $("#truckname").text();
+                        check = confirm(truckname + "을 하차하시겠습니까?");
+                        var truck_code = "${tlist.truck_code}";
+                        var date = new Date();
+                        var year = date.getFullYear();
+                        var month = date.getMonth() + 1; //months from 1-12
+                        var day = date.getDate();
 
-								if ((day + "").length < 2) {
-									day = "0" + day;
-								} else if ((month + "").length < 2) {
-									month = "0" + month;
-								}
-								var today = year + "-" + month + "-" + day;
-								/* alert(today); */
+                        if ((day + "").length < 2) {
+                           day = "0" + day;
+                        } else if ((month + "").length < 2) {
+                           month = "0" + month;
+                        }
+                        var today = year + "-" + month + "-" + day;
+                        /* alert(today); */
 
-								$.ajax({
-									url : "/customer/Deleteride",
-									type : "post",
-									data : {
-										"truck_code" : truck_code,
-										"email" : email,
-										"out_date" : today
-									},
-									success : function(data) {
-										$('#ride').text('탑승하기');
-									}
-								});
-							}
-						});
-					}
-				});
+                        $.ajax({
+                           url : "/customer/Deleteride",
+                           type : "post",
+                           data : {
+                              "truck_code" : truck_code,
+                              "email" : email,
+                              "out_date" : today
+                           },
+                           success : function(data) {
+                              $('#ride').text('탑승하기');
+                           }
+                        });
+                     }
+                  /* }); */
+               }
+            });
 
-				var score = "${sumscore}";
-				if (score > 0 && score < 2) {
-					$('.sumscore').append('<p>★☆☆☆☆</p>');
-				} else if (score > 2 && score < 3) {
-					$('.sumscore').append('<p>★★☆☆☆</p>');
-				} else if (score > 3 && score < 4) {
-					$('.sumscore').append('<p>★★★☆☆</p>');
-				} else if (score > 4 && score < 5) {
-					$('.sumscore').append('<p>★★★★☆</p>');
-				} else if (score == 5) {
-					$('.sumscore').append('<p>★★★★★</p>');
-				}
-				$("#call").click(
-						function() {
-							var truck_code = "${tlist.truck_code}";
-							location.href = "/truck/callForm/?truck_code="
-									+ truck_code;
-						});
-				$("#btn1").click(
-						function() {
-							$("#menu").css("visibility", "visible");
-							$("#review, #truckinfo, #location, #event").css(
-									"visibility", "hidden");
-						});
-				$("#btn2").click(
-						function() {
-							$("#review").css("visibility", "visible");
-							$("#menu, #truckinfo, #location, #event").css(
-									"visibility", "hidden");
-						});
-				$("#btn3").click(
-						function() {
-							$("#truckinfo").css("visibility", "visible");
-							$("#review, #menu, #location, #event").css(
-									"visibility", "hidden");
-						});
-				$("#btn4").click(
-						function() {
-							$("#location").css("visibility", "visible");
-							$("#review, #truckinfo, #menu, #event").css(
-									"visibility", "hidden");
-							/* $("#location").show();
-							$("#review, #truckinfo, #menu, #event").hide(); */
-						});
-				$("#btn5").click(
-						function() {
-							$("#event").css("visibility", "visible");
-							$("#review, #truckinfo, #location, #menu").css(
-									"visibility", "hidden");
-						});
-				$(".star_rating a").click(function() {
-					$(this).parent().children("a").removeClass("on");
-					$(this).addClass("on").prevAll("a").addClass("on");
-					return false;
-				});
-				$("#creatbtn").click(function() {
-					$("#reviewwhole").show();
-					$("#creatbtncancle").show();
-					$("#creatbtn").hide();
-				});
-				$("#creatbtncancle").click(function() {
-					$("#reviewwhole").hide();
-					$("#reviewwhole2").hide();
-					$("#creatbtncancle").hide();
-					$("#creatbtn").show();
-				});
-				$(".modify").click(function() {
-					var a = $(this);
-					var b = a.next().val();
-					a.closest("div").next().css("display", "block");
-					a.closest("div").css("display", "none");
+            var score = "${sumscore}";
+            if (score > 0 && score < 2) {
+               $('.sumscore').append('<p>★☆☆☆☆</p>');
+            } else if (score > 2 && score < 3) {
+               $('.sumscore').append('<p>★★☆☆☆</p>');
+            } else if (score > 3 && score < 4) {
+               $('.sumscore').append('<p>★★★☆☆</p>');
+            } else if (score > 4 && score < 5) {
+               $('.sumscore').append('<p>★★★★☆</p>');
+            } else if (score == 5) {
+               $('.sumscore').append('<p>★★★★★</p>');
+            }
+            $("#call").click(
+                  function() {
+                     var truck_code = "${tlist.truck_code}";
+                     location.href = "/truck/callForm/?truck_code="
+                           + truck_code;
+                  });
+            $("#btn1").click(
+                  function() {
+                     $("#menu").css("visibility", "visible");
+                     $("#review, #truckinfo, #location, #event").css(
+                           "visibility", "hidden");
+                  });
+            $("#btn2").click(
+                  function() {
+                     $("#review").css("visibility", "visible");
+                     $("#menu, #truckinfo, #location, #event").css(
+                           "visibility", "hidden");
+                  });
+            $("#btn3").click(
+                  function() {
+                     $("#truckinfo").css("visibility", "visible");
+                     $("#review, #menu, #location, #event").css(
+                           "visibility", "hidden");
+                  });
+            $("#btn4").click(
+                  function() {
+                     $("#location").css("visibility", "visible");
+                     $("#review, #truckinfo, #menu, #event").css(
+                           "visibility", "hidden");
+                     /* $("#location").show();
+                     $("#review, #truckinfo, #menu, #event").hide(); */
+                  });
+            $("#btn5").click(
+                  function() {
+                     $("#event").css("visibility", "visible");
+                     $("#review, #truckinfo, #location, #menu").css(
+                           "visibility", "hidden");
+                  });
+            $(".star_rating a").click(function() {
+               $(this).parent().children("a").removeClass("on");
+               $(this).addClass("on").prevAll("a").addClass("on");
+               return false;
+            });
+            $("#creatbtn").click(function() {
+               $("#reviewwhole").show();
+               $("#creatbtncancle").show();
+               $("#creatbtn").hide();
+            });
+            $("#creatbtncancle").click(function() {
+               $("#reviewwhole").hide();
+               $("#reviewwhole2").hide();
+               $("#creatbtncancle").hide();
+               $("#creatbtn").show();
+            });
+            $(".modify").click(function() {
+               var a = $(this);
+               var b = a.next().val();
+               a.closest("div").next().css("display", "block");
+               a.closest("div").css("display", "none");
 
-				});
-				$("#imageplus").click(function() {
-					$("#reviewwhole").hide();
-					$("#reviewwhole2").show();
+            });
+            $("#imageplus").click(function() {
+               $("#reviewwhole").hide();
+               $("#reviewwhole2").show();
 
-				});
+            });
 
-				$("#credit").click(
-						function() {
-							var reviewcontent = $("#reviewcontent").val();
-							var truckcode = "${tlist.truck_code}";
+            $("#credit").click(
+                  function() {
+                     var reviewcontent = $("#reviewcontent").val();
+                     var truckcode = "${tlist.truck_code}";
 
-							var reviewscore = $(
-									"input:radio[name='star']:checked").val();
-							var query = {
-								truck_code : truckcode,
-								review_content : reviewcontent,
-								review_score : reviewscore
-							}
-							$.ajax({
-								url : "/truck/reviewwrite",
-								data : query,
-								type : "post",
-								success : function(data) {
-									location.reload();
-								}
-							});
-						});
-				$(".delete").click(function() {
-					var a = $(this);
-					var b = a.next().val();
-					console.log(b);
-					var truckcodes = "${tlist.truck_code}";
-					/* alert(truckcodes); */
-					var reviewcode = b;
-					var query = {
-						truck_code : truckcodes,
-						review_code : reviewcode
-					}
-					$.ajax({
-						url : "/truck/reviewdelete",
-						type : "post",
-						data : query,
-						success : function(data) {
-							location.reload();
-						}
-					});
-				});
+                     var reviewscore = $(
+                           "input:radio[name='star']:checked").val();
+                     var query = {
+                        truck_code : truckcode,
+                        review_content : reviewcontent,
+                        review_score : reviewscore
+                     }
+                     $.ajax({
+                        url : "/truck/reviewwrite",
+                        data : query,
+                        type : "post",
+                        success : function(data) {
+                           location.reload();
+                        }
+                     });
+                  });
+            $(".delete").click(function() {
+               var a = $(this);
+               var b = a.next().val();
+               console.log(b);
+               var truckcodes = "${tlist.truck_code}";
+               /* alert(truckcodes); */
+               var reviewcode = b;
+               var query = {
+                  truck_code : truckcodes,
+                  review_code : reviewcode
+               }
+               $.ajax({
+                  url : "/truck/reviewdelete",
+                  type : "post",
+                  data : query,
+                  success : function(data) {
+                     location.reload();
+                  }
+               });
+            });
 
-				$(".modifysuccess").click(function() {
-					var a = $(this);
-					var b = a.next().val();
-					var content = a.prev().val();
+            $(".modifysuccess").click(function() {
+               var a = $(this);
+               var b = a.next().val();
+               var content = a.prev().val();
 
-					var query = {
+               var query = {
 
-						review_code : b,
-						review_content : content
+                  review_code : b,
+                  review_content : content
 
-					}
+               }
 
-					$.ajax({
-						url : "/truck/reviewmodify",
-						type : "post",
-						data : query,
-						success : function(data) {
-							location.reload();
+               $.ajax({
+                  url : "/truck/reviewmodify",
+                  type : "post",
+                  data : query,
+                  success : function(data) {
+                     location.reload();
 
-						}
+                  }
 
-					});
+               });
 
-				});
+            });
 
-				var a = "${test}";
-				if (a == null) {
+            var a = "${test}";
+            if (a == null) {
 
-				} else if (a == 1) {
-					$('#btn2').trigger('click');
-					var a = "${test2}";
-					var offset = $("#" + a).offset();
-					console.log(offset);
-					//alert(offset);
-					$('html, #review').animate({
-						scrollTop : offset.top - 575
-					}, 400);
-				}
-			});
+            } else if (a == 1) {
+               $('#btn2').trigger('click');
+               var a = "${test2}";
+               var offset = $("#" + a).offset();
+               console.log(offset);
+               //alert(offset);
+               $('html, #review').animate({
+                  scrollTop : offset.top - 575
+               }, 400);
+            }
+         });
 
-	/* $("#btn2").bind("click", function () { 
-	   alert("버튼이 클릭됨");
-	   
-	}); */
-	//$("#btn2").trigger("click");
-	//버튼 클릭이 아니라 코드에 의해서 click이벤트를 실행하고 싶다면?
+   /* $("#btn2").bind("click", function () { 
+      alert("버튼이 클릭됨");
+      
+   }); */
+   //$("#btn2").trigger("click");
+   //버튼 클릭이 아니라 코드에 의해서 click이벤트를 실행하고 싶다면?
 </script>
 </head>
 <body>
@@ -508,30 +508,30 @@
 					<%-- <jsp:include page="location.jsp"></jsp:include> --%>
 				</div>
 				<script>
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-					mapOption = {
-						center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-						level : 3
-					// 지도의 확대 레벨
-					};
+               var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+               mapOption = {
+                  center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                  level : 3
+               // 지도의 확대 레벨
+               };
 
-					var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+               var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-					// 마커가 표시될 위치입니다 
-					var markerPosition = new daum.maps.LatLng(33.450701,
-							126.570667);
+               // 마커가 표시될 위치입니다 
+               var markerPosition = new daum.maps.LatLng(33.450701,
+                     126.570667);
 
-					// 마커를 생성합니다
-					var marker = new daum.maps.Marker({
-						position : markerPosition
-					});
+               // 마커를 생성합니다
+               var marker = new daum.maps.Marker({
+                  position : markerPosition
+               });
 
-					// 마커가 지도 위에 표시되도록 설정합니다
-					marker.setMap(map);
+               // 마커가 지도 위에 표시되도록 설정합니다
+               marker.setMap(map);
 
-					// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-					// marker.setMap(null);
-				</script>
+               // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+               // marker.setMap(null);
+            </script>
 				<div id="locationdetail" style="text-align: left;">
 					지하철<br> -1호선을 타고 월평역에서 하차하여 약 20분정도 걸어오셔야 합니다. <br> <br>
 
@@ -552,7 +552,7 @@
 						<div id="eventbody">
 
 							<img id="eventimage"
-								src='${pageContext.request.contextPath}/resources/image/food10.PNG'>
+								src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
 						</div>
 						<div id="eventcontent">
 							<br>
@@ -579,25 +579,25 @@
 		</div>
 	</div>
 	<script>
-		var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
+      var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
 
-		// 이미지 지도에 표시할 마커입니다
-		// 이미지 지도에 표시할 마커는 Object 형태입니다
-		var marker = {
-			position : markerPosition
-		};
+      // 이미지 지도에 표시할 마커입니다
+      // 이미지 지도에 표시할 마커는 Object 형태입니다
+      var marker = {
+         position : markerPosition
+      };
 
-		var staticMapContainer = document.getElementById('map'), // 이미지 지도를 표시할 div  
-		staticMapOption = {
-			center : new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
-			level : 3, // 이미지 지도의 확대 레벨
-			marker : marker
-		// 이미지 지도에 표시할 마커 
-		};
+      var staticMapContainer = document.getElementById('map'), // 이미지 지도를 표시할 div  
+      staticMapOption = {
+         center : new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+         level : 3, // 이미지 지도의 확대 레벨
+         marker : marker
+      // 이미지 지도에 표시할 마커 
+      };
 
-		// 이미지 지도를 생성합니다
-		var map = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-	</script>
+      // 이미지 지도를 생성합니다
+      var map = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+   </script>
 
 </body>
 </html>

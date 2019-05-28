@@ -65,7 +65,8 @@
 	<select id="getEvent"
 		resultType="com.food.project.domain.EventVO" parameterType="String">
 		select
-		event_code , event_start, event_end , event_name , event_content from
+		event_code , event_start, event_end , event_name , event_content , event_url
+		from
 		event where truck_code = #{truck_code}
 	</select>
 
