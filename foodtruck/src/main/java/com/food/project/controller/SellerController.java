@@ -87,68 +87,6 @@ public class SellerController {
 	
 	@RequestMapping(value="/mngSales", method=RequestMethod.GET) 
 	public String mngSales(Model model, HttpSession session, HttpServletRequest request) {
-		// 매출 쿼리를 위해 매개변수로 사용할 truck_code 값
-		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
-		String truck_code = vo.getTruck_code();
-		
-//		String inputYear = request.getParameter("inputYear"); // 연도 값
-//		String inputMonth = request.getParameter("inputMonth"); // 월 값
-//		String inputFirstDate = request.getParameter("inputFirstDate"); // 사용자 지정 시작 날짜
-//		String inputLastDate = request.getParameter("inputLastDate"); //  사용자 지정 마지막 날짜
-//		String inputFirstYear = request.getParameter("inputFirstYear"); // 사용자 지정 시작 연도
-//		String inputLastYear = request.getParameter("inputLastYear"); //  사용자 지정 마지막 연도
-		String inputYear = "19";
-		String inputMonth = "05";
-		String inputFirstDate = "16-05-17";
-		String inputLastDate = "20-05-20";
-		String inputFirstYear = "2017";
-		String inputLastYear = "2019";
-		
-		String curYear2; // 현재 연도(2자리)
-		String curYear4; // 현재 연도(4자리)
-		String curMonth; // 현재 월
-		
-		ArrayList<PaymentVO> todaySales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
-		ArrayList<PaymentVO> weekSales = new ArrayList<>(); // 주간 매출 쿼리 결과를 담을 ArrayList
-		ArrayList<PaymentVO> monthSales = new ArrayList<>(); // 월간 매출 쿼리 결과를 담을 ArrayList
-		ArrayList<PaymentVO> yearSales = new ArrayList<>(); // 연간 매출 쿼리 결과를 담을 ArrayList
-		ArrayList<PaymentVO> selPeriodSales = new ArrayList<>(); // 선택된 기간 내 매출 쿼리 결과를 담을 ArrayList
-		Map<String, ArrayList<PaymentVO>> byDaySalesMap = new HashMap<>(); // 요일별 매출 쿼리 결과가 담긴 각 ArrayList를 담을 Map
-		Map<Integer, ArrayList<PaymentVO>> byTimeSalesMap = new HashMap<>(); // 선택된 기간 내 시간별 매출 쿼리 결과가 담긴 각 ArrayList를 담을 Map
-		
-		curYear2 = paymentService.getCurYear2(); // 현재 연도 쿼리 후 결과를 curYear2에 추가
-		curYear4 = paymentService.getCurYear4(); // 현재 연도 쿼리 후 결과를 curYear4에 추가
-		curMonth = paymentService.getCurMonth(); // 현재 월 쿼리 후 결과를 curMonth에 추가
-		
-		todaySales = paymentService.getTodaySales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
-		weekSales = paymentService.getWeekSales(truck_code); // 주간 매출 쿼리 후 결과를 weekSales에 추가
-		monthSales = paymentService.getMonthSales(truck_code, inputYear, inputMonth); // 월간 매출 쿼리 후 결과를 monthSales에 추가
-		yearSales = paymentService.getYearSales(truck_code, inputYear); // 연간 매출 쿼리 후 결과를 yearSales에 추가
-		selPeriodSales = paymentService.getSelPeriodSales(truck_code, inputFirstDate, inputLastDate); // 선택된 기간 내 매출 쿼리 후 결과를 selPeriodSales에 추가
-		
-		String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Map의 Key
-		for(int day=1; day<=7; day++) {
-			ArrayList<PaymentVO> byDaySales = new ArrayList<>(); // 요일별 매출 쿼리 결과를 담을 ArrayList
-			byDaySales = paymentService.getByDaySales(truck_code, inputFirstYear, inputLastYear); // 요일별 매출 쿼리 후 결과를 byDaySales에 추가
-			byDaySalesMap.put(days[day-1], byDaySales); // 요일별 매출 쿼리 결과가 담긴 각 ArrayList를 Map에 추가
-		}
-		
-		for(int hour=0; hour<24; hour++) {
-			ArrayList<PaymentVO> byTimeSales = new ArrayList<>(); // 선택된 기간 내 시간별 매출 쿼리 결과를 담을 ArrayList
-			byTimeSales = paymentService.getByTimeSales(truck_code, inputFirstDate, inputLastDate); // 선택된 기간 내 시간별 매출 쿼리 후 결과를 byTimeSales에 추가
-			byTimeSalesMap.put(hour, byTimeSales); // 선택된 기간 내 시간별 매출 쿼리 결과가 담긴 각 ArrayList를 Map에 추가
-		}
-		
-		model.addAttribute("curYear2", curYear2);
-		model.addAttribute("curYear4", curYear4);
-		model.addAttribute("curMonth", curMonth);
-		
-		model.addAttribute("todaySales", todaySales);
-		model.addAttribute("weekSales", weekSales);
-		model.addAttribute("monthSales", monthSales);
-		model.addAttribute("yearSales", yearSales);
-		model.addAttribute("selPeriodSales", selPeriodSales);
-		
 		return "seller/mngSales/mngSales";
 	}
 	
