@@ -11,9 +11,9 @@
 
 </head>
 <body>
-	
+	<button id="toArea" class="btn">허가구역 보기</button>
 	<div id="title" class="card-header">
-		<p>모집공고 안내 <button id="toArea" class="btn">허가구역 보기</button></p>
+		<p>모집공고 안내 </p>
 		
 	</div>
 	
