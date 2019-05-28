@@ -11,10 +11,9 @@
 
 </head>
 <body>
-	
+	<button id="toArea" class="btn">허가구역 보기</button>
 	<div id="title" class="card-header">
-		<p>모집공고 안내 <button id="toArea" class="btn">허가구역 보기</button></p>
-		
+		<p>모집공고 안내</p>
 	</div>
 	
 	<div id="searchall">
@@ -73,7 +72,7 @@
 		});//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
 		$('#title').click(function() {
 			location.href="/announce"; 
-		}); */
+		});
 		$('#toArea').click(function() {
 			location.href="/area"; 
 		});

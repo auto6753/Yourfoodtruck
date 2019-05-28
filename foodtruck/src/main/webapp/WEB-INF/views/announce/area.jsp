@@ -10,12 +10,10 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </head>
 <body>
-
+	<button id="toRecruit" class="btn">모집공고 보기</button>
 	<div id="title" class="card-header">
-		<p>허가구역 안내 <button id="toRecruit" class="btn">모집공고 보기</button></p>
-		
+		<p>허가구역 안내</p>
 	</div>
-	
 	<div id="searchall">
 		<nav class="navbar navbar-light bg-light">
 			<form class="form-inline" action="/area" method="post">
