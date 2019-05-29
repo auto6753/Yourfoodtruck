@@ -13,5 +13,4 @@ public class OnboardVO {
 	private String hours;
 	private int onboard_state;
 	private Date out_date;
-	
 }

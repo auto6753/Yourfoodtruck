@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.food.project.domain.OnboardCountDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
+import com.food.project.domain.PeriodDTO;
 import com.food.project.mapper.OnboardMapper;
 
 import lombok.AllArgsConstructor;
@@ -51,8 +52,12 @@ public class OnboardServiceimplement implements OnboardService{
 		mapper.updateOnboarddate(on);
 	}
 	@Override
-	public ArrayList<HashMap<String,Object>> CountOnboard(OnboardVO br) {
-		ArrayList<HashMap<String,Object>> mdf=mapper.CountOnboard(br);
+	public ArrayList<OnboardCountDTO> CountOnboard(OnboardVO br) {
+		/* ArrayList<HashMap<String,Object>> mdf=mapper.CountOnboard(br); */
 		return mapper.CountOnboard(br);
+	}
+	@Override
+	public ArrayList<OnboardCountDTO> countonboarddate(PeriodDTO period) {
+		return mapper.countonboarddate(period);
 	}
 }

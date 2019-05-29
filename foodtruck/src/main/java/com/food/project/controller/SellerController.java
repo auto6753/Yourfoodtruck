@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -44,6 +45,7 @@ import com.food.project.domain.MenuVO;
 import com.food.project.domain.OnboardCountDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PaymentVO;
+import com.food.project.domain.PeriodDTO;
 import com.food.project.domain.UploadFileUtils;
 import com.food.project.mapper.EventMapper;
 import com.food.project.mapper.SellerMapper;
@@ -60,7 +62,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
-import net.sf.json.JSONArray;
+import net.sf.json.*;
 
 
 @Controller
@@ -75,6 +77,7 @@ public class SellerController {
 	private FoodTruckService truckService;
 	private PaymentService paymentService;
 	private EventMapper eventmapper;
+	
 	//private SellerMapper sellermapper;
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	@Resource(name = "uploadPath")
@@ -973,60 +976,113 @@ public class SellerController {
 	
 	@RequestMapping(value="/psgpush", method=RequestMethod.GET) 
 	public String passenger(Model model,HttpSession session, HttpServletRequest request) {
-		
-		//차트용 탑승자 데이터 가져오기
 		FoodTruckVO foodtruckvo = (FoodTruckVO) session.getAttribute("seller");
 		String truck_code = foodtruckvo.getTruck_code();
 		int i = 1;
-		System.out.println("Ddddddddddddddddddddd");
-		System.out.println(truck_code);
-		OnboardVO br = new OnboardVO();
-		br.setTruck_code(truck_code);
-		br.setOnboard_state(i);
-		ArrayList<HashMap<String,Object>> on = onboard.CountOnboard(br);
-		ArrayList<HashMap<String,Object>> result = onboard.CountOnboard(br);
-		for(HashMap<String,Object> temp:on) {
-			HashMap<String,Object> data = new HashMap<>();
-			data.put("count_data",temp.get("COUNT"));
-			result.add(data);
-		}
-		
-		System.out.println("제발 되라");
-		System.out.println(result);
-		model.addAttribute("On", result);
-		
-		
-		//푸시알림용 파이어베이스 adminSDK설정
-		FirebaseApp defaultApp = null;
-		CustomerVO vo=new CustomerVO();
-		vo=(CustomerVO) session.getAttribute("sessionid");
-		String email=vo.getEmail();
-		FileInputStream serviceAccount;
+		String resultString;
 		try {
-			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
-				FirebaseOptions options = new FirebaseOptions.Builder()
-						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-						.build();
-				defaultApp = FirebaseApp.initializeApp(options);
-				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
-				model.addAttribute("_uid",userRecord.getUid());
-				defaultApp.delete();
-			}
+			String beginDate = request.getParameter("inputBeginDate");
+			String endDate = request.getParameter("inputEndDate");
+			System.out.println(beginDate);
+			System.out.println(endDate);
+			PeriodDTO period = new PeriodDTO();
+			period.setTruck_code(truck_code);
+			period.setOnboard_state(i);
+			period.setBeginDate(beginDate);
+			period.setEndDate(endDate);
 			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (FirebaseAuthException e) {
-			e.printStackTrace();
+			ArrayList<OnboardCountDTO> perioddate = onboard.countonboarddate(period);
+			System.out.println("1" +perioddate.toString());
+			int periodsize = perioddate.size();
+			JSONArray resultlist = new JSONArray();
+			ArrayList<Map<String,Object>> periodresult = new ArrayList<Map<String,Object>>();
+			for(int g=0;g<periodsize;g++) {
+				perioddate.get(g).getCount();
+				perioddate.get(g).getOnboard_date();
+				JSONObject periodcount = new JSONObject();
+				
+				periodcount.put("onboard_date", perioddate.get(g).getOnboard_date());
+				periodcount.put("count", perioddate.get(g).getCount());
+				System.out.println(periodcount.toString());
+				Map<String,Object> map = new HashMap<String,Object>();
+				map=JSONObject.fromObject(periodcount.toString());
+				resultlist.add(map);
+			}
+			resultlist=JSONArray.fromObject(resultlist.toString());
+			System.out.println("제발 되라");
+			resultString = resultlist.toString();
+			System.out.println(resultlist.toString());
+		}catch(Exception e) {
+			OnboardVO br = new OnboardVO();
+			br.setTruck_code(truck_code);
+			br.setOnboard_state(i);
+			ArrayList<OnboardCountDTO> on = onboard.CountOnboard(br);
+			int onSize = on.size();
+			JSONArray resultlist = new JSONArray();
+			ArrayList<Map<String,Object>> jsonresult = new ArrayList<Map<String,Object>>();
+			for(int j=0;j<onSize;j++) {
+				on.get(j).getCount();
+				on.get(j).getOnboard_date();
+				JSONObject ridecount = new JSONObject();
+				
+				ridecount.put("onboard_date", on.get(j).getOnboard_date());
+				ridecount.put("count", on.get(j).getCount());
+				System.out.println(ridecount.toString());
+				Map<String,Object> map = new HashMap<String,Object>();
+				map=JSONObject.fromObject(ridecount.toString());
+				jsonresult.add(map);
+			}
+			resultlist=JSONArray.fromObject(jsonresult.toString());
+			System.out.println("제발 되라");
+			System.out.println(resultlist.toString());
+			resultString = resultlist.toString();
 		}
+		
+		/* ArrayList<HashMap<String,Object>> on = onboard.CountOnboard(br);
+		 * ArrayList<HashMap<String,Object>> result = onboard.CountOnboard(br);
+		 * for(HashMap<String,Object> temp:on) { HashMap<String,Object> data = new
+		 * HashMap<>(); data.put("count_data",temp.get("COUNT")); result.add(data); }
+		 */
+		//차트용 탑승자 데이터 가져오기
+		
+		//model.addAttribute("On", on);
+		model.addAttribute("resultlist", resultString);
+		
+		
+		
+		//model.addAttribute("On", on);
+		//푸시알림용 파이어베이스 adminSDK설정
+//		FirebaseApp defaultApp = null;
+//		CustomerVO vo=new CustomerVO();
+//		vo=(CustomerVO) session.getAttribute("sessionid");
+//		String email=vo.getEmail();
+//		FileInputStream serviceAccount;
+//		try {
+//			if(defaultApp==null) {
+//				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+//				FirebaseOptions options = new FirebaseOptions.Builder()
+//						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+//						.build();
+//				defaultApp = FirebaseApp.initializeApp(options);
+//				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
+//				model.addAttribute("_uid",userRecord.getUid());
+//				defaultApp.delete();
+//			}
+//			
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+//		} catch (FirebaseAuthException e) {
+//			e.printStackTrace();
+//		}
 		
 		return "seller/psg/psgpush";
 	}
+
 	
 	@RequestMapping(value="/callmanage", method=RequestMethod.GET) 
 	public String call(Model model,HttpSession session) {
