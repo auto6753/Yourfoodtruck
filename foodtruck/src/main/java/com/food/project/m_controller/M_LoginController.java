@@ -2,16 +2,9 @@ package com.food.project.m_controller;
 
 
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +15,15 @@ import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
 import lombok.AllArgsConstructor;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+@CrossOrigin()
 @AllArgsConstructor
 @Controller
 @RequestMapping(value = "/m.login")
 public class M_LoginController {
 	private LoginService loginservice;
+	
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
@@ -59,6 +53,7 @@ public class M_LoginController {
 			FoodTruckVO fd = new FoodTruckVO();
 			fd = loginservice.getFoodTruck(email);
 			
+			
 			//푸드트럭 정보가 없으면 그냥 사용자정보만 리턴
 			if(fd == null){
 				sessionInfo.put("result","success");
@@ -66,9 +61,11 @@ public class M_LoginController {
 				
 			//트럭정보가 있으면 트럭정보도 리턴
 			}else {
-				truckInfo.fromObject(fd);
+				System.out.println(fd.toString());
+				truckInfo.put("truck_code",fd.getTruck_code());
 				sessionInfo.put("result","success");
 				sessionInfo.put("foodtruck",truckInfo);
+				System.out.println(truckInfo.toString());
 				return sessionInfo.toString();
 			}
 			
