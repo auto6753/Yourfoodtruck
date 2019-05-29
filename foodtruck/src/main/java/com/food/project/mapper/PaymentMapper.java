@@ -14,10 +14,8 @@ public interface PaymentMapper {
 	public ArrayList<PaymentVO> getPaymentList(String payment_telephone);
 	public int insertPaymentList(Map<String,Object> list);
 	public int updatePaymentList(PaymentVO vo);
-	
 	public int updatePoint(CustomerVO vo);
-	//point update
-
+	
 	// 매출관리
 	public String getCurYear2();
 	public String getCurYear4();
@@ -31,4 +29,8 @@ public interface PaymentMapper {
 	public ArrayList<PaymentVO> getByDaySales (@Param("truck_code") String truck_code, @Param("inputFirstYear") String inputFirstYear, @Param("inputLastYear") String inputLastYear);
 	public ArrayList<PaymentVO> getByTimeSales(@Param("truck_code") String truck_code, @Param("inputFirstYear") String inputFirstYear, @Param("inputLastYear") String inputLastYear);
 	public String isMember(String telephone);
+	public String[] getMonthValue(String truck_code);
+	public String[] getYearValue(String truck_code);
+	public String[] getByDayValue(String truck_code);
+	public String[] getByTimeValue(String truck_code);
 }

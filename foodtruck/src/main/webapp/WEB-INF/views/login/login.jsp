@@ -21,14 +21,14 @@
 	<!-- <form id="form"> --> <!-- 폼으로 묶으면 처음에 ajax 결과 반환이 안됨 -->
 		<div id="login_box">
 			<div class="form-group">
-				<input id="id" type="text" class="form-control"  placeholder="아이디" name="m_mail" value="" onkeyup="chkEnter(); chkShift(); chkSpace();"/>
+				<input id="id" type="text" class="form-control"  placeholder="아이디" name="m_mail" value="" onkeyup="chkEnter(); chkSpace();"/>
 			</div>
 			<div class="form-group">
-				<input id="pw" type="password" class="form-control"  placeholder="비밀번호" name="m_passwd" value="" onkeyup="chkEnter(); chkShift(); chkSpace();"/>
+				<input id="pw" type="password" class="form-control"  placeholder="비밀번호" name="m_passwd" value="" onkeyup="chkEnter(); chkSpace();"/>
 			</div>
 			<button id="login" class="btn">로그인</button>
-			<!-- <button id="testLogin" class="btn" onclick="fastLogin1();">bsj[shift]</button>
-			<button id="testLogin" class="btn" onclick="fastLogin2();">bsg[space]</button> -->
+			<!-- <button id="testLogin" class="btn" onclick="fastLogin1();">bsj[shift]</button> -->
+			<button id="testLogin" class="btn" onclick="fastLogin2();">bsj[space]</button>
 			<div id="linkp">
 			<span class="txt_find"> <a
 				href="/login/idSearch" class="link_find">아이디찾기</a> <a
@@ -40,37 +40,12 @@
 		</div>
 	<!-- </form> -->
 	<script>
-/* 		function fastLogin1() {
-			var query = {
-					email : "songtak456@naver.com",
-					password : "song1234"
-				};
-				$.ajax({
-					type : "post",
-					url : "/login",
-					data : query,
-					success : function(data) {
-						if ("idfail" == data) {
-							alert("해당 아이디가없습니다");
-						} else if ("pwfail" == data) {
-							alert("비밀번호가 틀렸습니다");
-						} else {
-							window.location.href="/project/rehome";  
-							window.location.replace("/");
-						}
-					}
-				 complete : function(data) {
-						 window.location.replace("/project");
-				   } 
-
-				});
-		}
-		
 		function fastLogin2() {
 			var query = {
-					email : "bsg@naver.com",
-					password : "bsg"
+					email : "bsj@naver.com",
+					password : "qwer1234"
 				};
+			
 				$.ajax({
 					type : "post",
 					url : "/login",
@@ -81,21 +56,11 @@
 						} else if ("pwfail" == data) {
 							alert("비밀번호가 틀렸습니다");
 						} else {
-							window.location.href="/project/rehome";  
 							window.location.replace("/");
 						}
 					}
-				 	 complete : function(data) {
-						 window.location.replace("/project");
-				   } 
 
 				});
-		}
-		
-		function chkShift() {
-			if (window.event.keyCode == 16) {
-				fastLogin1();
-			}
 		}
 		
 		function chkSpace() {
@@ -112,7 +77,7 @@
 		
 		function login() {
 			
-		} */
+		}
 		
 		$(document).ready(function() {
 			$("#id").focus();

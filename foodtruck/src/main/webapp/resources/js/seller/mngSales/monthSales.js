@@ -2,11 +2,11 @@
  * 
  */
 
-/**
- * 
- */
-
 $(document).ready(function(){
+	$("#yymm").change(function(){
+		$("#monthSalesRe").click();
+	});
+
 	var mCashSalesMonth = Number($("#mCashSalesMonth").val());
 	var nCashSalesMonth = Number($("#nCashSalesMonth").val());
 	var totalCashSalesMonth = Number($("#totalCashSalesMonth").val());
@@ -25,7 +25,6 @@ $(document).ready(function(){
 
     function drawChart() {
 
-      
       var data = google.visualization.arrayToDataTable([
           ['Year', '전체', '회원', '비회원'],
           ['합계', totalSalesMonth, mTotalSalesMonth, nTotalSalesMonth],
@@ -48,15 +47,5 @@ $(document).ready(function(){
       var chart = new google.charts.Bar(document.getElementById('chart_div'));
 
       chart.draw(data, google.charts.Bar.convertOptions(options));
-
-      var btns = document.getElementById('btn-group');
-
-      btns.onclick = function (e) {
-
-        if (e.target.tagName === 'BUTTON') {
-          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
-          chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-      }
     }
 });

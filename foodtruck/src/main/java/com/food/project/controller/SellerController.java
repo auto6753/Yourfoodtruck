@@ -88,10 +88,11 @@ public class SellerController {
 	
 	@RequestMapping(value="/mngSales", method=RequestMethod.GET) 
 	public String mngSales(Model model, HttpSession session, HttpServletRequest request) {
+		
 		return "seller/mngSales/mngSales";
 	}
 	
-	@RequestMapping(value="/salesInfo", method=RequestMethod.GET)
+	@RequestMapping(value="/salesInfo", method= {RequestMethod.GET, RequestMethod.POST})
 	public String salesInfo(Model model, HttpSession session, HttpServletRequest request) {
 		String pageName = request.getParameter("pageName");
 		
@@ -103,7 +104,6 @@ public class SellerController {
 		case "todaySales":
 			ArrayList<PaymentVO> todaySales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
 			todaySales = paymentService.getTodaySales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
-			System.out.println("todaySales");
 
 			int mKakaoSales = 0, nKakaoSales = 0; // 카카오페이 매출액(회원, 비회원)
 			int totalKakaoSales = 0; // 카카오페이 매출총액(회원 + 비회원)
@@ -319,8 +319,31 @@ public class SellerController {
 			return "seller/mngSales/weekSales";
 			
 		case "monthSales":
+		case "monthSalesRe":
 			ArrayList<PaymentVO> monthSales = new ArrayList<>(); // 월간 매출 쿼리 결과를 담을 ArrayList
-			monthSales = paymentService.getMonthSales(truck_code, "19", "05"); // 월간 매출 쿼리 후 결과를 monthSales에 추가
+			String[] monthVal = paymentService.getMonthValue(truck_code);
+			ArrayList<String> monthValArrList = new ArrayList<>();
+			String yymm = null; 
+			
+			for(int i=0; i<monthVal.length; i++) {
+				String[] temp = {"", ""};
+				temp[0] = monthVal[i].substring(0, 2);
+				temp[1] = monthVal[i].substring(3);
+				monthValArrList.add(i, temp[0] + "년 " + temp[1] + "월");
+				
+				if(i == monthVal.length-1 && pageName.equals("monthSales")) {
+					yymm = temp[0] + "년 " + temp[1] + "월";
+					monthSales = paymentService.getMonthSales(truck_code, temp[0], temp[1]); // 월간 매출 쿼리 후 결과를 monthSales에 추가
+				}
+			}
+
+			if(pageName.equals("monthSalesRe")) {
+				yymm = request.getParameter("yymm");
+				String inputYear = yymm.substring(0, 2);
+				String inputMonth = yymm.substring(4, 6);
+				
+				monthSales = paymentService.getMonthSales(truck_code, inputYear, inputMonth); // 월간 매출 쿼리 후 결과를 monthSales에 추가
+			}
 
 			int mKakaoSalesMonth = 0, nKakaoSalesMonth = 0; // 카카오페이 매출액(회원, 비회원)
 			int totalKakaoSalesMonth = 0; // 카카오페이 매출총액(회원 + 비회원)
@@ -404,6 +427,8 @@ public class SellerController {
 			totalCardSalesMonth = mCardSalesMonth + nCardSalesMonth;
 			totalKakaoSalesMonth = mKakaoSalesMonth + nKakaoSalesMonth;
 			
+			model.addAttribute("monthValArrList", monthValArrList); // 매출액이 집계된 연월 값(yy년 mm월)
+			
 			model.addAttribute("mCashSalesMonth", mCashSalesMonth); // 회원 현금 매출액
 			model.addAttribute("mCardSalesMonth", mCardSalesMonth); // 회원 카드 매출액
 			model.addAttribute("mKakaoSalesMonth", mKakaoSalesMonth); // 회원 카카오페이 매출액
@@ -423,12 +448,33 @@ public class SellerController {
 			model.addAttribute("menuSalesMonth", menuSalesMonth); // 메뉴별 판매량
 			model.addAttribute("totalAmountMonth", totalAmountMonth); // 총 판매량
 			
+			model.addAttribute("yymm", yymm);
+			
 			return "seller/mngSales/monthSales";
 			
 		case "yearSales":
-			ArrayList<PaymentVO> yearSales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
-			yearSales = paymentService.getYearSales(truck_code, "19"); // 금일 매출 쿼리 후 결과를 yearSales에 추가
-
+		case "yearSalesRe":
+			ArrayList<PaymentVO> yearSales = new ArrayList<>(); // 연간 매출 쿼리 결과를 담을 ArrayList
+			String[] yearVal = paymentService.getYearValue(truck_code);
+			ArrayList<String> yearValArrList = new ArrayList<>();
+			String yy = null;
+			
+			for(int i=0; i<yearVal.length; i++) {
+				yearValArrList.add(i, yearVal[i] + "년");
+				
+				if(i == yearVal.length-1 && pageName.equals("yearSales")) {
+					yy = yearVal[i] + "년";
+					yearSales = paymentService.getYearSales(truck_code, yearVal[i]); // 연간 매출 쿼리 후 결과를 yearSales에 추가
+				}
+			}
+			
+			if(pageName.equals("yearSalesRe")) {
+				yy = request.getParameter("yy");
+				String inputYear = yy.substring(0, 2);
+				
+				yearSales = paymentService.getYearSales(truck_code, inputYear); // 연간 매출 쿼리 후 결과를 yearSales에 추가
+			}
+			
 			int mKakaoSalesYear = 0, nKakaoSalesYear = 0; // 카카오페이 매출액(회원, 비회원)
 			int totalKakaoSalesYear = 0; // 카카오페이 매출총액(회원 + 비회원)
 			int mCashSalesYear = 0, nCashSalesYear = 0; // 현금 매출액(회원, 비회원)
@@ -511,6 +557,8 @@ public class SellerController {
 			totalCardSalesYear = mCardSalesYear + nCardSalesYear;
 			totalKakaoSalesYear = mKakaoSalesYear + nKakaoSalesYear;
 			
+			model.addAttribute("yearValArrList", yearValArrList); // 매출액이 집계된 연 값(yy년)
+			
 			model.addAttribute("mCashSalesYear", mCashSalesYear); // 회원 현금 매출액
 			model.addAttribute("mCardSalesYear", mCardSalesYear); // 회원 카드 매출액
 			model.addAttribute("mKakaoSalesYear", mKakaoSalesYear); // 회원 카카오페이 매출액
@@ -530,10 +578,38 @@ public class SellerController {
 			model.addAttribute("menuSalesYear", menuSalesYear); // 메뉴별 판매량
 			model.addAttribute("totalAmountYear", totalAmountYear); // 총 판매량
 			
+			model.addAttribute("yy", yy);
+			
 			return "seller/mngSales/yearSales";
 			
 		case "byDaySales":
-			ArrayList<PaymentVO> byDaySalesQuery = paymentService.getByDaySales(truck_code, "2018", "2019"); // 요일별 매출 쿼리 후 결과를 byDaySalesQuery에 추가
+		case "byDaySalesRe":
+			ArrayList<PaymentVO> byDaySalesQuery = new ArrayList<>(); // 요일별 매출 쿼리 결과를 담을 ArrayList
+			String[] byDayVal = paymentService.getByDayValue(truck_code);
+			ArrayList<String> byDayValArrList = new ArrayList<>();
+			String yyyy_db = null; // byDay Begin
+			String yyyy_de = null; // byDay End
+			
+			for(int i=0; i<byDayVal.length; i++) {
+				byDayValArrList.add(i, byDayVal[i] + "년");
+				
+				if(i == byDayVal.length-1 && pageName.equals("byDaySales")) {
+					yyyy_db = byDayVal[i] + "년";
+					yyyy_de = byDayVal[i] + "년";
+					byDaySalesQuery = paymentService.getByDaySales(truck_code, byDayVal[i], byDayVal[i]); // 요일별 매출 쿼리 후 결과를 byDaySalesQuery에 추가
+				}
+			}
+			
+			if(pageName.equals("byDaySalesRe")) {
+				yyyy_db = request.getParameter("yyyy_db");
+				yyyy_de = request.getParameter("yyyy_de");
+				String inputFirstYear = yyyy_db.substring(0, 4);
+				String inputLastYear = yyyy_de.substring(0, 4);
+				byDaySalesQuery = paymentService.getByDaySales(truck_code, inputFirstYear, inputLastYear);
+				System.out.println(byDaySalesQuery);
+			}
+			
+			
 			Map<Integer, ArrayList<PaymentVO>> byDaySales = new HashMap<>();
 			ArrayList<int[]> byDaySalesResult = new ArrayList<>();
 			
@@ -608,22 +684,50 @@ public class SellerController {
 				
 				byDaySalesResult.add(sales);
 			}
+			
 			model.addAttribute("byDaySalesResult", byDaySalesResult);
+			
+			model.addAttribute("yyyy_db", yyyy_db);
+			model.addAttribute("yyyy_de", yyyy_de);
+			model.addAttribute("byDayValArrList", byDayValArrList);
 			
 			return "seller/mngSales/byDaySales";
 			
 		case "byTimeSales":
-			ArrayList<PaymentVO> byTimeSalesQuery = paymentService.getByTimeSales(truck_code, "2018", "2019"); // 요일별 매출 쿼리 후 결과를 byDaySalesQuery에 추가
+		case "byTimeSalesRe":
+			ArrayList<PaymentVO> byTimeSalesQuery = new ArrayList<>(); // 시간별 매출 쿼리 결과를 담을 ArrayList
+			String[] byTimeVal = paymentService.getByTimeValue(truck_code);
+			ArrayList<String> byTimeValArrList = new ArrayList<>();
+			String yyyy_tb = null; // byTime Begin
+			String yyyy_te = null; // byTime End
+			
+			for(int i=0; i<byTimeVal.length; i++) {
+				byTimeValArrList.add(i, byTimeVal[i] + "년");
+				
+				if(i == byTimeVal.length-1 && pageName.equals("byTimeSales")) {
+					yyyy_tb = byTimeVal[i] + "년";
+					yyyy_te = byTimeVal[i] + "년";
+					byTimeSalesQuery = paymentService.getByTimeSales(truck_code, byTimeVal[i], byTimeVal[i]); // 시간별 매출 쿼리 후 결과를 byDaySalesQuery에 추가
+				}
+			}
+			
+			if(pageName.equals("byTimeSalesRe")) {
+				yyyy_tb = request.getParameter("yyyy_tb");
+				yyyy_te = request.getParameter("yyyy_te");
+				String inputFirstYear = yyyy_tb.substring(0, 4);
+				String inputLastYear = yyyy_te.substring(0, 4);
+				byTimeSalesQuery = paymentService.getByTimeSales(truck_code, inputFirstYear, inputLastYear);
+				System.out.println(byTimeSalesQuery);
+			}
+			
 			Map<Integer, ArrayList<PaymentVO>> byTimeSales = new HashMap<>();
 			ArrayList<int[]> byTimeSalesResult = new ArrayList<>();
-			System.out.println(byTimeSalesQuery);
 			for(int i=0; i<24; i++) {
 				ArrayList<PaymentVO> temp = new ArrayList<>();
 				for(int j=0; j<byTimeSalesQuery.size(); j++) {
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(byTimeSalesQuery.get(j).getPayment_date());			     
 					int hour = cal.get(Calendar.HOUR_OF_DAY) ;
-					System.out.println(hour + "시");
 					if(hour == i) {
 						temp.add(byTimeSalesQuery.get(j));
 					}
@@ -690,6 +794,10 @@ public class SellerController {
 				byTimeSalesResult.add(sales);
 			}
 			model.addAttribute("byTimeSalesResult", byTimeSalesResult);
+			
+			model.addAttribute("yyyy_tb", yyyy_tb);
+			model.addAttribute("yyyy_te", yyyy_te);
+			model.addAttribute("byTimeValArrList", byTimeValArrList);
 			
 			return "seller/mngSales/byTimeSales";
 			
