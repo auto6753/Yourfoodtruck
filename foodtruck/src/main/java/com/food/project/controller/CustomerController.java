@@ -54,6 +54,7 @@ public class CustomerController {
 	@RequestMapping(value = "/onboard", method = RequestMethod.GET)
 	public String onboard(Locale locale, Model model, HttpSession session) {
 		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		System.out.println("이부분인가?");
 		System.out.println(vo.getEmail());
 		ArrayList<OnboardVO> result = new ArrayList<>();
 		ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail());
@@ -119,20 +120,40 @@ public class CustomerController {
 		ArrayList<OnboardVO> result = new ArrayList<>();
 		sale = onboard.getOnboard(vo.getEmail());
 		int length = sale.size();
-
+		System.out.println(length);
+//
 		if (length != 0) {
+			System.out.println("ㅇ");
 			for (int i = 0; i < length; i++) {
-				String hours = sale.get(i).getHours();
-				int start_hour = Integer.parseInt(hours.substring(0, 2));
-				int end_hour = Integer.parseInt(hours.substring(3));
-				System.out.println(start_hour + " : " + end_hour);
-				SimpleDateFormat date = new SimpleDateFormat("HH");
+				//String hours = sale.get(i).getHours();
+				String start2 = sale.get(i).getTruck_starttime();
+				String end2 = sale.get(i).getTruck_endtime();
+				start2 = start2.replace(":", "");
+				end2 = end2.replace(":", "");
+				int start =  Integer.parseInt(start2);
+				int end =  Integer.parseInt(end2);
+				System.out.println(start);
+				System.out.println("===");
+				System.out.println(end);
+				System.out.println("===");
+				//int start_hour = Integer.parseInt(hours.substring(0, 2));
+				//int end_hour = Integer.parseInt(hours.substring(3));
+				//System.out.println(start_hour + " : " + end_hour);
+				SimpleDateFormat date = new SimpleDateFormat("HHmm");
+				//System.out.println(date);
 				int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
-				if (start_hour <= sysdate && end_hour >= sysdate && sale.get(0).getOnboard_state() == 1) {
+				System.out.println(sysdate);
+				System.out.println("d");
+				if (start <= sysdate && end >= sysdate && sale.get(i).getOnboard_state() == 1) {
 					result.add(sale.get(i));
+					System.out.println(sale.get(i).getBrandname());
+					System.out.println("해당되나?");
 				}
 			}
-			model.addAttribute("onSale", result);
+			System.out.println(result.size());
+			if(result.size()!=0) {
+				model.addAttribute("onSale", result);
+			}
 		}
 
 		return "customer/onSale";

@@ -39,6 +39,7 @@ $(document).ready(function(){
 	
 	$("#delMenu2").click(function(){
 		// var checked2 = $('input:checkbox[name=delChk]:checked').
+		//alert("a");
 		var checked = $('input:checkbox[name=delChk]:checked').parent('div').prev().children('input[name=menu_code]');
 		var checkedimg = $('input:checkbox[name=delChk]:checked').parent('div').prev().find('img');
 		
@@ -72,7 +73,8 @@ $(document).ready(function(){
 				contentType:"application/json;charset=UTF-8",
 				data:JSON.stringify(menu_codes),
 				success:function(data){
-					alert(data);
+					//alert(data);
+					location.reload();
 				}
 			});
 			console.log(menu_codes);
@@ -83,13 +85,11 @@ $(document).ready(function(){
 	});
 
 	$("#chkAllMenu").click(function(){
-	
 		var i = $(".on").index() +1;
 		// alert(i);
 		$(".delChk"+i).prop("checked", true);
 		$(".status"+i).addClass("selected");
 		$(".status"+i).text("선택됨");
-		
 	});
 
 	$("#unchkAllMenu").click(function unchkAllMenu(){
@@ -102,7 +102,6 @@ $(document).ready(function(){
 		$(".delChk").prop("checked", false);
 		$(".status").removeClass("selected");
 		$(".status").text("선택해제됨");
-		
 		$("#delMenu").toggle(); // 삭제 show
 		
 		$(".delChk").toggle(); // 체크박스 hide
@@ -146,11 +145,14 @@ $(document).ready(function(){
 		console.log(a.find("div").next().html());
 		console.log(a.find("div").next().next().html());
 		console.log(a.find("div").next().next().next().val());
-		a.find("div").children().addClass("1"); // src
+		console.log(a.find("div").next().next().next().next().next().val());
+		console.log("ㅋ");
+		//a.find("div").children().addClass("1"); // src
+		a.find("div").next().next().next().next().next().addClass("7");
 		a.find("div").next().addClass("2"); // 메뉴이름
 		a.find("div").next().next().addClass("3"); // 메뉴가격
 		a.find("div").next().next().next().addClass("4"); // 메뉴코드
-		a.find("div").next().next().next().next().addClass("5"); 
+		a.find("div").next().next().next().next().addClass("5"); //카테고리?
 		var popupX = (window.screen.width / 2) - (430 / 2);
 		var popupY = (window.screen.height / 2) - (600 / 2);
 		window.name = "parentForm";

@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.OnboardMapper">
 <select id="getOnboard" resultType="com.food.project.domain.OnboardVO">
-	select o.onboard_date, f.hours,f.brandname, f.truck_code, o.onboard_state
+	select o.onboard_date, f.truck_url,f.hours,f.truck_starttime,f.truck_endtime,f.brandname, f.truck_code, o.onboard_state
 	from onboard o join foodtruck f
 	on (o.truck_code = f.truck_code)
 	where o.email = #{email}

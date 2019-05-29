@@ -48,14 +48,13 @@
 												<div class="changeToBlock">${i.menu_name }</div>
 												<div class="changeToBlock">${i.unit_price }원</div>
 												<input name="menu_code" type="hidden" value="${i.menu_code}" />
-                        <input type="hidden" value="${i.menu_category}" />
+                        						<input type="hidden" value="${i.menu_category}" />
+                        						<input type="hidden" value="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
 											</div>
 											<div class="delChk">
-												<input type="checkbox" name="delChk" class="${i.menu_category}" value="" />
-												
-												<div class="${i.menu_category}" style="display: inline-block">선택해제됨</div>
+												<input type="checkbox"  name="delChk" class="delChk${i.menu_category} delChk" value="" />
+												<div class="status${i.menu_category} status" style="display: inline-block">선택해제됨</div>
 												<input type="hidden" value="${i.menu_code}" /> 
-											
 											</div>
 										</div>
 									</c:if>
@@ -76,12 +75,14 @@
 												</div>
 												<div class="changeToBlock">${i.menu_name }</div>
 												<div class="changeToBlock">${i.unit_price }원</div>
-												<input type="hidden" value="${i.menu_code}" /> 
+												<input name="menu_code" type="hidden" value="${i.menu_code}" />
 												<input type="hidden" value="${i.menu_category}" />
+												<input type="hidden" value="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
 											</div>
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="" class="delChk${i.menu_category} delChk" value="" />
 												<div class="status${i.menu_category} status" style="display: inline-block">선택해제됨</div>
+												<input type="hidden" value="${i.menu_code}" /> 
 											</div>
 										</div>
 									</c:if>
@@ -102,12 +103,12 @@
 												</div>
 												<div class="changeToBlock">${i.menu_name }</div>
 												<div class="changeToBlock">${i.unit_price }원</div>
-												<input type="hidden" value="${i.menu_code}" /> <input
-													type="hidden" value="${i.menu_category}" />
+												<input name="menu_code" type="hidden" value="${i.menu_code}" />
+												<input type="hidden" value="${i.menu_category}" />
+												<input type="hidden" value="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
 											</div>
 											<div class="delChk">
-												<input type="checkbox" name="delChk" id="${i}"
-													class="delChk${i.menu_category} delChk" value="" />
+												<input type="checkbox" name="delChk" id="${i}" class="delChk${i.menu_category} delChk" value="" />
 												<div class="status${i.menu_category} status" style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
@@ -129,8 +130,9 @@
 												</div>
 												<div class="changeToBlock">${i.menu_name }</div>
 												<div class="changeToBlock">${i.unit_price }원</div>
-												<input type="hidden" value="${i.menu_code}" /> <input
-													type="hidden" value="${i.menu_category}" />
+											    <input name="menu_code" type="hidden" value="${i.menu_code}" />
+												<input type="hidden" value="${i.menu_category}" />
+												<input type="hidden" value="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
 											</div>
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
@@ -156,8 +158,9 @@
 												</div>
 												<div class="changeToBlock">${i.menu_name }</div>
 												<div class="changeToBlock">${i.unit_price }원</div>
-												<input type="hidden" value="${i.menu_code}" /> <input
-													type="hidden" value="${i.menu_category}" />
+												<input name="menu_code" type="hidden" value="${i.menu_code}" />
+												<input type="hidden" value="${i.menu_category}" />
+												<input type="hidden" value="${pageContext.request.contextPath}/resources/image/upload/${i.menu_surl}" />
 											</div>
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"

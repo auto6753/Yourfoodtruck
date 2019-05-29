@@ -160,10 +160,18 @@
 			   
 			 }
 		
+		//var location = "${location}";
+		//console.log(location);
+		console.log(${location});
+		var lo= ${location};
+		console.log(lo);
+		console.log(typeof(lo));
+		console.log(lo.lat_y);
+		var markerPosition  = new daum.maps.LatLng(lo.lat_y, lo.lng_x); 
 		// 지도를 클릭한 위치에 표출할 마커입니다
 		var marker = new daum.maps.Marker({
 			// 지도 중심좌표에 마커를 생성합니다 
-			position : map.getCenter()
+			position : markerPosition
 		});
 		// 지도에 마커를 표시합니다
 		marker.setMap(map);

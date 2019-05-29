@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -75,6 +76,7 @@ public class SellerController {
 	private FoodTruckService truckService;
 	private PaymentService paymentService;
 	private EventMapper eventmapper;
+	private SellerMapper sellermapper;
 	//private SellerMapper sellermapper;
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	@Resource(name = "uploadPath")
@@ -765,14 +767,44 @@ public class SellerController {
 	}
   
 	@RequestMapping(value="/location", method=RequestMethod.GET) 
-	public String location(Model model) {
+	public String location(Model model, HttpSession session) {
+		FoodTruckVO tvo = (FoodTruckVO) session.getAttribute("seller");
+		
+		LocationVO lvo = new LocationVO();
+		lvo =  sellermapper.getlocation(tvo.getTruck_code());	
+		if(lvo ==null) {
+			lvo.setLat_y("37.566826");
+			lvo.setLng_x("126.9786567");
+		}
+		System.out.println(lvo);
+		JSONObject a  = new JSONObject();
+		a.put("lat_y",lvo.getLat_y());
+		a.put("lng_x",lvo.getLng_x());
+		
+		model.addAttribute("location", a);
 		return "seller/loc/location";
 	}
 	@RequestMapping(value="/location", method=RequestMethod.POST) 
-	public String location2(Model model, LocationVO vo) {
+	public String location2(Model model, LocationVO vo, HttpSession session) {
 		
 		sellerservice.insertlocaction(vo);
 		System.out.println(vo);
+		
+		
+		FoodTruckVO tvo = (FoodTruckVO) session.getAttribute("seller");
+		
+		LocationVO lvo = new LocationVO();
+		lvo =  sellermapper.getlocation(tvo.getTruck_code());	
+		if(lvo ==null) {
+			lvo.setLat_y("37.566826");
+			lvo.setLng_x("126.9786567");
+		}
+		System.out.println(lvo);
+		JSONObject a  = new JSONObject();
+		a.put("lat_y",lvo.getLat_y());
+		a.put("lng_x",lvo.getLng_x());
+		
+		model.addAttribute("location", a);
 		
 		//vo.setLoc_time(Timestamp.valueOf(DATE.getCurrentDate()));
 		return "seller/loc/location";
