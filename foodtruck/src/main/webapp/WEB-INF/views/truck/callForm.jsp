@@ -345,7 +345,7 @@
 			<div id="oj">
 				<button id="btn1" class="btn btn-default">선수금지불</button>
 				
-				<button id="btn2" class="btn btn-default">호출요청</button>
+				
 				<div id="pop" style="display: none;">
 				<div id="gg">
 				<div id="oo">

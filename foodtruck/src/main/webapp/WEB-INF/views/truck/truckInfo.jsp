@@ -35,7 +35,7 @@
 						var json = JSON.parse(data);
 						console.log(json);
 						if (json.onboardstate != 1) {
-							alert(json.onboard_state);
+							/* alert(json.onboard_state); */
 							$('#ride').text('탑승하기');
 						} else {
 							$('#ride').text('하차하기');
@@ -52,7 +52,7 @@
 					if (email == "") {
 						alert("로그인이후 이용가능합니다.");
 					} else {
-						$("#ride").click(function() {
+						/* $("#ride").click(function() { */
 							var email = "${sessionScope.sessionid.email}";
 							var truck_code = "${tlist.truck_code}";
 							var date = new Date();
@@ -66,7 +66,7 @@
 								month = "0" + month;
 							}
 							var today = year + "-" + month + "-" + day;
-							alert(today);
+							/* alert(today); */
 
 							if ($("#ride").text() == '탑승하기') {
 								$.ajax({
@@ -82,7 +82,7 @@
 									error : function(err) {
 										console.log(err);
 										console.log(err.statusText);
-										alert("안넘어감");
+									/* 	alert("안넘어감"); */
 									}
 								});
 
@@ -116,7 +116,7 @@
 									}
 								});
 							}
-						});
+						/* }); */
 					}
 				});
 
@@ -551,8 +551,7 @@
 					<c:forEach var="i" items="${event }">
 						<div id="eventbody">
 
-							<img id="eventimage"
-								src='${pageContext.request.contextPath}/resources/image/food10.PNG'>
+							<img id="eventimage" src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
 						</div>
 						<div id="eventcontent">
 							<br>

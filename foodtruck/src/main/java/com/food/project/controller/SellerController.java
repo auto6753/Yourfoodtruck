@@ -61,6 +61,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 
 @Controller
@@ -1132,6 +1133,11 @@ public class SellerController {
 		
 		
 		model.addAttribute("truckinfo" ,vo2);
+		
+		String a = vo2.getTruck_surl();
+		if (a==null) {
+			vo2.setTruck_surl("트럭사진.png");
+		}
 		
 		return "seller/truckinfo/truckinfo";
 	}

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.food.project.domain.EventMenuVO;
 import com.food.project.domain.EventVO;
+import com.food.project.domain.MaineventDTO;
 
 public interface EventService {
 
@@ -13,7 +14,10 @@ public interface EventService {
 	public void deleteEvent(String eventCode);
 	public void deleteEventMenu(String eventCode);
 	public ArrayList<EventMenuVO> getEventMenu(String truckCode);
-	public ArrayList<EventVO> getMainevent();
+
 	public ArrayList<EventVO> getEventForEdit(String eventCode);
+	public ArrayList<MaineventDTO> getMainevent(MaineventDTO vo);
+	
+	
 	
 }
