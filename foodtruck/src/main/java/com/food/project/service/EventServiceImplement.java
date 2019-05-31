@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.food.project.domain.EventMenuVO;
 import com.food.project.domain.EventVO;
+import com.food.project.domain.MaineventDTO;
 import com.food.project.mapper.EventMapper;
 
 import lombok.AllArgsConstructor;
@@ -60,16 +61,21 @@ public class EventServiceImplement implements EventService {
 		// TODO Auto-generated method stub
 		return eventMapper.getEventMenu(truckcode);
 	}
-	@Override
-	public ArrayList<EventVO> getMainevent() {
-		// TODO Auto-generated method stub
-		return eventMapper.getMainevent();
-	}
+	/*
+	 * @Override public ArrayList<EventVO> getMainevent() { // TODO Auto-generated
+	 * method stub return eventMapper.getMainevent(); }
+	 */
 
 	@Override
 	public ArrayList<EventVO> getEventForEdit(String eventCode) {
 		// TODO Auto-generated method stub
 		return eventMapper.getEventForEdit(eventCode);
+	}
+
+	@Override
+	public ArrayList<MaineventDTO> getMainevent(MaineventDTO vo) {
+		// TODO Auto-generated method stub
+		return eventMapper.getMainevent(vo);
 	}
 
 

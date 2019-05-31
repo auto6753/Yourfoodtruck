@@ -26,11 +26,11 @@
 						<button id="goBack" class="user-btn hideBtn">취소</button>
 					</div>
 					<ul class="tab paddingZero" id="tab">
-						<li>카테고리A</li>
-						<li>카테고리B</li>
-						<li>카테고리C</li>
-						<li>카테고리D</li>
-						<li>카테고리E</li>
+						<li>한식</li>
+						<li>중식</li>
+						<li>일식</li>
+						<li>분식</li>
+						<li>기타</li>
 					</ul>
 				</div>
 				<div class="tab_con" id="tab_con">

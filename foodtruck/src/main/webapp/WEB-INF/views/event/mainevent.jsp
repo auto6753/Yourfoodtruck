@@ -19,30 +19,33 @@
 				<div class="col-md-3">
 					<div class="bace">
 						<input type="hidden" class="truckcode" value="${i.truck_code}" />
+						
 						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
+							src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url }'>
 
 						<div class="menuname">
+							${i.brandname }<br>
 							${i.event_name } <br>
 							<fmt:formatDate value="${i.event_start }" pattern="yyyy.MM.dd" />~<fmt:formatDate
-										value="${i.event_end }" pattern="yyyy.MM.dd" /><br>
-							${i.brandname }
+										value="${i.event_end }" pattern="yyyy.MM.dd" />
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div class="col" id="endEvent">
+	<div class="col" id="endEvent">
 
 			<c:forEach var="e" items="${eevent}">
 				<div class="col-md-3">
 					<div class="bace">
 						<input type="hidden" class="truckcode"  value="${e.truck_code}" />
+						
 						<img class="img"
-							src='${pageContext.request.contextPath}/resources/image/food1.png'>
+							src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url }'>
 						<div class="menuname">
-							${e.event_name } <br> ${e.event_start }~${e.event_end }<br>
-							${e.brandname }
+						${e.brandname }<br>
+							${e.event_name } <br><fmt:formatDate value="${e.event_start }" pattern="yyyy.MM.dd" />~
+							<fmt:formatDate value="${e.event_end }" pattern="yyyy.MM.dd" />
 						</div>
 					</div>
 				</div>
