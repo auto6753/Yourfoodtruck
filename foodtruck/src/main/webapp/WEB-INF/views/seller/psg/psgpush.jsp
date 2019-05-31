@@ -12,21 +12,27 @@
 </div>
 </div>
 <h4>탑승자 현황 그래프</h4>
-<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
-<div id="Line_Controls_Chart">
-<div id="buttonbar">
-<form action="/seller/psgpush" method="GET">
-<input type="date" name="inputBeginDate"/>
-<input type="date" name="inputEndDate"/>
-<button type="submit" id="search"></button>
-</form>
+<div class="container">
+	<div class="row">
+		<div class="col">
+		<div class="sidemenu">
+			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+		</div>
+			<div id="Line_Controls_Chart">
+				<div id="buttonbar">
+					<form action="/seller/psgpush" method="GET">
+						<input type="date" name="inputBeginDate" /> <input type="date"
+							name="inputEndDate" />
+						<button type="submit" id="search"></button>
+					</form>
+				</div>
+				<!-- 라인 차트 생성할 영역 -->
+				<div id="chart_div"></div>
+			</div>
+		</div>
+		
+	</div>
 </div>
-	<!-- 라인 차트 생성할 영역 -->
-	<div id="chart_div"></div>
-
-</div>
-
-
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
