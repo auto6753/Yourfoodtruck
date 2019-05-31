@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.food.project.domain.EventMenuVO;
 import com.food.project.domain.EventVO;
+import com.food.project.domain.MaineventDTO;
 
 public interface EventMapper {
 	
@@ -16,7 +17,7 @@ public interface EventMapper {
 	public void delEvent(String event_code);
 	public void delEventMenu(String event_code);
 	public ArrayList<EventMenuVO> getEventMenu(String truck_code);
-	public ArrayList<EventVO> getMainevent();
+	public ArrayList<MaineventDTO> getMainevent(MaineventDTO vo);
 	public ArrayList<EventVO> getEventForEdit(String event_code);
 	
 	@Select("select event_url from event where event_code = #{event_code}")

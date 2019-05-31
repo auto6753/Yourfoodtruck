@@ -17,6 +17,19 @@
 		<div class="container">
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
+					<form id="salesInfo" action="salesInfo" method="GET">
+						<select id="yymm" name="yymm" required>
+							<c:forEach var="monthValArrList" items="${monthValArrList}" varStatus="status">
+								<c:if test="${yymm eq monthValArrList}">
+									<option value="${monthValArrList}" selected>${monthValArrList}</option>
+								</c:if>
+								<c:if test="${yymm ne monthValArrList}">
+									<option value="${monthValArrList}">${monthValArrList}</option>
+								</c:if>
+							</c:forEach>					
+						</select>
+						<button type="submit" id="monthSalesRe" name="pageName" value="monthSalesRe" style="display:none"></button>
+					</form>
 					<div id="chart_div"></div>
 					<table border="1">
 						<tr>

@@ -10,6 +10,19 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/byTimeSales.js"></script>
 <title>매출관리 - 시간별</title>
+<script>
+	function checkForm() {
+ 		var yyyy_tb = $("#yyyy_tb").val().substring(0, 4);
+		var yyyy_te = $("#yyyy_te").val().substring(0, 4);
+		
+		if(yyyy_tb > yyyy_te) {
+			alert("범위가 유효하지 않습니다.");
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -17,6 +30,29 @@
 		<div class="container">
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
+					<form id="salesInfo" action="salesInfo" method="GET" onsubmit="return checkForm();">
+						<select id="yyyy_tb" name="yyyy_tb" required>
+							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
+								<c:if test="${yyyy_tb eq byTimeValArrList}">
+									<option value="${byTimeValArrList}" selected>${byTimeValArrList}</option>
+								</c:if>
+								<c:if test="${yyyy_tb ne byTimeValArrList}">
+									<option value="${byTimeValArrList}">${byTimeValArrList}</option>
+								</c:if>
+							</c:forEach>					
+						</select>
+						<select id="yyyy_te" name="yyyy_te" required>
+							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
+								<c:if test="${yyyy_te eq byTimeValArrList}">
+									<option value="${byTimeValArrList}" selected>${byTimeValArrList}</option>
+								</c:if>
+								<c:if test="${yyyy_te ne byTimeValArrList}">
+									<option value="${byTimeValArrList}">${byTimeValArrList}</option>
+								</c:if>
+							</c:forEach>					
+						</select>
+						<button type="submit" id="byTimeSalesRe" name="pageName" value="byTimeSalesRe">확인</button>
+					</form>
 					<div id="chart_div"></div>
 					<c:forEach var="byTimeSalesResult" items="${byTimeSalesResult}">
 						<table border="1">

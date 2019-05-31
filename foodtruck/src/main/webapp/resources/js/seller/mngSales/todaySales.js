@@ -23,7 +23,7 @@ $(document).ready(function(){
 
       
       var data = google.visualization.arrayToDataTable([
-          ['Year', '전체', '회원', '비회원'],
+          ['오늘', '전체', '회원', '비회원'],
           ['합계', totalSales, mTotalSales, nTotalSales],
           ['현금', totalCashSales, mCashSales, nCashSales],
           ['카드', totalCardSales, mCardSales, nCardSales],

@@ -136,11 +136,11 @@ public class CustomerController {
 				System.out.println("===");
 				System.out.println(end);
 				System.out.println("===");
-				//int start_hour = Integer.parseInt(hours.substring(0, 2));
-				//int end_hour = Integer.parseInt(hours.substring(3));
-				//System.out.println(start_hour + " : " + end_hour);
+				// int start_hour = Integer.parseInt(hours.substring(0, 2));
+				// int end_hour = Integer.parseInt(hours.substring(3));
+				// System.out.println(start_hour + " : " + end_hour);
 				SimpleDateFormat date = new SimpleDateFormat("HHmm");
-				//System.out.println(date);
+				// System.out.println(date);
 				int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
 				System.out.println(sysdate);
 				System.out.println("d");
@@ -151,7 +151,7 @@ public class CustomerController {
 				}
 			}
 			System.out.println(result.size());
-			if(result.size()!=0) {
+			if (result.size() != 0) {
 				model.addAttribute("onSale", result);
 			}
 		}

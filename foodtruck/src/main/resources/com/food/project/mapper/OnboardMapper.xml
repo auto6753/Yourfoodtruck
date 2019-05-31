@@ -7,7 +7,7 @@
 	from onboard o join foodtruck f
 	on (o.truck_code = f.truck_code)
 	where o.email = #{email}
-	</select>
+</select>
 	<insert id="insertOnboard" parameterType="com.food.project.domain.OnboardVO">
 		insert into onboard(truck_code, email, onboard_date, onboard_state)
 		values(#{truck_code}, #{email}, #{onboard_date}, #{onboard_state})
@@ -32,9 +32,14 @@
 	<update id="updateOnboarddate"  parameterType="com.food.project.domain.OnboardVO">
 		update onboard set onboard_state=#{onboard_state} , onboard_date=#{onboard_date} where truck_code=#{truck_code} and email=#{email}
 	</update>
-	<select id="CountOnboard" resultType="HashMap">
-		select to_char(onboard_date, 'yy-mm-dd') as onboard_date, count(*) as count_total
+	<select id="CountOnboard" resultType="com.food.project.domain.OnboardCountDTO">
+		select to_char(onboard_date, 'yy-mm-dd') as onboard_date, count(*) as count
 		from onboard where onboard_state=#{onboard_state} and truck_code=#{truck_code}
-		group by onboard_date order by onboard_date desc
+		group by onboard_date order by onboard_date
+	</select>
+	<select id="countonboarddate" resultType="com.food.project.domain.OnboardCountDTO"  parameterType="com.food.project.domain.PeriodDTO">
+		select to_char(onboard_date, 'yy-mm-dd') as onboard_date, count(*) as count from onboard where onboard_state = #{onboard_state}
+		and onboard_date between to_date(#{beginDate}, 'yy-mm-dd') and to_date(#{endDate}, 'yy-mm-dd')
+		and truck_code = #{truck_code} group by onboard_date order by onboard_date
 	</select>
 </mapper>

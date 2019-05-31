@@ -26,11 +26,11 @@
 						<button id="goBack" class="user-btn hideBtn">취소</button>
 					</div>
 					<ul class="tab paddingZero" id="tab">
-						<li>카테고리A</li>
-						<li>카테고리B</li>
-						<li>카테고리C</li>
-						<li>카테고리D</li>
-						<li>카테고리E</li>
+						<li>한식</li>
+						<li>중식</li>
+						<li>일식</li>
+						<li>분식</li>
+						<li>기타</li>
 					</ul>
 				</div>
 				<div class="tab_con" id="tab_con">
@@ -137,7 +137,8 @@
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
 													class="delChk${i.menu_category} delChk" value="" />
-												<div class="status${i.menu_category} status" style="display: inline-block">선택해제됨</div>
+												<div class="status${i.menu_category} status"
+													style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
 									</c:if>
@@ -165,7 +166,8 @@
 											<div class="delChk">
 												<input type="checkbox" name="delChk" id="${i}"
 													class="delChk${i.menu_category} delChk" value="" />
-												<div class="status${i.menu_category} status" style="display: inline-block">선택해제됨</div>
+												<div class="status${i.menu_category} status"
+													style="display: inline-block">선택해제됨</div>
 											</div>
 										</div>
 									</c:if>

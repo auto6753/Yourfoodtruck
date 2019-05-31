@@ -28,4 +28,9 @@ public interface PaymentService {
 	public ArrayList<PaymentVO> getByDaySales(String truck_code, String inputFirstYear, String inputLastYear);
 	public ArrayList<PaymentVO> getByTimeSales(String truck_code, String inputFirstYear, String inputLastYear);
 	public String isMember(String telephone);
+	public String[] getMonthValue(String truck_code);
+	public String[] getYearValue(String truck_code);
+	public String[] getByDayValue(String truck_code);
+	public String[] getByTimeValue(String truck_code);
+	
 }

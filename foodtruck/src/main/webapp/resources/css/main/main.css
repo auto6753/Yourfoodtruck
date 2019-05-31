@@ -1,0 +1,50 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@media (min-width: 200px) !important;
+
+.carousel-inner{
+	margin-top:-4%;
+
+}
+ h3.display-4{
+	font-weight: 500;
+    line-height: 1.2;
+    color: gold;
+    font-family: 'Hanna', serif;
+	
+}
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: block;
+    height: 680px;
+  	
+}
+  
+.carousel-indicators {
+  
+  	z-index: 1;
+   
+} 
+.carousel-indicators li {
+ 
+    background-color: gold;
+}
+#story{
+	background-color: gainsboro;
+	width: 78.5%;
+    height:80px;
+    margin: 0 auto;
+    margin-top: 50px;
+    z-index: 1;
+	
+}
+
+.card-deck {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  	margin-right: 10%;
+    margin-left: 10%;
+}
+.card-deck .card {
+    margin-bottom: 0px;
+}

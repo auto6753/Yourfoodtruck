@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class OnboardCountDTO {
 	private String onboard_date;
-	private String count;
+	private int count;
 }

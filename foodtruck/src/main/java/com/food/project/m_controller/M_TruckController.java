@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -33,6 +32,7 @@ import com.google.gson.JsonArray;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @CrossOrigin()
 @Controller
@@ -265,24 +265,18 @@ public class M_TruckController {
 		
 		return data.toString();
 	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Model model) {
-		System.out.println("ㅇ");
-		return "truck/register/registerForm";
-	}
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String register(Model model,FoodTruckVO fd,HttpServletRequest request,HttpSession session) {
+	@ResponseBody
+	@RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String register(FoodTruckVO fd,HttpServletRequest request) {
 		System.out.println("1");
-		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
-		fd.setEmail(vo.getEmail());
-		fd.setLayout(0);
-		//System.out.println(fd);
+		System.out.println(fd);
 		FoodTruckVO vo2= service.insertFoodTruck(fd);
 		System.out.println(vo2);
 		//System.out.println(session);
-		session.setAttribute("seller", vo2);
-		return "redirect:/seller";
+		JSONObject sessionInfo = new JSONObject();
+		sessionInfo.put("result","success");
+		sessionInfo.put("foodtruck",vo2);
+		return sessionInfo.toString();
 	}
 
 	

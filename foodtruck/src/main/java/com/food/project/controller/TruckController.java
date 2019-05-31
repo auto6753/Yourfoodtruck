@@ -45,8 +45,8 @@ public class TruckController {
 		
 		ArrayList<EventVO> event = service.getEvent(truck_code);
 		model.addAttribute("event" ,event);
-		
 		model.addAttribute("tlist", ss); //푸드트럭 정보를 tlist 에 담아서 truck/truckInfo 페이지로 넘김 
+		
 		
 		ArrayList<ReviewDTO> d = service.getReviewList(truck_code); //클릭한 푸드트럭의 코드로 해당 푸드트럭의 댓글을 조회해서 reviewList에 담고 truck/truckInfo 로 넘겨줌
 
