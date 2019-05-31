@@ -17,12 +17,7 @@
 			</div>
 			<div class="col-xs-12 col-md-9 content">
 				<h1>매출관리</h1>
-				<div id="Line_Controls_Chart">
-					<!-- 라인 차트 생성할 영역 -->
-					<div id="lineChartArea" style="padding: 0px 20px 0px 0px;"></div>
-					<!-- 컨트롤바를 생성할 영역 -->
-					<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
-				</div>
+				<iframe src="/seller/mngSales" style="width: 100%; height: 50%; border: 1px lightgray solid;"></iframe>
 				
 				<h1>탑승자관리</h1>
 				<div id="Line_Controls_Chart2">

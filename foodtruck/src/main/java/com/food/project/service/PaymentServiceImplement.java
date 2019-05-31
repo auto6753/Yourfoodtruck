@@ -51,10 +51,11 @@ public class PaymentServiceImplement implements PaymentService {
 	}
 	@Override
 	public int updatePoint(CustomerVO vo) {
-		// TODO Auto-generated method stub
-		
 		return mapper.updatePoint(vo);
 	}
+	
+	
+	
 	// 매출관리
 	@Override
 	public String getCurYear2() {
@@ -124,4 +125,28 @@ public class PaymentServiceImplement implements PaymentService {
 		// TODO Auto-generated method stub
 		return mapper.isMember(telephone);
 	}
+
+	@Override
+	public String[] getMonthValue(String truck_code) {
+		// TODO Auto-generated method stub
+		return mapper.getMonthValue(truck_code);
+	}
+
+	@Override
+	public String[] getYearValue(String truck_code) {
+		// TODO Auto-generated method stub
+		return mapper.getYearValue(truck_code);
+	}
+
+	@Override
+	public String[] getByDayValue(String truck_code) {
+		return mapper.getByDayValue(truck_code);
+	}
+
+	@Override
+	public String[] getByTimeValue(String truck_code) {
+		// TODO Auto-generated method stub
+		return mapper.getByTimeValue(truck_code);
+	}
+	
 }

@@ -3,6 +3,10 @@
  */
 
 $(document).ready(function(){
+	$("#yy").change(function(){
+		$("#yearSalesRe").click();
+	});
+	
 	var mCashSalesYear = Number($("#mCashSalesYear").val());
 	var nCashSalesYear = Number($("#nCashSalesYear").val());
 	var totalCashSalesYear = Number($("#totalCashSalesYear").val());
