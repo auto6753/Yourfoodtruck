@@ -54,6 +54,7 @@ public class AnnounceController {
 		int start=postPager.getPageBegin();
 		int end=postPager.getPageEnd();
 		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,post_class);
+		System.out.println(areaList.toString());
 		System.out.println(postPager.toString());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("totPage",totPage);

@@ -16,9 +16,10 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     /* .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')} */
     .info .link {color: #5085BB;}
+    .list-group { height:500px; overflow-y: auto;}
 
 #fr {
-	margin-left: 40%;
+	margin:0 auto;
 }
 
 .profile-teaser-left {
@@ -31,6 +32,12 @@
 	width: 100%;
 	height: auto;
 }
+.btn{
+	background-color: rgb(255, 94, 24);
+	color: white;
+}
+
+
 
 .profile-teaser-main {
 	float: left;
@@ -44,8 +51,8 @@
    <select id="select" onchange="change()">
       <option value='map'>지도</option>
       <option value='list'>목록</option>
-   </select> 검색 : <input type="text" value="" id="keyword" size="15"> <input
-      id="submit" type="button" value="검색하기">
+   </select> <input type="text" value="" id="keyword" size="15" placeholder="주소입력"> <input
+      id="submit" type="button" value="검색하기"  class="btn">
 </form>
 <div id="list" style="display: none">
 	<%-- <c:forEach var="test" items="${loc}">
@@ -82,7 +89,7 @@ ${test.lat_y} // ${test.lng_x }
 <!-- </div> -->
 
 
-<div id="map" style="width: 60%; height: 50%; margin: 0 auto;"></div>
+<div id="map" style="width: 60%; height: 550px; margin: 0 auto;"></div>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <!-- <script type="text/javascript"
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04b9ba1fd8fa1800dc5a03023c8372db&libraries=clusterer"></script>

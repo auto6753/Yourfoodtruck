@@ -21,7 +21,8 @@ public interface CallListMapper {
 	 * @Delete("delete call_list where merchant_uid =#{merchant_uid}") public void
 	 * deleteCall(String merchant_uid);
 	 */
-
+	public ArrayList<Map<String,Object>> allList(Map<String,Object> map);
+	public Map<String,Object> totalPage(String truck_code);
 	@Select("select * from call_list where merchant_uid=#{merchant_uid}")
 	public CallListVO getCall(String merchant_uid);
 }

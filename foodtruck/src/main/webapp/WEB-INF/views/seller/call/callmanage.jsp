@@ -113,7 +113,6 @@
 						});
 		//$("#dd").click(function(){
 		//alert("클릭");
-
 		function update(i) {
 			var a = i;
 			console.log(i[0]);
@@ -124,7 +123,7 @@
 				type : "post",
 				data : {
 					merchant_uid : i[0],
-					progress : i[1]
+					PROGRESS : i[1]
 				},
 				success : function(data) {
 					if (data == 'success') {
@@ -140,7 +139,7 @@
 		function cancel(price, name, uid, reason) {
 
 			$.ajax({
-				url : "http://localhost:3000/cardrefund",
+				url : "http://39.127.7.64:3000/cardrefund",
 				crossOrigin : true,
 				"type" : "POST",
 				"contentType" : "application/json",
@@ -166,8 +165,8 @@
 						type : "post",
 						data : {
 							merchant_uid : result.merchant_uid,
-							progress : 6,
-							pay_status : 3
+							PROGRESS : 6,
+							PAY_STATUS : 3
 
 						},
 						success : function(data) {
@@ -247,14 +246,14 @@
 </script>
 
 
-<div class="container" >
-	<div class="row" >
+<div class="container">
+	<div class="row">
 		<div class="col-md-3">
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 		</div>
-		<div class="col-md-9" >
+		<div class="col-md-9">
 			<div class="callTitle">호출 관리</div>
-			<div class="calltext" style="overflow-x:hidden; overflow-y:auto;">
+			<div class="calltext" style="overflow-x: hidden; overflow-y: auto;">
 				<table>
 					<!-- #wrapper에 스타일 지정 -->
 					<thead>
@@ -271,55 +270,55 @@
 						<c:forEach var="i" items="${callList}">
 							<tr>
 								<!-- 요청된 호출 수만큼 <tr> 태그 생성 -->
-								<td><input type="hidden" value="${i.merchant_uid}" /> 행사일 :
-									${i.festival_startdate } ~ ${i.festival_enddate } <br>
-									행사시간 : ${i.festival_starttime } ~ ${i.festival_endtime } <br>
-									행사장소 : ${i.place} <br> 섭외비용 : <span>${i.price }</span> 원<br>
-									요구사항 : ${i.content } <br></td>
-								<td>신청자명 : <span>${i.name }</span> <br> 전화번호
-									:${i.calltel }
+								<td><input type="hidden" value="${i.MERCHANT_UID}" /> 행사일
+									: ${i.FESTIVAL_STARTDATE } ~ ${i.FESTIVAL_ENDDATE} <br>
+									행사시간 : ${i.FESTIVAL_STARTTIME } ~ ${i.FESTIVAL_ENDTIME } <br>
+									행사장소 : ${i.PLACE} <br> 섭외비용 : <span>${i.PRICE }</span> 원<br>
+									요구사항 : ${i.CONTENT } <br></td>
+								<td>신청자명 : <span>${i.NAME }</span> <br> 전화번호
+									:${i.CALLTEL }
 								</td>
-								<c:if test="${i.pay_status ==1}">
+								<c:if test="${i.PAY_STATUS ==1}">
 									<td>결제 : 결제 완료<br>
 								</c:if>
-								<c:if test="${i.pay_status ==2}">
+								<c:if test="${i.PAY_STATUS ==2}">
 									<td>결제 : 미결제<br>
 								</c:if>
-								<c:if test="${i.pay_status ==3}">
+								<c:if test="${i.PAY_STATUS ==3}">
 									<td>결제 : 취소<br>
 								</c:if>
-								<c:if test="${i.progress ==1}">
+								<c:if test="${i.PROGRESS ==1}">
 					상태 : 진행중<br>
 									<button class="agree">승인</button>
 									<button class="cancel1">취소</button>
 									</td>
 								</c:if>
-								<c:if test="${i.progress ==2}">
+								<c:if test="${i.PROGRESS ==2}">
 					상태 : 진행중<br>
 									<button class="confirm2">확인</button>
 									<button class="cancel2">취소</button>
 									</td>
 								</c:if>
-								<c:if test="${i.progress ==3}">
+								<c:if test="${i.PROGRESS ==3}">
 					상태 : 행사측 확인완료<br>
 									<button class="confirm3">확인</button>
 									<button class="cancel3">취소</button>
 									</td>
 								</c:if>
-								<c:if test="${i.progress ==4}">
+								<c:if test="${i.PROGRESS ==4}">
 					상태 : 행사측 미확인<br>
 									<button class="cancel4">취소</button>
 									</td>
 								</c:if>
-								<c:if test="${i.progress ==5}">
+								<c:if test="${i.PROGRESS ==5}">
 					상태 : 거래종료<br>
 									</td>
 								</c:if>
-								<c:if test="${i.progress ==6}">
+								<c:if test="${i.PROGRESS ==6}">
 					상태 : 취소<br>
 									</td>
 								</c:if>
-								<c:if test="${i.progress ==7}">
+								<c:if test="${i.PROGRESS ==7}">
 					취소 신청을 하셨습니다.<br>
 									</td>
 								</c:if>
@@ -328,7 +327,27 @@
 					</tbody>
 				</table>
 			</div>
+			<div id="nextall">
+				<nav id="next" aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page"><a class="page-link"
+							href="javascript:list('1')"><span>&lt;&lt;</span></a></li>
+						<c:forEach var="num" begin="${map.postPager.blockBegin}"
+							end="${map.postPager.blockEnd}">
+							<li class="page-item"><a class="page-link"
+								href="javascript:list('${num}')"><span>${num}</span></a></li>
+						</c:forEach>
+						<li class="page-item"><a class="page-link"
+							href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 
 	</div>
 </div>
+<script>
+function list(page) {
+	location.href = "/seller/callmanage?curPage=" + page ;
+}
+</script>
