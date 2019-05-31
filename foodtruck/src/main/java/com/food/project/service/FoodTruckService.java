@@ -14,6 +14,7 @@ import com.food.project.domain.ReviewVO;
 public interface FoodTruckService {
 	public ArrayList<FoodTruckVO> getFoodTruckList();
 	public FoodTruckVO getFoodTruck(String truck_code);
+	public FoodTruckVO getFoodTruckE(String email);
 	public FoodTruckVO insertFoodTruck(FoodTruckVO vo);
 	public void insertReview(ReviewVO vo);
 	public ArrayList<ReviewDTO> getReviewList(String truck_code);

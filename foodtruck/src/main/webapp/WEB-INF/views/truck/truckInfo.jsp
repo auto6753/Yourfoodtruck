@@ -507,30 +507,30 @@
 					<%-- <jsp:include page="location.jsp"></jsp:include> --%>
 				</div>
 				<script>
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-					mapOption = {
-						center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-						level : 3
-					// 지도의 확대 레벨
-					};
+               var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+               mapOption = {
+                  center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                  level : 3
+               // 지도의 확대 레벨
+               };
 
-					var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+               var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-					// 마커가 표시될 위치입니다 
-					var markerPosition = new daum.maps.LatLng(33.450701,
-							126.570667);
+               // 마커가 표시될 위치입니다 
+               var markerPosition = new daum.maps.LatLng(33.450701,
+                     126.570667);
 
-					// 마커를 생성합니다
-					var marker = new daum.maps.Marker({
-						position : markerPosition
-					});
+               // 마커를 생성합니다
+               var marker = new daum.maps.Marker({
+                  position : markerPosition
+               });
 
-					// 마커가 지도 위에 표시되도록 설정합니다
-					marker.setMap(map);
+               // 마커가 지도 위에 표시되도록 설정합니다
+               marker.setMap(map);
 
-					// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-					// marker.setMap(null);
-				</script>
+               // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+               // marker.setMap(null);
+            </script>
 				<div id="locationdetail" style="text-align: left;">
 					지하철<br> -1호선을 타고 월평역에서 하차하여 약 20분정도 걸어오셔야 합니다. <br> <br>
 
@@ -548,9 +548,13 @@
 
 				<div id="eventborder">
 					<c:forEach var="i" items="${event }">
-						<div id="eventbody">
-
-							<img id="eventimage" src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
+						<div id="eventbody" class="${i.event_url}">
+							<c:if test="${i.event_url} == 'defaultImg'">
+							<img id="eventimage"
+								src='${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png'>
+							</c:if>
+							<img id="eventimage"
+								src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
 						</div>
 						<div id="eventcontent">
 							<br>
@@ -577,25 +581,25 @@
 		</div>
 	</div>
 	<script>
-		var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
+      var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
 
-		// 이미지 지도에 표시할 마커입니다
-		// 이미지 지도에 표시할 마커는 Object 형태입니다
-		var marker = {
-			position : markerPosition
-		};
+      // 이미지 지도에 표시할 마커입니다
+      // 이미지 지도에 표시할 마커는 Object 형태입니다
+      var marker = {
+         position : markerPosition
+      };
 
-		var staticMapContainer = document.getElementById('map'), // 이미지 지도를 표시할 div  
-		staticMapOption = {
-			center : new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
-			level : 3, // 이미지 지도의 확대 레벨
-			marker : marker
-		// 이미지 지도에 표시할 마커 
-		};
+      var staticMapContainer = document.getElementById('map'), // 이미지 지도를 표시할 div  
+      staticMapOption = {
+         center : new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+         level : 3, // 이미지 지도의 확대 레벨
+         marker : marker
+      // 이미지 지도에 표시할 마커 
+      };
 
-		// 이미지 지도를 생성합니다
-		var map = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-	</script>
+      // 이미지 지도를 생성합니다
+      var map = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+   </script>
 
 </body>
 </html>

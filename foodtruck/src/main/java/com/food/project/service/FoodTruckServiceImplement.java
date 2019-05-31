@@ -91,6 +91,12 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 		mapper.updatetruckphoto(mvo);
 	}
 
+@Override
+public FoodTruckVO getFoodTruckE(String email) {
+	
+	return mapper.getFoodTruckE(email);
+}
+
 
 
 	

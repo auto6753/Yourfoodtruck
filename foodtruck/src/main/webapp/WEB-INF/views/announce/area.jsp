@@ -12,10 +12,8 @@
 <body>
 	<button id="toRecruit" class="btn">모집공고 보기</button>
 	<div id="title" class="card-header">
-		<p>허가구역 안내 </p>
-		
+		<p>허가구역 안내</p>
 	</div>
-	
 	<div id="searchall">
 		<nav class="navbar navbar-light bg-light">
 			<form class="form-inline" action="/area" method="post">
@@ -41,9 +39,6 @@
 				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
 				<input id="searchbutton" type="submit" value="조회" class="btn">
-				<c:if test="${not empty sessionScope.sessionid}">
-				<a href="/area/addArea"><button id="pageadd" type="button" class="btn">등록</button></a>
-				</c:if>
 			</form>
 		</nav>
 	</div>

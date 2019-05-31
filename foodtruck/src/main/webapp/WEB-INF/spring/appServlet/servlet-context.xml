@@ -30,7 +30,7 @@
 		</beans:constructor-arg>
 	</beans:bean> -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\bon300_22\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
+		<beans:constructor-arg value="C:\Users\bon300-25\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
 		</beans:constructor-arg>
 	</beans:bean>
 	<!--upload 용량 -->

@@ -50,6 +50,7 @@
         </div>
       </div>
       Slide Three - Set the background image for this slide in the line below
+
       <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">커피 트럭</h3>
@@ -94,7 +95,6 @@
 					<h4 class="card-title">이벤트</h4>
 					<p class="card-text">각 푸드트럭에서 실시하는 이벤트를 알아보세요.</p>
 
-				</div>
 			</div>
 			<div class="card"> 
 				<a href="/news"><img class="card-img-top" src="resources/image/news.png" alt="Card image cap" ></a>
@@ -124,7 +124,7 @@
 				data:JSON.stringify(result),
 				success:function(good) {
 					if(good =="Yes")alert("json데이터 들어감")
-					else if(good=="No");/* alert("안들어가도댐"); */
+					//else if(good=="No")alert("안들어가도댐");
 				},error:function(err) {
 					console.log('json저장 실패');
 					console.log(err);
@@ -132,5 +132,4 @@
 			});
 		});
 	});
-	
-	</script>
+</script>

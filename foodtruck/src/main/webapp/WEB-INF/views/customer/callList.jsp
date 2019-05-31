@@ -307,22 +307,5 @@ function cancel(i){
 			</tbody>
 		</table>
 	</div>
-	<div class="sunjae">
-		<nav aria-label="Page navigation example" id="nav" class="sg">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						<span class="sr-only"></span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only"></span>
-				</a></li>
-			</ul>
-		</nav>
-	</div>
 </body>
 </html>
