@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+.carousel-inner{
+   margin-top:-4%;
+
+}
+ h3.display-4{
+   font-weight: 500;
+   line-height: 1.2;
+   color: gold;
+   font-family: 'Hanna', serif;
+   font-size: 500%;
+   margin-right:60%;
+   margin-bottom: 15%;
+   
+}
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: block;
+    height: 85%;
+}
+.carousel-indicators {
+  
+    margin-right: 58%;
+    margin-bottom: 5%;
+}
+.carousel-indicators li {
+ 
+    background-color: gold;
+}

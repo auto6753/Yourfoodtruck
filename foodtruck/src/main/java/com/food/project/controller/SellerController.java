@@ -213,8 +213,8 @@ public class SellerController {
 			
 		case "weekSales":
 			ArrayList<PaymentVO> weekSales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
-			weekSales = paymentService.getTodaySales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
-
+			weekSales = paymentService.getWeekSales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
+			System.out.println(weekSales);
 			int mKakaoSalesWeek = 0, nKakaoSalesWeek = 0; // 카카오페이 매출액(회원, 비회원)
 			int totalKakaoSalesWeek = 0; // 카카오페이 매출총액(회원 + 비회원)
 			int mCashSalesWeek = 0, nCashSalesWeek = 0; // 현금 매출액(회원, 비회원)
