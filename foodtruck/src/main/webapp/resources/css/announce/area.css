@@ -57,6 +57,8 @@ p{
 #table{
    width:100%;
    margin: 0 auto;
+   height:540px;
+   overflow-y:auto;
 }
 #nextall{
    width:100%;
@@ -65,6 +67,6 @@ p{
 
 
 
-span{
-   color: rgb(255, 94, 24);
+#top-right a{
+   color: rgb(255, 94, 24)!important;
 }

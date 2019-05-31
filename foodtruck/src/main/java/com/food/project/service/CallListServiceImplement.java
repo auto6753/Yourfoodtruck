@@ -44,6 +44,20 @@ public class CallListServiceImplement implements CallListService {
 		// TODO Auto-generated method stub
 		return mapper.updateCallVo(vo);
 	}
-
+	@Override
+	public int totalPage(String truck_code) {
+		Map<String,Object> map=mapper.totalPage(truck_code);
+		System.out.println(map.toString());
+		int tot_page=Integer.parseInt(String.valueOf(map.get("TOT_PAGE")));
+		return tot_page;	
+	}
+	@Override
+	public ArrayList<Map<String,Object>> allList(int start, int end, String truck_code) {	
+		Map<String,Object> map=new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("truck_code", truck_code);
+		
+		return mapper.allList(map);	}
 
 }

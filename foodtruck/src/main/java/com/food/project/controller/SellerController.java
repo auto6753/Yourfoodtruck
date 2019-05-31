@@ -30,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,6 +48,7 @@ import com.food.project.domain.PaymentVO;
 import com.food.project.domain.UploadFileUtils;
 import com.food.project.mapper.EventMapper;
 import com.food.project.mapper.SellerMapper;
+import com.food.project.paging.CallListPager;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.FoodTruckService;
@@ -61,6 +63,8 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 
 
 @Controller
@@ -945,39 +949,39 @@ public class SellerController {
 		String truckCode = foodtruckvo.getTruck_code();
 		
 		CustomerVO e = (CustomerVO) request.getSession().getAttribute("sessionid");
-		logger.info("originalName : " + file.getOriginalFilename());
-		logger.info("size : " + file.getSize());
-		logger.info("contentType : " + file.getContentType());
 		FoodTruckVO vo4 = new FoodTruckVO();
 		String em = e.getEmail()+"/event";
 		vo4.setEmail(em);
 		//vo4.setEmail();
-		
-		ResponseEntity<String> upload = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
-				HttpStatus.OK);
-		String str = upload.getBody();
-		String[] array = str.split("\\\\");
-		System.out.println(array[0]);
-		System.out.println(array[1]);
-		System.out.println(array[0] + "\\" + array[1].substring(2));
-		
 		EventVO evo = new EventVO();
-		evo.setTruck_code(truckCode);
-		evo.setEvent_name(request.getParameter("event_name"));
-		String event_start=request.getParameter("event_start");
-		String event_end=request.getParameter("event_end");
-		Long longdata=Long.parseLong(event_start);
-		evo.setEvent_start(new Date(longdata));
-		longdata=Long.parseLong(event_end);
-		evo.setEvent_end(new Date(longdata));
-		evo.setEvent_target(request.getParameter("event_target"));
-		evo.setEvent_content(request.getParameter("event_content"));
-		evo.setEvent_payment(Integer.parseInt(request.getParameter("event_payment")));
-		evo.setEvent_combinable(Integer.parseInt(request.getParameter("event_combinable")));
-		evo.setEvent_url(array[0] + "\\" + array[1].substring(2));
+		try {
+			ResponseEntity<String> upload = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+					HttpStatus.OK);
+			String str = upload.getBody();
+			String[] array = str.split("\\\\");
+			System.out.println(array[0]);
+			System.out.println(array[1]);
+			System.out.println(array[0] + "\\" + array[1].substring(2));
+			evo.setEvent_url(array[0] + "\\" + array[1].substring(2));
+		}catch(Exception ex) {
+			evo.setEvent_url("defaultImg.png");
+		}
+			evo.setTruck_code(truckCode);
+			evo.setEvent_name(request.getParameter("event_name"));
+			String event_start=request.getParameter("event_start");
+			String event_end=request.getParameter("event_end");
+			Long longdata=Long.parseLong(event_start);
+			evo.setEvent_start(new Date(longdata));
+			longdata=Long.parseLong(event_end);
+			evo.setEvent_end(new Date(longdata));
+			evo.setEvent_target(request.getParameter("event_target"));
+			evo.setEvent_content(request.getParameter("event_content"));
+			evo.setEvent_payment(Integer.parseInt(request.getParameter("event_payment")));
+			evo.setEvent_combinable(Integer.parseInt(request.getParameter("event_combinable")));
+			
+		
+		
 		ArrayList<EventMenuVO> emvos = new ArrayList<>();
-		System.out.println(event_start);
-		System.out.println(event_end);
 		
 		String[] menuCode1 = request.getParameterValues("menuCode[]"); // 메뉴코드
 		String[] discount1 = request.getParameterValues("discount[]"); // 할인액
@@ -1137,9 +1141,22 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/callmanage", method=RequestMethod.GET) 
-	public String call(Model model,HttpSession session) {
+	public String call(Model model,@RequestParam(defaultValue="1") int curPage,HttpSession session) {
+		int totPage=0;
+		CallListPager callListPager;
+		
 		FoodTruckVO vo = (FoodTruckVO)session.getAttribute("seller");
-		model.addAttribute("callList", callService.getCallList(vo.getTruck_code()));
+		totPage=callService.totalPage(vo.getTruck_code());
+		callListPager=new CallListPager(totPage,curPage);
+		int start=callListPager.getPageBegin();
+		int end=callListPager.getPageEnd();
+		ArrayList<Map<String,Object>> callList = callService.allList(start,end,vo.getTruck_code());
+		//callService.getCallList(vo.getTruck_code())
+		model.addAttribute("callList", callList);
+		Map<String,Object> map = new HashMap<>();
+		map.put("totPage",totPage);
+		map.put("callListPager",callListPager);
+		model.addAttribute("map",map);
 		return "seller/call/callmanage";
 	}
 	
@@ -1240,6 +1257,11 @@ public class SellerController {
 		
 		
 		model.addAttribute("truckinfo" ,vo2);
+		
+		String a = vo2.getTruck_surl();
+		if (a==null) {
+			vo2.setTruck_surl("트럭사진.png");
+		}
 		
 		return "seller/truckinfo/truckinfo";
 	}

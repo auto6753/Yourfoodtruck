@@ -20,10 +20,10 @@
 #main{
 
 
-   height: 50px;
-   width:80%;
-   
-   
+	height: 50px;
+	width:80%;
+	
+	
 }
 .navbar{
 z-index:2;
@@ -36,6 +36,11 @@ border-radius: 10px;
 
 /* #top-right {
 
+	padding: 0 auto;
+} */
+
+/* #top-right {
+
    padding: 0 auto;
 } */
 
@@ -44,32 +49,44 @@ border-radius: 10px;
 }
 .test{
 
-   margin-left:20%;
-   margin-right:20%;
-    font-family: 'yg-jalnan';
-   font-size: 120%;
-   font-weight: 700;
-   
-   
+	margin-left:20%;
+	margin-right:20%;
+ 	font-family: 'yg-jalnan';
+	font-size: 120%;
+	font-weight: 700;
+	
+	
 }
 .navbar-light .navbar-brand {
     color: rgba(0, 0, 0, .9);
     font-family: 'yg-jalnan';
+    width: 50%;
+    position: relative;
+    
 }
 a{
-   color: rgb(255, 94, 24);
-   
+	color: rgb(255, 94, 24);
 
 
 }
 .collapse.show{
-   display: block;
-   text-align: center;
-   background-color: white;
-   margin-top: 34px;
+	display: block;
+	text-align: center;
+	background-color: white;
+	margin-top: 5px;
 
 
 }
+
+.navbar-collapse {
+   
+ 
+    position: relative;
+    left: 10%;
+    font-size: 100%;
+    width: 300%;
+}
+ 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: rgba(0, 0, 0, .9);
 }
@@ -83,54 +100,61 @@ light .navbar-nav .nav-link:hover{
 color: rgba(255, 94, 24); 
 }
 .collapse navbar-collapse{
-   margin-left: 300px;
+	margin-left: 300px;
 }
+.foodtruck{
+	width: 100%;
+    position: relative;
+  	right: 20%
+}
+
+
 
 
 </style>
 <!-- Navigation -->
 <div class="test">
 <nav 
-   class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-   <div id="main" class="container" >
-      <a class="navbar-brand" href="/rehome" >당신의 푸드트럭</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-         data-target="#navbarResponsive" aria-controls="navbarResponsive"
-         aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a class="nav-link" href="#">서비스소개
-                  <span class="sr-only">(current)</span>
-            </a></li>
-            <li class="nav-item"><a class="nav-link" href="/search">트럭검색</a></li>
-            <li class="nav-item"><a class="nav-link" href="/area">모집공고</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li>
-            <li class="nav-item"><a class="nav-link" href="/help">고객센터</a></li>
-         </ul>
-         <div id="top-right">
-            <c:if test="${sessionid == null}">
-            <span id="login" class="badge badge-light"><a href="/login">로그인</a></span>
-            <span class="badge badge-light"><a href="/login/register">회원가입</a></span>
-            </c:if>
-            <c:if test="${not empty sessionScope.sessionid}">   
-               <span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
-               <input id="sessione" type="hidden" value="${sessionScope.sessionid.email }">
-               <input id="sessionp" type="hidden" value="${sessionScope.sessionid.point}">
-               <span id="" class="badge badge-light"><a href="#">포인트 : ${sessionScope.sessionid.point} 원</a></span>
-               <span id="" class="badge badge-light"><a href="/customer">마이페이지</a></span>
-               <c:if test="${empty sessionScope.seller}">   
-               <span id="" class="badge badge-light"><a href="/truck/register">트럭등록</a></span>
-               </c:if>
-               <c:if test="${not empty sessionScope.seller}">
-               <span id="" class="badge badge-light"><a href="/seller">트럭관리</a></span>
-               </c:if>
-               <span id="" class="badge badge-light"><a href="/login/logout">로그아웃</a></span>
-            </c:if>
-         </div>
-      </div>
-   </div>
+	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+	<div id="main" class="container" >
+		<a class="navbar-brand" href="/rehome" ><img class="foodtruck"src="/resources/image/KakaoTalk_20190530_140110049.png"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarResponsive" aria-controls="navbarResponsive"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="/search">트럭검색</a></li>
+				<li class="nav-item"><a class="nav-link" href="/area">모집공고</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li>
+				<li class="nav-item"><a class="nav-link" href="/help">고객센터</a></li>
+			</ul>
+			<div id="top-right">
+				<c:if test="${sessionid == null}">
+				<span id="login" class="badge badge-light"><a href="/login">로그인</a></span>
+				<span class="badge badge-light"><a href="/login/register">회원가입</a></span>
+				</c:if>
+				<c:if test="${not empty sessionScope.sessionid}">	
+					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
+					<input id="sessione" type="hidden" value="${sessionScope.sessionid.email }">
+					<input id="sessionp" type="hidden" value="${sessionScope.sessionid.point}">
+					<span id="" class="badge badge-light"><a href="#">포인트 : ${sessionScope.sessionid.point} 원</a></span>
+					<span id="" class="badge badge-light"><a href="/customer">마이페이지</a></span>
+					<c:if test="${empty sessionScope.seller}">	
+					<span id="" class="badge badge-light"><a href="/truck/register">트럭등록</a></span>
+					</c:if>
+					<c:if test="${not empty sessionScope.seller}">
+					<span id="" class="badge badge-light"><a href="/seller">트럭관리</a></span>
+					</c:if>
+					<span id="" class="badge badge-light"><a href="/login/logout">로그아웃</a></span>
+				</c:if>
+			</div>
+		</div>
+	</div>
 </nav>
 </div>
 <script>

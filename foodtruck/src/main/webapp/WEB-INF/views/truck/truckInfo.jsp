@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" >
+<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
 <title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
@@ -35,7 +36,7 @@
 						var json = JSON.parse(data);
 						console.log(json);
 						if (json.onboardstate != 1) {
-							alert(json.onboard_state);
+							/* alert(json.onboard_state); */
 							$('#ride').text('탑승하기');
 						} else {
 							$('#ride').text('하차하기');
@@ -52,7 +53,7 @@
 					if (email == "") {
 						alert("로그인이후 이용가능합니다.");
 					} else {
-						$("#ride").click(function() {
+						/* $("#ride").click(function() { */
 							var email = "${sessionScope.sessionid.email}";
 							var truck_code = "${tlist.truck_code}";
 							var date = new Date();
@@ -66,7 +67,7 @@
 								month = "0" + month;
 							}
 							var today = year + "-" + month + "-" + day;
-							alert(today);
+							/* alert(today); */
 
 							if ($("#ride").text() == '탑승하기') {
 								$.ajax({
@@ -82,7 +83,7 @@
 									error : function(err) {
 										console.log(err);
 										console.log(err.statusText);
-										alert("안넘어감");
+									/* 	alert("안넘어감"); */
 									}
 								});
 
@@ -116,7 +117,7 @@
 									}
 								});
 							}
-						});
+						/* }); */
 					}
 				});
 
@@ -292,9 +293,9 @@
 <body>
 	<div id="with" class="col">
 		<div id="height" class="col">
-			<div style="float: left;" class="col">
+			<div  class="col">
 				<img
-					src='${pageContext.request.contextPath}/resources/image/upload/${tlist.truck_url}'>
+					class="truckimage"src='${pageContext.request.contextPath}/resources/image/upload/${tlist.truck_url}'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>
@@ -303,9 +304,7 @@
 					<button id="call">호출하기</button>
 				</div>
 			</div>
-			<div id="btngroup"
-				style="margin: 0 auto; margin-top: 200px; text-align: center;"
-				class="col">
+			<div id="btngroup" class="col">
 				<button id="btn1" class="col-md-2">메뉴</button>
 				<button id="btn2" class="col-md-2">리뷰 및 평점</button>
 				<button id="btn3" class="col-md-2">트럭 정보</button>
@@ -318,7 +317,7 @@
 					<c:forEach var="i" items="${menu }">
 						<div class="col-md-3">
 
-							<img class="img"
+							<img class="img1"
 								src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_url }">
 							<div class="menuname">
 								<br>${i.menu_name }<br> ${i.unit_price }
@@ -508,30 +507,30 @@
 					<%-- <jsp:include page="location.jsp"></jsp:include> --%>
 				</div>
 				<script>
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-					mapOption = {
-						center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-						level : 3
-					// 지도의 확대 레벨
-					};
+               var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+               mapOption = {
+                  center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                  level : 3
+               // 지도의 확대 레벨
+               };
 
-					var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+               var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-					// 마커가 표시될 위치입니다 
-					var markerPosition = new daum.maps.LatLng(33.450701,
-							126.570667);
+               // 마커가 표시될 위치입니다 
+               var markerPosition = new daum.maps.LatLng(33.450701,
+                     126.570667);
 
-					// 마커를 생성합니다
-					var marker = new daum.maps.Marker({
-						position : markerPosition
-					});
+               // 마커를 생성합니다
+               var marker = new daum.maps.Marker({
+                  position : markerPosition
+               });
 
-					// 마커가 지도 위에 표시되도록 설정합니다
-					marker.setMap(map);
+               // 마커가 지도 위에 표시되도록 설정합니다
+               marker.setMap(map);
 
-					// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-					// marker.setMap(null);
-				</script>
+               // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+               // marker.setMap(null);
+            </script>
 				<div id="locationdetail" style="text-align: left;">
 					지하철<br> -1호선을 타고 월평역에서 하차하여 약 20분정도 걸어오셔야 합니다. <br> <br>
 
@@ -549,10 +548,13 @@
 
 				<div id="eventborder">
 					<c:forEach var="i" items="${event }">
-						<div id="eventbody">
-
+						<div id="eventbody" class="${i.event_url}">
+							<c:if test="${i.event_url} == 'defaultImg'">
 							<img id="eventimage"
-								src='${pageContext.request.contextPath}/resources/image/food10.PNG'>
+								src='${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png'>
+							</c:if>
+							<img id="eventimage"
+								src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
 						</div>
 						<div id="eventcontent">
 							<br>
@@ -579,25 +581,25 @@
 		</div>
 	</div>
 	<script>
-		var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
+      var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
 
-		// 이미지 지도에 표시할 마커입니다
-		// 이미지 지도에 표시할 마커는 Object 형태입니다
-		var marker = {
-			position : markerPosition
-		};
+      // 이미지 지도에 표시할 마커입니다
+      // 이미지 지도에 표시할 마커는 Object 형태입니다
+      var marker = {
+         position : markerPosition
+      };
 
-		var staticMapContainer = document.getElementById('map'), // 이미지 지도를 표시할 div  
-		staticMapOption = {
-			center : new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
-			level : 3, // 이미지 지도의 확대 레벨
-			marker : marker
-		// 이미지 지도에 표시할 마커 
-		};
+      var staticMapContainer = document.getElementById('map'), // 이미지 지도를 표시할 div  
+      staticMapOption = {
+         center : new daum.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+         level : 3, // 이미지 지도의 확대 레벨
+         marker : marker
+      // 이미지 지도에 표시할 마커 
+      };
 
-		// 이미지 지도를 생성합니다
-		var map = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-	</script>
+      // 이미지 지도를 생성합니다
+      var map = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+   </script>
 
 </body>
 </html>
