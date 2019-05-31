@@ -1,9 +1,14 @@
 package com.food.project.m_controller;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
+import com.google.firebase.auth.UserRecord.CreateRequest;
+
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONObject;
 
@@ -25,7 +38,7 @@ public class M_LoginController {
 	private LoginService loginservice;
 	
 	
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String loginCheck(@RequestBody Map<String,Object> map) {
 		String email = (String)map.get("email");
@@ -132,9 +145,54 @@ public class M_LoginController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public String insert(CustomerVO cus) {
+	public String insert(@RequestBody Map<String,Object> map) {
+		FirebaseApp defaultApp = null;
+		List<FirebaseApp> apps=FirebaseApp.getApps();
+		FileInputStream serviceAccount;
+		FirebaseOptions options=null;
+		String email=(String)map.get("email");
+		String password=(String)map.get("password");
+		String nickname=(String)map.get("nickname");
+		String telephone=(String)map.get("telephone");
+		//파이어베이스 옵션 설정
+		try {
+			serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+			options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+					.build();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//이미 관리자 defaultApp이 있는지 검사
+		if(apps!=null && !apps.isEmpty()) {
+			for(FirebaseApp app:apps) {
+				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+					defaultApp = app;
+			}
+		}else {
+			defaultApp = FirebaseApp.initializeApp(options);
+		}
+		CreateRequest request=new CreateRequest()
+				.setEmail(email)
+				.setEmailVerified(false)
+				.setPassword(password);
+		try {
+			UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+			System.out.println("Successfully created new user : " + userRecord.getUid());
+		} catch (FirebaseAuthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CustomerVO cus = new CustomerVO();
+		cus.setEmail(email);
+		cus.setPassword(password);
+		cus.setNickname(nickname);
+		cus.setTelephone(telephone);
 		cus.setRegdate(new Date());
 		loginservice.insertCustomer(cus);
-		return "success";
+		return "";
 	}
 }
