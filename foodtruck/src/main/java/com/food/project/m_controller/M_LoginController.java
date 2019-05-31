@@ -30,7 +30,7 @@ import com.google.firebase.auth.UserRecord.CreateRequest;
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONObject;
 
-@CrossOrigin()
+@CrossOrigin
 @AllArgsConstructor
 @Controller
 @RequestMapping(value = "/m.login")
@@ -182,10 +182,12 @@ public class M_LoginController {
 		try {
 			UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
 			System.out.println("Successfully created new user : " + userRecord.getUid());
+			
 		} catch (FirebaseAuthException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		defaultApp.delete();
 		CustomerVO cus = new CustomerVO();
 		cus.setEmail(email);
 		cus.setPassword(password);

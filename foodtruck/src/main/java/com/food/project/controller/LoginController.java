@@ -211,6 +211,7 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		defaultApp.delete();
 		cus.setRegdate(new Date());
 		loginservice.insertCustomer(cus);
 		return "redirect:/login/registerSuccess";

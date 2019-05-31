@@ -9,7 +9,6 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <body>
-	<button style="width:100px; height:100px;" onclick="openMngSales();" value="매출관리"></button>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">

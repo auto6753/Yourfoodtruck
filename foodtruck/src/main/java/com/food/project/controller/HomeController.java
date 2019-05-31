@@ -156,6 +156,7 @@ public class HomeController {
 			System.out.println("Failed and the reason is behind");
 			e.printStackTrace();
 		}
+		defaultApp.delete();
 		return "ok";
 	}
 }

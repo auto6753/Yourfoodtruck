@@ -8,6 +8,13 @@
 <style>
 @font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 
+.fixed{
+ width: 140%;
+  top: 0;
+  right: 0;
+  left: -30%;
+  z-index: 1030;
+}
 .carousel-item {
    height: 65vh;
    min-height: 350px;
@@ -115,7 +122,7 @@ color: rgba(255, 94, 24);
 <!-- Navigation -->
 <div class="test">
 <nav 
-	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed">
 	<div id="main" class="container" >
 		<a class="navbar-brand" href="/rehome" ><img class="foodtruck"src="/resources/image/KakaoTalk_20190530_140110049.png"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"

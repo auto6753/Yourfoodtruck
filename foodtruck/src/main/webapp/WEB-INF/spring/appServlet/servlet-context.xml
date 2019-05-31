@@ -63,4 +63,9 @@
 				class="com.food.project.interceptor.SellerInterceptor" />
 		</interceptor>
 	</interceptors>
+	<websocket:handlers allowed-origins="*">
+		<websocket:mapping path="/m.seorder" handler="PaymentHandler"/>
+		<websocket:sockjs/>
+	</websocket:handlers>
+	<beans:bean id="PaymentHandler" class="com.food.project.websocket.PaymentHandler"/>
 </beans:beans>
