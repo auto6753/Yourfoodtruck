@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+#Line_Controls_Chart{
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 800px;
+	height: 600px;
+	border: 1px solid darkgray;
+	float: left;
+}
+
+#chart_div{
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 700px;
+	height: 500px;
+	border: 1px solid darkgray;
+}
+h4{
+	text-align: center;
+	float: center;
+}
+#search{
+	width: 30px;
+	height: 25px;
+}
+#buttonbar{
+	float: right;
+	width: 400px;
+	height: 50px;
+	margin-top: 10px;
+	margin-right: 65px;
+}
+.sidemenu{
+	float: left;
+}
+
+ 
