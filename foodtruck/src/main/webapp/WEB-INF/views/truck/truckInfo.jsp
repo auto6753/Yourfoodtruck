@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" >
+<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
 <title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
@@ -292,9 +293,9 @@
 <body>
 	<div id="with" class="col">
 		<div id="height" class="col">
-			<div style="float: left;" class="col">
+			<div  class="col">
 				<img
-					src='${pageContext.request.contextPath}/resources/image/upload/${tlist.truck_url}'>
+					class="truckimage"src='${pageContext.request.contextPath}/resources/image/upload/${tlist.truck_url}'>
 				<div id="cross">
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>
@@ -303,9 +304,7 @@
 					<button id="call">호출하기</button>
 				</div>
 			</div>
-			<div id="btngroup"
-				style="margin: 0 auto; margin-top: 200px; text-align: center;"
-				class="col">
+			<div id="btngroup" class="col">
 				<button id="btn1" class="col-md-2">메뉴</button>
 				<button id="btn2" class="col-md-2">리뷰 및 평점</button>
 				<button id="btn3" class="col-md-2">트럭 정보</button>
@@ -318,7 +317,7 @@
 					<c:forEach var="i" items="${menu }">
 						<div class="col-md-3">
 
-							<img class="img"
+							<img class="img1"
 								src="${pageContext.request.contextPath}/resources/image/upload/${i.menu_url }">
 							<div class="menuname">
 								<br>${i.menu_name }<br> ${i.unit_price }

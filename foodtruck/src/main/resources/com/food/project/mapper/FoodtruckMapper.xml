@@ -71,19 +71,21 @@
 
 	<select id="getRank" resultType="com.food.project.domain.MainPageRankDTO">
 	<![CDATA[		
-		with 
-		test_a as(
+with 
+    test_a as(
 		select a.truck_code, b.truck_url, b.brandname, sum(a.review_score) score
 		from review a , foodtruck b
 		where a.review_regdate > trunc(sysdate,'mm')
 		and a.review_regdate < trunc(add_months(sysdate, +1),'mm')
 		and a.truck_code = b.truck_code
 		GROUP BY a.truck_code, b.truck_url, b.brandname),
-		test_b as(
-		select rank() over (order by test_a.score desc) as rank, test_a.*
-		from test_a
-		where rownum <= 6)
-		select * from test_b
+    test_b as(
+        select c.* 
+        from (select rownum as rnum,row_number() over (order by test_a.score desc) as rank, test_a.*
+              from test_a) c
+        where c.rank <= 5)
+        select * from test_b
+
 	]]>
 	</select>
 	<update id="updatetruckphoto" parameterType="com.food.project.domain.FoodTruckVO">
