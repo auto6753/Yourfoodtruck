@@ -9,13 +9,13 @@
 @font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 
 .carousel-item {
-	height: 65vh;
-	min-height: 350px;
-	background: no-repeat center center scroll;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+   height: 65vh;
+   min-height: 350px;
+   background: no-repeat center center scroll;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
 }
 #main{
 
@@ -39,8 +39,13 @@ border-radius: 10px;
 	padding: 0 auto;
 } */
 
+/* #top-right {
+
+   padding: 0 auto;
+} */
+
 #top-right {
-	margin-top: 50px;
+   margin-top: 50px;
 }
 .test{
 
@@ -61,7 +66,6 @@ border-radius: 10px;
 }
 a{
 	color: rgb(255, 94, 24);
-	
 
 
 }
@@ -155,35 +159,35 @@ color: rgba(255, 94, 24);
 </div>
 <script>
 $(document).ready(function(){
-	//alert("?");
-	
-	var email= $("#sessione").val();
-	var point= $("#sessionp").val();
-	//alert(a);
-	if(email==null){
-		return;
-	}else{
-		$.ajax({
-			type:"post",
-			url:"/login/pointck",
-			data:{
-				email:email,
-				point:point
-			},
-			success:function(data){
-				
-				if(data=="different"){
-					window.location.reload();
-				}
-				/* if(data.point==$("#sessionp").val()){
-					//alert("같음");
-				}else{
-					alert(data.point);
-					alert($("#sessionp").val());
-				} */
-			}
-		});
-	}
+   //alert("?");
+   
+   var email= $("#sessione").val();
+   var point= $("#sessionp").val();
+   //alert(a);
+   if(email==null){
+      return;
+   }else{
+      $.ajax({
+         type:"post",
+         url:"/login/pointck",
+         data:{
+            email:email,
+            point:point
+         },
+         success:function(data){
+            
+            if(data=="different"){
+               window.location.reload();
+            }
+            /* if(data.point==$("#sessionp").val()){
+               //alert("같음");
+            }else{
+               alert(data.point);
+               alert($("#sessionp").val());
+            } */
+         }
+      });
+   }
 
 });
 </script>
