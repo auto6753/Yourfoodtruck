@@ -34,7 +34,6 @@ public class TruckController {
 	private FoodtruckMapper mapper;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-
 	public String info(Model model ,@RequestParam("truck_code") String truck_code) { //검색된페이지에서 클릭한 푸드트럭의 코드를 들고옴
 		//model.addAttribute("dd", hi);
 		FoodTruckVO ss= service.getFoodTruck(truck_code); //클릭한 푸드트럭으로 해당 푸드트럭의 정보를 select 
@@ -46,18 +45,11 @@ public class TruckController {
 		
 		ArrayList<EventVO> event = service.getEvent(truck_code);
 		model.addAttribute("event" ,event);
-		
-		 System.out.println(event); 
-		
-		
-		
-		
 		model.addAttribute("tlist", ss); //푸드트럭 정보를 tlist 에 담아서 truck/truckInfo 페이지로 넘김 
 		
 		
 		ArrayList<ReviewDTO> d = service.getReviewList(truck_code); //클릭한 푸드트럭의 코드로 해당 푸드트럭의 댓글을 조회해서 reviewList에 담고 truck/truckInfo 로 넘겨줌
 
-		
 		float count = d.size();
 		float score = 0;
 		float result = 0;

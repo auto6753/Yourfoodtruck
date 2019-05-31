@@ -20,6 +20,7 @@ public interface SellerMapper {
 
 	public void insertlocation(LocationVO vo);
 	
-	
+	@Select("select truck_code ,lat_y,lng_x,loc_time from location where truck_code =#{truck_code} and ROWNUM = 1 order by loc_time desc")
+	public LocationVO getlocation(String truck_code);
 	
 }

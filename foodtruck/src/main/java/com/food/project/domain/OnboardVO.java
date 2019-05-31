@@ -1,4 +1,3 @@
-
 package com.food.project.domain;
 
 import java.util.Date;

@@ -10,7 +10,6 @@ import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PeriodDTO;
 
 public interface OnboardService {
-
 	public ArrayList<OnboardVO> getOnboard(String email);
 	public void DeleteOnboard(String truck_code);
 	public ArrayList<OnboardVO> getOnSale(String email);

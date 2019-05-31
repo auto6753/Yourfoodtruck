@@ -50,7 +50,6 @@
         </div>
       </div>
       Slide Three - Set the background image for this slide in the line below
-
       <div class="carousel-item" style="background-image: url('resources/image/food3.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">커피 트럭</h3>

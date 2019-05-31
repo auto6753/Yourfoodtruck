@@ -121,17 +121,17 @@ public class CustomerController {
 		sale = onboard.getOnboard(vo.getEmail());
 		int length = sale.size();
 		System.out.println(length);
-		//
+//
 		if (length != 0) {
 			System.out.println("ㅇ");
 			for (int i = 0; i < length; i++) {
-				// String hours = sale.get(i).getHours();
+				//String hours = sale.get(i).getHours();
 				String start2 = sale.get(i).getTruck_starttime();
 				String end2 = sale.get(i).getTruck_endtime();
 				start2 = start2.replace(":", "");
 				end2 = end2.replace(":", "");
-				int start = Integer.parseInt(start2);
-				int end = Integer.parseInt(end2);
+				int start =  Integer.parseInt(start2);
+				int end =  Integer.parseInt(end2);
 				System.out.println(start);
 				System.out.println("===");
 				System.out.println(end);
