@@ -43,112 +43,124 @@ var beforeSnapshot='';
 var forDblist=new Array();
 var list =[];
 var isChecked=false;
+
 function pay(a){
-	var result = confirm('결제확인하시겠습니까?');
-	if (result) {
-		var parent_node=$('#'+a).parent();
-//		console.log(parent_node.html());
-//		console.log('===========');
-//		console.log(parent_node.children().eq(1).html());
-		var payment_list=parent_node.children().eq(1);
-		//console.log(a.html());
-		$("#"+a).css("background-color", "red");
-		var telephone = $("#"+a).next().val();
-		var truckcode = $("#"+a).next().next().val();
-		telephone=telephone.substr(1);
-		telephone=telephone.substr(0,telephone.length-1);
-//		console.log(telephone +'//' + truckcode);
-		var pay_length=payment_list.children().length;
-		console.log(pay_length);
-		for(var i=0; i<pay_length;i++) {
-			//<p>닭강정2 1 3400 과 hidden 두개</p>
-			var menucode=payment_list.children().eq(i);
-			var menu_code=menucode.find('.insert_menu_code');
-			var payment_class=menu_code.next();
-			var total_price=menu_code.prev();
-			var amount=total_price.prev();
-			var pay_list={
-					truck_code:truckcode,
-					payment_telephone:telephone,
-					menu_code:menu_code.val(),
-					payment_class:parseInt(payment_class.val()),
-					total_price:parseInt(total_price.text()),
-					amount:parseInt(amount.text())
-			};
-			list.push(pay_list);
-		}
-		console.log(list);
-		for(var i=0; i<list.length;i++) {
-			firebase.database().ref('/PaymentTest2/'+ _uid +'/'+telephone+'/'+a+'/'+i+'/payed').set('payed');
-			firebase.database().ref('/PaymentResult/'+ _uid +'/'+telephone+'/'+a+'/'+i).set(list[i]);
-		}
-		
- 		$.ajax({
-			type:"POST",
-			url:"/pay/insertPayment",
-			data:JSON.stringify(list),
-			contentType:"application/json;charset=UTF-8",
-			traditional:true,
-			success:function(data) {
-				console.log('success');
-			},error:function(err) {
-				console.log(err);
+	var isPayed=false;
+	if(!isPayed) {
+		var result = confirm('결제확인하시겠습니까?');
+		if (result) {
+			var parent_node=$('#'+a).parent();
+//			console.log(parent_node.html());
+//			console.log('===========');
+//			console.log(parent_node.children().eq(1).html());
+			var payment_list=parent_node.children().eq(1);
+			//console.log(a.html());
+			$("#"+a).css("background-color", "red");
+			var telephone = $("#"+a).next().val();
+			var truckcode = $("#"+a).next().next().val();
+			telephone=telephone.substr(1);
+			telephone=telephone.substr(0,telephone.length-1);
+//			console.log(telephone +'//' + truckcode);
+			var pay_length=payment_list.children().length;
+			console.log(pay_length);
+			for(var i=0; i<pay_length;i++) {
+				//<p>닭강정2 1 3400 과 hidden 두개</p>
+				var menucode=payment_list.children().eq(i);
+				var menu_code=menucode.find('.insert_menu_code');
+				var payment_class=menu_code.next();
+				var total_price=menu_code.prev();
+				var amount=total_price.prev();
+				var pay_list={
+						truck_code:truckcode,
+						payment_telephone:telephone,
+						menu_code:menu_code.val(),
+						payment_class:parseInt(payment_class.val()),
+						total_price:parseInt(total_price.text()),
+						amount:parseInt(amount.text())
+				};
+				list.push(pay_list);
 			}
-		});
- 		list=[];
- 		parent_node.addClass('payed');
- 		isChecked=true;
- 		
+			console.log(list);
+			for(var i=0; i<list.length;i++) {
+				firebase.database().ref('/PaymentTest2/'+ _uid +'/'+telephone+'/'+a+'/'+i+'/payed').set('payed');
+				firebase.database().ref('/PaymentResult/'+ _uid +'/'+telephone+'/'+a+'/'+i).set(list[i]);
+			}
+			
+	 		$.ajax({
+				type:"POST",
+				url:"/pay/insertPayment",
+				data:JSON.stringify(list),
+				contentType:"application/json;charset=UTF-8",
+				traditional:true,
+				success:function(data) {
+					console.log('success');
+				},error:function(err) {
+					console.log(err);
+				}
+			});
+	 		list=[];
+	 		parent_node.addClass('payed');
+	 		isChecked=true;
+	 		
+		}
+	}else {
+		
 	}
+	
 }
 function release(a) {
-	var released = confirm("출고확인하시겠습니까?");
-	if(released && isChecked) {
-		var telephone = $("#"+a).next().val();
-		telephone=telephone.substr(1);
-		telephone=telephone.substr(0,telephone.length-1);
-		var truckcode = $("#"+a).next().next().val();
-		var date = new Date();
-		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
-		var day=date.getDate();	var hour=date.getHours();
-		var minute=date.getMinutes(); var sec=date.getSeconds();
-		if((day+'').length<2)	day="0"+day;
-		if((month+'').length=1)	month="0"+month;
-		console.log(date.toString());
-		var sysdate=year+month+day+"";
-		var parent_node=$('#'+a).parent();
-		var payment_list=parent_node.children().eq(1);
-		var menucode=payment_list.children().eq(0);
-		var menu_code=menucode.find('.insert_menu_code');
-		var payment_class=menu_code.next();
-		var data={
-				truck_code : truckcode,
-				payment_telephone : telephone,
-				payment_code: sysdate,
-				payment_class: parseInt(payment_class.val()) 
-		};
-		$.ajax({
-			type:"POST",
-			url:"/pay/updatePayment",
-			data:JSON.stringify(data),
-			contentType:"application/json;charset=UTF-8",
-			traditional:true,
-			success:function(data) {
-				console.log('success');
-			},error:function(err) {
-				console.log(err);
-			}
-		});
-		$('.result').append(parent_node);
-		console.log(parent_node);
-		var delref=firebase.database().ref('/PaymentTest2/'+ _uid +'/'+telephone+'/'+a);
-		delref.remove();
-		parent_node.removeClass("payed");
-		parent_node.addClass('ended');
-		
-	}else if(!isChecked) {
-		alert("결제확인을 먼저 하십시오");
+	var isPayed=false;
+	if(!isPayed) {
+		var released = confirm("출고확인하시겠습니까?");
+		if(released && isChecked) {
+			var telephone = $("#"+a).next().val();
+			telephone=telephone.substr(1);
+			telephone=telephone.substr(0,telephone.length-1);
+			var truckcode = $("#"+a).next().next().val();
+			var date = new Date();
+			var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
+			var day=date.getDate();	var hour=date.getHours();
+			var minute=date.getMinutes(); var sec=date.getSeconds();
+			if((day+'').length<2)	day="0"+day;
+			if((month+'').length=1)	month="0"+month;
+			console.log(date.toString());
+			var sysdate=year+month+day+"";
+			var parent_node=$('#'+a).parent();
+			var payment_list=parent_node.children().eq(1);
+			var menucode=payment_list.children().eq(0);
+			var menu_code=menucode.find('.insert_menu_code');
+			var payment_class=menu_code.next();
+			var data={
+					truck_code : truckcode,
+					payment_telephone : telephone,
+					payment_code: sysdate,
+					payment_class: parseInt(payment_class.val()) 
+			};
+			$.ajax({
+				type:"POST",
+				url:"/pay/updatePayment",
+				data:JSON.stringify(data),
+				contentType:"application/json;charset=UTF-8",
+				traditional:true,
+				success:function(data) {
+					console.log('success');
+				},error:function(err) {
+					console.log(err);
+				}
+			});
+			$('.result').append(parent_node);
+			console.log(parent_node);
+			var delref=firebase.database().ref('/PaymentTest2/'+ _uid +'/'+telephone+'/'+a);
+			delref.remove();
+			parent_node.removeClass("payed");
+			parent_node.addClass('ended');
+			$('#'+a).attr('disabled','disabled');
+			parent_node.find('.release').attr('disabled','disabled');
+		}else if(!isChecked) {
+			alert("결제확인을 먼저 하십시오");
+		}
 	}
+	
 }
 
 $(function() {
@@ -163,6 +175,7 @@ $(function() {
 	ref.on('value',function(snapshot) {
 		if(isfirst){
 			var result=snapshot.val();
+			console.log(result);
 			for(var menus in result) {
 				console.log('=====결과를 전화번호별로 구분=====');
 				console.log(menus);
@@ -204,6 +217,7 @@ $(function() {
 		}else{
 			$('.wrap').html("");
 			var result=snapshot.val();
+			console.log(result);
 			for(var menus in result) {
 				console.log('=====결과를 전화번호별로 구분=====');
 				console.log(menus);
