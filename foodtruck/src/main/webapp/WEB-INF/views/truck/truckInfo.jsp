@@ -550,9 +550,9 @@
 				<div id="eventborder">
 					<c:forEach var="i" items="${event }">
 						<div id="eventbody" class="${i.event_url}">
-							<c:if test="${i.event_url} == 'defaultImg'">
+							<c:if test="${i.event_url} == 'defaultImg.png'">
 							<img id="eventimage"
-								src='${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png'>
+								src='${pageContext.request.contextPath}/resources/image/upload/defaultImg.png'>
 							</c:if>
 							<img id="eventimage"
 								src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
