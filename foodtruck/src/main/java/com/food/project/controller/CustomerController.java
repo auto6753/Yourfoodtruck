@@ -57,6 +57,7 @@ public class CustomerController {
 		System.out.println("이부분인가?");
 		System.out.println(vo.getEmail());
 		ArrayList<OnboardVO> result = new ArrayList<>();
+		
 		ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail());
 		if (ob.size() != 0) {
 			for (int i = 0; i < ob.size(); i++) {
