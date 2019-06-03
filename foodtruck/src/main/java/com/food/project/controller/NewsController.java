@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.EventVO;
+import com.food.project.domain.MaineventDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.PostVO;
 import com.food.project.paging.PostPager;
@@ -117,30 +118,33 @@ public class NewsController {
 	
 	
 	@RequestMapping(value = "/eventOn", method = RequestMethod.GET)
-	public String eventOn(Locale locale, Model model) {
-		ArrayList<EventVO> eve = new ArrayList<EventVO>();
-		ArrayList<EventVO> ievent = new ArrayList<>();
-		ArrayList<EventVO> eevent = new ArrayList<>();
-		eve = eventService.getMainevent();
-			
-		for(int i=0; i < eve.size(); i++) {
-			SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
-			int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
-			System.out.println(sysdate);
-			Date enddate = eve.get(i).getEvent_end();
-			String edate = date.format(enddate);
-			int end_date = Integer.parseInt(edate);
-			System.out.println(end_date);
+	public String eventOn(Locale locale, Model model , MaineventDTO vo) {
+		ArrayList<MaineventDTO> eve =  eventService.getMainevent(vo);
 		
-			if(end_date > sysdate) {
-				ievent.add(eve.get(i));
-			}else {
-				eevent.add(eve.get(i));
+		 ArrayList<MaineventDTO> ievent = new ArrayList<>(); 
+		 ArrayList<MaineventDTO> eevent = new ArrayList<>();
+		
+		/* eve = eventService.getMainevent(); */
+			
+		
+		 for(int i=0; i < eve.size(); i++) { SimpleDateFormat date = new
+		 SimpleDateFormat("yyyyMMdd"); int sysdate =
+		 Integer.parseInt(date.format(System.currentTimeMillis()));
+		 System.out.println(sysdate); Date enddate = eve.get(i).getEvent_end(); String
+		 edate = date.format(enddate); int end_date = Integer.parseInt(edate);
+		 System.out.println(end_date);
+		 
+		 if(end_date > sysdate) { 
+			 ievent.add(eve.get(i)); 
+			 }else { 
+			eevent.add(eve.get(i)); 
 			}
-		}		
+		 }
+		 
 		
 		model.addAttribute("ievent",ievent);
 		model.addAttribute("eevent",eevent);
+		
 		
 		
 		

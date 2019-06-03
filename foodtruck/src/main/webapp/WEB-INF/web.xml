@@ -62,6 +62,7 @@
 		<filter-name>encoding</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<async-supported>true</async-supported>
 
 
 </web-app>

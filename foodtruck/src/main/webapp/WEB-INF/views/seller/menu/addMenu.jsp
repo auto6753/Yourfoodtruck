@@ -33,12 +33,12 @@
 				<td class="itemName"><label>카테고리</label></td>
 				<td>
 					<select id="category" name="category" required>
-						<option value="" selected>카테고리</option>
-						<option value="1">카테고리A</option>
-						<option value="2">카테고리B</option>
-						<option value="3">카테고리C</option>
-						<option value="4">카테고리D</option>
-						<option value="5">카테고리E</option>
+						<option value="" selected>종류</option>
+						<option value="1">한식</option>
+						<option value="2">중식</option>
+						<option value="3">일식</option>
+						<option value="4">분식</option>
+						<option value="5">기타</option>
 					</select>
 				</td>
 			</tr>
@@ -50,16 +50,16 @@
 				<td class="itemName"><label for="unitPrice">가격(원)</label></td>
 				<td><input id="unitPrice" class="inputText" type="text" name="unitPrice" required/></td>
 			</tr>
-			<tr> <!-- 여기부터 -->
+			<!-- <tr> 여기부터
 				<td class="itemName" valign="top"><label class="labelStyle" for="details">상세내용</label></td>
 				<td><textarea id="details" name="details">
 					</textarea>
-			<!-- 		<div class="showByte">
+					<div class="showByte">
 						<input type="text" name="messagebyte" value="0" size="1" maxlength="2" readonly>
 						<font color="#000000">/ 1000 byte</font>
-					</div> -->
+					</div>
 				</td>
-			</tr> <!-- 여기까지 검토할 것 -->
+			</tr> 여기까지 검토할 것 -->
 			<tr>
 				<td colspan="2">
 					<div class="btns">

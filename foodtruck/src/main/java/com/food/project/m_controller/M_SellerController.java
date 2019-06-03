@@ -1,6 +1,10 @@
 package com.food.project.m_controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,25 +14,40 @@ import org.json.simple.JSONObject;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.service.FoodTruckService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.ThreadManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import lombok.AllArgsConstructor;
 
+@CrossOrigin
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/m.seller")
 public class M_SellerController {
 	private SellerService sellerservice;
+	private FoodTruckService truckservice;
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
@@ -48,78 +67,84 @@ public class M_SellerController {
 		return "seller/event/event";
 	}
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
-	public String seorder(Model model, HttpSession session) {
+	@SuppressWarnings({ "unchecked", "null" })
+	@ResponseBody
+	@RequestMapping(value="/seorder", produces = "application/text; charset=utf8") 
+	public String seorder(@RequestBody String param) throws InterruptedException, IOException, FirebaseAuthException {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map = net.sf.json.JSONObject.fromObject(param);
+		String email=(String)map.get("email");
+		String uid;
+		JSONObject resultObj = new JSONObject();
 		FirebaseApp defaultApp = null;
-		CustomerVO vo=new CustomerVO();
-		vo=(CustomerVO) session.getAttribute("sessionid");
-		String email=vo.getEmail();
+		List<FirebaseApp> apps=FirebaseApp.getApps();
 		FileInputStream serviceAccount;
-		try {
-			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
-				FirebaseOptions options = new FirebaseOptions.Builder()
-						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-						.build();
-				defaultApp = FirebaseApp.initializeApp(options);
-				System.out.println("First"+defaultApp.getName());
-				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
-				System.out.println(userRecord.getUid());
-				model.addAttribute("_uid",userRecord.getUid());
-				defaultApp.delete();
+		FirebaseOptions options=null;
+		serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+		
+		//이미 관리자 defaultApp이 있는지 검사
+		if(apps!=null && !apps.isEmpty()) {
+			for(FirebaseApp app:apps) {
+				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+					defaultApp = app;
 			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (FirebaseAuthException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else {
+			defaultApp=null;
+			options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+					.build();
+			defaultApp = FirebaseApp.initializeApp(options);
 		}
-		return "seller/order/seorder";
+		UserRecord userRecord;
+		if(defaultApp!=null) {
+			userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
+			uid=userRecord.getUid();
+			DatabaseReference ref=FirebaseDatabase.getInstance().
+				getReference("/PaymentTest2/"+userRecord.getUid());
+			ref.limitToFirst(15).addListenerForSingleValueEvent(new ValueEventListener() {
+				@Override
+				public void onDataChange(DataSnapshot dataSnapshot) {
+					List<Object> list = (List<Object>) dataSnapshot.getValue();
+					System.out.println(list.toString());
+				}
+				@Override
+				public void onCancelled(DatabaseError databaseError) {
+					// ...
+				}
+			});
+		}
+		defaultApp.getApps().clear();
+		defaultApp.delete();
+		return resultObj.toString();
 	}
 	
-	@RequestMapping(value="/cuorder", method=RequestMethod.GET) 
-	public String cuorder(Model model,HttpServletRequest request,HttpSession session) {
-		FoodTruckVO vo = new FoodTruckVO();
-		vo = (FoodTruckVO) request.getSession().getAttribute("seller");
-		String truckcode = vo.getTruck_code();
-		System.out.println(truckcode);
+	@RequestMapping(value="/cuorder", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String cuorder(@RequestBody String param) {
+		Map<String,Object> paymentMap = new HashMap<String,Object>();
+		paymentMap = net.sf.json.JSONObject.fromObject(param);
+		String email = (String)paymentMap.get("email");
+		String truck_code= truckservice.getFoodTruckE(email).getTruck_code();
+		System.out.println(truck_code +"///" + email);
 		ArrayList<MenuVO> menulist = new ArrayList<>();
-		menulist = sellerservice.getmenu(truckcode);
-		model.addAttribute("menulist", menulist);
-		model.addAttribute("orderTarget","customer");
-//		CustomerVO cvo=(CustomerVO)request.getSession().getAttribute("sessionid");
-//		String email=cvo.getEmail();
-//		UserRecord userRecord;
-//		try {
-//			userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
-//			// See the UserRecord reference doc for the contents of userRecord.
-//			System.out.println("Successfully fetched user data in cuorder: " + userRecord.getEmail());
-//			DatabaseReference ref=FirebaseDatabase.getInstance().getReference("/PaymentTest2/"+userRecord.getUid());
-//			ref.addChildEventListener(new ChildEventListener() {
-//				@Override
-//				public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-//					JSONObject test = (JSONObject) snapshot.getValue();
-//					model.addAttribute("test",test);
-//				}
-//				@Override
-//				public void onChildChanged(DataSnapshot snapshot, String previousChildName) {}
-//				@Override
-//				public void onChildRemoved(DataSnapshot snapshot) {}
-//				@Override
-//				public void onChildMoved(DataSnapshot snapshot, String previousChildName) {}
-//				@Override
-//				public void onCancelled(DatabaseError error) {}
-//			});
-//		} catch (FirebaseAuthException e) {
-//			e.printStackTrace();
-//		}
-		return "seller/order/cuorder";
+		menulist = sellerservice.getmenu(truck_code);
+		JSONArray a = new JSONArray();
+		for(MenuVO vo : menulist) {
+			JSONObject jsonObj = new JSONObject();
+			jsonObj.put("menu_code",vo.getMenu_code());
+			jsonObj.put("menu_url",vo.getMenu_url());
+			jsonObj.put("menu_surl",vo.getMenu_surl());
+			jsonObj.put("menu_name",vo.getMenu_name());
+			jsonObj.put("menu_category",vo.getMenu_category());
+			jsonObj.put("unit_price",vo.getUnit_price());
+			jsonObj.put("menu_desc",vo.getMenu_desc());
+			jsonObj.put("truck_code",vo.getTruck_code());
+			a.add(jsonObj);
+		}
+		System.out.println(a.toString()+"jsonArray잘나오나?");
+		
+		return a.toString();
 	}
 }

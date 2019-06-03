@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.food.project.domain.OnboardCountDTO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.domain.PeriodDTO;
 
 public interface OnboardMapper {
 	public ArrayList<OnboardVO> getOnboard(String email);
@@ -16,5 +17,6 @@ public interface OnboardMapper {
 	public void Deleteride(OnboardVO on);
 	public void updateOutdate(OnboardVO on);
 	public void updateOnboarddate(OnboardVO on);
-	public ArrayList<HashMap<String,Object>> CountOnboard(OnboardVO br);
+	public ArrayList<OnboardCountDTO> CountOnboard(OnboardVO br);
+	public ArrayList<OnboardCountDTO> countonboarddate(PeriodDTO period);
 }

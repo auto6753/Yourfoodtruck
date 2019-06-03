@@ -1,4 +1,3 @@
-
 package com.food.project.domain;
 
 import java.util.Date;
@@ -16,5 +15,4 @@ public class OnboardVO {
 	private String truck_url;
 	private String truck_starttime;
 	private String truck_endtime;
-	
 }

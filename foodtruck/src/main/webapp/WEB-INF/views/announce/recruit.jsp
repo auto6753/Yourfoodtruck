@@ -69,7 +69,7 @@
 		});//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
 		$('#title').click(function() {
 			location.href="/announce"; 
-		});
+		}); 
 		$('#toArea').click(function() {
 			location.href="/area"; 
 		});
