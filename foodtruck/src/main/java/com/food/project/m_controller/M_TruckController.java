@@ -4,23 +4,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.food.project.domain.CustomerVO;
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
@@ -28,11 +24,9 @@ import com.food.project.domain.OnboardVO;
 import com.food.project.domain.ReviewDTO;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.OnboardService;
-import com.google.gson.JsonArray;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @CrossOrigin()
 @Controller

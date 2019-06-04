@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/seller/mngSales/mngSales.css"/>"> <!-- 사용자 css -->
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/seller/mngSales/mngSales.js"/>"></script> <!-- 사용자 js -->
-<script type="text/javascript" src="<c:url value="/resources/js/seller/forNavBar.js"/>"></script> <!-- 사용자 js -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API -->
 <title>매출관리</title>
 </head>
