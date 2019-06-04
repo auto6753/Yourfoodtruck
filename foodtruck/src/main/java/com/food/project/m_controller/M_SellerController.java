@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,20 +19,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.food.project.domain.CustomerVO;
-import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.ThreadManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,7 +79,14 @@ public class M_SellerController {
 		List<FirebaseApp> apps=FirebaseApp.getApps();
 		FileInputStream serviceAccount;
 		FirebaseOptions options=null;
-		serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 서버 올릴 때 경로
+		System.out.println(path);
+		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
+				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		serviceAccount = new FileInputStream(firebasePath);
 		
 		//이미 관리자 defaultApp이 있는지 검사
 		if(apps!=null && !apps.isEmpty()) {

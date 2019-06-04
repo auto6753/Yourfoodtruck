@@ -1,6 +1,7 @@
 package com.food.project.controller;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
@@ -179,9 +183,16 @@ public class LoginController {
 		List<FirebaseApp> apps=FirebaseApp.getApps();
 		FileInputStream serviceAccount;
 		FirebaseOptions options=null;
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 서버 올릴 때 경로
+		System.out.println(path);
+		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
+				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 		//파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+			serviceAccount = new FileInputStream(firebasePath);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -200,12 +211,12 @@ public class LoginController {
 		}else {
 			defaultApp = FirebaseApp.initializeApp(options);
 		}
-		CreateRequest request=new CreateRequest()
+		CreateRequest prequest=new CreateRequest()
 				.setEmail(cus.getEmail())
 				.setEmailVerified(false)
 				.setPassword(cus.getPassword());
 		try {
-			UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+			UserRecord userRecord = FirebaseAuth.getInstance().createUser(prequest);
 			System.out.println("Successfully created new user : " + userRecord.getUid());
 		} catch (FirebaseAuthException e) {
 			// TODO Auto-generated catch block
