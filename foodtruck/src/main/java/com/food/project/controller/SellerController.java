@@ -34,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.food.project.domain.CustomerVO;
@@ -1146,7 +1148,7 @@ public class SellerController {
 				periodcount.put("count", perioddate.get(g).getCount());
 				System.out.println(periodcount.toString());
 				Map<String,Object> map = new HashMap<String,Object>();
-				map=JSONObject.fromObject(periodcount.toString());
+				map=net.sf.json.JSONObject.fromObject(periodcount.toString());
 				resultlist.add(map);
 			}
 			resultlist=JSONArray.fromObject(resultlist.toString());
@@ -1170,7 +1172,7 @@ public class SellerController {
 				ridecount.put("count", on.get(j).getCount());
 				System.out.println(ridecount.toString());
 				Map<String,Object> map = new HashMap<String,Object>();
-				map=JSONObject.fromObject(ridecount.toString());
+				map=net.sf.json.JSONObject.fromObject(ridecount.toString());
 				jsonresult.add(map);
 			}
 			resultlist=JSONArray.fromObject(jsonresult.toString());
@@ -1268,9 +1270,17 @@ public class SellerController {
 		vo=(CustomerVO) session.getAttribute("sessionid");
 		String email=vo.getEmail();
 		FileInputStream serviceAccount;
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 서버 올릴 때 경로
+		System.out.println(path);
+		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
+				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		//파이어베이스 옵션 설정
 		try {
 			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+				serviceAccount = new FileInputStream(firebasePath);
 				FirebaseOptions options = new FirebaseOptions.Builder()
 						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -1302,6 +1312,10 @@ public class SellerController {
 		menulist = sellerservice.getmenu(truckcode);
 		model.addAttribute("menulist", menulist);
 		model.addAttribute("orderTarget","customer");
+		
+		FoodTruckVO vo1 = truckService.getBrandname(truckcode);
+		System.out.println(vo1);
+		model.addAttribute("brandname" , vo1);
 //		CustomerVO cvo=(CustomerVO)request.getSession().getAttribute("sessionid");
 //		String email=cvo.getEmail();
 //		UserRecord userRecord;

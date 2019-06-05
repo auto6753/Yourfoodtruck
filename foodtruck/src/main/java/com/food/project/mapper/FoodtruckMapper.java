@@ -31,5 +31,6 @@ public interface FoodtruckMapper {
 	
 	
 	public ArrayList<MainPageRankDTO> getRank();
+	public FoodTruckVO getBrandname(String truckcode);
 	
 }

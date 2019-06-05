@@ -157,6 +157,8 @@ var list = new Array();
 	src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
 </head>
 <style>
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
+@font-face {font-family: 'Handon3gyeopsal600g';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');font-weight: normal;font-style: normal; } 
 #logo {
 	text-align: center;
 	font-weight: bold;
@@ -165,6 +167,10 @@ var list = new Array();
 
 div a {
 	color: rgb(255, 94, 24);
+}
+.brandname{
+	font-family: 'yg-jalnan';
+	font-size: 150%;
 }
 
 #box {
@@ -210,10 +216,14 @@ div a {
 }
 
 #click {
-	background-color: rgb(255, 94, 24);
-	color: white;
-	width: 49.8%;
-	float: left;
+    background-color: rgb(255, 94, 24);
+    color: white;
+    width: 100%;
+    float: left;
+    height: 5%;
+    font-size: 120%;
+    font-family: 'Handon3gyeopsal600g';
+	
 }
 
 #click2 {
@@ -227,6 +237,7 @@ div a {
 	width: 95%;
 	text-align: center;
 	margin: 0 auto;
+	font-family: 'Handon3gyeopsal600g';
 }
 
 .c1 {
@@ -239,14 +250,14 @@ div a {
 }
 
 .food {
-	width: 50%;
+	
 	height: 250px;
 }
 
 #foodlist {
 	text-align: center;
-	margin: 0 auto;
-	margin-top: 30px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 .panel-title {
 	padding-top: 1%;
@@ -268,12 +279,12 @@ h3 {
 	<input type="hidden" id="ref">
 	<div id="cuorder">
 		<div id="logo">
-			<a href="/rehome">현재 푸드트럭</a>
+			<a href="/rehome" class="brandname">${brandname.brandname}</a>
 		</div>
 		<div>
 			<div id="box">
-				<button id="click" class="btn">food</button>
-				<button id="click2" class="btn">drink</button>
+				<button id="click" class="btn">어서오십시오 고객님! ${brandname.brandname }입니다.</button>
+				
 				<div id="order">
 					<div id="box2">
 						<div id="foodlist">
@@ -310,7 +321,7 @@ h3 {
 						<button id="cancle1" class="btn c1">취소</button>
 					</div>
 				</div>
-				<div id="cashtel"style="display: none; text-align: center; width: 100%; margin-top: 50%; height: 50%;">
+				<div id="cashtel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="cashtelephone" type="tel" style="width: 100%;"><br>
@@ -319,7 +330,7 @@ h3 {
 					<button id="back" class="btn c1">주문추가</button>
 				</div>
 			</div>
-			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 50%; height: 50%;">
+			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="kakaotelephone" type="tel" style="width: 100%;"><br>

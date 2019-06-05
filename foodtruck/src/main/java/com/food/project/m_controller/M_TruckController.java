@@ -32,7 +32,6 @@ import com.google.gson.JsonArray;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @CrossOrigin()
 @Controller

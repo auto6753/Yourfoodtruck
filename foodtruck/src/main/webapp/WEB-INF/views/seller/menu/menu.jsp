@@ -39,7 +39,7 @@
 							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
 									<c:if test="${i.menu_category ==1}">
-										<div class="col-md-3 menuf">
+										<div class="col-md-4 menuf menuss">
 											<div class="menut">
 												<div class="imgBox">
 													<img class="img editMenu changeToBlock"

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #Line_Controls_Chart{
-	margin: 0 auto;
+	margin-left: 150px;
 	margin-top: 50px;
 	width: 800px;
 	height: 600px;
@@ -33,6 +33,25 @@ h4{
 }
 .sidemenu{
 	float: left;
+	position:fixed;
+}
+#wrap {
+	margin-left: 150px;
+	margin-top: 50px;
+	width: 800px;
+	height:200px;
+	border: 1px solid darkgray;
+}
+.col {
+	margin :0 auto;
+}
+#forPush{
+	margin:0 auto;
+	width:400px;
+}
+.showByte{
+	margin:0 auto;
+	width:130px;
 }
 
  
