@@ -1,3 +1,4 @@
+@font-face {font-family: 'Arita-dotum-Medium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');font-weight: normal;font-style: normal; } 
 .callTitle{
 	font-weight: bold;
 	font-size: 35px;
@@ -8,20 +9,40 @@
 	color: rgb(255, 94, 24);
 }
 .calltext{
-	border: 0.5px solid lightgray;
-	color: #666;
-	height:500px;
-	overflow-y:auto;
+	    border: 3px solid lightgray;
+    /* color: #666; */
+    height: 399px;
+    position: relative;
+    left: 25%;
+    bottom: 338px;
+    width: 80%;
 	
 
 
 }
+td{
+	border: 0.5px solid lightgray;
+    font-size: 100%;
+     font-family: 'Arita-dotum-Medium';
+}
+#col_1{
+	border: 0.5px solid lightgray;
+    font-size: 100%;
+    font-family: 'Arita-dotum-Medium';
+}
+.menuTitle{
+	    font-size: 50px;
+    height: 60px;
+    margin: 23px 0 17px;
+    color: #666;
+    text-align: center;
+    position: relative;
+    bottom: 20px;
+    font-family: 'Hanna', serif;
+	
+}
 table{
 	width:100%;
-}
-td ,th{
-	border: 0.5px solid rgb(255, 166, 77);
-	font-size: 100%;
 }
 
 

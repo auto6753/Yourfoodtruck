@@ -19,7 +19,8 @@
     .list-group { height:500px; overflow-y: auto;}
 
 #fr {
-	margin:0 auto;
+	    width: 100%;
+    
 }
 
 .profile-teaser-left {
@@ -36,24 +37,52 @@
 	background-color: rgb(255, 94, 24);
 	color: white;
 }
-
-
+.row {
+    height: 510px;
+    
+    border-radius: 20px;
+    border: 5px solid;
+    border-color: darkgrey;
+}
+.list-group {
+        height: 500px;
+        border-radius: 20px;
+    overflow-y: auto;
+    width: 100%;
+}
 
 .profile-teaser-main {
 	float: left;
 	width: 79%;
 }
+#keyword{
+  
+    width: 30%;
+}
+#search{
+	margin-left:27%;
+	margin-top: 40px;
+}
+.h2, h2 {
+    font-size: 2rem;
+    font-family: 'yg-jalnan';
+}
+
 </style>
-<div style="margin-top: 180px; border: solid 1px;"></div>
+<div style="margin-top: 30px; border: solid 2px;border-color: tomato; ">
 <!-- <div id="menu_wrap" class="bg_white"> -->
 <!--    <div class="option"> -->
-<form id="fr">
+</div>
+<div id="search">
+<form >
    <select id="select" onchange="change()">
       <option value='map'>지도</option>
       <option value='list'>목록</option>
    </select> <input type="text" value="" id="keyword" size="15" placeholder="주소입력"> <input
-      id="submit" type="button" value="검색하기"  class="btn">
+      id="submit" type="button" value="검색"  class="btn">
 </form>
+</div>
+
 <div id="list" style="display: none">
 	<%-- <c:forEach var="test" items="${loc}">
 ${test.lat_y} // ${test.lng_x }
@@ -366,7 +395,7 @@ function change(){
          		var a='d';
          		var c=1;
          		var truck=list2[i].truck_code;
-             	$("#list-group").append("<div class='list-group-item clearfix'><div class='profile-teaser-left'><div class='profile-img'><a href='/truck/?truck_code="+list2[i].truck_code+"'><img src='/resources/image/upload/"+list2[i].truck_url+"'/></a></div></div><div class='profile-teaser-main'><div class='infobox' style='cursor:pointer'><h2 class='profile-name'>"+list2[i].brandname+"</h2><div class='info'><span class=''>영업시간:</span>" + list2[i].hours+"</div><div class='info'><span class=''>트럭번호:</span>" + list2[i].trucknum+"</div></div><br><div class='info'><span class=''>★★★★☆</span> 9.4</div><div class='info'><span class=''>댓글 " + list2[i].total_review + "</span> </div> </div> <button style='float: right;'>탑승하기</button><button style='float: right;'>호출하기</button> </div></div>");
+             	$("#list-group").append("<div class='list-group-item clearfix'><div class='profile-teaser-left'><div class='profile-img'><a href='/truck/?truck_code="+list2[i].truck_code+"'><img src='/resources/image/upload/"+list2[i].truck_url+"'/></a></div></div><div class='profile-teaser-main'><div class='infobox' style='cursor:pointer'><h2 class='profile-name'>"+list2[i].brandname+"</h2><div class='info'><span class=''>영업시간:</span>" + list2[i].hours+"</div><div class='info'><span class=''>트럭번호:</span>" + list2[i].trucknum+"</div></div></div><div class='info'><span class=''>댓글 " + list2[i].total_review + "</span> </div> </div> </div></div>");
          	}
         	
          }

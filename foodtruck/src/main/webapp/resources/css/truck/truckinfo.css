@@ -1,12 +1,22 @@
 @charset "UTF-8";
-
+@font-face {font-family: 'Handon3gyeopsal600g';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');font-weight: normal;font-style: normal; } 
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 div.stars {
+	
+	
 
 	width: 100%;
 	display: inline-block;
 }
+.col-md-2 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 25%;
+  }
+
 #cross{
-	 margin-left: 32%;
+	 margin-left: 38%;
     width: 100%;
     position: relative;
     bottom: 200px;	
@@ -22,6 +32,7 @@ div.stars {
 	height: 200px;
     width: 30%;
     margin-top:20px;
+    margin-left: 5%
 	
 }
 .img{
@@ -69,7 +80,7 @@ label.star:before {
 
 #with {
 	margin: 0 auto;
-	margin-top: 150px;
+	margin-top: 50px;
 	width: 75%;
 	height: 800px;
 	border: 1px solid darkgray;
@@ -87,14 +98,14 @@ img.img1 {
 #height {
 	margin: 0 auto;
 	margin-top: 50px;
-	width: 100%;
+	width: 70%;
 	height: 700px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+
 }
 
 h1 {
 	margin: 0 auto;
+	font-family: 'yg-jalnan';
 }
 
 
@@ -103,56 +114,71 @@ h1 {
     height: 50px;
     width: 100%;
     position: relative;
-    bottom: 15%;
-    left: 13%;
+    bottom: 20%;
+       left: 4.9%;
 }
 
 #btn1, #btn2, #btn3, #btn4, #btn5 {
-	width: 14%;
-	height: 50px;
+	width: 17.7%;
+	height: 60px;
 	text-align: center;
 	display: inline-block;
-	border: 1px solid darkgray;
-	
+	border: 1px solid rgb(255, 94, 24); 
+	border-radius:12px;
+	background-color: rgb(255, 94, 24);
+	font-family: 'Handon3gyeopsal600g';
+	color: white;
+	font-size: 130%;
 }
+
+
+
 
 #creatbtn, #creatbtncancle {
 	margin-top: 5px;
-	width: 120px;
-	height: 40px;
-	text-align: center;
-	display: inline-block;
-	border: 1px solid darkgray;
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid;
+    border-color:rgb(255, 94, 24);
+    background-color:rgb(255, 94, 24);
+    font-family: 'Handon3gyeopsal600g';
+    color: white;
+	
 }
 
 #menu {
     /* margin: 0 auto; */
     /* margin-top: 50px; */
     border: 1px solid darkgray;
-    width: 100%;
+    width: 90%;
     border-radius: 10px;
-    height: 400px;
+    height: 350px;
     position: relative;
-    bottom: 14%;
+    bottom: 18%;
     /* left: 1%; */
-    border: 2px solid darkgray;
+    border: 5px solid ;
+    border-color: rgb(255, 94, 24); 
     text-align: center;
     overflow-y: scroll;
     /* margin-bottom: 10%; */
 }
 
 #review {
-    /* margin: 0 auto; */
-    /* margin-top: 5px; */
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 88%;
     border: 1px solid darkgray;
-    width: 100%;
-    height: 400px;
+    /* width: -webkit-fill-available; */
+    height: 350px;
     border-radius: 10px;
     position: relative;
-    bottom: 72%;
-  
+    bottom: 70%;
+    /* left: 1%; */
     text-align: center;
-    border: 2px solid darkgray;
+    border: 5px solid ;
+    border-color: rgb(255, 94, 24); 
     overflow-y: scroll;
 }
 
@@ -163,21 +189,22 @@ h1 {
     height: 300px;
     border-radius: 10px;
     position: relative;
-    bottom: 130.5%;
+    bottom: 121%;
     left: 14.5%;
     text-align: center;
 }
 #event {
-    /* margin: 0 auto; */
+        /* margin: 0 auto; */
     /* margin-top: 5px; */
     border-radius: 10px;
-    width: 100%;
-    height: 400px;
+    width: 88%;
+    height: 350px;
     position: relative;
-    bottom: 246%;
-    
+    bottom: 224.5%;
+    left: 6%;
     text-align: center;
-    border: 2px solid darkgray;
+    border: 5px solid ;
+    border-color: rgb(255, 94, 24); 
     overflow-y: scroll;
 }
 
@@ -185,13 +212,14 @@ h1 {
     /* margin: 0 auto; */
     /* margin-top: 5px; */
     border-radius: 10px;
-    width: 70%;
-    height: 400px;
+    width: 88%;
+    height: 350px;
     position: relative;
-    bottom: 189%;
-    left: 14%;
+    bottom: 174.5%;
+    left: 6%;
     text-align: center;
-    border: 2px solid darkgray;
+    border: 5px solid ;
+    border-color: rgb(255, 94, 24); 
     overflow-y: scroll;
 }
 
@@ -200,9 +228,12 @@ h1 {
 	margin-left: 10px;
 	margin-top: 5px;
 	border-radius: 10px;
-	border: 1px solid darkgray;
-	width: 300px;
-	height: 385px;
+	border: 2px solid ;
+	border-color: rgb(255, 94, 24); 
+	 font-family: 'Handon3gyeopsal600g';
+	     font-size: 90%;
+	    width: 26.5%;
+    height: 335px;
 	float: left;
 }
 
@@ -212,36 +243,45 @@ h1 {
 	margin-left: 10px;
 	border-radius: 10px;
 	border: 1px solid darkgray;
-	width: 550px;
-	height: 385px;
+	width: 71%;
+	height: 335px;
 	float: left;
 	"
 }
 
 #ride, #call {
-	width: 100px;
-	height: 30px;
-	text-align: center;
-	display: inline-block;
-	border: 1px solid darkgray;
-	margin: 0 auto;
+
+    height: 50px;
+   background-color: slategrey;
+    width: 10%;
+    font-family: 'Handon3gyeopsal600g';
+    font-size: 120%;
+    color: ghostwhite;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid;
+    margin: 0 auto;
 }
 
 #credit, #imageplus {
-	width: 100px;
-	height: 30px;
-	text-align: center;
-	display: inline-block;
-	border: 1px solid darkgray;
-	margin: 0 auto;
+width: 100px;
+    height: 30px;
+    position: relative;
+    top: 150px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid darkgray;
+    font-family: 'Handon3gyeopsal600g';
+    margin: 0 auto;
 }
 
 .col-md-3 {
-	margin: 4%;
-	height: 250px;
-	border: 1px solid darkgray;
-	text-align: center;
-	border-radius: 10px;
+	    margin: 4%;
+    height: 250px;
+    border: 3px solid;
+    border-color: burlywood;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .img {
@@ -257,7 +297,9 @@ h1 {
 }
 
 .col-md-12 {
-	border: 1px solid darkgray;
+	border: 2px solid ;
+	border-color: rgb(255, 94, 24); 
+	
 	margin: 0 auto;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -432,60 +474,87 @@ h1 {
 }
 
 #truckruntime {
-	padding-top: 40px;
-	margin: 5px 10px 0 5px;
-	text-align: center;
-	width: 250px;
-	height: 132px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+padding-top: 40px;
+    margin: 5px 10px 0 5px;
+    text-align: center;
+    width: 100%;
+    height: 120px;
+    border: 2px solid;
+    border-color:rgb(255, 94, 24); 
+    border-radius: 10px;
+    position: relative;
+    font-family: 'Handon3gyeopsal600g';
+    right: 45%;
 }
 
 #cacheinfo {
 	padding-top: 40px;
-	margin: 5px 10px 0 5px;
-	text-align: center;
-	width: 250px;
-	height: 132px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+    margin: 5px 10px 0 5px;
+    text-align: center;
+    width: 100%;
+    height: 120px;
+     border: 2px solid;
+    border-color:rgb(255, 94, 24); 
+    border-radius: 10px;
+    position: relative;
+    font-family: 'Handon3gyeopsal600g';
+    right: 45%;
 }
 
 #managerinfo {
-	padding-top: 40px;
-	margin: 5px 10px 0 5px;
-	text-align: center;
-	width: 250px;
-	height: 132px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+padding-top: 40px;
+    margin: 5px 10px 0 5px;
+    text-align: center;
+    width: 100%;
+    height: 120px;
+     border: 2px solid;
+    border-color:rgb(255, 94, 24); 
+    border-radius: 10px;
+    position: relative;    
+    font-family: 'Handon3gyeopsal600g';
+    right: 45%;
 }
 
 #truckruntime1 {
-	padding-top: 40px;
-	margin: 5px 5px 5px 5px;
-	width: 670px;
-	height: 132px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+	    padding-top: 40px;
+	        text-align: center;
+    margin: 5px 5px 5px 5px;
+        width: 219.5%;
+    height: 120px;
+     border: 2px solid;
+    border-color:rgb(255, 94, 24); 
+    border-radius: 10px;
+    position: relative;
+    font-family: 'Handon3gyeopsal600g';
+    right: 26%;
 }
 
 #cacheinfo1 {
-	padding-top: 40px;
-	margin: 5px 5px 5px 5px;
-	width: 670px;
-	height: 132px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+	    padding-top: 40px;
+	        text-align: center;
+    margin: 5px 5px 5px 5px;
+        width: 219.5%;
+    height: 120px;
+     border: 2px solid;
+    border-color:rgb(255, 94, 24); 
+    border-radius: 10px;
+    position: relative;
+    font-family: 'Handon3gyeopsal600g';
+    right: 26%;
 }
 
 #managerinfo1 {
-	padding-top: 30px;
-	margin: 5px 5px 5px 5px;
-	width: 670px;
-	height: 132px;
-	border: 1px solid darkgray;
-	border-radius: 10px;
+	       padding-top: 20px;
+	        text-align: center;
+    margin: 5px 5px 5px 5px;
+       width: 219.5%;
+    height: 120px;
+  border: 2px solid;
+    border-color:rgb(255, 94, 24); 
+    border-radius: 10px;
+    position: relative;
+    font-family: 'Handon3gyeopsal600g';
+    right: 26%;
 }
 
 #truckinfobody {
@@ -516,12 +585,14 @@ h1 {
 	width: 280px;
 	height: 350px;
 	text-align: left;
+	 font-family: 'Handon3gyeopsal600g';
 }
 
-#eventborder {
-	margin-top: 50px;
-	width: 100%;
-	height: 320px;
-	border-top: 1px solid darkgray;
-	border-bottom: 1px solid darkgray;
+
+.eventborder {
+    /* margin-top: 50px; */
+    width: 100%;
+    height: 348px;
+    border-top: 2px solid darkgray;
+    border-bottom: 2px solid darkgray;
 }

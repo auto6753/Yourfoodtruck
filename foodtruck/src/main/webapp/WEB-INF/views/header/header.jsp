@@ -32,9 +32,10 @@
 	
 	
 }
+
 .navbar{
 z-index:2;
-margin-top:2%;
+margin-top:3%;
 margin-left:12%;
 margin-right:12%;
 height: 100px;
@@ -114,13 +115,20 @@ color: rgba(255, 94, 24);
     position: relative;
   	right: 20%
 }
+.fixed{
+ width: 140%;
+  top: 0;
+  right: 0;
+  left: -31.5%;
+  z-index: 1030;
+}
 
 
 
 
 </style>
 <!-- Navigation -->
-<div class="test">
+<div class="test" >
 <nav 
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed">
 	<div id="main" class="container" >
@@ -132,32 +140,32 @@ color: rgba(255, 94, 24);
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">서비스소개
+				<!-- <li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
-				</a></li>
+				</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="/search">트럭검색</a></li>
-				<li class="nav-item"><a class="nav-link" href="/area">모집공고</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li>
+				<li class="nav-item"><a class="nav-link" href="/area">허가구역/모집공고</a></li>
+				<!-- <li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="/help">고객센터</a></li>
 			</ul>
 			<div id="top-right">
 				<c:if test="${sessionid == null}">
-				<span id="login" class="badge badge-light"><a href="/login">로그인</a></span>
-				<span class="badge badge-light"><a href="/login/register">회원가입</a></span>
+				<span id="login" class="badge badge-light"><a href="/login" style="color:rgba(255, 94, 24)">로그인</a></span>
+				<span class="badge badge-light"><a href="/login/register" style="color:rgba(255, 94, 24)">회원가입</a></span>
 				</c:if>
 				<c:if test="${not empty sessionScope.sessionid}">	
-					<span id="" class="badge badge-light"><a href="#">${sessionScope.sessionid.nickname}님</a></span>
+					<span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">${sessionScope.sessionid.nickname}님</span>
 					<input id="sessione" type="hidden" value="${sessionScope.sessionid.email }">
 					<input id="sessionp" type="hidden" value="${sessionScope.sessionid.point}">
-					<span id="" class="badge badge-light"><a href="#">포인트 : ${sessionScope.sessionid.point} 원</a></span>
-					<span id="" class="badge badge-light"><a href="/customer">마이페이지</a></span>
+					<span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">포인트 : ${sessionScope.sessionid.point} 원</span>
+					<span id="" class="badge badge-light"><a href="/customer" style="color:rgba(255, 94, 24)">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
-					<span id="" class="badge badge-light"><a href="/truck/register">트럭등록</a></span>
+					<span id="" class="badge badge-light"><a href="/truck/register" style="color:rgba(255, 94, 24)">트럭등록</a></span>
 					</c:if>
 					<c:if test="${not empty sessionScope.seller}">
-					<span id="" class="badge badge-light"><a href="/seller">트럭관리</a></span>
+					<span id="" class="badge badge-light"><a href="/seller" style="color:rgba(255, 94, 24)">트럭관리</a></span>
 					</c:if>
-					<span id="" class="badge badge-light"><a href="/login/logout">로그아웃</a></span>
+					<span id="" class="badge badge-light"><a href="/login/logout" style="color:rgba(255, 94, 24)">로그아웃</a></span>
 				</c:if>
 			</div>
 		</div>

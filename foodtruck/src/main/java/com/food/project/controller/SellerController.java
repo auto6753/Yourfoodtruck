@@ -1312,6 +1312,10 @@ public class SellerController {
 		menulist = sellerservice.getmenu(truckcode);
 		model.addAttribute("menulist", menulist);
 		model.addAttribute("orderTarget","customer");
+		
+		FoodTruckVO vo1 = truckService.getBrandname(truckcode);
+		System.out.println(vo1);
+		model.addAttribute("brandname" , vo1);
 //		CustomerVO cvo=(CustomerVO)request.getSession().getAttribute("sessionid");
 //		String email=cvo.getEmail();
 //		UserRecord userRecord;
