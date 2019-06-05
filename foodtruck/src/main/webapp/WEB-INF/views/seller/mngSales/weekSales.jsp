@@ -90,5 +90,7 @@
 	<input type="hidden" id="mTotalSalesWeek" value="${mTotalSalesWeek}"/>
 	<input type="hidden" id="nTotalSalesWeek" value="${nTotalSalesWeek}"/>
 	<input type="hidden" id="totalSalesWeek" value="${totalSalesWeek}"/>
+	
+	<input type="hidden" id="page" value="2"/>
 </body>
 </html>

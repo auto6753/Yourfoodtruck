@@ -18,6 +18,7 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpSession;
 
@@ -97,7 +98,7 @@ public class SellerController {
 	@RequestMapping(value="/mngSales", method=RequestMethod.GET) 
 	public String mngSales(Model model, HttpSession session, HttpServletRequest request) {
 		
-		return "seller/mngSales/mngSales";
+		return "seller/mngSales/todaySales";
 	}
 	
 	@RequestMapping(value="/salesInfo", method= {RequestMethod.GET, RequestMethod.POST})
@@ -808,6 +809,128 @@ public class SellerController {
 			model.addAttribute("byTimeValArrList", byTimeValArrList);
 			
 			return "seller/mngSales/byTimeSales";
+			
+		case "selPeriodSales":
+		case "selPeriodSalesRe":
+			String pn = request.getParameter("pageName");
+			
+			ArrayList<PaymentVO> selPeriodSales = new ArrayList<>();
+			String inputFirstDate = null;
+			String inputLastDate = null;
+			
+			if(pn.equals("selPeriodSales")) {
+				
+			}
+			else {
+				inputFirstDate = request.getParameter("firstDate");
+				inputLastDate = request.getParameter("lastDate");
+				System.out.println(inputFirstDate);
+				System.out.println(inputLastDate);
+				selPeriodSales = paymentService.getSelPeriodSales(truck_code, inputFirstDate, inputLastDate);
+			}
+			
+			int mKakaoSalesSelPeriod = 0, nKakaoSalesSelPeriod = 0; // 카카오페이 매출액(회원, 비회원)
+			int totalKakaoSalesSelPeriod = 0; // 카카오페이 매출총액(회원 + 비회원)
+			int mCashSalesSelPeriod = 0, nCashSalesSelPeriod = 0; // 현금 매출액(회원, 비회원)
+			int totalCashSalesSelPeriod = 0; // 현금 매출총액(회원 + 비회원)
+			int mCardSalesSelPeriod = 0, nCardSalesSelPeriod = 0; // 카드 매출액(회원, 비회원)
+			int totalCardSalesSelPeriod = 0; // 카드 매출총액(회원 + 비회원)
+			int mTotalSalesSelPeriod = 0, nTotalSalesSelPeriod = 0; // 총 매출액(회원, 비회원)
+			int totalSalesSelPeriod = 0; // 총 매출액(회원 + 비회원)
+			
+			int totalAmountSelPeriod = 0; // 총 판매량
+			
+			HashSet<String> menuCodesSelPeriod = new HashSet<>();
+			ArrayList<MenuSalesVO> menuSalesSelPeriod = new ArrayList<>();
+			
+			for(int i=0; i<selPeriodSales.size(); i++) {
+				switch(selPeriodSales.get(i).getPayment_class()) {
+				case 3: // 카카오페이
+					telephone = selPeriodSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+						mKakaoSalesSelPeriod = mKakaoSalesSelPeriod + selPeriodSales.get(i).getTotal_price();
+					} else { // 회원 조회 값이 없으면(= 비회원이면)
+						nKakaoSalesSelPeriod = nKakaoSalesSelPeriod + selPeriodSales.get(i).getTotal_price();
+					}
+					break;
+				case 4: // 현금
+					telephone = selPeriodSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCashSalesSelPeriod = mCashSalesSelPeriod + selPeriodSales.get(i).getTotal_price();
+					} else {
+						nCashSalesSelPeriod = nCashSalesSelPeriod + selPeriodSales.get(i).getTotal_price();
+					}
+					break;
+				case 5: // 카드
+					telephone = selPeriodSales.get(i).getPayment_telephone();
+					isMember = paymentService.isMember(telephone);
+					
+					if(isMember != null) {
+						mCardSalesSelPeriod = mCardSalesSelPeriod + selPeriodSales.get(i).getTotal_price();
+					} else {
+						nCardSalesSelPeriod = nCardSalesSelPeriod + selPeriodSales.get(i).getTotal_price();
+					}
+					break;
+					default:
+				}
+				
+				String menu_code = selPeriodSales.get(i).getMenu_code();
+				String menu_name = selPeriodSales.get(i).getMenu_name();
+				
+				if(menu_code == null) { selPeriodSales.get(i).setMenu_code("999999999"); }
+				if(menu_name == null) { selPeriodSales.get(i).setMenu_name("(삭제된 메뉴)"); }
+				
+				if(menuCodesSelPeriod.add(selPeriodSales.get(i).getMenu_code())) {
+					MenuSalesVO temp = new MenuSalesVO();
+					temp.setMenu_code(selPeriodSales.get(i).getMenu_code());
+					temp.setMenu_name(selPeriodSales.get(i).getMenu_name());
+					temp.setAmount(selPeriodSales.get(i).getAmount());
+					temp.setTotalPrice(selPeriodSales.get(i).getTotal_price());
+					temp.setUnitPrice(selPeriodSales.get(i).getTotal_price() / selPeriodSales.get(i).getAmount());
+					menuSalesSelPeriod.add(temp);
+					totalAmountSelPeriod = totalAmountSelPeriod + selPeriodSales.get(i).getAmount();
+				} else {
+					for(int j=0; j<menuSalesSelPeriod.size(); j++) {
+						if(menuSalesSelPeriod.get(j).getMenu_code().equals(selPeriodSales.get(i).getMenu_code())) {
+							menuSalesSelPeriod.get(j).add(selPeriodSales.get(i).getAmount(), selPeriodSales.get(i).getTotal_price());
+							totalAmountSelPeriod = totalAmountSelPeriod + selPeriodSales.get(i).getAmount();
+						}
+					}
+				}
+			}
+
+			mTotalSalesSelPeriod = mKakaoSalesSelPeriod + mCashSalesSelPeriod + mCardSalesSelPeriod;
+			nTotalSalesSelPeriod = nKakaoSalesSelPeriod + nCashSalesSelPeriod + nCardSalesSelPeriod;
+			totalSalesSelPeriod = mTotalSalesSelPeriod + nTotalSalesSelPeriod;
+			
+			totalCashSalesSelPeriod = mCashSalesSelPeriod + nCashSalesSelPeriod;
+			totalCardSalesSelPeriod = mCardSalesSelPeriod + nCardSalesSelPeriod;
+			totalKakaoSalesSelPeriod = mKakaoSalesSelPeriod + nKakaoSalesSelPeriod;
+			
+			model.addAttribute("mCashSalesSelPeriod", mCashSalesSelPeriod); // 회원 현금 매출액
+			model.addAttribute("mCardSalesSelPeriod", mCardSalesSelPeriod); // 회원 카드 매출액
+			model.addAttribute("mKakaoSalesSelPeriod", mKakaoSalesSelPeriod); // 회원 카카오페이 매출액
+			model.addAttribute("mTotalSalesSelPeriod", mTotalSalesSelPeriod); // 회원 총 매출액
+			
+			model.addAttribute("nCashSalesSelPeriod", nCashSalesSelPeriod); // 비회원 현금 매출액
+			model.addAttribute("nCardSalesSelPeriod", nCardSalesSelPeriod); // 비회원 카드 매출액
+			model.addAttribute("nKakaoSalesSelPeriod", nKakaoSalesSelPeriod); // 비회원 카카오페이 매출액
+			model.addAttribute("nTotalSalesSelPeriod", nTotalSalesSelPeriod); // 비회원 총 매출액
+			
+			model.addAttribute("totalCashSalesSelPeriod", totalCashSalesSelPeriod); // 현금 총 매출액
+			model.addAttribute("totalCardSalesSelPeriod", totalCardSalesSelPeriod); // 카드 총 매출액
+			model.addAttribute("totalKakaoSalesSelPeriod", totalKakaoSalesSelPeriod); // 카카오페이 총 매출액
+			
+			model.addAttribute("totalSalesSelPeriod", totalSalesSelPeriod); // 회원 + 비회원 총 매출액
+			
+			model.addAttribute("menuSalesSelPeriod", menuSalesSelPeriod); // 메뉴별 판매량
+			model.addAttribute("totalAmountSelPeriod", totalAmountSelPeriod); // 총 판매량
+			
+			return "seller/mngSales/selPeriodSales";
 			
 			default:
 				return "seller/mngSales/mngSales";
