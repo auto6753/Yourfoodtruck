@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.food.project.domain.CustomerVO;
-import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.SellerService;
@@ -31,11 +31,11 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import lombok.AllArgsConstructor;
 
@@ -65,40 +65,64 @@ public class M_SellerController {
 		return "seller/event/event";
 	}
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
-	public String seorder(Model model, HttpSession session) {
+	@SuppressWarnings({ "unchecked", "null" })
+	@ResponseBody
+	@RequestMapping(value="/seorder", produces = "application/text; charset=utf8") 
+	public String seorder(@RequestBody String param) throws InterruptedException, IOException, FirebaseAuthException {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map = net.sf.json.JSONObject.fromObject(param);
+		String email=(String)map.get("email");
+		String uid;
+		JSONObject resultObj = new JSONObject();
 		FirebaseApp defaultApp = null;
-		CustomerVO vo=new CustomerVO();
-		vo=(CustomerVO) session.getAttribute("sessionid");
-		String email=vo.getEmail();
+		List<FirebaseApp> apps=FirebaseApp.getApps();
 		FileInputStream serviceAccount;
-		try {
-			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
-				FirebaseOptions options = new FirebaseOptions.Builder()
-						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-						.build();
-				defaultApp = FirebaseApp.initializeApp(options);
-				System.out.println("First"+defaultApp.getName());
-				UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
-				System.out.println(userRecord.getUid());
-				model.addAttribute("_uid",userRecord.getUid());
-				defaultApp.delete();
+		FirebaseOptions options=null;
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 서버 올릴 때 경로
+		System.out.println(path);
+		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
+				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		serviceAccount = new FileInputStream(firebasePath);
+		
+		//이미 관리자 defaultApp이 있는지 검사
+		if(apps!=null && !apps.isEmpty()) {
+			for(FirebaseApp app:apps) {
+				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+					defaultApp = app;
 			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (FirebaseAuthException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else {
+			defaultApp=null;
+			options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+					.build();
+			defaultApp = FirebaseApp.initializeApp(options);
 		}
-		return "seller/order/seorder";
+		UserRecord userRecord;
+		if(defaultApp!=null) {
+			userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
+			uid=userRecord.getUid();
+			DatabaseReference ref=FirebaseDatabase.getInstance().
+				getReference("/PaymentTest2/"+userRecord.getUid());
+			ref.limitToFirst(15).addListenerForSingleValueEvent(new ValueEventListener() {
+				@Override
+				public void onDataChange(DataSnapshot dataSnapshot) {
+					List<Object> list = (List<Object>) dataSnapshot.getValue();
+					System.out.println(list.toString());
+				}
+				@Override
+				public void onCancelled(DatabaseError databaseError) {
+					// ...
+				}
+			});
+		}
+		defaultApp.getApps().clear();
+		defaultApp.delete();
+		return resultObj.toString();
 	}
 	
 	@RequestMapping(value="/cuorder", produces = "application/text; charset=utf8")

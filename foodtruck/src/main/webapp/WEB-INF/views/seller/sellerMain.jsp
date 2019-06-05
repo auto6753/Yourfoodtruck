@@ -9,7 +9,6 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <body>
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">

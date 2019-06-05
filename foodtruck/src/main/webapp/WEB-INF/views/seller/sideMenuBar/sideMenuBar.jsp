@@ -26,7 +26,6 @@ span {
 </style>
 <head>
 <meta charset="UTF-8">
-
 <link rel="stylesheet" href="<c:url value="/resources/css/seller/sideMenuBar/sideMenuBar.css"/>">
 <script type="text/javascript" src="<c:url value="/resources/js/seller/sideMenu.js"/>"></script>
 <title>Insert title here</title>

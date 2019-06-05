@@ -86,7 +86,6 @@ with
               from test_a) c
         where c.rank <= 5)
         select * from test_b
-
 	]]>
 	</select>
 	<update id="updatetruckphoto" parameterType="com.food.project.domain.FoodTruckVO">
