@@ -90,5 +90,7 @@
 	<input type="hidden" id="mTotalSales" value="${mTotalSales}"/>
 	<input type="hidden" id="nTotalSales" value="${nTotalSales}"/>
 	<input type="hidden" id="totalSales" value="${totalSales}"/>
+	
+	<input type="hidden" id="page" value="1"/>
 </body>
 </html>

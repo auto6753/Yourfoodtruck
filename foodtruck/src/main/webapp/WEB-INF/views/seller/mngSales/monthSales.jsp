@@ -103,5 +103,7 @@
 	<input type="hidden" id="mTotalSalesMonth" value="${mTotalSalesMonth}"/>
 	<input type="hidden" id="nTotalSalesMonth" value="${nTotalSalesMonth}"/>
 	<input type="hidden" id="totalSalesMonth" value="${totalSalesMonth}"/>
+	
+	<input type="hidden" id="page" value="3"/>
 </body>
 </html>

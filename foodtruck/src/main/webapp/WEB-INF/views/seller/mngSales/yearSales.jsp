@@ -103,5 +103,7 @@
 	<input type="hidden" id="mTotalSalesYear" value="${mTotalSalesYear}"/>
 	<input type="hidden" id="nTotalSalesYear" value="${nTotalSalesYear}"/>
 	<input type="hidden" id="totalSalesYear" value="${totalSalesYear}"/>
+	
+	<input type="hidden" id="page" value="4"/>
 </body>
 </html>

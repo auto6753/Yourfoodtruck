@@ -23,6 +23,32 @@
 			}, 400);
 			return false;
 		});
+		
+		var pageVal;
+		pageVal = $("#page").val();
+		
+		switch(pageVal){
+		case "1":
+			$(".today").css("background-color", "red");
+			break;
+		case "2":
+			$(".week").css("background-color", "orange");
+			break;
+		case "3":
+			$(".month").css("background-color", "yellow");
+			break;
+		case "4":
+			$(".year").css("background-color", "green");
+			break;
+		case "5":
+			$(".byDay").css("background-color", "blue");
+			break;
+		case "6":
+			$(".byTime").css("background-color", "navy");
+			break;
+		case "7":
+			$(".selPeriod").css("background-color", "purple");
+		}
 	});
 </script>
 <style>
@@ -39,7 +65,7 @@ a.top {
   -moz-border-radius: 7;
   border-radius: 7px;
   color: #ff5e18;
-  font-size: 20px;
+  font-size: 14px;
   background: #ffffff;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
@@ -49,6 +75,11 @@ a.top {
   background: #ffffff;
   text-decoration: none;
 }
+
+.navBtn {
+	width: 14.2%;
+	height: 50px;
+}
 </style>
 </head>
 <body>
@@ -56,12 +87,13 @@ a.top {
 	<form id="salesInfo" action="salesInfo" method="GET">
 		<div class="container">
 			<nav id="navBar" class="row">
-				<button class="col-md-2 navBtn butn hanna" name="pageName" value="todaySales">금일</button>
-				<button class="col-md-2 navBtn butn hanna" name="pageName" value="weekSales">주간</button>
-				<button class="col-md-2 navBtn butn hanna" name="pageName" value="monthSales">월간</button>
-				<button class="col-md-2 navBtn butn hanna" name="pageName" value="yearSales">연간</button>
-				<button class="col-md-2 navBtn butn hanna" name="pageName" value="byDaySales">요일별</button>
-				<button class="col-md-2 navBtn butn hanna" name="pageName" value="byTimeSales">시간대별</button>
+				<button class="navBtn butn hanna today" name="pageName" value="todaySales">금일</button>
+				<button class="navBtn butn hanna week" name="pageName" value="weekSales">주간</button>
+				<button class="navBtn butn hanna month" name="pageName" value="monthSales">월간</button>
+				<button class="navBtn butn hanna year" name="pageName" value="yearSales">연간</button>
+				<button class="navBtn butn hanna byDay" name="pageName" value="byDaySales">요일별</button>
+				<button class="navBtn butn hanna byTime" name="pageName" value="byTimeSales">시간대별</button>
+				<button class="navBtn butn hanna selPeriod" name="pageName" value="selPeriodSales">사용자지정</button>
 			</nav>
 		</div>
 	</form>
