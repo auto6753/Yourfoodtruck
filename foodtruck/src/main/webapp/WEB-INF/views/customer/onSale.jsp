@@ -58,7 +58,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<div id="with" class="col">
-		<h1 style="text-align: center; margin-top: 10px;">탑승중인 트럭</h1>
+		<h1 style="text-align: center; margin-top: 10px;">운행중인트럭</h1>
 		<br>
 		<div class="album py-5 bg-light">
 			<div class="container">

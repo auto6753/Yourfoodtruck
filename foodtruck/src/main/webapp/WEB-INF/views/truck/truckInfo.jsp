@@ -17,7 +17,7 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9df56b013af05d5db1fb3350de0a4265"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
 		
 		
@@ -291,7 +291,7 @@
 </script>
 </head>
 <body>
-	<div id="with" class="col">
+	
 		<div id="height" class="col">
 			<div  class="col">
 				<img
@@ -300,8 +300,8 @@
 					<br>
 					<h1 id="truckname">${tlist.brandname}</h1>
 					<br>
-					<button id="ride">탑승하기</button>
-					<button id="call">호출하기</button>
+					<button id="ride" class="btn">탑승하기</button>
+					<button id="call" class="btn">호출하기</button>
 				</div>
 			</div>
 			<div id="btngroup" class="col">
@@ -546,12 +546,13 @@
 			</div>
 			<div id="event" style="visibility: hidden;">
 
-				<div id="eventborder">
+				
 					<c:forEach var="i" items="${event }">
+					
 						<div id="eventbody" class="${i.event_url}">
-							<c:if test="${i.event_url} == 'defaultImg'">
+							<c:if test="${i.event_url} == 'defaultImg.png'">
 							<img id="eventimage"
-								src='${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png'>
+								src='${pageContext.request.contextPath}/resources/image/upload/defaultImg.png'>
 							</c:if>
 							<img id="eventimage"
 								src='${pageContext.request.contextPath}/resources/image/upload/${i.event_url}'>
@@ -573,13 +574,14 @@
 							</h6>
 							<br>
 						</div>
+					
 					</c:forEach>
 				</div>
 
 
 			</div>
-		</div>
-	</div>
+		
+	
 	<script>
       var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
 

@@ -25,6 +25,7 @@ public interface FoodTruckService {
 	public ArrayList<EventVO> getEvent(String truck_code);
 	public ArrayList<MainPageRankDTO> getRank();
 	public void updatetruckphoto(FoodTruckVO mvo);
+	public FoodTruckVO getBrandname(String truckcode);
 	
 	
 }

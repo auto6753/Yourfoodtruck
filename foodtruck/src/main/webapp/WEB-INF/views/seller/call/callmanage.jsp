@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
 	type="text/javascript"></script>
@@ -252,7 +253,10 @@
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
-			<div class="callTitle">호출 관리</div>
+				<div class="col-md-12 paddingZero">
+					<div class="menuTitle">호출관리</div>
+					</div>
+					</div>
 			<div class="calltext" style="overflow-x: hidden; overflow-y: auto;">
 				<table>
 					<!-- #wrapper에 스타일 지정 -->
@@ -260,9 +264,9 @@
 						<tr>
 							<th id="col_1">요청정보</th>
 							<!-- #col_1에 스타일 지정 -->
-							<th id="col_2">신청자정보</th>
+							<th id="col_1">신청자정보</th>
 							<!-- #col_2에 스타일 지정 -->
-							<th id="col_3">진행상태</th>
+							<th id="col_1">진행상태</th>
 							<!-- #col_3에 스타일 지정 -->
 						</tr>
 					</thead>
@@ -270,16 +274,17 @@
 						<c:forEach var="i" items="${callList}">
 							<tr>
 								<!-- 요청된 호출 수만큼 <tr> 태그 생성 -->
-								<td><input type="hidden" value="${i.MERCHANT_UID}" /> 행사일
-									: ${i.FESTIVAL_STARTDATE } ~ ${i.FESTIVAL_ENDDATE} <br>
+								<td><input type="hidden" value="${i.MERCHANT_UID}" /> 
+								행사일 : <fmt:formatDate value="${i.FESTIVAL_STARTDATE }" pattern="yyyy.MM.dd" />~
+								<fmt:formatDate value="${i.FESTIVAL_ENDDATE}" pattern="yyyy.MM.dd" /><br>
 									행사시간 : ${i.FESTIVAL_STARTTIME } ~ ${i.FESTIVAL_ENDTIME } <br>
 									행사장소 : ${i.PLACE} <br> 섭외비용 : <span>${i.PRICE }</span> 원<br>
 									요구사항 : ${i.CONTENT } <br></td>
-								<td>신청자명 : <span>${i.NAME }</span> <br> 전화번호
+								<td>신청자명 : ${i.NAME } <br> 전화번호
 									:${i.CALLTEL }
 								</td>
 								<c:if test="${i.PAY_STATUS ==1}">
-									<td>결제 : 결제 완료<br>
+									<td>결제 : 결제완료<br>
 								</c:if>
 								<c:if test="${i.PAY_STATUS ==2}">
 									<td>결제 : 미결제<br>
@@ -327,7 +332,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div id="nextall">
+			<%-- <div id="nextall">
 				<nav id="next" aria-label="Page navigation example">
 					<ul class="pagination">
 						<li class="page"><a class="page-link"
@@ -341,11 +346,11 @@
 							href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
 					</ul>
 				</nav>
-			</div>
+			</div> --%>
 		</div>
 
 	</div>
-</div>
+
 <script>
 function list(page) {
 	location.href = "/seller/callmanage?curPage=" + page ;

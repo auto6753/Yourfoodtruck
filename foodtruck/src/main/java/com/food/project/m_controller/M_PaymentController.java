@@ -1,6 +1,11 @@
 package com.food.project.m_controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.PaymentVO;
 import com.food.project.service.PaymentService;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
@@ -53,41 +61,63 @@ public class M_PaymentController {
 	public void insertOrder(@RequestBody String param) {
 		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
 		paymentMap = JSONArray.fromObject(param);
+		int a=payService.insertPaymentList(paymentMap);
+		if(a==0) {
+			System.out.println("Error");
+		}else {
+			System.out.println("Success");
+		}
+//		String email=(String)paymentMap.get(0).get("seller_email");
+//		String telephone=(String)paymentMap.get(0).get("payment_telephone");
+//		SimpleDateFormat format1 = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+//		String inputDate = format1.format(new Date());
+//		inputDate=inputDate.substring(2);
+//		JSONObject jsonObj = new JSONObject();
+//		FirebaseApp defaultApp = null;
+//		List<FirebaseApp> apps=FirebaseApp.getApps();
+//		FileInputStream serviceAccount;
+//		FirebaseOptions options=null;
+//		try {
+//			serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+//			options = new FirebaseOptions.Builder()
+//					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+//					.build();
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		//이미 관리자 defaultApp이 있는지 검사
+//		if(apps!=null && !apps.isEmpty()) {
+//			for(FirebaseApp app:apps) {
+//				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+//					defaultApp = app;
+//			}
+//		}else {
+//			defaultApp = FirebaseApp.initializeApp(options);
+//		}
 //		UserRecord userRecord;
 //		try {
 //			userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
 //			// See the UserRecord reference doc for the contents of userRecord.
 //			System.out.println("Successfully fetched user data in cuorder: " + userRecord.getEmail());
-//			DatabaseReference ref=FirebaseDatabase.getInstance().getReference("/PaymentTest2/"+userRecord.getUid());
-//			ref.addChildEventListener(new ChildEventListener() {
-//				@Override
-//				public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-//					JSONObject test = (JSONObject) snapshot.getValue();
-//				}
-//				@Override
-//				public void onChildChanged(DataSnapshot snapshot, String previousChildName) {}
-//				@Override
-//				public void onChildRemoved(DataSnapshot snapshot) {}
-//				@Override
-//				public void onChildMoved(DataSnapshot snapshot, String previousChildName) {}
-//				@Override
-//				public void onCancelled(DatabaseError error) {}
-//			});
+//			DatabaseReference ref=FirebaseDatabase.getInstance().
+//					getReference("/PaymentTest2/"+userRecord.getUid()+"/"+telephone+"/");
+//			for(int i=0; i<paymentMap.size();i++) {
+//				ref.child((String)paymentMap.get(0).get("payment_regdate")+"/"+i).setValueAsync(paymentMap.get(i));
+//			}
+//			
+//			jsonObj.put("result", "success");
+//			
 //		} catch (FirebaseAuthException e) {
 //			e.printStackTrace();
+//			jsonObj.put("result", "fail");
 //		}
+//		defaultApp.delete();
+//		
+//		return jsonObj.toString();
 		
-	}
-	@RequestMapping(value="/afterOrder",method=RequestMethod.POST)
-	public String afterOrder() {
-		return "seller/order/afterOrder";
-	}
-	@RequestMapping(value="/payck",method=RequestMethod.POST)
-	@ResponseBody
-	public String payck(Model model,PaymentVO vo) {
-		System.out.println(vo.getTruck_code());
-		System.out.println(vo.getPayment_telephone());
-		return "success";
 	}
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/updatePayment")
@@ -98,8 +128,7 @@ public class M_PaymentController {
 		vo.setTruck_code((String)paymentMap.get("truck_code"));
 		vo.setPayment_telephone((String)paymentMap.get("payment_telephone"));
 		vo.setPayment_code((String)paymentMap.get("payment_code"));
-		vo.setPayment_class(
-				(int)paymentMap.get("payment_class"));
+		vo.setPayment_class((int)paymentMap.get("payment_class"));
 		
 		System.out.println(paymentMap);
 		int a=payService.updatePaymentList(vo);

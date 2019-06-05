@@ -30,6 +30,7 @@ import com.google.gson.JsonObject;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSON;
+import net.sf.json.JSONArray;
 @AllArgsConstructor
 @Controller
 @CrossOrigin()
@@ -40,33 +41,120 @@ public class M_CustomerController {
 	CallListService callList;
 	OnboardService onboard;
 	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String mypage(Locale locale, Model model) {
-		return "customer/mypage";
-	}
+//	@RequestMapping(value = "", method = RequestMethod.GET)
+//	public String mypage(Locale locale, Model model) {
+//		return "customer/mypage";
+//	}
 	
-	@RequestMapping(value = "/onboard", method = RequestMethod.GET)
-	public String onboard(Locale locale, Model model, HttpSession session) {
-		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
-		System.out.println(vo.getEmail());
+	@ResponseBody
+	@RequestMapping(value = "/onboard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String onboard(@RequestBody Map<String,Object> map) {
+		System.out.println("?");
+		//String truck_code = (String)map.get("truck_code");
+		String email = (String)map.get("email");
+		System.out.println(email);
+		System.out.println("d");
+		//CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		//System.out.println(vo.getEmail());
+		ArrayList<OnboardVO> result = new ArrayList<>();
+		JSONArray data = new JSONArray();
+		ArrayList<OnboardVO> ob = onboard.getOnboard(email);
+		if (ob.size() != 0) {
+			for (int i = 0; i < ob.size(); i++) {
+				int e = ob.get(i).getOnboard_state();
+				System.out.println(ob);
+				System.out.println(e);
+				if (e == 1) {
+					result.add(ob.get(i));
+				}
+			}
+			for(int i =0;i<result.size();i++) {
+				System.out.println("?");
+				JSONObject obj = new JSONObject();
+				obj.put("brandname",result.get(i).getBrandname());
+				obj.put("truck_url",result.get(i).getTruck_url());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
+				obj.put("onboard_date",sdf.format(result.get(i).getOnboard_date()));
+				obj.put("truck_code",result.get(i).getTruck_code());
+				data.add(obj);
+			}
 		
-		ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail());
-		for(int i=0; i < ob.size(); i++) {
-			System.out.println(ob);
 		}
-		model.addAttribute("onboard", ob);
+		//model.addAttribute("onboard", ob);
 		/*
 		 * ArrayList<OnboardVO> ob = onboard.getOnboard(vo.getEmail()); for(int i
 		 * =0;i<ob.size();i++) { System.out.println(ob); }
 		 * model.addAttribute("Onboard",ob);
 		 * 
 		 */
-		return "customer/onboard";
+		System.out.println(data.toString());
+		return data.toString();
+		
 	}
-	
-	@RequestMapping(value = "/onSale", method = RequestMethod.GET)
-	public String onSale(Locale locale, Model model) {
-		return "customer/onSale";
+	@ResponseBody
+	@RequestMapping(value = "/onSale", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String onSale(@RequestBody Map<String,Object> map) {
+		//CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+		
+		String email = (String)map.get("email");
+//		System.out.println(vo.getEmail());
+
+		ArrayList<OnboardVO> sale = new ArrayList<OnboardVO>();
+		ArrayList<OnboardVO> result = new ArrayList<>();
+		sale = onboard.getOnboard(email);
+		int length = sale.size();
+		System.out.println(length);
+//
+		if (length != 0) {
+			System.out.println("ㅇ");
+			for (int i = 0; i < length; i++) {
+				//String hours = sale.get(i).getHours();
+				String start2 = sale.get(i).getTruck_starttime();
+				String end2 = sale.get(i).getTruck_endtime();
+				start2 = start2.replace(":", "");
+				end2 = end2.replace(":", "");
+				int start =  Integer.parseInt(start2);
+				int end =  Integer.parseInt(end2);
+				System.out.println(start);
+				System.out.println("===");
+				System.out.println(end);
+				System.out.println("===");
+				// int start_hour = Integer.parseInt(hours.substring(0, 2));
+				// int end_hour = Integer.parseInt(hours.substring(3));
+				// System.out.println(start_hour + " : " + end_hour);
+				SimpleDateFormat date = new SimpleDateFormat("HHmm");
+				// System.out.println(date);
+				int sysdate = Integer.parseInt(date.format(System.currentTimeMillis()));
+				System.out.println(sysdate);
+				System.out.println("d");
+				if (start <= sysdate && end >= sysdate && sale.get(i).getOnboard_state() == 1) {
+					result.add(sale.get(i));
+					System.out.println(sale.get(i).getBrandname());
+					System.out.println("해당되나?");
+				}
+			}
+			System.out.println(result.size());
+			
+		}
+		
+		JSONArray test = new JSONArray();
+		if (result.size() != 0) {
+			for(OnboardVO a : result) {
+				JSONObject temp  = new JSONObject();
+				temp.put("truck_code", a.getTruck_code());
+				temp.put("brandname",a.getBrandname());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
+				temp.put("onboard_date",sdf.format(a.getOnboard_date()));
+				temp.put("truck_url",a.getTruck_url());
+				test.add(temp);
+			}
+			return test.toString();
+			
+		}else {
+			//return email;
+			return "fail";
+		}
+
 	}
 	
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
@@ -176,6 +264,7 @@ public class M_CustomerController {
 		JSONObject ob = new JSONObject();
 		return  ob.toString();
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/Deleteride", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String Deleteride(@RequestBody Map<String,Object> map) {

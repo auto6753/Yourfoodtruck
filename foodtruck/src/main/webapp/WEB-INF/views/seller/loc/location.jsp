@@ -38,7 +38,9 @@
 <script type="text/javascript" src=""></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1d1757d7f3887c30f0142b09e5ff2be&libraries=services,clusterer,drawing"></script>
+<style>
 
+</style>
 </head>
 <body>
 	<div class="container">
@@ -58,9 +60,14 @@
 				</form>
 			</div>
 	</div> --%>
+	<div class="col-md-9">
+				<div class="col-md-12 paddingZero">
+					<div class="menuTitle">위치등록</div>
+					</div>
+					</div>
 			<div class="search">
 				<input type="text" value="" id="keyword" >
-				<input id="submit" type="button" value="검색하기">
+				<input id="submit" type="button" class="btn" value="검색하기">
 				<div id="map" ></div>
 			</div>
 			
@@ -69,7 +76,7 @@
 			
 			<div id="result">
 			<p>
-				<em>자신의 위치를 눌러주세요</em>
+				<em>등록할 위치를 지도에 클릭하십시오.</em>
 			</p>
 			<form action="/seller/location" method="post"> 
 			<div id="clickLatlng"><button id="store" style="display: none"> 검색위치로등록</button></div>

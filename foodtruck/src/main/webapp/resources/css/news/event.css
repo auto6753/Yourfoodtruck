@@ -23,7 +23,7 @@ a { text-decoration:none; color:#000; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
 .tab_con div { display:none; height:300px; text-align:center;}
 
-img {
+.img {
 	width: 250px;
 	height: 180px;
 	border-radius: 10px;
