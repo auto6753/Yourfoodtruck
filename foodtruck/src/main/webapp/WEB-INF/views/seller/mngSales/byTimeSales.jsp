@@ -96,5 +96,7 @@
 			</div>
 		</div>
 	</div>
+	
+	<input type="hidden" id="page" value="6"/>
 </body>
 </html>

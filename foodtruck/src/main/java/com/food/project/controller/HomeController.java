@@ -119,7 +119,7 @@ public class HomeController {
 			
 		}
 		
-		System.out.println(yj);
+		System.out.println(">>>" + yj);
 		
 		
 		model.addAttribute("mainimage", yj);
