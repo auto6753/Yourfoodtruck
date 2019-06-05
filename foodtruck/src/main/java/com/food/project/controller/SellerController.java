@@ -1146,7 +1146,7 @@ public class SellerController {
 				periodcount.put("count", perioddate.get(g).getCount());
 				System.out.println(periodcount.toString());
 				Map<String,Object> map = new HashMap<String,Object>();
-				map=JSONObject.fromObject(periodcount.toString());
+				map=net.sf.json.JSONObject.fromObject(periodcount.toString());
 				resultlist.add(map);
 			}
 			resultlist=JSONArray.fromObject(resultlist.toString());
@@ -1170,7 +1170,7 @@ public class SellerController {
 				ridecount.put("count", on.get(j).getCount());
 				System.out.println(ridecount.toString());
 				Map<String,Object> map = new HashMap<String,Object>();
-				map=JSONObject.fromObject(ridecount.toString());
+				map=net.sf.json.JSONObject.fromObject(ridecount.toString());
 				jsonresult.add(map);
 			}
 			resultlist=JSONArray.fromObject(jsonresult.toString());
@@ -1302,6 +1302,10 @@ public class SellerController {
 		menulist = sellerservice.getmenu(truckcode);
 		model.addAttribute("menulist", menulist);
 		model.addAttribute("orderTarget","customer");
+		
+		FoodTruckVO vo1 = truckService.getBrandname(truckcode);
+		System.out.println(vo1);
+		model.addAttribute("brandname" , vo1);
 //		CustomerVO cvo=(CustomerVO)request.getSession().getAttribute("sessionid");
 //		String email=cvo.getEmail();
 //		UserRecord userRecord;

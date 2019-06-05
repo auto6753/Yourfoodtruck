@@ -97,6 +97,12 @@ public FoodTruckVO getFoodTruckE(String email) {
 	return mapper.getFoodTruckE(email);
 }
 
+@Override
+public FoodTruckVO getBrandname(String truckcode) {
+	
+	return mapper.getBrandname(truckcode);
+}
+
 
 
 	

@@ -76,8 +76,8 @@ with
     test_a as(
 		select a.truck_code, b.truck_url, b.brandname, sum(a.review_score) score
 		from review a , foodtruck b
-		where a.review_regdate > trunc(sysdate,'mm')
-		and a.review_regdate < trunc(add_months(sysdate, +1),'mm')
+		where a.review_regdate < trunc(sysdate,'mm')
+		and a.review_regdate > trunc(add_months(sysdate, -1),'mm')
 		and a.truck_code = b.truck_code
 		GROUP BY a.truck_code, b.truck_url, b.brandname),
     test_b as(
@@ -92,4 +92,7 @@ with
 	<update id="updatetruckphoto" parameterType="com.food.project.domain.FoodTruckVO">
 		update foodtruck set truck_url=#{truck_url}, truck_surl=#{truck_surl} where truck_code = #{truck_code} 
 	</update>
+	<select id="getBrandname" resultType="com.food.project.domain.FoodTruckVO">
+		select brandname from foodtruck where truck_code=#{truck_code}
+	</select>
 </mapper>

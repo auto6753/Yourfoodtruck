@@ -96,7 +96,7 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 
 						<div id="box" class="row justify-content-center">
 							<div class="col-md-6">
-								<div id="card" class="card">
+								<div id="card1" class="card1">
 
 									<article class="card-body">
 										
