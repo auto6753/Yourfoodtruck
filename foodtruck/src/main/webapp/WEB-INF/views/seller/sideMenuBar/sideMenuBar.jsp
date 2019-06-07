@@ -35,7 +35,7 @@ span {
 	<div class="list-group">
 				<ul class="sidebar">
 					<li class="menu" ><a href="/seller/"  class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">메인</span></a>
-					<li class="menu"><a href="/seller/truckinfo"   class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">트럭정보수정</span></a>
+					<li class="menu"><a href="/seller/truckinfo"   class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">트럭정보관리</span></a>
 					<li class="menu"><a href="/seller/menu"   class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">메뉴등록</span></a>
 					<li class="menu"><a href="/seller/location"  class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">위치등록</span></a>
 					<li class="menu"><a href="/seller/event"   class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">이벤트등록</span></a>

@@ -2,15 +2,16 @@
 
 #with {
 	margin: 0 auto;
-	margin-top: 150px;
-	width: 1200px;
-	height: 600px;
+    margin-top: 30px;
+    width: 1200px;
+    height: 600px;
 
 }
 #ingevent, #endevent{
-	height: 700px;
-	overflow-y: scroll;
-	border: 1px solid #eee;
+	    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    border: 3px solid #eee;
 
 }
 * { margin:0; padding:0; }
@@ -21,7 +22,7 @@ a { text-decoration:none; color:#000; }
 .tab li { display:inline-block; padding:20px; cursor:pointer; }
 .tab li.on { background-color:#eee; color:#f00; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
-.tab_con div { display:none; height:300px; text-align:center;}
+.tab_con div { display:none; height:300px; width:100%;text-align:center;}
 
 .img {
 	width: 250px;

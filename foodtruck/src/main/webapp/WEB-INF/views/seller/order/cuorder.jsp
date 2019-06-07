@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="initial-scale=1, width=device=width, viewport-fit=cover">
 <title>주문관리</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
@@ -234,10 +235,11 @@ div a {
 }
 
 #click3 {
-	width: 95%;
-	text-align: center;
-	margin: 0 auto;
-	font-family: 'Handon3gyeopsal600g';
+	    width: 100%;
+    font-size: 55%;
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .c1 {
@@ -248,10 +250,18 @@ div a {
 	font-size: 120%;
 	margin-top: 5px;
 }
+.c2{
+background-color: rgb(255, 94, 24);
+    color: white;
+    width: 40%;
+    height: 50px;
+    font-size: 120%;
+    margin-top: 5px;
+}
 
 .food {
 	
-	height: 250px;
+width: 100%;
 }
 
 #foodlist {
@@ -325,18 +335,18 @@ h3 {
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="cashtelephone" type="tel" style="width: 100%;"><br>
-					<button id="cashok" class="btn c1">확인</button>
-					<button id="cashcancle" class="btn c1">취소</button>
-					<button id="back" class="btn c1">주문추가</button>
+					<button id="cashok" class="btn c2">확인</button>
+					<button id="cashcancle" class="btn c2">취소</button>
+					<button id="back" class="btn c2">주문추가</button>
 				</div>
 			</div>
 			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="kakaotelephone" type="tel" style="width: 100%;"><br>
-					<button id="kakaohok" class="btn c1">확인</button>
-					<button id="kakaocancle" class="btn c1">취소</button>
-					<button id="back2" class="btn c1">주문추가</button>
+					<button id="kakaohok" class="btn c2">확인</button>
+					<button id="kakaocancle" class="btn c2">취소</button>
+					<button id="back2" class="btn c2">주문추가</button>
 				</div>
 			</div>
 			</div>

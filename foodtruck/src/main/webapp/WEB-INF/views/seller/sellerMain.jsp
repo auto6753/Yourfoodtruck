@@ -14,17 +14,22 @@
 			<div class="col-md-3">
 				<jsp:include page="sideMenuBar/sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-xs-12 col-md-9 content">
-				<h1>매출관리</h1>
-				<iframe src="/seller/mngSales" style="width: 100%; height: 50%; border: 1px lightgray solid;"></iframe>
+			<div class="col-md-9">
+				<div class="col-md-12 paddingZero">
+					<div class="menuTitle">매출관리</div>
+					</div>
+					</div>
+			<div class="col-xs-12 col-md-9 content" id="main1">
 				
-				<h1>탑승자관리</h1>
+				<iframe src="/seller/mngSales" style="width: 100%; height: 220%; position: relative; bottom: 100px;border: 2px lightgray solid;"></iframe>
+				
+				<!-- <h1>탑승자관리</h1>
 				<div id="Line_Controls_Chart2">
-					<!-- 라인 차트 생성할 영역 -->
+					라인 차트 생성할 영역
 					<div id="lineChartArea2" style="padding: 0px 20px 0px 0px;"></div>
-					<!-- 컨트롤바를 생성할 영역 -->
+					컨트롤바를 생성할 영역
 					<div id="controlsArea2" style="padding: 0px 20px 0px 0px;"></div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

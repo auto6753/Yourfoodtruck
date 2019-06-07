@@ -1,16 +1,17 @@
-
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 #with {
-	margin: 0 auto;
-	margin-top: 150px;
-	width: 1200px;
-	height: 600px;
-
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 1200px;
+    height: 600px;
+    font-family: 'yg-jalnan';
+    border-radius: 10px;
+    background-color: lightgray;
 }
 .row {
-	margin:10px;
-	margin:3px;
-	height:800px;
-	overflow-y:auto;
+	    margin: 3px;
+    height: 400px;
+    overflow-y: auto;
 }
 .sg {
     transform: translate(8%,15%);

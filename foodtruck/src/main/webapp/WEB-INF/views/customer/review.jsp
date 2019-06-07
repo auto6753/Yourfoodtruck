@@ -33,12 +33,12 @@
 </head>
 <body>
 
-	<div style="overflow: auto" id="with" class="col">
+	<div  id="with" class="col">
 	
 		<h1 style="text-align: center; margin-top: 10px;">리뷰 및 평점</h1>
 		<br>
 	
-		<table class="table table-hover" class="col">
+		<table style="overflow: auto" class="table table-hover" class="col">
 		
 			<thead>
 				<th>푸드트럭명</th>
