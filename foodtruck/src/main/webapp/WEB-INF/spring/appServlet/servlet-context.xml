@@ -59,6 +59,7 @@
 		<interceptor>
 			<mapping path="/seller/**" />
 			<exclude-mapping path="/login/**" />
+			<exclude-mapping path="/seller/cuorder/**"/>
 			<beans:bean id="sellerInterceptor"
 				class="com.food.project.interceptor.SellerInterceptor" />
 		</interceptor>

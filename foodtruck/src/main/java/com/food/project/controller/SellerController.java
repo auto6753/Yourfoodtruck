@@ -1427,10 +1427,10 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/cuorder", method=RequestMethod.GET) 
-	public String cuorder(Model model,HttpServletRequest request,HttpSession session) {
+	public String cuorder(Model model,@Param("truck_code") String truck_code) {
 		FoodTruckVO vo = new FoodTruckVO();
-		vo = (FoodTruckVO) request.getSession().getAttribute("seller");
-		String truckcode = vo.getTruck_code();
+		//vo = (FoodTruckVO) request.getSession().getAttribute("seller");
+		String truckcode = truck_code;
 		ArrayList<MenuVO> menulist = new ArrayList<>();
 		menulist = sellerservice.getmenu(truckcode);
 		model.addAttribute("menulist", menulist);
@@ -1547,4 +1547,15 @@ public class SellerController {
 
 		return a;
 	}
+	
+//	@RequestMapping(value="/qrcode", method=RequestMethod.GET) 
+//	public String qrcode(Model model,@Param("truck_code") String truck_code,@Param("email") String email) {
+//		
+//		JSONObject a = new JSONObject();
+//		a.put("truck_code",truck_code);
+//		a.put("email",email);
+//		
+//		model.addAttribute("qrcode", a);
+//		return "seller/qrcode";
+//	}
 }
