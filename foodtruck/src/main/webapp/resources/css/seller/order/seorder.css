@@ -1,57 +1,57 @@
 @charset "UTF-8";
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 body {
-	font-family: "Open Sans", sans-serif;
+   font-family: 'yg-jalnan';
 }
 
 .wrap {
-	width: 1000px;
-	height: 300px;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	border: 1px solid skyblue;
+   width: 5000px;
+   overflow:auto;
+   border: 1px solid ;
+  
+   
 }
 
 .list {
-	width: 300px;
-	height: 100%;
-	display: inline-block;
-	border: solid 3px;
+   width: 300px;
+   height: 300px;
+   display: inline-block;
+   border: solid 3px;
 }
 .result {
-	width: 1000px;
-	height: 300px;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	border: 1px solid pink;
+   width: 5000px;
+ 
+   overflow:auto;
+   border: 1px solid ;
 }
 .ended {
-	background-color: skyblue;
+   background-color: dimgrey;
 }
 .payed {
-	background-color:gray;
-}
-.menu {
-	
-}
-
-.head {
-	
+   background-color:gray;
 }
 
 h4 {
-	text-align: center;
+   text-align: center;
 }
 
 .num {
-	color: darkgreen;
-	float: left;
-	font-size: 1.8em;
+   color: crimson;
+   float: left;
+   font-size: 1.8em;
 }
 
 .num+span {
-	float: right;
+   float: right;
 }
 
 .num+span+div {
-	border: solid 3px;
+   border: solid 3px;
+}
+button{
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    height: 18%;
+    width: 50%;
 }

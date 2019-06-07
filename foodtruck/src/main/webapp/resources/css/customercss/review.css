@@ -1,9 +1,13 @@
 @charset "UTF-8";
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 /* .stars {
 	width: 200px !important;
 }  */
 #on{
 	color: #ff6622;
+}
+h1{
+	font-family: 'yg-jalnan';
 }
 .stars {
 	width: 100%;
@@ -45,11 +49,16 @@ label.star:before {
 	font-family: FontAwesome;
 }
 #with {
-	margin: 0 auto;
-	margin-top: 150px;
-	width: 1200px;
-	height: 600px;
-	border: 1px solid darkgray;
+	       margin: 0 auto;
+    margin-top: 50px;
+    width: 1200px;
+    height: 600px;
+    overflow: auto;
+    border: 4px solid;
+    border-radius:10px;
+    border-color: lightgray;
+  
+   
 }
 
 .sunjae{

@@ -29,7 +29,7 @@
 			<img alt="Bootstrap Image Preview" src="${pageContext.request.contextPath}/resources/image/question_list.png" /> 
 <!-- 		버튼말고 a태그로 하고 스타일
 			<button type="button" class="btn btn-link btn-lg">문의내역</button> -->
-			<a class="nav-link" href="/help/myQuestion">1:1문의</a>
+			<a class="nav-link" href="/help/myQuestion">나의문의내역</a>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +62,8 @@ $(document).ready(function(){
 	<div id="with" class="col">
 		<h1 style="text-align: center; margin-top: 10px;">탑승트럭</h1>
 		<br>
-		<div class="album py-5 bg-light">
-			<div class="container">
+		<div class="album py-5 bg-light" style="height:80%;">
+			<div class="container1">
 				<div class="row">
 					<c:forEach var="i" items="${onboard}">
 						<div class="col-md-4">
@@ -70,7 +71,8 @@ $(document).ready(function(){
 								<img src="${pageContext.request.contextPath}/resources/image/upload/${i.truck_url }"
 									style="width: 100%; height: 225px;">
 								<div class="card-body">
-									<p class="card-text">${i.brandname} ${i.onboard_date}</p>
+									<p class="card-text">${i.brandname}</p> 
+									<p><fmt:formatDate value="${i.onboard_date}" pattern="yyyy.MM.dd" /></p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
 											<button class="btn btn-sm btn-outline-secondary detail">상세정보</button>

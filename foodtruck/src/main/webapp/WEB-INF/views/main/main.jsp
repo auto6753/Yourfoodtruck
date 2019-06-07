@@ -24,7 +24,9 @@
        
       <div class="carousel-item active" style="background-image: url('resources/image/upload/${i.truck_url}')">
         <div class="carousel-caption  d-md-block">
-          <h3 class="display-4">월간맛트럭<br>영예의1위!<br><${i.brandname }></h3>
+        	
+        	
+          <h3 class="display-4"><br>월간맛트럭<br>영예의1위!<br><${i.brandname }></h3>
           <input type="hidden" value="${i.truck_code }"/>
         </div>
       </div>

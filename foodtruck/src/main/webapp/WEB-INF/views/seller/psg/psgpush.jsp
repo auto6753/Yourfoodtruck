@@ -3,11 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/seller/psg/psg.css"/>" />
-<div class="sidemenu">
-				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
-			</div>
+
 <div class="container">
 	<div class="row">
+	<div class="col-md-3">
+				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-12 paddingZero">
+					<div class="menuTitle">탑승자알림관리</div>
+					</div>
+					</div>
 		<div class="col">
 			<div id="wrap">
 				<h4>탑승자알림</h4>
@@ -27,10 +33,10 @@
 			<div id="Line_Controls_Chart">
 				<h4>탑승자 현황 그래프</h4>
 				<div id="buttonbar">
-					<form action="/seller/psgpush" method="GET">
+					<form action="/seller/psgpush" method="GET" style="position: relative; right: 25%;">
 						<input type="date" name="inputBeginDate" /> <input type="date"
 							name="inputEndDate" />
-						<button type="submit" id="search"></button>
+						<button type="submit" id="search" >확인</button>
 					</form>
 				</div>
 				<!-- 라인 차트 생성할 영역 -->

@@ -67,7 +67,7 @@
 					</div>
 			<div class="search">
 				<input type="text" value="" id="keyword" >
-				<input id="submit" type="button" class="btn" value="검색하기">
+				<input id="submit" type="button" value="검색하기">
 				<div id="map" ></div>
 			</div>
 			
