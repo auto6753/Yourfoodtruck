@@ -63,6 +63,7 @@ public class M_TruckController {
 		ArrayList<ReviewDTO> review = service.getReviewList(truck_code);
 		ArrayList<EventVO> event = service.getEvent(truck_code);
 		System.out.println(event.size());
+//		메뉴
 		JSONArray test1=new JSONArray();
 		for(int i =0;i<menu.size();i++) {
 			System.out.println("?");
@@ -74,6 +75,7 @@ public class M_TruckController {
 		}
 		data.put("menu_list",test1);
 		
+//		리뷰
 		JSONArray test4=new JSONArray();
 		for(int i =0;i<review.size();i++) {
 			System.out.println("?");
@@ -278,6 +280,22 @@ public class M_TruckController {
 		return sessionInfo.toString();
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getTruck", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String getTruck(@RequestBody Map<String,Object> map) {
+		System.out.println("오나요");
+		String truck_code = (String)map.get("truck_code");
+		//String truck_code = fd.getTruck_code();
+		System.out.println(truck_code);
+		
+		FoodTruckVO ffd = service.getFoodTruck(truck_code);
+		
+		System.out.println(ffd.toString());
+		JSONArray i  = new JSONArray();
+		i.add(ffd);
+		
+		return i.toString();
+	}
 	
 //	@RequestMapping(value = "/register", method = RequestMethod.POST)
 //	public String register2(Model model, FoodTruckVO fd) {
