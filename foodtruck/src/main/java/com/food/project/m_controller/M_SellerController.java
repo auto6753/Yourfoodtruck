@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.SellerService;
@@ -39,7 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import lombok.AllArgsConstructor;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/m.seller")
@@ -53,6 +54,20 @@ public class M_SellerController {
 		
 		model.addAttribute("menuNum", menuNum);
 		return "seller/menu/menu";
+	}
+	@ResponseBody
+	@RequestMapping(value="/location", method=RequestMethod.POST) 
+	public String updateLocation(@RequestBody String param) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map = net.sf.json.JSONObject.fromObject(param);
+		LocationVO vo = new LocationVO();
+		System.out.println(map.toString());
+		vo.setLat_y((String)map.get("lat_y"));
+		vo.setLng_x((String)map.get("lng_x"));
+		vo.setTruck_code((String)map.get("truck_code"));
+		sellerservice.insertlocaction(vo);
+		System.out.println("called");
+		return "";
 	}
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET) 

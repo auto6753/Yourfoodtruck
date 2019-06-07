@@ -193,7 +193,7 @@ public class CustomerController {
 					System.out.println(transFormat.format(transFormat.parse(sysd)));
 
 					Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
-					br.setOnboard_date(test);
+					br.setOnboard_date(transFormat.format(transFormat.parse(sysd)));
 					System.out.println("넘어오나여?");
 					System.out.println("넣어나여?");
 				} catch (ParseException e) {
@@ -214,7 +214,7 @@ public class CustomerController {
 				System.out.println(transFormat.format(transFormat.parse(sysd)));
 
 				Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
-				br.setOnboard_date(test);
+				br.setOnboard_date(transFormat.format(transFormat.parse(sysd)));
 				System.out.println("넘어오나여?");
 				System.out.println("넣어나여?");
 			} catch (ParseException e) {

@@ -36,7 +36,7 @@ import com.google.firebase.auth.UserRecord.CreateRequest;
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONObject;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 @Controller
 @RequestMapping(value = "/m.login")

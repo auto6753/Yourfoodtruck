@@ -73,8 +73,7 @@ public class M_CustomerController {
 				JSONObject obj = new JSONObject();
 				obj.put("brandname",result.get(i).getBrandname());
 				obj.put("truck_url",result.get(i).getTruck_url());
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
-				obj.put("onboard_date",sdf.format(result.get(i).getOnboard_date()));
+				obj.put("onboard_date",result.get(i).getOnboard_date());
 				obj.put("truck_code",result.get(i).getTruck_code());
 				data.add(obj);
 			}
@@ -144,7 +143,7 @@ public class M_CustomerController {
 				temp.put("truck_code", a.getTruck_code());
 				temp.put("brandname",a.getBrandname());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
-				temp.put("onboard_date",sdf.format(a.getOnboard_date()));
+				temp.put("onboard_date",a.getOnboard_date());
 				temp.put("truck_url",a.getTruck_url());
 				test.add(temp);
 			}
@@ -226,7 +225,7 @@ public class M_CustomerController {
 					System.out.println(transFormat.format(transFormat.parse(sysd)));
 
 					Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
-					br.setOnboard_date(test);
+					br.setOnboard_date(transFormat.format(transFormat.parse(sysd)));
 					System.out.println("넘어오나여?");
 					System.out.println("넣어나여?");
 				} catch (ParseException e) {
@@ -247,7 +246,7 @@ public class M_CustomerController {
 				System.out.println(transFormat.format(transFormat.parse(sysd)));
 
 				Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
-				br.setOnboard_date(test);
+				br.setOnboard_date(transFormat.format(transFormat.parse(sysd)));
 				System.out.println("넘어오나여?");
 				System.out.println("넣어나여?");
 			} catch (ParseException e) {

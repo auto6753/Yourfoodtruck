@@ -59,7 +59,7 @@
 	<select id="selectMenu"
 		resultType="com.food.project.domain.MenuVO" parameterType="String">
 		select
-		menu_code , menu_name , menu_url , unit_price from menu where
+		menu_code , menu_name , menu_url , unit_price,menu_surl from menu where
 		truck_code = #{truck_code}
 	</select>
 	<select id="getEvent"
