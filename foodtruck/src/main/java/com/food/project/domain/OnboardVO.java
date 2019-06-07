@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class OnboardVO {
-	private Date onboard_date;
+	private String onboard_date;
 	private String brandname;
 	private String email;
 	private String truck_code;

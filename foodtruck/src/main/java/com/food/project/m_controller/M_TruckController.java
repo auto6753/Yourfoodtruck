@@ -64,8 +64,10 @@ public class M_TruckController {
 			JSONObject obj = new JSONObject();
 			obj.put("menu_name",menu.get(i).getMenu_name());
 			obj.put("menu_url",menu.get(i).getMenu_url());
+			obj.put("menu_surl",menu.get(i).getMenu_surl());
 			obj.put("menu_unitprice",menu.get(i).getUnit_price());
 			test1.add(obj);
+			System.out.println("메뉴 surl 찍히나?"+test1.toString());
 		}
 		data.put("menu_list",test1);
 		
