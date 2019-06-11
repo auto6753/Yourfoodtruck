@@ -1,5 +1,13 @@
-@font-face {font-family: 'Arita-dotum-Medium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');font-weight: normal;font-style: normal; } 
-.callTitle{
+@font-face {
+	font-family: 'Arita-dotum-Medium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.callTitle {
 	font-weight: bold;
 	font-size: 35px;
 	height: 35px;
@@ -8,42 +16,63 @@
 	text-align: center;
 	color: rgb(255, 94, 24);
 }
-.calltext{
-	    border: 3px solid lightgray;
-    /* color: #666; */
-    height: 399px;
-    position: relative;
-    left: 25%;
-    bottom: 338px;
-    width: 80%;
-	
 
-
+.calltext {
+	border: 3px solid lightgray;
+	/* color: #666; */
+	height: 399px;
+	position: relative;
+	left: 25%;
+	bottom: 338px;
+	width: 80%;
 }
-td{
+
+td {
 	border: 0.5px solid lightgray;
-    font-size: 100%;
-     font-family: 'Arita-dotum-Medium';
+	font-size: 100%;
+	font-family: 'Arita-dotum-Medium';
+	padding: 15px;
+	height: 200px;
 }
-#col_1{
+
+#col_1 {
 	border: 0.5px solid lightgray;
-    font-size: 100%;
-    font-family: 'Arita-dotum-Medium';
-}
-.menuTitle{
-	    font-size: 50px;
-    height: 60px;
-    margin: 23px 0 17px;
-    color: #666;
-    text-align: center;
-    position: relative;
-    bottom: 20px;
-    font-family: 'Hanna', serif;
-	
-}
-table{
-	width:100%;
+	font-size: 100%;
+	font-family: 'Arita-dotum-Medium';
+	padding: 15px;
+	width: 50%;
+	height: 50px;
 }
 
+#col_2 {
+	border: 0.5px solid lightgray;
+	font-size: 100%;
+	font-family: 'Arita-dotum-Medium';
+	padding: 15px;
+	width: 30%;
+	height: 50px;
+}
 
+#col_3 {
+	border: 0.5px solid lightgray;
+	font-size: 100%;
+	font-family: 'Arita-dotum-Medium';
+	padding: 15px;
+	width: 20%;
+	height: 50px;
+}
 
+.menuTitle {
+	font-size: 50px;
+	height: 60px;
+	margin: 23px 0 17px;
+	color: #666;
+	text-align: center;
+	position: relative;
+	bottom: 20px;
+	font-family: 'Hanna', serif;
+}
+
+table {
+	width: 100%;
+}

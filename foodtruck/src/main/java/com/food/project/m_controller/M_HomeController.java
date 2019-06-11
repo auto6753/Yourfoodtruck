@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,22 +22,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.food.project.domain.MainPageRankDTO;
+import com.food.project.service.FoodTruckService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
  * Handles requests for the application home page.
  */
+@AllArgsConstructor
 @Controller
-@RequestMapping(value="/m")
+@RequestMapping(value = "/m")
 public class M_HomeController {
-
-
+	private FoodTruckService foodtruckService;
 	static final Logger logger = LoggerFactory.getLogger(M_HomeController.class);
 
 	/**
@@ -43,54 +49,73 @@ public class M_HomeController {
 	 */
 	@CrossOrigin
 	@ResponseBody
-	@RequestMapping(value="", method = RequestMethod.GET)
-	public String appHome(HttpServletRequest request) {
-		System.out.println();
-		System.out.println(request);
-		return "main/main.html";
+	@RequestMapping(value = "", produces = "application/text; charset=utf8" )
+	public String appHome() {
+		ArrayList<MainPageRankDTO> yj = new ArrayList<>();
+		System.out.println("?");
+		yj = foodtruckService.getRank();
+		JSONArray jsarr = new JSONArray();
+		for(int i=0;i<yj.size();i++) {
+			String a = yj.get(i).getTruck_url();
+			String url[] = a.split("\\\\");
+			String b = url[0];
+			String c = url[1];
+			String d = url[0]+"/"+url[1];
+			yj.get(i).setTruck_url(d);
+			JSONObject jObj = new JSONObject();
+			jObj.put("truck_code",yj.get(i).getTruck_code());
+			jObj.put("rank",yj.get(i).getRank());
+			jObj.put("truck_url",yj.get(i).getTruck_url());
+			jObj.put("brandname",yj.get(i).getBrandname());
+			jObj.put("score",yj.get(i).getScore());
+			jsarr.add(jObj);
+		}
+		System.out.println("?");
+		System.out.println(">>>" + jsarr.toString());
+		return jsarr.toString();
 	}
+
 	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(value = "/pushToken")
 	public void token(@RequestBody String param) {
 //		model.addAttribute("content",main(model));
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map = JSONObject.fromObject(param);
-		String token = (String)map.get("token");
-		System.out.println(">>>>>>>>>>"+map.toString());
+		String token = (String) map.get("token");
+		System.out.println(">>>>>>>>>>" + map.toString());
 		FirebaseApp defaultApp = null;
-		List<FirebaseApp> apps=FirebaseApp.getApps();
+		List<FirebaseApp> apps = FirebaseApp.getApps();
 		FileInputStream serviceAccount;
-		FirebaseOptions options=null;
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		FirebaseOptions options = null;
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+				.getRequest();
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// 서버 올릴 때 경로
 		System.out.println(path);
-		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
-				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+		String firebasePath = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+				+ File.separator + "resources" + File.separator + "json" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		//파이어베이스 옵션 설정
+		// 파이어베이스 옵션 설정
 		try {
 			serviceAccount = new FileInputStream(firebasePath);
-			options = new FirebaseOptions.Builder()
-					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-					.build();
+			options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/").build();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//이미 관리자 defaultApp이 있는지 검사
-		if(apps!=null && !apps.isEmpty()) {
-			for(FirebaseApp app:apps) {
-				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+		// 이미 관리자 defaultApp이 있는지 검사
+		if (apps != null && !apps.isEmpty()) {
+			for (FirebaseApp app : apps) {
+				if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
 					defaultApp = app;
 			}
-		}else {
+		} else {
 			defaultApp = FirebaseApp.initializeApp(options);
 		}
-		DatabaseReference ref=FirebaseDatabase.getInstance().getReference("/FCMToken");
+		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/FCMToken");
 		ref.push().setValueAsync(token);
 		defaultApp.delete();
 	}

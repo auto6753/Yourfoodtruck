@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.service.CallListService;
+import com.food.project.service.FoodTruckService;
 import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
 import com.google.gson.JsonObject;
@@ -41,6 +43,7 @@ public class M_CustomerController {
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
+	private FoodTruckService truckservice;
 	
 //	@RequestMapping(value = "", method = RequestMethod.GET)
 //	public String mypage(Locale locale, Model model) {
@@ -157,10 +160,14 @@ public class M_CustomerController {
 		}
 
 	}
-	
-	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public String review(Locale locale, Model model) {
-		return "customer/review";
+	@ResponseBody
+	@RequestMapping(value = "/review", produces = "application/text; charset=utf8")
+	public String review(@RequestBody Map<String,Object> map) {
+		String email=(String)map.get("email");
+		ArrayList<MyreviewlistDTO> vo2 = truckservice.selectReview(email);
+		JSONArray result = new JSONArray();
+		result = JSONArray.fromObject(vo2);
+		return result.toString();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -189,7 +196,15 @@ public class M_CustomerController {
 			data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
 			data.put("name", a.get("NAME"));
 			data.put("pay_status", a.get("PAY_STATUS"));
-			data.put("request_date", a.get("REQUEST_DATE"));
+			String request_date;
+			try {
+				request_date = new SimpleDateFormat("yyyy/MM/dd").format((Date)a.get("REQUEST_DATE"));
+			}catch(Exception e) {
+				e.printStackTrace();
+				request_date="널값";
+			}
+			System.out.println(request_date);
+			data.put("request_date", request_date);
 			arry.add(data);
 		}
 
