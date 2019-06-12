@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CallListDetailDTO;
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.mapper.CallListMapper;
 import com.food.project.service.CallListService;
 import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
@@ -40,7 +42,6 @@ public class M_CustomerController {
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
-	
 //	@RequestMapping(value = "", method = RequestMethod.GET)
 //	public String mypage(Locale locale, Model model) {
 //		return "customer/mypage";
@@ -303,5 +304,18 @@ public class M_CustomerController {
 		request.getSession().removeAttribute("sessionid");
 		service.delete(c.getEmail());	
 		return "customer/goodbye";
+	}
+	
+	//콜 자세히
+	@ResponseBody
+	@RequestMapping(value = "/detail", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String detail(@RequestBody Map<String,Object> map) {
+		String merchant_uid = (String)map.get("merchant_uid");
+		System.out.println(merchant_uid);
+		CallListDetailDTO c = callList.getCall(merchant_uid);
+		System.out.println(c);
+		JSONArray a = new JSONArray();
+		a.add(c);
+		return a.toString();
 	}
 }

@@ -275,6 +275,17 @@ public class M_TruckController {
 		return sessionInfo.toString();
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getTruck", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String getTruck(@RequestBody Map<String,Object> map) {
+		System.out.println("1");
+		String truck_code = (String)map.get("truck_code");
+		FoodTruckVO fd = service.getFoodTruck(truck_code);
+		JSONArray a = new JSONArray();
+		a.add(fd);
+		
+		return a.toString();
+	}
 	
 //	@RequestMapping(value = "/register", method = RequestMethod.POST)
 //	public String register2(Model model, FoodTruckVO fd) {

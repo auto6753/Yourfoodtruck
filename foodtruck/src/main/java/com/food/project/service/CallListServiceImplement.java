@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.food.project.domain.CallListDetailDTO;
 import com.food.project.domain.CallListVO;
 import com.food.project.mapper.CallListMapper;
 
@@ -58,6 +59,13 @@ public class CallListServiceImplement implements CallListService {
 		map.put("end", end);
 		map.put("truck_code", truck_code);
 		
-		return mapper.allList(map);	}
+		return mapper.allList(map);	
+		}
+	@Override
+	public CallListDetailDTO getCall(String merchant_uid) {
+		// TODO Auto-generated method stub
+		
+		return mapper.getCall2(merchant_uid);
+	}
 
 }

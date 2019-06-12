@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.food.project.domain.CallListDetailDTO;
 import com.food.project.domain.CallListVO;
 
 public interface CallListService {
@@ -16,7 +17,8 @@ public interface CallListService {
 	//public void deleteCall(String merchant_uid);
 	public int updateCall(CallListVO vo);
 	public int updateCallVo(CallListVO vo);
-	
 	public ArrayList<Map<String,Object>> allList(@Param("start") int start, @Param("end") int end, @Param("truck_code") String truck_code);
 	public int totalPage(String truck_code);
+	public CallListDetailDTO getCall(String merchant_uid);
+	
 }
