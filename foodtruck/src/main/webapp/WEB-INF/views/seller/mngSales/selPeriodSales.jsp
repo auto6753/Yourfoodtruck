@@ -20,6 +20,7 @@
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET">
 						<input type="date" name="firstDate"/>
+						<span>~</span>
 						<input type="date" name="lastDate"/>
 						<button type="submit" id="byDaySalesRe" name="pageName" value="selPeriodSalesRe">검색</button>
 					</form>

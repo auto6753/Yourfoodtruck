@@ -41,6 +41,7 @@
 								</c:if>
 							</c:forEach>					
 						</select>
+						<span>~</span>
 						<select id="yyyy_te" name="yyyy_te" required>
 							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
 								<c:if test="${yyyy_te eq byTimeValArrList}">
