@@ -12,7 +12,7 @@
 </style>
 <title>트럭정보 수정</title>
 <%-- <script type="text/javascript"
-	src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script> --%>
+   src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script> --%>
 <script src="/resources/js/qrcode/qrcode.js"></script>
 <script>
 $(document).ready(function(){
@@ -223,8 +223,8 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 												</div>
 
 											</div>
-											<input class="user-btn" type="button" id="truckphoto"
-												name="truckphoto" value="메인이미지 등록/수정">
+											<button class="user-btn" type="button" id="truckphoto"
+												name="truckphoto">메인이미지 등록/수정</button>
 
 											<div class="qrcode"></div>
 											<input id="print" type="button" class="user-btn"
@@ -238,7 +238,10 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 
 												<input type="submit" id="modifytruck" class="user-btn"
 													value="수정">
+
 											</div>
+
+
 										</article>
 									</div>
 								</div>
@@ -253,7 +256,6 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 		</div>
 	</div>
 </body>
-
 
 
 
