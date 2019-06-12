@@ -17,7 +17,25 @@ $(document).ready(function(){
 	var totalSales = Number($("#totalSales").val());
 	
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    if(
+    		mCashSales == 0 &&
+    		nCashSales == 0 &&
+    		totalCashSales == 0 &&
+    		mCardSales == 0 &&
+    		nCardSales == 0 &&
+    		totalCardSales == 0 &&
+    		mKakaoSales == 0 &&
+    		nKakaoSales == 0 &&
+    		totalKakaoSales == 0 &&
+    		mTotalSales == 0 &&
+    		nTotalSales == 0 &&
+    		totalSales == 0	
+    ){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
 
@@ -32,8 +50,8 @@ $(document).ready(function(){
 
       var options = {
         chart: {
-          title: 'Company Performance',
-          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+//          title: 'Company Performance',
+//          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
         vAxis: {format: 'decimal'},

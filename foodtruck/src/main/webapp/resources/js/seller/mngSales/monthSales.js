@@ -21,7 +21,25 @@ $(document).ready(function(){
 	var totalSalesMonth = Number($("#totalSalesMonth").val());
 	
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    if(
+    		mCashSalesMonth == 0 &&
+    		nCashSalesMonth == 0 &&
+    		totalCashSalesMonth == 0 &&
+    		mCardSalesMonth == 0 &&
+    		nCardSalesMonth == 0 &&
+    		totalCardSalesMonth == 0 &&
+    		mKakaoSalesMonth == 0 &&
+    		nKakaoSalesMonth == 0 &&
+    		totalKakaoSalesMonth == 0 &&
+    		mTotalSalesMonth == 0 &&
+    		nTotalSalesMonth == 0 &&
+    		totalSalesMonth == 0	
+    ){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
 
@@ -35,8 +53,8 @@ $(document).ready(function(){
 
       var options = {
         chart: {
-          title: 'Company Performance',
-          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+//          title: 'Company Performance',
+//          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
         vAxis: {format: 'decimal'},

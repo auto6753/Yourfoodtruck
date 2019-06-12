@@ -17,7 +17,25 @@ $(document).ready(function(){
 	var totalSalesWeek = Number($("#totalSalesWeek").val());
 	
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    if(
+    		mCashSalesWeek == 0 &&
+    		nCashSalesWeek == 0 &&
+    		totalCashSalesWeek == 0 &&
+    		mCardSalesWeek == 0 &&
+    		nCardSalesWeek == 0 &&
+    		totalCardSalesWeek == 0 &&
+    		mKakaoSalesWeek == 0 &&
+    		nKakaoSalesWeek == 0 &&
+    		totalKakaoSalesWeek == 0 &&
+    		mTotalSalesWeek == 0 &&
+    		nTotalSalesWeek == 0 &&
+    		totalSalesWeek == 0	
+    ){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
 
@@ -32,8 +50,8 @@ $(document).ready(function(){
 
       var options = {
         chart: {
-          title: 'Company Performance',
-          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+//          title: 'Company Performance',
+//          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
         vAxis: {format: 'decimal'},
