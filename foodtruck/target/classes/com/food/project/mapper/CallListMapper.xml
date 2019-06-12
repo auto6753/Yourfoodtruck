@@ -8,47 +8,81 @@
 		to_char(festival_enddate,'YYYY/MM/DD')festival_enddate,merchant_uid,calltel
 		from call_list
 		where truck_code=#{truck_code}
-		
-		
 	</select>
-	
-	<select id="getCallList2" resultType="map" parameterType="String">
-	<!-- select b.brandname,a.name,TO_CHAR(a.request_date,'MM-DD') request_date ,a.pay_status,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate ,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code = a.truck_code and a.email=#{email} order by request_date -->
-	     select b.brandname,a.name,TO_CHAR(a.request_date,'MM-DD') request_date,a.pay_status,a.merchant_uid,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate ,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code = a.truck_code and a.email=#{email} order by request_date desc
+
+	<select id="getCallList2" resultType="map"
+		parameterType="String">
+		<!-- select b.brandname,a.name,TO_CHAR(a.request_date,'MM-DD') request_date 
+			,a.pay_status,a.place,a.festival_name,TO_CHAR(a.festival_enddate, 'MM-DD') 
+			festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD') festival_startdate 
+			,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date, 
+			'MM-DD') reporting_date from foodtruck b , call_list a where b.truck_code 
+			= a.truck_code and a.email=#{email} order by request_date -->
+		select b.brandname,a.name,TO_CHAR(a.request_date,'MM-DD')
+		request_date,a.pay_status,a.merchant_uid,a.place,a.festival_name,TO_CHAR(a.festival_enddate,
+		'MM-DD') festival_enddate ,TO_CHAR(a.festival_startdate, 'MM-DD')
+		festival_startdate
+		,a.festival_starttime,a.festival_endtime,a.progress,TO_CHAR(a.reporting_date,
+		'MM-DD') reporting_date from foodtruck b , call_list a where
+		b.truck_code = a.truck_code and a.email=#{email} order by request_date
+		desc
 	</select>
-	<select id="getMyCallList" parameterType="String" resultType="com.food.project.domain.CallListVO">
+	<select id="getMyCallList" parameterType="String"
+		resultType="com.food.project.domain.CallListVO">
 		select * from call_list where email=#{email}
-		order by festival_startdate desc
+		order by
+		festival_startdate desc
 	</select>
-	<insert id="insertCallList" parameterType="com.food.project.domain.CallListVO">
-		insert into call_list(merchant_uid,name,pay_status,zip_code,place,festival_startdate,festival_enddate,festival_name,festival_starttime,festival_endtime,calltel,content,email,truck_code,price)
+	<insert id="insertCallList"
+		parameterType="com.food.project.domain.CallListVO">
+		insert into
+		call_list(merchant_uid,name,pay_status,zip_code,place,festival_startdate,festival_enddate,festival_name,festival_starttime,festival_endtime,calltel,content,email,truck_code,price)
 		values(#{merchant_uid},#{name},#{pay_status},#{zip_code},#{place},#{festival_startdate},#{festival_enddate},#{festival_name},#{festival_starttime},#{festival_endtime},#{calltel},#{content},#{email},#{truck_code},#{price})
 	</insert>
-	
-	<update id="updateCall" parameterType="com.food.project.domain.CallListVO">
-		update call_list set pay_status=#{pay_status},progress=#{progress} where merchant_uid=#{merchant_uid}
+
+	<update id="updateCall"
+		parameterType="com.food.project.domain.CallListVO">
+		update call_list set
+		pay_status=#{pay_status},progress=#{progress} where
+		merchant_uid=#{merchant_uid}
 	</update>
-		<update id="updateCallVo" parameterType="com.food.project.domain.CallListVO">
-		update call_list set progress=#{progress} where merchant_uid=#{merchant_uid}
+	<update id="updateCallVo"
+		parameterType="com.food.project.domain.CallListVO">
+		update call_list set progress=#{progress} where
+		merchant_uid=#{merchant_uid}
 	</update>
 	<select id="totalPage" resultType="map">
-		select count(*) tot_page from call_list where truck_code=#{truck_code}
+		select count(*) tot_page from
+		call_list where truck_code=#{truck_code}
 	</select>
 	<!-- 페이징용 sql문 -->
 	<sql id="pagingHeader">
 		select * from (
-			select rownum rn, c.* from(
+		select rownum rn, c.* from(
 	</sql>
 	<sql id="pagingFooter">
-			) c
+		) c
 		) where rn between #{start} and #{end}
 	</sql>
 	<select id="allList" resultType="map" parameterType="map">
 		<!-- 목록 조회 및 페이징 전체 쿼리 -->
 		<include refid="pagingHeader"></include>
-			select *
-			from call_list 
-			where truck_code=#{truck_code}
+		select *
+		from call_list
+		where truck_code=#{truck_code}
 		<include refid="pagingFooter"></include>
+	</select>
+	<select id="getCall2" resultType="com.food.project.domain.CallListDetailDTO">
+		select a.place, a.festival_name, TO_CHAR(a.festival_startdate,'YY-MM-DD') as
+		startdate, TO_CHAR(a.festival_enddate,'YY-MM-DD') as enddate,
+		a.festival_starttime,a.festival_endtime,
+		a.price,a.progress,a.pay_status, a.merchant_uid,
+		to_char(a.request_date,'YY-MM-DD') as requestdate, a.content,
+		f.brandname ,c.telephone
+		from
+		call_list a, foodtruck f,customer c
+		where a.truck_code = f.truck_code and
+		c.email = f.email and
+		a.merchant_uid=#{merchant_uid}
 	</select>
 </mapper>
