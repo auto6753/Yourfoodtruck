@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CallListVO;
 import com.food.project.domain.PaymentVO;
+import com.food.project.mapper.CallListMapper;
 import com.food.project.service.PaymentService;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -43,7 +45,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping(value="/m.pay")
 public class M_PaymentController {
-	
+	private CallListMapper mapper;
 	private PaymentService payService;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/insertPayment", produces = "application/text; charset=utf8")
@@ -135,6 +137,12 @@ public class M_PaymentController {
 		if(a==0) System.out.println("Error");
 		else System.out.println("Success");
 	}
+	@ResponseBody
+	@RequestMapping(value = "/GetPayment", method=RequestMethod.POST)
+	public CallListVO GetPayment(Model model,CallListVO vo) {
+		System.out.println(vo.getMerchant_uid());
+		return mapper.getCall(vo.getMerchant_uid());
+	}	
 	
 	
 }

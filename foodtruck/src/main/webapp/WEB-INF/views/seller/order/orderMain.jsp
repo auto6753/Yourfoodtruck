@@ -32,7 +32,7 @@ margin-top: 100px;
 		</div>
 		<div class="col-md-9">
 			<div id="button">
-				<a href="cuorder"><button id="cuorder" class="btn">현장 고객용</button></a>
+				<a href="cuorder?truck_code=${sessionScope.seller.truck_code}"><button id="cuorder" class="btn">현장 고객용</button></a>
 				
 				<a href="seorder"><button id="seorder"  class="btn">현장 상인용</button></a>
 			</div>

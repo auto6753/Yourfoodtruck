@@ -296,61 +296,52 @@
 					상태 : 진행중<br>
 									<button class="agree">승인</button>
 									<button class="cancel1">취소</button>
-									</td>
 								</c:if>
 								<c:if test="${i.PROGRESS ==2}">
 					상태 : 진행중<br>
 									<button class="confirm2">확인</button>
 									<button class="cancel2">취소</button>
-									</td>
 								</c:if>
 								<c:if test="${i.PROGRESS ==3}">
 					상태 : 행사측 확인완료<br>
 									<button class="confirm3">확인</button>
 									<button class="cancel3">취소</button>
-									</td>
 								</c:if>
 								<c:if test="${i.PROGRESS ==4}">
 					상태 : 행사측 미확인<br>
 									<button class="cancel4">취소</button>
-									</td>
 								</c:if>
 								<c:if test="${i.PROGRESS ==5}">
 					상태 : 거래종료<br>
-									</td>
 								</c:if>
 								<c:if test="${i.PROGRESS ==6}">
 					상태 : 취소<br>
-									</td>
 								</c:if>
 								<c:if test="${i.PROGRESS ==7}">
 					취소 신청을 하셨습니다.<br>
-									</td>
 								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-			<%-- <div id="nextall">
+			<div id="nextall">
 				<nav id="next" aria-label="Page navigation example">
 					<ul class="pagination">
 						<li class="page"><a class="page-link"
 							href="javascript:list('1')"><span>&lt;&lt;</span></a></li>
-						<c:forEach var="num" begin="${map.postPager.blockBegin}"
-							end="${map.postPager.blockEnd}">
+						<c:forEach var="num" begin="${map.callListPager.blockBegin}"
+							end="${map.callListPager.blockEnd}">
 							<li class="page-item"><a class="page-link"
 								href="javascript:list('${num}')"><span>${num}</span></a></li>
 						</c:forEach>
 						<li class="page-item"><a class="page-link"
-							href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
+							href="javascript:list('${map.callListPager.nextPage}')"><span>>></span></a></li>
 					</ul>
 				</nav>
-			</div> --%>
+			</div>
 		</div>
-
 	</div>
-
 <script>
 function list(page) {
 	location.href = "/seller/callmanage?curPage=" + page ;

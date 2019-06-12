@@ -1,6 +1,8 @@
 package com.food.project.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 
@@ -31,6 +33,7 @@ public interface FoodtruckMapper {
 	
 	
 	public ArrayList<MainPageRankDTO> getRank();
+	public ArrayList<Map<String,Object>> getRank2();
 	public FoodTruckVO getBrandname(String truckcode);
 	
 }

@@ -1009,16 +1009,20 @@ public class SellerController {
 		
 		LocationVO lvo = new LocationVO();
 		lvo =  sellermapper.getlocation(tvo.getTruck_code());	
-		if(lvo ==null) {
-			lvo.setLat_y("37.566826");
-			lvo.setLng_x("126.9786567");
-		}
-		System.out.println(lvo);
-		JSONObject a  = new JSONObject();
-		a.put("lat_y",lvo.getLat_y());
-		a.put("lng_x",lvo.getLng_x());
-		
-		model.addAttribute("location", a);
+		if(lvo==null) {
+	         JSONObject a = new JSONObject();
+	         a.put("lat_y",37.566826);
+	         a.put("lng_x", 126.9786567);
+	         model.addAttribute("location", a);
+	      
+	      }
+	      else {
+	         JSONObject a  = new JSONObject();
+	         a.put("lat_y",lvo.getLat_y());
+	         a.put("lng_x",lvo.getLng_x());
+	         
+	         model.addAttribute("location", a);
+	      }
 		return "seller/loc/location";
 	}
 	@RequestMapping(value="/location", method=RequestMethod.POST) 
@@ -1427,10 +1431,10 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/cuorder", method=RequestMethod.GET) 
-	public String cuorder(Model model,HttpServletRequest request,HttpSession session) {
+	public String cuorder(Model model,@Param("truck_code") String truck_code) {
 		FoodTruckVO vo = new FoodTruckVO();
-		vo = (FoodTruckVO) request.getSession().getAttribute("seller");
-		String truckcode = vo.getTruck_code();
+		//vo = (FoodTruckVO) request.getSession().getAttribute("seller");
+		String truckcode = truck_code;
 		ArrayList<MenuVO> menulist = new ArrayList<>();
 		menulist = sellerservice.getmenu(truckcode);
 		model.addAttribute("menulist", menulist);
@@ -1494,11 +1498,12 @@ public class SellerController {
 		String[] pay = request.getParameterValues("paytype");//truckinfo.jsp에 있는 체크박스 value가 paytype인걸을 배열로 묶는것
 		int sum = 0;
 		
-		for(int i=0; i<pay.length; i++) {
-			
-			sum += Integer.parseInt(pay[i]);
-		}
-		vo.setPaytype(sum);
+		if(pay!=null) {
+		      for(int i=0; i<pay.length; i++) {
+		         sum += Integer.parseInt(pay[i]);
+		         }
+		      }
+		vo.setPaytype(sum);	
 		
 		truckService.updateTruckinfo(vo);
 		return "redirect:/seller/truckinfo";
@@ -1547,4 +1552,15 @@ public class SellerController {
 
 		return a;
 	}
+	
+//	@RequestMapping(value="/qrcode", method=RequestMethod.GET) 
+//	public String qrcode(Model model,@Param("truck_code") String truck_code,@Param("email") String email) {
+//		
+//		JSONObject a = new JSONObject();
+//		a.put("truck_code",truck_code);
+//		a.put("email",email);
+//		
+//		model.addAttribute("qrcode", a);
+//		return "seller/qrcode";
+//	}
 }

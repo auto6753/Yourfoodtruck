@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -20,10 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CallListDetailDTO;
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.CustomerVO;
+import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.mapper.CallListMapper;
 import com.food.project.service.CallListService;
+import com.food.project.service.FoodTruckService;
 import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
 import com.google.gson.JsonObject;
@@ -40,7 +45,7 @@ public class M_CustomerController {
 	private LoginService service;
 	CallListService callList;
 	OnboardService onboard;
-	
+	private FoodTruckService truckservice;
 //	@RequestMapping(value = "", method = RequestMethod.GET)
 //	public String mypage(Locale locale, Model model) {
 //		return "customer/mypage";
@@ -136,6 +141,7 @@ public class M_CustomerController {
 			
 		}
 		
+		
 		JSONArray test = new JSONArray();
 		if (result.size() != 0) {
 			for(OnboardVO a : result) {
@@ -155,28 +161,65 @@ public class M_CustomerController {
 		}
 
 	}
-	
-	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public String review(Locale locale, Model model) {
-		return "customer/review";
+	@ResponseBody
+	@RequestMapping(value = "/review", produces = "application/text; charset=utf8")
+	public String review(@RequestBody Map<String,Object> map) {
+		String email=(String)map.get("email");
+		ArrayList<MyreviewlistDTO> vo2 = truckservice.selectReview(email);
+		JSONArray result = new JSONArray();
+		result = JSONArray.fromObject(vo2);
+		return result.toString();
 	}
 	
-	@RequestMapping(value = "/callList", method = RequestMethod.GET)
-	public String callList(Locale locale, Model model ,HttpSession session) {
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "/callList", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String callList(@RequestBody Map<String,Object> map) {
 		
-		CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
-		System.out.println(vo.getEmail());
-		//String email = null;
-		
-		ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
-		
-		for(int i = 0;i<cl.size();i++) {
-			System.out.println(cl);
-		}
-		
-		model.addAttribute("CallList", cl);
+		//CustomerVO vo = (CustomerVO) session.getAttribute("sessionid");
+//		System.out.println(vo.getEmail());
+		String email = (String)map.get("email");
 
-		 return "customer/callList";
+		// System.out.println("z"+callList.getCallList2(vo.getEmail()));
+
+		List<Map<String, Object>> list = callList.getCallList2(email);
+		JSONArray arry = new JSONArray();
+		for (Map<String, Object> a : list) {
+			JSONObject data = new JSONObject();
+			data.put("festival_name", a.get("FESTIVAL_NAME"));
+			data.put("merchant_uid", a.get("MERCHANT_UID"));
+			data.put("brandname", a.get("BRANDNAME"));
+			data.put("festival_startdate", a.get("FESTIVAL_STARTDATE"));
+			data.put("festival_enddate", a.get("FESTIVAL_ENDDATE"));
+			data.put("progress", a.get("PROGRESS"));
+			data.put("place", a.get("PLACE"));
+			data.put("festival_endtime", a.get("FESTIVAL_ENDTIME"));
+			data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
+			data.put("name", a.get("NAME"));
+			data.put("pay_status", a.get("PAY_STATUS"));
+			String request_date;
+			try {
+				request_date = new SimpleDateFormat("yyyy/MM/dd").format((Date)a.get("REQUEST_DATE"));
+			}catch(Exception e) {
+				e.printStackTrace();
+				request_date="널값";
+			}
+			System.out.println(request_date);
+			data.put("request_date", request_date);
+			arry.add(data);
+		}
+
+		// System.out.println(list);
+		System.out.println(arry);
+		// ArrayList<CallListVO> cl = callList.getMyCallList(vo.getEmail());
+
+//		for(int i = 0;i<cl.size();i++) {
+//			System.out.println(cl);
+//		}
+//		
+		//model.addAttribute("CallList2", arry);
+		// model.addAttribute("CallList", cl);
+		return arry.toString();
 		 
 	}
 	
@@ -303,5 +346,18 @@ public class M_CustomerController {
 		request.getSession().removeAttribute("sessionid");
 		service.delete(c.getEmail());	
 		return "customer/goodbye";
+	}
+	
+	//콜 자세히
+	@ResponseBody
+	@RequestMapping(value = "/detail", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String detail(@RequestBody Map<String,Object> map) {
+		String merchant_uid = (String)map.get("merchant_uid");
+		System.out.println(merchant_uid);
+		CallListDetailDTO c = callList.getCall(merchant_uid);
+		System.out.println(c);
+		JSONArray a = new JSONArray();
+		a.add(c);
+		return a.toString();
 	}
 }

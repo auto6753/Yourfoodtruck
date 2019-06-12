@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,12 +19,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
+import com.food.project.paging.CallListPager;
+import com.food.project.service.CallListService;
 import com.food.project.service.FoodTruckService;
 import com.food.project.service.SellerService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -47,7 +52,7 @@ import lombok.AllArgsConstructor;
 public class M_SellerController {
 	private SellerService sellerservice;
 	private FoodTruckService truckservice;
-	
+	private CallListService callService;
 	@RequestMapping(value="/menu", method=RequestMethod.GET) 
 	public String menu(Model model) {
 		int menuNum = 17;
@@ -166,5 +171,22 @@ public class M_SellerController {
 		System.out.println(a.toString()+"jsonArray잘나오나?");
 		
 		return a.toString();
+	}
+	@ResponseBody
+	@RequestMapping(value="/callmanage", produces = "application/text; charset=utf8") 
+	public String call(@RequestBody String param) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map = net.sf.json.JSONObject.fromObject(param);
+		List<Map<String,Object>> callList = callService.getCallList((String)map.get("truck_code"));
+		net.sf.json.JSONObject resultObj = new net.sf.json.JSONObject();
+		net.sf.json.JSONArray resultArr = new net.sf.json.JSONArray();
+		resultArr = net.sf.json.JSONArray.fromObject(callList);
+		if(callList.isEmpty()) {
+			resultObj.put("result","empty");
+			return resultObj.toString();
+		}else {
+			System.out.println(callList.toString());
+			return resultArr.toString();
+		}
 	}
 }
