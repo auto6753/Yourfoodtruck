@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.CallListMapper">
-	<select id="getCallList"
-		resultType="com.food.project.domain.CallListVO" parameterType="String">
-		select *
-		from call_list where truck_code=#{truck_code}
-
+	<select id="getCallList" resultType="map" parameterType="String">
+		select progress,pay_status,name,content,place,price,festival_starttime,
+		festival_endtime,to_char(festival_startdate,'YYYY/MM/DD')festival_startdate,
+		to_char(festival_enddate,'YYYY/MM/DD')festival_enddate,merchant_uid,calltel
+		from call_list
+		where truck_code=#{truck_code}
 	</select>
 
 	<select id="getCallList2" resultType="map"

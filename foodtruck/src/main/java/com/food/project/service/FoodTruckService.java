@@ -1,6 +1,8 @@
 package com.food.project.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
@@ -24,6 +26,7 @@ public interface FoodTruckService {
 	public ArrayList<MenuVO> selectMenu(String truck_code);
 	public ArrayList<EventVO> getEvent(String truck_code);
 	public ArrayList<MainPageRankDTO> getRank();
+	public ArrayList<Map<String,Object>> getRank2();
 	public void updatetruckphoto(FoodTruckVO mvo);
 	public FoodTruckVO getBrandname(String truckcode);
 	

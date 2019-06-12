@@ -16,10 +16,10 @@ public class SellerServiceImplement implements SellerService {
 	SellerMapper sellermapper;
 
 	@Override
-	public ArrayList<MenuVO> getmenu(String truckcode) {
+	public ArrayList<MenuVO> getmenu(String truck_code) {
 		// TODO Auto-generated method stub
 		
-		return sellermapper.getmenu(truckcode);
+		return sellermapper.getmenu(truck_code);
 	}
 	
 	@Override
