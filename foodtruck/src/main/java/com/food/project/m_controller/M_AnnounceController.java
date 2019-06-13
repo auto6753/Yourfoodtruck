@@ -37,7 +37,8 @@ public class M_AnnounceController {
 	
 	
 	//허가구역 관리 컨트롤러
-	@RequestMapping(value = "/m.area")
+	@ResponseBody
+	@RequestMapping(value = "/m.area",produces = "application/text; charset=utf8")
 	public String area(Model model,@RequestParam(defaultValue="2") int post_class,
 			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
 		int totPage=0;
@@ -59,9 +60,6 @@ public class M_AnnounceController {
 		map.put("totPage",totPage);
 		map.put("keyword",keyword);
 		map.put("postPager",postPager);
-		model.addAttribute("areapostList",postService.getPostList(2));
-		model.addAttribute("areaList",areaList);
-		model.addAttribute("map",map);
 		return "announce/area";
 	}
 	@RequestMapping(value = "/m.area/specificck", method = RequestMethod.GET)

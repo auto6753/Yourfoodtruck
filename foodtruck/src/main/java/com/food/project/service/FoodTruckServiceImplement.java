@@ -1,6 +1,8 @@
 package com.food.project.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -84,6 +86,11 @@ public class FoodTruckServiceImplement implements FoodTruckService {
 	public ArrayList<MainPageRankDTO> getRank() {
 		// TODO Auto-generated method stub
 		return mapper.getRank();
+  }
+	@Override
+	public ArrayList<Map<String,Object>> getRank2() {
+		System.out.println(mapper.getRank2().toString());
+		return mapper.getRank2();
   }
   
   @Override

@@ -6,7 +6,7 @@
 		parameterType="String">
 		select
 		menu_code,menu_url,menu_surl,menu_name,menu_category,unit_price,menu_desc,truck_code
-		from menu where truck_code = #{truckcode}
+		from menu where truck_code = #{truck_code}
 	</select>
 	<insert id="insertmenu"
 		parameterType="com.food.project.domain.MenuVO">
@@ -31,4 +31,12 @@
 		delete from menu where
 		menu_code= #{menu_code}
 	</delete>
+
+	<select id="getCustomer" resultType="com.food.project.domain.CustomerVO">
+		select c.email, c.password
+		from customer c, foodtruck f
+		where c.email = f.email and
+		f.truck_code = #{truck_code}
+	</select>
+
 </mapper>

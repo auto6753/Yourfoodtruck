@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; }
 #container3 {
 	width: 24%;
 	height: 220px;
@@ -15,16 +16,13 @@
 }
 
 #title {
-	margin-top: 200px;
-	margin: 0 auto;
-	width: 1200px;
+	width: 925px;
+    height: 300px;
+    margin: 0 auto;
+    font-family: 'yg-jalnan';
 }
 
-#title2 {
-	margin-top: 20px;
-	margin:0 auto;
-	width: 1200px;
-}
+
 
 .snip1535 {
 	background-color: #c47135;
@@ -100,16 +98,12 @@
 	width:50%; 
 	height: 200px;
 }
-#title{
-	width: 925px;
-	height: 300px;
-	margin: 0 auto;
-	margin-top: 200px;
-}
+
 #title2{
 	width: 850px;
 	height: 200px;
 	margin: 0 auto;
+	font-family: 'yg-jalnan';
 }
 
 .carousel-item {

@@ -43,13 +43,18 @@ public class PaymentController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/insertPayment")
 	@ResponseBody
-	public void payment(@RequestBody String param) {
+	public String payment(@RequestBody String param) {
 		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
 		paymentMap = JSONArray.fromObject(param);
 		System.out.println(paymentMap);
 		int a=payService.insertPaymentList(paymentMap);
-		if(a==0) System.out.println("Error");
-		else System.out.println("Success");
+		if(a==0) {
+			System.out.println("Error");
+			return "error";
+		}else {
+			System.out.println("Success");
+			return "success";
+		}
 	}
 	@RequestMapping(value="/insertOrder",method=RequestMethod.POST)
 	public void insertOrder(Model model, HttpServletRequest request) {
@@ -102,6 +107,7 @@ public class PaymentController {
 	public String Callrefund(Model model,CallListVO vo) {
 		//callService.
 		//callmapper.deleteCall(vo.getMerchant_uid());
+		System.out.println("호출업뎃");
 		System.out.println(vo);
 		int a ;
 		if(vo.getPay_status() == 0) {

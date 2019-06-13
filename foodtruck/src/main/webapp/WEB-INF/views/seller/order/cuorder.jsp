@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="initial-scale=1, width=device=width, viewport-fit=cover">
 <title>주문관리</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
@@ -155,6 +156,8 @@ var list = new Array();
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
 <script
 	src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
+	type="text/javascript"></script>
 </head>
 <style>
 @font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
@@ -234,10 +237,11 @@ div a {
 }
 
 #click3 {
-	width: 95%;
-	text-align: center;
-	margin: 0 auto;
-	font-family: 'Handon3gyeopsal600g';
+	    width: 100%;
+    font-size: 55%;
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .c1 {
@@ -248,10 +252,18 @@ div a {
 	font-size: 120%;
 	margin-top: 5px;
 }
+.c2{
+background-color: rgb(255, 94, 24);
+    color: white;
+    width: 40%;
+    height: 50px;
+    font-size: 120%;
+    margin-top: 5px;
+}
 
 .food {
 	
-	height: 250px;
+width: 100%;
 }
 
 #foodlist {
@@ -279,7 +291,7 @@ h3 {
 	<input type="hidden" id="ref">
 	<div id="cuorder">
 		<div id="logo">
-			<a href="/rehome" class="brandname">${brandname.brandname}</a>
+			<a href="/rehome" id="brandname" class="brandname">${brandname.brandname}</a>
 		</div>
 		<div>
 			<div id="box">
@@ -315,9 +327,9 @@ h3 {
 							style="font-size: 30px" id="allprice">0</span>
 					</div>
 					<div id="click3">
-						<button id="card" class="btn c1">카드결제</button>
+						<!-- <button id="card" class="btn c1">카드결제</button> -->
 						<button id="cash" class="btn c1">현금결제</button>
-						<button id="kakaopay" class="btn c1">카카오페이</button>
+						<!-- <button id="kakaopay" class="btn c1">카카오페이</button> -->
 						<button id="cancle1" class="btn c1">취소</button>
 					</div>
 				</div>
@@ -325,18 +337,27 @@ h3 {
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="cashtelephone" type="tel" style="width: 100%;"><br>
-					<button id="cashok" class="btn c1">확인</button>
-					<button id="cashcancle" class="btn c1">취소</button>
-					<button id="back" class="btn c1">주문추가</button>
+					<button id="cashok" class="btn c2">확인</button>
+					<button id="cashcancle" class="btn c2">취소</button>
+					<button id="back" class="btn c2">주문추가</button>
 				</div>
 			</div>
 			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="kakaotelephone" type="tel" style="width: 100%;"><br>
-					<button id="kakaohok" class="btn c1">확인</button>
-					<button id="kakaocancle" class="btn c1">취소</button>
-					<button id="back2" class="btn c1">주문추가</button>
+					<button id="kakaohok" class="btn c2">확인</button>
+					<button id="kakaocancle" class="btn c2">취소</button>
+					<button id="back2" class="btn c2">주문추가</button>
+				</div>
+			</div>
+			<div id="cardtel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
+				<div style="display: inline-block; width: 90%; height: 35%;">
+					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
+					<input id="cardphone" type="tel" style="width: 100%;"><br>
+					<button id="cardok" class="btn c2">확인</button>
+					<button id="cardcancle" class="btn c2">취소</button>
+					<button id="back3" class="btn c2">주문추가</button>
 				</div>
 			</div>
 			</div>

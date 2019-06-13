@@ -31,6 +31,8 @@ public class UploadController {
 
 	@Resource(name = "uploadPath")
 	String uploadPath;
+	@Resource(name = "uploadPathSchool")
+	String uploadPathSchool;
 	
 	// String uploadPath = "/resources/image/upload/";
 //	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.GET)
@@ -47,6 +49,7 @@ public class UploadController {
 		logger.info("originalName : " + file.getOriginalFilename());
 		logger.info("size : " + file.getSize());
 		logger.info("contentType : " + file.getContentType());
+		logger.info("String : " + uploadPathSchool);
 
 		System.out.println("ㅇ");
 		System.out.println(session.getAttribute("seller"));
@@ -55,11 +58,14 @@ public class UploadController {
 		// System.out.println(vo.getEmail());
 		// String email = vo.getEmail();
 		ResponseEntity<String> a = new ResponseEntity<String>(
-				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+				UploadFileUtils.uploadFile(uploadPathSchool, file.getOriginalFilename(), file.getBytes(), vo4),
 				HttpStatus.OK);
 
 		String str = a.getBody();
 		System.out.println(str);
+		logger.info("업로드 후 찍히는 경로 :" + str );
+		//linux 용
+		//String[] array = str.split(File.separator);
 		String[] array = str.split("\\\\");
 		System.out.println(array[0]);
 		System.out.println(array[1]);
@@ -128,8 +134,8 @@ public class UploadController {
 		if (file!=null) {
 			//System.out.println(surl);
 			//System.out.println(url);
-			url = uploadPath + url;
-			surl = uploadPath + surl;
+			url = uploadPathSchool + url;
+			surl = uploadPathSchool + surl;
 			System.out.println(url);
 			System.out.println(surl);
 			File file1 = new File(url);
@@ -159,10 +165,12 @@ public class UploadController {
 					 //System.out.println(vo4.getEmail());
 					 //String email = vo4.getEmail();
 					ResponseEntity<String> a = new ResponseEntity<String>(
-							UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+							UploadFileUtils.uploadFile(uploadPathSchool, file.getOriginalFilename(), file.getBytes(), vo4),
 							HttpStatus.OK);
 					String str = a.getBody();
 					System.out.println(str);
+					//linux 용
+					//String[] array = str.split(File.separator);
 					String[] array = str.split("\\\\");
 					System.out.println(array[0]);
 					System.out.println(array[1]);

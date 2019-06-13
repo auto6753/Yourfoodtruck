@@ -3,7 +3,10 @@ import time
 import json
 import os
 import shutil
+import datetime
 from selenium.common.exceptions import *
+now = datetime.datetime.now()
+nowDate = now.strftime('%Y-%m-%d')
 
 ##====================================서울======================================
 def seoul_gonggo():
@@ -32,7 +35,7 @@ def seoul_gonggo():
         a = driver.find_elements_by_css_selector('#seoul-integrated-board > table > tbody > tr > td.sib-lst-type-basic-subject > a')
     except NoSuchElementException :
         print('항목이 없습니다.')
-        region["region"]="seoul"
+        region["region"]="서울"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -44,7 +47,7 @@ def seoul_gonggo():
             seoul['post_url']='http://www.seoul.go.kr/news/news_notice.do#view/'+m.get_attribute('data-code')
             arrays.append(seoul)
             seoul={}
-        region["region"]="seoul"
+        region["region"]="서울"
         region["gonggo_list"]=arrays
         
     list_per_region.append(region)
@@ -86,7 +89,7 @@ def gyeonggi_gonggo():
         a = driver.find_elements_by_css_selector('#content-body > div > div.board-list.board-table.board-list-box > table > tbody > tr > td.board-default-td-title > a')
     except:
         print('항목이 없습니다.')
-        region["region"]="gyeonggi"
+        region["region"]="경기"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -98,7 +101,7 @@ def gyeonggi_gonggo():
             gyeonggi['post_url']=m.get_attribute('href')
             arrays.append(gyeonggi)
             gyeonggi={}
-        region["region"]="gyeonggi"
+        region["region"]="경기"
         region["gonggo_list"]=arrays
         
 ##====================================경기======================================
@@ -157,7 +160,7 @@ def chungbuk_gonggo():
         a = driver.find_elements_by_css_selector('body > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > table > tbody > tr:nth-child(5) > td > table > tbody > tr > td:nth-child(2) > a')    
     except NoSuchElementException:
         print('항목이 없습니다.')
-        region["region"]="chungbuk"
+        region["region"]="충북"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -174,7 +177,7 @@ def chungbuk_gonggo():
                                    'command=searchDetail&flag=gosiGL&svp=Y&sido=&sno='+sno+'&gosiGbn='+gosiGbn)
             arrays.append(chungbuk)
             chungbuk={}
-        region["region"]="chungbuk"
+        region["region"]="충북"
         region["gonggo_list"]=arrays
 ##====================================충북======================================
     wrapper_String = open("./result.json","r",encoding="UTF8").read()
@@ -234,7 +237,7 @@ def chungnam_gonggo():
         a = driver.find_elements_by_css_selector('body > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > table > tbody > tr:nth-child(5) > td > table > tbody > tr > td:nth-child(2) > a')    
     except NoSuchElementException:
         print('항목이 없습니다.')
-        region["region"]="chungnam"
+        region["region"]="충남"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -251,7 +254,7 @@ def chungnam_gonggo():
                                    'command=searchDetail&flag=gosiGL&svp=Y&sido=cn&sno='+sno+'&gosiGbn='+gosiGbn)
             arrays.append(chungnam)
             chungnam={}
-        region["region"]="chungnam"
+        region["region"]="충남"
         region["gonggo_list"]=arrays
 ##====================================충남======================================
     wrapper_String = open("./result.json","r",encoding="UTF8").read()
@@ -295,7 +298,7 @@ def gangwon_gonggo():
         a = driver.find_elements_by_css_selector('#contents_area > div > div.board > div.board_list > table > tbody > tr > td:nth-child(2) > p > a')    
     except NoSuchElementException:
         print('항목이 없습니다.')
-        region["region"]="gangwon"
+        region["region"]="강원"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -307,7 +310,7 @@ def gangwon_gonggo():
             gangwon['post_url']= (href)
             arrays.append(gangwon)
             gangwon={}
-        region["region"]="gangwon"
+        region["region"]="강원"
         region["gonggo_list"]=arrays
 ##====================================강원======================================
     wrapper_String = open("./result.json","r",encoding="UTF8").read()
@@ -348,7 +351,7 @@ def busan_gonggo():
         a = driver.find_elements_by_css_selector('#contents > div.section.board > div > ul > li > div > a')
     except NoSuchElementException:
         print('항목이 없습니다.')
-        region["region"]="busan"
+        region["region"]="부산"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -368,7 +371,7 @@ def busan_gonggo():
                 arrays.append(busan)
                 busan={}
             inc_num = inc_num+1
-        region["region"]="busan"
+        region["region"]="부산"
         region["gonggo_list"]=arrays
 ##====================================부산======================================
     wrapper_String = open("./result.json","r",encoding="UTF8").read()
@@ -415,7 +418,7 @@ def daejeon_gonggo():
         a = driver.find_elements_by_css_selector('#content > div.new_bbs.mt30 > table > tbody > tr > td.al_left.subject > a')
     except NoSuchElementException:
         print('항목이 없습니다.')
-        region["region"]="daejeon"
+        region["region"]="대전"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -435,7 +438,7 @@ def daejeon_gonggo():
                 arrays.append(daejeon)
                 daejeon={}
             inc_num = inc_num+1
-        region["region"]="daejeon"
+        region["region"]="대전"
         region["gonggo_list"]=arrays
 ##====================================대전======================================
     wrapper_String = open("./result.json","r",encoding="UTF8").read()
@@ -483,7 +486,7 @@ def daegu_gonggo():
         a = driver.find_elements_by_css_selector('#content > div.section > ul > li > dl > dt > a')
     except NoSuchElementException:
         print('항목이 없습니다.')
-        region["region"]="daegu"
+        region["region"]="대구"
         region["gonggo_list"]=None
     else:
         gosi_title = None
@@ -507,7 +510,7 @@ def daegu_gonggo():
                 arrays.append(daegu)
                 daegu={}
             inc_num = inc_num+1
-        region["region"]="daegu"
+        region["region"]="대구"
         region["gonggo_list"]=arrays
 ##====================================대구======================================
     wrapper_String = open("./result.json","r",encoding="UTF8").read()

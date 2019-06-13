@@ -4,15 +4,18 @@ p{
 }
 #title {
 
-   font-size: 200%;
-   width:100%;
-	marign: 0 auto;
-   
+font-size: 200%;
+    width: 84%;
+    margin-left: 8.3%;
+    margin-top: 25px;
+    border-radius: 15px;
 }
 
 #searchall{
-   margin: 0 auto;
-   width:100%;
+      margin: 0 auto;
+    width: 110.2%;
+    margin-left: -4.8%;
+    margin-top: -3.3%;
 }
 .form-inline{
    width:100%;
@@ -34,7 +37,8 @@ p{
    
 }  */
 .pagination{
-	margin-left: 40%;
+	position: relative;
+    left: 48%;
 }
 
 #pageadd{
@@ -45,8 +49,11 @@ p{
    
 }
 #table{
-   width:100%;
-   margin: 0 auto;
+      width: 83.5%;
+    /* margin: 0 auto; */
+    margin-left: 8.6%;
+    /* border: 1px solid; */
+    /* border-color: lightgray; */
 }
 #nextall{
    width:100%;

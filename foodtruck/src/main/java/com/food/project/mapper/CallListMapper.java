@@ -7,11 +7,12 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
+import com.food.project.domain.CallListDetailDTO;
 import com.food.project.domain.CallListVO;
 
 
 public interface CallListMapper {
-	public ArrayList<CallListVO> getCallList(String truck_code);
+	public ArrayList<Map<String,Object>> getCallList(String truck_code);
 	public int insertCallList(CallListVO vo);
 	public ArrayList<CallListVO> getMyCallList(String email);
 	public ArrayList<Map<String, Object>> getCallList2(String email);
@@ -25,4 +26,6 @@ public interface CallListMapper {
 	public Map<String,Object> totalPage(String truck_code);
 	@Select("select * from call_list where merchant_uid=#{merchant_uid}")
 	public CallListVO getCall(String merchant_uid);
+	
+	public CallListDetailDTO getCall2(String merchant_uid);
 }

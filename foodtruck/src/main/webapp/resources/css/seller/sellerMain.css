@@ -7,6 +7,24 @@
 	padding: 10%;
 	text-align: center;
 }
+.menuTitle{
+   font-size: 50px;
+    height: 60px;
+    margin: 23px 0 17px;
+    color: #666;
+    text-align: center;
+    position: relative;
+    bottom: 20px;
+    font-family: 'Hanna', serif;
+}
+#main1 {
+      /* margin-top: 50px; */
+    position: relative;
+    left: 26%;
+    bottom: 339px;
+    border: 3px solid gainsboro;
+    height: 400px;
+}
 
 .mngbtn {
 	border: 1px solid lightgray;

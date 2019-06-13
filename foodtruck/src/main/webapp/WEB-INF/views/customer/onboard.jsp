@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,18 +59,20 @@ $(document).ready(function(){
 </head>
 <body>
 	<div id="with" class="col">
-		<h1 style="text-align: center; margin-top: 10px;">탑승트럭</h1>
+		<h1 style="text-align: center;">탑승트럭</h1>
 		<br>
-		<div class="album py-5 bg-light">
-			<div class="container">
+		<div class="album py-5 bg-light" style="height: 80%;">
+			<div class="container1">
 				<div class="row">
 					<c:forEach var="i" items="${onboard}">
 						<div class="col-md-4">
 							<div class="card mb-4 shadow-sm">
-								<img src="${pageContext.request.contextPath}/resources/image/upload/${i.truck_url }"
+								<img
+									src="${pageContext.request.contextPath}/resources/image/upload/${i.truck_url }"
 									style="width: 100%; height: 225px;">
 								<div class="card-body">
-									<p class="card-text">${i.brandname} ${i.onboard_date}</p>
+									<p class="card-text">${i.brandname}</p>
+									<p>${i.onboard_date}</p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
 											<button class="btn btn-sm btn-outline-secondary detail">상세정보</button>
