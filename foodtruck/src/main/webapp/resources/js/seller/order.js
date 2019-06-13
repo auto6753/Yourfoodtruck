@@ -5,6 +5,9 @@ var list = new Array();
 $(document).ready(function() {
 	var is = false;
 	var alltotal_price = 0;
+	  var IMP = window.IMP; // 생략가능
+	  IMP.init('imp91176976'); 
+	
 	$("#foodlist").on('click',"button",function() {
 		// var a=$(this).find('p');
 		var a = $(this);
@@ -71,6 +74,7 @@ $(document).ready(function() {
 		} else {
 			$("#order").css("display","none");
 			$("#cashtel").css("display","block");
+			
 			console.log(list);
 			//alert("주문등록 완료!");
 		}
@@ -80,13 +84,93 @@ $(document).ready(function() {
 			alert("주문목록이업서여");
 		} else {
 			$("#order").css("display","none");
-			$("#cashtel").css("display","block");
+			$("#cardtel").css("display","block");
 			console.log(list);
 			//alert("주문등록 완료!");
 		}
 	});
 	
-	$("#cashok").click(function(){
+	$("#cardok").click(function(){ //카드
+		var payment_telephone = $("#cardphone").val();
+		var date = new Date();
+		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
+		var day=date.getDate();	var hour=date.getHours();
+		var minute=date.getMinutes(); var sec=date.getSeconds();
+		if((day+'').length<2)	day="0"+day;
+		if((month+'').length=1)	month="0"+month;
+		console.log(date.toString());
+		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
+		
+		//결제 호출 -------------------------------
+		alert("ㅇ");
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : $("#brandname").text()+" 주문",
+			    amount : alltotal_price,
+			    buyer_tel : payment_telephone
+			    //m_redirect_url : 'https://www.yourdomain.com/payments/complete' 
+			}, function(rsp) { 
+				console.log(rsp);
+			    if ( rsp.success ) { //결제성공후
+			    	alert("성공");
+			    	//alert("ㅇ");	
+			    	for(var c=0;c<list.length;c++){  //주문내역 추가할거 추가
+			    		list[c].payment_class=3;
+			    		list[c].truck_code=$('#sessionTruckCode').val();
+			    		list[c].payment_telephone=payment_telephone;
+			    		list[c].merchant_uid = rsp.merchant_uid;
+			    	}			    	
+			    	$.ajax({
+			    		type:"post",
+			    		url:"/pay/insertPayment",
+			    		contentType:"application/json;charset=UTF-8",
+			    		async:false,
+			    		data:JSON.stringify(list),
+			    		success:function(data){ 
+			    			alert(data);
+			    			if(data=="success"){ //인서트성공후
+			    				//window.location.href="/customer/callList";						
+			    				//파이어베이스 전송
+			    				for(var a=0 ;a< list.length; a++) {
+			    					list[a].payed='payed'; //결제를 성공했으니 payed
+			    					firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
+			    				}	
+			    				//초기화-----------------------------------
+			    				$("#cardphone").val(""); 
+			    				$("tbody").empty();
+			    				var a = $("tbody"); //tebody 태그 없앰;
+			    				alltotal_price = 0;
+			    				$("#allprice").html(alltotal_price);
+			    				list = new Array(); //list초기화
+			    				$("#box").css("scroll","top");
+			    				$("#order").css("display","block");
+			    				$("#cardtel").css("display","none");
+			    			}
+			    			else{
+			    				alert(data);
+			    			}
+			    		},
+			    		error:function(err){
+			    			alert(err);
+			    		}
+			    	}); 
+			         var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num; 
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		
+		//----------------------------------	---------
+	});
+	$("#cashok").click(function(){ //현금
 		var payment_telephone = $("#cashtelephone").val();
 		var date = new Date();
 		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
@@ -96,6 +180,7 @@ $(document).ready(function() {
 		if((month+'').length=1)	month="0"+month;
 		console.log(date.toString());
 		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
+		
 		for(var a=0 ;a< list.length; a++) {
 			list[a].payment_class=1;
 			list[a].truck_code=$('#sessionTruckCode').val();
@@ -103,6 +188,7 @@ $(document).ready(function() {
 			list[a].payed='not';
 			firebase.database().ref('PaymentTest2/'+firebase.auth().currentUser.uid+'/'+list[0].payment_telephone +'/'+sysdate+'/'+a).set(list[a]);
 		}
+		
 		$("#cashtelephone").val("");
 		$("tbody").empty();
 		var a = $("tbody"); //tebody 태그 없앰;
@@ -114,7 +200,7 @@ $(document).ready(function() {
 		$("#cashtel").css("display","none");
 	});
 	
-	$("#kakaohok").click(function(){
+	$("#kakaohok").click(function(){ //카카오
 		var payment_telephone =""+$("#kakaotelephone").val();
 		var date = new Date();
 		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
@@ -155,6 +241,13 @@ $(document).ready(function() {
 		$("#kakaotel").css("display","none");
 	});
 	
+	$("#back3").click(function() {
+		$("#cardphone").val("");
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#cardtel").css("display","none");
+	});
+	
 	$("#kakaocancle").click(function() {
 		$("#kakaotelephone").val("");
 		$("tbody").empty();
@@ -178,6 +271,18 @@ $(document).ready(function() {
 		$("#box").css("scroll","top");
 		$("#order").css("display","block");
 		$("#cashtel").css("display","none");
+	});
+	
+	$("#cardcancle").click(function() {
+		$("#cardphone").val("");
+		$("tbody").empty();
+		var a = $("tbody"); //tebody 태그 없앰;
+		alltotal_price = 0;
+		$("#allprice").html(alltotal_price);
+		list = new Array(); //list초기화
+		$("#box").css("scroll","top");
+		$("#order").css("display","block");
+		$("#cardtel").css("display","none");
 	});
 	
 	
