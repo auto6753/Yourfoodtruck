@@ -60,6 +60,7 @@
 			<mapping path="/seller/**" />
 			<exclude-mapping path="/login/**" />
 			<exclude-mapping path="/seller/cuorder/**"/>
+			<exclude-mapping path="/seller/qrorder/**"/>
 			<beans:bean id="sellerInterceptor"
 				class="com.food.project.interceptor.SellerInterceptor" />
 		</interceptor>

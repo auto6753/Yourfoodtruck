@@ -117,14 +117,14 @@
       function update(i) {
          var a = i;
          console.log(i[0]);
-         console.log(i[1]);
+         //console.log(i[1]);
          console.log(i);
          $.ajax({
             url : "/pay/Callrefund",
             type : "post",
             data : {
                merchant_uid : i[0],
-               PROGRESS : i[1]
+               progress : i[1]
             },
             success : function(data) {
                if (data == 'success') {
@@ -138,10 +138,10 @@
 
       }
       function cancel(price, name, uid, reason) {
-
+    	  alert("?");
          $.ajax({
             url : "http://39.127.7.64:3000/cardrefund",
-            crossOrigin : true,
+            //crossOrigin : true,
             "type" : "POST",
             "contentType" : "application/json",
             "data" : JSON.stringify({
@@ -166,8 +166,8 @@
                   type : "post",
                   data : {
                      merchant_uid : result.merchant_uid,
-                     PROGRESS : 6,
-                     PAY_STATUS : 3
+                     progress : 6,
+                     pay_status : 3
 
                   },
                   success : function(data) {

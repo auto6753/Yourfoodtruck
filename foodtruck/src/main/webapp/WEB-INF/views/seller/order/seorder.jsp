@@ -79,7 +79,7 @@ function pay(a){
                   amount:parseInt(amount.text())
             };
             list.push(pay_list);
-         }
+         }  
          console.log(list);
          for(var i=0; i<list.length;i++) {
             firebase.database().ref('/PaymentTest2/'+ _uid +'/'+telephone+'/'+a+'/'+i+'/payed').set('payed');

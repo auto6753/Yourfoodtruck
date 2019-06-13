@@ -31,4 +31,12 @@
 		delete from menu where
 		menu_code= #{menu_code}
 	</delete>
+
+	<select id="getCustomer" resultType="com.food.project.domain.CustomerVO">
+		select c.email, c.password
+		from customer c, foodtruck f
+		where c.email = f.email and
+		f.truck_code = #{truck_code}
+	</select>
+
 </mapper>
