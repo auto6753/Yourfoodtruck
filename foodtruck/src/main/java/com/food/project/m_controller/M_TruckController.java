@@ -138,6 +138,27 @@ public class M_TruckController {
 			}
 			
 		}
+		String truck_surl = service.getFoodTruck(truck_code).getTruck_surl();
+		String truck_url = service.getFoodTruck(truck_code).getTruck_url();
+		if(truck_surl==null) {
+			data.put("truck_url","트럭사진.png");
+		}else {
+			//data.put("truck_surl",a.get("TRUCK_SURL"));
+			System.out.println("독도2");
+			System.out.println(truck_surl);
+			//String temp[] = a.get("TRUCK_SURL).split("\\"));
+			String temp[] = truck_surl.split("\\\\");
+			String temp1=temp[0];
+			String temp2=temp[1];
+			System.out.println(temp1);
+			System.out.println(temp2);
+			String temp3 = temp1+"/"+temp2;
+			System.out.println(temp3);
+			data.put("truck_url",temp3);
+			//data.put("truck_surl","test6@naver.com/ebd1ba13-7aba-4716-8a13-2c35ffe80a75_mug_obj_152024802935945730");
+		}
+		data.put("truck_surl",truck_surl);
+		data.put("truck_url",truck_url);
 		System.out.println(data.toString());
 		System.out.println(data);
 		System.out.println(email);
