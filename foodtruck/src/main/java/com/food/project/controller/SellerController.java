@@ -1563,4 +1563,23 @@ public class SellerController {
 //		model.addAttribute("qrcode", a);
 //		return "seller/qrcode";
 //	}
+	
+	@RequestMapping(value="/qrorder", method=RequestMethod.GET) 
+	public String qrorder(Model model,@Param("truck_code") String truck_code) {
+		FoodTruckVO vo = new FoodTruckVO();
+		//vo = (FoodTruckVO) request.getSession().getAttribute("seller");
+		String truckcode = truck_code;
+		ArrayList<MenuVO> menulist = new ArrayList<>();
+		CustomerVO cvo = sellerservice.getCustomer(truck_code);
+		menulist = sellerservice.getmenu(truckcode);
+		model.addAttribute("menulist", menulist);
+		model.addAttribute("orderTarget","customer");
+		model.addAttribute("member",cvo);
+		model.addAttribute("truck_code",truckcode);
+		FoodTruckVO vo1 = truckService.getBrandname(truckcode);
+		System.out.println(vo1);
+		model.addAttribute("brandname" , vo1);
+		return "seller/order/qrorder";
+	}
+	
 }

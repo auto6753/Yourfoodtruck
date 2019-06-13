@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.food.project.domain.CustomerVO;
 import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.mapper.SellerMapper;
@@ -46,6 +47,13 @@ public class SellerServiceImplement implements SellerService {
 	public void deletemenu(String menu_code) {
 		// TODO Auto-generated method stub
 		sellermapper.deletemenu(menu_code);
+	}
+
+	@Override
+	public CustomerVO getCustomer(String truck_code) {
+		// TODO Auto-generated method stub
+		
+		return sellermapper.getCustomer(truck_code);
 	}
 
 //	@Override

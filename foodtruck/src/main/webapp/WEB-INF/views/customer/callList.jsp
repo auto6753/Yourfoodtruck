@@ -202,8 +202,8 @@ function cancel(i){
             success:function(data){   
                console.log(data);
                $.ajax({
-                   url:"http://localhost:3000/cardrefund",
-                   crossOrigin:true,
+                   url:"http://39.127.7.64:3000/cardrefund",
+                   //crossOrigin:true,
                     "type": "POST",
                      "contentType": "application/json",
                      "data": JSON.stringify({
