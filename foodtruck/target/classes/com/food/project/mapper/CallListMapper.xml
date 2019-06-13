@@ -63,6 +63,7 @@
 	<sql id="pagingFooter">
 		) c
 		) where rn between #{start} and #{end}
+		order by request_date desc
 	</sql>
 	<select id="allList" resultType="map" parameterType="map">
 		<!-- 목록 조회 및 페이징 전체 쿼리 -->
