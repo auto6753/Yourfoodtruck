@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -18,23 +19,27 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/resources/image/**" location="/resources/image/" />
-	<resources mapping="/resources/js/**" location="/resources/js/" />
-	<resources mapping="/resources/css/**" location="/resources/css/" />
+	<resources mapping="/resources/image/**"
+		location="/resources/image/" />
+	<resources mapping="/resources/js/**"
+		location="/resources/js/" />
+	<resources mapping="/resources/css/**"
+		location="/resources/css/" />
 	<resources mapping="firebase-messaging-sw.js" location="/" />
 
 
-	<!-- upload path  -->
-	<!-- <beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\bon300-21\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
-		</beans:constructor-arg>
-	</beans:bean> -->
+	<!-- upload path -->
+	<!-- <beans:bean id="uploadPath" class="java.lang.String"> <beans:constructor-arg 
+		value="C:\Users\bon300-21\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\"> 
+		</beans:constructor-arg> </beans:bean> -->
 	<beans:bean id="uploadPathSchool" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\bon300-25\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
+		<beans:constructor-arg
+			value="C:\Users\bon300-21\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
 		</beans:constructor-arg>
 	</beans:bean>
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="/var/lib/tomcat9/webapps/ROOT/resources/image/upload/">
+		<beans:constructor-arg
+			value="/var/lib/tomcat9/webapps/ROOT/resources/image/upload/">
 		</beans:constructor-arg>
 	</beans:bean>
 	<!--upload 용량 -->
@@ -50,7 +55,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	<!-- CORS setting : https://spring.io/blog/2015/06/08/cors-support-in-spring-framework#xml-namespace -->
-    <beans:import resource="cors-config.xml" />
+	<beans:import resource="cors-config.xml" />
 	<context:component-scan
 		base-package="com.food.project" />
 	<interceptors>
@@ -63,15 +68,17 @@
 		<interceptor>
 			<mapping path="/seller/**" />
 			<exclude-mapping path="/login/**" />
-			<exclude-mapping path="/seller/cuorder/**"/>
-			<exclude-mapping path="/seller/qrorder/**"/>
+			<exclude-mapping path="/seller/cuorder/**" />
+			<exclude-mapping path="/seller/qrorder/**" />
 			<beans:bean id="sellerInterceptor"
 				class="com.food.project.interceptor.SellerInterceptor" />
 		</interceptor>
 	</interceptors>
 	<websocket:handlers allowed-origins="*">
-		<websocket:mapping path="/m.seorder" handler="PaymentHandler"/>
-		<websocket:sockjs/>
+		<websocket:mapping path="/m.seorder"
+			handler="PaymentHandler" />
+		<websocket:sockjs />
 	</websocket:handlers>
-	<beans:bean id="PaymentHandler" class="com.food.project.websocket.PaymentHandler"/>
+	<beans:bean id="PaymentHandler"
+		class="com.food.project.websocket.PaymentHandler" />
 </beans:beans>

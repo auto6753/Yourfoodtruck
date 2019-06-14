@@ -337,8 +337,7 @@
 		
 		$("#addEventBtn").click(function(){
 			
-			
-			
+	
 			var files = $("#uploadImg")[0].files;
 			var file = files[0];
 			
@@ -405,7 +404,7 @@
 	            processData: false,
 	            contentType: false,
 				success: function(data){
-					 alert("success");
+					// alert(data);
 					 $('#layer1').hide();
 				}
 			});
@@ -432,6 +431,7 @@
 						"eventCode": eventCode
 					},
 					success: function(data) {
+						//alert(data);
 						location.reload();
 						alert("삭제가 완료되었습니다.");
 					},

@@ -967,12 +967,15 @@ public class SellerController {
 	    paymentMap = JSONArray.fromObject(param);
 		System.out.println(paymentMap.size());
 		for(int i =0;i<paymentMap.size();i++) {
+			
 			String menu_code = (String) paymentMap.get(i).get("menu_code");
 			String url = uploadPath +(String) paymentMap.get(i).get("url");
 			String surl = uploadPath + (String) paymentMap.get(i).get("surl");
+			System.out.println("--------------------------------");
 			System.out.println(menu_code);
 			System.out.println(url);
 			System.out.println(surl);
+			System.out.println("--------------------------------");
 			sellerservice.deletemenu(menu_code);
 			File file = new File(url);
 			if (file.exists()) { // 파일존재여부확인
@@ -1111,19 +1114,29 @@ public class SellerController {
 		
 		CustomerVO e = (CustomerVO) request.getSession().getAttribute("sessionid");
 		FoodTruckVO vo4 = new FoodTruckVO();
+		//String em = e.getEmail()+"\\event";
 		String em = e.getEmail()+"/event";
 		vo4.setEmail(em);
 		//vo4.setEmail();
 		EventVO evo = new EventVO();
+		String st1 = null;
+		String str = null;
+		
 		try {
 			ResponseEntity<String> upload = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
 					HttpStatus.OK);
-			String str = upload.getBody();
-			String[] array = str.split("\\\\");
-			System.out.println(array[0]);
-			System.out.println(array[1]);
-			System.out.println(array[0] + "\\" + array[1].substring(2));
-			evo.setEvent_url(array[0] + "\\" + array[1].substring(2));
+			str = upload.getBody();
+			//String[] array = str.split("\\\\");
+			//str.replace("/event", "\\event");
+			
+			String[] array = str.split(File.separator);
+			System.out.println(array[0]);//ddd@naver.com
+			System.out.println(array[1]);//event
+			System.out.println(array[2]);//s_sdalfsdf.png
+			st1 = array[0] + "?" + array[1];
+			System.out.println(array[0] + "/" +array[1]+ "/" +array[2].substring(2));
+			str = array[0] + "/" +array[1]+ "/"+array[2].substring(2);
+			evo.setEvent_url(array[0] + "/" +array[1]+"/"+array[2].substring(2));
 		}catch(Exception ex) {
 			evo.setEvent_url("defaultImg.png");
 		}
@@ -1172,7 +1185,7 @@ public class SellerController {
 		System.out.println("????");
 		eventService.addEvent(mapvo);
 		
-		return "success";
+		return str;
 	}
 	
 	@RequestMapping(value="/delEvent", method=RequestMethod.POST)
@@ -1182,8 +1195,10 @@ public class SellerController {
 		
 		
 		EventVO ev = eventmapper.getEvent1_code(eventCode);
-		String url = uploadPath+ev.getEvent_url();
-		String surl = url.replace("/event\\", "/event\\s_");
+		String iurl = uploadPath+ev.getEvent_url();
+		
+		String surl = iurl.replace("/event\\", "\\event\\s_");
+		String url = surl.replace("\\event\\s_", "\\event\\");
 		System.out.println(url);
 		System.out.println(surl);
 		File file = new File(url);
@@ -1213,7 +1228,8 @@ public class SellerController {
 		eventService.deleteEventMenu(eventCode);
 		eventService.deleteEvent(eventCode);
 		
-		return "success";
+		return iurl + surl + url;
+		
 	}
 	
 	@RequestMapping(value="/editEvent", method=RequestMethod.POST)
@@ -1536,7 +1552,8 @@ public class SellerController {
 
 		String str = a.getBody();
 		System.out.println(str);
-		String[] array = str.split("\\\\");
+		String[] array = str.split(File.separator);
+		//String[] array = str.split("\\\\");
 		System.out.println(array[0]);
 		System.out.println(array[1]);
 		System.out.println(array[0] + "\\" + array[1].substring(2));
