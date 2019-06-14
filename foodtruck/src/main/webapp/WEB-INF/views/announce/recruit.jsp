@@ -12,13 +12,13 @@
 
 </head>
 <body>
-	<button id="toArea" class="btn">허가구역 보기</button>
+	<button id="view" class="btn">허가구역이 보고싶다면 Click!</button>
 	<div id="title" class="card-header">
 		<p>모집공고 안내</p>
 	</div>
 	
 	<div id="searchall">
-		<nav class="navbar navbar-light bg-light">
+		<nav class="navbarr">
 			<form class="form-inline" action="/announce" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
@@ -55,7 +55,7 @@
 				<c:forEach var="num" begin="${map.postPager.blockBegin}" end="${map.postPager.blockEnd}">
 					<li class="page-item"><a class="page-link" href="javascript:list('${num}')"><span>${num}</span></a></li>
 				</c:forEach>			
-				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>»</span></a></li>
+				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>&gt;&gt;</span></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -71,9 +71,11 @@
 		$('#title').click(function() {
 			location.href="/announce"; 
 		}); 
-		$('#toArea').click(function() {
+		$('#view').click(function() {
 			location.href="/area"; 
 		});
+		$(".table td").addClass("word-break");
+		$(".table th").addClass("word-break");
 	});
 </script>	
 </body>
