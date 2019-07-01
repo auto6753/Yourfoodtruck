@@ -18,6 +18,7 @@
     left: 20%;
     /* right: 13%; */
     bottom: 42.6%;
+    margin-top:50px;
     
 }
 
@@ -54,7 +55,7 @@ h4{
     border: 3px solid lightgray;
     position: relative;
     left: 20%;
-    bottom: 42.3%;
+    bottom: 310px;
 }
 .col {
 	margin-left: 10%;

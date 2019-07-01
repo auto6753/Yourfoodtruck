@@ -10,7 +10,7 @@
 	height: 250px;
 }
 </style>
-<title>트럭정보 수정</title>
+<title>당신의 푸드트럭</title>
 <%-- <script type="text/javascript"
    src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script> --%>
 <script src="/resources/js/qrcode/qrcode.js"></script>
@@ -70,7 +70,7 @@ $(document).ready(function(){
              var muid = $(".qrcode")[i].innerHTML;
              console.log(muid);
              var qrcode = new QRCode(document.getElementsByClassName("qrcode")[i], {
-               text: "http://39.127.7.64:8080/seller/qrorder/?truck_code="+truck_code,//+"&email="+email2,
+               text: "http://15.164.137.166/seller/qrorder/?truck_code="+truck_code+"&email="+email2,
                width: 800,
                height: 800,
                colorDark: "#000000",

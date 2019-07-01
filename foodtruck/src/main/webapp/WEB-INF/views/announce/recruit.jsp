@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-<title>모집공고 안내</title>
+<title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />

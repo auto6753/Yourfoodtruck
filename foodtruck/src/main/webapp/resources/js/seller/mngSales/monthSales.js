@@ -44,7 +44,7 @@ $(document).ready(function(){
     function drawChart() {
 
       var data = google.visualization.arrayToDataTable([
-          ['Year', '전체', '회원', '비회원'],
+          ['월간', '전체', '회원', '비회원'],
           ['합계', totalSalesMonth, mTotalSalesMonth, nTotalSalesMonth],
           ['현금', totalCashSalesMonth, mCashSalesMonth, nCashSalesMonth],
           ['카드', totalCardSalesMonth, mCardSalesMonth, nCardSalesMonth],

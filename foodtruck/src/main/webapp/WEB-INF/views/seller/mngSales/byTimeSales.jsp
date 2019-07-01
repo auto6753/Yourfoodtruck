@@ -55,6 +55,7 @@
 						<button type="submit" id="byTimeSalesRe" name="pageName" value="byTimeSalesRe">확인</button>
 					</form>
 					<div id="chart_div"></div>
+					<div id="table_div" style="display:none;">
 					<c:forEach var="byTimeSalesResult" items="${byTimeSalesResult}">
 						<table border="1">
 							<tr>
@@ -93,6 +94,7 @@
 						<input type="hidden" class="byTimeSalesResult10" value="${byTimeSalesResult[10]}"/>
 						<input type="hidden" class="byTimeSalesResult11" value="${byTimeSalesResult[11]}"/>
 					</c:forEach>
+					</div>
 				</section>
 			</div>
 		</div>

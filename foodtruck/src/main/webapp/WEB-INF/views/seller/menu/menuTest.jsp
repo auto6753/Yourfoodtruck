@@ -4,7 +4,7 @@
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/seller/menu/menu.css"/>"/>
 <head>
-<title>메뉴관리</title>
+<title>당신의 푸드트럭</title>
 <script type="text/javascript" src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script>
 </head>
 <body>

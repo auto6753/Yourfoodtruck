@@ -34,7 +34,7 @@
 	}
 </script>
 
-<title>위치관리</title>
+<title>당신의 푸드트럭</title>
 <script type="text/javascript" src=""></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1d1757d7f3887c30f0142b09e5ff2be&libraries=services,clusterer,drawing"></script>

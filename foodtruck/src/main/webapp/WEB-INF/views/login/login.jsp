@@ -5,7 +5,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>당신의 푸드트럭</title>
-<title>BootStrap</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/login/login.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/font/font.css"/>">

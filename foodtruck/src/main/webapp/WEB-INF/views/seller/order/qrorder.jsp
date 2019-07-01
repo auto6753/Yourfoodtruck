@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1, width=device=width, viewport-fit=cover">
-<title>주문관리</title>
+<title>당신의 푸드트럭</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet"
@@ -155,7 +155,7 @@ h3 {
 		</div>
 		<div>
 			<div id="box">
-				<button id="click" class="btn">어서오십시오 고객님! ${brandname.brandname }입니다.</button>
+				<button id="click" class="btn">어서오십시오 고객님!</button>
 				
 				<div id="order">
 					<div id="box2">
@@ -188,12 +188,21 @@ h3 {
 					</div>
 					<div id="click3">
 						<button id="card" class="btn c1">카드결제</button>
-			<!-- 		<button id="cash" class="btn c1">현금결제</button> -->
+				 		<button id="cash" class="btn c1">현금결제</button>
 						<button id="kakaopay" class="btn c1">카카오페이</button>
 						<button id="cancle1" class="btn c1">취소</button>
 					</div>
 				</div>
-			<div id="cardtel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
+			<div id="cashtel"style="display: none; text-align: center; width: 100%; margin-top: 200px; height: 50%;">
+				<div style="display: inline-block; width: 90%; height: 35%;">
+					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
+					<input id="cashtelephone" type="tel" style="width: 100%;"><br>
+					<button id="cashok" class="btn c2">확인</button>
+					<button id="cashcancle" class="btn c2">취소</button>
+					<button id="back" class="btn c2">주문추가</button>
+				</div>
+			</div>
+			<div id="cardtel"style="display: none; text-align: center; width: 100%; margin-top: 200px; height: 50%;">
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="cardphone" type="tel" style="width: 100%;"><br>
@@ -202,7 +211,7 @@ h3 {
 					<button id="back3" class="btn c2">주문추가</button>
 				</div>
 			</div>
-			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 400px; height: 50%;">
+			<div id="kakaotel"style="display: none; text-align: center; width: 100%; margin-top: 200px; height: 50%;">
 				<div style="display: inline-block; width: 90%; height: 35%;">
 					<h3 style="">주문받으실 전화번호를 입력해주세요</h3>
 					<input id="kakaotelephone" type="tel" style="width: 100%;"><br>

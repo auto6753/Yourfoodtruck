@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>허가구역 안내</title>
+<title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />

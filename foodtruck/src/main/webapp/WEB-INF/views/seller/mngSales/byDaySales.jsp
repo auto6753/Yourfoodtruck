@@ -55,7 +55,8 @@
 						<button type="submit" id="byDaySalesRe" name="pageName" value="byDaySalesRe">확인</button>
 					</form>
 					<div id="chart_div"></div>
-					<c:forEach var="byDaySalesResult" items="${byDaySalesResult}" begin="1">
+					<div id="table_div" style="display:none;">
+ 					<c:forEach var="byDaySalesResult" items="${byDaySalesResult}" begin="1">
 						<table border="1">
 							<tr>
 								<td></td>
@@ -131,6 +132,7 @@
 						<input type="hidden" class="byDaySalesResult10" value="${byDaySalesResult[10]}"/>
 						<input type="hidden" class="byDaySalesResult11" value="${byDaySalesResult[11]}"/>
 					</c:forEach>
+					</div>
 				</section>
 			</div>
 		</div>

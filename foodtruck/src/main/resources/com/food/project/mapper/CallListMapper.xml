@@ -8,6 +8,7 @@
 		to_char(festival_enddate,'YYYY/MM/DD')festival_enddate,merchant_uid,calltel
 		from call_list
 		where truck_code=#{truck_code}
+		order by request_date desc
 	</select>
 
 	<select id="getCallList2" resultType="map"

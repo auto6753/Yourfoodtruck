@@ -65,7 +65,7 @@
 					</table>
 					<table border="1" class="hideTable">
 						<tr>
-							<td>메뉴코드</td>
+							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>
 							<td>단가</td>
 							<td>판매량</td>
@@ -73,7 +73,7 @@
 						</tr>
 						<c:forEach var="menuSalesMonth" items="${menuSalesMonth}">
 							<tr>
-								<td>${menuSalesMonth.menu_code}</td>
+								<%-- <td>${menuSalesMonth.menu_code}</td> --%>
 								<td>${menuSalesMonth.menu_name}</td>
 								<td><fmt:formatNumber value="${menuSalesMonth.unitPrice}" pattern="#,###"/></td>
 								<td><fmt:formatNumber value="${menuSalesMonth.amount}" pattern="#,###"/></td>
@@ -81,7 +81,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="3">합계</td>
+							<td colspan="2">합계</td>
 							<td>${totalAmountMonth}</td>
 							<td><fmt:formatNumber value="${totalSalesMonth}" pattern="#,###"/></td>
 						</tr>

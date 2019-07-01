@@ -197,15 +197,16 @@ public class M_CustomerController {
 			data.put("festival_starttime", a.get("FESTIVAL_STARTTIME"));
 			data.put("name", a.get("NAME"));
 			data.put("pay_status", a.get("PAY_STATUS"));
-			String request_date;
-			try {
-				request_date = new SimpleDateFormat("yyyy/MM/dd").format((Date)a.get("REQUEST_DATE"));
-			}catch(Exception e) {
-				e.printStackTrace();
-				request_date="널값";
-			}
-			System.out.println(request_date);
-			data.put("request_date", request_date);
+			data.put("request_date",a.get("REQUEST_DATE"));
+//			String request_date;
+//			try {
+//				request_date = new SimpleDateFormat("yyyy/MM/dd").format((java.util.Date)a.get("REQUEST_DATE"));
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//				request_date="널값";
+//			}
+//			System.out.println(request_date);
+//			data.put("request_date", request_date);
 			arry.add(data);
 		}
 

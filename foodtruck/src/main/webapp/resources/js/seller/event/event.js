@@ -207,7 +207,9 @@
 	}
 	
 	$(document).ready(function(){
-		
+		$('.test').ready(function() {
+			$('.test nav').addClass('z-indexto1');
+		});
 		var isAddDefault=false;
 		var isEditDefault=false;
 		
@@ -313,6 +315,7 @@
 				$("#noImage").css("display", "");
 				$("#prev_previewId").remove();
 			});
+			$('.test nav').removeClass('z-indexto1');
 		});
 		
 		$("#cancelEdit").click(function(){
@@ -337,7 +340,6 @@
 		
 		$("#addEventBtn").click(function(){
 			
-	
 			var files = $("#uploadImg")[0].files;
 			var file = files[0];
 			

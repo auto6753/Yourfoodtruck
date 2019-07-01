@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴수정</title>
+<title>당신의 푸드트럭</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/menu/addMenu.css"/>" />
 <script type="text/javascript"

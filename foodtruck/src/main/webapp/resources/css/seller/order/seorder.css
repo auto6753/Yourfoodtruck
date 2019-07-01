@@ -6,6 +6,7 @@ body {
 
 .wrap {
    width: 5000px;
+   height:306px;
    overflow:auto;
    border: 1px solid ;
   
@@ -19,16 +20,16 @@ body {
    border: solid 3px;
 }
 .result {
-   width: 5000px;
- 
-   overflow:auto;
-   border: 1px solid ;
+	width: 5000px;
+ 	height:306px;
+	overflow:auto;
+	border: 1px solid ;
 }
 .ended {
-   background-color: dimgrey;
+   background-color: rgba(255, 94, 24, .6);
 }
 .payed {
-   background-color:gray;
+   background-color: rgba(135,206,235, .7);
 }
 
 h4 {

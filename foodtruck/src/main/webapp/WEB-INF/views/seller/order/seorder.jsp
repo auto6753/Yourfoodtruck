@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,23 +7,40 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap Product list for Ecommerce Website</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="<c:url value="/resources/css/seller/order/seorder.css"/>">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>당신의 푸드트럭</title>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/seller/order/seorder.css"/>">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+<script
+	src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+<style>
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; }
+h1 {
+	margin-top:50px;
+	text-align:center;
+	font-size:6rem;
+}
+.wrap {
+margin-top : 100px;
+}
+</style>
 </head>
 <body>
-   <div class="wrap">
-   </div>
-   <div class="result">
-   </div>
+	<h1>주문 확인 페이지</h1>
+	<div class="wrap"></div>
+	<div class="result"></div>
 </body>
 <script>
 var first=true;
@@ -36,10 +53,34 @@ var config = {
    messagingSenderId : "960564228551"
 };
 firebase.initializeApp(config);
-var _uid='${requestScope._uid}';
+
+function getQuerystring(paramName) {  //html 파라미터 넘어오는거 값 받을수있음
+    var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+    //alert(_tempUrl);
+    
+    if(_tempUrl=="") return false;
+    var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
+    for (var i = 0; _tempArray.length; i++) {
+       var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기 
+       if (_keyValuePair[0] == paramName) { // _keyValuePair[0] : 파라미터 명 // _keyValuePair[1] : 파라미터 값
+          return _keyValuePair[1];
+       }
+    }
+ }
+
+ var truck_code = getQuerystring('truck_code');
+ var _uid = getQuerystring('_uid');
+ 
+ if(truck_code ==""){
+    //alert("없당");
+    truck_code = "${sessionScope.seller.truck_code}";
+    _uid='${requestScope._uid}';
+ }
+ 
+//var _uid='${requestScope._uid}';
+
 console.log(_uid);
 var beforeSnapshot='';
-
 var forDblist=new Array();
 var list =[];
 var isChecked=false;
@@ -156,6 +197,30 @@ function release(a) {
          parent_node.addClass('ended');
          $('#'+a).attr('disabled','disabled');
          parent_node.find('.release').attr('disabled','disabled');
+         var pushObj = {};
+         pushObj.notification = {};
+         pushObj.notification.title = "주문이 완료되었습니다!";
+         pushObj.notification.body = "맛있게 드시고 리뷰남겨주세요!";
+         pushObj.notification.sound = "default";
+         pushObj.to = "/topics/order";
+         pushObj.priority = "high";
+         pushObj.data = {};
+         pushObj.data.toLink = "review";
+         console.log(pushObj);
+         //alert(pushObj.to);
+         $.ajax({
+             type: "post",
+             url: "/pushTest2",
+             data: JSON.stringify(pushObj),
+             contentType: "application/json; chartset=UTF-8",
+             success: function(data) {
+                 alert("성공적으로 보냈습니다!");
+             },
+             error: function(err) {
+                 alert("ajax 연결 실패!");
+                 console.log(JSON.stringify(err));
+             }
+         });
       }else if(!isChecked) {
          alert("결제확인을 먼저 하십시오");
       }
@@ -186,9 +251,9 @@ $(function() {
                console.log('=======전화번호별 거래내용들을 보여줌(같은번호로 했을떄 한개만)=======');
                console.log(orderList[order]);//전화번호별 거래내역
                console.log("'"+order+"'");//전화번호
-               var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
+               var order_index=orderList[order].length;//한사람당 주문한 제품개수
                console.log(order_index);
-               $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release" onclick="release(\''+order+'\')">출고확인</button></div>');         
+               $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="'+truck_code+'"><button class="release" onclick="release(\''+order+'\')">출고확인</button></div>');         
                if(order_index >1) {
                   for(var i=0;i<order_index;i++) {
                      $('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][i].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
@@ -228,8 +293,7 @@ $(function() {
                console.log('=======전화번호별 거래내용들을 보여줌(같은번호로 했을떄 한개만)=======');
                console.log(orderList[order]);//전화번호별 거래내역
                console.log(order);//전화번호
-               var order_index=order_index=orderList[order].length;//한사람당 주문한 제품개수
-               
+               var order_index=orderList[order].length;//한사람당 주문한 제품개수
                console.log(order_index);
                $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone
                      +'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'

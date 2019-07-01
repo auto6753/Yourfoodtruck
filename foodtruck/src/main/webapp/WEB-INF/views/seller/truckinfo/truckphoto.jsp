@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴등록</title>
+<title>당신의 푸드트럭</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/seller/truckinfo/truckphoto.css"/>"/>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/seller/truckinfo/truckphoto.js"/>"></script>
