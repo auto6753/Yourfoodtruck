@@ -192,7 +192,8 @@ public class LoginController {
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 		//파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath);
+			//serviceAccount = new FileInputStream(firebasePath);
+			serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
