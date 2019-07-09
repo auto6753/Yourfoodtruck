@@ -9,6 +9,7 @@
 <html>
 <head>
 <body>
+ 디테일
 </body>
 </head>
 </html>

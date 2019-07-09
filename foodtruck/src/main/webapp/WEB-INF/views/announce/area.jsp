@@ -10,10 +10,13 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </head>
 <body>
-	<button id="view" class="btn">모집공고가 보고싶다면 Click!</button>
-	<div id="title" class="card-header">
+	<!-- <button id="view" class="btn">모집공고가 보고싶다면 Click!</button> -->
+	<br>
+	<br>
+	<div id="title" class="title">
 		<p>허가구역 안내</p>
 	</div>
+	<div id="content" style="width: 80%; margin: 0 auto;">
 	<div id="searchall">
 		<nav class="navbarr">
 			<form class="form-inline" action="/area" method="post">
@@ -38,7 +41,7 @@
 				</select>				
 				<input id="searchbox"name="keyword" size="10" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
-				<input id="searchbutton" type="submit" value="조회" class="btn">
+				<input id="searchbutton" type="submit" value="검색" class="btn">
 			</form>
 		</nav>
 	</div>
@@ -79,6 +82,7 @@
 				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>&gt;&gt;</span></a></li>
 			</ul>
 		</nav>
+	</div>
 	</div>
 <script>
 	function list(page) {

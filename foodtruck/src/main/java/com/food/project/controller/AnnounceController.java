@@ -56,7 +56,7 @@ public class AnnounceController {
 		model.addAttribute("announcepostList",postService.getPostList(1));
 		model.addAttribute("announceList",areaList);
 		model.addAttribute("map",map);
-		return "announce/recruit";
+		return "announce/localrecruit";
 	}
 	
 	@RequestMapping(value = "/announce/specificck", method = RequestMethod.GET)
