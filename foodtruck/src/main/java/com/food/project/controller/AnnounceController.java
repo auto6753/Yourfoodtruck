@@ -58,6 +58,36 @@ public class AnnounceController {
 		model.addAttribute("map",map);
 		return "announce/localrecruit";
 	}
+	@RequestMapping(value = "/announce/recruit")
+	public String recruits(Model model,@RequestParam(defaultValue="1") int post_class,
+			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
+		//========================================페이징 하기=======================================
+		int totPage=0;
+		PostPager postPager;
+		if(keyword.isEmpty()) {
+			totPage=postService.totalPage(post_class);
+			System.out.println("인자 1개"+totPage);
+			postPager=new PostPager(totPage,curPage);
+		}else {
+			totPage=postService.totalPage2(post_class,keyword);
+			System.out.println("인자 2개"+totPage);
+			postPager=new PostPager(totPage,curPage);
+		}
+		int start=postPager.getPageBegin();
+		int end=postPager.getPageEnd();
+		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,post_class);
+		System.out.println(areaList.toString());
+		System.out.println(postPager.toString());
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("totPage",totPage);
+		map.put("keyword",keyword);
+		map.put("postPager",postPager);
+		model.addAttribute("announcepostList",postService.getPostList(1));
+		model.addAttribute("announceList",areaList);
+		model.addAttribute("map",map);
+		return "announce/recruit";
+	}
+	
 	
 	@RequestMapping(value = "/announce/specificck", method = RequestMethod.GET)
 	public String announceSpecificck(Model model,@RequestParam("post_code") String post_code) {

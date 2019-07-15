@@ -18,14 +18,14 @@
 	<div id="title" class="">
 		<p>지자체 모집공고</p>
 	</div>
-	<div style="height: 800px ;border: 1px solid">
-	<div id="side"style="display: inline-block; border: 1px solid;">
+	<div style="height: 800px ;">
+	<div id="side"style="display: inline-block;">
 	<jsp:include page="sidebar.jsp"></jsp:include>
 	</div>
-	<div id="content" style="display: inline-block; border: 1px solid">
+	<div id="content1" style="display: inline-block; ">
 	
-	<div id="searchall">
-		<nav class="navbarr">
+	<div id="searchalll">
+		<nav class="navbarrr">
 			<form class="form-inline" action="/announce" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
@@ -35,7 +35,6 @@
 			</form>
 		</nav>
 	</div>
-	
 	<div id="table">
 		<table class="table">
 			<thead>

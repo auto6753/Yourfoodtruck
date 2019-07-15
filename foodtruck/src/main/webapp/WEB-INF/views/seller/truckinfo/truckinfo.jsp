@@ -70,7 +70,8 @@ $(document).ready(function(){
              var muid = $(".qrcode")[i].innerHTML;
              console.log(muid);
              var qrcode = new QRCode(document.getElementsByClassName("qrcode")[i], {
-               text: "http://15.164.137.166/seller/qrorder/?truck_code="+truck_code+"&email="+email2,
+              // text: "http://15.164.137.166/seller/qrorder/?truck_code="+truck_code+"&email="+email2,
+               text: "http://39.127.7.64:8080/seller/qrorder/?truck_code="+truck_code+"&email="+email2,
                width: 800,
                height: 800,
                colorDark: "#000000",

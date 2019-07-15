@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -37,6 +38,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,17 +63,71 @@ public class M_SellerController {
 		return "seller/menu/menu";
 	}
 	@ResponseBody
-	@RequestMapping(value="/location", method=RequestMethod.POST) 
+	@RequestMapping(value="/location", method=RequestMethod.POST, produces = "application/text; charset=utf8") 
 	public String updateLocation(@RequestBody String param) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map = net.sf.json.JSONObject.fromObject(param);
 		LocationVO vo = new LocationVO();
 		System.out.println(map.toString());
+		String email=(String)map.get("email");
+		String password=(String)map.get("password");
 		vo.setLat_y((String)map.get("lat_y"));
 		vo.setLng_x((String)map.get("lng_x"));
 		vo.setTruck_code((String)map.get("truck_code"));
 		sellerservice.insertlocaction(vo);
 		System.out.println("called");
+		
+		//uid 가져오기
+		FirebaseApp defaultApp = null;
+		List<FirebaseApp> apps=FirebaseApp.getApps();
+		FileInputStream serviceAccount;
+		FirebaseOptions options=null;
+		Map<String,Object> result = new HashMap<>();
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 서버 올릴 때 경로
+		String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+				+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+
+
+		//파이어베이스 옵션 설정
+		//파이어베이스 옵션 설정
+		try {
+			serviceAccount = new FileInputStream(firebasePath2);
+			options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+					.build();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//이미 관리자 defaultApp이 있는지 검사
+		if(apps!=null && !apps.isEmpty()) {
+			for(FirebaseApp app:apps) {
+				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+					defaultApp = app;
+			}
+		}else {
+			defaultApp = FirebaseApp.initializeApp(options);
+		}
+		try {
+			UserRecord userRecord=FirebaseAuth.getInstance().getUserByEmail(email);
+			result.put("_uid",userRecord.getUid());
+			net.sf.json.JSONObject rst = new net.sf.json.JSONObject();
+			rst=net.sf.json.JSONObject.fromObject(result);
+			return rst.toString();
+			
+		} catch (FirebaseAuthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		defaultApp.delete();
+		
 		return "";
 	}
 	
@@ -102,11 +158,12 @@ public class M_SellerController {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// 서버 올릴 때 경로
-		System.out.println(path);
-		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
-				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+		String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		serviceAccount = new FileInputStream(firebasePath);
+		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+				+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		serviceAccount = new FileInputStream(firebasePath2);
 		
 		//이미 관리자 defaultApp이 있는지 검사
 		if(apps!=null && !apps.isEmpty()) {
