@@ -30,6 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,7 +72,7 @@ import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
 import net.sf.json.*;
 
-
+@CrossOrigin(origins = "*")
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/seller")
@@ -96,6 +97,14 @@ public class SellerController {
 	public String sellerMain(Model model, HttpSession session) {
 		return "seller/sellerMain";
 	}
+	@RequestMapping(value="/appMngsales")
+	public String appMngSales(@RequestParam String truck_code, HttpSession session) {
+		System.out.println(truck_code);
+		FoodTruckVO vo = truckService.getFoodTruck(truck_code);
+		session.setAttribute("seller",vo);
+		return "redirect:/seller/mngSales";
+	}
+	
 	
 	@RequestMapping(value="/mngSales", method=RequestMethod.GET) 
 	public String mngSales(Model model, HttpSession session, HttpServletRequest request) {
