@@ -228,6 +228,7 @@ $(document).ready(function() {
 		$("#box").css("scroll","top");
 		$("#order").css("display","block");
 		$("#kakaotel").css("display","none");
+	
 	});
 	$("#back").click(function() {
 		$("#cashtelephone").val("");
@@ -285,6 +286,5 @@ $(document).ready(function() {
 		$("#order").css("display","block");
 		$("#cardtel").css("display","none");
 	});
-	
 	
 });
