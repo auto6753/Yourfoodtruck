@@ -104,7 +104,7 @@
 				lay_pop.css('left', (pos.left)+10 + 'px');
 				
 				closeX.css('position', 'absolute');
-				closeX.css('top', (pos.top)+9 + 'px');    // 레이어 위치 지정
+				closeX.css('top', (pos.top)-12 + 'px');    // 레이어 위치 지정
 				closeX.css('left', (pos.left)+247 + 'px');
 				
 				$(".layerPopup").hide();
@@ -177,7 +177,7 @@
  						<input type="hidden" value="${row.ADDR}"/>
 	 					<div class="contents" style="display:inline-block; position:relative;">
 							<a href="#layerPopup">
-								<img src="resources/image/info.png" style="width:17px; height:17px; position:relative; top:-2px; "/>
+								<img src="resources/image/map-marker-2-32.png" style="width:auto; height:15px; position:relative; top:-2px; "/>
 							</a>
 					    </div>
  					</td>
