@@ -188,14 +188,14 @@ public class LoginController {
 		// 서버 올릴 때 경로
 		System.out.println(path);
 		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
-//			+ File.separator + "resources" + File.separator + "json" + File.separator
-//			+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+			+ File.separator + "resources" + File.separator + "json" + File.separator
+			+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 
 		//파이어베이스 옵션 설정
 		try {
 			//serviceAccount = new FileInputStream(firebasePath);
-			serviceAccount = new FileInputStream(firebasePath);
+			serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")

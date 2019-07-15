@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ public class PaymentController {
 	private PaymentService payService;
 	private CallListMapper mapper;
 	private FoodTruckService foodService;
+	private PaymentService paymentService;
 	
 	//private CallListMapper callmapper;
 	@SuppressWarnings("unchecked")
@@ -87,7 +89,18 @@ public class PaymentController {
 		if(a==0) System.out.println("Error");
 		else System.out.println("Success");
 	}
-	
+	//오늘총액 업데이트
+	@RequestMapping(value="/updateTodaySales",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateTodaySales(Model model,HttpSession session) {
+		FoodTruckVO vo2 = (FoodTruckVO)session.getAttribute("seller");
+		String truck_code2 = vo2.getTruck_code();
+		System.out.println(truck_code2);
+		String today_sales = paymentService.getTodaySalesForSeorder(truck_code2);
+		JSONObject result = new JSONObject();
+		result.put("today_sales", today_sales);
+		return result.toString();
+	}
 	// 푸드트럭 호출 결제
 	@ResponseBody
 	@RequestMapping(value = "/CallPayment", method=RequestMethod.POST)

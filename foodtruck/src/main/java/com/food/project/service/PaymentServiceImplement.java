@@ -77,8 +77,16 @@ public class PaymentServiceImplement implements PaymentService {
 	}
 	
 	@Override
+	public String getTodaySalesForSeorder(String truck_code) {
+		// TODO Auto-generated method stub
+		String result = (String) mapper.getTodaySalesForSeorder(truck_code).get("SUM");
+		System.out.println(result);
+		return result;
+	}
+	@Override
 	public ArrayList<PaymentVO> getTodaySales(String truck_code) {
 		// TODO Auto-generated method stub
+		
 		return mapper.getTodaySales(truck_code);
 	}
 
