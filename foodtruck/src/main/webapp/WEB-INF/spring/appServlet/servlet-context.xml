@@ -65,7 +65,9 @@
 		<interceptor>
 			<mapping path="/seller/**" />
 			<exclude-mapping path="/login/**" />
+			<exclude-mapping path="/seller/appMngsales/**" />
 			<exclude-mapping path="/seller/cuorder/**" />
+			<exclude-mapping path="/seller/mngSales/**" />
 			<exclude-mapping path="/seller/qrorder/**" />
 			<exclude-mapping path="/seller/seorder/**" />
 			<beans:bean id="sellerInterceptor"
