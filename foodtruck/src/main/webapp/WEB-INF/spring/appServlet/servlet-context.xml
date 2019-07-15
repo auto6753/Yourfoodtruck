@@ -31,7 +31,7 @@
 		</beans:constructor-arg> </beans:bean> -->
 	<beans:bean id="uploadPathSchool" class="java.lang.String">
 		<beans:constructor-arg
-			value="C:\Users\bon300-21\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
+			value="C:\Users\bon300-22\git\Yourfoodtruck\foodtruck\src\main\webapp\resources\image\upload\">
 		</beans:constructor-arg>
 	</beans:bean>
 	<beans:bean id="uploadPath" class="java.lang.String">
@@ -65,7 +65,9 @@
 		<interceptor>
 			<mapping path="/seller/**" />
 			<exclude-mapping path="/login/**" />
+			<exclude-mapping path="/seller/appMngsales/**" />
 			<exclude-mapping path="/seller/cuorder/**" />
+			<exclude-mapping path="/seller/mngSales/**" />
 			<exclude-mapping path="/seller/qrorder/**" />
 			<exclude-mapping path="/seller/seorder/**" />
 			<beans:bean id="sellerInterceptor"
