@@ -16,7 +16,7 @@
 	<div id="title" class="title">
 		<p>허가구역 안내</p>
 	</div>
-	<div id="content" style="width: 80%; margin: 0 auto;">
+	<div id="content" >
 	<div id="searchall">
 		<nav class="navbarr">
 			<form class="form-inline" action="/area" method="post">
