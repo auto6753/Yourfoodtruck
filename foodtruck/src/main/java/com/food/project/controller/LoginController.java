@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
@@ -42,6 +43,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/login")
 public class LoginController {
 	private LoginService loginservice;
+	
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
@@ -132,7 +134,6 @@ public class LoginController {
 		 }else
 			 return ck.getPassword();
 		 
-				
 	}
 
 	@RequestMapping(value = "/passSearch", method = RequestMethod.GET)

@@ -441,4 +441,17 @@ public class CustomerController {
 
 		return "customer/goodbye";
 	}
+	
+	
+	@RequestMapping(value = "/joinlist", method = RequestMethod.GET)
+	public String joinlist(Locale locale, Model model, HttpServletRequest request) {
+		CustomerVO c = new CustomerVO();
+		c = (CustomerVO) request.getSession().getAttribute("sessionid");
+		
+		String email = c.getEmail();
+		
+		
+		return "customer/joinlist";
+	}
+	
 }
