@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,13 +8,122 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zprqsl0tqo"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zprqsl0tqo&submodules=geocoder"></script>
+<style>
+	.layerPopup {
+		border:4px solid #ddd;
+		background:#fff;
+	}
+	
+	.layerPopup button {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
-	<!-- <button id="view" class="btn">모집공고가 보고싶다면 Click!</button> -->
-	<br>
-	<br>
-	<div id="title" class="title">
-		<p>허가구역 안내</p>
+	<script>
+		$(document).ready(function() {
+			$(".contents > a").click(function() {
+				var sa = $(this).parent().prev().val();
+				getData(sa);
+			});
+		});
+		function getData(sa) {
+			result = naver.maps.Service.geocode({
+				query : sa
+			}, function(status, response) {
+				if (status !== naver.maps.Service.Status.OK) {
+					return alert('Something wrong!');
+				}
+
+				var resultmap = response.v2, // 검색 결과의 컨테이너
+				items = resultmap.addresses; // 검색 결과의 배열
+				x = eval(items[0].x);
+				y = eval(items[0].y);
+				var point = new naver.maps.Point(x, y);
+
+				$("#map").css("display", "block");
+				$("#closeX").css("display", "block");
+				drawMap(x, y);
+			});
+
+		}
+
+		function drawMap(x, y, sa) {
+
+			// do Something
+
+			var HOME_PATH = window.HOME_PATH || '.';
+			var cityhall = new naver.maps.LatLng(y, x),
+
+			map = new naver.maps.Map('map', {
+				center : new naver.maps.LatLng(y, x),
+				zoom : 10
+			}),
+
+			marker = new naver.maps.Marker({
+				map : map,
+				position : cityhall
+			});
+
+			var contentString = [ '<div class="iw_inner">',
+					'   <h3>' + sa + '</h3>', '</div>' ].join('');
+
+/* 			var infowindow = new naver.maps.InfoWindow({
+				anchorSkew : true
+			}); */
+
+/* 			naver.maps.Event.addListener(marker, "click", function(e) {
+				if (infowindow.getMap()) {
+					infowindow.close();
+				} else {
+					infowindow.open(map, marker);
+				}
+			}); */
+
+			infowindow.open(map, marker);
+		}
+	</script>
+	
+	<script>
+		$(window).resize(function() { //창크기 변화 감지
+			$(".layerPopup").hide();
+			$("#closeX").hide();
+		});
+
+		$(document).ready(function(){
+			$(".contents > a").click(function(){
+				var lay_pop = $(".layerPopup");
+				var pos = $(this).offset();
+				
+				var closeX = $("#closeX");
+				
+				lay_pop.css('position', 'absolute');
+				lay_pop.css('top', (pos.top)+10 + 'px');    // 레이어 위치 지정
+				lay_pop.css('left', (pos.left)+10 + 'px');
+				
+				closeX.css('position', 'absolute');
+				closeX.css('top', (pos.top)-12 + 'px');    // 레이어 위치 지정
+				closeX.css('left', (pos.left)+247 + 'px');
+				
+				$(".layerPopup").hide();
+				$(this).blur();
+				$(".layerPopup").show();
+				$(".layerPopup a").focus();
+				return false;
+			});
+			
+			$("#closeX").click(function(){
+				$(".layerPopup").hide();
+				$("#closeX").hide();
+			});
+		});
+	</script>
+ 	<button id="toRecruit" class="btn">모집공고 보기</button>
+	<div id="title" class="card-header">
+		<p>허가구역 안내</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
 	</div>
 	<div id="content" style="width: 80%; margin: 0 auto;">
 	<div id="searchall">
@@ -64,12 +173,25 @@
  						<input type="hidden" class="latitude" value="${row.LATITUDE}">
  						<input type="hidden" class="longitude" value="${row.LONGITUDE}">
  					</td>
- 					<td class="boardaddr">${row.ADDR}</td>
- 					<td class="govern">${row.GOVERN_PHONE}</td>
+ 					<td style="position:relative;">${row.ADDR}
+ 						<input type="hidden" value="${row.ADDR}"/>
+	 					<div class="contents" style="display:inline-block; position:relative;">
+							<a href="#layerPopup">
+								<img src="resources/image/map-marker-2-32.png" style="width:auto; height:15px; position:relative; top:-2px; "/>
+							</a>
+					    </div>
+ 					</td>
+ 					<td>${row.GOVERN_NAME}</td>
+ 					<td>${row.GOVERN_PHONE}</td>
  				</tr>
  				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<img id="closeX" src="resources/image/close_x.png" style="width:22px; height:22px; cursor:pointer; display:none;"/>
+	<div class="layerPopup" style="display:none; z-index:100; position:relative;">
+		
+		<div id="map" style="width:250px; height:250px; display: none; position:relative;"></div>
 	</div>
 	
 	<div id="nextall">
@@ -105,7 +227,6 @@
 		$(".table td").addClass("word-break");
 		$(".table th").addClass("word-break");
 	});
-	
-</script>	
+</script>
 </body>
 </html>
