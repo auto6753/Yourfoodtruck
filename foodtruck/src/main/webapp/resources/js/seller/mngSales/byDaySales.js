@@ -46,7 +46,7 @@ $(document).ready(function(){
 
       
       var data = google.visualization.arrayToDataTable([
-          ['Year', '전체', '회원', '비회원'],
+          ['요일별', '전체', '회원', '비회원'],
           ['월요일', byDaySalesResultMon[2], byDaySalesResultMon[1], byDaySalesResultMon[0]],
           ['화요일', byDaySalesResultTue[2], byDaySalesResultTue[1], byDaySalesResultTue[0]],
           ['수요일', byDaySalesResultWed[2], byDaySalesResultWed[1], byDaySalesResultWed[0]],

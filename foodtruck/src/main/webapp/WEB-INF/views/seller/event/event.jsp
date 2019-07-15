@@ -5,7 +5,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/event/event.css"/>" />
 <head>
-<title>이벤트관리</title>
+<title>당신의 푸드트럭</title>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/seller/event/event.js"/>"></script>
 </head>

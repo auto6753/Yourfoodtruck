@@ -4,151 +4,11 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1, width=device=width, viewport-fit=cover">
-<title>주문관리</title>
+<title>당신의 푸드트럭</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/news/news.css"/>" />
-<!-- <script type="text/javascript"
-	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
-<script>
-let sock = new SockJS("<c:url value="/project/echo"/>");
-sock.onmessage = onMessage;
-sock.onclose = onClose;
-
-// 메시지 전송
-function sendMessage() {
-	sock.send(JSON.stringify(list));
-}
-
-// 서버로부터 메시지를 받았을 때
-function onMessage(msg) {
-}
-
-// 서버와 연결을 끊었을 때
-function onClose(evt) {
-	$("#data").append("연결 끊김");
-}
-var list = new Array();
-	$(document).ready(function() {
-				var is = false;
-				var alltotal_price = 0;
-				$("#foodlist").on('click',"button",function() {
-							//var a=$(this).find('p');
-							var a = $(this);
-							//var name = a.html();
-							var name = a.next().html();
-							var total_price = a.nextAll().eq(1).html();
-							var menu_code = a.nextAll().eq(2).val();
-							var amount = 1;
-							//클릭한 상품이 현재 목록에 있는지 확인
-							for (var i = 0; i < list.length; i++) {
-								if (list[i].menu_code == menu_code) { //있으면 수량만 더하기 
-									list[i].amount += 1;
-									list[i].total_price = list[i].amount * total_price;
-									var k = list[i].menu_code;
-									//해당 값 수정
-									console.log($("#" + k).html());
-									$("#" + k).html("<td>"+list[i].name+"</td><td>"+list[i].amount+"</td><td>"+ list[i].total_price+"</td>");
-									console.log($("#" + k).html());
-									alltotal_price += parseInt(total_price);
-									$("#allprice").html(alltotal_price);
-									is = true; // 상품이 있기때문에 true 로 바꿔서 추가못하게 함
-								}
-							}
-							if (!is) { //상품이 없어서 추가하고 어팬드
-								var temp = {
-									menu_code : menu_code,
-									amount : amount,
-									total_price : parseInt(total_price),
-									name : name
-								}
-								list.push(temp);
-								var k = temp.menu_code;
-								alltotal_price += parseInt(temp.total_price);
-								$("#allprice").html(total_price);
-								$("tbody").append("<tr id='"+k+"'><td>" + temp.name+ "</td><td>" + temp.amount+ "</td><td>" + temp.total_price + "</td>");
-				
-							}
-							if (is) { //초기화
-								//alert(is);
-								is = false;
-							}
-						});
-				$("#cancle1").click(function() {
-					$("tbody").empty();
-					var a = $("tbody"); //tebody 태그 없앰;
-					alltotal_price = 0;
-					$("#allprice").html(alltotal_price);
-					list = new Array(); //list초기화
-				});
-				$("#kakaopay").click(function() {
-					console.log(list);
-					$("#order").css("display","none");
-					$("#kakaotel").css("display","block");
-					console.log(JSON.parse(JSON.stringify(list)));
-					if (typeof list[0] == 'undefined') {
-						alert("주문목록이업서여");
-					} else {
-						for(var a in list) {
-							list[a].payment_class=0;
-							list[a].truck_code='${sessionScope.seller.truck_code}';
-							list[a].payment_telephone='010-1111-4875';
-						}
-						console.log(list);
-						sendMessage();
-					}
-				});
-				$("#cash").click(function() {
-					console.log(list);
-					$("#order").css("display","none");
-					$("#cashtel").css("display","block");
-					if (typeof list[0] == 'undefined') {
-						alert("주문목록이업서여");
-					} else {
-						for(var a in list) {
-							list[a].payment_class=1;
-							list[a].truck_code='${sessionScope.seller.truck_code}';
-							list[a].payment_telephone='010-1111-4875';
-						}
-						console.log(list);
-						sendMessage();
-						alert("현금결제 총 결제금액" + allprice);
-					}
-
-				});
-				
-				$("#card").click(function() {
-					$("#order").css("display","none");
-					$("#cashtel").css("display","block");
-					console.log(list);
-					if (typeof list[0] == 'undefined') {
-						alert("주문목록이업서여");
-					} else {
-						for(var a in list) {
-							list[a].payment_class=2;
-							list[a].truck_code='${sessionScope.seller.truck_code}';
-							list[a].payment_telephone='010-1111-4875';
-						}
-						console.log(list);
-						sendMessage();
-						alert("카드결제 총 결제금액" + allprice);
-					}
-
-				});
-				$("#back").click(function() {
-					$("#box").css("scroll","top");
-					$("#order").css("display","block");
-					$("#cashtel").css("display","none");
-				});
-				$("#back2").click(function() {
-					$("#box").css("scroll","top");
-					$("#order").css("display","block");
-					$("#kakaotel").css("display","none");
-				});
-			});
-</script> -->
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.ajax-cross-origin.min.js"/>"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
@@ -160,123 +20,142 @@ var list = new Array();
 	type="text/javascript"></script>
 </head>
 <style>
-@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
-@font-face {font-family: 'Handon3gyeopsal600g';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');font-weight: normal;font-style: normal; } 
+
+@font-face {
+   font-family: 'yg-jalnan';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Handon3gyeopsal600g';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
 #logo {
-	text-align: center;
-	font-weight: bold;
-	font-size: 290%;
+   text-align: center;
+   font-weight: bold;
+   font-size: 290%;
+   font-family: 'yg-jalnan';
 }
 
 div a {
-	color: rgb(255, 94, 24);
-}
-.brandname{
-	font-family: 'yg-jalnan';
-	font-size: 150%;
+   color: rgb(255, 94, 24);
 }
 
-#box {
-	border: 2px solid;
-	border-radius: 10px;
-	color: rgb(255, 94, 24);
-	width: 90%;
-	height: 1100px;
-	margin: 0 auto;
-	margin-top: 40px;
+.brandname {
+   font-family: 'yg-jalnan';
+   font-size: 150%;
+}
+
+#box1{
+    border: 2px solid;
+    border-radius: 10px;
+    color: rgb(255, 94, 24);
+    width: 100%;
+    height: 1100px;
+    margin: 0 auto;
+    margin-top: 40px;
 }
 
 #box2 {
-	border: 2px solid;
-	color: rgb(255, 94, 24);
-	width: 85%;
-	height: 650px;
-	margin: 0 auto;
-	position: relative;
-	margin-top: 70px;
-	overflow: auto;
-	-ms-overflow-style: none;
+   border: 2px solid;
+color: rgb(255, 94, 24);
+width: 100%;
+height: 650px;
+margin: 0 auto;
+position: relative;
+/* margin-top: 70px; */
+overflow: auto;
 }
 
 #box2::-webkit-scrollbar {
-	display: none;
+   display: none;
 }
 
 #box3::-webkit-scrollbar {
-	display: none;
+   display: none;
 }
 
 #box3 {
-	border: 2px solid;
-	color: rgb(255, 94, 24);
-	width: 85%;
-	height: 200px;
-	margin: 0 auto;
-	position: relative;
-	margin-top: 20px;
-	overflow: auto;
-	-ms-overflow-style: none;
+   border: 2px solid;
+   color: rgb(255, 94, 24);
+   width: 85%;
+   height: 200px;
+   margin: 0 auto;
+   position: relative;
+   margin-top: 20px;
+   overflow: auto;
+   -ms-overflow-style: none;
 }
 
 #click {
-    background-color: rgb(255, 94, 24);
+   background-color: rgb(255, 94, 24);
     color: white;
     width: 100%;
-    float: left;
-    height: 5%;
-    font-size: 120%;
+    /* float: left; */
+    height: 60px;
+    font-size: 133%;
     font-family: 'Handon3gyeopsal600g';
-	
 }
 
 #click2 {
-	background-color: rgb(255, 94, 24);
-	color: white;
-	width: 49.8%;
-	float: right;
+   background-color: rgb(255, 94, 24);
+   color: white;
+   width: 49.8%;
+   float: right;
 }
 
 #click3 {
-	    width: 100%;
-    font-size: 55%;
+   width: 100%;
     text-align: center;
     margin: 0 auto;
+    font-size: 80%;
     font-family: 'Handon3gyeopsal600g';
+}
+.foods{
+   border: 1px solid;
+   font-family: 'Handon3gyeopsal600g';
 }
 
 .c1 {
-	background-color: rgb(255, 94, 24);
-	color: white;
-	width: 22%;
-	height: 50px;
-	font-size: 120%;
-	margin-top: 5px;
-}
-.c2{
-background-color: rgb(255, 94, 24);
+   background-color: rgb(255, 94, 24);
     color: white;
-    width: 40%;
+    width: 30%;
     height: 50px;
     font-size: 120%;
+   margin-top: 5px;
+   font-family: 'Handon3gyeopsal600g';
+}
+.c2{
+   background-color: rgb(255, 94, 24);
+    color: white;
+    width: 20%;
+    height: 50px;
+    font-size: 110%;
     margin-top: 5px;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .food {
-	
-width: 100%;
+   height: 250px;
+    width: 100%;
+    background: white;
 }
 
 #foodlist {
-	text-align: center;
+   text-align: center;
     margin: 0 auto;
-    margin-top: 50px;
 }
+
 .panel-title {
-	padding-top: 1%;
-	margin-left: 7.2%;
+   text-align: center;
 }
-h3 {
-	
+#cashtel {
+	margin-top:-150px;
 }
 </style>
 <body>
@@ -295,7 +174,7 @@ h3 {
 		</div>
 		<div>
 			<div id="box">
-				<button id="click" class="btn">어서오십시오 고객님! ${brandname.brandname }입니다.</button>
+				<button id="click" class="btn">${brandname.brandname }입니다.</button>
 				
 				<div id="order">
 					<div id="box2">

@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,32 +38,46 @@ public class M_AnnounceController {
 	
 	
 	//허가구역 관리 컨트롤러
-	@RequestMapping(value = "/m.area")
-	public String area(Model model,@RequestParam(defaultValue="2") int post_class,
-			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
+	@ResponseBody
+	@RequestMapping(value = "/m.area",produces = "application/text; charset=utf8")
+	public String area(@RequestBody Map<String,Object> requestmap
+			//@RequestParam(defaultValue="1") int sido,
+			//@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword
+			) {
+		String keyword;
+		int sido;
+		int curPage;
+		try {
+			keyword=(String)requestmap.get("keyword");
+			sido=(Integer)requestmap.get("sido");
+			curPage=(Integer)requestmap.get("curPage");
+		}catch(Exception e) {
+			keyword="";
+			curPage=1;
+			sido=1;
+		}
+		
 		int totPage=0;
 		PostPager postPager;
 		if(keyword.isEmpty()) {
-			totPage=postService.totalPage(post_class);
+			totPage=postService.totalPage(sido);
 			System.out.println("인자 1개"+totPage);
 			postPager=new PostPager(totPage,curPage);
 		}else {
-			totPage=postService.totalPage2(post_class,keyword);
+			totPage=postService.totalPage2(sido,keyword);
 			System.out.println("인자 2개"+totPage);
 			postPager=new PostPager(totPage,curPage);
 		}
 		int start=postPager.getPageBegin();
 		int end=postPager.getPageEnd();
-		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,post_class);
+		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,sido);
 		System.out.println(postPager.toString());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("totPage",totPage);
 		map.put("keyword",keyword);
 		map.put("postPager",postPager);
-		model.addAttribute("areapostList",postService.getPostList(2));
-		model.addAttribute("areaList",areaList);
-		model.addAttribute("map",map);
-		return "announce/area";
+		map.put("areaList",areaList);
+		return map.toString();
 	}
 	@RequestMapping(value = "/m.area/specificck", method = RequestMethod.GET)
 	public String specificck(Model model,@RequestParam("post_code") String post_code) {

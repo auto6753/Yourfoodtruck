@@ -10,7 +10,7 @@
 </select>
 	<insert id="insertOnboard" parameterType="com.food.project.domain.OnboardVO">
 		insert into onboard(truck_code, email, onboard_date, onboard_state)
-		values(#{truck_code}, #{email}, #{onboard_date}, #{onboard_state})
+		values(#{truck_code}, #{email}, sysdate, #{onboard_state})
 	</insert>
 	<delete id="DeleteOnboard">
 		update onboard set onboard_state =#{onbaord_state} where truck_code=#{truck_code} and email=#{email}
@@ -27,10 +27,10 @@
 		where email = #{email} and truck_code= #{truck_code}
 	</select>
 	<update id="updateOutdate"  parameterType="com.food.project.domain.OnboardVO">
-		update onboard set onboard_state=#{onboard_state} , out_date=#{out_date} where truck_code=#{truck_code} and email=#{email}
+		update onboard set onboard_state=#{onboard_state} , out_date= sysdate where truck_code=#{truck_code} and email=#{email}
 	</update>
 	<update id="updateOnboarddate"  parameterType="com.food.project.domain.OnboardVO">
-		update onboard set onboard_state=#{onboard_state} , onboard_date=#{onboard_date} where truck_code=#{truck_code} and email=#{email}
+		update onboard set onboard_state=#{onboard_state} , onboard_date= sysdate where truck_code=#{truck_code} and email=#{email}
 	</update>
 	<select id="CountOnboard" resultType="com.food.project.domain.OnboardCountDTO">
 		select to_char(onboard_date, 'yy-mm-dd') as onboard_date, count(*) as count

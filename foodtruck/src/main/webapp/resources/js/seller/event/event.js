@@ -207,7 +207,9 @@
 	}
 	
 	$(document).ready(function(){
-		
+		$('.test').ready(function() {
+			$('.test nav').addClass('z-indexto1');
+		});
 		var isAddDefault=false;
 		var isEditDefault=false;
 		
@@ -313,6 +315,7 @@
 				$("#noImage").css("display", "");
 				$("#prev_previewId").remove();
 			});
+			$('.test nav').removeClass('z-indexto1');
 		});
 		
 		$("#cancelEdit").click(function(){
@@ -336,8 +339,6 @@
 		});
 		
 		$("#addEventBtn").click(function(){
-			
-			
 			
 			var files = $("#uploadImg")[0].files;
 			var file = files[0];
@@ -405,7 +406,7 @@
 	            processData: false,
 	            contentType: false,
 				success: function(data){
-					 alert("success");
+					// alert(data);
 					 $('#layer1').hide();
 				}
 			});
@@ -432,6 +433,7 @@
 						"eventCode": eventCode
 					},
 					success: function(data) {
+						//alert(data);
 						location.reload();
 						alert("삭제가 완료되었습니다.");
 					},

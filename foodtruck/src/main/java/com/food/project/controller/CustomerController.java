@@ -191,7 +191,6 @@ public class CustomerController {
 				try {
 					transFormat.parse(sysd);
 					System.out.println(transFormat.format(transFormat.parse(sysd)));
-
 					Date test = Date.valueOf(transFormat.format(transFormat.parse(sysd)));
 					br.setOnboard_date(transFormat.format(transFormat.parse(sysd)));
 					System.out.println("넘어오나여?");
@@ -229,7 +228,7 @@ public class CustomerController {
 			System.out.println("되라");
 		}
 	
-		return "";
+		return "f";
 	}
 
 	@SuppressWarnings("unchecked")

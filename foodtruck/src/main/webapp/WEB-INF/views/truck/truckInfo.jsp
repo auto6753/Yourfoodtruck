@@ -20,7 +20,7 @@
 <script>
 	$(document).ready(function() {
 		
-		
+			
 				var email = "${sessionScope.sessionid.email}";
 				var truck_code = "${tlist.truck_code}";
 				//alert(email);

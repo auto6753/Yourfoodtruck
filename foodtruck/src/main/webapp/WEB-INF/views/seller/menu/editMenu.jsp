@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴수정</title>
+<title>당신의 푸드트럭</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/menu/addMenu.css"/>" />
 <script type="text/javascript"
@@ -91,25 +91,30 @@ $(document).ready(function(){
 		 	var ssurl = $(".7", opener.document).val();
 		   //console.log(ssurl); 
 		   console.log(ssurl);
+		   //alert(ssurl);
 		   var surl = ssurl.replace("/resources/image/upload/","");
 		   //alert(surl);
 		  // alert(url);
+		  //alert(surl);
 		   var url = ssurl.replace("\\s_","\\");
 		   console.log(url);
+		   //alert(url);
 		  // alert(url);
 		   $("#price").val(price);
 		  // $("#price").val($(".3", opener.document).html());
 		   $("#noImage").attr("src",url);
-		   url = surl.replace("\\s_","\\");
+		   url = surl.replace("/s_","/");
 		   //$("#voltage").val($(".4", opener.document).text());
 		  // $("#manufacturer").val($(".5", opener.document).text());
+		   // url = surl.replace("\\s_","\\");
+		   console.log(url);
+		   //alert(url);
 		  remove();
 		  $("#cancel2Btn").click(function(){
 			  //remove();
 			  window.close();
 		  });
 		  $("#modify").click(function(){
-			 	
 			 	if(!istrue){
 			 		 window.close();
 			 	}else{

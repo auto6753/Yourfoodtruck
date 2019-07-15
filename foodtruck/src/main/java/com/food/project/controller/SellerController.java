@@ -30,6 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,6 +59,7 @@ import com.food.project.paging.CallListPager;
 import com.food.project.service.CallListService;
 import com.food.project.service.EventService;
 import com.food.project.service.FoodTruckService;
+import com.food.project.service.LoginService;
 import com.food.project.service.OnboardService;
 import com.food.project.service.PaymentService;
 import com.food.project.service.SellerService;
@@ -70,7 +72,7 @@ import com.google.firebase.auth.UserRecord;
 import lombok.AllArgsConstructor;
 import net.sf.json.*;
 
-
+@CrossOrigin(origins = "*")
 @Controller
 @AllArgsConstructor
 @RequestMapping(value = "/seller")
@@ -84,6 +86,7 @@ public class SellerController {
 	private PaymentService paymentService;
 	private EventMapper eventmapper;
 	private SellerMapper sellermapper;
+	private LoginService loginservice;
 	//private SellerMapper sellermapper;
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	@Resource(name = "uploadPath")
@@ -94,6 +97,14 @@ public class SellerController {
 	public String sellerMain(Model model, HttpSession session) {
 		return "seller/sellerMain";
 	}
+	@RequestMapping(value="/appMngsales")
+	public String appMngSales(@RequestParam String truck_code, HttpSession session) {
+		System.out.println(truck_code);
+		FoodTruckVO vo = truckService.getFoodTruck(truck_code);
+		session.setAttribute("seller",vo);
+		return "redirect:/seller/mngSales";
+	}
+	
 	
 	@RequestMapping(value="/mngSales", method=RequestMethod.GET) 
 	public String mngSales(Model model, HttpSession session, HttpServletRequest request) {
@@ -101,9 +112,126 @@ public class SellerController {
 		return "seller/mngSales/todaySales";
 	}
 	
+	@RequestMapping(value="/salesToday")
+	public String todaySales(Model model, HttpSession session, HttpServletRequest request) {
+		String pageName="todaySales";
+		// 매출 쿼리를 위해 매개변수로 사용할 truck_code 값
+		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
+		String truck_code = vo.getTruck_code(); 
+		ArrayList<PaymentVO> todaySales = new ArrayList<>(); // 금일 매출 쿼리 결과를 담을 ArrayList
+		todaySales = paymentService.getTodaySales(truck_code); // 금일 매출 쿼리 후 결과를 todaySales에 추가
+		int mKakaoSales = 0, nKakaoSales = 0; // 카카오페이 매출액(회원, 비회원)
+		int totalKakaoSales = 0; // 카카오페이 매출총액(회원 + 비회원)
+		int mCashSales = 0, nCashSales = 0; // 현금 매출액(회원, 비회원)
+		int totalCashSales = 0; // 현금 매출총액(회원 + 비회원)
+		int mCardSales = 0, nCardSales = 0; // 카드 매출액(회원, 비회원)
+		int totalCardSales = 0; // 카드 매출총액(회원 + 비회원)
+		int mTotalSales = 0, nTotalSales = 0; // 총 매출액(회원, 비회원)
+		int totalSales = 0; // 총 매출액(회원 + 비회원)
+		int totalAmount = 0; // 총 판매량
+			
+		String telephone = null; // payment 테이블의 payment_telephone 컬럼 값
+		String isMember = null; // 회원 조회 값
+			
+		HashSet<String> menuCodes = new HashSet<>();
+		ArrayList<MenuSalesVO> menuSales = new ArrayList<>();
+			
+		for(int i=0; i<todaySales.size(); i++) {
+			switch(todaySales.get(i).getPayment_class()) {
+			case 3: // 카카오페이
+				telephone = todaySales.get(i).getPayment_telephone();
+				isMember = paymentService.isMember(telephone);
+					
+				if(isMember != null) { // 회원 조회 값이 있으면(= 회원이면)
+					mKakaoSales = mKakaoSales + todaySales.get(i).getTotal_price();
+				} else { // 회원 조회 값이 없으면(= 비회원이면)
+					nKakaoSales = nKakaoSales + todaySales.get(i).getTotal_price();
+				}
+				break;
+			case 4: // 현금
+				telephone = todaySales.get(i).getPayment_telephone();
+				isMember = paymentService.isMember(telephone);
+					
+				if(isMember != null) {
+					mCashSales = mCashSales + todaySales.get(i).getTotal_price();
+				} else {
+					nCashSales = nCashSales + todaySales.get(i).getTotal_price();
+				}
+				break;
+			case 5: // 카드
+				telephone = todaySales.get(i).getPayment_telephone();
+				isMember = paymentService.isMember(telephone);
+				
+				if(isMember != null) {
+					mCardSales = mCardSales + todaySales.get(i).getTotal_price();
+				} else {
+					nCardSales = nCardSales + todaySales.get(i).getTotal_price();
+				}
+				break;
+			default:
+			}
+				
+			String menu_code = todaySales.get(i).getMenu_code();
+			String menu_name = todaySales.get(i).getMenu_name();
+				
+			if(menu_code == null) { todaySales.get(i).setMenu_code("999999999"); }
+			if(menu_name == null) { todaySales.get(i).setMenu_name("(삭제된 메뉴)"); }
+				
+			if(menuCodes.add(todaySales.get(i).getMenu_code())) {
+				MenuSalesVO temp = new MenuSalesVO();
+				temp.setMenu_code(todaySales.get(i).getMenu_code());
+				temp.setMenu_name(todaySales.get(i).getMenu_name());
+				temp.setAmount(todaySales.get(i).getAmount());
+				temp.setTotalPrice(todaySales.get(i).getTotal_price());
+				temp.setUnitPrice(todaySales.get(i).getTotal_price() / todaySales.get(i).getAmount());
+				menuSales.add(temp);
+				totalAmount = totalAmount + todaySales.get(i).getAmount();
+			} else {
+				for(int j=0; j<menuSales.size(); j++) {
+					if(menuSales.get(j).getMenu_code().equals(todaySales.get(i).getMenu_code())) {
+						menuSales.get(j).add(todaySales.get(i).getAmount(), todaySales.get(i).getTotal_price());
+						totalAmount = totalAmount + todaySales.get(i).getAmount();
+					}
+				}
+			}
+		}
+
+		mTotalSales = mKakaoSales + mCashSales + mCardSales;
+		nTotalSales = nKakaoSales + nCashSales + nCardSales;
+		totalSales = mTotalSales + nTotalSales;
+			
+		totalCashSales = mCashSales + nCashSales;
+		totalCardSales = mCardSales + nCardSales;
+		totalKakaoSales = mKakaoSales + nKakaoSales;
+			
+		model.addAttribute("mCashSales", mCashSales); // 회원 현금 매출액
+		model.addAttribute("mCardSales", mCardSales); // 회원 카드 매출액
+		model.addAttribute("mKakaoSales", mKakaoSales); // 회원 카카오페이 매출액
+		model.addAttribute("mTotalSales", mTotalSales); // 회원 총 매출액
+			
+		model.addAttribute("nCashSales", nCashSales); // 비회원 현금 매출액
+		model.addAttribute("nCardSales", nCardSales); // 비회원 카드 매출액
+		model.addAttribute("nKakaoSales", nKakaoSales); // 비회원 카카오페이 매출액
+		model.addAttribute("nTotalSales", nTotalSales); // 비회원 총 매출액
+			
+		model.addAttribute("totalCashSales", totalCashSales); // 현금 총 매출액
+		model.addAttribute("totalCardSales", totalCardSales); // 카드 총 매출액
+		model.addAttribute("totalKakaoSales", totalKakaoSales); // 카카오페이 총 매출액
+			
+		model.addAttribute("totalSales", totalSales); // 회원 + 비회원 총 매출액
+			
+		model.addAttribute("menuSales", menuSales); // 메뉴별 판매량
+		model.addAttribute("totalAmount", totalAmount); // 총 판매량
+		return "seller/mngSales/todaySales";
+	}
 	@RequestMapping(value="/salesInfo", method= {RequestMethod.GET, RequestMethod.POST})
 	public String salesInfo(Model model, HttpSession session, HttpServletRequest request) {
-		String pageName = request.getParameter("pageName");
+		String pageName;
+		try {
+			pageName = request.getParameter("pageName");
+		} catch(Exception e) {
+			pageName="todaySales";
+		}
 		
 		// 매출 쿼리를 위해 매개변수로 사용할 truck_code 값
 		FoodTruckVO vo = (FoodTruckVO) session.getAttribute("seller");
@@ -967,12 +1095,15 @@ public class SellerController {
 	    paymentMap = JSONArray.fromObject(param);
 		System.out.println(paymentMap.size());
 		for(int i =0;i<paymentMap.size();i++) {
+			
 			String menu_code = (String) paymentMap.get(i).get("menu_code");
 			String url = uploadPath +(String) paymentMap.get(i).get("url");
 			String surl = uploadPath + (String) paymentMap.get(i).get("surl");
+			System.out.println("--------------------------------");
 			System.out.println(menu_code);
 			System.out.println(url);
 			System.out.println(surl);
+			System.out.println("--------------------------------");
 			sellerservice.deletemenu(menu_code);
 			File file = new File(url);
 			if (file.exists()) { // 파일존재여부확인
@@ -1111,19 +1242,29 @@ public class SellerController {
 		
 		CustomerVO e = (CustomerVO) request.getSession().getAttribute("sessionid");
 		FoodTruckVO vo4 = new FoodTruckVO();
+		//String em = e.getEmail()+"\\event";
 		String em = e.getEmail()+"/event";
 		vo4.setEmail(em);
 		//vo4.setEmail();
 		EventVO evo = new EventVO();
+		String st1 = null;
+		String str = null;
+		
 		try {
 			ResponseEntity<String> upload = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
 					HttpStatus.OK);
-			String str = upload.getBody();
-			String[] array = str.split("\\\\");
-			System.out.println(array[0]);
-			System.out.println(array[1]);
-			System.out.println(array[0] + "\\" + array[1].substring(2));
-			evo.setEvent_url(array[0] + "\\" + array[1].substring(2));
+			str = upload.getBody();
+			//String[] array = str.split("\\\\");
+			//str.replace("/event", "\\event");
+			
+			String[] array = str.split(File.separator);
+			System.out.println(array[0]);//ddd@naver.com
+			System.out.println(array[1]);//event
+			System.out.println(array[2]);//s_sdalfsdf.png
+			st1 = array[0] + "?" + array[1];
+			System.out.println(array[0] + "/" +array[1]+ "/" +array[2].substring(2));
+			str = array[0] + "/" +array[1]+ "/"+array[2].substring(2);
+			evo.setEvent_url(array[0] + "/" +array[1]+"/"+array[2].substring(2));
 		}catch(Exception ex) {
 			evo.setEvent_url("defaultImg.png");
 		}
@@ -1172,7 +1313,7 @@ public class SellerController {
 		System.out.println("????");
 		eventService.addEvent(mapvo);
 		
-		return "success";
+		return str;
 	}
 	
 	@RequestMapping(value="/delEvent", method=RequestMethod.POST)
@@ -1182,8 +1323,10 @@ public class SellerController {
 		
 		
 		EventVO ev = eventmapper.getEvent1_code(eventCode);
-		String url = uploadPath+ev.getEvent_url();
-		String surl = url.replace("/event\\", "/event\\s_");
+		String iurl = uploadPath+ev.getEvent_url();
+		
+		String surl = iurl.replace("/event\\", "\\event\\s_");
+		String url = surl.replace("\\event\\s_", "\\event\\");
 		System.out.println(url);
 		System.out.println(surl);
 		File file = new File(url);
@@ -1213,7 +1356,8 @@ public class SellerController {
 		eventService.deleteEventMenu(eventCode);
 		eventService.deleteEvent(eventCode);
 		
-		return "success";
+		return iurl + surl + url;
+		
 	}
 	
 	@RequestMapping(value="/editEvent", method=RequestMethod.POST)
@@ -1391,23 +1535,33 @@ public class SellerController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/seorder", method=RequestMethod.GET) 
-	public String seorder(Model model, HttpSession session) {
+	public String seorder(Model model, HttpSession session,@Param("truck_code") String truck_code,@Param("_uid") String _uid) {
 		FirebaseApp defaultApp = null;
 		CustomerVO vo=new CustomerVO();
-		vo=(CustomerVO) session.getAttribute("sessionid");
-		String email=vo.getEmail();
+		String email;
+		try {
+			vo=(CustomerVO) session.getAttribute("sessionid");
+			email=vo.getEmail();
+		}
+		catch(Exception e) {
+			model.addAttribute("_uid",_uid);
+			return "seller/order/seorder";
+		}
+		
 		FileInputStream serviceAccount;
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// 서버 올릴 때 경로
 		System.out.println(path);
-		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
-				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
-				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//				+ File.separator + "resources" + File.separator + "json" + File.separator
+//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+
 		//파이어베이스 옵션 설정
 		try {
 			if(defaultApp==null) {
-				serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
+				serviceAccount = new FileInputStream(firebasePath);
 				FirebaseOptions options = new FirebaseOptions.Builder()
 						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -1536,14 +1690,15 @@ public class SellerController {
 
 		String str = a.getBody();
 		System.out.println(str);
-		String[] array = str.split("\\\\");
+		String[] array = str.split(File.separator);
+		//String[] array = str.split("\\\\");
 		System.out.println(array[0]);
 		System.out.println(array[1]);
 		System.out.println(array[0] + "\\" + array[1].substring(2));
-	
+		
 		mvo.setTruck_url(array[0] + "\\" + array[1].substring(2));
 		mvo.setTruck_code(vo4.getTruck_code());
-		mvo.setTruck_surl(str);
+		mvo.setTruck_surl(array[0] + "\\" + array[1]);
 		System.out.println(mvo);
 		truckService.updatetruckphoto(mvo);
 
@@ -1565,13 +1720,17 @@ public class SellerController {
 //	}
 	
 	@RequestMapping(value="/qrorder", method=RequestMethod.GET) 
-	public String qrorder(Model model,@Param("truck_code") String truck_code) {
+	public String qrorder(Model model,@Param("truck_code") String truck_code,HttpSession session) {
 		FoodTruckVO vo = new FoodTruckVO();
 		//vo = (FoodTruckVO) request.getSession().getAttribute("seller");
 		String truckcode = truck_code;
 		ArrayList<MenuVO> menulist = new ArrayList<>();
 		CustomerVO cvo = sellerservice.getCustomer(truck_code);
 		menulist = sellerservice.getmenu(truckcode);
+		FoodTruckVO fd = new FoodTruckVO();
+		fd=loginservice.getFoodTruck(cvo.getEmail());
+		session.setAttribute("sessionid",cvo);
+		session.setAttribute("seller",fd);
 		model.addAttribute("menulist", menulist);
 		model.addAttribute("orderTarget","customer");
 		model.addAttribute("member",cvo);

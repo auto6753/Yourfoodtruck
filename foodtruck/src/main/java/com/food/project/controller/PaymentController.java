@@ -94,7 +94,6 @@ public class PaymentController {
 
 	public String CallPayment(Model model,CallListVO vo) {
 		System.out.println(vo);
-		vo.setRequest_date(new Date());
 		
 		callService.insertCallList(vo);
 		System.out.println("결제하고 인서트하러왔다");

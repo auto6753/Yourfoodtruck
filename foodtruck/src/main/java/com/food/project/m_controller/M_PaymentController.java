@@ -1,5 +1,6 @@
 package com.food.project.m_controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.food.project.domain.CallListVO;
 import com.food.project.domain.PaymentVO;
@@ -60,65 +63,77 @@ public class M_PaymentController {
 	}
 	@RequestMapping(value="/insertOrder",method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public void insertOrder(@RequestBody String param) {
+	public String insertOrder(@RequestBody String param) {
 		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
 		paymentMap = JSONArray.fromObject(param);
+		System.out.println(paymentMap.toString());
 		int a=payService.insertPaymentList(paymentMap);
 		if(a==0) {
 			System.out.println("Error");
 		}else {
 			System.out.println("Success");
 		}
-//		String email=(String)paymentMap.get(0).get("seller_email");
-//		String telephone=(String)paymentMap.get(0).get("payment_telephone");
-//		SimpleDateFormat format1 = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-//		String inputDate = format1.format(new Date());
-//		inputDate=inputDate.substring(2);
-//		JSONObject jsonObj = new JSONObject();
-//		FirebaseApp defaultApp = null;
-//		List<FirebaseApp> apps=FirebaseApp.getApps();
-//		FileInputStream serviceAccount;
-//		FirebaseOptions options=null;
-//		try {
-//			serviceAccount = new FileInputStream("C:\\fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json");
-//			options = new FirebaseOptions.Builder()
-//					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
-//					.build();
-//		} catch (FileNotFoundException e1) {
-//			e1.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		//이미 관리자 defaultApp이 있는지 검사
-//		if(apps!=null && !apps.isEmpty()) {
-//			for(FirebaseApp app:apps) {
-//				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
-//					defaultApp = app;
-//			}
-//		}else {
-//			defaultApp = FirebaseApp.initializeApp(options);
-//		}
-//		UserRecord userRecord;
-//		try {
-//			userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
-//			// See the UserRecord reference doc for the contents of userRecord.
-//			System.out.println("Successfully fetched user data in cuorder: " + userRecord.getEmail());
-//			DatabaseReference ref=FirebaseDatabase.getInstance().
-//					getReference("/PaymentTest2/"+userRecord.getUid()+"/"+telephone+"/");
-//			for(int i=0; i<paymentMap.size();i++) {
-//				ref.child((String)paymentMap.get(0).get("payment_regdate")+"/"+i).setValueAsync(paymentMap.get(i));
-//			}
-//			
-//			jsonObj.put("result", "success");
-//			
-//		} catch (FirebaseAuthException e) {
-//			e.printStackTrace();
-//			jsonObj.put("result", "fail");
-//		}
+		String email=(String)paymentMap.get(0).get("seller_email");
+		String telephone=(String)paymentMap.get(0).get("payment_telephone");
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		String inputDate = format1.format(new Date());
+		inputDate=inputDate.substring(2);
+		JSONObject jsonObj = new JSONObject();
+		FirebaseApp defaultApp = null;
+		List<FirebaseApp> apps=FirebaseApp.getApps();
+		FileInputStream serviceAccount;
+		FirebaseOptions options=null;
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 서버 올릴 때 경로
+		System.out.println(path);
+		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//				+ File.separator + "resources" + File.separator + "json" + File.separator
+//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+
+		try {
+			serviceAccount = new FileInputStream(firebasePath);
+			options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+					.build();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//이미 관리자 defaultApp이 있는지 검사
+		if(apps!=null && !apps.isEmpty()) {
+			for(FirebaseApp app:apps) {
+				if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+					defaultApp = app;
+			}
+		}else {
+			defaultApp = FirebaseApp.initializeApp(options);
+		}
+		UserRecord userRecord;
+		Map<String,Object> rstmap = new HashMap<>();
+		try {
+			userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
+			// See the UserRecord reference doc for the contents of userRecord.
+			System.out.println("Successfully fetched user data in cuorder: " + userRecord.getEmail());
+			DatabaseReference ref=FirebaseDatabase.getInstance().
+					getReference("/PaymentTest2/"+userRecord.getUid()+"/"+telephone+"/");
+			for(int i=0; i<paymentMap.size();i++) {
+				ref.child((String)paymentMap.get(0).get("payment_regdate")+"/"+i).setValueAsync(paymentMap.get(i));
+			}
+			
+			rstmap.put("result", "success");
+			
+		} catch (FirebaseAuthException e) {
+			e.printStackTrace();
+			rstmap.put("result", "fail");
+		}
 //		defaultApp.delete();
-//		
-//		return jsonObj.toString();
+		jsonObj=JSONObject.fromObject(rstmap);
+		
+		return jsonObj.toString();
 		
 	}
 	@SuppressWarnings("unchecked")

@@ -8,6 +8,7 @@
 		to_char(festival_enddate,'YYYY/MM/DD')festival_enddate,merchant_uid,calltel
 		from call_list
 		where truck_code=#{truck_code}
+		order by request_date desc
 	</select>
 
 	<select id="getCallList2" resultType="map"
@@ -63,6 +64,7 @@
 	<sql id="pagingFooter">
 		) c
 		) where rn between #{start} and #{end}
+		order by request_date desc
 	</sql>
 	<select id="allList" resultType="map" parameterType="map">
 		<!-- 목록 조회 및 페이징 전체 쿼리 -->

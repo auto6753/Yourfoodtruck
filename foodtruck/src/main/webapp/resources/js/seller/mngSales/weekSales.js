@@ -41,7 +41,7 @@ $(document).ready(function(){
 
       
       var data = google.visualization.arrayToDataTable([
-          ['Year', '전체', '회원', '비회원'],
+          ['주간', '전체', '회원', '비회원'],
           ['합계', totalSalesWeek, mTotalSalesWeek, nTotalSalesWeek],
           ['현금', totalCashSalesWeek, mCashSalesWeek, nCashSalesWeek],
           ['카드', totalCardSalesWeek, mCardSalesWeek, nCardSalesWeek],

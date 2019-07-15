@@ -27,7 +27,7 @@ $(document).ready(function(){
 
       
       var data = google.visualization.arrayToDataTable([
-          ['Year', '전체', '회원', '비회원'],
+          ['연간', '전체', '회원', '비회원'],
           ['합계', totalSalesYear, mTotalSalesYear, nTotalSalesYear],
           ['현금', totalCashSalesYear, mCashSalesYear, nCashSalesYear],
           ['카드', totalCardSalesYear, mCardSalesYear, nCardSalesYear],

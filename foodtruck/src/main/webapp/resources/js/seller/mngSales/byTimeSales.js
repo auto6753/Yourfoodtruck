@@ -21,7 +21,7 @@ $(document).ready(function(){
     function drawChart() {
       
       var data = google.visualization.arrayToDataTable([
-    	  ['시', '전체', '회원', '비회원'],
+    	  ['시간대별', '전체', '회원', '비회원'],
     	  [byTimeSalesResult[0][0], byTimeSalesResult[0][1], byTimeSalesResult[0][2], byTimeSalesResult[0][3]]
       ]);
       

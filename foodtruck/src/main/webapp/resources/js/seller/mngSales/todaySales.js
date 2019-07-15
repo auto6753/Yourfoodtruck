@@ -3,6 +3,9 @@
  */
 
 $(document).ready(function(){
+	
+	
+	
 	var mCashSales = Number($("#mCashSales").val());
 	var nCashSales = Number($("#nCashSales").val());
 	var totalCashSales = Number($("#totalCashSales").val());

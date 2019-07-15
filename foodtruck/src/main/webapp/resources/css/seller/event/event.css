@@ -312,7 +312,7 @@ a {
 }
 
 .fixed-top {
-	z-index: 1 !important;
+	z-index: 10 !important;
 }
 
 .labelStyle {
@@ -403,7 +403,7 @@ a {
 	/* margin-top: 50px; */
 	position: relative;
 	left: 26%;
-	bottom: 339px;
+	bottom: 310px;
 	border: 3px solid gainsboro;
 	height: 400px;
 }
@@ -603,4 +603,7 @@ textarea {
 	border: 1px solid #ff3f00;
 	background-color: #ff4800;
 	color: #fff;
+}
+.z-indexto1{
+	z-index:0;
 }

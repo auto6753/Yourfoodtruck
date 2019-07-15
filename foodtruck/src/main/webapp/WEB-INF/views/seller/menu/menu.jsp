@@ -4,7 +4,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/menu/menu.css"/>" />
 <head>
-<title>메뉴관리</title>
+<title>당신의 푸드트럭</title>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script>
 </head>
@@ -67,7 +67,7 @@
 							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
 									<c:if test="${i.menu_category ==2}">
-										<div class="col-md-3 menuf">
+										<div class="col-md-4 menuf menuss">
 											<div class="menut">
 												<div class="imgBox">
 													<img class="img editMenu changeToBlock"
@@ -95,7 +95,7 @@
 							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
 									<c:if test="${i.menu_category ==3}">
-										<div class="col-md-3 menuf">
+										<div class="col-md-4 menuf menuss" >
 											<div class="menut">
 												<div class="imgBox">
 													<img class="img editMenu changeToBlock"
@@ -122,7 +122,7 @@
 							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
 									<c:if test="${i.menu_category ==4}">
-										<div class="col-md-3 menuf">
+										<div class="col-md-4 menuf menuss">
 											<div class="menut">
 												<div class="imgBox">
 													<img class="img editMenu changeToBlock"
@@ -151,7 +151,7 @@
 							<div class="row mbox">
 								<c:forEach var="i" items="${menuNum}">
 									<c:if test="${i.menu_category ==5}">
-										<div class="col-md-3 menuf">
+										<div class="col-md-4 menuf menuss">
 											<div class="menut">
 												<div class="imgBox">
 													<img class="img editMenu changeToBlock"

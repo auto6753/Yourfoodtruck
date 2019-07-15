@@ -14,5 +14,5 @@ public interface LocationService {
 //	public ArrayList<LocationVO> getLocation(LocationVO vo,String email);
 	//public ArrayList<LocationVO> getLoc();
 	public List<Map<String, Object>> getLoc();
-	
+	public ArrayList<LocationVO> getLocation(String truck_code);
 }

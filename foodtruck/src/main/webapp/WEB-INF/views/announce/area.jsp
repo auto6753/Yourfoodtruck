@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>허가구역 안내</title>
+<title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />
@@ -120,13 +120,14 @@
 			});
 		});
 	</script>
-	
  	<button id="toRecruit" class="btn">모집공고 보기</button>
 	<div id="title" class="card-header">
 		<p>허가구역 안내</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
 	</div>
+	<div id="content" style="width: 80%; margin: 0 auto;">
 	<div id="searchall">
-		<nav class="navbar navbar-light bg-light">
+		<nav class="navbarr">
 			<form class="form-inline" action="/area" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
@@ -147,9 +148,9 @@
 					<option value="16">경남</option>
 					<option value="17">제주</option>
 				</select>				
-				<input id="searchbox"name="keyword" value="${map.keyword}">
+				<input id="searchbox"name="keyword" size="10" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
-				<input id="searchbutton" type="submit" value="조회" class="btn">
+				<input id="searchbutton" type="submit" value="검색" class="btn">
 			</form>
 		</nav>
 	</div>
@@ -158,17 +159,16 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>지역</th>
-					<th>구역명</th>
-					<th>주소</th>
-					<th>관할구역</th>
+					<th class="boardsido">지역</th>
+					<th class="boardTitle">구역명</th>
+					<th class="boardaddr">주소</th>
 					<th>문의전화번호</th>
 				</tr>
 			</thead>
 			<tbody>
  				<c:forEach var="row" items="${requestScope.areaList}">
  				<tr>
- 					<td>${row.SIDO_NAME}</td>
+ 					<td class="boardsido">${row.SIDO_NAME}</td>
  					<td class="boardTitle">${row.AREA_NAME}
  						<input type="hidden" class="latitude" value="${row.LATITUDE}">
  						<input type="hidden" class="longitude" value="${row.LONGITUDE}">
@@ -201,9 +201,10 @@
 				<c:forEach var="num" begin="${map.postPager.blockBegin}" end="${map.postPager.blockEnd}">
 					<li class="page-item"><a class="page-link" href="javascript:list('${num}')"><span>${num}</span></a></li>
 				</c:forEach>			
-				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
+				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>&gt;&gt;</span></a></li>
 			</ul>
 		</nav>
+	</div>
 	</div>
 <script>
 	function list(page) {
@@ -220,9 +221,11 @@
 		$('#title').click(function() {
 			location.href = "/area";
 		});
-		$('#toRecruit').click(function() {
+		$('#view').click(function() {
 			location.href = "/announce";
 		});
+		$(".table td").addClass("word-break");
+		$(".table th").addClass("word-break");
 	});
 </script>
 </body>

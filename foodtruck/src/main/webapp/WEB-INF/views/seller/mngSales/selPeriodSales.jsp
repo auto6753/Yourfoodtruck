@@ -59,7 +59,7 @@
 					</table>
 					<table border="1">
 						<tr>
-							<td>메뉴코드</td>
+							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>
 							<td>단가</td>
 							<td>판매량</td>
@@ -67,7 +67,7 @@
 						</tr>
 						<c:forEach var="menuSalesSelPeriod" items="${menuSalesSelPeriod}">
 							<tr>
-								<td>${menuSalesSelPeriod.menu_code}</td>
+								<%-- <td>${menuSalesSelPeriod.menu_code}</td> --%>
 								<td>${menuSalesSelPeriod.menu_name}</td>
 								<td><fmt:formatNumber value="${menuSalesSelPeriod.unitPrice}" pattern="#,###"/></td>
 								<td><fmt:formatNumber value="${menuSalesSelPeriod.amount}" pattern="#,###"/></td>
@@ -75,7 +75,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="3">합계</td>
+							<td colspan="2">합계</td>
 							<td>${totalAmountSelPeriod}</td>
 							<td><fmt:formatNumber value="${totalSalesSelPeriod}" pattern="#,###"/></td>
 						</tr>

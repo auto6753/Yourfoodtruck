@@ -1,13 +1,10 @@
 package com.food.project.controller;
 
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.client.ClientProtocolException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.food.project.domain.CustomerVO;
-import com.food.project.domain.PaymentVO;
 import com.food.project.domain.PostVO;
 import com.food.project.paging.PostPager;
-import com.food.project.seleniumTest.SeleniumTest;
 import com.food.project.service.AreaService;
-import com.food.project.service.PaymentService;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
@@ -63,7 +56,7 @@ public class AnnounceController {
 		model.addAttribute("announcepostList",postService.getPostList(1));
 		model.addAttribute("announceList",areaList);
 		model.addAttribute("map",map);
-		return "announce/recruit";
+		return "announce/localrecruit";
 	}
 	
 	@RequestMapping(value = "/announce/specificck", method = RequestMethod.GET)
