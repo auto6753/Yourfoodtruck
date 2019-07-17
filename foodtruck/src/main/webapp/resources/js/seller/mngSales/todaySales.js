@@ -34,7 +34,7 @@ $(document).ready(function(){
     		nTotalSales == 0 &&
     		totalSales == 0	
     ){
-    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px;'/>");
     	$(".hideTable").css("display", "none");
     } else {
     	google.charts.setOnLoadCallback(drawChart);
@@ -57,6 +57,7 @@ $(document).ready(function(){
 //          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
+        //legend : {position:"top"},
         vAxis: {format: 'decimal'},
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
