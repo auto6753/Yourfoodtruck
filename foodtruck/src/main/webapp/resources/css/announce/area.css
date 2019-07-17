@@ -13,6 +13,52 @@ p {
 	/* border-radius: 15px; */
 	text-align: center;
 	background-color: white;
+	margin-top: 2%;
+}
+#searchalll{
+	position: relative;
+    left: -30px;
+	
+}
+.sidebar{
+	    position: relative;
+    top: -60px;
+    left: 150px;
+    width: 12%;
+    font-size: 20px;
+    display: -webkit-inline-box;
+}
+#pageadd{
+   
+   background-color: rgb(255, 94, 24);
+   color: white;
+
+}
+label{
+	font-family: 'yg-jalnan';
+	font-size: 20px;
+	
+}
+#box{
+	    margin-left: 36%;
+}
+#titles{
+	    width: 80%;
+}
+#contentt{
+	    width: 80%;
+	    font-size:25px;
+}
+#d{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:20%;
+	    margin-left: 39.3%;
+}
+#dd{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+	
 }
 
 #searchall {
@@ -130,7 +176,7 @@ p {
 #content1{
 	
 	width: 80%; 
-	margin-left: 1% ;
+	margin-left: 10% ;
 }
 
 /* .table {

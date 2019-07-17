@@ -12,26 +12,28 @@
 
 </head>
 <body>
-	<!-- <button id="view" class="btn">허가구역이 보고싶다면 Click!</button> -->
-	<br>
-	<br>
-	<div id="title" class="">
-		<p>지자체 모집공고</p>
-	</div>
-	<div style="height: 800px ;">
-	<div id="side"style="display: inline-block;">
+	
+	<div id="title" >
+		<p>일반 모집공고</p>
+		<div id="side">
 	<jsp:include page="sidebar.jsp"></jsp:include>
 	</div>
+	</div>
+	<div style="height: 800px;">
+	
+
+	
 	<div id="content1" style="display: inline-block; ">
 	
 	<div id="searchalll">
 		<nav class="navbarrr">
-			<form class="form-inline" action="/announce" method="post">
-				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button id="searchbutton" type="button" class="btn">검색</button> -->
+			<form class="form-inline" action="/recruit" method="post">
 				<input id="searchbox"name="keyword" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="1">
 				<input id="searchbutton"type="submit" value="검색" class="btn" id="search">
+				<c:if test="${not empty sessionScope.sessionid}">
+				<a href="/recruit/addRecruit"><button id="pageadd" type="button" class="btn">등록</button></a>
+				</c:if>
 			</form>
 		</nav>
 	</div>
@@ -41,16 +43,17 @@
 			<thead>
 				<tr>
 					<th>제목</th>
-					<th>지역</th>
 					<th>등록일</th>
+					<th>조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="row" items="${requestScope.announceList}">
+				<c:forEach var="row" items="${recruit }">
 				<tr>
-					<td class="boardTitle"><a href="${row.POST_URL}">${row.POST_TITLE}</a></td>
-					<td>${row.POST_CONTENT}</td>
-					<td>${row.POST_REGDATE}</td>
+					<td class="boardTitle">${row.request_title}</td>
+					<input type="hidden" value="${row.request_code }"> 
+					<td>${row.request_regdate}</td>
+					<td>${row.request_view}</td>
 				</c:forEach>
 			</tbody>
 		</table>
@@ -69,15 +72,20 @@
 	</div>
 </div>
 </div>
+
 <script>
+$(document).ready(function(){
+	$('.boardTitle').on('click', function(){
+		var a = $(this);
+		var requestCode= a.next().val();//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
+		$(location).attr('href','/recruit/specific?request_code='+requestCode);
+	});
+});
 	function list(page) {
 		location.href="/announce?curPage="+page+"&keyword=${map.keyword}";
 	}
 	$(function() {
-		$('.boardTitle').on('click', function(){
-			var a = $(this);
-			var postCode= a.next().val();
-		});//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
+		//next td 다음에 나오는 것을 지칭함 , val은 next에 해당하는 val에 해당하는 값
 		$('#title').click(function() {
 			location.href="/announce"; 
 		}); 
@@ -87,6 +95,6 @@
 		$(".table td").addClass("word-break");
 		$(".table th").addClass("word-break");
 	});
-</script>	
+</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.paging.PostPager;
@@ -38,5 +39,9 @@ public interface PostMapper {
 	public Map<String,Object> totalPage2(Map<String,Object> map);
 	
 	public ArrayList<ReviewVO> getReview(String email);
+	public void addRecruit(RecruitVO vo);
+	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	/* public ArrayList<RecruitVO> getSpecific(String request_code); */
+	public RecruitVO getRequestspecific(String request_code);
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
 import com.food.project.domain.ReviewVO;
 
@@ -44,6 +45,11 @@ public interface PostService {
 	public int totalPage2(@Param("post_class")int post_class, @Param("keyword") String keyword);
 	
 	public ArrayList<ReviewVO> getReview(String email);
+	//일반모집공고 등록하기
+	public void addRecruit(RecruitVO vo);
+	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	public RecruitVO getRequestspecific(String request_code);
+	
 	
 	
 }
