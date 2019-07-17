@@ -33,7 +33,7 @@ h1 {
 	font-size:6rem;
 }
 .wrap {
-margin-top : 100px;
+margin-top : 50px;
 }
 </style>
 </head>
@@ -41,6 +41,7 @@ margin-top : 100px;
 	<h1>주문 확인 페이지</h1>
 	<div class="wrap"></div>
 	<div class="result"></div>
+	<div class="today_sales">오늘의 매출액 : ${today_sales}원</div>
 </body>
 <script>
 var first=true;
@@ -215,20 +216,38 @@ function release(a) {
              contentType: "application/json; chartset=UTF-8",
              success: function(data) {
                  alert("성공적으로 보냈습니다!");
+                 updateTodaySales();
              },
              error: function(err) {
                  alert("ajax 연결 실패!");
                  console.log(JSON.stringify(err));
              }
          });
+         //updateTodaySales();
       }else if(!isChecked) {
          alert("결제확인을 먼저 하십시오");
       }
    }
    
 }
+function updateTodaySales() {
+	$.ajax({
+ 		type:"POST",
+ 		url:"/pay/updateTodaySales",
+ 		contentType:"application/json;charset=UTF-8",
+ 		traditional:true,
+ 		success:function(data) {
+ 			var json = JSON.parse(data);
+ 			console.log(json);
+ 			$('.today_sales').html("오늘의 매출액 : "+json.today_sales+"원");
+ 		},error:function(err) {
+ 			console.log(err);
+ 		}
+ 	});
+}
 
 $(function() {
+	var truck_code = "${sessionScope.seller.truck_code}";
    var isfirst = true;
    var ref=firebase.database().ref('/PaymentTest2/'+ _uid +'/').limitToFirst(15);
    ref.once('value').then(function(snapshot) {
@@ -253,7 +272,7 @@ $(function() {
                console.log("'"+order+"'");//전화번호
                var order_index=orderList[order].length;//한사람당 주문한 제품개수
                console.log(order_index);
-               $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="'+truck_code+'"><button class="release" onclick="release(\''+order+'\')">출고확인</button></div>');         
+               $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone+'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'+orderList[order][0].payment_telephone+'" class="menu"style="height: 75px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order+'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''+orderList[order][0].payment_telephone+'\'"><input type="hidden" value="'+truck_code+'"><button class="release" onclick="release(\''+order+'\')">출고확인</button></div>');         
                if(order_index >1) {
                   for(var i=0;i<order_index;i++) {
                      $('#'+orderList[order][0].payment_telephone+'').append('<p><span>'+orderList[order][i].name+'</span>&nbsp;<span>'+orderList[order][i].amount+'</span>&nbsp;<span>'+orderList[order][i].total_price+'</span><input type="hidden" class="insert_menu_code" value="'+orderList[order][i].menu_code+'"><input type="hidden" class="insert_payment_class" value="'+orderList[order][i].payment_class+'"></p>');
@@ -271,6 +290,7 @@ $(function() {
                      $('#'+orderList[order][0].payment_telephone+'').parent().addClass('payed');
                      $("#"+orderList[order][0].payment_telephone).next().css("background-color", "red");
                      isChecked=true;
+                    
                   }
 /*                   $('.menu').append('<span class="orderInfo">'+orderList[order][0].total_price+'</span><br/>');
                   $('.menu').append('<span class="orderInfo">'+orderList[order][0].payment_telephone+'</span><br/>');    */
@@ -298,7 +318,7 @@ $(function() {
                $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>'+orderList[order][0].payment_telephone
                      +'</h4><span class="num">01</span> <span class="">주문시간</span><div style="margin-top: 15%;"><span>경과시간</span></div></div><div id="'
                      +orderList[order][0].payment_telephone
-                     +'" class="menu"style="height: 140px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order
+                     +'" class="menu"style="height: 75px; overflow-y: scroll; overflow-x: hidden;"></div><button id="'+order
                      +'"  onclick="pay(\''+order+'\')" class="pay">결제확인</button><input type="hidden" value="\''
                      +orderList[order][0].payment_telephone+'\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="release"  onclick="release(\''+order+'\')">출고확인</button></div>');
                if(order_index >1) {

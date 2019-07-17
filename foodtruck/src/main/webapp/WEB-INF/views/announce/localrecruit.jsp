@@ -35,7 +35,6 @@
 			</form>
 		</nav>
 	</div>
-	
 	<div id="table">
 		<table class="table">
 			<thead>

@@ -1542,6 +1542,12 @@ public class SellerController {
 		try {
 			vo=(CustomerVO) session.getAttribute("sessionid");
 			email=vo.getEmail();
+//			FoodTruckVO vo2 = (FoodTruckVO)session.getAttribute("seller");
+//			String truck_code2 = vo2.getTruck_code();
+//			System.out.println(truck_code2);
+//			int today_sales = Integer.parseInt((String)(paymentService.getTodaySalesForSeorder(truck_code2).get("SUM")));
+//			System.out.println(today_sales);
+//			model.addAttribute("today_sales",today_sales);
 		}
 		catch(Exception e) {
 			model.addAttribute("_uid",_uid);
@@ -1554,14 +1560,14 @@ public class SellerController {
 		// 서버 올릴 때 경로
 		System.out.println(path);
 		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
-//				+ File.separator + "resources" + File.separator + "json" + File.separator
-//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+				+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 
 		//파이어베이스 옵션 설정
 		try {
 			if(defaultApp==null) {
-				serviceAccount = new FileInputStream(firebasePath);
+				serviceAccount = new FileInputStream(firebasePath2);
 				FirebaseOptions options = new FirebaseOptions.Builder()
 						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -1581,6 +1587,12 @@ public class SellerController {
 		} catch (FirebaseAuthException e) {
 			e.printStackTrace();
 		}
+		FoodTruckVO vo2 = (FoodTruckVO)session.getAttribute("seller");
+		String truck_code2 = vo2.getTruck_code();
+		System.out.println(truck_code2);
+		String today_sales = paymentService.getTodaySalesForSeorder(truck_code2);
+		System.out.println(today_sales);
+		model.addAttribute("today_sales",today_sales);
 		return "seller/order/seorder";
 	}
 	

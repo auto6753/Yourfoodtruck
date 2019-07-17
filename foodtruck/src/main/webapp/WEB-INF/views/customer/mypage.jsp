@@ -24,6 +24,9 @@
 		$(".onSale").click(function() {
 			location.href = "/customer/onSale";
 		});
+		$(".joinlist").click(function() {
+			location.href = "/customer/joinlist";
+		});
 		$(".cusInfo").click(function() {
 			location.href = "/customer/cusInfo";
 		});
@@ -45,6 +48,8 @@
 		<button id="container2" class="text2 cusInfo col btn btn-default"><h4>회원정보관리</h4><img src="/resources/image/cusInfo.svg" class="img1"></button>
 		<button id="container2" class="text2 col myQuestion btn btn-default"><h4>1:1문의내역</h4><img src="/resources/image/myQuestion.svg" class="img1"></button>
 		<button id="container2" class="text2 goodbyeForm col btn btn-default"><h4>회원탈퇴</h4><img src="/resources/image/goodbyeForm.svg" class="img1"></button>
+		<button id="container2" class="text joinlist col btn btn-default"><h4>참가신청 내역</h4><img src="/resources/image/goodbyeForm.svg" class="img1"></button>
+		
 	</div>
 </div>
 
