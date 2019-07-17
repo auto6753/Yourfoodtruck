@@ -13,15 +13,15 @@
 </head>
 <body>
 	<!-- <button id="view" class="btn">허가구역이 보고싶다면 Click!</button> -->
-	<br>
-	<br>
+	
 	<div id="title" class="">
 		<p>지자체 모집공고</p>
+		<div id="side">
+		<jsp:include page="sidebar.jsp"></jsp:include>
+	</div>
 	</div>
 	<div style="height: 800px ;">
-	<div id="side"style="display: inline-block;">
-	<jsp:include page="sidebar.jsp"></jsp:include>
-	</div>
+	
 	<div id="content1" style="display: inline-block; ">
 	
 	<div id="searchalll">

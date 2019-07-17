@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.PostMapper;
@@ -87,6 +88,22 @@ public class PostServiceImplement implements PostService {
 	
 	@Override
 	public ArrayList<ReviewVO> getReview(String email) { return mapper.getReview(email);}
+	@Override
+	public void addRecruit(RecruitVO vo) {
+		mapper.addRecruit(vo);
+		
+	}
+	@Override
+	public ArrayList<RecruitVO> getList(RecruitVO vo) {
+		
+		return mapper.getList(vo);
+	}
+	@Override
+	public RecruitVO getRequestspecific(String request_code) {
+		// TODO Auto-generated method stub
+		return mapper.getRequestspecific(request_code);
+	}
+
 
 	
 

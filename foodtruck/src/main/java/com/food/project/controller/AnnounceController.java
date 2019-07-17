@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.paging.PostPager;
 import com.food.project.service.AreaService;
 import com.food.project.service.PostService;
@@ -58,35 +59,58 @@ public class AnnounceController {
 		model.addAttribute("map",map);
 		return "announce/localrecruit";
 	}
-	@RequestMapping(value = "/announce/recruit")
-	public String recruits(Model model,@RequestParam(defaultValue="1") int post_class,
-			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword) {
+	@RequestMapping(value = "/recruit" , method= RequestMethod.GET)
+	public String recruits(Model model/*@RequestParam(defaultValue="1") int post_class,
+			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword*/
+			, RecruitVO vo) {
+		ArrayList<RecruitVO> vo1 = postService.getList(vo);
+		System.out.println(vo1);
+		model.addAttribute("recruit" , vo1);
+		
 		//========================================페이징 하기=======================================
-		int totPage=0;
-		PostPager postPager;
-		if(keyword.isEmpty()) {
-			totPage=postService.totalPage(post_class);
-			System.out.println("인자 1개"+totPage);
-			postPager=new PostPager(totPage,curPage);
-		}else {
-			totPage=postService.totalPage2(post_class,keyword);
-			System.out.println("인자 2개"+totPage);
-			postPager=new PostPager(totPage,curPage);
-		}
-		int start=postPager.getPageBegin();
-		int end=postPager.getPageEnd();
-		ArrayList<Map<String,Object>> areaList=postService.allList(start,end,keyword,post_class);
-		System.out.println(areaList.toString());
-		System.out.println(postPager.toString());
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("totPage",totPage);
-		map.put("keyword",keyword);
-		map.put("postPager",postPager);
-		model.addAttribute("announcepostList",postService.getPostList(1));
-		model.addAttribute("announceList",areaList);
-		model.addAttribute("map",map);
+		/*
+		 * int totPage=0; PostPager postPager; if(keyword.isEmpty()) {
+		 * totPage=postService.totalPage(post_class);
+		 * System.out.println("인자 1개"+totPage); postPager=new
+		 * PostPager(totPage,curPage); }else {
+		 * totPage=postService.totalPage2(post_class,keyword);
+		 * System.out.println("인자 2개"+totPage); postPager=new
+		 * PostPager(totPage,curPage); } int start=postPager.getPageBegin(); int
+		 * end=postPager.getPageEnd(); ArrayList<Map<String,Object>>
+		 * areaList=postService.allList(start,end,keyword,post_class);
+		 * System.out.println(areaList.toString());
+		 * System.out.println(postPager.toString()); Map<String,Object> map=new
+		 * HashMap<String,Object>(); map.put("totPage",totPage);
+		 * map.put("keyword",keyword); map.put("postPager",postPager);
+		 * model.addAttribute("announcepostList",postService.getPostList(1));
+		 * model.addAttribute("announceList",areaList); model.addAttribute("map",map);
+		 */
 		return "announce/recruit";
 	}
+	@RequestMapping(value= "/recruit/addRecruit", method= RequestMethod.GET)
+	public String addRecruit(Model model) {
+		return "announce/addRecruit";
+	}
+	@RequestMapping(value= "/recruit/addRecruit", method= RequestMethod.POST)
+	public String addRecruit(Model model , RecruitVO vo) {
+		
+		postService.addRecruit(vo);
+		
+		
+		return "redirect:/recruit";
+	}
+	@RequestMapping(value= "/recruit/specific", method= RequestMethod.GET)
+	public String recruitSpecific(Model model ,@RequestParam("request_code") String request_code) {
+		
+		RecruitVO ck = postService.getRequestspecific(request_code);
+		model.addAttribute("specific", ck);
+		System.out.println(ck);
+		System.out.println("1");
+		
+		
+		return "announce/recruitSpecific";
+	}
+	
 	
 	
 	@RequestMapping(value = "/announce/specificck", method = RequestMethod.GET)
