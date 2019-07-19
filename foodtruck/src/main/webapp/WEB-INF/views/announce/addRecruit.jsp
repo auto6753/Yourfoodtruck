@@ -22,7 +22,7 @@
 	</div>
 	<div style="height: 800px;">
 		
-		<div id="content1" style="display: inline-block;">
+		<div id="content" style="display: inline-block;">
 
 
 

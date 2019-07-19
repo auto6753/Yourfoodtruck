@@ -93,15 +93,43 @@ public class PostServiceImplement implements PostService {
 		mapper.addRecruit(vo);
 		
 	}
+	//일반모집공고목록 불러오기
 	@Override
 	public ArrayList<RecruitVO> getList(RecruitVO vo) {
 		
 		return mapper.getList(vo);
 	}
+	//일반모집공고 상세보기
 	@Override
 	public RecruitVO getRequestspecific(String request_code) {
 		// TODO Auto-generated method stub
 		return mapper.getRequestspecific(request_code);
+	}
+	//일반모집공고 조회수
+	@Override
+	public void updateVisit(String request_code) {
+		// TODO Auto-generated method stub
+		mapper.updateVisit(request_code);
+		
+	}
+	//일반모집공고 삭제
+	@Override
+	public void deleteRequest(RecruitVO vo) {
+		
+		mapper.deleteRequest(vo);
+	}
+	//일반모집공고 수정페이지 이동
+	@Override
+	public RecruitVO getRequestmodify(String request_code) {
+		
+		return mapper.getRequestmodify(request_code);
+	}
+	//일반모집공고 수정하기
+	@Override
+	public void requestmodifysuccess(RecruitVO vo) {
+		
+		mapper.requestmodifysuccess(vo);
+		
 	}
 
 

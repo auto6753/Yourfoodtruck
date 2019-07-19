@@ -93,8 +93,8 @@
 	</select>
 	<!-- 일반모집공고 등록하기 -->
 	<insert id="addRecruit" parameterType="com.food.project.domain.RecruitVO">
-		insert into request(request_code,request_title,request_content,request_regdate)
-		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},sysdate)
+		insert into request(request_code,request_title,request_content,request_email,request_regdate)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},#{request_email},sysdate)
 	</insert>
 	<!-- 일반모집공고리스트 불러오기 -->
 	<select id="getList" resultType="com.food.project.domain.RecruitVO" >
@@ -104,4 +104,22 @@
 	<select id="getRequestspecific" resultType="com.food.project.domain.RecruitVO" >
 		select * from request where request_code = #{request_code} 
 	</select>
+	<!-- 일반모집공고 조회수올리기 -->
+	<update id="updateVisit" parameterType="com.food.project.domain.RecruitVO">
+		update request set request_view = request_view + 1 where request_code = #{request_code}
+	</update>
+	<!-- 일반모집공고 삭제하기 -->
+	<delete id="deleteRequest" parameterType="com.food.project.domain.RecruitVO" >
+		delete from request where request_code=#{request_code}
+	</delete>
+	<!-- 일반모집공고 수정페이지 이동 -->
+	<select id="getRequestmodify" resultType="com.food.project.domain.RecruitVO" >
+		select * from request where request_code = #{request_code}
+	</select>
+	<!-- 일반모집공고 수정하기-->
+	<update id="requestmodifysuccess" parameterType="com.food.project.domain.RecruitVO">
+		update request set request_title=#{request_title} , request_content=#{request_content} where request_code=#{request_code}
+	</update>
+	
+	
 </mapper>

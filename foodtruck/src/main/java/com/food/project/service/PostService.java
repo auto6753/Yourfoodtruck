@@ -47,8 +47,18 @@ public interface PostService {
 	public ArrayList<ReviewVO> getReview(String email);
 	//일반모집공고 등록하기
 	public void addRecruit(RecruitVO vo);
+	//일반모집공고 목록불러오기
 	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	//일반모집공고 상세보기
 	public RecruitVO getRequestspecific(String request_code);
+	//일반모집공고 조회수
+	public void updateVisit(String request_code);
+	//일반모집공고 삭제
+	public void deleteRequest(RecruitVO vo);
+	//일반모집공고 수정페이지 이동
+	public RecruitVO getRequestmodify(String request_code);
+	//일반모집공고 수정하기
+	public void requestmodifysuccess(RecruitVO vo);
 	
 	
 	

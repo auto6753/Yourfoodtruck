@@ -16,48 +16,35 @@
 
 <script>
 	$(document).ready(function(){
-		$("#delete").click(function(){
-			var request_code = ${specific.request_code};
-			//alert(request_code);
+		$("#modifysuccess").click(function(){
+			
+			var a = $(this);
+			var requestcode = a.next().val();
+			//alert(requestcode);
+			var requesttitle = $("#titles").val();
+			//alert(requesttitle);
+			var requestcontent = $("#contentt").val();
+			//alert(requestcontent);
 			var query = {
-					request_code : request_code
+					request_code : requestcode,
+					request_title : requesttitle,
+					request_content : requestcontent
 					
 			}
 			$.ajax({
 				
-				url: "/recruit/delete",
+				
+				url: "/recruit/successmodify",
 				type: "post",
 				data: query,
-				success : function(data){
+				success:function(data){
 					
-					location.href="/recruit";
+					location.href="/recruit/specific?request_code="+requestcode;
 				}
-				
 			});
 			
-			
 		});
-		$("#modify").click(function(){
-			var a = $(this);
-			var requestcode = a.next().val();
-			//alert(requestcode);
-			location.href="/recruit/modify?request_code="+requestcode;
 		
-		$("#request").click(function(){
-			var a = $(this);
-			var requestcode = a.next().val();
-			//alert(requestcode);
-			location.href="/recruit/requestsuccess?request_code="+requestcode;
-			
-			
-		});	
-		
-
-			
-			
-			
-			
-		});
 	});
 
 </script>
@@ -65,7 +52,7 @@
 <body>
 
 	<div id="title" class="">
-		<p>${specific.request_title }</p>
+		<p>공고 수정</p>
 	</div>
 	<div style="height: 800px;">
 		
@@ -75,31 +62,23 @@
 
 	
 			<div id="box">
-					
+					<div class="form-group">
+						<label for="exampleInputEmail1">제목</label> <input
+							name="request_title" id="titles" type="text" class="form-control" value="${requestmodify.request_title }">
+					</div>
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">내용</label>
-						
 						<span>
-						
 						<textarea name="request_content" id="contentt" class="form-control"
-							id="exampleFormControlTextarea1"  rows="8"  readonly>${specific.request_content}</textarea>
-					
+							 rows="8">${requestmodify.request_content }</textarea>
 						 </span>
 						
 					</div>
-					<c:if test="${sessionScope.sessionid.email != specific.request_email}">
-					<button id="request" class="btn" >참가신청</button> 
-					<input type="hidden" value="${specific.request_code}">
-					</c:if>
-					<c:if test="${sessionScope.sessionid.email == specific.request_email}">
-					<input id="delete" type="button" class="btn" value="삭제">
-					<input type="hidden" value="${specific.request_code}">
-					<input id="modify" type="button" class="btn" value="수정">
-					<input type="hidden" value="${specific.request_code}">
-					</c:if>
+					<button id="modifysuccess" class="btn" >수정완료</button>
+					 <input type="hidden" name="request_code"value="${requestmodify.request_code }">
 					<input id="dd" onclick="history.go(-1);" class="btn" value="취소">
 				</div>
-
+	
 
 		</div>
 

@@ -43,5 +43,9 @@ public interface PostMapper {
 	public ArrayList<RecruitVO> getList(RecruitVO vo);
 	/* public ArrayList<RecruitVO> getSpecific(String request_code); */
 	public RecruitVO getRequestspecific(String request_code);
+	public void updateVisit(String request_code);
+	public void deleteRequest(RecruitVO vo);
+	public RecruitVO getRequestmodify(String request_code);
+	public void requestmodifysuccess(RecruitVO vo);
 
 }

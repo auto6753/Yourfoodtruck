@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
+import com.food.project.domain.RequestdataVO;
 import com.food.project.paging.PostPager;
 import com.food.project.service.AreaService;
 import com.food.project.service.PostService;
@@ -92,7 +97,11 @@ public class AnnounceController {
 		return "announce/addRecruit";
 	}
 	@RequestMapping(value= "/recruit/addRecruit", method= RequestMethod.POST)
-	public String addRecruit(Model model , RecruitVO vo) {
+	public String addRecruit(Model model , RecruitVO vo , HttpSession session ) {
+		
+		CustomerVO cvo = (CustomerVO) session.getAttribute("sessionid");
+		
+		vo.setRequest_email(cvo.getEmail());
 		
 		postService.addRecruit(vo);
 		
@@ -104,11 +113,48 @@ public class AnnounceController {
 		
 		RecruitVO ck = postService.getRequestspecific(request_code);
 		model.addAttribute("specific", ck);
-		System.out.println(ck);
-		System.out.println("1");
+		//System.out.println(ck);
+		//System.out.println("1");
 		
+		postService.updateVisit(request_code);
 		
 		return "announce/recruitSpecific";
+	}
+	
+	@RequestMapping(value= "/recruit/modify", method= RequestMethod.GET)
+	public String recruitModify(Model model ,@RequestParam("request_code") String request_code) {
+		
+		RecruitVO ck = postService.getRequestmodify(request_code);
+		System.out.println(ck);
+		model.addAttribute("requestmodify", ck);
+		
+	
+		
+		return "announce/recruitModify";
+	}
+	@RequestMapping(value= "/recruit/successmodify", method= RequestMethod.POST)
+	@ResponseBody
+	public String successmodify(Model model , RecruitVO vo) {
+		
+		postService.requestmodifysuccess(vo);
+		
+	
+		
+	
+		
+		return "";
+	}
+	
+	@RequestMapping(value= "/recruit/delete", method= RequestMethod.POST)
+	@ResponseBody
+	public String recruitDelete(Model model ,RecruitVO vo ) {
+		
+		postService.deleteRequest(vo);
+		
+		
+	
+		
+		return "";
 	}
 	
 	

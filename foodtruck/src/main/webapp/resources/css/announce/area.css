@@ -47,18 +47,50 @@ label{
 }
 #contentt{
 	    width: 80%;
+	   
+	    font-size:25px;
+}
+#contenttt{
+	width: 80%;
+	 height: 400px;
 	    font-size:25px;
 }
 #d{
 	 background-color: rgb(255, 94, 24);
    color: white;
-   width:20%;
-	    margin-left: 39.3%;
+   width:10%;
+	   
 }
 #dd{
 	 background-color: rgb(255, 94, 24);
    color: white;
+   width:10%;
 	
+}
+#modifysuccess{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+       margin-left: 59.8%;
+	
+}
+#delete{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+   margin-left:49.5%
+	
+}
+#request{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+   margin-left:59.5%;
+}
+#modify{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
 }
 
 #searchall {

@@ -22,7 +22,7 @@
 	<div style="height: 800px;">
 	
 
-	
+
 	<div id="content1" style="display: inline-block; ">
 	
 	<div id="searchalll">
@@ -45,6 +45,7 @@
 					<th>제목</th>
 					<th>등록일</th>
 					<th>조회수</th>
+					<th>참여현황</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +55,7 @@
 					<input type="hidden" value="${row.request_code }"> 
 					<td>${row.request_regdate}</td>
 					<td>${row.request_view}</td>
+					<td>${row.request_truck_count }</td>
 				</c:forEach>
 			</tbody>
 		</table>
