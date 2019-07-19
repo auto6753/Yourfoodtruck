@@ -65,9 +65,8 @@ public class AnnounceController {
 		return "announce/localrecruit";
 	}
 	@RequestMapping(value = "/recruit" , method= RequestMethod.GET)
-	public String recruits(Model model/*@RequestParam(defaultValue="1") int post_class,
-			@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword*/
-			, RecruitVO vo) {
+	public String recruits(Model model/*@RequestParam(defaultValue="1") int post_class, @RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword*/, RecruitVO vo) {
+		System.out.println("ann/recruit");
 		ArrayList<RecruitVO> vo1 = postService.getList(vo);
 		System.out.println(vo1);
 		model.addAttribute("recruit" , vo1);

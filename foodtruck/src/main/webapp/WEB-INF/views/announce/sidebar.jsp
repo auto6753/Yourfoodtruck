@@ -34,7 +34,7 @@ span {
 	<div class="list-group">
 				<ul class="sidebar" >
 					<li class="menu" ><a href="/announce"  class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">지자체 모집공고</span></a>
-					<li class="menu"><a href="/announce/recruit"   class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">일반 모집공고</span></a>
+					<li class="menu"><a href="/recruit" class="list-group-item"><i class="fa fa-credit-card"></i> <span style="font-family: 'Hanna', serif;">일반 모집공고</span></a>
 					<!-- <li class="menu"><a href="/seller/layout"  class="list-group-item active"><i class="fa fa-credit-card"></i> <span>레이아웃</span></a> -->
 					</li>
 				</ul>

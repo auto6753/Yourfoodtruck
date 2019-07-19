@@ -118,8 +118,6 @@
 		resultType="com.food.project.domain.ReviewVO">
 		select * from review where email = #{email}
 	</select>
-<<<<<<< HEAD
-
 	<!--내가 쓴 모집공고 불러오기 -->
 	<select id="getMyRequest"
 		resultType="com.food.project.domain.RecruitVO">
@@ -127,45 +125,55 @@
 	</select>
 
 	<!--해당 글의 모집공고 참가 신청자 보기 -->
-	<select id="getRequest_data"
-		resultType="com.food.project.domain.Request_DataDTO">
-		select b.brandname, a.telephone ,c.request_truck_code, c.request_code
-		,c.request_data_regdate
+	<select id="getRequest_data" resultType="com.food.project.domain.Request_DataDTO">
+		select b.brandname, a.telephone ,c.request_truck_code,c.request_code,c.request_data_regdate
 		from customer a, foodtruck b, request_data c
 		where a.email = b.email
-		and b.truck_code = c.request_truck_code
+		and b.truck_code =
+		c.request_truck_code
 		and c.request_code = #{request_code}
-=======
+	</select>
 	<!-- 일반모집공고 등록하기 -->
-	<insert id="addRecruit" parameterType="com.food.project.domain.RecruitVO">
-		insert into request(request_code,request_title,request_content,request_email,request_regdate)
+	<insert id="addRecruit"
+		parameterType="com.food.project.domain.RecruitVO">
+		insert into
+		request(request_code,request_title,request_content,request_email,request_regdate)
 		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},#{request_email},sysdate)
 	</insert>
 	<!-- 일반모집공고리스트 불러오기 -->
-	<select id="getList" resultType="com.food.project.domain.RecruitVO" >
-		select * from request order by request_regdate desc
+	<select id="getList"
+		resultType="com.food.project.domain.RecruitVO">
+		select * from request
+		order by request_regdate desc
 	</select>
 	<!-- 일반모집공고 상세보기 -->
-	<select id="getRequestspecific" resultType="com.food.project.domain.RecruitVO" >
-		select * from request where request_code = #{request_code} 
->>>>>>> branch 'dev-tk2' of https://github.com/auto6753/Yourfoodtruck.git
+	<select id="getRequestspecific"
+		resultType="com.food.project.domain.RecruitVO">
+		select * from request
+		where request_code = #{request_code}
 	</select>
 	<!-- 일반모집공고 조회수올리기 -->
-	<update id="updateVisit" parameterType="com.food.project.domain.RecruitVO">
-		update request set request_view = request_view + 1 where request_code = #{request_code}
+	<update id="updateVisit"
+		parameterType="com.food.project.domain.RecruitVO">
+		update request set request_view = request_view + 1 where
+		request_code = #{request_code}
 	</update>
 	<!-- 일반모집공고 삭제하기 -->
-	<delete id="deleteRequest" parameterType="com.food.project.domain.RecruitVO" >
-		delete from request where request_code=#{request_code}
+	<delete id="deleteRequest"
+		parameterType="com.food.project.domain.RecruitVO">
+		delete from request
+		where request_code=#{request_code}
 	</delete>
 	<!-- 일반모집공고 수정페이지 이동 -->
-	<select id="getRequestmodify" resultType="com.food.project.domain.RecruitVO" >
-		select * from request where request_code = #{request_code}
+	<select id="getRequestmodify"
+		resultType="com.food.project.domain.RecruitVO">
+		select * from request
+		where request_code = #{request_code}
 	</select>
-	<!-- 일반모집공고 수정하기-->
-	<update id="requestmodifysuccess" parameterType="com.food.project.domain.RecruitVO">
-		update request set request_title=#{request_title} , request_content=#{request_content} where request_code=#{request_code}
+	<!-- 일반모집공고 수정하기 -->
+	<update id="requestmodifysuccess"
+		parameterType="com.food.project.domain.RecruitVO">
+		update request set request_title=#{request_title} ,
+		request_content=#{request_content} where request_code=#{request_code}
 	</update>
-	
-	
 </mapper>

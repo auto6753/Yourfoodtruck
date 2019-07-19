@@ -89,7 +89,6 @@ public class PostServiceImplement implements PostService {
 	
 	@Override
 	public ArrayList<ReviewVO> getReview(String email) { return mapper.getReview(email);}
-<<<<<<< HEAD
 	
 	@Override //내가쓴 모집공고 불러오기
 	public ArrayList<RecruitVO> getMyRequest(String email) {
@@ -104,7 +103,6 @@ public class PostServiceImplement implements PostService {
 		
 		return mapper.getRequest_data(request_code);
 	}
-=======
 	@Override
 	public void addRecruit(RecruitVO vo) {
 		mapper.addRecruit(vo);
@@ -149,8 +147,5 @@ public class PostServiceImplement implements PostService {
 		
 	}
 
->>>>>>> branch 'dev-tk2' of https://github.com/auto6753/Yourfoodtruck.git
-
-	
 
 }

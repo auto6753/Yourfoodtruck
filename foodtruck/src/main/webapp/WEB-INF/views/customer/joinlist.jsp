@@ -42,7 +42,7 @@ $(document).ready(function(){
 				<td>OO 행사 푸드트럭 모집 </td>
 				<td>1/15~1/16</td>
 				<td>3명</td>
-				<td>진행중 <button class="list">신청 목록</button> <input type="hidden" value="19071800017"></td>
+				<td>진행중 <button class="list">신청 목록</button> <input type="hidden" value="19071900018"></td>
 				<td>3 일후에 종료됩니다.</td>
 				</tr>
 			</tbody>

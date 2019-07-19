@@ -1,16 +1,7 @@
 package com.food.project.domain;
 
-<<<<<<< HEAD
 import lombok.Data;
-
-@Data
-public class RecruitVO {
-
-=======
 import java.sql.Date;
-
-import lombok.Data;
-
 @Data
 public class RecruitVO {
 	public String request_code;
@@ -21,5 +12,4 @@ public class RecruitVO {
 	public String request_email;
 	public Date request_regdate;
 		
->>>>>>> branch 'dev-tk2' of https://github.com/auto6753/Yourfoodtruck.git
 }
