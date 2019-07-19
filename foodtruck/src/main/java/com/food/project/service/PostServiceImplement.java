@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.Request_DataDTO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.PostMapper;
 
@@ -87,6 +89,20 @@ public class PostServiceImplement implements PostService {
 	
 	@Override
 	public ArrayList<ReviewVO> getReview(String email) { return mapper.getReview(email);}
+	
+	@Override //내가쓴 모집공고 불러오기
+	public ArrayList<RecruitVO> getMyRequest(String email) {
+		// TODO Auto-generated method stub
+		return mapper.getMyRequest(email);
+		
+	}
+	
+	@Override //해당 글의 모집공고 참가 신청자 보기 
+	public ArrayList<Request_DataDTO> getRequest_data(String request_code) {
+		// TODO Auto-generated method stub
+		
+		return mapper.getRequest_data(request_code);
+	}
 
 	
 

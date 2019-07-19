@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.Request_DataDTO;
 import com.food.project.domain.ReviewVO;
 
 public interface PostService {
@@ -45,5 +47,11 @@ public interface PostService {
 	
 	public ArrayList<ReviewVO> getReview(String email);
 	
+	//내가쓴 모집공고 불러오기
+	public ArrayList<RecruitVO> getMyRequest(String email);
+
+	//해당 글의 모집공고 참가 신청자 보기 
+	public ArrayList<Request_DataDTO> getRequest_data(String request_code);
+
 	
 }
