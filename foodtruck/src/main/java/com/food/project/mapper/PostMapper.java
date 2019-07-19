@@ -40,7 +40,9 @@ public interface PostMapper {
 	public Map<String,Object> totalPage2(Map<String,Object> map);
 	
 	public ArrayList<ReviewVO> getReview(String email);
-	
+	public void addRecruit(RecruitVO vo);
+	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	public RecruitVO getRequestspecific(String request_code);
 	//내가 쓴 모집공고불러오기
 	public ArrayList<RecruitVO> getMyRequest(String email);
 	

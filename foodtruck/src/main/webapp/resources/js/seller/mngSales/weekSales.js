@@ -31,7 +31,7 @@ $(document).ready(function(){
     		nTotalSalesWeek == 0 &&
     		totalSalesWeek == 0	
     ){
-    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px;'/>");
     	$(".hideTable").css("display", "none");
     } else {
     	google.charts.setOnLoadCallback(drawChart);

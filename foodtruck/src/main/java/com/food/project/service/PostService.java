@@ -46,6 +46,11 @@ public interface PostService {
 	public int totalPage2(@Param("post_class")int post_class, @Param("keyword") String keyword);
 	
 	public ArrayList<ReviewVO> getReview(String email);
+	//일반모집공고 등록하기
+	public void addRecruit(RecruitVO vo);
+	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	public RecruitVO getRequestspecific(String request_code);
+	
 	
 	//내가쓴 모집공고 불러오기
 	public ArrayList<RecruitVO> getMyRequest(String email);

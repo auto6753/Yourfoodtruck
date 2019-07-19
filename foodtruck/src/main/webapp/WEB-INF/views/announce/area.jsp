@@ -120,7 +120,6 @@
 			});
 		});
 	</script>
- 	<button id="toRecruit" class="btn">모집공고 보기</button>
 	<div id="title" class="card-header">
 		<p>허가구역 안내</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 
@@ -177,7 +176,7 @@
  						<input type="hidden" value="${row.ADDR}"/>
 	 					<div class="contents" style="display:inline-block; position:relative;">
 							<a href="#layerPopup">
-								<img src="resources/image/map-marker-2-32.png" style="width:auto; height:15px; position:relative; top:-2px; "/>
+								<img src="resources/image/map-marker-32.png" style="width:auto; height:15px; position:relative; top:-2px; "/>
 							</a>
 					    </div>
  					</td>
@@ -220,9 +219,6 @@
 		$('#forSido').val("${sido}");
 		$('#title').click(function() {
 			location.href = "/area";
-		});
-		$('#view').click(function() {
-			location.href = "/announce";
 		});
 		$(".table td").addClass("word-break");
 		$(".table th").addClass("word-break");

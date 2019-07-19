@@ -118,6 +118,7 @@
 		resultType="com.food.project.domain.ReviewVO">
 		select * from review where email = #{email}
 	</select>
+<<<<<<< HEAD
 
 	<!--내가 쓴 모집공고 불러오기 -->
 	<select id="getMyRequest"
@@ -134,5 +135,19 @@
 		where a.email = b.email
 		and b.truck_code = c.request_truck_code
 		and c.request_code = #{request_code}
+=======
+	<!-- 일반모집공고 등록하기 -->
+	<insert id="addRecruit" parameterType="com.food.project.domain.RecruitVO">
+		insert into request(request_code,request_title,request_content,request_regdate)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},sysdate)
+	</insert>
+	<!-- 일반모집공고리스트 불러오기 -->
+	<select id="getList" resultType="com.food.project.domain.RecruitVO" >
+		select * from request order by request_regdate desc
+	</select>
+	<!-- 일반모집공고 상세보기 -->
+	<select id="getRequestspecific" resultType="com.food.project.domain.RecruitVO" >
+		select * from request where request_code = #{request_code} 
+>>>>>>> branch 'dev-tk2' of https://github.com/auto6753/Yourfoodtruck.git
 	</select>
 </mapper>
