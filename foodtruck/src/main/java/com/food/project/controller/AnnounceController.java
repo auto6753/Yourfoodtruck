@@ -19,6 +19,7 @@ import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.RequestdataVO;
 import com.food.project.paging.PostPager;
 import com.food.project.service.AreaService;
@@ -66,9 +67,9 @@ public class AnnounceController {
 	}
 	@RequestMapping(value = "/recruit" , method= RequestMethod.GET)
 	public String recruits(Model model/*@RequestParam(defaultValue="1") int post_class, @RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword*/, RecruitVO vo) {
-		System.out.println("ann/recruit");
+		//System.out.println("ann/recruit");
 		ArrayList<RecruitVO> vo1 = postService.getList(vo);
-		System.out.println(vo1);
+		//System.out.println(vo1);
 		model.addAttribute("recruit" , vo1);
 		
 		//========================================페이징 하기=======================================
@@ -102,9 +103,9 @@ public class AnnounceController {
 		
 		vo.setRequest_email(cvo.getEmail());
 		
+	
 		postService.addRecruit(vo);
-		
-		
+	
 		return "redirect:/recruit";
 	}
 	@RequestMapping(value= "/recruit/specific", method= RequestMethod.GET)
@@ -142,6 +143,64 @@ public class AnnounceController {
 	
 		
 		return "";
+	}
+	@RequestMapping(value= "/recruit/requestsuccess", method= RequestMethod.POST)
+	@ResponseBody
+	public String successmodify(Model model , RecruitVO vo1,Request_DataVO vo , HttpSession session) {
+		System.out.println("gg");
+		
+		
+		String a = "fail";
+		
+		FoodTruckVO cvo = (FoodTruckVO) session.getAttribute("seller");
+		
+		if(cvo.getTruck_code() == null) {
+			
+			return a;
+		}else {
+			vo.setRequest_truck_code(cvo.getTruck_code());
+			
+			
+			
+			postService.requestsuccess(vo); 
+			postService.updaterequestsuccess(vo1);
+			System.out.println("gg");
+			return "success";
+		}
+		
+		
+	}
+	@RequestMapping(value= "/recruit/requestck", method= RequestMethod.POST)
+	@ResponseBody
+	public String requestck(Model model , RecruitVO vo1 , Request_DataVO vo , HttpSession session) {
+		System.out.println("gg");
+		
+		
+		String a = "fail";
+		
+		FoodTruckVO cvo = (FoodTruckVO) session.getAttribute("seller");
+		
+		if(cvo.getTruck_code() == null) {
+			
+			return a;
+		}else {
+			vo.setRequest_truck_code(cvo.getTruck_code());
+			
+			
+			
+			Request_DataVO ck = postService.requestck(vo); 
+			
+			if(ck == null) {
+				return a;
+			}else {
+				
+				return "success";
+			}
+			
+			
+		}
+		
+		
 	}
 	
 	@RequestMapping(value= "/recruit/delete", method= RequestMethod.POST)

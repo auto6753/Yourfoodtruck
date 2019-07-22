@@ -9,6 +9,7 @@ import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
 import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 
 public interface PostService {
@@ -60,13 +61,23 @@ public interface PostService {
 	public RecruitVO getRequestmodify(String request_code);
 	//일반모집공고 수정하기
 	public void requestmodifysuccess(RecruitVO vo);
+	//일반모집공고 참가신청하기
+	public void requestsuccess(Request_DataVO vo);
 	
-	
+	//일반모집공고 참여현황 올리기
+	public void updaterequestsuccess(RecruitVO vo1);
 	//내가쓴 모집공고 불러오기
 	public ArrayList<RecruitVO> getMyRequest(String email);
 
 	//해당 글의 모집공고 참가 신청자 보기 
 	public ArrayList<Request_DataDTO> getRequest_data(String request_code);
+	public Request_DataVO requestck(Request_DataVO vo);
+	
+	
+	
+	
+	
+	
 
 	
 }

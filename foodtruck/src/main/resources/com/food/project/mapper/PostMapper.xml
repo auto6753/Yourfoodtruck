@@ -137,8 +137,8 @@
 	<insert id="addRecruit"
 		parameterType="com.food.project.domain.RecruitVO">
 		insert into
-		request(request_code,request_title,request_content,request_email,request_regdate)
-		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},#{request_email},sysdate)
+		request(request_code,request_title,request_content,request_email,request_start,request_end)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},#{request_email},#{request_start},#{request_end})
 	</insert>
 	<!-- 일반모집공고리스트 불러오기 -->
 	<select id="getList"
@@ -174,6 +174,21 @@
 	<update id="requestmodifysuccess"
 		parameterType="com.food.project.domain.RecruitVO">
 		update request set request_title=#{request_title} ,
-		request_content=#{request_content} where request_code=#{request_code}
+		request_content=#{request_content} , request_start=#{request_start} , request_end=#{request_end} where request_code=#{request_code}
 	</update>
+	<!-- 일반모집공고 참가신청 -->
+		<insert id="requestsuccess" parameterType="com.food.project.domain.Request_DataVO">
+		insert into
+		request_data(request_data_code,request_truck_code,request_code)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(request_data_sequence.NEXTVAL,'FM00000')),#{request_truck_code},#{request_code})
+	</insert>
+	<!-- 일반모집공고 참여현황 올리기 -->
+	<update id="updaterequestsuccess" parameterType="com.food.project.domain.RecruitVO">
+		update request set request_truck_count = request_truck_count + 1 where request_code = #{request_code}
+	</update>
+	<!-- 일반모집공고 참여신청 중복확인 -->
+	<select id="requestck" resultType="com.food.project.domain.Request_DataVO">
+		select * from request_data where request_code = #{request_code} and request_truck_code =#{request_truck_code}
+	</select>
+	
 </mapper>

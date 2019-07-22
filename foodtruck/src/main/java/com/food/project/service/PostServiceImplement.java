@@ -10,6 +10,7 @@ import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
 import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.PostMapper;
 
@@ -146,6 +147,25 @@ public class PostServiceImplement implements PostService {
 		mapper.requestmodifysuccess(vo);
 		
 	}
+	//일반모집공고 참가신청
+	@Override
+	public void requestsuccess(Request_DataVO vo) {
+		
+		mapper.requestsuccess(vo);
+	}
+	@Override
+	public void updaterequestsuccess(RecruitVO vo1) {
+	
+		mapper.updaterequestsuccess(vo1);
+		
+	}
+	@Override
+	public Request_DataVO requestck(Request_DataVO vo) {
+	
+		return mapper.requestck(vo);
+	}
+	
+
 
 
 }

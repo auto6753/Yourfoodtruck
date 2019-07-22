@@ -66,6 +66,21 @@ label{
    color: white;
    width:10%;
 	
+	
+}
+#beginDate{
+	width: 39%;
+	display: inline-block;
+}
+#endDate{
+	width: 39%;
+	display: inline-block;
+}
+#requestsuccess{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+       margin-left: 59.8%;
 }
 #modifysuccess{
 	 background-color: rgb(255, 94, 24);

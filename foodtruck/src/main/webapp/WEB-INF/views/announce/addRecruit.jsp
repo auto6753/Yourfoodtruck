@@ -14,6 +14,42 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 
+<script>
+/* $(document).ready(function(){
+	$("#d").click(function(){
+		
+
+	var title = $("#titles").val();
+	var requeststart = new Date($("#beginDate").val()).getTime(); // 이벤트 시작일
+	var requestend = new Date($("#endDate").val()).getTime(); // 이벤트 종료일
+	var content = $("#contentt").val();
+	
+	
+	var query={
+			request_title : title,
+			request_start : requeststart,
+			request_end : requestend,
+			request_content : content
+ 		
+	}
+	$.ajax({
+		
+		url: "/recruit/addRecruit",
+		type: "post",
+		data: query,
+		success: function(data){
+			
+			
+			
+		}
+		
+	});
+	});
+});	
+	 */
+
+
+</script>
 </head>
 <body>
 
@@ -26,18 +62,26 @@
 
 
 
-		<form id="all" action="/recruit/addRecruit" method="post" >
+<form id="all" action="/recruit/addRecruit" method="post" >
 			<div id="box">
 					<div class="form-group">
 						<label for="exampleInputEmail1">제목</label> <input
 							name="request_title" id="titles" type="text" class="form-control">
 					</div>
 					<div class="form-group">
+								<label for="exampleInputEmail1">기간</label>
+								<div>
+										<input type="datetime-local" id="beginDate" class="form-control" name="request_start"/>
+										<span>~</span>
+										<input type="datetime-local" id="endDate" class="form-control" name="request_end" required/>
+								</div>		
+								
+					</div>	
+					<div class="form-group">
 						<label for="exampleFormControlTextarea1">내용</label>
 						<span>
 						<textarea name="request_content" id="contentt" class="form-control"
 							id="exampleFormControlTextarea1" rows="6">장소: ex)서울시 동대문구 00박람회장
-입점기간: ex)00년00월00일(월)~00년00월00일(일)
 입점료: ex)3일 총 25만원
 모집대수: ex)00대
 희망메뉴: ex)치킨종류
@@ -49,10 +93,10 @@
 						 </textarea>
 						 </span>
 					</div>
-					<input id="d" type="submit" class="btn" value="등록"> 
+					<button id="d" class="btn">등록</button>
 					<input id="dd" onclick="history.go(-1);" class="btn" value="취소">
 				</div>
-		</form>
+		</form> 
 
 		</div>
 

@@ -7,6 +7,7 @@ import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
 import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.paging.PostPager;
 public interface PostMapper {
@@ -54,6 +55,9 @@ public interface PostMapper {
 	
 	//해당 글의 모집공고 참가 신청자 보기 
 	public ArrayList<Request_DataDTO> getRequest_data(String request_code);
+	public void requestsuccess(Request_DataVO vo);
+	public void updaterequestsuccess(RecruitVO vo1);
+	public Request_DataVO requestck(Request_DataVO vo);
 
 
 }

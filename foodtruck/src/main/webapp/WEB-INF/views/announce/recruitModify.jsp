@@ -24,11 +24,16 @@
 			var requesttitle = $("#titles").val();
 			//alert(requesttitle);
 			var requestcontent = $("#contentt").val();
+			var requeststart = $("#beginDate").val();
+			var requestend = $("#endDate").val();
 			//alert(requestcontent);
 			var query = {
 					request_code : requestcode,
 					request_title : requesttitle,
-					request_content : requestcontent
+					request_content : requestcontent,
+					request_start : requeststart,
+					request_end : requestend
+					
 					
 			}
 			$.ajax({
@@ -66,6 +71,15 @@
 						<label for="exampleInputEmail1">제목</label> <input
 							name="request_title" id="titles" type="text" class="form-control" value="${requestmodify.request_title }">
 					</div>
+					<div class="form-group">
+								<label for="exampleInputEmail1">기간</label>
+								<div>
+										<input type="datetime-local" id="beginDate" class="form-control" name="request_start" value="${requestmodify.request_start}"/>
+										<span>~</span>
+										<input type="datetime-local" id="endDate" class="form-control" name="request_end"  value="${requestmodify.request_end}"required/>
+								</div>		
+								
+					</div>	
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">내용</label>
 						<span>
