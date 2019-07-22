@@ -13,6 +13,12 @@
 	href="<c:url value ="/resources/css/customercss/cusInfo.css"/>" />
 </head>
 <body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<jsp:include page="sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-9">
 	<div id="with" class="col">
 		<h1 style="text-align: center; padding-top: 20px;">회원정보</h1>
 
@@ -86,11 +92,13 @@
 					</div>
 				</div>
 			</div>
-			<br> 성별: 남<br> 생년월일: 1997.02.11<br>
 			휴대전화:${cusinfo.telephone}
 
 		</div>
 	</div>
+	</div>
+</div>
+</div>
 </body>
 <script>
    

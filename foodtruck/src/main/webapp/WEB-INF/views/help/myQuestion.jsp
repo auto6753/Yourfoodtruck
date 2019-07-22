@@ -11,6 +11,12 @@
 <body>
 <div>
 <body>
+		<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<jsp:include page="../customer/sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-9">
 	<div id="with" class="col">
 		<h1 id="bb">문의내역</h1>
 		<br>
@@ -37,6 +43,9 @@
 </c:forEach> --%>
 			</tbody>
 		</table>
+	</div>
+	</div>
+	</div>
 	</div>
 	<script>
 $(document).ready(function(){

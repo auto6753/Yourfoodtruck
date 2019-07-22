@@ -82,7 +82,7 @@ public class SellerController {
 	private SellerService sellerservice;
 	private EventService eventService;
 	private CallListService callService;
-	private FoodTruckService truckService;
+	private FoodTruckService truckService; 
 	private PaymentService paymentService;
 	private EventMapper eventmapper;
 	private SellerMapper sellermapper;
@@ -108,6 +108,8 @@ public class SellerController {
 	
 	@RequestMapping(value="/mngSales", method=RequestMethod.GET) 
 	public String mngSales(Model model, HttpSession session, HttpServletRequest request) {
+		String queryString = request.getParameter("type");
+		model.addAttribute("type", queryString);
 		
 		return "seller/mngSales/todaySales";
 	}
@@ -226,6 +228,9 @@ public class SellerController {
 	}
 	@RequestMapping(value="/salesInfo", method= {RequestMethod.GET, RequestMethod.POST})
 	public String salesInfo(Model model, HttpSession session, HttpServletRequest request) {
+		String type = request.getParameter("type");
+		model.addAttribute("type", type);
+		
 		String pageName;
 		try {
 			pageName = request.getParameter("pageName");
@@ -1294,10 +1299,8 @@ public class SellerController {
 		String[] discount = discount2.split(",");
 //		System.out.println(menuCode[0]);
 //		System.out.println(discount[0]);
-		System.out.println("?");
 		
 		for(int i=0; i<menuCode.length; i++) {
-			System.out.println("??");
 			EventMenuVO emvo = new EventMenuVO();
 			emvo.setMenu_code(menuCode[i]);
 			emvo.setDiscount(Integer.parseInt(discount[i]));
