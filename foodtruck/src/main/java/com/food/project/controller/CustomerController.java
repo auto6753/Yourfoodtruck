@@ -25,6 +25,7 @@ import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.Request_DataDTO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.service.CallListService;
@@ -454,7 +455,23 @@ public class CustomerController {
 		c = (CustomerVO) request.getSession().getAttribute("sessionid");
 		
 		String email = c.getEmail();
+		System.out.println(email);
+		List<RecruitVO> re = post.getMyRequest(email);
 		
+		if(re.isEmpty()) {
+			System.out.println("null");
+		}else {
+			System.out.println(re);
+			net.sf.json.JSONArray jsonArray1 = net.sf.json.JSONArray.fromObject(re);
+			
+			System.out.println(jsonArray1);
+		
+			model.addAttribute("list", jsonArray1);
+		}
+		
+//		JSONArray a = new JSONArray();
+//		a.add(re);
+//		System.out.println(a);
 		
 		return "customer/joinlist";
 	}

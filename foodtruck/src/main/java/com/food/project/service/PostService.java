@@ -71,12 +71,15 @@ public interface PostService {
 
 	//해당 글의 모집공고 참가 신청자 보기 
 	public ArrayList<Request_DataDTO> getRequest_data(String request_code);
+<<<<<<< HEAD
 	public Request_DataVO requestck(Request_DataVO vo);
 	
 	
 	
 	
 	
+=======
+>>>>>>> branch 'dev-tk2' of https://github.com/auto6753/Yourfoodtruck.git
 	
 
 	
