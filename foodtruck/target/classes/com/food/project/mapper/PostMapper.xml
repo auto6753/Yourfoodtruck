@@ -119,9 +119,8 @@
 		select * from review where email = #{email}
 	</select>
 	<!--내가 쓴 모집공고 불러오기 -->
-	<select id="getMyRequest"
-		resultType="com.food.project.domain.RecruitVO">
-		select * from request where email = #{email}
+	<select id="getMyRequest" resultType="com.food.project.domain.RecruitVO">
+		select * from request where request_email=#{email}
 	</select>
 
 	<!--해당 글의 모집공고 참가 신청자 보기 -->

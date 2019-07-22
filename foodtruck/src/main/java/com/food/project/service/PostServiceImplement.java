@@ -93,6 +93,7 @@ public class PostServiceImplement implements PostService {
 	@Override //내가쓴 모집공고 불러오기
 	public ArrayList<RecruitVO> getMyRequest(String email) {
 		// TODO Auto-generated method stub
+		
 		return mapper.getMyRequest(email);
 		
 	}
