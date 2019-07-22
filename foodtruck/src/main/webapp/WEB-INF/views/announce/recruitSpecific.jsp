@@ -9,8 +9,7 @@
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/announce/area.css"/>" />
+<link rel="stylesheet" href="/resources/css/announce/area.css"" />
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 
@@ -116,10 +115,6 @@
 	<div style="height: 800px;">
 		
 		<div id="content" style="display: inline-block;">
-
-
-
-	
 			<div id="box">
 					
 					<div class="form-group">
@@ -146,7 +141,7 @@
 					<c:if test="${sessionScope.sessionid.email != specific.request_email}">
 					<button id="request" class="btn" >참가신청</button>
 					<input type="hidden" value="${specific.request_code}">
-					<button id="requestsuccess" class="btn"style="display: none; ">참가중</button>
+					<button id="requestsuccess" class="btn"style="display: none; ">신청완료</button>
 					</c:if>
 					<c:if test="${sessionScope.sessionid.email == specific.request_email}">
 					<input id="delete" type="button" class="btn" value="삭제">
@@ -156,12 +151,7 @@
 					</c:if>
 					<input id="dd"  class="btn" value="취소">
 				</div>
-
-
 		</div>
-
 	</div>
-
-
 </body>
 </html>
