@@ -16,6 +16,7 @@ $(document).ready(function(){
 	});
 	$(".mozip").click(function() {
 		// 모집공고 페이지
+		location.href ="/customer/joinlist";
 	});
 	$(".cusInfo").click(function() {
 		location.href = "/customer/cusInfo";

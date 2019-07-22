@@ -237,8 +237,6 @@ public class SellerController {
 		model.addAttribute("type", type);
 		
 		String pageName;
-		String type = request.getParameter("type");
-		model.addAttribute("type", type);
 		try {
 			pageName = request.getParameter("pageName");
 		} catch (Exception e) {

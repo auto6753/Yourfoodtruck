@@ -39,7 +39,7 @@ span {
 					<li class="menu onboard2" style="display:none;" ><a href="/customer/onSale"  class="list-group-item"><span style="font-family: 'Hanna', serif;">운행중인 트럭</span></a>
 					<li class="menu review"><a href="/customer/review"   class="list-group-item"><span style="font-family: 'Hanna', serif;">리뷰관리</span></a>
 					<li class="menu callList"><a href="/customer/callList"   class="list-group-item"><span style="font-family: 'Hanna', serif;">호출내역</span></a>
-					<li class="menu"><a href="#"  class="list-group-item"><span style="font-family: 'Hanna', serif;">모집공고</span></a>
+					<li class="menu"><a href="/customer/joinlist"  class="list-group-item"><span style="font-family: 'Hanna', serif;">모집공고</span></a>
 					<li class="menu cusInfo"><a href="/customer/cusInfo"   class="list-group-item"><span style="font-family: 'Hanna', serif;">회원정보관리</span></a>
 					<li class="menu myQuestion"><a href="/help/myQuestion"   class="list-group-item"><span style="font-family: 'Hanna', serif;">문의내역</span></a>
 					<li class="menu goodbyeForm"><a href="/customer/goodbyeForm"   class="list-group-item"><span style="font-family: 'Hanna', serif;">회원탈퇴</span></a>
