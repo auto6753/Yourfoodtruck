@@ -2,106 +2,192 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.PostMapper">
-	
+
 	<!-- 페이징용 sql문 -->
 	<sql id="search">
 		where post_class=#{post_class}
-		and post_title like '%'||#{keyword}||'%'	
+		and post_title like
+		'%'||#{keyword}||'%'
 	</sql>
 	<sql id="pagingHeader">
 		select * from (
-			select rownum rn, a.* from(
+		select rownum rn, a.* from(
 	</sql>
 	<sql id="pagingFooter">
-			) a
+		) a
 		) where rn between #{start} and #{end}
 	</sql>
 	<!-- 게시글 리스트 불러오기 -->
-	<select id="getPostList" resultType="com.food.project.domain.PostVO">
-		select post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate, to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,post_content,post_title,post_visit,post_url,post_class
+	<select id="getPostList"
+		resultType="com.food.project.domain.PostVO">
+		select post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate,
+		to_char(post_moddate,'yyyy/mm/dd')as post_moddate
+		,post_content,post_title,post_visit,post_url,post_class
 		from post
-		where post_class=#{post_class}
+		where
+		post_class=#{post_class}
 		order by post_regdate DESC
-	<!-- 페이징 하고나서 페이지 불러오기 -->
+		<!-- 페이징 하고나서 페이지 불러오기 -->
 	</select>
 	<select id="allList" resultType="map" parameterType="map">
 		<!-- 목록 조회 및 페이징 전체 쿼리 -->
 		<include refid="pagingHeader"></include>
-			select rownum,post_code,to_char(post_regdate,'yyyy/mm/dd')as post_regdate,
-			to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,
-			post_content,post_title,post_visit,post_url,post_class
-			from post
-			<include refid="search"></include>
-			order by post_regdate desc
+		select rownum,post_code,to_char(post_regdate,'yyyy/mm/dd')as
+		post_regdate,
+		to_char(post_moddate,'yyyy/mm/dd')as post_moddate ,
+		post_content,post_title,post_visit,post_url,post_class
+		from post
+		<include refid="search"></include>
+		order by post_regdate desc
 		<include refid="pagingFooter"></include>
 	</select>
 	<!-- 조회수 -->
-	<update id="updatePostvisit" parameterType="com.food.project.domain.PostVO">
-		update post set post_visit = post_visit + 1 where post_code = #{post_code , jdbcType=VARCHAR}
-		
-	</update>
-	
-	<!-- 게시글 불러오기 -->
-	<select id="getPost" resultType="com.food.project.domain.PostVO">
-		select * from post where post_code=#{post_code , jdbcType=VARCHAR}
-	</select>
-	
-	<!-- 게시글 등록하기 -->
-	<insert id="insertPost" parameterType="com.food.project.domain.PostVO">
-		insert into post(post_code,post_content,post_title,post_visit,post_url,post_class)
-		values (concat(to_char(sysdate,'yymmdd'),to_char(post_sequence.NEXTVAL,'FM00000')),#{post_content},#{post_title},#{post_visit},#{post_url,jdbcType=VARCHAR},#{post_class})
-	</insert>
-	<!-- 상세보기정보 수정페이지로 넘기기 -->
-	<select id="getSpecific" resultType="com.food.project.domain.PostVO">
-		select * from post where post_code=#{post_code ,jdbcType=VARCHAR }
-	</select>
-	
-	<!-- 게시글 수정하기 -->
-	<update id="updatePost" parameterType="com.food.project.domain.PostVO">
-		update post set post_moddate = sysdate, post_content=#{post_content},post_title=#{post_title} where post_code=#{post_code , jdbcType=VARCHAR}<!-- post_url=#{post_url} -->
+	<update id="updatePostvisit"
+		parameterType="com.food.project.domain.PostVO">
+		update post set post_visit = post_visit + 1 where
+		post_code = #{post_code , jdbcType=VARCHAR}
+
 	</update>
 
-	<!-- 게시글 삭제하기 -->	
-	<delete id="deletePost" parameterType="com.food.project.domain.PostVO" >
-		delete from post where post_code=#{post_code}
+	<!-- 게시글 불러오기 -->
+	<select id="getPost" resultType="com.food.project.domain.PostVO">
+		select * from post where
+		post_code=#{post_code , jdbcType=VARCHAR}
+	</select>
+
+	<!-- 게시글 등록하기 -->
+	<insert id="insertPost"
+		parameterType="com.food.project.domain.PostVO">
+		insert into
+		post(post_code,post_content,post_title,post_visit,post_url,post_class)
+		values
+		(concat(to_char(sysdate,'yymmdd'),to_char(post_sequence.NEXTVAL,'FM00000')),#{post_content},#{post_title},#{post_visit},#{post_url,jdbcType=VARCHAR},#{post_class})
+	</insert>
+	<!-- 상세보기정보 수정페이지로 넘기기 -->
+	<select id="getSpecific"
+		resultType="com.food.project.domain.PostVO">
+		select * from post where post_code=#{post_code
+		,jdbcType=VARCHAR }
+	</select>
+
+	<!-- 게시글 수정하기 -->
+	<update id="updatePost"
+		parameterType="com.food.project.domain.PostVO">
+		update post set post_moddate = sysdate,
+		post_content=#{post_content},post_title=#{post_title} where
+		post_code=#{post_code , jdbcType=VARCHAR}<!-- post_url=#{post_url} -->
+	</update>
+
+	<!-- 게시글 삭제하기 -->
+	<delete id="deletePost"
+		parameterType="com.food.project.domain.PostVO">
+		delete from post where
+		post_code=#{post_code}
 	</delete>
 	<delete id="deleteAnnounce">
 		delete from post where post_class=1
 	</delete>
-	
-	
+
+
 	<!-- 댓글 등록하기 -->
-	<select id="getReply" resultType="com.food.project.domain.ReplyVO">
-		select * from post_reply where post_code=#{post_code} order by reply_num
+	<select id="getReply"
+		resultType="com.food.project.domain.ReplyVO">
+		select * from post_reply where post_code=#{post_code} order
+		by reply_num
 	</select>
-	
-	<!-- 댓글 가져오기 -->	
-	<insert id="insertReply" parameterType="com.food.project.domain.ReplyVO">
-		insert into post_reply(post_code,reply_regdate,reply_content,reply_num)
+
+	<!-- 댓글 가져오기 -->
+	<insert id="insertReply"
+		parameterType="com.food.project.domain.ReplyVO">
+		insert into
+		post_reply(post_code,reply_regdate,reply_content,reply_num)
 		values(#{post_code},#{reply_regdate},#{reply_content},reply_seq.NEXTVAL)
 	</insert>
 	<!-- 총 게시물 갯수 가져오기 -->
 	<select id="totalPage" resultType="map">
-		select count(*) tot_page from post where post_class=#{post_class}
+		select count(*) tot_page from
+		post where post_class=#{post_class}
 	</select>
 	<select id="totalPage2" resultType="map" parameterType="map">
-		select count(*) tot_page from post
-		where post_class=#{post_class} and post_title like '%'||#{keyword}||'%'
+		select
+		count(*) tot_page from post
+		where post_class=#{post_class} and
+		post_title like '%'||#{keyword}||'%'
 	</select>
-	<select id="getReview" resultType="com.food.project.domain.ReviewVO">
+	<select id="getReview"
+		resultType="com.food.project.domain.ReviewVO">
 		select * from review where email = #{email}
 	</select>
+	<!--내가 쓴 모집공고 불러오기 -->
+	<select id="getMyRequest" resultType="com.food.project.domain.RecruitVO">
+		select * from request where request_email=#{email}
+	</select>
+
+	<!--해당 글의 모집공고 참가 신청자 보기 -->
+	<select id="getRequest_data" resultType="com.food.project.domain.Request_DataDTO">
+		select b.brandname, a.telephone ,c.request_truck_code,c.request_code,c.request_data_regdate
+		from customer a, foodtruck b, request_data c
+		where a.email = b.email
+		and b.truck_code =
+		c.request_truck_code
+		and c.request_code = #{request_code}
+	</select>
 	<!-- 일반모집공고 등록하기 -->
-	<insert id="addRecruit" parameterType="com.food.project.domain.RecruitVO">
-		insert into request(request_code,request_title,request_content,request_regdate)
-		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},sysdate)
+	<insert id="addRecruit"
+		parameterType="com.food.project.domain.RecruitVO">
+		insert into
+		request(request_code,request_title,request_content,request_email,request_start,request_end)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(request_sequence.NEXTVAL,'FM00000')),#{request_title},#{request_content},#{request_email},#{request_start},#{request_end})
 	</insert>
 	<!-- 일반모집공고리스트 불러오기 -->
-	<select id="getList" resultType="com.food.project.domain.RecruitVO" >
-		select * from request order by request_regdate desc
+	<select id="getList"
+		resultType="com.food.project.domain.RecruitVO">
+		select * from request
+		order by request_regdate desc
 	</select>
 	<!-- 일반모집공고 상세보기 -->
-	<select id="getRequestspecific" resultType="com.food.project.domain.RecruitVO" >
-		select * from request where request_code = #{request_code} 
+	<select id="getRequestspecific"
+		resultType="com.food.project.domain.RecruitVO">
+		select * from request
+		where request_code = #{request_code}
 	</select>
+	<!-- 일반모집공고 조회수올리기 -->
+	<update id="updateVisit"
+		parameterType="com.food.project.domain.RecruitVO">
+		update request set request_view = request_view + 1 where
+		request_code = #{request_code}
+	</update>
+	<!-- 일반모집공고 삭제하기 -->
+	<delete id="deleteRequest"
+		parameterType="com.food.project.domain.RecruitVO">
+		delete from request
+		where request_code=#{request_code}
+	</delete>
+	<!-- 일반모집공고 수정페이지 이동 -->
+	<select id="getRequestmodify"
+		resultType="com.food.project.domain.RecruitVO">
+		select * from request
+		where request_code = #{request_code}
+	</select>
+	<!-- 일반모집공고 수정하기 -->
+	<update id="requestmodifysuccess"
+		parameterType="com.food.project.domain.RecruitVO">
+		update request set request_title=#{request_title} ,
+		request_content=#{request_content} , request_start=#{request_start} , request_end=#{request_end} where request_code=#{request_code}
+	</update>
+	<!-- 일반모집공고 참가신청 -->
+		<insert id="requestsuccess" parameterType="com.food.project.domain.Request_DataVO">
+		insert into
+		request_data(request_data_code,request_truck_code,request_code)
+		values(concat(to_char(sysdate,'yymmdd'),to_char(request_data_sequence.NEXTVAL,'FM00000')),#{request_truck_code},#{request_code})
+	</insert>
+	<!-- 일반모집공고 참여현황 올리기 -->
+	<update id="updaterequestsuccess" parameterType="com.food.project.domain.RecruitVO">
+		update request set request_truck_count = request_truck_count + 1 where request_code = #{request_code}
+	</update>
+	<!-- 일반모집공고 참여신청 중복확인 -->
+	<select id="requestck" resultType="com.food.project.domain.Request_DataVO">
+		select * from request_data where request_code = #{request_code} and request_truck_code =#{request_truck_code}
+	</select>
+	
 </mapper>

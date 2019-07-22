@@ -1,10 +1,9 @@
 package com.food.project.domain;
 
-import java.sql.Date;
-
+import java.util.Date;
 import lombok.Data;
-
 @Data
+
 public class RecruitVO {
 	public String request_code;
 	public String request_title;
@@ -13,5 +12,7 @@ public class RecruitVO {
 	public int request_view;
 	public String request_email;
 	public Date request_regdate;
-		
+	public String request_start;
+	public String request_end;
+	public int request_status;
 }

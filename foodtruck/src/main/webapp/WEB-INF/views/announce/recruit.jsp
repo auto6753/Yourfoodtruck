@@ -22,7 +22,7 @@
 	<div style="height: 800px;">
 	
 
-	
+
 	<div id="content1" style="display: inline-block; ">
 	
 	<div id="searchalll">
@@ -45,6 +45,8 @@
 					<th>제목</th>
 					<th>등록일</th>
 					<th>조회수</th>
+					<th>참여현황</th>
+					<th>모집여부</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +56,13 @@
 					<input type="hidden" value="${row.request_code }"> 
 					<td>${row.request_regdate}</td>
 					<td>${row.request_view}</td>
+					<td>${row.request_truck_count }</td>
+					<c:if test="${row.request_status == 0}">
+					<td>모집중</td>
+					</c:if>
+					<c:if test="${row.request_status == 1 }">
+					<td>모집마감</td>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

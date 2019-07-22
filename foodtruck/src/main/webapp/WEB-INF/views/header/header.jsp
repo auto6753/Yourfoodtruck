@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin" />
 <style>
 @font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 

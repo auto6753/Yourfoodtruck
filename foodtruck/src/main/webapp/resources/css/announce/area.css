@@ -1,27 +1,27 @@
 @charset "UTF-8";
 @font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 p {
-	color: rgb(255, 94, 24);
+   color: rgb(255, 94, 24);
 }
 
 #title {
-	font-size: 200%;
-	width: 100%;
-	height: 80px;
-	/* margin-left: 8.3%; */
-	font-family: 'yg-jalnan';
-	/* border-radius: 15px; */
-	text-align: center;
-	background-color: white;
-	margin-top: 2%;
+   font-size: 200%;
+   width: 100%;
+   height: 80px;
+   /* margin-left: 8.3%; */
+   font-family: 'yg-jalnan';
+   /* border-radius: 15px; */
+   text-align: center;
+   background-color: white;
+   margin-top: 2%;
 }
 #searchalll{
-	position: relative;
+   position: relative;
     left: -30px;
-	
+   
 }
 .sidebar{
-	    position: relative;
+       position: relative;
     top: -60px;
     left: 150px;
     width: 12%;
@@ -35,155 +35,202 @@ p {
 
 }
 label{
-	font-family: 'yg-jalnan';
-	font-size: 20px;
-	
+   font-family: 'yg-jalnan';
+   font-size: 20px;
+   
 }
 #box{
-	    margin-left: 36%;
+       margin-left: 36%;
 }
 #titles{
-	    width: 80%;
+       width: 80%;
 }
 #contentt{
-	    width: 80%;
-	    font-size:25px;
+       width: 80%;
+      
+       font-size:25px;
+}
+#contenttt{
+   width: 80%;
+    height: 400px;
+       font-size:25px;
 }
 #d{
-	 background-color: rgb(255, 94, 24);
+    background-color: rgb(255, 94, 24);
    color: white;
-   width:20%;
-	    margin-left: 39.3%;
+   width:10%;
+      
 }
 #dd{
-	 background-color: rgb(255, 94, 24);
+    background-color: rgb(255, 94, 24);
    color: white;
-	
+   width:10%;
+   
+   
+}
+#beginDate{
+   width: 39%;
+   display: inline-block;
+}
+#endDate{
+   width: 39%;
+   display: inline-block;
+}
+#requestsuccess{
+    background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+       margin-left: 59.8%;
+}
+#modifysuccess{
+    background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+       margin-left: 59.8%;
+   
+}
+#delete{
+    background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+   margin-left:49.5%
+   
+}
+#request{
+    background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+   margin-left:59.5%;
+}
+#modify{
+    background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
 }
 
 #searchall {
-	/* margin-top: -3.3%; */
-	height:50px;
-	margin-left: -2%;
+   /* margin-top: -3.3%; */
+   height:50px;
+   margin-left: -2%;
 }
 
 .form-inline {
-	width: 100%;
-	margin-left: 30px;
-	height:40px;
+   width: 100%;
+   margin-left: 30px;
+   height:40px;
 }
 
 #searchbox {
-	width: 20%;
+   width: 20%;
 }
 
 #searchbutton {
-	background-color: rgb(255, 94, 24);
-	color: white;
+   background-color: rgb(255, 94, 24);
+   color: white;
 }
 
 #pageadd {
-	margin-left: 2px;
+   margin-left: 2px;
 }
 /* #add{
    margin: 0 auto;
    
 }  */
 .pagination {
-	position: relative;
-	left: 46%;
+   position: relative;
+   left: 46%;
 }
 
 #pageadd {
-	background-color: rgb(255, 94, 24);
-	color: white;
+   background-color: rgb(255, 94, 24);
+   color: white;
 }
 
 #nextall {
-	width: 100%;
+   width: 100%;
 }
 
 .navbarr {
-	
-	height:50px;
+   
+   height:50px;
 }
 .navbarrr{
-	height:50px;
-	
+   height:50px;
+   
 }
 
 #top-right a {
-	color: rgb(255, 94, 24) !important;
+   color: rgb(255, 94, 24) !important;
 }
 
 #view {
-	background-color: rgb(255, 94, 24);
-	font-family: 'yg-jalnan';
-	margin-top: 30px;
-	color: azure;
-	width: 100%;
-	text-align: center;
+   background-color: rgb(255, 94, 24);
+   font-family: 'yg-jalnan';
+   margin-top: 30px;
+   color: azure;
+   width: 100%;
+   text-align: center;
 }
 
 @media screen and (min-width: 100px) and (max-width:700px){
-	.table {
-	margin:0 auto;
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent;
-		font-size: 12px;
-	}
+   .table {
+   margin:0 auto;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      background-color: transparent;
+      font-size: 12px;
+   }
 .table .boardaddr{
-	white-space: nowrap;
-	min-width:55px;
-	}
+   white-space: nowrap;
+   min-width:55px;
+   }
 }
 }
 .table {
-	margin:0 auto;
-		width: 330px;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent;
-		font-size: 0.6rem;
-	}
+   margin:0 auto;
+      width: 330px;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      background-color: transparent;
+      font-size: 0.6rem;
+   }
 .table .boardaddr{
-	white-space: nowrap;
-	min-width:55px;
+   white-space: nowrap;
+   min-width:55px;
 }
 .word-break {
-	word-break:break-all;
-	white-space: nowrap;
-	overflow: hidden;
-	min-width:54px;
-	max-width:260px;
+   word-break:break-all;
+   white-space: nowrap;
+   overflow: hidden;
+   min-width:54px;
+   max-width:260px;
 }
 .boardaddr {
-	max-width:150px;
+   max-width:150px;
 }
 .boardTitle{
-	max-width:180px;
+   max-width:180px;
 }
 .boardsido{
-	max-width:54px;
+   max-width:54px;
 }
 #content{
-	
-	width: 80%; 
-	margin: 0 auto;
+   
+   width: 80%; 
+   margin: 0 auto;
 }
 #content1{
-	
-	width: 80%; 
-	margin-left: 10% ;
+   
+   width: 80%; 
+   margin-left: 10% ;
 }
 
 /* .table {
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 1rem;
-	background-color: transparent;
-	font-size: 12px;
-	text-align: center;
+   width: 100%;
+   max-width: 100%;
+   margin-bottom: 1rem;
+   background-color: transparent;
+   font-size: 12px;
+   text-align: center;
 } */

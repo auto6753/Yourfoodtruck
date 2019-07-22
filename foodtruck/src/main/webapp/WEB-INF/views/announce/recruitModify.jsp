@@ -15,46 +15,49 @@
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 
 <script>
-/* $(document).ready(function(){
-	$("#d").click(function(){
-		
-
-	var title = $("#titles").val();
-	var requeststart = new Date($("#beginDate").val()).getTime(); // 이벤트 시작일
-	var requestend = new Date($("#endDate").val()).getTime(); // 이벤트 종료일
-	var content = $("#contentt").val();
-	
-	
-	var query={
-			request_title : title,
-			request_start : requeststart,
-			request_end : requestend,
-			request_content : content
- 		
-	}
-	$.ajax({
-		
-		url: "/recruit/addRecruit",
-		type: "post",
-		data: query,
-		success: function(data){
+	$(document).ready(function(){
+		$("#modifysuccess").click(function(){
 			
+			var a = $(this);
+			var requestcode = a.next().val();
+			//alert(requestcode);
+			var requesttitle = $("#titles").val();
+			//alert(requesttitle);
+			var requestcontent = $("#contentt").val();
+			var requeststart = $("#beginDate").val();
+			var requestend = $("#endDate").val();
+			//alert(requestcontent);
+			var query = {
+					request_code : requestcode,
+					request_title : requesttitle,
+					request_content : requestcontent,
+					request_start : requeststart,
+					request_end : requestend
+					
+					
+			}
+			$.ajax({
+				
+				
+				url: "/recruit/successmodify",
+				type: "post",
+				data: query,
+				success:function(data){
+					
+					location.href="/recruit/specific?request_code="+requestcode;
+				}
+			});
 			
-			
-		}
+		});
 		
 	});
-	});
-});	
-	 */
-
 
 </script>
 </head>
 <body>
 
 	<div id="title" class="">
-		<p>공고 등록</p>
+		<p>공고 수정</p>
 	</div>
 	<div style="height: 800px;">
 		
@@ -62,18 +65,18 @@
 
 
 
-<form id="all" action="/recruit/addRecruit" method="post" >
+	
 			<div id="box">
 					<div class="form-group">
 						<label for="exampleInputEmail1">제목</label> <input
-							name="request_title" id="titles" type="text" class="form-control">
+							name="request_title" id="titles" type="text" class="form-control" value="${requestmodify.request_title }">
 					</div>
 					<div class="form-group">
 								<label for="exampleInputEmail1">기간</label>
 								<div>
-										<input type="datetime-local" id="beginDate" class="form-control" name="request_start"/>
+										<input type="datetime-local" id="beginDate" class="form-control" name="request_start" value="${requestmodify.request_start}"/>
 										<span>~</span>
-										<input type="datetime-local" id="endDate" class="form-control" name="request_end" required/>
+										<input type="datetime-local" id="endDate" class="form-control" name="request_end"  value="${requestmodify.request_end}"required/>
 								</div>		
 								
 					</div>	
@@ -81,22 +84,15 @@
 						<label for="exampleFormControlTextarea1">내용</label>
 						<span>
 						<textarea name="request_content" id="contentt" class="form-control"
-							id="exampleFormControlTextarea1" rows="6">장소: ex)서울시 동대문구 00박람회장
-입점료: ex)3일 총 25만원
-모집대수: ex)00대
-희망메뉴: ex)치킨종류
-전기지원여부: ex)전기지원가능
-기타: ex)쓰레기통 및 쓰레기봉지 구비 필수 
-희망: ex)메뉴당 200인분 이상 
-선정발표일: ex) 00년00월00일 , 선정되는대로 즉시 발표
-						
-						 </textarea>
+							 rows="8">${requestmodify.request_content }</textarea>
 						 </span>
+						
 					</div>
-					<button id="d" class="btn">등록</button>
+					<button id="modifysuccess" class="btn" >수정완료</button>
+					 <input type="hidden" name="request_code"value="${requestmodify.request_code }">
 					<input id="dd" onclick="history.go(-1);" class="btn" value="취소">
 				</div>
-		</form> 
+	
 
 		</div>
 
