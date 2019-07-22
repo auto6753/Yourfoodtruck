@@ -212,7 +212,7 @@
 													</c:forEach>
 												</select>
 												<input type="text" class="menuWidth2" name="price" placeholder="단가" disabled/>
-												<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this.value);" onkeypress="return digit_check(event);" required disabled/>
+												<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this);" onkeypress="return digit_check(event);" required disabled/>
 												<input type="text" class="menuWidth2" name="dResult" placeholder="할인가" required disabled/>
 											</div>
 										</div>
@@ -348,7 +348,7 @@
 													</c:forEach>
 												</select>
 												<input type="text" class="menuWidth2" name="price" placeholder="단가" disabled/>
-												<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this.value);" onkeypress="return digit_check(event);" required disabled/>
+												<input type="number" class="menuWidth2" name="discount" placeholder="할인액" onKeyUp="showDiscResult(this);" onkeypress="return digit_check(event);" required disabled/>
 												<input type="text" class="menuWidth2" name="dResult" placeholder="할인가" required disabled/>
 											</div>
 										</div>
