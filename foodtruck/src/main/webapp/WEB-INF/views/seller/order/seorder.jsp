@@ -41,7 +41,12 @@ margin-top : 50px;
 	<h1>주문 확인 페이지</h1>
 	<div class="wrap"></div>
 	<div class="result"></div>
-	<div class="today_sales">오늘의 매출액 : ${today_sales}원</div>
+	<c:if test="${today_sales =='empty'}">
+		<div class="today_sales">오늘의 매출액 : 0원</div>
+	</c:if>
+	<c:if test="${today_sales !='empty'}">
+		<div class="today_sales">오늘의 매출액 : ${today_sales}원</div>
+	</c:if>
 </body>
 <script>
 var first=true;
@@ -239,7 +244,13 @@ function updateTodaySales() {
  		success:function(data) {
  			var json = JSON.parse(data);
  			console.log(json);
- 			$('.today_sales').html("오늘의 매출액 : "+json.today_sales+"원");
+ 			alert(data);
+ 			if(json.today_sales =="empty") {
+ 				$('.today_sales').html("오늘의 매출액 : 0원");
+ 			}else {
+ 				$('.today_sales').html("오늘의 매출액 : "+json.today_sales+"원");
+ 			}
+ 			
  		},error:function(err) {
  			console.log(err);
  		}

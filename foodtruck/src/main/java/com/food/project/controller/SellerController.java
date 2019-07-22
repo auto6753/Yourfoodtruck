@@ -1625,7 +1625,8 @@ public class SellerController {
 		FoodTruckVO vo2 = (FoodTruckVO) session.getAttribute("seller");
 		String truck_code2 = vo2.getTruck_code();
 		System.out.println(truck_code2);
-		String today_sales = paymentService.getTodaySalesForSeorder(truck_code2);
+		String today_sales;
+		today_sales = paymentService.getTodaySalesForSeorder(truck_code2);
 		System.out.println(today_sales);
 		model.addAttribute("today_sales", today_sales);
 		return "seller/order/seorder";
