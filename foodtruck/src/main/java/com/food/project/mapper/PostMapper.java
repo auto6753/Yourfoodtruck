@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.paging.PostPager;
 public interface PostMapper {
@@ -38,5 +41,23 @@ public interface PostMapper {
 	public Map<String,Object> totalPage2(Map<String,Object> map);
 	
 	public ArrayList<ReviewVO> getReview(String email);
+	public void addRecruit(RecruitVO vo);
+	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	public RecruitVO getRequestspecific(String request_code);
+
+	public void updateVisit(String request_code);
+	public void deleteRequest(RecruitVO vo);
+	public RecruitVO getRequestmodify(String request_code);
+	public void requestmodifysuccess(RecruitVO vo);
+
+	//내가 쓴 모집공고불러오기
+	public ArrayList<RecruitVO> getMyRequest(String email);
+	
+	//해당 글의 모집공고 참가 신청자 보기 
+	public ArrayList<Request_DataDTO> getRequest_data(String request_code);
+	public void requestsuccess(Request_DataVO vo);
+	public void updaterequestsuccess(RecruitVO vo1);
+	public Request_DataVO requestck(Request_DataVO vo);
+
 
 }

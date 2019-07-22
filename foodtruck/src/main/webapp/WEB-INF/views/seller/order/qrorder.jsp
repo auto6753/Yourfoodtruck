@@ -188,7 +188,7 @@ h3 {
 					</div>
 					<div id="click3">
 						<button id="card" class="btn c1">카드결제</button>
-				 		<button id="cash" class="btn c1">현금결제</button>
+				 		<!-- <button id="cash" class="btn c1">현금결제</button> -->
 						<button id="kakaopay" class="btn c1">카카오페이</button>
 						<button id="cancle1" class="btn c1">취소</button>
 					</div>

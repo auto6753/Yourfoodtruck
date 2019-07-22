@@ -13,4 +13,5 @@ public interface AreaService {
 			@Param("keyword")String keyword,@Param("sido") int sido);
 	public int totalPage(int sido);
 	public int totalPage2(@Param("sido")int sido, @Param("keyword") String keyword);
+	
 }

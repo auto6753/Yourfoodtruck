@@ -82,6 +82,7 @@ public class M_LoginController {
 			}else {
 				System.out.println(fd.toString());
 				truckInfo.put("truck_code",fd.getTruck_code());
+				truckInfo.put("brandname",fd.getBrandname());
 				sessionInfo.put("result","success");
 				sessionInfo.put("foodtruck",truckInfo);
 				System.out.println(truckInfo.toString());
@@ -165,15 +166,17 @@ public class M_LoginController {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// 서버 올릴 때 경로
-		System.out.println(path);
-		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
-				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
+		String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		System.out.println(firebasePath);
+		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+				+ File.separator + "resources" + File.separator + "json" + File.separator
+				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+
+
 		//파이어베이스 옵션 설정
 		//파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath);
+			serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")

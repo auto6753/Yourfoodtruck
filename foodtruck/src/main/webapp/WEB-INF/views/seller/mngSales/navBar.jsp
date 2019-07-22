@@ -12,48 +12,48 @@
 <script type="text/javascript"
    src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script>
-   $(document).ready(function() {
-      $(window).scroll(function() {
-         if ($(this).scrollTop() > 50) {
-            $('.top').fadeIn();
-         } else {
-            $('.top').fadeOut();
-         }
-      });
-      
-      $('.top').click(function() {
-         $('html, body').animate({
-            scrollTop : 0
-         }, 400);
-         return false;
-      });
-      
-      var pageVal;
-      pageVal = $("#page").val();
-      
-      switch(pageVal){
-      case "1":
-         $(".today").css("background-color", "red");
-         break;
-      case "2":
-         $(".week").css("background-color", "orange");
-         break;
-      case "3":
-         $(".month").css("background-color", "yellow");
-         break;
-      case "4":
-         $(".year").css("background-color", "green");
-         break;
-      case "5":
-         $(".byDay").css("background-color", "blue");
-         break;
-      case "6":
-         $(".byTime").css("background-color", "navy");
-         break;
-      case "7":
-         $(".selPeriod").css("background-color", "purple");
-      }
-   });
+	$(document).ready(function() {
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 50) {
+				$('.top').fadeIn();
+			} else {
+				$('.top').fadeOut();
+			}
+		});
+
+		$('.top').click(function() {
+			$('html, body').animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
+
+		var pageVal;
+		pageVal = $("#page").val();
+
+		switch (pageVal) {
+		case "1":
+			$(".today").css("background-color", "red");
+			break;
+		case "2":
+			$(".week").css("background-color", "orange");
+			break;
+		case "3":
+			$(".month").css("background-color", "yellow");
+			break;
+		case "4":
+			$(".year").css("background-color", "green");
+			break;
+		case "5":
+			$(".byDay").css("background-color", "blue");
+			break;
+		case "6":
+			$(".byTime").css("background-color", "navy");
+			break;
+		case "7":
+			$(".selPeriod").css("background-color", "purple");
+		}
+	});
 </script>
 <style>
 a.top {

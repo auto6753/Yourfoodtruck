@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.food.project.domain.CustomerVO;
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
+import com.food.project.domain.Request_DataVO;
+import com.food.project.domain.RequestdataVO;
 import com.food.project.paging.PostPager;
 import com.food.project.service.AreaService;
 import com.food.project.service.PostService;
@@ -58,6 +65,157 @@ public class AnnounceController {
 		model.addAttribute("map",map);
 		return "announce/localrecruit";
 	}
+	@RequestMapping(value = "/recruit" , method= RequestMethod.GET)
+	public String recruits(Model model/*@RequestParam(defaultValue="1") int post_class, @RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword*/, RecruitVO vo) {
+		//System.out.println("ann/recruit");
+		ArrayList<RecruitVO> vo1 = postService.getList(vo);
+		//System.out.println(vo1);
+		model.addAttribute("recruit" , vo1);
+		
+		//========================================페이징 하기=======================================
+		/*
+		 * int totPage=0; PostPager postPager; if(keyword.isEmpty()) {
+		 * totPage=postService.totalPage(post_class);
+		 * System.out.println("인자 1개"+totPage); postPager=new
+		 * PostPager(totPage,curPage); }else {
+		 * totPage=postService.totalPage2(post_class,keyword);
+		 * System.out.println("인자 2개"+totPage); postPager=new
+		 * PostPager(totPage,curPage); } int start=postPager.getPageBegin(); int
+		 * end=postPager.getPageEnd(); ArrayList<Map<String,Object>>
+		 * areaList=postService.allList(start,end,keyword,post_class);
+		 * System.out.println(areaList.toString());
+		 * System.out.println(postPager.toString()); Map<String,Object> map=new
+		 * HashMap<String,Object>(); map.put("totPage",totPage);
+		 * map.put("keyword",keyword); map.put("postPager",postPager);
+		 * model.addAttribute("announcepostList",postService.getPostList(1));
+		 * model.addAttribute("announceList",areaList); model.addAttribute("map",map);
+		 */
+		return "announce/recruit";
+	}
+	@RequestMapping(value= "/recruit/addRecruit", method= RequestMethod.GET)
+	public String addRecruit(Model model) {
+		return "announce/addRecruit";
+	}
+	@RequestMapping(value= "/recruit/addRecruit", method= RequestMethod.POST)
+	public String addRecruit(Model model , RecruitVO vo , HttpSession session ) {
+		
+		CustomerVO cvo = (CustomerVO) session.getAttribute("sessionid");
+		
+		vo.setRequest_email(cvo.getEmail());
+		
+	
+		postService.addRecruit(vo);
+	
+		return "redirect:/recruit";
+	}
+	@RequestMapping(value= "/recruit/specific", method= RequestMethod.GET)
+	public String recruitSpecific(Model model ,@RequestParam("request_code") String request_code) {
+		
+		RecruitVO ck = postService.getRequestspecific(request_code);
+		model.addAttribute("specific", ck);
+		//System.out.println(ck);
+		//System.out.println("1");
+		
+		postService.updateVisit(request_code);
+		
+		return "announce/recruitSpecific";
+	}
+	
+	@RequestMapping(value= "/recruit/modify", method= RequestMethod.GET)
+	public String recruitModify(Model model ,@RequestParam("request_code") String request_code) {
+		
+		RecruitVO ck = postService.getRequestmodify(request_code);
+		System.out.println(ck);
+		model.addAttribute("requestmodify", ck);
+		
+	
+		
+		return "announce/recruitModify";
+	}
+	@RequestMapping(value= "/recruit/successmodify", method= RequestMethod.POST)
+	@ResponseBody
+	public String successmodify(Model model , RecruitVO vo) {
+		
+		postService.requestmodifysuccess(vo);
+		
+	
+		
+	
+		
+		return "";
+	}
+	@RequestMapping(value= "/recruit/requestsuccess", method= RequestMethod.POST)
+	@ResponseBody
+	public String successmodify(Model model , RecruitVO vo1,Request_DataVO vo , HttpSession session) {
+		System.out.println("gg");
+		
+		
+		String a = "fail";
+		
+		FoodTruckVO cvo = (FoodTruckVO) session.getAttribute("seller");
+		
+		if(cvo.getTruck_code() == null) {
+			
+			return a;
+		}else {
+			vo.setRequest_truck_code(cvo.getTruck_code());
+			
+			
+			
+			postService.requestsuccess(vo); 
+			postService.updaterequestsuccess(vo1);
+			System.out.println("gg");
+			return "success";
+		}
+		
+		
+	}
+	@RequestMapping(value= "/recruit/requestck", method= RequestMethod.POST)
+	@ResponseBody
+	public String requestck(Model model , RecruitVO vo1 , Request_DataVO vo , HttpSession session) {
+		System.out.println("gg");
+		
+		
+		String a = "fail";
+		
+		FoodTruckVO cvo = (FoodTruckVO) session.getAttribute("seller");
+		
+		if(cvo.getTruck_code() == null) {
+			
+			return a;
+		}else {
+			vo.setRequest_truck_code(cvo.getTruck_code());
+			
+			
+			
+			Request_DataVO ck = postService.requestck(vo); 
+			
+			if(ck == null) {
+				return a;
+			}else {
+				
+				return "success";
+			}
+			
+			
+		}
+		
+		
+	}
+	
+	@RequestMapping(value= "/recruit/delete", method= RequestMethod.POST)
+	@ResponseBody
+	public String recruitDelete(Model model ,RecruitVO vo ) {
+		
+		postService.deleteRequest(vo);
+		
+		
+	
+		
+		return "";
+	}
+	
+	
 	
 	@RequestMapping(value = "/announce/specificck", method = RequestMethod.GET)
 	public String announceSpecificck(Model model,@RequestParam("post_code") String post_code) {

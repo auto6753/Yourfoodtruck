@@ -6,7 +6,10 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 
 public interface PostService {
@@ -44,6 +47,40 @@ public interface PostService {
 	public int totalPage2(@Param("post_class")int post_class, @Param("keyword") String keyword);
 	
 	public ArrayList<ReviewVO> getReview(String email);
+	//일반모집공고 등록하기
+	public void addRecruit(RecruitVO vo);
+	//일반모집공고 목록불러오기
+	public ArrayList<RecruitVO> getList(RecruitVO vo);
+	//일반모집공고 상세보기
+	public RecruitVO getRequestspecific(String request_code);
+	//일반모집공고 조회수
+	public void updateVisit(String request_code);
+	//일반모집공고 삭제
+	public void deleteRequest(RecruitVO vo);
+	//일반모집공고 수정페이지 이동
+	public RecruitVO getRequestmodify(String request_code);
+	//일반모집공고 수정하기
+	public void requestmodifysuccess(RecruitVO vo);
+	//일반모집공고 참가신청하기
+	public void requestsuccess(Request_DataVO vo);
 	
+	//일반모집공고 참여현황 올리기
+	public void updaterequestsuccess(RecruitVO vo1);
+	//내가쓴 모집공고 불러오기
+	public ArrayList<RecruitVO> getMyRequest(String email);
+
+	//해당 글의 모집공고 참가 신청자 보기 
+	public ArrayList<Request_DataDTO> getRequest_data(String request_code);
+<<<<<<< HEAD
+	public Request_DataVO requestck(Request_DataVO vo);
+	
+	
+	
+	
+	
+=======
+>>>>>>> branch 'dev-tk2' of https://github.com/auto6753/Yourfoodtruck.git
+	
+
 	
 }

@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.OnboardVO;
+import com.food.project.domain.RecruitVO;
+import com.food.project.domain.Request_DataDTO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.service.CallListService;
 import com.food.project.service.FoodTruckService;
@@ -33,6 +36,9 @@ import com.google.gson.JsonArray;
 import com.food.project.service.PostService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONSerializer;
+
+
 
 @AllArgsConstructor
 @Controller
@@ -45,7 +51,7 @@ public class CustomerController {
 	CallListService callList;
 	OnboardService onboard;
 	PostService post;
-
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
 		return "customer/mypage";
@@ -441,4 +447,58 @@ public class CustomerController {
 
 		return "customer/goodbye";
 	}
+	
+	
+	@RequestMapping(value = "/joinlist", method = RequestMethod.GET)
+	public String joinlist(Locale locale, Model model, HttpServletRequest request) {
+		CustomerVO c = new CustomerVO();
+		c = (CustomerVO) request.getSession().getAttribute("sessionid");
+		
+		String email = c.getEmail();
+		System.out.println(email);
+		List<RecruitVO> re = post.getMyRequest(email);
+		
+		if(re.isEmpty()) {
+			System.out.println("null");
+		}else {
+			System.out.println(re);
+			net.sf.json.JSONArray jsonArray1 = net.sf.json.JSONArray.fromObject(re);
+			
+			System.out.println(jsonArray1);
+		
+			model.addAttribute("list", jsonArray1);
+		}
+		
+//		JSONArray a = new JSONArray();
+//		a.add(re);
+//		System.out.println(a);
+		
+		return "customer/joinlist";
+	}
+	
+	@RequestMapping(value = "/poplist", method = RequestMethod.GET) //해당글에서 참가내역 보기
+	public String poplist(Model model, @Param("request_code")String request_code){
+		System.out.println(request_code);
+		
+		
+		ArrayList<Request_DataDTO> list = post.getRequest_data(request_code); 
+		System.out.println(list);
+		
+		JSONObject b = new JSONObject();
+		
+		b.put("data",list);
+		JSONArray a = new JSONArray();
+		a.add(b);
+		
+		net.sf.json.JSONArray jsonArray1 = net.sf.json.JSONArray.fromObject(list);
+		
+		System.out.println(jsonArray1);
+//		System.out.println(a.toString());
+//		System.out.println(b.toString());
+//		System.out.println(b);
+		model.addAttribute("list", jsonArray1);
+		return "customer/newJoinList";
+	}
+	
 }
+

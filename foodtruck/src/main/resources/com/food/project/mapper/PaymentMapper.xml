@@ -2,139 +2,206 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.PaymentMapper">
-   <select id="getAllList" resultType="com.food.project.domain.PaymentVO">
-      select * from payment
-   </select>
-   <select id="getPaymentList" resultType="com.food.project.domain.PaymentVO">
-      select * from payment where payment_telephone =#{payment_telephone}
-   </select>
-   <insert id="insertPaymentList" parameterType="Map">
-      insert into payment(payment_code, truck_code, menu_code,
-         amount, total_price, payment_class,payment_telephone)
-      values(to_char(sysdate,'yymmdd')||to_char(payment_sequence.NEXTVAL,'fm000000'),
-         #{truck_code},#{menu_code},#{amount},
-         #{total_price},#{payment_class},#{payment_telephone})
-   </insert>
-   <update id="updatePaymentList" parameterType="map">
-      update payment set payment_class= payment_class+3
-      where truck_code=#{truck_code}
-      and payment_telephone=#{payment_telephone}
-      and payment_code like #{payment_code}||'%'
-   </update>
-   
+	<select id="getAllList"
+		resultType="com.food.project.domain.PaymentVO">
+		select * from payment
+	</select>
+	<select id="getPaymentList"
+		resultType="com.food.project.domain.PaymentVO">
+		select * from payment where payment_telephone
+		=#{payment_telephone}
+	</select>
+	<insert id="insertPaymentList" parameterType="Map">
+		insert into
+		payment(payment_code, truck_code, menu_code,
+		amount, total_price,
+		payment_class,payment_telephone)
+		values(to_char(sysdate,'yymmdd')||to_char(payment_sequence.NEXTVAL,'fm000000'),
+		#{truck_code},#{menu_code},#{amount},
+		#{total_price},#{payment_class},#{payment_telephone})
+	</insert>
+	<update id="updatePaymentList" parameterType="map">
+		update payment set
+		payment_class= payment_class+3
+		where truck_code=#{truck_code}
+		and
+		payment_telephone=#{payment_telephone}
+		and payment_code like
+		#{payment_code}||'%'
+	</update>
 
-   <update id="updatePoint" parameterType="com.food.project.domain.CustomerVO">
-      update customer set point=point+#{point} where email=#{email}
-   </update>
 
-   <!-- 매출관리 쿼리 -->
-   <select id="getCurYear2" resultType="String"> <!-- 현재 연도(2자리) SELECT -->
-      select to_char(sysdate, 'YY') from dual
-   </select>
-   
-   <select id="getCurYear4" resultType="String"> <!-- 현재 연도(4자리) SELECT -->
-      select to_char(sysdate, 'YYYY') from dual
-   </select>
-   
-   <select id="getCurMonth" resultType="String"> <!-- 현재 월 SELECT -->
-      select to_char(sysdate, 'MM') from dual
-   </select>
-   
-   <select id="getTodaySales" resultType="com.food.project.domain.PaymentVO"> <!-- 금일 매출 SELECT -->
-      select a.*, b.menu_name
-      from payment a left outer join menu b on (a.menu_code = b.menu_code)
-      where to_char(a.payment_date,'YY-MM-DD') = to_char(sysdate,'YY-MM-DD') and a.truck_code = #{truck_code} and a.payment_class not in(0,1,2)
-      order by a.payment_date
-   </select>
-   
-   <select id="getWeekSales" resultType="com.food.project.domain.PaymentVO"> <!-- 주간 매출 SELECT -->
-      select a.*, b.menu_name
-      from payment a left outer join menu b on (a.menu_code = b.menu_code)
-      where to_date(a.payment_date, 'YY-MM-DD') <![CDATA[>=]]> TRUNC(TO_DATE(sysdate, 'YY-MM-DD'), 'IW') 
-      and to_date(a.payment_date, 'YY-MM-DD') <![CDATA[<=]]> TRUNC(TO_DATE(sysdate, 'YY-MM-DD'), 'IW')+6 
-      and a.truck_code = #{truck_code} 
-      and a.payment_class not in(0,1,2)
-      order by a.payment_date 
-   </select>
-   
-   <select id="getMonthSales" resultType="com.food.project.domain.PaymentVO"> <!-- 월간 매출 SELECT -->
-      select a.*, b.menu_name
-        from payment a left outer join menu b on (a.menu_code = b.menu_code)
-        where to_char(a.payment_date,'YY-MM') = concat(concat(#{inputYear}, '-'), #{inputMonth}) 
-        and a.truck_code = #{truck_code} 
-        and a.payment_class not in(0,1,2)
-        order by a.payment_date 
-   </select>
-   
-   <select id="getYearSales" resultType="com.food.project.domain.PaymentVO"> <!-- 연간 매출 SELECT -->
-      select a.*, b.menu_name
-        from payment a left outer join menu b on (a.menu_code = b.menu_code)
-        where to_char(a.payment_date,'YY') = #{inputYear} and a.truck_code = #{truck_code} and a.payment_class not in(0,1,2)
-        order by a.payment_date
-   </select>
-   
-   <select id="getSelPeriodSales" resultType="com.food.project.domain.PaymentVO"> <!-- 선택된 기간 내 매출 SELECT -->
-      select a.*, b.menu_name
-           from payment a left outer join menu b on (a.menu_code = b.menu_code)
-           where to_char(a.payment_date,'YYYY-MM-DD') <![CDATA[>=]]> #{inputFirstDate}
-           and to_char(a.payment_date,'YYYY-MM-DD') <![CDATA[<=]]> #{inputLastDate}
-           and a.truck_code = #{truck_code} and a.payment_class not in(0,1,2)
-           order by a.payment_date
-   </select>
-   
-   <select id="getByDaySales" resultType="com.food.project.domain.PaymentVO"> <!-- 요일별 매출 SELECT -->
-      select a.*, b.menu_name
-        from payment a left outer join menu b on (a.menu_code = b.menu_code)
-        where to_char(a.payment_date,'YYYY') <![CDATA[>=]]> #{inputFirstYear}
-        and to_char(a.payment_date,'YYYY') <![CDATA[<=]]> #{inputLastYear}
-        and a.truck_code = #{truck_code}
-        and a.payment_class not in(0,1,2)
-        order by a.payment_date
-   </select>
-   
-   <select id="getByTimeSales" resultType="com.food.project.domain.PaymentVO"> <!-- 선택된 기간 내 시간별 매출 SELECT -->
-      select a.*, b.menu_name
-        from payment a left outer join menu b on (a.menu_code = b.menu_code)
-        where to_char(a.payment_date,'YYYY') <![CDATA[>=]]> #{inputFirstYear}
-        and to_char(a.payment_date,'YYYY') <![CDATA[<=]]> #{inputLastYear}
-        and a.truck_code = #{truck_code}
-        and a.payment_class not in(0,1,2)
-        order by a.payment_date
-   </select>
-   
-   <select id="isMember" resultType="String">
-      select telephone from customer where telephone = #{telephone}
-   </select>
-   
-   <select id="getMonthValue" resultType="String">
-   		select to_char(payment_date, 'yy-mm') as p_date
-   		from payment where truck_code = #{truck_code}
-   		and payment_class not in(0,1,2)
-   		group by to_char(payment_date, 'yy-mm')
-   		order by p_date
-   </select>
-   
-    <select id="getYearValue" resultType="String">
-   		select to_char(payment_date, 'yy') as p_date
-   		from payment where truck_code = #{truck_code}
-   		and payment_class not in(0,1,2)
-   		group by to_char(payment_date, 'yy')
-   		order by p_date
-   </select>
-   
-   <select id="getByDayValue" resultType="String">
-   		select to_char(payment_date, 'yyyy') as p_date
-   		from payment where truck_code = #{truck_code}
-   		and payment_class not in(0,1,2)
-   		group by to_char(payment_date, 'yyyy')
-   		order by p_date
-   </select>
-   
-   <select id="getByTimeValue" resultType="String">
-   		select to_char(payment_date, 'yyyy') as p_date
-   		from payment where truck_code = #{truck_code}
-   		and payment_class not in(0,1,2)
-   		group by to_char(payment_date, 'yyyy')
-   		order by p_date
-   </select>
+	<update id="updatePoint"
+		parameterType="com.food.project.domain.CustomerVO">
+		update customer set point=point+#{point} where
+		email=#{email}
+	</update>
+
+	<!-- 매출관리 쿼리 -->
+	<select id="getCurYear2" resultType="String"> <!-- 현재 연도(2자리) SELECT -->
+		select to_char(sysdate, 'YY') from dual
+	</select>
+
+	<select id="getCurYear4" resultType="String"> <!-- 현재 연도(4자리) SELECT -->
+		select to_char(sysdate, 'YYYY') from dual
+	</select>
+
+	<select id="getCurMonth" resultType="String"> <!-- 현재 월 SELECT -->
+		select to_char(sysdate, 'MM') from dual
+	</select>
+
+	<select id="getTodaySales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 금일 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_char(a.payment_date,'YY-MM-DD') =
+		to_char(sysdate,'YY-MM-DD') and
+		a.truck_code = #{truck_code} and
+		a.payment_class not in(0,1,2)
+		order by a.payment_date
+	</select>
+	<select id="getTodaySalesForSeorder" resultType="map">
+		select
+		to_char(sum(total_price)) sum
+		from payment
+		where to_char(payment_date,'YY-MM-DD') = to_char(sysdate,'YY-MM-DD')
+		and truck_code = #{truck_code} and payment_class not in(0,1,2)
+		order by payment_date
+	</select>
+
+	<select id="getWeekSales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 주간 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_date(a.payment_date, 'YY-MM-DD') <![CDATA[>=]]>
+		TRUNC(TO_DATE(sysdate, 'YY-MM-DD'), 'IW')
+		and to_date(a.payment_date,
+		'YY-MM-DD') <![CDATA[<=]]>
+		TRUNC(TO_DATE(sysdate, 'YY-MM-DD'), 'IW')+6
+		and a.truck_code =
+		#{truck_code}
+		and a.payment_class not in(0,1,2)
+		order by a.payment_date
+	</select>
+
+	<select id="getMonthSales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 월간 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_char(a.payment_date,'YY-MM') =
+		concat(concat(#{inputYear}, '-'),
+		#{inputMonth})
+		and a.truck_code =
+		#{truck_code}
+		and a.payment_class not in(0,1,2)
+		order by a.payment_date
+	</select>
+
+	<select id="getYearSales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 연간 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_char(a.payment_date,'YY') =
+		#{inputYear} and a.truck_code =
+		#{truck_code} and a.payment_class not
+		in(0,1,2)
+		order by a.payment_date
+	</select>
+
+	<select id="getSelPeriodSales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 선택된 기간 내 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_char(a.payment_date,'YYYY-MM-DD') <![CDATA[>=]]>
+		#{inputFirstDate}
+		and to_char(a.payment_date,'YYYY-MM-DD') <![CDATA[<=]]>
+		#{inputLastDate}
+		and a.truck_code = #{truck_code} and a.payment_class
+		not in(0,1,2)
+		order by a.payment_date
+	</select>
+
+	<select id="getByDaySales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 요일별 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_char(a.payment_date,'YYYY') <![CDATA[>=]]>
+		#{inputFirstYear}
+		and to_char(a.payment_date,'YYYY') <![CDATA[<=]]>
+		#{inputLastYear}
+		and a.truck_code = #{truck_code}
+		and a.payment_class
+		not in(0,1,2)
+		order by a.payment_date
+	</select>
+
+	<select id="getByTimeSales"
+		resultType="com.food.project.domain.PaymentVO"> <!-- 선택된 기간 내 시간별 매출 SELECT -->
+		select a.*, b.menu_name
+		from payment a left outer join menu b on
+		(a.menu_code = b.menu_code)
+		where to_char(a.payment_date,'YYYY') <![CDATA[>=]]>
+		#{inputFirstYear}
+		and to_char(a.payment_date,'YYYY') <![CDATA[<=]]>
+		#{inputLastYear}
+		and a.truck_code = #{truck_code}
+		and a.payment_class
+		not in(0,1,2)
+		order by a.payment_date
+	</select>
+
+	<select id="isMember" resultType="String">
+		select telephone from customer
+		where telephone = #{telephone}
+	</select>
+
+	<select id="getMonthValue" resultType="String">
+		select
+		to_char(payment_date, 'yy-mm') as p_date
+		from payment where truck_code
+		= #{truck_code}
+		and payment_class not in(0,1,2)
+		group by
+		to_char(payment_date, 'yy-mm')
+		order by p_date
+	</select>
+
+	<select id="getYearValue" resultType="String">
+		select
+		to_char(payment_date, 'yy') as p_date
+		from payment where truck_code =
+		#{truck_code}
+		and payment_class not in(0,1,2)
+		group by
+		to_char(payment_date, 'yy')
+		order by p_date
+	</select>
+
+	<select id="getByDayValue" resultType="String">
+		select
+		to_char(payment_date, 'yyyy') as p_date
+		from payment where truck_code =
+		#{truck_code}
+		and payment_class not in(0,1,2)
+		group by
+		to_char(payment_date, 'yyyy')
+		order by p_date
+	</select>
+
+	<select id="getByTimeValue" resultType="String">
+		select
+		to_char(payment_date, 'yyyy') as p_date
+		from payment where truck_code =
+		#{truck_code}
+		and payment_class not in(0,1,2)
+		group by
+		to_char(payment_date, 'yyyy')
+		order by p_date
+	</select>
 </mapper>

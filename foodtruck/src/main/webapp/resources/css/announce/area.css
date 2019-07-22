@@ -1,14 +1,5 @@
 @charset "UTF-8";
-
-@font-face {
-	font-family: 'yg-jalnan';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
+@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
 p {
 	color: rgb(255, 94, 24);
 }
@@ -22,11 +13,105 @@ p {
 	/* border-radius: 15px; */
 	text-align: center;
 	background-color: white;
+	margin-top: 2%;
+}
+#searchalll{
+	position: relative;
+    left: -30px;
+	
+}
+.sidebar{
+	    position: relative;
+    top: -60px;
+    left: 150px;
+    width: 12%;
+    font-size: 20px;
+    display: -webkit-inline-box;
+}
+#pageadd{
+   
+   background-color: rgb(255, 94, 24);
+   color: white;
+
+}
+label{
+	font-family: 'yg-jalnan';
+	font-size: 20px;
+	
+}
+#box{
+	    margin-left: 36%;
+}
+#titles{
+	    width: 80%;
+}
+#contentt{
+	    width: 80%;
+	   
+	    font-size:25px;
+}
+#contenttt{
+	width: 80%;
+	 height: 400px;
+	    font-size:25px;
+}
+#d{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+	   
+}
+#dd{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+	
+	
+}
+#beginDate{
+	width: 39%;
+	display: inline-block;
+}
+#endDate{
+	width: 39%;
+	display: inline-block;
+}
+#requestsuccess{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+       margin-left: 59.8%;
+}
+#modifysuccess{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+       margin-left: 59.8%;
+	
+}
+#delete{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+   margin-left:49.5%
+	
+}
+#request{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
+   margin-left:59.5%;
+}
+#modify{
+	 background-color: rgb(255, 94, 24);
+   color: white;
+   width:10%;
 }
 
 #searchall {
 	/* margin-top: -3.3%; */
 	height:50px;
+	margin-left: -2%;
 }
 
 .form-inline {
@@ -36,7 +121,7 @@ p {
 }
 
 #searchbox {
-	/* width: 35%; */
+	width: 20%;
 }
 
 #searchbutton {
@@ -53,7 +138,7 @@ p {
 }  */
 .pagination {
 	position: relative;
-	left: 48%;
+	left: 46%;
 }
 
 #pageadd {
@@ -66,9 +151,12 @@ p {
 }
 
 .navbarr {
-	margin-top: 13px;
-	padding: 4px;
+	
 	height:50px;
+}
+.navbarrr{
+	height:50px;
+	
 }
 
 #top-right a {
@@ -127,6 +215,17 @@ p {
 .boardsido{
 	max-width:54px;
 }
+#content{
+	
+	width: 80%; 
+	margin: 0 auto;
+}
+#content1{
+	
+	width: 80%; 
+	margin-left: 10% ;
+}
+
 /* .table {
 	width: 100%;
 	max-width: 100%;
