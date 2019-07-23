@@ -19,7 +19,7 @@
 	$(document).ready(function() {
 				var a = ${list};
 				console.log(a);
-				a = JSON.parse(a);
+				//a = JSON.parse(a);
 				for (var i = 0; i < a.length; i++) {
 					var day = a[i].request_regdate.date;
 					var month = a[i].request_regdate.month + 1;
@@ -43,10 +43,44 @@
 					start = start.substr(2, 8); //날짜 서브스트링
 					start = start.replace(/\-/g, "/");
 					console.log(start.replace(/\-/g, ""));
-
+					
+					
+					
 					end = end.substr(2, 8); //날짜 서브스트링
 					end = end.replace(/\-/g, "/");
 					console.log(end);
+					var e = a[i].request_end;
+					e = e.substr(0,10);
+					console.log(e);
+					e = e.replace(/\-/g,"");
+					console.log(e);
+					//console.log(e);
+					var secDate= e;  /// 문자열 or  숫자 데이터
+					var year1 = secDate.substr(0,4);
+					var month1 = secDate.substr(4,2);
+					var day1 = secDate.substr(6,2);
+					var date1= new Date(year1, month1-1, day1);  // date로 변경
+					console.log(date1);
+					
+			
+					var s = a[i].request_start;
+					s = s.substr(0,10);
+					console.log(e);
+					s = s.replace(/\-/g,"");
+					console.log(s);
+					//console.log(e);
+					var secDate= s;  /// 문자열 or  숫자 데이터
+					var year2 = secDate.substr(0,4);
+					var month2 = secDate.substr(4,2);
+					var day2 = secDate.substr(6,2);
+					var date2= new Date(year2, month2-1, day2);  // date로 변경
+					console.log(date2);
+					
+					//alert(date1);
+					//var f = new Date();
+					
+					//console.log(date1);
+					console.log(new Date());
 					var status;
 
 					var startend = start + "~" + end;
@@ -103,7 +137,7 @@
 							<th>모집기간</th>
 							<th>신청현황</th>
 							<th>모집상태</th>
-							<th>D-day</th>
+
 						</tr>
 						<tbody id="tbody">
 							<!-- <tr>

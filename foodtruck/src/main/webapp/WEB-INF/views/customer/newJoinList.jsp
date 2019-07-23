@@ -13,7 +13,7 @@
 				a = JSON.parse(a);
 				console.log(a);
 				console.log(a.length);
-			
+				
 
 				//console.log(JSON.parse(a));
 				//var c = JSON.parse(a);
@@ -42,7 +42,7 @@
 						$("<td></td>").text(a[i].brandname).appendTo(tr);
 						$("<td></td>").text(a[i].telephone).appendTo(tr);
 						$("<input />").attr({value : "'"+a[i].request_truck_code+"'", type : 'hidden'}).addClass('truck_code').appendTo(tr);
-						$("<input />").attr('type', 'radio').addClass('radio').appendTo(tr);
+						$("<input />").attr({type:'radio',value : a[i].request_truck_code}).addClass('radio').appendTo(tr);
 						$("#tbody").append(tr);
 
 						//console.log(tr);
@@ -64,7 +64,9 @@
 					//	$.ajax({
 					//		
 					//	});
-					alert("값없음");
+					var tr = $("<tr></tr>");
+					$("<td></td>").text("신청 한사람이 없습니다.").appendTo(tr);
+					$("#tbody").append(tr);
 				}
 			});
 </script>

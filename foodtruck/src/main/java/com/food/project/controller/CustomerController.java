@@ -17,6 +17,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ import com.food.project.domain.MyreviewlistDTO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.RecruitVO;
 import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.service.CallListService;
 import com.food.project.service.FoodTruckService;
@@ -499,6 +501,27 @@ public class CustomerController {
 		model.addAttribute("list", jsonArray1);
 		return "customer/newJoinList";
 	}
-	
+	@ResponseBody
+	@RequestMapping(value = "/selectlist", method = RequestMethod.POST) //선택한목록
+	public String selectlist(Model model, @RequestBody String[] list){
+		
+		//System.out.println(truck_code);
+		System.out.println("ㅇ");
+		for(int i=0;i<list.length;i++) { //status update
+			if(i>=1) {
+				Request_DataVO a = new Request_DataVO();
+				a.setRequest_code(list[0]);
+				a.setRequest_truck_code(list[i]);
+				
+				post.requestdataup(a);
+			}else {
+				System.out.println("게시글"+list[i]);
+				post.requestupdate(list[i]);
+			}
+			
+			System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+		}
+		return "a";
+	}
 }
 

@@ -119,16 +119,21 @@
 		select * from review where email = #{email}
 	</select>
 	<!--내가 쓴 모집공고 불러오기 -->
-	<select id="getMyRequest" resultType="com.food.project.domain.RecruitVO">
+	<select id="getMyRequest"
+		resultType="com.food.project.domain.RecruitVO">
 		select * from request where request_email=#{email}
 	</select>
 
 	<!--해당 글의 모집공고 참가 신청자 보기 -->
-	<select id="getRequest_data" resultType="com.food.project.domain.Request_DataDTO">
-		select b.brandname, a.telephone ,c.request_truck_code,c.request_code,c.request_data_regdate
-		from customer a, foodtruck b, request_data c
+	<select id="getRequest_data"
+		resultType="com.food.project.domain.Request_DataDTO">
+		select b.brandname, a.telephone
+		,c.request_truck_code,c.request_code,c.request_data_regdate
+		from
+		customer a, foodtruck b, request_data c
 		where a.email = b.email
-		and b.truck_code =
+		and
+		b.truck_code =
 		c.request_truck_code
 		and c.request_code = #{request_code}
 	</select>
@@ -173,21 +178,35 @@
 	<update id="requestmodifysuccess"
 		parameterType="com.food.project.domain.RecruitVO">
 		update request set request_title=#{request_title} ,
-		request_content=#{request_content} , request_start=#{request_start} , request_end=#{request_end} where request_code=#{request_code}
+		request_content=#{request_content} , request_start=#{request_start} ,
+		request_end=#{request_end} where request_code=#{request_code}
 	</update>
 	<!-- 일반모집공고 참가신청 -->
-		<insert id="requestsuccess" parameterType="com.food.project.domain.Request_DataVO">
+	<insert id="requestsuccess"
+		parameterType="com.food.project.domain.Request_DataVO">
 		insert into
 		request_data(request_data_code,request_truck_code,request_code)
 		values(concat(to_char(sysdate,'yymmdd'),to_char(request_data_sequence.NEXTVAL,'FM00000')),#{request_truck_code},#{request_code})
 	</insert>
 	<!-- 일반모집공고 참여현황 올리기 -->
-	<update id="updaterequestsuccess" parameterType="com.food.project.domain.RecruitVO">
-		update request set request_truck_count = request_truck_count + 1 where request_code = #{request_code}
+	<update id="updaterequestsuccess"
+		parameterType="com.food.project.domain.RecruitVO">
+		update request set request_truck_count =
+		request_truck_count + 1 where request_code = #{request_code}
 	</update>
 	<!-- 일반모집공고 참여신청 중복확인 -->
-	<select id="requestck" resultType="com.food.project.domain.Request_DataVO">
-		select * from request_data where request_code = #{request_code} and request_truck_code =#{request_truck_code}
+	<select id="requestck"
+		resultType="com.food.project.domain.Request_DataVO">
+		select * from request_data where request_code =
+		#{request_code} and request_truck_code =#{request_truck_code}
 	</select>
-	
+	<!-- 모집공고 종료 -->
+	<update id="requestupdate" parameterType="String">
+		update request set
+		request_status = 1 where request_code = #{request_code}
+	</update>
+		<update id="requestdataup" parameterType="com.food.project.domain.Request_DataVO">
+		update request_data set
+		request_status = 1 where request_code = #{request_code} and request_truck_code = #{request_truck_code}
+	</update>
 </mapper>

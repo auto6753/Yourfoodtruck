@@ -165,6 +165,17 @@ public class PostServiceImplement implements PostService {
 	
 		return mapper.requestck(vo);
 	}
+	@Override
+	public void requestupdate(String request_code) {
+		// TODO Auto-generated method stub
+		System.out.println("여기는 service im"+request_code);
+		mapper.requestupdate(request_code);
+	}
+	@Override
+	public void requestdataup(Request_DataVO vo) {
+		// TODO Auto-generated method stub
+		mapper.requestdataup(vo);
+	}
 	
 
 

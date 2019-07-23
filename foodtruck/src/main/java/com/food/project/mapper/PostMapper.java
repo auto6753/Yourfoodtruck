@@ -58,6 +58,8 @@ public interface PostMapper {
 	public void requestsuccess(Request_DataVO vo);
 	public void updaterequestsuccess(RecruitVO vo1);
 	public Request_DataVO requestck(Request_DataVO vo);
+	public void requestupdate(String request_code);
+	public void requestdataup(Request_DataVO vo);
 
 
 }

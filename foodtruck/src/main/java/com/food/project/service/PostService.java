@@ -74,6 +74,10 @@ public interface PostService {
 
 	public Request_DataVO requestck(Request_DataVO vo);
 	
+	public void requestupdate(String request_code);
+	
+	public void requestdataup(Request_DataVO vo);
+	
 
 	
 }
