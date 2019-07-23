@@ -31,18 +31,19 @@
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="max-width: 1650px;">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2" style="margin-top: 50px;">
 				<jsp:include page="sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div id="with" class="col">
 
 					<h1 style="text-align: center; padding-top: 20px;">리뷰 및 평점</h1>
 					<br>
 
-					<table style="overflow: auto" class="table table-hover" class="col">
+					<table style="overflow: auto; background-color: #f8f9fa"
+						class="table table-hover" class="col">
 
 						<thead>
 							<th>푸드트럭명</th>
@@ -87,6 +88,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

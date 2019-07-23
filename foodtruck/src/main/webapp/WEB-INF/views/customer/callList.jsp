@@ -278,16 +278,17 @@ function cancel(i){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="max-width: 1650px;">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2" style="margin-top: 50px;">
 				<jsp:include page="sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div id="with" class="col">
 					<h1 id="bb" style="text-align: center; padding-top: 20px;">호출내역</h1>
 					<br>
-					<table class="table table-hover" class="col">
+					<table style="background-color: #f8f9fa;" class="table table-hover"
+						class="col">
 						<tr>
 							<th>푸드트럭명</th>
 							<th>위치</th>

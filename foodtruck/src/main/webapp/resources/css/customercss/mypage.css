@@ -1,15 +1,12 @@
 @charset "UTF-8";
 
 .uContainer {
-	border: 1px lightgray solid;
-	
 	margin-top: 5%;
 }
 
 .mypage {
 	width: 25% !important;
 	height: 25% !important;
-	
 	margin: 2% 0;
 }
 

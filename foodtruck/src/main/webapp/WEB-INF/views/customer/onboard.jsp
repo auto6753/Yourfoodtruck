@@ -9,11 +9,54 @@
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value ="/resources/css/customercss/onboard.css"/>" />
+</head>
+<body>
+	<div class="container" style="max-width: 1650px;">
+		<div class="row">
+			<div class="col-md-2" style="margin-top: 50px;">
+				<jsp:include page="sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-10">
+				<div id="with" class="col">
+					<h1 style="text-align: center;">탑승트럭</h1>
+					<br>
+					<div class="album py-5 bg-light"
+						style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+								<c:forEach var="i" items="${onboard}">
+									<div class="col-md-4">
+										<div class="card mb-4 shadow-sm">
+											<img
+												src="${pageContext.request.contextPath}/resources/image/upload/${i.truck_url }"
+												style="width: 100%; height: 225px;">
+											<div class="card-body">
+												<p class="card-text">${i.brandname}</p>
+												<p>${i.onboard_date}</p>
+												<div
+													class="d-flex justify-content-between align-items-center">
+													<div class="btn-group">
+														<button class="btn btn-sm btn-outline-secondary detail">상세정보</button>
+														<button class="btn btn-sm btn-outline-secondary delete">하차</button>
+														<input class="truckcode" type="hidden"
+															value="${i.truck_code}" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 <script>
 	$(document).ready(function() {
-		$(".onboard2").css("display", "block");
 		$(".delete").click(function() {
-			alert("d");
 			var a = $(this);
 			//var truckcode = $("#truckcode").val();
 			var truckcode = a.next().val();
@@ -59,48 +102,4 @@
 		});
 	});
 </script>
-</head>
-<body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<jsp:include page="sideMenuBar.jsp"></jsp:include>
-			</div>
-			<div class="col-md-9">
-				<div id="with" class="col">
-					<h1 style="text-align: center;">탑승트럭</h1>
-					<br>
-					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
-						<div class="container">
-							<div class="row">
-								<c:forEach var="i" items="${onboard}">
-									<div class="col-md-4">
-										<div class="card mb-4 shadow-sm">
-											<img
-												src="${pageContext.request.contextPath}/resources/image/upload/${i.truck_url }"
-												style="width: 100%; height: 225px;">
-											<div class="card-body">
-												<p class="card-text">${i.brandname}</p>
-												<p>${i.onboard_date}</p>
-												<div
-													class="d-flex justify-content-between align-items-center">
-													<div class="btn-group">
-														<button class="btn btn-sm btn-outline-secondary detail">상세정보</button>
-														<button class="btn btn-sm btn-outline-secondary delete">하차</button>
-														<input class="truckcode" type="hidden"
-															value="${i.truck_code}" />
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
 </html>

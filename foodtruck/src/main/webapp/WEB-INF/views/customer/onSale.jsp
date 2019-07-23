@@ -61,12 +61,12 @@
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="max-width: 1650px;">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2" style="margin-top: 50px;">
 				<jsp:include page="sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div id="with" class="col">
 					<h1>운행중인트럭</h1>
 					<br>
