@@ -102,6 +102,9 @@
 		$("#dd").click(function(){
 			location.href="/recruit";
 		});
+		$("#ddd").click(function(){
+			location.href="/recruit";
+		});
 		
 });
 
@@ -117,7 +120,7 @@
 		<div id="content" style="display: inline-block;">
 			<div id="box">
 					
-					<div class="form-group">
+				
 					<div class="form-group">
 								<label for="exampleInputEmail1">기간</label>
 								<div>
@@ -137,7 +140,25 @@
 					
 						 </span>
 						
-					</div>
+				
+				
+			
+					<c:if test="${specific.request_status ==1}">
+						<label for="exampleFormControlTextarea1" id="good">선정트럭</label>
+						
+						
+						<span>
+						
+						<textarea name="request_content" id="contentt" class="form-control"
+							id="exampleFormControlTextarea1"  rows="4"  readonly><c:forEach var="i" items="${goodtruck }">${i.brandname}</c:forEach>
+							</textarea>
+							
+						 </span>
+						 <input id="ddd"  class="btn" value="목록">
+					</c:if>
+						
+				
+					<c:if test="${specific.request_status == 0 }">
 					<c:if test="${sessionScope.sessionid.email != specific.request_email}">
 					<button id="request" class="btn" >참가신청</button>
 					<input type="hidden" value="${specific.request_code}">
@@ -149,7 +170,9 @@
 					<input id="modify" type="button" class="btn" value="수정">
 					<input type="hidden" value="${specific.request_code}">
 					</c:if>
-					<input id="dd"  class="btn" value="취소">
+				
+					<input id="dd"  class="btn" value="목록">
+					</c:if>
 				</div>
 		</div>
 	</div>

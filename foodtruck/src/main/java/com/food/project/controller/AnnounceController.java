@@ -1,5 +1,6 @@
 package com.food.project.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +69,9 @@ public class AnnounceController {
 	@RequestMapping(value = "/recruit" , method= RequestMethod.GET)
 	public String recruits(Model model/*@RequestParam(defaultValue="1") int post_class, @RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="") String keyword*/, RecruitVO vo) {
 		//System.out.println("ann/recruit");
+		
 		ArrayList<RecruitVO> vo1 = postService.getList(vo);
+		
 		//System.out.println(vo1);
 		model.addAttribute("recruit" , vo1);
 		
@@ -116,6 +119,10 @@ public class AnnounceController {
 		//System.out.println(ck);
 		//System.out.println("1");
 		
+		ArrayList<FoodTruckVO> tt = postService.requestselecttruck(request_code);//당첨트럭 조회
+		if(tt.size() >= 1) {
+			model.addAttribute("goodtruck", tt);
+		}
 		postService.updateVisit(request_code);
 		
 		return "announce/recruitSpecific";

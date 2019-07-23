@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,7 @@
 				<tr>
 					<td class="boardTitle">${row.request_title}</td>
 					<input type="hidden" value="${row.request_code }"> 
-					<td>${row.request_regdate}</td>
+					<td><fmt:formatDate value="${row.request_regdate}" pattern="yyyy.MM.dd"/></td>
 					<td>${row.request_view}</td>
 					<td>${row.request_truck_count }</td>
 					<c:if test="${row.request_status == 0}">

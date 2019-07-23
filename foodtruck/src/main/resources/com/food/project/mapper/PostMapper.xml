@@ -209,4 +209,9 @@
 		update request_data set
 		request_status = 1 where request_code = #{request_code} and request_truck_code = #{request_truck_code}
 	</update>
+	<!-- 선정트럭 조회 -->
+	<select id="requestselecttruck" resultType="com.food.project.domain.FoodTruckVO">
+		select b.brandname from request_data a ,foodtruck b where a.request_code = #{request_code} and a.request_status =1
+		and b.truck_code = request_truck_code
+	</select>
 </mapper>

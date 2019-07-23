@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
@@ -77,6 +78,8 @@ public interface PostService {
 	public void requestupdate(String request_code);
 	
 	public void requestdataup(Request_DataVO vo);
+
+	public ArrayList<FoodTruckVO> requestselecttruck(String request_code);
 	
 
 	

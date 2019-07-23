@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PostVO;
 import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
@@ -175,6 +176,11 @@ public class PostServiceImplement implements PostService {
 	public void requestdataup(Request_DataVO vo) {
 		// TODO Auto-generated method stub
 		mapper.requestdataup(vo);
+	}
+	@Override
+	public ArrayList<FoodTruckVO> requestselecttruck(String request_code) {
+		
+		return mapper.requestselecttruck(request_code);
 	}
 	
 
