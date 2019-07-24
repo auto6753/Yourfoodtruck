@@ -18,13 +18,9 @@
 <script>
 	$(document).ready(
 			function() {
-				var a = $
-				{
-					list
-				}
-				;
+				var a = ${list};
 				console.log(a);
-				a = JSON.parse(a);
+				//a = JSON.parse(a);
 				for (var i = 0; i < a.length; i++) {
 					var day = a[i].request_regdate.date;
 					var month = a[i].request_regdate.month + 1;
@@ -32,27 +28,16 @@
 					var year = "" + a[i].request_regdate.year;
 					year = year.substr(1);
 
-					/* var smonth = a[i].request_start.month + 1;
-					var emonth = a[i].request_end.month + 1;
-					var sday = a[i].request_start.date;
-					var eday = a[i].request_end.date;
-					
-					var start = smonth + "/" + sday;
-					var end = emonth + "/" + eday;
-					
-					var startend = start + "~"+end; */
-					//str.substr( 3 )
-					//console.log(year);
 					var start = a[i].request_start;
 					var end = a[i].request_end;
 					start = start.substr(2, 8); //날짜 서브스트링
 					start = start.replace(/\-/g, "/");
 					console.log(start.replace(/\-/g, ""));
 
-					end = end.substr(2, 8); //날짜 서브스트링
-					end = end.replace(/\-/g, "/");
-					console.log(end);
-					var status;
+					//alert(date1);
+					//var f = new Date();
+
+					//console.log(date1);
 
 					var startend = start + "~" + end;
 					var date = year + "/" + month + "/" + day;
@@ -91,7 +76,7 @@
 </script>
 </head>
 <body>
-	<div class="container" style="max-width: 1650px;">
+	<div class="container"  style="max-width: 1650px;">
 		<div class="row">
 			<div class="col-md-2" style="margin-top: 50px;">
 				<jsp:include page="sideMenuBar.jsp"></jsp:include>
@@ -101,27 +86,26 @@
 					<h1 id="bb" style="text-align: center; padding-top: 20px;">모집공고
 						작성 내역</h1>
 					<br>
-					<table style="background-color: #f8f9fa" class="table table-hover"
-						class="col">
+					<table style="background-color: #f8f9fa" class="table table-hover" class="col">
 						<tr>
 							<th>날짜</th>
 							<th>제목</th>
 							<th>모집기간</th>
 							<th>신청현황</th>
 							<th>모집상태</th>
-							<th>D-day</th>
+
 						</tr>
 						<tbody id="tbody">
 							<!-- <tr>
-					<td>19/7/15</td>
-					<td>OO 행사 푸드트럭 모집</td>
-					<td>1/15~1/16</td>
-					<td>3명</td>
-					<td>진행중
-						<button class="list">신청 목록</button> <input type="hidden" value="19071900018">
-					</td>
-					<td>3 일후에 종료됩니다.</td>
-				</tr> -->
+               <td>19/7/15</td>
+               <td>OO 행사 푸드트럭 모집</td>
+               <td>1/15~1/16</td>
+               <td>3명</td>
+               <td>진행중
+                  <button class="list">신청 목록</button> <input type="hidden" value="19071900018">
+               </td>
+               <td>3 일후에 종료됩니다.</td>
+            </tr> -->
 						</tbody>
 					</table>
 				</div>
