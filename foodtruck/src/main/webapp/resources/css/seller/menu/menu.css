@@ -141,16 +141,10 @@ a { text-decoration:none; color:#000; }
 .tab_con { clear:both; margin-top:5px; padding:0 !important;}
 .tab_con div { display:none; /*line-height:100px;*/ text-align:center; }
 
-.menuTitle {
-	
-	font-size: 50px;
-	height: 35px;
-	margin: 23px 0 17px;
-	color: #666;
-	text-align: center;
-	position: relative;
-    top: 18px;
-    font-family: 'Hanna', serif;
+.menuTitle{
+ 
+    text-align: center;
+	padding-top: 20px;
 }
 
 .changeToBlock {
@@ -169,4 +163,20 @@ a { text-decoration:none; color:#000; }
     position: relative;
     right: 3%;
         margin-top: 5%;
+}
+
+.mw1650 {
+	max-width: 1650px !important;
+}
+
+.mgt50 {
+	margin-top: 50px;
+}
+
+#with {
+	margin-top: 50px;
+	height: 600px;
+	font-family: 'yg-jalnan';
+	border-radius: 10px;
+	background-color: lightgray;
 }

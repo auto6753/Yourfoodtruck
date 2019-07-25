@@ -7,6 +7,21 @@
 	font-style: normal;
 }
 
+.mw1650 {
+	max-width: 1650px !important;
+}
+
+.mgt50 {
+	margin-top: 50px;
+}
+
+#with {
+	margin-top: 50px;
+	height: 600px;
+	font-family: 'yg-jalnan';
+	border-radius: 10px;
+	background-color: lightgray;
+}
 .callTitle {
 	font-weight: bold;
 	font-size: 35px;

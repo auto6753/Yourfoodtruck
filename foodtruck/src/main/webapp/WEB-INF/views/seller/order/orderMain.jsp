@@ -26,8 +26,35 @@ margin-top: 100px;
 
 
 }
+
+.mw1650 {
+	max-width: 1650px !important;
+}
+
+.mgt50 {
+	margin-top: 50px;
+}
+
+#with {
+	margin-top: 50px;
+	height: 600px;
+	font-family: 'yg-jalnan';
+	border-radius: 10px;
+	background-color: lightgray;
+}
 </style>
-<div class="container">
+<div class="container mw1650">
+	<div class="row">
+		<div class="col-md-2 mgt50">
+			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+		</div>
+		<div class="col-md-10">
+			<div id="with" class="col"></div>
+		</div>
+	</div>
+</div>
+
+<%-- <div class="container">
 	<div class="row">
 		<div class="col-md-3">
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
@@ -40,4 +67,4 @@ margin-top: 100px;
 			</div>
 		</div>
 	</div>
-</div>
+</div> --%>

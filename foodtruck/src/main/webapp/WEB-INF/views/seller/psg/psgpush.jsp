@@ -5,8 +5,18 @@
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/psg/psg.css"/>" />
-
-<div class="container">
+	
+<div class="container mw1650"">
+	<div class="row">
+		<div class="col-md-2 mgt50">
+			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+		</div>
+		<div class="col-md-10">
+			<div id="with" class="col"></div>
+		</div>
+	</div>
+</div>
+<%-- <div class="container">
 	<div class="row">
 		<div class="col-md-3">
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
@@ -46,7 +56,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> --%>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>

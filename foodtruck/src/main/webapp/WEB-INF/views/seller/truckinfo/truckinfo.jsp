@@ -160,13 +160,33 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 </head>
 
 <body>
-	<div class="container">
+	<div class="container mw1650">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2 mgt50">
 				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-md-9">
-				<div class="col-md-12 paddingZero">
+			<div class="col-md-10">
+				<div id="with" class="col">
+					<h1 class="menuTitle">트럭정보수정</h1>
+					<br>
+					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+	<%-- <div id="with" class="col">
 					<div class="menuTitle">트럭정보 수정</div>
 					<form id="all" action="/seller/truckinfomodify" method="post">
 						<div id="container">
@@ -251,11 +271,10 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 
 						</div>
 					</form>
-				</div>
-
+					</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </body>
 
 

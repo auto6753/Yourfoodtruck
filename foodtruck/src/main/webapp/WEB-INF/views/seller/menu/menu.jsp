@@ -9,7 +9,27 @@
 	src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container mw1650">
+		<div class="row">
+			<div class="col-md-2 mgt50">
+				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-10">
+				<div id="with" class="col">
+					<h1 class="menuTitle">메뉴관리</h1>
+					<br>
+					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<%-- <div class="container">
 		<div class="row">
 			<div class="col-md-3">
 				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
@@ -178,5 +198,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </body>

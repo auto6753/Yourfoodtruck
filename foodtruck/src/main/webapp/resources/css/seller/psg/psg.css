@@ -1,4 +1,19 @@
 @charset "UTF-8";
+.mw1650 {
+	max-width: 1650px !important;
+}
+
+.mgt50 {
+	margin-top: 50px;
+}
+
+#with {
+	margin-top: 50px;
+	height: 600px;
+	font-family: 'yg-jalnan';
+	border-radius: 10px;
+	background-color: lightgray;
+}
 .menuTitle{
    font-size: 50px;
     height: 60px;
@@ -57,9 +72,7 @@ h4{
     left: 20%;
     bottom: 310px;
 }
-.col {
-	margin-left: 10%;
-}
+
 #forPush{
 	margin:0 auto;
 	width:400px;

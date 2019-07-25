@@ -43,12 +43,32 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container mw1650">
+		<div class="row">
+			<div class="col-md-2 mgt50">
+				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-10">
+				<div id="with" class="col">
+					<h1 class="menuTitle">위치등록</h1>
+					<br>
+					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<%-- <div class="container">
 		<div class="row">
 			<div class="col-md-3">
 				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 			</div>
-			<%-- 
+			
 		<div class="col-md-9 content">
 				<form name="form" id="form" method="post">
 					<input type="button" onClick="goPopup();" value="팝업"/>
@@ -59,7 +79,7 @@
 					우편번호<input type="text" id="zipNo" name="zipNo"/>
 				</form>
 			</div>
-	</div> --%>
+	</div>
 	<div class="col-md-9">
 				<div class="col-md-12 paddingZero">
 					<div class="menuTitle">위치등록</div>
@@ -86,7 +106,7 @@
 			</form>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {

@@ -1,5 +1,21 @@
 @charset "UTF-8";
 
+
+.mw1650 {
+	max-width: 1650px !important;
+}
+
+.mgt50 {
+	margin-top: 50px;
+}
+
+#with {
+	margin-top: 50px;
+	height: 600px;
+	font-family: 'yg-jalnan';
+	border-radius: 10px;
+	background-color: lightgray;
+}
 .card1 {
 	position: relative;
 	display: -webkit-box;
@@ -181,17 +197,10 @@ a {
 	text-align: center;
 }
 
-.menuTitle {
-	/* font-weight: bold; */
-	font-size: 50px;
-	height: 35px;
-	position: relative;
-	bottom: 20px;
-	right: 5px;
-	margin: 23px 0 17px;
-	color: #666;
-	text-align: center;
-	font-family: 'Hanna', serif;
+.menuTitle{
+ 
+    text-align: center;
+	padding-top: 20px;
 }
 
 .changeToBlock {
