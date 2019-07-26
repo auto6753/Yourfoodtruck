@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function(){
+	$("#selDate").show();
 	var mCashSalesSelPeriod = Number($("#mCashSalesSelPeriod").val());
 	var nCashSalesSelPeriod = Number($("#nCashSalesSelPeriod").val());
 	var totalCashSalesSelPeriod = Number($("#totalCashSalesSelPeriod").val());
@@ -78,5 +79,9 @@ $(document).ready(function(){
 //          chart.draw(data, google.charts.Bar.convertOptions(options));
 //        }
 //      }
+    }
+    
+    if($("#inputFirstDate").val() == "" || $("#inputLastDate").val() == ""){
+    	$("#selDate").hide();
     }
 });

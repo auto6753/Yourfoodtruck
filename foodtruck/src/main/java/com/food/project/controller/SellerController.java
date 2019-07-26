@@ -1101,6 +1101,8 @@ public class SellerController {
 			model.addAttribute("menuSalesSelPeriod", menuSalesSelPeriod); // 메뉴별 판매량
 			model.addAttribute("totalAmountSelPeriod", totalAmountSelPeriod); // 총 판매량
 
+			model.addAttribute("inputFirstDate", inputFirstDate);
+			model.addAttribute("inputLastDate", inputLastDate);
 			return "seller/mngSales/selPeriodSales";
 
 		default:

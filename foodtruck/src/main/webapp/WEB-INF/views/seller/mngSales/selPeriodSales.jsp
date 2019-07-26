@@ -10,7 +10,33 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/selPeriodSales.js"></script>
 <title>매출관리 - 금일</title>
+<style>
+.date {
+	height: 30px;
+	position: relative;
+	top: 2.5px;
+	width: 85px;
+}
 
+#byPeriodSalesRe {
+	position: relative;
+	top: 2px;
+	width: 85px;
+	height: 30px;
+	margin-left: 0.5%;
+}
+
+#chart_div {
+	margin-top: 1%;
+}
+
+#selDate {
+	display: inline-block;
+	float: right;
+	position: relative;
+	top: 10px;
+}
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -19,11 +45,15 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET">
-						<input type="date" name="firstDate" class="hideTable"/>
+						<input type="date" name="firstDate" class="date"/>
 						<span class="hideTable">~</span>
-						<input type="date" name="lastDate" class="hideTable"/>
-						<button type="submit" id="byDaySalesRe" name="pageName" value="selPeriodSalesRe" class="hideTable">검색</button>
+						<input type="date" name="lastDate" class="date"/>
+						<button type="submit" id="byPeriodSalesRe" name="pageName" value="selPeriodSalesRe">검색</button>
+						<div id="selDate">${inputFirstDate} ~ ${inputLastDate} </div>
+						<input type="hidden" id="inputFirstDate" value="${inputFirstDate}"/>
+						<input type="hidden" id="inputLastDate" value="${inputLastDate}"/>
 					</form>
+					
 					<div id="chart_div" style="text-align:center;"></div>
 					<table border="1" class="hideTable">
 						<tr>
