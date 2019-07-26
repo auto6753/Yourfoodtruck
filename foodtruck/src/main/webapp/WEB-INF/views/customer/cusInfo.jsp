@@ -78,7 +78,7 @@
 							</div>
 						</div>
 						<br> 닉네임: ${cusinfo.nickname}
-						<button href="#layer2" class="btn-example">변경</button>
+						<button href="#layer2" class="btn-example">변경</button><br/>
 						<div class="dim-layer">
 							<div class="dimBg"></div>
 							<div id="layer2" class="pop-layer">

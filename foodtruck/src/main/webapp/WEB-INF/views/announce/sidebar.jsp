@@ -20,6 +20,27 @@ span {
     right: 3%;
         top: 75px;
 }
+@media screen and (min-width: 100px) and (max-width:700px) {
+	.list-group {
+	display: block;
+	
+	}
+	.sidebar {
+	padding:2px;
+	display:inline-block;
+	width:100%;
+	height:65px;
+	margin:0;
+	}
+	li.menu {
+	font-size:1rem;
+	display:inline-block;
+	width:40%;
+	margin:3%;
+	}
+}
+
+}
 
 /* li { display:inline-block; padding:20px; cursor:pointer; } */
 /* li.on { background-color:#eee; color:#f00; font-weight:bold;} */

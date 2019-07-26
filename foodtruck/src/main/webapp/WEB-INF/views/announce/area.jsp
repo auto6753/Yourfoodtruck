@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 <title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
@@ -161,7 +162,8 @@
 					<th class="boardsido">지역</th>
 					<th class="boardTitle">구역명</th>
 					<th class="boardaddr">주소</th>
-					<th>문의전화번호</th>
+					<th class="boardArea">관할구역</th>
+					<th class="boardTel">문의전화번호</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -172,16 +174,17 @@
  						<input type="hidden" class="latitude" value="${row.LATITUDE}">
  						<input type="hidden" class="longitude" value="${row.LONGITUDE}">
  					</td>
- 					<td style="position:relative;">${row.ADDR}
- 						<input type="hidden" value="${row.ADDR}"/>
-	 					<div class="contents" style="display:inline-block; position:relative;">
+ 					<td class="boardaddr" style="position:relative;">
+ 					<input type="hidden" value="${row.ADDR}"/>
+ 						<div class="contents" style="display:inline-block; position:relative;">
 							<a href="#layerPopup">
 								<img src="resources/image/map-marker-32.png" style="width:auto; height:15px; position:relative; top:-2px; "/>
 							</a>
-					    </div>
+					    </div>${row.ADDR}
+ 						
  					</td>
- 					<td>${row.GOVERN_NAME}</td>
- 					<td>${row.GOVERN_PHONE}</td>
+ 					<td class="boardArea">${row.GOVERN_NAME}</td>
+ 					<td class="boardTel">${row.GOVERN_PHONE}</td>
  				</tr>
  				</c:forEach>
 			</tbody>

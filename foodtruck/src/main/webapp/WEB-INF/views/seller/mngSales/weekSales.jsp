@@ -15,6 +15,7 @@
 	<div id="wrap">
 		<jsp:include page="navBar.jsp"></jsp:include>
 		<div class="container">
+		<input type="hidden" name="type" value="app"/>
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<div id="chart_div" style="text-align:center;"></div>

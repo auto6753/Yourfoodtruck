@@ -16,6 +16,7 @@
 		<jsp:include page="navBar.jsp"></jsp:include>
 		<div class="container">
 			<div class="row">
+			<input type="hidden" name="type" value="app"/>
 				<section id="salesSec" class="col-md-12">
 					<div id="chart_div" style="text-align:center;"></div>
 					<table border="1" class="hideTable">
