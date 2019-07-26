@@ -10,12 +10,39 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/byDaySales.js"></script>
 <title>매출관리 - 주간</title>
+<style>
+	#yyyy_db {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#yyyy_de {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#byDaySalesRe {
+		position: relative;
+		top: 2px;
+		width: 85px;
+		height: 30px;
+		margin-left: 0.5%;
+	}
+	
+	#chart_div {
+		margin-top:1%;
+	}
+</style>
 <script>
 	function checkForm() {
- 		var yyyy_db = $("#yyyy_db").val().substring(0, 4);
+		var yyyy_db = $("#yyyy_db").val().substring(0, 4);
 		var yyyy_de = $("#yyyy_de").val().substring(0, 4);
-		
-		if(yyyy_db > yyyy_de) {
+
+		if (yyyy_db > yyyy_de) {
 			alert("범위가 유효하지 않습니다.");
 			return false;
 		} else {
