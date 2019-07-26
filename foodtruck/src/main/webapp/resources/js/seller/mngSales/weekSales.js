@@ -55,6 +55,7 @@ $(document).ready(function(){
         },
         bars: 'vertical',
         vAxis: {format: 'decimal'},
+        legend : {position:'top'},
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
       };

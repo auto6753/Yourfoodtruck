@@ -55,6 +55,7 @@ $(document).ready(function(){
         },
         bars: 'vertical',
         vAxis: {format: 'decimal'},
+        legend : {position:'top'},
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
       };
@@ -64,13 +65,18 @@ $(document).ready(function(){
       chart.draw(data, google.charts.Bar.convertOptions(options));
 
       var btns = document.getElementById('btn-group');
-
-      btns.onclick = function (e) {
-
-        if (e.target.tagName === 'BUTTON') {
-          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
-          chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-      }
+      $('#btn-group').on('click',function(e) {
+          if (e.target.tagName === 'BUTTON') {
+              options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
+              chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+       });
+//      btns.onclick = function (e) {
+//
+//        if (e.target.tagName === 'BUTTON') {
+//          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
+//          chart.draw(data, google.charts.Bar.convertOptions(options));
+//        }
+//      }
     }
 });
