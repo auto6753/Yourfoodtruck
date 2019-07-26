@@ -19,13 +19,13 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET">
-						<input type="date" name="firstDate"/>
-						<span>~</span>
-						<input type="date" name="lastDate"/>
-						<button type="submit" id="byDaySalesRe" name="pageName" value="selPeriodSalesRe">검색</button>
+						<input type="date" name="firstDate" class="hideTable"/>
+						<span class="hideTable">~</span>
+						<input type="date" name="lastDate" class="hideTable"/>
+						<button type="submit" id="byDaySalesRe" name="pageName" value="selPeriodSalesRe" class="hideTable">검색</button>
 					</form>
-					<div id="chart_div"></div>
-					<table border="1">
+					<div id="chart_div" style="text-align:center;"></div>
+					<table border="1" class="hideTable">
 						<tr>
 							<td></td>
 							<td>회원</td>
@@ -57,7 +57,7 @@
 							<td><fmt:formatNumber value="${totalSalesSelPeriod}" pattern="#,###"/></td>
 						</tr>
 					</table>
-					<table border="1">
+					<table border="1" class="hideTable">
 						<tr>
 							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>

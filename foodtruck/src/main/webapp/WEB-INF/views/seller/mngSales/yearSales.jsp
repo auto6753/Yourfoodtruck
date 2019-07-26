@@ -18,7 +18,7 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET">
-						<select id="yy" name="yy" required>
+						<select id="yy" name="yy" class="hideTable" required>
 							<c:forEach var="yearValArrList" items="${yearValArrList}">
 								<c:if test="${yy eq yearValArrList}">
 									<option value="${yearValArrList}" selected>${yearValArrList}</option>
@@ -30,8 +30,8 @@
 						</select>
 						<button type="submit" id="yearSalesRe" name="pageName" value="yearSalesRe" style="display:none"></button>
 					</form>
-					<div id="chart_div"></div>
-					<table border="1">
+					<div id="chart_div" style="text-align:center;"></div>
+					<table border="1" class="hideTable">
 						<tr>
 							<td></td>
 							<td>회원</td>
@@ -63,7 +63,7 @@
 							<td><fmt:formatNumber value="${totalSalesYear}" pattern="#,###"/></td>
 						</tr>
 					</table>
-					<table border="1">
+					<table border="1" class="hideTable">
 						<tr>
 							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>

@@ -40,7 +40,31 @@ $(document).ready(function(){
 	];
 	
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    
+    var status = 0;
+    
+    for(var i=0; i<3; i++){
+	    if(byDaySalesResultSun[i] == 0) {status = status + 1;}
+	    
+	    if(byDaySalesResultMon[i] == 0) {status = status + 1;}
+	    
+	    if(byDaySalesResultTue[i] == 0) {status = status + 1;}
+	    
+	    if(byDaySalesResultWed[i] == 0) {status = status + 1;}
+	    
+	    if(byDaySalesResultThu[i] == 0) {status = status + 1;}
+	    
+	    if(byDaySalesResultFri[i] == 0) {status = status + 1;}
+	    
+	    if(byDaySalesResultSat[i] == 0) {status = status + 1;}
+    }
+   
+    if(status == 21){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
 

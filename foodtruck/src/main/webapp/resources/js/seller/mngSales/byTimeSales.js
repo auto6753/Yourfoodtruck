@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	var byTimeSalesResult = new Array();
-	console.log("aa"+byTimeSalesResult);
+	
 	for(var i=0; i<24; i++){
 		var temp = new Array();
 			temp.push(i+"시");
@@ -14,9 +14,22 @@ $(document).ready(function(){
 			byTimeSalesResult.push(temp);
 	}
 	
-	console.log(byTimeSalesResult);
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    
+    var status = 0;
+    
+    for(var i=0; i<24; i++){
+    	for(var j=1; j<4; j++){
+    		if(byTimeSalesResult[i][j] == 0) {status = status + 1;}
+    	}
+    }
+    console.log(status);
+    if(status == 72){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
       

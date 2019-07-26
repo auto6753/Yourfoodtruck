@@ -111,6 +111,7 @@ public class SellerController {
 		FoodTruckVO vo = truckService.getFoodTruck(truck_code);
 		session.setAttribute("seller", vo);
 		model.addAttribute("type", queryString);
+		System.out.println(queryString);
 		return "seller/mngSales/todaySales";
 	}
 
@@ -744,6 +745,7 @@ public class SellerController {
 			model.addAttribute("menuSalesYear", menuSalesYear); // 메뉴별 판매량
 			model.addAttribute("totalAmountYear", totalAmountYear); // 총 판매량
 
+			System.out.println(mCashSalesYear);
 			model.addAttribute("yy", yy);
 
 			return "seller/mngSales/yearSales";

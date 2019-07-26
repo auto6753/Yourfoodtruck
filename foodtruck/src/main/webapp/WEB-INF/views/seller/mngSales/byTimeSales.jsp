@@ -31,7 +31,7 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET" onsubmit="return checkForm();">
-						<select id="yyyy_tb" name="yyyy_tb" required>
+						<select id="yyyy_tb" name="yyyy_tb" class="hideTable" required>
 							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
 								<c:if test="${yyyy_tb eq byTimeValArrList}">
 									<option value="${byTimeValArrList}" selected>${byTimeValArrList}</option>
@@ -41,8 +41,8 @@
 								</c:if>
 							</c:forEach>					
 						</select>
-						<span>~</span>
-						<select id="yyyy_te" name="yyyy_te" required>
+						<span class="hideTable">~</span>
+						<select id="yyyy_te" name="yyyy_te" class="hideTable" required>
 							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
 								<c:if test="${yyyy_te eq byTimeValArrList}">
 									<option value="${byTimeValArrList}" selected>${byTimeValArrList}</option>
@@ -52,12 +52,12 @@
 								</c:if>
 							</c:forEach>					
 						</select>
-						<button type="submit" id="byTimeSalesRe" name="pageName" value="byTimeSalesRe">확인</button>
+						<button type="submit" id="byTimeSalesRe" name="pageName" value="byTimeSalesRe" class="hideTable">확인</button>
 					</form>
-					<div id="chart_div"></div>
+					<div id="chart_div" style="text-align:center;"></div>
 					<div id="table_div" style="display:none;">
 					<c:forEach var="byTimeSalesResult" items="${byTimeSalesResult}">
-						<table border="1">
+						<table border="1" class="hideTable">
 							<tr>
 								<td></td>
 								<td>회원</td>

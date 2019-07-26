@@ -31,7 +31,7 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET" onsubmit="return checkForm();">
-						<select id="yyyy_db" name="yyyy_db" required>
+						<select id="yyyy_db" name="yyyy_db" class="hideTable" required>
 							<c:forEach var="byDayValArrList" items="${byDayValArrList}">
 								<c:if test="${yyyy_db eq byDayValArrList}">
 									<option value="${byDayValArrList}" selected>${byDayValArrList}</option>
@@ -41,8 +41,8 @@
 								</c:if>
 							</c:forEach>					
 						</select>
-						<span>~</span>
-						<select id="yyyy_de" name="yyyy_de" required>
+						<span class="hideTable">~</span>
+						<select id="yyyy_de" name="yyyy_de" class="hideTable" required>
 							<c:forEach var="byDayValArrList" items="${byDayValArrList}">
 								<c:if test="${yyyy_de eq byDayValArrList}">
 									<option value="${byDayValArrList}" selected>${byDayValArrList}</option>
@@ -52,12 +52,12 @@
 								</c:if>
 							</c:forEach>					
 						</select>
-						<button type="submit" id="byDaySalesRe" name="pageName" value="byDaySalesRe">확인</button>
+						<button type="submit" id="byDaySalesRe" name="pageName" value="byDaySalesRe" class="hideTable">확인</button>
 					</form>
-					<div id="chart_div"></div>
+					<div id="chart_div" style="text-align:center;"></div>
 					<div id="table_div" style="display:none;">
  					<c:forEach var="byDaySalesResult" items="${byDaySalesResult}" begin="1">
-						<table border="1">
+						<table border="1" class="hideTable">
 							<tr>
 								<td></td>
 								<td>회원</td>
@@ -95,7 +95,7 @@
 						<input type="hidden" class="byDaySalesResult11" value="${byDaySalesResult[11]}"/>
 					</c:forEach>
 					<c:forEach var="byDaySalesResult" items="${byDaySalesResult}" begin="0" end="0">
-						<table border="1">
+						<table border="1" class="hideTable">
 							<tr>
 								<td></td>
 								<td>회원</td>

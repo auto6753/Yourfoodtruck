@@ -33,25 +33,32 @@
 
 		switch (pageVal) {
 		case "1":
-			$(".today").css("background-color", "red");
+			$(".today").css("background-color", "#ff5e18");
+			$(".today").css("color", "white");
 			break;
 		case "2":
-			$(".week").css("background-color", "orange");
+			$(".week").css("background-color", "#ff5e18");
+			$(".week").css("color", "white");
 			break;
 		case "3":
-			$(".month").css("background-color", "yellow");
+			$(".month").css("background-color", "#ff5e18");
+			$(".month").css("color", "white");
 			break;
 		case "4":
-			$(".year").css("background-color", "green");
+			$(".year").css("background-color", "#ff5e18");
+			$(".year").css("color", "white");
 			break;
 		case "5":
-			$(".byDay").css("background-color", "blue");
+			$(".byDay").css("background-color", "#ff5e18");
+			$(".byDay").css("color", "white");
 			break;
 		case "6":
-			$(".byTime").css("background-color", "navy");
+			$(".byTime").css("background-color", "#ff5e18");
+			$(".byTime").css("color", "white");
 			break;
 		case "7":
-			$(".selPeriod").css("background-color", "purple");
+			$(".selPeriod").css("background-color", "#ff5e18");
+			$(".selPeriod").css("color", "white");
 		}
 	});
 </script>
@@ -104,6 +111,7 @@ a.top {
       style="padding-top: 10px;">
       <div class="container">
          <nav id="navBar" class="row">
+         	<input type="hidden" name="type" value="${type}"/>
             <button class="navBtn butn hanna today" name="pageName"
                value="todaySales">금일</button>
             <button class="navBtn butn hanna week" name="pageName"
