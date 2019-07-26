@@ -34,7 +34,7 @@ $(document).ready(function(){
     		nTotalSales == 0 &&
     		totalSales == 0	
     ){
-    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px;'/>");
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
     	$(".hideTable").css("display", "none");
     } else {
     	google.charts.setOnLoadCallback(drawChart);

@@ -17,7 +17,25 @@ $(document).ready(function(){
 	var totalSalesSelPeriod = Number($("#totalSalesSelPeriod").val());
 	
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    if(
+    		mCashSalesSelPeriod == 0 &&
+    		nCashSalesSelPeriod == 0 &&
+    		totalCashSalesSelPeriod == 0 &&
+    		mCardSalesSelPeriod == 0 &&
+    		nCardSalesSelPeriod == 0 &&
+    		totalCardSalesSelPeriod == 0 &&
+    		mKakaoSalesSelPeriod == 0 &&
+    		nKakaoSalesSelPeriod == 0 &&
+    		totalKakaoSalesSelPeriod == 0 &&
+    		mTotalSalesSelPeriod == 0 &&
+    		nTotalSalesSelPeriod == 0 &&
+    		totalSalesSelPeriod == 0	
+    ){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
 

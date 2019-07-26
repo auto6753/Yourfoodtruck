@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	var byTimeSalesResult = new Array();
-	
+	console.log("aa"+byTimeSalesResult);
 	for(var i=0; i<24; i++){
 		var temp = new Array();
 			temp.push(i+"시");

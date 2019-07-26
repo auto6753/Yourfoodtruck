@@ -17,9 +17,10 @@
 				<div id="with" class="col">
 					<h1 class="menuTitle">매출관리</h1>
 					<br>
-					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
-						<div class="container">
+					<div class="album bg-light paddingZero" style="height: 80%; overflow-y: auto;">
+						<div class="container containeru">
 							<div class="row">
+								<iframe src="/seller/salesToday" style="width: 100%; height: 480px; overflow-y:hidden; border: 2px lightgray solid;"></iframe>
 							</div>
 						</div>
 					</div>
@@ -27,20 +28,4 @@
 			</div>
 		</div>
 	</div>
-	
-	 <div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<jsp:include page="sideMenuBar/sideMenuBar.jsp"></jsp:include>
-			</div>
-			<div class="col-md-9">
-				<div class="col-md-12 paddingZero">
-					<div class="menuTitle">매출관리</div>
-					</div>
-					</div>
-			<div class="col-xs-12 col-md-9 content" id="main1">
-				<iframe src="/seller/salesToday" style="width: 100%; height: 550px; overflow-y:auto; position: relative; bottom: 100px;border: 2px lightgray solid;"></iframe>
-			</div>
-		</div>
-	</div> 
 </body>

@@ -12,7 +12,41 @@
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 		</div>
 		<div class="col-md-10">
-			<div id="with" class="col"></div>
+			<div id="with" class="col">
+				<h1 class="menuTitle">탑승자관리</h1>
+					<br>
+					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+								<div id="forPush">
+									<textarea id="details" name="details" cols="54" rows="3"
+										onFocus="clearMessage();" onKeyUp="checkByte();">내용을 입력해 주세요.</textarea>
+								</div>
+								<div class="showByte">
+									<input type="text" id="messagebyte" name="messagebyte"
+										value="0" size="1" maxlength="2" disabled> <font
+										color="#000000">/ 1000 byte</font> <input type="button"
+										id="forPushBtn" value="푸쉬알림 보내기">
+								</div>
+								<div id="forToken"></div>
+							</div>
+							<div class="row">
+								<div id="Line_Controls_Chart">
+				<h4 style="padding-top: 10px;">탑승자 현황 그래프</h4>
+				<div id="buttonbar">
+					<form action="/seller/psgpush" method="GET">
+						<input type="date" name="inputBeginDate" /> <input type="date"
+							name="inputEndDate" />
+						<button type="submit" id="search">확인</button>
+					</form>
+				</div>
+				<!-- 라인 차트 생성할 영역 -->
+				<div id="chart_div"></div>
+			</div>
+							</div>
+						</div>
+					</div>
+			</div>
 		</div>
 	</div>
 </div>

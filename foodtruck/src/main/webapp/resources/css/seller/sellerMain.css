@@ -4,10 +4,16 @@
 	max-width: 1650px !important;
 }
 
+.containeru {
+	max-width: 1650px !important;
+}
 .mgt50 {
 	margin-top: 50px;
 }
 
+.paddingZero {
+	padding: 0 !important;
+}
 #with {
 	margin-top: 50px;
 	height: 600px;

@@ -21,7 +21,25 @@ $(document).ready(function(){
 	var totalSalesYear = Number($("#totalSalesYear").val());
 	
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    if(
+    		mCashSalesYear == 0 &&
+    		nCashSalesYear == 0 &&
+    		totalCashSalesYear == 0 &&
+    		mCardSalesYear == 0 &&
+    		nCardSalesYear == 0 &&
+    		totalCardSalesYear == 0 &&
+    		mKakaoSalesYear == 0 &&
+    		nKakaoSalesYear == 0 &&
+    		totalKakaoSalesYear == 0 &&
+    		mTotalSalesYear == 0 &&
+    		nTotalSalesYear == 0 &&
+    		totalSalesYear == 0	
+    ){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
 

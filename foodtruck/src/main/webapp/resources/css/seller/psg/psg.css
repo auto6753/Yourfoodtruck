@@ -1,4 +1,10 @@
 @charset "UTF-8";
+
+.menuTitle {
+	text-align: center;
+	padding-top: 20px;
+}
+
 .mw1650 {
 	max-width: 1650px !important;
 }
@@ -14,73 +20,62 @@
 	border-radius: 10px;
 	background-color: lightgray;
 }
-.menuTitle{
-   font-size: 50px;
-    height: 60px;
-    margin: 23px 0 17px;
-    color: #666;
-    text-align: center;
-    position: relative;
-    bottom: 20px;
-    font-family: 'Hanna', serif;
-}
-#Line_Controls_Chart{
 
-       width: 80%;
-    height: 600px;
-    border: 3px solid lightgray;
-    position: relative;
-    left: 20%;
-    /* right: 13%; */
-    bottom: 42.6%;
-    margin-top:50px;
-    
+#Line_Controls_Chart {
+	width: 100%;
+	height: 600px;
+	border: 3px solid lightgray;
+	margin-top: 2%;
 }
 
-#chart_div{
+#chart_div {
 	margin: 0 auto;
-	margin-top: 50px;
-	width: 700px;
-	height: 500px;
+	width: 1000px;
+	height: 450px;
 	border: 1px solid darkgray;
 }
-h4{
+
+h4 {
 	text-align: center;
 	float: center;
 }
-#search{
-	    width: 15%;
-    height: 25px;
+
+#search {
+	width: 15%;
+	height: 25px;
+	margin-right: 6%;
 }
-#buttonbar{
-	float: right;
-	width: 400px;
+
+#buttonbar {
 	height: 50px;
 	margin-top: 10px;
-	margin-right: 65px;
+	text-align: right;
 }
-.sidemenu{
+
+.sidemenu {
 	float: left;
-	position:fixed;
+	position: fixed;
 }
+
 #wrap {
- 
-        width: 80%;
-    height: 200px;
-    border: 3px solid lightgray;
-    position: relative;
-    left: 20%;
-    bottom: 310px;
+	width: 80%;
+	height: 200px;
+	border: 3px solid lightgray;
+	position: relative;
+	left: 20%;
+	bottom: 310px;
 }
 
-#forPush{
-	margin:0 auto;
-	width:400px;
-}
-.showByte{
-	margin:0 auto;
-	width:130px;
+#forPush {
+	width: 100%;
 }
 
+#details {
+	width: 100%;
+}
 
- 
+.showByte {
+	width: 100%;
+	text-align: right;
+	margin-top: 0.5%;
+}

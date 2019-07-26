@@ -252,22 +252,13 @@
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 		</div>
 		<div class="col-md-10">
-			<div id="with" class="col"></div>
-		</div>
-	</div>
-</div>
-
-<%-- <div class="container">
-	<div class="row">
-		<div class="col-md-3">
-			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
-		</div>
-		<div class="col-md-9">
-			<div class="col-md-12 paddingZero">
-				<div class="menuTitle">호출관리</div>
-			</div>
-		</div>
-		<div class="calltext" style="overflow-x: hidden; overflow-y: auto;">
+			<div id="with" class="col">
+				<h1 class="menuTitle">호출관리</h1>
+					<br>
+					<div class="album bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+								<div class="calltext" style="overflow-x: hidden; overflow-y: auto;">
 			<table>
 				<!-- #wrapper에 스타일 지정 -->
 				<thead>
@@ -342,6 +333,8 @@
 				</tbody>
 			</table>
 		</div>
+		</div>
+		<div class="row">
 		<div id="nextall">
             <nav id="next" aria-label="Page navigation example">
                <ul class="pagination">
@@ -357,9 +350,19 @@
                </ul>
             </nav>
          </div>
+         </div>
+							</div>
+						</div>
+					</div>
+			
+		</div>
 	</div>
+</div>
 
-</div> --%>
+
+		
+		
+		
 
 <script>
 function list(page) {

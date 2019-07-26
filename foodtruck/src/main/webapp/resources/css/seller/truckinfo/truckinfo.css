@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-
+.plusCon {
+	height: 193px;
+}
 .mw1650 {
 	max-width: 1650px !important;
 }
@@ -38,18 +40,28 @@
 	right: 55%;
 }
 
+.w {
+	width: 40% !important;
+}
+
+.bb{
+	display: block;
+}
+.ib {
+	display: inline-block !important;
+}
+
 .menut {
-	width: 50%;
 	border: 1px solid lightgray;
 }
 
 #truckphoto {
-	margin-left: 70%;
+	width: 300px;
 }
 
 .imgbox {
-	width: 100%;
-	height: 150px;
+	width: 300px;
+	height: 300px;
 }
 
 .truckphoto {
@@ -71,7 +83,7 @@
 }
 
 .user-btn {
-	width: 30%;
+	width: 300px;
 	display: inline-block;
 	-moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;

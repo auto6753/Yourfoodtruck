@@ -7,6 +7,11 @@
 	font-style: normal;
 }
 
+.menuTitle {
+	text-align: center;
+	padding-top: 20px;
+}
+
 .mw1650 {
 	max-width: 1650px !important;
 }
@@ -22,24 +27,18 @@
 	border-radius: 10px;
 	background-color: lightgray;
 }
-.callTitle {
-	font-weight: bold;
-	font-size: 35px;
-	height: 35px;
-	margin: 23px 0 17px;
-	color: #666;
-	text-align: center;
-	color: rgb(255, 94, 24);
+
+#nextall {
+	margin: 0 auto;
+	margin-top: 1%;
 }
 
 .calltext {
+	margin-top: 2%;
 	border: 3px solid lightgray;
 	/* color: #666; */
-	height: 450px;
-	position: relative;
-	left: 25%;
-	bottom: 310px;
-	width: 80%;
+	height: 400px;
+	width: 100%;
 }
 
 td {
@@ -75,17 +74,6 @@ td {
 	padding: 15px;
 	width: 20%;
 	height: 50px;
-}
-
-.menuTitle {
-	font-size: 50px;
-	height: 60px;
-	margin: 23px 0 17px;
-	color: #666;
-	text-align: center;
-	position: relative;
-	bottom: 20px;
-	font-family: 'Hanna', serif;
 }
 
 table {
