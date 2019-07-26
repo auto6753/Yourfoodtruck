@@ -10,6 +10,26 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/monthSales.js"></script>
 <title>매출관리 - 월간</title>
+<style>
+	#yymm {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#monthSalesRe {
+		position: relative;
+		top: 2px;
+		width: 85px;
+		height: 30px;
+		margin-left: 0.5%;
+	}
+	
+	#chart_div {
+		margin-top:1%;
+	}
+</style>
 </head>
 <body>
 	<div id="wrap">
