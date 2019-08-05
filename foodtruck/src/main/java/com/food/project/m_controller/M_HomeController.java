@@ -101,7 +101,8 @@ public class M_HomeController {
 
 		// 파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath2);
+			serviceAccount = new FileInputStream(firebasePath);
+			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/").build();
 		} catch (FileNotFoundException e1) {

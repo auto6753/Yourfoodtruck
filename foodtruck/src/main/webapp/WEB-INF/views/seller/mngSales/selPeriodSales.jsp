@@ -27,7 +27,7 @@
 }
 
 #chart_div {
-	margin-top: 1%;
+	margin-top: 3%;
 }
 
 #selDate {

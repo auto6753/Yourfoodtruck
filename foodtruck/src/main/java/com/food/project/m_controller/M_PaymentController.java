@@ -93,7 +93,8 @@ public class M_PaymentController {
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 
 		try {
-			serviceAccount = new FileInputStream(firebasePath2);
+			serviceAccount = new FileInputStream(firebasePath);
+			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")

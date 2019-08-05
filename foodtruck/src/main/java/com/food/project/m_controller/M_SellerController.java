@@ -96,7 +96,8 @@ public class M_SellerController {
 		//파이어베이스 옵션 설정
 		//파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath2);
+			serviceAccount = new FileInputStream(firebasePath);
+			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -163,7 +164,8 @@ public class M_SellerController {
 		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
 				+ File.separator + "resources" + File.separator + "json" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		serviceAccount = new FileInputStream(firebasePath2);
+		serviceAccount = new FileInputStream(firebasePath);
+		//serviceAccount = new FileInputStream(firebasePath2);
 		
 		//이미 관리자 defaultApp이 있는지 검사
 		if(apps!=null && !apps.isEmpty()) {

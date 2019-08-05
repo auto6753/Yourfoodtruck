@@ -1604,7 +1604,8 @@ public class SellerController {
 		// 파이어베이스 옵션 설정
 		try {
 			if (defaultApp == null) {
-				serviceAccount = new FileInputStream(firebasePath2);
+				serviceAccount = new FileInputStream(firebasePath);
+				//serviceAccount = new FileInputStream(firebasePath2);
 				FirebaseOptions options = new FirebaseOptions.Builder()
 						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 						.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/").build();
