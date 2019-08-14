@@ -152,7 +152,7 @@ public class M_LoginController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public String insert(@RequestBody Map<String,Object> map) {
+	public String insert(@RequestBody Map<String,Object> map) throws FileNotFoundException {
 		FirebaseApp defaultApp = null;
 		List<FirebaseApp> apps=FirebaseApp.getApps();
 		FileInputStream serviceAccount;
@@ -168,15 +168,15 @@ public class M_LoginController {
 		// 서버 올릴 때 경로
 		String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
-				+ File.separator + "resources" + File.separator + "json" + File.separator
-				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//				+ File.separator + "resources" + File.separator + "json" + File.separator
+//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 
-
+		serviceAccount = new FileInputStream(firebasePath);
 		//파이어베이스 옵션 설정
 		//파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath);
+			
 			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))

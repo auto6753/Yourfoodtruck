@@ -22,40 +22,6 @@
 				<div id="with" class="col">
 					<h1 style="text-align: center; padding-top: 20px;">회원정보</h1>
 
-					<div class="img">
-						<img src="/resources/image/customer.svg" class="img2" id="image">
-						<button id="pop_bt" class="bt1">프로필수정</button>
-						<div id="pop" style="display: none;">
-							<div style="height: 370px">
-								프로필 수정 <br>
-								<div id="slide">
-									<input type="radio" name="pos" id="pos1" checked> <input
-										type="radio" name="pos" id="pos2"> <input type="radio"
-										name="pos" id="pos3"> <input type="radio" name="pos"
-										id="pos4">
-									<ul>
-										<li><img src="/resources/image/customer2.svg"
-											class="img2"></li>
-										<li><img src="/resources/image/customer3.svg"
-											class="img2"></li>
-										<li><img src="/resources/image/customer4.svg"
-											class="img2"></li>
-										<li><img src="/resources/image/customer5.svg"
-											class="img2"></li>
-									</ul>
-									<p class="pos">
-										<label for="pos1"></label> <label for="pos2"></label> <label
-											for="pos3"></label> <label for="pos4"></label>
-									</p>
-								</div>
-								<button id="close">적용</button>
-								<button id="close1">취소</button>
-							</div>
-
-
-						</div>
-					</div>
-
 
 					<div class="div2">
 						<br> 아이디:${cusinfo.email} <br>비밀번호

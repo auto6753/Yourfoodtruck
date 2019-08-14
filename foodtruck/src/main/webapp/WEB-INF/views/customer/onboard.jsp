@@ -60,7 +60,6 @@
 			var a = $(this);
 			//var truckcode = $("#truckcode").val();
 			var truckcode = a.next().val();
-			alert(truckcode);
 			var email = "${sessionScope.sessionid.email}";
 			var date = new Date();
 			var year = date.getFullYear();
@@ -73,9 +72,7 @@
 				month = "0" + month;
 			}
 			var today = year + "-" + month + "-" + day;
-			alert(today);
-			alert(truckcode);
-			alert(email);
+			
 
 			$.ajax({
 				type : "post",

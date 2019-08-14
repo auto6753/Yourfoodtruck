@@ -63,7 +63,7 @@ public class M_PaymentController {
 	}
 	@RequestMapping(value="/insertOrder",method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String insertOrder(@RequestBody String param) {
+	public String insertOrder(@RequestBody String param) throws FileNotFoundException {
 		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
 		paymentMap = JSONArray.fromObject(param);
 		System.out.println(paymentMap.toString());
@@ -88,12 +88,12 @@ public class M_PaymentController {
 		// 서버 올릴 때 경로
 		System.out.println(path);
 		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
-				+ File.separator + "resources" + File.separator + "json" + File.separator
-				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//				+ File.separator + "resources" + File.separator + "json" + File.separator
+//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		serviceAccount = new FileInputStream(firebasePath);
 		try {
-			serviceAccount = new FileInputStream(firebasePath);
+			
 			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))

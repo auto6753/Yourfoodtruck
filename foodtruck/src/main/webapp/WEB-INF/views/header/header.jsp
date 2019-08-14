@@ -151,7 +151,7 @@ color: rgba(255, 94, 24);
 				<li class="nav-item"><a class="nav-link" href="/area">허가구역</a></li>
 				<li id="z" class="nav-item"><a class="nav-link" href="/announce">모집공고</a></li>
 				<!-- <li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li> -->
-				<li class="nav-item"><a class="nav-link" href="/help">고객센터</a></li>
+				<li class="nav-item"><a class="nav-link" href="/help">질문하기</a></li>
 			</ul>
 			<div id="top-right">
 				<c:if test="${sessionid == null}">

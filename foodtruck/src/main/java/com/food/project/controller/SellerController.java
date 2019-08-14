@@ -1571,7 +1571,7 @@ public class SellerController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/seorder", method = RequestMethod.GET)
 	public String seorder(Model model, HttpSession session, @Param("truck_code") String truck_code,
-			@Param("_uid") String _uid) {
+			@Param("_uid") String _uid) throws FileNotFoundException {
 		FirebaseApp defaultApp = null;
 		CustomerVO vo = new CustomerVO();
 		String email;
@@ -1597,14 +1597,15 @@ public class SellerController {
 		System.out.println(path);
 		String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
-				+ File.separator + "resources" + File.separator + "json" + File.separator
-				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//				+ File.separator + "resources" + File.separator + "json" + File.separator
+//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 
 		// 파이어베이스 옵션 설정
+		serviceAccount = new FileInputStream(firebasePath);
 		try {
 			if (defaultApp == null) {
-				serviceAccount = new FileInputStream(firebasePath);
+				
 				//serviceAccount = new FileInputStream(firebasePath2);
 				FirebaseOptions options = new FirebaseOptions.Builder()
 						.setCredentials(GoogleCredentials.fromStream(serviceAccount))

@@ -100,7 +100,7 @@ img.img1 {
    margin-top: 50px;
    width: 70%;
    height: 700px;
-
+   overflow: hidden;
 }
 
 h1 {

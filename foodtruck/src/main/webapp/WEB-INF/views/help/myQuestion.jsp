@@ -25,23 +25,11 @@
 						<tr>
 							<th>문의번호</th>
 							<th>제목</th>
-							<th>등록일</th>
-							<th>답변일</th>
+							<th>내용</th>
 							<th>상태</th>
-
+							<th>등록일</th>
 						</tr>
 						<tbody id="g">
-							<%-- 		<c:forEach var="i" items="${CallList}">
-				<tr>
-					<td>${i.name}</td>
-					<td>${i.place}</td>
-					<td>${i.festival_name}</td>
-					<td>${i.festival_startdate}~${i.festival_enddate}</td>
-					<td>${i.festival_starttime}~${i.festival_endtime}</td>
-					<td>${i.reporting_date}</td>
-					<td>${i.progress}</td>									
-				</tr>
-</c:forEach> --%>
 						</tbody>
 					</table>
 				</div>
@@ -51,63 +39,61 @@
 	<script>
 		$(document).ready(
 				function() {
-					var templist = $
-					{
-						list
-					}
-					;
+					var templist = ${list};
 					var list = JSON.parse(JSON.stringify(templist));
 					console.log(list);
 					for (var i = 0; i < list.length; i++) {
-						$("#content").append(
-								list[i].question_code + " "
-										+ list[i].question_title + " "
-										+ list[i].question_content + " "
-										+ list[i].status + " "
-										+ list[i].question_regdate + "<br>");
+						$("#g").append(
+								"<tr><td>" + list[i].question_code
+										+ "</td><td>" + list[i].question_title
+										+ "</td><td>"
+										+ list[i].question_content
+										+ "</td><td> " + list[i].status
+										+ "</td><td> "
+										+ list[i].question_regdate
+										+ "</td></tr>");
 					}
 
 				});
 	</script>
 </body>
+<%-- <section class="display-inline">
+      <h3>문의번호</h3>
 
-<%-- 	<section class="display-inline">
-		<h3>문의번호</h3>
-
-		<c:forEach var="item" items="${list}" step=1>
-    		${item.num}
-		</c:forEach>
-	</section>
-	<section class="display-inline">
-		<h3>제목</h3>
-		<c:forEach var="item" items="${list}" step=1>
-    		${item.title}
-		</c:forEach>
-	</section>
-	<section class="display-inline">
-		<h3>등록일</h3>
-		<c:forEach var="item" items="${list}" step=1>
-    		${item.regDate}
-		</c:forEach>
-	</section>
-	<section class="display-inline">
-		<h3>답변일</h3>
-		<c:forEach var="item" items="${list}" step=1>
-    		${item.resDate}
-		</c:forEach>
-	</section>
-	<section class="display-inline">
-		<h3>상태</h3>
-		<c:forEach var="item" items="${list}" step=1>
-    		${item.status}
-		</c:forEach>
-	</section>
-	<footer>
-	${result}
-	</footer>
-	<div id="content">
-	</div>
-</div> --%>
+      <c:forEach var="item" items="${list}" step=1>
+          ${item.num}
+      </c:forEach>
+   </section>
+   <section class="display-inline">
+      <h3>제목</h3>
+      <c:forEach var="item" items="${list}" step=1>
+          ${item.title}
+      </c:forEach>
+   </section>
+   <section class="display-inline">
+      <h3>등록일</h3>
+      <c:forEach var="item" items="${list}" step=1>
+          ${item.regDate}
+      </c:forEach>
+   </section>
+   <section class="display-inline">
+      <h3>답변일</h3>
+      <c:forEach var="item" items="${list}" step=1>
+          ${item.resDate}
+      </c:forEach>
+   </section>
+   <section class="display-inline">
+      <h3>상태</h3>
+      <c:forEach var="item" items="${list}" step=1>
+          ${item.status}
+      </c:forEach>
+   </section>
+   <footer>
+   ${result}
+   </footer>
+   <div id="content">
+   </div>
+</div>  --%>
 
 
 

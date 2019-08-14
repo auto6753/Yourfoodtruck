@@ -7,6 +7,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
 <title>당신의 푸드트럭</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans">
@@ -38,7 +41,7 @@ margin-top : 50px;
 </style>
 </head>
 <body>
-	<h1>주문 확인 페이지</h1>
+	<h1>주문 내역</h1>
 	<div class="wrap"></div>
 	<div class="result"></div>
 	<c:if test="${today_sales =='empty'}">
@@ -244,7 +247,7 @@ function updateTodaySales() {
  		success:function(data) {
  			var json = JSON.parse(data);
  			console.log(json);
- 			alert(data);
+ 			//alert(data);
  			if(json.today_sales =="empty") {
  				$('.today_sales').html("오늘의 매출액 : 0원");
  			}else {

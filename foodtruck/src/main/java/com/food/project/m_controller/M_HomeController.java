@@ -78,7 +78,7 @@ public class M_HomeController {
 	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(value = "/pushToken")
-	public void token(@RequestBody String param) {
+	public void token(@RequestBody String param) throws FileNotFoundException {
 //		model.addAttribute("content",main(model));
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = JSONObject.fromObject(param);
@@ -94,14 +94,14 @@ public class M_HomeController {
 		// 서버 올릴 때 경로
 		String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
 				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
-		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
-				+ File.separator + "resources" + File.separator + "json" + File.separator
-				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//				+ File.separator + "resources" + File.separator + "json" + File.separator
+//				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
 
-
+		serviceAccount = new FileInputStream(firebasePath);
 		// 파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath);
+			
 			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/").build();

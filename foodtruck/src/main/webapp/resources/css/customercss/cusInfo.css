@@ -50,7 +50,7 @@ h1 {
 .div2 {
 	margin-left: 2%;
 	margin-top: 20px;
-	width: 78%;
+	width: 96%;
 	height: 400px;
 	float: left;
 	border-radius: 10px;
@@ -106,13 +106,12 @@ h1 {
 
 .dim-layer {
 	display: none;
-	position: fixed;
-	_position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 100;
+	position: absolute;
+	top: 50%;
+	left: 28.7%;
+	width: 410px;
+	height: auto;
+	z-index: 10;
 	border-radius: 10px;
 }
 
