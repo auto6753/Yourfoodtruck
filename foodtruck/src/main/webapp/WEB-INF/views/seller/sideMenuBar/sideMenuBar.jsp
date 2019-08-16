@@ -124,7 +124,7 @@ span {
 
 			<li class="menu mb"><a href="/seller/event" class="linkStyle">이벤트등록</a></li>
 
-			<li class="menu mb"><a href="/seller/psgpush" class="linkStyle">탑승자알림관리</a></li>
+			<li class="menu mb"><a href="/seller/psgpush" class="linkStyle">탑승자관리</a></li>
 
 			<li class="menu mb"><a href="/seller/callmanage"
 				class="linkStyle">호출관리</a></li>
