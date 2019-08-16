@@ -48,6 +48,9 @@ $(document).ready(function(){
 //          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
+        bar : {
+			groupWidth : '50%' // 그래프 너비 설정 %
+		},
         legend : {position:'top'},
         vAxis: {format: 'decimal'},
         height: 400,

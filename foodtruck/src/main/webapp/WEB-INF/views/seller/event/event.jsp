@@ -300,10 +300,10 @@
 											<input type="checkbox" id="pCard" name="payment" value="card" />
 											카드
 										</div>
-										<div>
+										<!-- <div>
 											<input type="checkbox" id="pKakao" name="payment"
 												value="kakaoPay" /> 카카오페이
-										</div>
+										</div> -->
 									</td>
 								</tr>
 								<tr>

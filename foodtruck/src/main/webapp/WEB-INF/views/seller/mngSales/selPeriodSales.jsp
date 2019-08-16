@@ -15,7 +15,7 @@
 	height: 30px;
 	position: relative;
 	top: 2.5px;
-	width: 85px;
+	width: 150px;
 }
 
 #byPeriodSalesRe {

@@ -48,8 +48,8 @@ $(document).ready(function(){
           ['연간', '전체', '회원', '비회원'],
           ['합계', totalSalesYear, mTotalSalesYear, nTotalSalesYear],
           ['현금', totalCashSalesYear, mCashSalesYear, nCashSalesYear],
-          ['카드', totalCardSalesYear, mCardSalesYear, nCardSalesYear],
-          ['카카오페이', totalKakaoSalesYear, mKakaoSalesYear, nKakaoSalesYear]
+          ['카드', totalCardSalesYear, mCardSalesYear, nCardSalesYear]
+//          ,['카카오페이', totalKakaoSalesYear, mKakaoSalesYear, nKakaoSalesYear]
       ]);
 
       var options = {
@@ -58,6 +58,9 @@ $(document).ready(function(){
 //          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
+        bar : {
+			groupWidth : '50%' // 그래프 너비 설정 %
+		},
         vAxis: {format: 'decimal'},
         legend : {
         	position:'top',

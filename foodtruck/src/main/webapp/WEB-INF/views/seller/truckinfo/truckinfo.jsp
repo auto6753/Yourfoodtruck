@@ -217,8 +217,8 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 												type="checkbox" id="ck1" name="paytype" value="5"> <label
 												for="ck1">현금</label> <input type="checkbox" id="ck2"
 												name="paytype" value="3"> <label for="ck2">카드</label>
-											<input type="checkbox" id="ck3" name="paytype" value="1">
-											<label for="ck3">카카오페이</label>
+											<!-- <input type="checkbox" id="ck3" name="paytype" value="1">
+											<label for="ck3">카카오페이</label> -->
 
 										</div>
 										<div class="form-group">
