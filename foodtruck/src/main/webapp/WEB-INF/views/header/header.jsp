@@ -57,7 +57,9 @@ border-radius: 10px;
 } */
 
 #top-right {
-   margin-top: 50px;
+	margin-top: 50px;
+	min-width:350px;
+	font-size:13px;
 }
 .test{
 
@@ -126,6 +128,9 @@ color: rgba(255, 94, 24);
   left: -31.5%;
   z-index: 1030;
 }
+.big-list {
+	min-width:375px;
+}
 
 
 
@@ -143,7 +148,7 @@ color: rgba(255, 94, 24);
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto big-list">
 				<!-- <li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li> -->
@@ -162,7 +167,7 @@ color: rgba(255, 94, 24);
 					<span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">${sessionScope.sessionid.nickname}님</span>
 					<input id="sessione" type="hidden" value="${sessionScope.sessionid.email }">
 					<input id="sessionp" type="hidden" value="${sessionScope.sessionid.point}">
-					<span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">포인트 : ${sessionScope.sessionid.point} 원</span>
+					<%-- <span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">포인트 : ${sessionScope.sessionid.point} 원</span> --%>
 					<span id="" class="badge badge-light"><a href="/customer" style="color:rgba(255, 94, 24)">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
 					<span id="" class="badge badge-light"><a href="/truck/register" style="color:rgba(255, 94, 24)">트럭등록</a></span>

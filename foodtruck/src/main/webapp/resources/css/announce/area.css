@@ -35,13 +35,13 @@ p {
 	font-size: 30px;
 }
 
-.sidebar {
-	position: relative;
-	top: -60px;
-	left: 150px;
-	width: 12%;
-	font-size: 20px;
-	display: -webkit-inline-box;
+.sidebar{
+   position: relative;
+    top: -50px;
+    left: 8%;
+    width: 200px;
+    font-size: 15px;
+    display: -webkit-inline-box;
 }
 
 #pageadd {

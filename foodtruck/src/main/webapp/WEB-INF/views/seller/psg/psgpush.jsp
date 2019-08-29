@@ -133,7 +133,7 @@ function checkByte() {
          console.log(truck_code);
          var pushObj={};
          pushObj.notification={};
-         pushObj.notification.title="탑승자 알림을 확인해보세요!";
+         pushObj.notification.title="[${sessionScope.seller.brandname}]";
          pushObj.notification.body=pushTxt;
          pushObj.notification.sound="default";
          pushObj.to="/topics/all";
