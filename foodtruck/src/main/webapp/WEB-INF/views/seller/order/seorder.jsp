@@ -99,7 +99,7 @@
             function pay(a) {
                 var isPayed = false;
                 if (!isPayed) {
-                    var result = confirm('결제확인하시겠습니까?');
+                    var result = confirm('결제완료하시겠습니까?');
                     if (result) {
                         var parent_node = $('#' + a).parent();
                         //         console.log(parent_node.html());
@@ -166,7 +166,7 @@
             function release(a) {
                 var isPayed = false;
                 if (!isPayed) {
-                    var released = confirm("출고확인하시겠습니까?");
+                    var released = confirm("조리완료하시겠습니까?");
                     if (released && isChecked) {
                         var telephone = $("#" + a).next().val();
                         telephone = telephone.substr(1);
@@ -243,7 +243,7 @@
                         });
                         //updateTodaySales();
                     } else if (!isChecked) {
-                        alert("결제확인을 먼저 하십시오");
+                        alert("결제완료을 먼저 하십시오");
                     }
                 }
 
@@ -298,7 +298,7 @@
                                 console.log("'" + order + "'"); //전화번호
                                 var order_index = orderList[order].length; //한사람당 주문한 제품개수
                                 console.log(order_index);
-                                $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>' + orderList[order][0].payment_telephone + '</h4><span class="num"></span><div style="margin-top:30px; border-bottom:solid 1px black;"><span class="info_div"></span></div></div><div id="' + orderList[order][0].payment_telephone + '" class="menu"style="overflow-y: scroll; overflow-x: hidden;"></div><button class="button orange" id="' + order + '"  onclick="pay(\'' + order + '\')" class="pay">결제확인</button><input type="hidden" value="\'' + orderList[order][0].payment_telephone + '\'"><input type="hidden" value="' + truck_code + '"><button class=" orange button release" onclick="release(\'' + order + '\')">출고확인</button></div>');
+                                $('.wrap').append('<div id="list" class="list" style=""><div class="head"><h4>' + orderList[order][0].payment_telephone + '</h4><span class="num"></span><div style="margin-top:30px; border-bottom:solid 1px black;"><span class="info_div"></span></div></div><div id="' + orderList[order][0].payment_telephone + '" class="menu"style="overflow-y: scroll; overflow-x: hidden;"></div><button class="button orange" id="' + order + '"  onclick="pay(\'' + order + '\')" class="pay">결제완료</button><input type="hidden" value="\'' + orderList[order][0].payment_telephone + '\'"><input type="hidden" value="' + truck_code + '"><button class=" orange button release" onclick="release(\'' + order + '\')">조리완료</button></div>');
                                 var timeTxt = order.slice(2, -6);
                                 timeTxt = timeTxt.replace("_", "-");
                                 timeTxt = timeTxt.replace("_", " ");
@@ -338,6 +338,7 @@
                                     if (orderList[order][0].payed == 'payed') {
                                         $('#' + orderList[order][0].payment_telephone + '').parent().addClass('payed');
                                         $("#" + orderList[order][0].payment_telephone).next().attr("disabled", true);
+                                        $("#" + orderList[order][0].payment_telephone).next().addClass("disabled");
                                         isChecked = true;
                                     }
                                     var parent_node = $('#' + orderList[order][0].payment_telephone + '').parent();
@@ -373,8 +374,8 @@
                                     '</h4><span class="num"></span><div style="margin-top:30px; border-bottom:solid 1px black;"><span class="info_div"></span></div></div><div id="' +
                                     orderList[order][0].payment_telephone +
                                     '" class="menu"style="overflow-y: scroll; overflow-x: hidden;"></div><button class="button orange" id="' + order +
-                                    '"  onclick="pay(\'' + order + '\')" class="pay">결제확인</button><input type="hidden" value="\'' +
-                                    orderList[order][0].payment_telephone + '\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="button orange release"  onclick="release(\'' + order + '\')">출고확인</button></div>');
+                                    '"  onclick="pay(\'' + order + '\')" class="pay">결제완료</button><input type="hidden" value="\'' +
+                                    orderList[order][0].payment_telephone + '\'"><input type="hidden" value="${sessionScope.seller.truck_code }"><button class="button orange release"  onclick="release(\'' + order + '\')">조리완료</button></div>');
                                 var timeTxt = order.slice(2, -6);
                                 timeTxt = timeTxt.replace("_", "-");
                                 timeTxt = timeTxt.replace("_", " ");
@@ -395,6 +396,7 @@
                                         if (orderList[order][0].payed == 'payed') {
                                             $('#' + orderList[order][0].payment_telephone + '').parent().addClass('payed');
                                             $("#" + orderList[order][0].payment_telephone).next().attr("disabled", true);
+                                            $("#" + orderList[order][0].payment_telephone).next().addClass("disabled");
                                             isChecked = true;
                                         }
                                         /*                      $('.menu').append('<span class="orderInfo">'+orderList[order][i].total_price+'</span><br/>');
@@ -411,6 +413,7 @@
                                     if (orderList[order][0].payed == 'payed') {
                                         $('#' + orderList[order][0].payment_telephone + '').parent().addClass('payed');
                                         $("#" + orderList[order][0].payment_telephone).next().attr("disabled", true);
+                                        $("#" + orderList[order][0].payment_telephone).next().addClass("disabled");
                                         isChecked = true;
                                     }
                                     var parent_node = $('#' + orderList[order][0].payment_telephone + '').parent();
