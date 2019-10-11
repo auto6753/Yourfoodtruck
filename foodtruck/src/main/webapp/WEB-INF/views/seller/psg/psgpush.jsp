@@ -1,11 +1,56 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<head><title>당신의 푸드트럭</title></head>
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/psg/psg.css"/>" />
-
-<div class="container">
+	
+<div class="container mw1650"">
+	<div class="row">
+		<div class="col-md-2 mgt50">
+			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
+		</div>
+		<div class="col-md-10">
+			<div id="with" class="col">
+				<h1 class="menuTitle">탑승자관리</h1>
+					<br>
+					<div class="album py-5 bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+								<div id="forPush">
+									<textarea id="details" name="details" cols="54" rows="3"
+										onFocus="clearMessage();" onKeyUp="checkByte();">내용을 입력해 주세요.</textarea>
+								</div>
+								<div class="showByte">
+									<input type="text" id="messagebyte" name="messagebyte"
+										value="0" size="1" maxlength="2" disabled> <font
+										color="#000000">/ 1000 byte</font> <input type="button"
+										id="forPushBtn" value="푸쉬알림 보내기">
+								</div>
+								<div id="forToken"></div>
+							</div>
+							<div class="row">
+								<div id="Line_Controls_Chart">
+				<h4 style="padding-top: 10px;">탑승자 현황 그래프</h4>
+				<div id="buttonbar">
+					<form action="/seller/psgpush" method="GET">
+						<input type="date" name="inputBeginDate" /> <input type="date"
+							name="inputEndDate" />
+						<button type="submit" id="search">확인</button>
+					</form>
+				</div>
+				<!-- 라인 차트 생성할 영역 -->
+				<div id="chart_div"></div>
+			</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%-- <div class="container">
 	<div class="row">
 		<div class="col-md-3">
 			<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
@@ -45,7 +90,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> --%>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -88,7 +133,7 @@ function checkByte() {
          console.log(truck_code);
          var pushObj={};
          pushObj.notification={};
-         pushObj.notification.title="탑승자 알림을 확인해보세요!";
+         pushObj.notification.title="[${sessionScope.seller.brandname}]";
          pushObj.notification.body=pushTxt;
          pushObj.notification.sound="default";
          pushObj.to="/topics/all";

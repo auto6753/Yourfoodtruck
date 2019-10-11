@@ -15,6 +15,7 @@
 	<div id="wrap">
 		<jsp:include page="navBar.jsp"></jsp:include>
 		<div class="container">
+		<input type="hidden" name="type" value="app"/>
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<div id="chart_div" style="text-align:center;"></div>
@@ -52,7 +53,7 @@
 					</table>
 					<table border="1" class="hideTable">
 						<tr>
-							<td>메뉴코드</td>
+							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>
 							<td>단가</td>
 							<td>판매량</td>
@@ -60,7 +61,7 @@
 						</tr>
 						<c:forEach var="menuSalesWeek" items="${menuSalesWeek}">
 							<tr>
-								<td>${menuSalesWeek.menu_code}</td>
+								<%-- <td>${menuSalesWeek.menu_code}</td> --%>
 								<td>${menuSalesWeek.menu_name}</td>
 								<td><fmt:formatNumber value="${menuSalesWeek.unitPrice}" pattern="#,###"/></td>
 								<td><fmt:formatNumber value="${menuSalesWeek.amount}" pattern="#,###"/></td>
@@ -68,7 +69,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="3">합계</td>
+							<td colspan="2">합계</td>
 							<td>${totalAmountWeek}</td>
 							<td><fmt:formatNumber value="${totalSalesWeek}" pattern="#,###"/></td>
 						</tr>

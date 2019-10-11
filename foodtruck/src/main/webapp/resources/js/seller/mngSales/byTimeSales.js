@@ -14,14 +14,27 @@ $(document).ready(function(){
 			byTimeSalesResult.push(temp);
 	}
 	
-	console.log(byTimeSalesResult);
     google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+    
+    var status = 0;
+    
+    for(var i=0; i<24; i++){
+    	for(var j=1; j<4; j++){
+    		if(byTimeSalesResult[i][j] == 0) {status = status + 1;}
+    	}
+    }
+    console.log(status);
+    if(status == 72){
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
+    	$(".hideTable").css("display", "none");
+    } else {
+    	google.charts.setOnLoadCallback(drawChart);
+    }
 
     function drawChart() {
       
       var data = google.visualization.arrayToDataTable([
-    	  ['시', '전체', '회원', '비회원'],
+    	  ['시간대별', '전체', '회원', '비회원'],
     	  [byTimeSalesResult[0][0], byTimeSalesResult[0][1], byTimeSalesResult[0][2], byTimeSalesResult[0][3]]
       ]);
       
@@ -35,6 +48,10 @@ $(document).ready(function(){
 //          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
+        bar : {
+			groupWidth : '50%' // 그래프 너비 설정 %
+		},
+        legend : {position:'top'},
         vAxis: {format: 'decimal'},
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
@@ -45,13 +62,18 @@ $(document).ready(function(){
       chart.draw(data, google.charts.Bar.convertOptions(options));
 
       var btns = document.getElementById('btn-group');
-
-      btns.onclick = function (e) {
-
-        if (e.target.tagName === 'BUTTON') {
-          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
-          chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-      }
+      $('#btn-group').on('click',function(e) {
+          if (e.target.tagName === 'BUTTON') {
+              options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
+              chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+       });
+//      btns.onclick = function (e) {
+//
+//        if (e.target.tagName === 'BUTTON') {
+//          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
+//          chart.draw(data, google.charts.Bar.convertOptions(options));
+//        }
+//      }
     }
 });

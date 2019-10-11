@@ -20,7 +20,7 @@ public interface PaymentMapper {
 	public String getCurYear2();
 	public String getCurYear4();
 	public String getCurMonth();
-	
+	public Map<String, Object> getTodaySalesForSeorder(String truck_code);
 	public ArrayList<PaymentVO> getTodaySales(String truck_code);
 	public ArrayList<PaymentVO> getWeekSales(String truck_code);
 	public ArrayList<PaymentVO> getMonthSales(@Param("truck_code") String truck_code, @Param("inputYear") String inputYear, @Param("inputMonth") String inputMonth);

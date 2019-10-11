@@ -10,6 +10,26 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/yearSales.js"></script>
 <title>매출관리 - 연간</title>
+<style>
+	#yy {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#yearSalesRe {
+		position: relative;
+		top: 2px;
+		width: 85px;
+		height: 30px;
+		margin-left: 0.5%;
+	}
+	
+	#chart_div {
+		margin-top:3%;
+	}
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -18,7 +38,7 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET">
-						<select id="yy" name="yy" required>
+						<select id="yy" name="yy" class="hideTable" required>
 							<c:forEach var="yearValArrList" items="${yearValArrList}">
 								<c:if test="${yy eq yearValArrList}">
 									<option value="${yearValArrList}" selected>${yearValArrList}</option>
@@ -30,8 +50,8 @@
 						</select>
 						<button type="submit" id="yearSalesRe" name="pageName" value="yearSalesRe" style="display:none"></button>
 					</form>
-					<div id="chart_div"></div>
-					<table border="1">
+					<div id="chart_div" style="text-align:center;"></div>
+					<table border="1" class="hideTable">
 						<tr>
 							<td></td>
 							<td>회원</td>
@@ -63,9 +83,9 @@
 							<td><fmt:formatNumber value="${totalSalesYear}" pattern="#,###"/></td>
 						</tr>
 					</table>
-					<table border="1">
+					<table border="1" class="hideTable">
 						<tr>
-							<td>메뉴코드</td>
+							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>
 							<td>단가</td>
 							<td>판매량</td>
@@ -73,7 +93,7 @@
 						</tr>
 						<c:forEach var="menuSalesYear" items="${menuSalesYear}">
 							<tr>
-								<td>${menuSalesYear.menu_code}</td>
+								<%-- <td>${menuSalesYear.menu_code}</td> --%>
 								<td>${menuSalesYear.menu_name}</td>
 								<td><fmt:formatNumber value="${menuSalesYear.unitPrice}" pattern="#,###"/></td>
 								<td><fmt:formatNumber value="${menuSalesYear.amount}" pattern="#,###"/></td>
@@ -81,7 +101,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="3">합계</td>
+							<td colspan="2">합계</td>
 							<td>${totalAmountYear}</td>
 							<td><fmt:formatNumber value="${totalSalesYear}" pattern="#,###"/></td>
 						</tr>

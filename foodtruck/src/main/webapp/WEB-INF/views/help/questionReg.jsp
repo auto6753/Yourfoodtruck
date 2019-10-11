@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>1:1문의</title>
+<title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/help/questionReg.css"/>"/>
 <script type="text/javascript" src="<c:url value="/resources/js/help/questionReg.js"/>"></script>

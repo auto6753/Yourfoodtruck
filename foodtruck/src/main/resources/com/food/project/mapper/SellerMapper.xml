@@ -24,8 +24,7 @@
 	<insert id="insertlocation"
 		parameterType="com.food.project.domain.LocationVO">
 		insert into location (truck_code, loc_time,
-		lat_y,lng_x)values(#{truck_code},systimestamp + interval '0 09:00:00'
-		day to second,#{lat_y},#{lng_x})
+		lat_y,lng_x)values(#{truck_code},systimestamp,#{lat_y},#{lng_x})
 	</insert>
 	<delete id="deletemenu" parameterType="String">
 		delete from menu where

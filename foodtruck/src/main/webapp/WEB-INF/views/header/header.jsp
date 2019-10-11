@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin" />
 <style>
 @font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; } 
@@ -33,6 +32,11 @@
 	
 }
 
+#z::hover{
+	?
+}
+
+
 .navbar{
 z-index:2;
 margin-top:3%;
@@ -53,7 +57,9 @@ border-radius: 10px;
 } */
 
 #top-right {
-   margin-top: 50px;
+	margin-top: 50px;
+	min-width:350px;
+	font-size:13px;
 }
 .test{
 
@@ -122,6 +128,9 @@ color: rgba(255, 94, 24);
   left: -31.5%;
   z-index: 1030;
 }
+.big-list {
+	min-width:375px;
+}
 
 
 
@@ -139,14 +148,15 @@ color: rgba(255, 94, 24);
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto big-list">
 				<!-- <li class="nav-item active"><a class="nav-link" href="#">서비스소개
 						<span class="sr-only">(current)</span>
 				</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="/search">트럭검색</a></li>
-				<li class="nav-item"><a class="nav-link" href="/area">허가구역/모집공고</a></li>
+				<li class="nav-item"><a class="nav-link" href="/area">허가구역</a></li>
+				<li id="z" class="nav-item"><a class="nav-link" href="/announce">모집공고</a></li>
 				<!-- <li class="nav-item"><a class="nav-link" href="#">앱 다운로드</a></li> -->
-				<li class="nav-item"><a class="nav-link" href="/help">고객센터</a></li>
+				<li class="nav-item"><a class="nav-link" href="/help">질문하기</a></li>
 			</ul>
 			<div id="top-right">
 				<c:if test="${sessionid == null}">
@@ -157,7 +167,7 @@ color: rgba(255, 94, 24);
 					<span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">${sessionScope.sessionid.nickname}님</span>
 					<input id="sessione" type="hidden" value="${sessionScope.sessionid.email }">
 					<input id="sessionp" type="hidden" value="${sessionScope.sessionid.point}">
-					<span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">포인트 : ${sessionScope.sessionid.point} 원</span>
+					<%-- <span id="" class="badge badge-light" style="color:rgba(255, 94, 24)">포인트 : ${sessionScope.sessionid.point} 원</span> --%>
 					<span id="" class="badge badge-light"><a href="/customer" style="color:rgba(255, 94, 24)">마이페이지</a></span>
 					<c:if test="${empty sessionScope.seller}">	
 					<span id="" class="badge badge-light"><a href="/truck/register" style="color:rgba(255, 94, 24)">트럭등록</a></span>

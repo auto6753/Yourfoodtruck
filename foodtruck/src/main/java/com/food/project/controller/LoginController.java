@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.food.project.domain.CustomerVO;
 import com.food.project.domain.FoodTruckVO;
 import com.food.project.service.LoginService;
@@ -42,6 +43,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/login")
 public class LoginController {
 	private LoginService loginservice;
+	
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
@@ -132,7 +134,6 @@ public class LoginController {
 		 }else
 			 return ck.getPassword();
 		 
-				
 	}
 
 	@RequestMapping(value = "/passSearch", method = RequestMethod.GET)
@@ -178,7 +179,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(Locale locale, Model model,CustomerVO cus) {
+	public String insert(Locale locale, Model model,CustomerVO cus) throws FileNotFoundException {
 		FirebaseApp defaultApp = null;
 		List<FirebaseApp> apps=FirebaseApp.getApps();
 		FileInputStream serviceAccount;
@@ -187,12 +188,15 @@ public class LoginController {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// 서버 올릴 때 경로
 		System.out.println(path);
-		String firebasePath = path.substring(0,47)+"src" + File.separator +"main"
-				+ File.separator +"webapp"+ File.separator + "resources" + File.separator + "json" + File.separator
-				+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+//		String firebasePath2 = path.substring(0, 47) + "src" + File.separator + "main" + File.separator + "webapp"
+//			+ File.separator + "resources" + File.separator + "json" + File.separator
+//			+ "fir-test-f3fea-firebase-adminsdk-yvo75-b7c73a6644.json";
+		serviceAccount = new FileInputStream(firebasePath);
 		//파이어베이스 옵션 설정
 		try {
-			serviceAccount = new FileInputStream(firebasePath);
+			
+			//serviceAccount = new FileInputStream(firebasePath2);
 			options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")

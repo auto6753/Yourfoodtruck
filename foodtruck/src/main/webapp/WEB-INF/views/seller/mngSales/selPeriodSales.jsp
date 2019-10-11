@@ -10,7 +10,33 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/selPeriodSales.js"></script>
 <title>매출관리 - 금일</title>
+<style>
+.date {
+	height: 30px;
+	position: relative;
+	top: 2.5px;
+	width: 150px;
+}
 
+#byPeriodSalesRe {
+	position: relative;
+	top: 2px;
+	width: 85px;
+	height: 30px;
+	margin-left: 0.5%;
+}
+
+#chart_div {
+	margin-top: 3%;
+}
+
+#selDate {
+	display: inline-block;
+	float: right;
+	position: relative;
+	top: 10px;
+}
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -19,13 +45,17 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET">
-						<input type="date" name="firstDate"/>
-						<span>~</span>
-						<input type="date" name="lastDate"/>
-						<button type="submit" id="byDaySalesRe" name="pageName" value="selPeriodSalesRe">검색</button>
+						<input type="date" name="firstDate" class="date"/>
+						<span class="hideTable">~</span>
+						<input type="date" name="lastDate" class="date"/>
+						<button type="submit" id="byPeriodSalesRe" name="pageName" value="selPeriodSalesRe">검색</button>
+						<div id="selDate">${inputFirstDate} ~ ${inputLastDate} </div>
+						<input type="hidden" id="inputFirstDate" value="${inputFirstDate}"/>
+						<input type="hidden" id="inputLastDate" value="${inputLastDate}"/>
 					</form>
-					<div id="chart_div"></div>
-					<table border="1">
+					
+					<div id="chart_div" style="text-align:center;"></div>
+					<table border="1" class="hideTable">
 						<tr>
 							<td></td>
 							<td>회원</td>
@@ -57,9 +87,9 @@
 							<td><fmt:formatNumber value="${totalSalesSelPeriod}" pattern="#,###"/></td>
 						</tr>
 					</table>
-					<table border="1">
+					<table border="1" class="hideTable">
 						<tr>
-							<td>메뉴코드</td>
+							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>
 							<td>단가</td>
 							<td>판매량</td>
@@ -67,7 +97,7 @@
 						</tr>
 						<c:forEach var="menuSalesSelPeriod" items="${menuSalesSelPeriod}">
 							<tr>
-								<td>${menuSalesSelPeriod.menu_code}</td>
+								<%-- <td>${menuSalesSelPeriod.menu_code}</td> --%>
 								<td>${menuSalesSelPeriod.menu_name}</td>
 								<td><fmt:formatNumber value="${menuSalesSelPeriod.unitPrice}" pattern="#,###"/></td>
 								<td><fmt:formatNumber value="${menuSalesSelPeriod.amount}" pattern="#,###"/></td>
@@ -75,7 +105,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="3">합계</td>
+							<td colspan="2">합계</td>
 							<td>${totalAmountSelPeriod}</td>
 							<td><fmt:formatNumber value="${totalSalesSelPeriod}" pattern="#,###"/></td>
 						</tr>

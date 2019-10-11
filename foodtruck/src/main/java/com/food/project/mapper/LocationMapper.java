@@ -17,5 +17,6 @@ public interface LocationMapper {
 	//public ArrayList<> getLoc();
 	
 	public List<Map<String, Object>> getLoc();
+	public ArrayList<LocationVO> getLocation(String truck_code);
 
 }

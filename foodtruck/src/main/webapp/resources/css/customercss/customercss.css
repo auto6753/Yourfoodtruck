@@ -1,5 +1,14 @@
 @charset "UTF-8";
-@font-face {font-family: 'yg-jalnan';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');font-weight: normal;font-style: normal; }
+
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 #container3 {
 	width: 24%;
 	height: 220px;
@@ -17,12 +26,10 @@
 
 #title {
 	width: 925px;
-    height: 300px;
-    margin: 0 auto;
-    font-family: 'yg-jalnan';
+	height: 300px;
+	margin: 0 auto;
+	font-family: 'yg-jalnan';
 }
-
-
 
 .snip1535 {
 	background-color: #c47135;
@@ -74,32 +81,36 @@
 	background-color: #c47135;
 }
 
-.snip1535:hover:before, .snip1535.hover:before, .snip1535:hover:after, .snip1535.hover:after {
+.snip1535:hover:before, .snip1535.hover:before, .snip1535:hover:after,
+	.snip1535.hover:after {
 	height: 100%;
 	width: 100%;
 }
-.text{
- 	text-align: center;
-	padding-top: 10px; 	
+
+.text {
+	text-align: center;
+	padding-top: 10px;
 }
-.text2{
+
+.text2 {
 	text-align: center;
 	padding-top: 30px;
 }
-.img2{
-	
+
+.img2 {
 	margin: 0 auto;
 	margin-top: 15px;
-	width:50%; 
+	width: 50%;
 	height: 180px;
 }
-.img1{
+
+.img1 {
 	margin-top: 15px;
-	width:50%; 
+	width: 50%;
 	height: 200px;
 }
 
-#title2{
+#title2 {
 	width: 850px;
 	height: 200px;
 	margin: 0 auto;
@@ -116,11 +127,11 @@
 	background-size: cover;
 }
 
-
-.test{
+.test {
 	margin-bottom: 90px;
 }
-h4{
+
+h4 {
 	text-align: center;
 	margin-top: 5px;
 	width: 150;

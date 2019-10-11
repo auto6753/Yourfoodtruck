@@ -1,78 +1,320 @@
 @charset "UTF-8";
-p{
-   color: rgb(255, 94, 24);
+
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-#toArea{
-	background-color: rgb(255, 94, 24);
- 	color:white;
- 	margin-left: 8.4%;
+
+p {
+	color: rgb(255, 94, 24);
 }
-#toRecruit{
-	background-color: rgb(255, 94, 24);
- 	color:white;
-     margin-left: 8.4%;
-}
-#search{
-	background-color: rgb(255, 94, 24);
-}
+
 #title {
-
-   font-size: 200%;
-    width: 84%;
-    margin-left: 8.3%;
-    
-    border-radius: 15px;
-}
-#searchall{
-     margin: 0 auto;
-    width: 110.2%;
-    margin-left: -4.8%;
-    margin-top: -3.3%;
-}
-.form-inline{
-   width:100%;
+	font-size: 200%;
+	width: 100%;
+	height: 80px;
+	/* margin-left: 8.3%; */
+	font-family: 'yg-jalnan';
+	/* border-radius: 15px; */
+	text-align: center;
+	background-color: white;
+	margin-top: 2%;
 }
 
-#searchbox{
-   width:35%;
+#searchalll {
+	position: relative;
+	left: -30px;
 }
-#searchbutton{
-   
-   background-color: rgb(255, 94, 24);
-   color:white;
+
+#good {
+	margin-top: 30px;
+	font-size: 30px;
 }
-#pageadd{
-   margin-left: 2px;
+
+.sidebar{
+   position: relative;
+    top: -50px;
+    left: 8%;
+    width: 200px;
+    font-size: 15px;
+    display: -webkit-inline-box;
+}
+
+#pageadd {
+	background-color: rgb(255, 94, 24);
+	color: white;
+}
+
+label {
+	font-family: 'yg-jalnan';
+	font-size: 20px;
+}
+
+#box {
+	margin-left: 36%;
+}
+
+#titles {
+	width: 80%;
+}
+
+#contentt {
+	width: 80%;
+	font-size: 25px;
+}
+
+#contenttt {
+	width: 80%;
+	height: 400px;
+	font-size: 25px;
+}
+
+#d {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+}
+
+#dd {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+}
+
+#ddd {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+	margin-left: 70%;
+}
+
+#beginDate {
+	width: 39%;
+	display: inline-block;
+}
+
+#endDate {
+	width: 39%;
+	display: inline-block;
+}
+
+#requestsuccess {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+	margin-left: 59.8%;
+}
+
+#modifysuccess {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+	margin-left: 59.8%;
+}
+
+#delete {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+	margin-left: 49.5%
+}
+
+#request {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+	margin-left: 59.5%;
+}
+
+#modify {
+	background-color: rgb(255, 94, 24);
+	color: white;
+	width: 10%;
+}
+
+#searchall {
+	/* margin-top: -3.3%; */
+	height: 50px;
+	margin-left: -2%;
+}
+
+.form-inline {
+	width: 100%;
+	margin-left: 30px;
+	height: 40px;
+}
+
+#searchbox {
+	width: 20%;
+}
+
+#searchbutton {
+	background-color: rgb(255, 94, 24);
+	color: white;
+}
+
+#pageadd {
+	margin-left: 2px;
 }
 /* #add{
    margin: 0 auto;
    
 }  */
-.pagination{
+.pagination {
 	position: relative;
-    left: 48%;
+	left: 46%;
 }
-#pageadd{
-   
-   background-color: rgb(255, 94, 24);
-   color: white;
 
-   
+#pageadd {
+	background-color: rgb(255, 94, 24);
+	color: white;
 }
-#table{
-      width: 83.5%;
-    /* margin: 0 auto; */
-    margin-left: 8.6%;
-    /* border: 1px solid; */
-    /* border-color: lightgray; */
+
+#nextall {
+	width: 100%;
 }
-#nextall{
-   width:100%;
-   
-} 
 
-
-
-#top-right a{
-   color: rgb(255, 94, 24)!important;
+.navbarr {
+	height: 50px;
 }
+
+.navbarrr {
+	height: 50px;
+}
+
+#top-right a {
+	color: rgb(255, 94, 24) !important;
+}
+
+#view {
+	background-color: rgb(255, 94, 24);
+	font-family: 'yg-jalnan';
+	margin-top: 30px;
+	color: azure;
+	width: 100%;
+	text-align: center;
+}
+
+@media screen and (min-width: 100px) and (max-width:700px) {
+	.sidebar {
+		position:static;
+		top:-20px;
+		left:0;
+	}
+	.pagination {
+    	margin-left: 0.5%;
+    	left:23%;
+	}
+	#searchall {
+		margin-top: 4px;
+		width: 100%;
+		height: 50px;
+		border: none;
+	}
+	.form-inline {
+	margin-top:65px;
+		padding-left:20px;
+		width: 100%;
+	}
+	#forSido {
+		height:40px;
+		margin-right:5px;
+	}
+	#searchbox {
+		margin-top:2px;
+		margin-right:5px;
+		width: 35%;
+		line-height: 32px;
+	}
+	#searchbutton {
+		background-color: rgb(255, 94, 24);
+		color: white;
+		margin: 0;
+		width: 60px;
+	}
+	.table {
+		margin: 0 auto;
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		background-color: transparent;
+		font-size: 10px;
+	}
+	.table .boardaddr {
+		white-space: nowrap;
+		min-width: 55px;
+		max-width: 70px;
+	}
+	.table .boardArea {
+		display: none;
+	}
+	.table .boardsido {
+		display: none;
+	}
+	.table .boardTel {
+		min-width: 70px;
+		max-width: 70px;
+	}
+	.table .boardTitle {
+		min-wdith: 80px;
+		max-width: 80px;
+	}
+}
+
+}
+.table {
+	margin: 0 auto;
+	width: 330px;
+	max-width: 100%;
+	margin-bottom: 1rem;
+	background-color: transparent;
+	font-size: 0.6rem;
+}
+
+.table .boardaddr {
+	white-space: nowrap;
+	min-width: 55px;
+}
+
+.word-break {
+	word-break: break-all;
+	white-space: nowrap;
+	overflow: hidden;
+	min-width: 54px;
+	max-width: 260px;
+}
+
+.boardaddr {
+	max-width: 150px;
+}
+
+.boardTitle {
+	max-width: 180px;
+}
+
+.boardsido {
+	max-width: 54px;
+}
+
+#content {
+	width: 80%;
+	margin: 0 auto;
+}
+
+#content1 {
+	width: 80%;
+	margin-left: 10%;
+}
+
+/* .table {
+   width: 100%;
+   max-width: 100%;
+   margin-bottom: 1rem;
+   background-color: transparent;
+   font-size: 12px;
+   text-align: center;
+} */

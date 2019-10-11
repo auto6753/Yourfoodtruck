@@ -7,20 +7,16 @@
 	font-style: normal;
 }
 
+.onboard+ul {
+	display: block !important;
+}
+
 #with {
-	margin: 0 auto;
 	margin-top: 50px;
-	width: 1200px;
 	height: 600px;
 	font-family: 'yg-jalnan';
 	border-radius: 10px;
 	background-color: lightgray;
-}
-
-.row {
-	margin: 3px;
-	height: 400px;
-	overflow-y: auto;
 }
 
 .sg {

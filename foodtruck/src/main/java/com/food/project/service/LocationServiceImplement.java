@@ -21,6 +21,12 @@ public class LocationServiceImplement implements LocationService {
 		// TODO Auto-generated method stub
 		return mapper.getLoc();
 	}
+
+	@Override
+	public ArrayList<LocationVO> getLocation(String truck_code) {
+		// TODO Auto-generated method stub
+		return mapper.getLocation(truck_code);
+	}
 	
 //	@Override
 //	public void insertLoc(LocationVO vo) {

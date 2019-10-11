@@ -7,24 +7,38 @@
 	font-style: normal;
 }
 
-.callTitle {
-	font-weight: bold;
-	font-size: 35px;
-	height: 35px;
-	margin: 23px 0 17px;
-	color: #666;
+.menuTitle {
 	text-align: center;
-	color: rgb(255, 94, 24);
+	padding-top: 20px;
+}
+
+.mw1650 {
+	max-width: 1650px !important;
+}
+
+.mgt50 {
+	margin-top: 50px;
+}
+
+#with {
+	margin-top: 50px;
+	height: 600px;
+	font-family: 'yg-jalnan';
+	border-radius: 10px;
+	background-color: lightgray;
+}
+
+#nextall {
+	margin: 0 auto;
+	margin-top: 1%;
 }
 
 .calltext {
+	margin-top: 2%;
 	border: 3px solid lightgray;
 	/* color: #666; */
-	height: 399px;
-	position: relative;
-	left: 25%;
-	bottom: 338px;
-	width: 80%;
+	height: 400px;
+	width: 100%;
 }
 
 td {
@@ -60,17 +74,6 @@ td {
 	padding: 15px;
 	width: 20%;
 	height: 50px;
-}
-
-.menuTitle {
-	font-size: 50px;
-	height: 60px;
-	margin: 23px 0 17px;
-	color: #666;
-	text-align: center;
-	position: relative;
-	bottom: 20px;
-	font-family: 'Hanna', serif;
 }
 
 table {

@@ -20,6 +20,7 @@ public interface PaymentService {
 	public String getCurYear4();
 	public String getCurMonth();
 	
+	public String getTodaySalesForSeorder(String truck_code);
 	public ArrayList<PaymentVO> getTodaySales(String truck_code);
 	public ArrayList<PaymentVO> getWeekSales(String truck_code);
 	public ArrayList<PaymentVO> getMonthSales(String truck_code, String inputYear, String inputMonth);

@@ -6,11 +6,12 @@
 <head>
 <style>
 .qrcode img {
-	width: 250px;
-	height: 250px;
+	margin-top: 10%;
+	width: 300px;
+	height: 300px;
 }
 </style>
-<title>트럭정보 수정</title>
+<title>당신의 푸드트럭</title>
 <%-- <script type="text/javascript"
    src="<c:url value="/resources/js/seller/menu/menu.js"/>"></script> --%>
 <script src="/resources/js/qrcode/qrcode.js"></script>
@@ -70,7 +71,8 @@ $(document).ready(function(){
              var muid = $(".qrcode")[i].innerHTML;
              console.log(muid);
              var qrcode = new QRCode(document.getElementsByClassName("qrcode")[i], {
-               text: "http://39.127.7.64:8080/seller/qrorder/?truck_code="+truck_code,//+"&email="+email2,
+              // text: "http://15.164.137.166/seller/qrorder/?truck_code="+truck_code+"&email="+email2,
+               text: "http://15.164.137.166/seller/qrorder/?truck_code="+truck_code+"&email="+email2,
                width: 800,
                height: 800,
                colorDark: "#000000",
@@ -159,101 +161,103 @@ $("input:checkbox[name=paytype]:checked").each(function(){
 </head>
 
 <body>
-	<div class="container">
+	<div class="container mw1650">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2 mgt50">
 				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 			</div>
-			<div class="col-md-9">
-				<div class="col-md-12 paddingZero">
-					<div class="menuTitle">트럭정보 수정</div>
-					<form id="all" action="/seller/truckinfomodify" method="post">
-						<div id="container">
-
-							<div id="box" class="row justify-content-center">
-								<div class="col-md-6">
-									<div id="card1" class="card1">
-
-										<article class="card-body">
+			<div class="col-md-10">
+				<div id="with" class="col">
+					<h1 class="menuTitle">트럭정보수정</h1>
+					<br>
+					<div class="album py-5 bg-light"
+						style="height: 80%; overflow-y: auto;">
 
 
-											<input type="hidden" name="truck_code"
-												value="${truckinfo.truck_code}">
-											<div class="form-group">
-												<label>트럭 상호명</label> <input name="brandname" type="text"
-													class="form-control" value="${truckinfo.brandname }">
-											</div>
-											<div class="form-group">
-												<label>사업자번호</label> <input name="crn" type="text"
-													class="form-control" value="${truckinfo.crn}">
-											</div>
+						<form id="all" action="/seller/truckinfomodify" method="post">
 
-											<div class="form-group">
-												<label>트럭번호</label> <input name="trucknum" type="text"
-													class="form-control" value="${truckinfo.trucknum}">
-											</div>
-											<!-- form-row.// -->
-											<div class="form-group">
-												<label>계좌번호</label> <input name="account" type="text"
-													class="form-control" value="${truckinfo.account}">
-											</div>
-
-											<div class="form-group">
-												<label>고객 결제수단 &nbsp;: &nbsp;&nbsp;</label> <input
-													type="checkbox" id="ck1" name="paytype" value="5">
-												<label for="ck1">현금</label> <input type="checkbox" id="ck2"
-													name="paytype" value="3"> <label for="ck2">카드</label>
-												<input type="checkbox" id="ck3" name="paytype" value="1">
-												<label for="ck3">카카오페이</label>
-
-											</div>
-											<div class="form-group">
-												<label>운영시간</label> <input id="Starttime"
-													name="truck_starttime" type="time" class="form-control"
-													value="${truckinfo.truck_starttime }"> ~ <input
-													id="Endtime" name="truck_endtime" type="time"
-													class="form-control" value="${truckinfo.truck_endtime }">
-
-											</div>
-
-											<div class="menut">
-												<div class="imgBox">
-													<img class="img editMenu changeToBlock"
-														src="${pageContext.request.contextPath}/resources/image/upload/${truckinfo.truck_surl}" />
-												</div>
-
-											</div>
-											<button class="user-btn" type="button" id="truckphoto"
-												name="truckphoto">메인이미지 등록/수정</button>
-
-											<div class="qrcode"></div>
-											<input id="print" type="button" class="user-btn"
-												value="qr코드 인쇄">
-											<div class="form-group">
-												<label>[추가 기입 사항]</label>
-												<textarea class="form-control" rows="3" name="truck_desc">${truckinfo.truck_desc }</textarea>
-											</div>
-
-											<div id="menuBtns">
-
-												<input type="submit" id="modifytruck" class="user-btn"
-													value="수정">
-
-											</div>
-
-
-										</article>
+							<div class="container">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="imgBox">
+											<img class="img editMenu changeToBlock"
+												src="${pageContext.request.contextPath}/resources/image/upload/${truckinfo.truck_surl}" />
+										</div>
+										<button class="user-btn" type="button" id="truckphoto"
+											name="truckphoto">메인이미지 등록/수정</button>
+										<div class="qrcode"></div>
+										<input id="print" type="button" class="user-btn"
+											value="qr코드 인쇄">
 									</div>
+
+									<div class="col-md-8">
+										<input type="hidden" name="truck_code"
+											value="${truckinfo.truck_code}">
+										<div class="form-group">
+											<label>트럭 상호명</label> <input name="brandname" type="text"
+												class="form-control" value="${truckinfo.brandname }">
+										</div>
+										<div class="form-group">
+											<label>사업자번호</label> <input name="crn" type="text"
+												class="form-control" value="${truckinfo.crn}">
+										</div>
+
+										<div class="form-group">
+											<label>트럭번호</label> <input name="trucknum" type="text"
+												class="form-control" value="${truckinfo.trucknum}">
+										</div>
+										<!-- form-row.// -->
+										<div class="form-group">
+											<label>계좌번호</label> <input name="account" type="text"
+												class="form-control" value="${truckinfo.account}">
+										</div>
+
+										<div class="form-group">
+											<label>고객 결제수단 &nbsp;: &nbsp;&nbsp;</label> <input
+												type="checkbox" id="ck1" name="paytype" value="5"> <label
+												for="ck1">현금</label> <input type="checkbox" id="ck2"
+												name="paytype" value="3"> <label for="ck2">카드</label>
+											<!-- <input type="checkbox" id="ck3" name="paytype" value="1">
+											<label for="ck3">카카오페이</label> -->
+
+										</div>
+										<div class="form-group">
+											<label class="bb">운영시간</label> <input id="Starttime"
+												name="truck_starttime" type="time" class="form-control ib w"
+												value="${truckinfo.truck_starttime }"> ~ <input
+												id="Endtime" name="truck_endtime" type="time"
+												class="form-control ib w"
+												value="${truckinfo.truck_endtime }">
+
+										</div>
+
+										<div class="form-group">
+											<label>[추가 기입 사항]</label>
+											<textarea class="form-control plusCon" rows="3"
+												name="truck_desc">${truckinfo.truck_desc }</textarea>
+										</div>
+									</div>
+
+								</div>
+
+
+
+
+								<div id="menuBtns">
+
+									<input type="submit" id="modifytruck" class="user-btn"
+										value="수정">
+
 								</div>
 
 							</div>
+						</form>
 
-						</div>
-					</form>
+					</div>
 				</div>
-
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 

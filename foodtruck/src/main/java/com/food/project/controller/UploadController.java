@@ -45,7 +45,7 @@ public class UploadController {
 	@RequestMapping(value = "/upload/upload", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public ResponseEntity<String> upload(MultipartFile file, HttpSession session, MenuVO mvo) throws Exception {
 		System.out.println("와랏!");
-
+		
 		logger.info("originalName : " + file.getOriginalFilename());
 		logger.info("size : " + file.getSize());
 		logger.info("contentType : " + file.getContentType());
@@ -58,15 +58,15 @@ public class UploadController {
 		// System.out.println(vo.getEmail());
 		// String email = vo.getEmail();
 		ResponseEntity<String> a = new ResponseEntity<String>(
-				UploadFileUtils.uploadFile(uploadPathSchool, file.getOriginalFilename(), file.getBytes(), vo4),
+				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
 				HttpStatus.OK);
 
 		String str = a.getBody();
 		System.out.println(str);
 		logger.info("업로드 후 찍히는 경로 :" + str );
 		//linux 용
-		//String[] array = str.split(File.separator);
-		String[] array = str.split("\\\\");
+		String[] array = str.split(File.separator);
+		//String[] array = str.split("\\\\");
 		System.out.println(array[0]);
 		System.out.println(array[1]);
 		System.out.println(array[0] + "\\" + array[1].substring(2));
@@ -92,6 +92,7 @@ public class UploadController {
 		System.out.println(surl);
 		System.out.println(url);
 		File file = new File(url);
+		
 		if (file.exists()) { // 파일존재여부확인
 			if (file.delete()) {
 				System.out.println("파일삭제 성공");
@@ -130,12 +131,17 @@ public class UploadController {
 		String surl = mvo.getMenu_surl();
 		String url = mvo.getMenu_url();
 		//String surl ="";
+		System.out.println("-------------");
+		System.out.println(surl);
+		System.out.println(url);
+		System.out.println("-------------");
+		
 		//String url ="";
 		if (file!=null) {
 			//System.out.println(surl);
 			//System.out.println(url);
-			url = uploadPathSchool + url;
-			surl = uploadPathSchool + surl;
+			url = uploadPath + url;
+			surl = uploadPath + surl;
 			System.out.println(url);
 			System.out.println(surl);
 			File file1 = new File(url);
@@ -165,13 +171,13 @@ public class UploadController {
 					 //System.out.println(vo4.getEmail());
 					 //String email = vo4.getEmail();
 					ResponseEntity<String> a = new ResponseEntity<String>(
-							UploadFileUtils.uploadFile(uploadPathSchool, file.getOriginalFilename(), file.getBytes(), vo4),
+							UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
 							HttpStatus.OK);
 					String str = a.getBody();
 					System.out.println(str);
 					//linux 용
-					//String[] array = str.split(File.separator);
-					String[] array = str.split("\\\\");
+					String[] array = str.split(File.separator);
+					//String[] array = str.split("\\\\");
 					System.out.println(array[0]);
 					System.out.println(array[1]);
 					System.out.println(array[0] + "\\" + array[1].substring(2));
@@ -195,5 +201,4 @@ public class UploadController {
 		}
 		return "zz";
 	}
-	
 }

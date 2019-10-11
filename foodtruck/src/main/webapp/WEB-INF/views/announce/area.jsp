@@ -1,21 +1,133 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>허가구역 안내</title>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<title>당신의 푸드트럭</title>
 <jsp:include page="../header/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/announce/area.css"/>" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zprqsl0tqo"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zprqsl0tqo&submodules=geocoder"></script>
+<style>
+	.layerPopup {
+		border:4px solid #ddd;
+		background:#fff;
+	}
+	
+	.layerPopup button {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
-	<button id="toRecruit" class="btn">모집공고 보기</button>
+	<script>
+		$(document).ready(function() {
+			$(".contents > a").click(function() {
+				var sa = $(this).parent().prev().val();
+				getData(sa);
+			});
+		});
+		function getData(sa) {
+			result = naver.maps.Service.geocode({
+				query : sa
+			}, function(status, response) {
+				if (status !== naver.maps.Service.Status.OK) {
+					return alert('Something wrong!');
+				}
+
+				var resultmap = response.v2, // 검색 결과의 컨테이너
+				items = resultmap.addresses; // 검색 결과의 배열
+				x = eval(items[0].x);
+				y = eval(items[0].y);
+				var point = new naver.maps.Point(x, y);
+
+				$("#map").css("display", "block");
+				$("#closeX").css("display", "block");
+				drawMap(x, y);
+			});
+
+		}
+
+		function drawMap(x, y, sa) {
+
+			// do Something
+
+			var HOME_PATH = window.HOME_PATH || '.';
+			var cityhall = new naver.maps.LatLng(y, x),
+
+			map = new naver.maps.Map('map', {
+				center : new naver.maps.LatLng(y, x),
+				zoom : 10
+			}),
+
+			marker = new naver.maps.Marker({
+				map : map,
+				position : cityhall
+			});
+
+			var contentString = [ '<div class="iw_inner">',
+					'   <h3>' + sa + '</h3>', '</div>' ].join('');
+
+/* 			var infowindow = new naver.maps.InfoWindow({
+				anchorSkew : true
+			}); */
+
+/* 			naver.maps.Event.addListener(marker, "click", function(e) {
+				if (infowindow.getMap()) {
+					infowindow.close();
+				} else {
+					infowindow.open(map, marker);
+				}
+			}); */
+
+			infowindow.open(map, marker);
+		}
+	</script>
+	
+	<script>
+		$(window).resize(function() { //창크기 변화 감지
+			$(".layerPopup").hide();
+			$("#closeX").hide();
+		});
+
+		$(document).ready(function(){
+			$(".contents > a").click(function(){
+				var lay_pop = $(".layerPopup");
+				var pos = $(this).offset();
+				
+				var closeX = $("#closeX");
+				
+				lay_pop.css('position', 'absolute');
+				lay_pop.css('top', (pos.top)+10 + 'px');    // 레이어 위치 지정
+				lay_pop.css('left', (pos.left)+10 + 'px');
+				
+				closeX.css('position', 'absolute');
+				closeX.css('top', (pos.top)-12 + 'px');    // 레이어 위치 지정
+				closeX.css('left', (pos.left)+247 + 'px');
+				
+				$(".layerPopup").hide();
+				$(this).blur();
+				$(".layerPopup").show();
+				$(".layerPopup a").focus();
+				return false;
+			});
+			
+			$("#closeX").click(function(){
+				$(".layerPopup").hide();
+				$("#closeX").hide();
+			});
+		});
+	</script>
 	<div id="title" class="card-header">
-		<p>허가구역 안내</p>
+		<p>허가구역 안내</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
 	</div>
+	<div id="content" >
 	<div id="searchall">
-		<nav class="navbar navbar-light bg-light">
+		<nav class="navbarr">
 			<form class="form-inline" action="/area" method="post">
 				<!-- <input id="searchbox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button id="searchbutton" type="button" class="btn">검색</button> -->
@@ -36,9 +148,9 @@
 					<option value="16">경남</option>
 					<option value="17">제주</option>
 				</select>				
-				<input id="searchbox"name="keyword" value="${map.keyword}">
+				<input id="searchbox"name="keyword" size="10" value="${map.keyword}">
 				<input type="hidden" name="post_class" value="2">
-				<input id="searchbutton" type="submit" value="조회" class="btn">
+				<input id="searchbutton" type="submit" value="검색" class="btn">
 			</form>
 		</nav>
 	</div>
@@ -47,28 +159,41 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>지역</th>
-					<th>구역명</th>
-					<th>주소</th>
-					<th>관할구역</th>
-					<th>문의전화번호</th>
+					<th class="boardsido">지역</th>
+					<th class="boardTitle">구역명</th>
+					<th class="boardaddr">주소</th>
+					<th class="boardArea">관할구역</th>
+					<th class="boardTel">문의전화번호</th>
 				</tr>
 			</thead>
 			<tbody>
  				<c:forEach var="row" items="${requestScope.areaList}">
  				<tr>
- 					<td>${row.SIDO_NAME}</td>
+ 					<td class="boardsido">${row.SIDO_NAME}</td>
  					<td class="boardTitle">${row.AREA_NAME}
  						<input type="hidden" class="latitude" value="${row.LATITUDE}">
  						<input type="hidden" class="longitude" value="${row.LONGITUDE}">
  					</td>
- 					<td>${row.ADDR}</td>
- 					<td>${row.GOVERN_NAME}</td>
- 					<td>${row.GOVERN_PHONE}</td>
+ 					<td class="boardaddr" style="position:relative;">
+ 					<input type="hidden" value="${row.ADDR}"/>
+ 						<div class="contents" style="display:inline-block; position:relative;">
+							<a href="#layerPopup">
+								<img src="resources/image/map-marker-32.png" style="width:auto; height:15px; position:relative; top:-2px; "/>
+							</a>
+					    </div>${row.ADDR}
+ 						
+ 					</td>
+ 					<td class="boardArea">${row.GOVERN_NAME}</td>
+ 					<td class="boardTel">${row.GOVERN_PHONE}</td>
  				</tr>
  				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<img id="closeX" src="resources/image/close_x.png" style="width:22px; height:22px; cursor:pointer; display:none;"/>
+	<div class="layerPopup" style="display:none; z-index:100; position:relative;">
+		
+		<div id="map" style="width:250px; height:250px; display: none; position:relative;"></div>
 	</div>
 	
 	<div id="nextall">
@@ -78,9 +203,10 @@
 				<c:forEach var="num" begin="${map.postPager.blockBegin}" end="${map.postPager.blockEnd}">
 					<li class="page-item"><a class="page-link" href="javascript:list('${num}')"><span>${num}</span></a></li>
 				</c:forEach>			
-				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>>></span></a></li>
+				<li class="page-item"><a class="page-link" href="javascript:list('${map.postPager.nextPage}')"><span>&gt;&gt;</span></a></li>
 			</ul>
 		</nav>
+	</div>
 	</div>
 <script>
 	function list(page) {
@@ -97,10 +223,9 @@
 		$('#title').click(function() {
 			location.href = "/area";
 		});
-		$('#toRecruit').click(function() {
-			location.href = "/announce";
-		});
+		$(".table td").addClass("word-break");
+		$(".table th").addClass("word-break");
 	});
-</script>	
+</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="<c:url value="/resources/css/seller/loc/addrlinkSample.css"/>"/>
-<title>jusoPopup.jsp</title>
+<title>당신의 푸드트럭</title>
 <%
 	request.setCharacterEncoding("UTF-8"); //해당시스템의 인코딩타입이 UTF-8일 경우
 	//request.setCharacterEncoding("EUC-KR"); //해당시스템의 인코딩타입이 EUC-KR일 경우

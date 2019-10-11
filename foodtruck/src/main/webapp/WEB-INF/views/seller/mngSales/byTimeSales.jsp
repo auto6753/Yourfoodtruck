@@ -10,6 +10,34 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/byTimeSales.js"></script>
 <title>매출관리 - 시간별</title>
+
+<style>
+	#yyyy_tb {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#yyyy_te {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#byTimeSalesRe {
+		position: relative;
+		top: 2px;
+		width: 85px;
+		height: 30px;
+		margin-left: 0.5%;
+	}
+	
+	#chart_div {
+		margin-top:3%;
+	}
+</style>
 <script>
 	function checkForm() {
  		var yyyy_tb = $("#yyyy_tb").val().substring(0, 4);
@@ -31,7 +59,7 @@
 			<div class="row">
 				<section id="salesSec" class="col-md-12">
 					<form id="salesInfo" action="salesInfo" method="GET" onsubmit="return checkForm();">
-						<select id="yyyy_tb" name="yyyy_tb" required>
+						<select id="yyyy_tb" name="yyyy_tb" class="hideTable" required>
 							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
 								<c:if test="${yyyy_tb eq byTimeValArrList}">
 									<option value="${byTimeValArrList}" selected>${byTimeValArrList}</option>
@@ -41,8 +69,8 @@
 								</c:if>
 							</c:forEach>					
 						</select>
-						<span>~</span>
-						<select id="yyyy_te" name="yyyy_te" required>
+						<span class="hideTable">~</span>
+						<select id="yyyy_te" name="yyyy_te" class="hideTable" required>
 							<c:forEach var="byTimeValArrList" items="${byTimeValArrList}">
 								<c:if test="${yyyy_te eq byTimeValArrList}">
 									<option value="${byTimeValArrList}" selected>${byTimeValArrList}</option>
@@ -52,11 +80,12 @@
 								</c:if>
 							</c:forEach>					
 						</select>
-						<button type="submit" id="byTimeSalesRe" name="pageName" value="byTimeSalesRe">확인</button>
+						<button type="submit" id="byTimeSalesRe" name="pageName" value="byTimeSalesRe" class="hideTable">확인</button>
 					</form>
-					<div id="chart_div"></div>
+					<div id="chart_div" style="text-align:center;"></div>
+					<div id="table_div" style="display:none;">
 					<c:forEach var="byTimeSalesResult" items="${byTimeSalesResult}">
-						<table border="1">
+						<table border="1" class="hideTable">
 							<tr>
 								<td></td>
 								<td>회원</td>
@@ -93,6 +122,7 @@
 						<input type="hidden" class="byTimeSalesResult10" value="${byTimeSalesResult[10]}"/>
 						<input type="hidden" class="byTimeSalesResult11" value="${byTimeSalesResult[11]}"/>
 					</c:forEach>
+					</div>
 				</section>
 			</div>
 		</div>

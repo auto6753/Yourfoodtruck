@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.uContainer {
+	margin-top: 5%;
+}
+
+.mypage {
+	width: 25% !important;
+	height: 25% !important;
+	margin: 2% 0;
+}
+
+.cusorp {
+	cursor: pointer;
+}

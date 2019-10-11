@@ -35,7 +35,7 @@ $(document).ready(function(){
     		nTotalSalesMonth == 0 &&
     		totalSalesMonth == 0	
     ){
-    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
     	$(".hideTable").css("display", "none");
     } else {
     	google.charts.setOnLoadCallback(drawChart);
@@ -44,11 +44,11 @@ $(document).ready(function(){
     function drawChart() {
 
       var data = google.visualization.arrayToDataTable([
-          ['Year', '전체', '회원', '비회원'],
+          ['월간', '전체', '회원', '비회원'],
           ['합계', totalSalesMonth, mTotalSalesMonth, nTotalSalesMonth],
           ['현금', totalCashSalesMonth, mCashSalesMonth, nCashSalesMonth],
-          ['카드', totalCardSalesMonth, mCardSalesMonth, nCardSalesMonth],
-          ['카카오페이', totalKakaoSalesMonth, mKakaoSalesMonth, nKakaoSalesMonth]
+          ['카드', totalCardSalesMonth, mCardSalesMonth, nCardSalesMonth]
+//          ,['카카오페이', totalKakaoSalesMonth, mKakaoSalesMonth, nKakaoSalesMonth]
       ]);
 
       var options = {
@@ -57,7 +57,11 @@ $(document).ready(function(){
 //          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
+        bar : {
+			groupWidth : '50%' // 그래프 너비 설정 %
+		},
         vAxis: {format: 'decimal'},
+        legend : {position:'top'},
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
       };

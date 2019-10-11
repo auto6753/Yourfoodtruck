@@ -3,6 +3,9 @@
  */
 
 $(document).ready(function(){
+	
+	
+	
 	var mCashSales = Number($("#mCashSales").val());
 	var nCashSales = Number($("#nCashSales").val());
 	var totalCashSales = Number($("#totalCashSales").val());
@@ -31,7 +34,7 @@ $(document).ready(function(){
     		nTotalSales == 0 &&
     		totalSales == 0	
     ){
-    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:460px;'/>");
+    	$("#chart_div").html("<img src='/resources/image/nodata.png' style='width:400px; margin-top: 5%;'/>");
     	$(".hideTable").css("display", "none");
     } else {
     	google.charts.setOnLoadCallback(drawChart);
@@ -44,8 +47,8 @@ $(document).ready(function(){
           ['오늘', '전체', '회원', '비회원'],
           ['합계', totalSales, mTotalSales, nTotalSales],
           ['현금', totalCashSales, mCashSales, nCashSales],
-          ['카드', totalCardSales, mCardSales, nCardSales],
-          ['카카오페이', totalKakaoSales, mKakaoSales, nKakaoSales]
+          ['카드', totalCardSales, mCardSales, nCardSales]
+//          ,['카카오페이', totalKakaoSales, mKakaoSales, nKakaoSales]
       ]);
 
       var options = {
@@ -54,6 +57,10 @@ $(document).ready(function(){
 //          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
         },
         bars: 'vertical',
+        bar : {
+			groupWidth : '50%' // 그래프 너비 설정 %
+		},
+        legend : {position:'top'},
         vAxis: {format: 'decimal'},
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
@@ -64,13 +71,18 @@ $(document).ready(function(){
       chart.draw(data, google.charts.Bar.convertOptions(options));
 
       var btns = document.getElementById('btn-group');
-
-      btns.onclick = function (e) {
-
-        if (e.target.tagName === 'BUTTON') {
-          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
-          chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-      }
+      $('#btn-group').on('click',function(e) {
+          if (e.target.tagName === 'BUTTON') {
+              options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
+              chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+       });
+//      btns.onclick = function (e) {
+//
+//        if (e.target.tagName === 'BUTTON') {
+//          options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
+//          chart.draw(data, google.charts.Bar.convertOptions(options));
+//        }
+//      }
     }
 });

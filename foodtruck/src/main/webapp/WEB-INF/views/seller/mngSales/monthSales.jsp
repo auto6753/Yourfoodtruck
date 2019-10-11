@@ -10,6 +10,26 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 API js -->
 <script type="text/javascript" src="/resources/js/seller/mngSales/monthSales.js"></script>
 <title>매출관리 - 월간</title>
+<style>
+	#yymm {
+		height: 30px;
+		position: relative;
+		top: 2.5px;
+		width: 85px;
+	}
+	
+	#monthSalesRe {
+		position: relative;
+		top: 2px;
+		width: 85px;
+		height: 30px;
+		margin-left: 0.5%;
+	}
+	
+	#chart_div {
+		margin-top:3%;
+	}
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -65,7 +85,7 @@
 					</table>
 					<table border="1" class="hideTable">
 						<tr>
-							<td>메뉴코드</td>
+							<!-- <td>메뉴코드</td> -->
 							<td>메뉴명</td>
 							<td>단가</td>
 							<td>판매량</td>
@@ -73,7 +93,7 @@
 						</tr>
 						<c:forEach var="menuSalesMonth" items="${menuSalesMonth}">
 							<tr>
-								<td>${menuSalesMonth.menu_code}</td>
+								<%-- <td>${menuSalesMonth.menu_code}</td> --%>
 								<td>${menuSalesMonth.menu_name}</td>
 								<td><fmt:formatNumber value="${menuSalesMonth.unitPrice}" pattern="#,###"/></td>
 								<td><fmt:formatNumber value="${menuSalesMonth.amount}" pattern="#,###"/></td>
@@ -81,7 +101,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="3">합계</td>
+							<td colspan="2">합계</td>
 							<td>${totalAmountMonth}</td>
 							<td><fmt:formatNumber value="${totalSalesMonth}" pattern="#,###"/></td>
 						</tr>

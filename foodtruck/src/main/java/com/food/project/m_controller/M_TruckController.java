@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.food.project.domain.EventVO;
 import com.food.project.domain.FoodTruckVO;
+import com.food.project.domain.LocationVO;
 import com.food.project.domain.MenuVO;
 import com.food.project.domain.OnboardVO;
 import com.food.project.domain.ReviewDTO;
 import com.food.project.service.FoodTruckService;
+import com.food.project.service.LocationService;
 import com.food.project.service.OnboardService;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +36,7 @@ import net.sf.json.JSONArray;
 @RequestMapping(value = "/m.truck")
 public class M_TruckController {
 	private FoodTruckService service;
+	private LocationService locservice;
 	OnboardService onboard;
 	@SuppressWarnings("unchecked")
 	@ResponseBody
@@ -57,6 +60,7 @@ public class M_TruckController {
 		//menu.get(0).get
 		ArrayList<ReviewDTO> review = service.getReviewList(truck_code);
 		ArrayList<EventVO> event = service.getEvent(truck_code);
+		ArrayList<LocationVO> location = locservice.getLocation(truck_code);
 		System.out.println(event.size());
 //		메뉴
 		JSONArray test1=new JSONArray();
@@ -101,12 +105,14 @@ public class M_TruckController {
 		data.put("sumscore", result);
 		
 		JSONArray test2=new JSONArray();
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 		for(int i =0;i<event.size();i++) {
 			JSONObject obj = new JSONObject();
 			obj.put("event_content",event.get(i).getEvent_content());
 			obj.put("event_name",event.get(i).getEvent_name());
-			obj.put("menu_start",event.get(i).getEvent_start());
-			obj.put("menu_end",event.get(i).getEvent_end());
+			obj.put("event_url",event.get(i).getEvent_url());
+			obj.put("event_start",transFormat.format(event.get(i).getEvent_start()));
+			obj.put("evemt_end",transFormat.format(event.get(i).getEvent_end()));
 			test2.add(obj);
 		}
 		data.put("event_list",test2);
@@ -156,6 +162,18 @@ public class M_TruckController {
 			System.out.println(temp3);
 			data.put("truck_url",temp3);
 			//data.put("truck_surl","test6@naver.com/ebd1ba13-7aba-4716-8a13-2c35ffe80a75_mug_obj_152024802935945730");
+		}
+		if(location==null) {
+			data.put("locationstate",0);
+		}else {
+			JSONArray locarr = new JSONArray();
+			for(int i=0; i<location.size();i++) {
+				JSONObject loc = new JSONObject();
+				loc.put("lat_x",location.get(i).getLat_y());
+				loc.put("lng_y",location.get(i).getLng_x());
+				locarr.add(loc);
+			}
+			data.put("locationstate",locarr);
 		}
 		data.put("truck_surl",truck_surl);
 		data.put("truck_url",truck_url);

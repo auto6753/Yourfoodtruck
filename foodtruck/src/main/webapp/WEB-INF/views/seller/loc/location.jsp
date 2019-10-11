@@ -34,66 +34,67 @@
 	}
 </script>
 
-<title>위치관리</title>
+<title>당신의 푸드트럭</title>
 <script type="text/javascript" src=""></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1d1757d7f3887c30f0142b09e5ff2be&libraries=services,clusterer,drawing"></script>
 <style>
-
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container mw1650">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2 mgt50">
 				<jsp:include page="../sideMenuBar/sideMenuBar.jsp"></jsp:include>
 			</div>
-			<%-- 
-		<div class="col-md-9 content">
-				<form name="form" id="form" method="post">
-					<input type="button" onClick="goPopup();" value="팝업"/>
-					도로명주소 전체(포맷)<input type="text" id="roadFullAddr" name="roadFullAddr" value=""/><br>
-					도로명주소 <input type="text" id="roadAddrPart1" name="roadAddrPart1" value=""/><br>
-					고객입력 상세주소<input type="text" id="addrDetail" name="addrDetail" value=""/><br>
-					참고주소<input type="text" id="roadAddrPart2" name="roadAddrPart2" value=""/><br>
-					우편번호<input type="text" id="zipNo" name="zipNo"/>
-				</form>
-			</div>
-	</div> --%>
-	<div class="col-md-9">
-				<div class="col-md-12 paddingZero">
-					<div class="menuTitle">위치등록</div>
+			<div class="col-md-10">
+				<div id="with" class="col">
+					<h1 class="menuTitle">위치등록</h1>
+					<br>
+					<div class="album bg-light" style="height: 80%; overflow-y: auto;">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-10">
+									<div class="search">
+										<input type="text" value="" id="keyword"> <input
+											id="submit" type="button" value="검색하기">
+										<div id="map"></div>
+									</div>
+
+								</div>
+								<div class="col-md-2 pm">
+									<div id="result">
+										<p>
+											<em>등록할 위치를</br>지도에서 클릭하십시오.</em>
+										</p>
+										<form action="/seller/location" method="post">
+											<div id="clickLatlng">
+												<button id="store" style="display: none">검색위치로등록</button>
+											</div>
+											<input id="lat_y" name="lat_y" type="hidden"> <input
+												id="lng_x" name="lng_x" type="hidden"> <input
+												id="truck_code" name="truck_code"
+												value="${sessionScope.seller.truck_code }" type="hidden">
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					</div>
-			<div class="search">
-				<input type="text" value="" id="keyword" >
-				<input id="submit" type="button" value="검색하기">
-				<div id="map" ></div>
-			</div>
-			
-			
-			
-			
-			<div id="result">
-			<p>
-				<em>등록할 위치를 지도에 클릭하십시오.</em>
-			</p>
-			<form action="/seller/location" method="post"> 
-			<div id="clickLatlng"><button id="store" style="display: none"> 검색위치로등록</button></div>
-			<input id="lat_y" name="lat_y" type="hidden">
-			<input id="lng_x" name="lng_x" type="hidden">
-			<input id="truck_code" name="truck_code" value="${sessionScope.seller.truck_code }" type="hidden">
-			</form>
+				</div>
 			</div>
 		</div>
 	</div>
+
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
-			center : new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			center : new daum.maps.LatLng(36.350370, 127.384819), // 지도의 중심좌표
 			level : 15
 		// 지도의 확대 레벨
 		};
+
+
 
 		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		var ps = new daum.maps.services.Places(map);

@@ -3,19 +3,19 @@
 .display-inline {
 	display: inline-block !important;
 }
+
 #with {
-	       margin: 0 auto;
-    margin-top: 50px;
-    width: 1200px;
-    height: 600px;
-    overflow: auto;
-    border: 4px solid;
-    border-radius:10px;
-    border-color: lightgray;
-  
-   
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 1600px;
+	height: 600px;
+	overflow: auto;
+	border-radius: 10px;
+	background-color: lightgray;
+	font-family: 'yg-jalnan';
 }
-h1{
-	    text-align: center;
+
+h1 {
+	text-align: center;
 	font-family: 'yg-jalnan';
 }

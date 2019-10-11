@@ -1,29 +1,31 @@
 @charset "UTF-8";
 
-
-h1{
+h1 {
 	text-align: center;
 	margin-top: 100px;
 }
+
 #with {
-	margin: 0 auto;
 	margin-top: 20px;
-	width: 1200px;
+	width: 1277px;
 	height: 600px;
 	border: 1px solid darkgray;
 }
-#width{
+
+#width {
 	margin: 0 auto;
 	margin-top: 15px;
-	width:1180px;
+	width: 1180px;
 	height: 100px;
-	float:top;
+	float: top;
 	border: 1px solid darkgray;
 }
-h3{
+
+h3 {
 	margin-top: 30px;
 }
-#height1{
+
+#height1 {
 	padding: 0 !important;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -32,7 +34,8 @@ h3{
 	float: left;
 	border: 1px solid darkgray;
 }
-#height2{
+
+#height2 {
 	padding: 0 !important;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -44,7 +47,7 @@ h3{
 	text-align: center;
 }
 
-#height3{
+#height3 {
 	padding: 0 !important;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -53,52 +56,63 @@ h3{
 	height: 452px;
 	float: left;
 	border: 1px solid darkgray;
-	
 }
-h6{
+
+h6 {
 	text-align: center;
 	color: red;
 }
-.button{
+
+.button {
 	margin-top: 100px;
 	text-align: center;
 }
-#head1{
-	width:605px;
-	border-bottom: 1px solid darkgray;
-	padding: 0 !important;
-	text-align: center;
-	font-size: 20px;
-}
-#head2{
-	width:260px;
-	border-bottom: 1px solid darkgray;
-	padding: 0 !important;
-	text-align: center;
-	font-size: 20px;
-}
-#head3{
-	width:260px;
-	border-bottom: 1px solid darkgray;
-	padding: 0 !important;
-	text-align: center;
-	font-size: 20px;
-}
-.text{
 
+#head1 {
+	width: 605px;
+	border-bottom: 1px solid darkgray;
+	padding: 0 !important;
+	text-align: center;
+	font-size: 20px;
+}
+
+#head2 {
+	width: 260px;
+	border-bottom: 1px solid darkgray;
+	padding: 0 !important;
+	text-align: center;
+	font-size: 20px;
+}
+
+#head3 {
+	width: 260px;
+	border-bottom: 1px solid darkgray;
+	padding: 0 !important;
+	text-align: center;
+	font-size: 20px;
+}
+
+.text {
 	margin-top: 150px;
 }
-#pop{
-    width:400px; height:200px; background:white;  
-    position:absolute; top: 35px; left:-80px; text-align:center; 
-    border:1px solid darkgray;
-    text-align: center;
-   }
 
-#close{
+#pop {
+	width: 400px;
+	height: 200px;
+	background: white;
+	position: absolute;
+	top: 35px;
+	left: -80px;
+	text-align: center;
+	border: 1px solid darkgray;
+	text-align: center;
+}
+
+#close {
 	margin-bottom: 30px;
-    width:100px;
-   }
-.btn1{
+	width: 100px;
+}
+
+.btn1 {
 	margin-top: 50px;
 }

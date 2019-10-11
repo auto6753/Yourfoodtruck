@@ -60,7 +60,7 @@ $(document).ready(function() {
 	});
 	$("#kakaopay").click(function() {
 		if (typeof list[0] == 'undefined') {
-			alert("주문목록이업서여");
+			alert("주문목록이 없습니다");
 		} else {
 			$("#order").css("display","none");
 			$("#kakaotel").css("display","block");
@@ -70,7 +70,7 @@ $(document).ready(function() {
 	});
 	$("#cash").click(function() {
 		if (typeof list[0] == 'undefined') {
-			alert("주문목록이업서여");
+			alert("주문목록이 없습니다");
 		} else {
 			$("#order").css("display","none");
 			$("#cashtel").css("display","block");
@@ -81,7 +81,7 @@ $(document).ready(function() {
 	});
 	$("#card").click(function() {
 		if (typeof list[0] == 'undefined') {
-			alert("주문목록이업서여");
+			alert("주문목록이 없습니다");
 		} else {
 			$("#order").css("display","none");
 			$("#cardtel").css("display","block");
@@ -102,7 +102,7 @@ $(document).ready(function() {
 		var sysdate=year+month+'_'+day+'_'+hour+'_'+minute+'_'+sec;
 		
 		//결제 호출 -------------------------------
-		alert("ㅇ");
+		//alert("ㅇ");
 			IMP.request_pay({
 			    pg : 'inicis', // version 1.1.0부터 지원.
 			    pay_method : 'card',
@@ -117,7 +117,7 @@ $(document).ready(function() {
 			    	alert("성공");
 			    	//alert("ㅇ");	
 			    	for(var c=0;c<list.length;c++){  //주문내역 추가할거 추가
-			    		list[c].payment_class=3;
+			    		list[c].payment_class=2;
 			    		list[c].truck_code=$('#sessionTruckCode').val();
 			    		list[c].payment_telephone=payment_telephone;
 			    		list[c].merchant_uid = rsp.merchant_uid;
@@ -129,7 +129,7 @@ $(document).ready(function() {
 			    		async:false,
 			    		data:JSON.stringify(list),
 			    		success:function(data){ 
-			    			alert(data);
+			    			//alert(data);
 			    			if(data=="success"){ //인서트성공후
 			    				//window.location.href="/customer/callList";						
 			    				//파이어베이스 전송
@@ -172,6 +172,7 @@ $(document).ready(function() {
 	});
 	$("#cashok").click(function(){ //현금
 		var payment_telephone = $("#cashtelephone").val();
+		//alert(payment_telephone);
 		var date = new Date();
 		var year=date.getFullYear().toString().substr(2);	var month=date.getMonth()+1;
 		var day=date.getDate();	var hour=date.getHours();
@@ -227,6 +228,7 @@ $(document).ready(function() {
 		$("#box").css("scroll","top");
 		$("#order").css("display","block");
 		$("#kakaotel").css("display","none");
+	
 	});
 	$("#back").click(function() {
 		$("#cashtelephone").val("");
@@ -284,6 +286,5 @@ $(document).ready(function() {
 		$("#order").css("display","block");
 		$("#cardtel").css("display","none");
 	});
-	
 	
 });

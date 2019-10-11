@@ -22,6 +22,13 @@
 		(select truck_code,max(loc_time) from location
 		group by truck_code)
 	</select>
+	<select id="getLocation" resultType="com.food.project.domain.LocationVO">
+	select lc.truck_code,lc.loc_time,lc.lat_y lat_y,lc.lng_x lng_x
+	from location lc
+	where lc.truck_code=#{truck_code} and lc.loc_time in
+	(select max(loc_time) from location
+	group by truck_code)
+	</select>
 	<!-- 위치넣기 -->
 	<!-- <insert id="insertCustomer" parameterType="com.food.project.domain.CustomerVO"> 
 		insert into customer(email,password,telephone,position,nickname) values(#{email},#{password},#{telephone},#{position},#{nickname}) 

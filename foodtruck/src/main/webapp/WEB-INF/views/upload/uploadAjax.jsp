@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>당신의 푸드트럭</title>
 <%-- <%@ include file="../include/header.jsp" %> --%>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.min.js"/>"></script>

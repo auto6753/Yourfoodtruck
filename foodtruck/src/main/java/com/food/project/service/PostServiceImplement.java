@@ -6,8 +6,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.food.project.domain.FoodTruckVO;
 import com.food.project.domain.PostVO;
+import com.food.project.domain.RecruitVO;
 import com.food.project.domain.ReplyVO;
+import com.food.project.domain.Request_DataDTO;
+import com.food.project.domain.Request_DataVO;
 import com.food.project.domain.ReviewVO;
 import com.food.project.mapper.PostMapper;
 
@@ -87,7 +91,99 @@ public class PostServiceImplement implements PostService {
 	
 	@Override
 	public ArrayList<ReviewVO> getReview(String email) { return mapper.getReview(email);}
-
 	
+	@Override //내가쓴 모집공고 불러오기
+	public ArrayList<RecruitVO> getMyRequest(String email) {
+		// TODO Auto-generated method stub
+		
+		return mapper.getMyRequest(email);
+		
+	}
+	
+	@Override //해당 글의 모집공고 참가 신청자 보기 
+	public ArrayList<Request_DataDTO> getRequest_data(String request_code) {
+		// TODO Auto-generated method stub
+		
+		return mapper.getRequest_data(request_code);
+	}
+	@Override
+	public void addRecruit(RecruitVO vo) {
+		mapper.addRecruit(vo);
+		
+	}
+	//일반모집공고목록 불러오기
+	@Override
+	public ArrayList<RecruitVO> getList(RecruitVO vo) {
+		
+		return mapper.getList(vo);
+	}
+	//일반모집공고 상세보기
+	@Override
+	public RecruitVO getRequestspecific(String request_code) {
+		// TODO Auto-generated method stub
+		return mapper.getRequestspecific(request_code);
+	}
+	//일반모집공고 조회수
+	@Override
+	public void updateVisit(String request_code) {
+		// TODO Auto-generated method stub
+		mapper.updateVisit(request_code);
+		
+	}
+	//일반모집공고 삭제
+	@Override
+	public void deleteRequest(RecruitVO vo) {
+		
+		mapper.deleteRequest(vo);
+	}
+	//일반모집공고 수정페이지 이동
+	@Override
+	public RecruitVO getRequestmodify(String request_code) {
+		
+		return mapper.getRequestmodify(request_code);
+	}
+	//일반모집공고 수정하기
+	@Override
+	public void requestmodifysuccess(RecruitVO vo) {
+		
+		mapper.requestmodifysuccess(vo);
+		
+	}
+	//일반모집공고 참가신청
+	@Override
+	public void requestsuccess(Request_DataVO vo) {
+		
+		mapper.requestsuccess(vo);
+	}
+	@Override
+	public void updaterequestsuccess(RecruitVO vo1) {
+	
+		mapper.updaterequestsuccess(vo1);
+		
+	}
+	@Override
+	public Request_DataVO requestck(Request_DataVO vo) {
+	
+		return mapper.requestck(vo);
+	}
+	@Override
+	public void requestupdate(String request_code) {
+		// TODO Auto-generated method stub
+		System.out.println("여기는 service im"+request_code);
+		mapper.requestupdate(request_code);
+	}
+	@Override
+	public void requestdataup(Request_DataVO vo) {
+		// TODO Auto-generated method stub
+		mapper.requestdataup(vo);
+	}
+	@Override
+	public ArrayList<FoodTruckVO> requestselecttruck(String request_code) {
+		
+		return mapper.requestselecttruck(request_code);
+	}
+	
+
+
 
 }
