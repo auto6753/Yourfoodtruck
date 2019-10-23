@@ -1,4 +1,11 @@
 @charset "UTF-8";
+.edit:hover{
+	outline: none;
+}
+.edit:focus{
+	outline: none;
+}
+
 .menuTitle{
  
     text-align: center;
@@ -218,9 +225,14 @@ a {
 	display: none !important;
 }
 
+.categoryW {
+	width: 12%;
+	color: #666;
+}
+
 .menuWidth {
-	width: 28.1%;
-	color: #666
+	width: 16.1%;
+	color: #666;
 }
 
 .menuWidth2 {
@@ -405,7 +417,13 @@ a {
 	z-index: -1;
 }
 
-#addEvent {
+#uploadedImg {
+	width: 400px;
+	height: 300px;
+}
+
+
+#opener {
 	float: right;
 }
 
@@ -425,6 +443,12 @@ a {
 }
 
 #details {
+	width: 90%;
+	height: 147px;
+	color: #666;
+}
+
+#details2 {
 	width: 90%;
 	height: 147px;
 	color: #666;
@@ -507,6 +531,10 @@ textarea {
 	padding-top: 10px;
 	border-top: 1px solid #ff9248;
 	text-align: center;
+}
+
+.btn-r {
+	text-align: center !important;
 }
 
 .pop-layer2 .btn-r {

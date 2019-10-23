@@ -8,6 +8,14 @@
 		menu_code,menu_url,menu_surl,menu_name,menu_category,unit_price,menu_desc,truck_code
 		from menu where truck_code = #{truck_code}
 	</select>
+	
+	<select id="getmenu2" resultType="com.food.project.domain.MenuVO"
+		parameterType="String">
+		select
+		menu_code,menu_url,menu_surl,menu_name,menu_category,unit_price,menu_desc,truck_code
+		from menu where menu_code = #{menu_code}
+	</select>
+	
 	<insert id="insertmenu"
 		parameterType="com.food.project.domain.MenuVO">
 		insert into

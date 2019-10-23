@@ -43,6 +43,50 @@ public class EventServiceImplement implements EventService {
 		}
 		
 	}
+	
+	@Override
+	public void editEvent(Map<String,Object> evo) {
+		// TODO Auto-generated method stub
+		//이벤트 테이블에 insert 하면서 이벤트 코드 가져오기
+		eventMapper.editEvent((EventVO)evo.get("event"));
+		
+		EventVO vo=new EventVO();
+		vo.setTruck_code((String)evo.get("truck_code"));
+		vo =eventMapper.getEvent_code(vo);
+		String event_code = vo.getEvent_code();
+		ArrayList<EventMenuVO> emvos= (ArrayList<EventMenuVO>)evo.get("eventMenu");
+		if(evo.get("eventMenu")!=null) {
+			eventMapper.delEventMenu(event_code);
+			for(int i=0; i<emvos.size();i++) {
+				emvos.get(i).setEvent_code(event_code);
+				System.out.println(emvos.get(i).getMenu_code());
+				eventMapper.addEventMenu(emvos.get(i));
+			}
+		}
+		
+	}
+	
+	@Override
+	public void editEvent2(Map<String, Object> evo) {
+		// TODO Auto-generated method stub
+		//이벤트 테이블에 insert 하면서 이벤트 코드 가져오기
+		eventMapper.editEvent2((EventVO)evo.get("event"));
+		
+		EventVO vo=new EventVO();
+		vo.setTruck_code((String)evo.get("truck_code"));
+		vo =eventMapper.getEvent_code(vo);
+		String event_code = vo.getEvent_code();
+		ArrayList<EventMenuVO> emvos= (ArrayList<EventMenuVO>)evo.get("eventMenu");
+		if(evo.get("eventMenu")!=null) {
+			eventMapper.delEventMenu(event_code);
+			for(int i=0; i<emvos.size();i++) {
+				emvos.get(i).setEvent_code(event_code);
+				System.out.println(emvos.get(i).getMenu_code());
+				eventMapper.addEventMenu(emvos.get(i));
+			}
+		}
+		
+	}
 
 	@Override
 	public void deleteEvent(String eventCode) {
@@ -77,6 +121,20 @@ public class EventServiceImplement implements EventService {
 		// TODO Auto-generated method stub
 		return eventMapper.getMainevent(vo);
 	}
+
+	@Override
+	public EventVO getEventInfo(String eventCode) {
+		// TODO Auto-generated method stub
+		return eventMapper.getEventInfo(eventCode);
+	}
+
+	@Override
+	public ArrayList<EventMenuVO> getEventMenu2(String eventCode) {
+		// TODO Auto-generated method stub
+		return eventMapper.getEventMenu2(eventCode);
+	}
+
+	
 
 
 }

@@ -16,4 +16,5 @@ public interface SellerService {
 	public void insertlocaction(LocationVO vo);
 	public void deletemenu(String menu_code);
 	public CustomerVO getCustomer(String truck_code);
+	public MenuVO getmenu2(String menuCode);
 }

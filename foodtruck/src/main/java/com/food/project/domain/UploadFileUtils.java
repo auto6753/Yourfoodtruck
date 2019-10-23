@@ -20,7 +20,6 @@ public class UploadFileUtils {
 	
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData,FoodTruckVO vo) throws Exception {
 
-    	System.out.println("이메일 넘어와라" + vo.getEmail());
     	// UUID 발급
         UUID uuid = UUID.randomUUID();
         // 저장할 파일명 = UUID + 원본이름
@@ -28,6 +27,7 @@ public class UploadFileUtils {
         // 업로드할 디렉토리 폴더(이메일) 생성
         String savedPath = vo.getEmail();  //calcPath(uploadPath,email);
         makeDir(uploadPath, savedPath);
+        
         // 파일 경로(기존의 업로드경로+이메일), 파일명을 받아 파일 객체 생성
         File target = new File(uploadPath + savedPath, savedName);
         // 임시 디렉토리에 업로드된 파일을 지정된 디렉토리로 복사

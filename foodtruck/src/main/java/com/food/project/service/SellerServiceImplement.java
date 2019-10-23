@@ -56,6 +56,12 @@ public class SellerServiceImplement implements SellerService {
 		return sellermapper.getCustomer(truck_code);
 	}
 
+	@Override
+	public MenuVO getmenu2(String menuCode) {
+		// TODO Auto-generated method stub
+		return sellermapper.getmenu2(menuCode);
+	}
+
 //	@Override
 //	public void deletemenu(String menu_code) {
 //		// TODO Auto-generated method stub

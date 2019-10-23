@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.food.project.mapper.EventMapper">
-
+	<select id="getEventInfo" resultType="com.food.project.domain.EventVO" parameterType="String">
+		SELECT EVENT_NAME, EVENT_START, EVENT_END, EVENT_TARGET, EVENT_CONTENT, EVENT_PAYMENT, EVENT_COMBINABLE, event_url
+		FROM EVENT
+		WHERE EVENT_CODE = #{eventCode}
+	</select>
+	
 	<select id="getEvent"
 		resultType="com.food.project.domain.EventVO" parameterType="String">
 		SELECT
@@ -13,6 +18,10 @@
 	
 	<select id="getEventMenu" resultType="com.food.project.domain.EventMenuVO">
 		select e.event_code, m.menu_name, em.discount from menu m, event_menu em, event e where e.event_code = em.event_code and em.menu_code = m.menu_code and e.truck_code = #{truck_code}
+	</select>
+	
+	<select id="getEventMenu2" resultType="com.food.project.domain.EventMenuVO">
+		select e.event_code, m.menu_code, m.menu_name, em.discount from menu m, event_menu em, event e where e.event_code = em.event_code and em.menu_code = m.menu_code and e.event_code = #{eventCode}
 	</select>
 	
 	<select id="getEvent_code" resultType="com.food.project.domain.EventVO">
@@ -34,11 +43,45 @@
 		#{event_payment},#{event_url})
 	</insert>
 	
+	<update id="editEvent" parameterType="com.food.project.domain.EventVO">
+		update event
+		set event_name = #{event_name},
+			event_start = #{event_start},
+			event_end = #{event_end},
+			event_target = #{event_target},
+			event_content = #{event_content},
+			event_payment = #{event_payment},
+			event_combinable = #{event_combinable},
+			event_url = #{event_url}
+		where event_code = #{event_code}
+		
+	</update>
+	
+	<update id="editEvent2" parameterType="com.food.project.domain.EventVO">
+		update event
+		set event_name = #{event_name},
+			event_start = #{event_start},
+			event_end = #{event_end},
+			event_target = #{event_target},
+			event_content = #{event_content},
+			event_payment = #{event_payment},
+			event_combinable = #{event_combinable}
+		where event_code = #{event_code}
+		
+	</update>
+	
 	<insert id="addEventMenu"
 		parameterType="com.food.project.domain.EventMenuVO">
 		insert into event_menu(event_code,menu_code,discount)
 		values(#{event_code},#{menu_code},#{discount})
 	</insert>
+	
+	<update id="editEventMenu"
+		parameterType="com.food.project.domain.EventMenuVO">
+		update event_menu
+		set menu_code = #{menu_code},
+			discount = #{discount}
+	</update>
 	
 	<delete id="delEvent">
 		delete from event where event_code = #{event_code}

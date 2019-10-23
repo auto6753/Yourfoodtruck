@@ -4,12 +4,23 @@
 <jsp:include page="../../header/header.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/seller/event/event.css"/>" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
+<script>
+var projPath = "${pageContext.request.contextPath}";
+</script>
 <title>당신의 푸드트럭</title>
+<script type="text/javascript">
+	var projPath = "${pageContext.request.contextPath}";
+</script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/seller/event/event.js"/>"></script>
+	
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
+
 	<div class="container mw1650">
 		<div class="row">
 			<div class="col-md-2 mgt50">
@@ -28,7 +39,7 @@
 										<li>진행중인 이벤트</li>
 										<li>종료된 이벤트</li>
 									</ul>
-									<a href="#layer1" id="addEvent" class="user-btn btn-example">등록</a>
+									<button id="opener" class="user-btn btn-example">등록</button>
 								</div>
 								<div class="col-md-12 tab_con" id="tab_con">
 									<div class="eventBox">
@@ -39,17 +50,18 @@
 													<!-- 행당 2개 이벤트 배치 -->
 													<div class="manageEvent">
 														<div>
-															<a href="#layer2" class="btn-example2 edit"> <img
+															<button class=" opener2 btn-example2 edit" style="background: none; border: 0"> <img
 																src="${pageContext.request.contextPath}/resources/image/icon/edit-property-16.png" />
-															</a>
+															</button>
+															<input id="eCode" class="eCode delEvent" type="hidden"
+														value="${event.event_code}"/>
 														</div>
 														<div class="delete">
 															<img
 																src="${pageContext.request.contextPath}/resources/image/icon/delete-16.png" />
 														</div>
 													</div>
-													<input class="delEvent" type="hidden"
-														value="${event.event_code}" />
+													
 													<div class="eventItem">이벤트명</div>
 													<div class="eventItemContent eventName">${event.event_name}</div>
 
@@ -167,14 +179,7 @@
 	</div>
 
 	<!-- 이벤트 등록 딤처리 팝업 레이어(시작) -->
-	<div class="dim-layer">
-		<div class="dimBg"></div>
-		<div id="layer1" class="pop-layer">
-			<div class="pop-container">
-				<div class="pop-conts">
-					<!--content //-->
-					<div class="ctxt mb20">
-						<div class="addEventTitle">이벤트 등록</div>
+<div id="dialog" title="이벤트 등록">
 						<form action="">
 							<div id="upload">
 								<div id="previewId">
@@ -193,6 +198,7 @@
 										src="${pageContext.request.contextPath}/resources/image/seller/event/noimage.png" />
 									<img id="defaultImg"
 										src="${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png" />
+									
 								</div>
 							</div>
 							<table id="table">
@@ -200,44 +206,61 @@
 									<td class="titleStyle" valign="top"><label
 										class="labelStyle" for="eventName">이벤트명</label></td>
 									<td class="contentStyle" valign="top"><input type="text"
-										id="eventName" name="eventName" required /></td>
+										id="eventName" name="eventName" maxlength="50"/></td>
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">기간</label></td>
 									<td valign="top"><input type="datetime-local"
-										id="beginDate" class="date" name="beginDate" /> <span>~</span>
+										id="beginDate" class="date" name="beginDate" style="width:40%"/> <span>~</span>
 										<input type="datetime-local" id="endDate" class="date"
-										name="endDate" required /></td>
+										name="endDate" style="width:40%"/></td>
 								</tr>
 								<tr>
-									<td valign="top"><label class="labelStyle" for="target">대상</label></td>
+									<td valign="top"><label class="labelStyle" for="target" >대상</label></td>
 									<td valign="top"><input type="text" id="target"
-										name="target" required /></td>
+										name="target"  maxlength="30"></td>
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">메뉴</label></td>
 									<td valign="top" class="menuWrapper">
 										<div>
+											<div class="categoryW menuCol">종류</div>
 											<div class="menuWidth menuCol">이름</div>
 											<div class="menuWidth2 menuCol">단가(원)</div>
 											<div class="menuWidth2 menuCol">할인액(원)</div>
 											<div class="menuWidth2 menuCol">할인가(원)</div>
 										</div>
+										
+										
+										
+										<select id="allMenu" name="allMenu" style="display: none;">
+											<option value="" selected>&nbsp;&nbsp;--메뉴--</option>
+											<c:forEach var="i" items="${menuList}">
+												<option value="${i.menu_code}">${i.menu_name}</option>
+											</c:forEach>
+										</select>
+
 										<div id="pre_set" style="display: none; float: top;">
-											<select class="menuWidth" name="menu1"
-												onchange="changeAttr(this);" required>
-												<option value="" selected>&nbsp;&nbsp;------- 메뉴
-													-------</option>
-												<c:forEach var="i" items="${menuList}">
-													<option value="${i.menu_code}">${i.menu_name}</option>
-												</c:forEach>
-											</select> <input type="text" class="menuWidth2" name="price"
-												placeholder="단가" disabled /> <input type="number"
-												class="menuWidth2" name="discount" placeholder="할인액"
-												onKeyUp="showDiscResult(this);"
-												onkeypress="return digit_check(event);" required disabled />
+										<select class="categoryW selectCat" name="menu1">
+													<option value="" selected>&nbsp;&nbsp;종류</option>
+													<option value="1">한식</option>
+													<option value="2">중식</option>
+													<option value="3">일식</option>
+													<option value="4">분식</option>
+													<option value="5">기타</option>
+										</select>
+										
+											<select class="menuWidth selectmenu" name="menu1" onchange="return changeAttr(this);" >
+												<option value='' selected>&nbsp;&nbsp;--메뉴--</option>
+											</select>
+											
+											<input type="text" class="menuWidth2" name="price"
+													placeholder="단가" disabled /> <input type="text"
+													class="menuWidth2 discount" name="discount" placeholder="할인액"
+													onKeyUp="showDiscResult(this); removeChar(event);"
+													onkeypress="return onlyNumber(event);" disabled />
 											<input type="text" class="menuWidth2" name="dResult"
-												placeholder="할인가" required disabled /> <a href="#"
+												placeholder="할인가"  disabled /> <a href="#"
 												class="deleteMenuBtn" onclick="remove_item(this)"> <img
 												class="deleteMenuBtnImg"
 												src="${pageContext.request.contextPath}/resources/image/icon/deletemenu.svg" />
@@ -245,24 +268,34 @@
 												src="${pageContext.request.contextPath}/resources/image/icon/deletemenu2.svg" />
 											</a>
 										</div>
-
-										<div id="field">
+										
+										<div id="menuCats" style="display:none;">
+											<input type="hidden" class="catVal" value="0"/>
+											<c:forEach var="i" items="${menuList}">
+												<input type="hidden" class="catVal" value="${i.menu_category}"/>
+											</c:forEach>
+										</div>
+										
+										<div id="field" style="overflow-y:scroll">
 											<div id="default">
-												<select class="menuWidth" name="menu1"
-													onchange="changeAttr(this);" required>
-													<option value="" selected>&nbsp;&nbsp;------- 메뉴
-														-------</option>
-													<c:forEach var="i" items="${menuList}">
-														<option value="${i.menu_code}">${i.menu_name}</option>
-
-													</c:forEach>
-												</select> <input type="text" class="menuWidth2" name="price"
-													placeholder="단가" disabled /> <input type="number"
-													class="menuWidth2" name="discount" placeholder="할인액"
-													onKeyUp="showDiscResult(this);"
-													onkeypress="return digit_check(event);" required disabled />
+											<select class="categoryW selectCat" name="menu1">
+													<option value="" selected>&nbsp;&nbsp;종류</option>
+													<option value="1">한식</option>
+													<option value="2">중식</option>
+													<option value="3">일식</option>
+													<option value="4">분식</option>
+													<option value="5">기타</option>
+										</select>
+										
+											<select class="menuWidth selectmenu" name="menu1" onchange="return changeAttr(this);" >
+												<option value='' selected>&nbsp;&nbsp;--메뉴--</option>
+											</select> <input type="text" class="menuWidth2" name="price"
+													placeholder="단가" disabled /> <input type="text"
+													class="menuWidth2 discount" name="discount" placeholder="할인액"
+													onKeyUp="showDiscResult(this); removeChar(event);"
+													onkeypress="return onlyNumber(event);" disabled />
 												<input type="text" class="menuWidth2" name="dResult"
-													placeholder="할인가" required disabled />
+													placeholder="할인가"  disabled />
 											</div>
 										</div> <c:forEach var="i" items="${menuList}">
 											<input id="${i.menu_code}" type="hidden"
@@ -280,14 +313,15 @@
 								<tr>
 									<td valign="top"><label class="labelStyle" for="details">상세내용</label></td>
 									<td valign="top"><textarea id="details" name="details"
-											required onFocus="clearMessage(this.form);"
-											onKeyUp="checkByte(this.form);">내용을 입력해 주세요.
-										</textarea>
+									onKeyUp="checkByte(this.form);" placeholder="내용을 입력해 주세요."></textarea>
 										<div class="showByte">
-											<input type="text" name="messagebyte" value="0" size="1"
+											<input type="text" id="messagebyte" name="messagebyte" value="0" size="1"
 												maxlength="2" readonly> <font color="#000000">/
-												1000 byte</font>
+												600 byte</font>
+											<input id="checkDetails" type="hidden" value="0"/>
 										</div></td>
+										
+										
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">결제수단</label></td>
@@ -310,42 +344,26 @@
 									<td valign="top"><label class="labelStyle">중복적용</label></td>
 									<td class="color666" valign="top">
 										<div>
-											<input type="radio" name="duplicate" value="1" /> 가능
+											<input id="duplicate1" type="radio" name="duplicate" value="1" /> 가능
 										</div>
 										<div>
-											<input type="radio" name="duplicate" value="0" /> 불가
+											<input id="duplicate0" type="radio" name="duplicate" value="0" /> 불가
 										</div>
 									</td>
 								</tr>
 							</table>
-						</form>
-						<div class="btn-r fixedStyle">
-							<button id="addEventBtn" class="btnCommonStyle">등록</button>
-							<button class="btnCommonStyle resetBtn">리셋</button>
-							<button id="cancelAdd" class="btnCommonStyle btn-layerClose">취소</button>
+						
+						<div class="btn-r">
+							<button id="addEventBtn" class="btnCommonStyle">등록</button> 
+							<input type="reset" id="resetBtn"  class="btnCommonStyle resetBtn" type="reset" value="리셋"/>
 						</div>
-					</div>
-					<div class="blankBox"></div>
-					<!--// content-->
-				</div>
-			</div>
-		</div>
-	</div>
+						</form>
+</div>
+
 	<!-- 이벤트 등록 딤처리 팝업 레이어(끝) -->
 
 	<!-- 이벤트 수정 딤처리 팝업 레이어(시작) -->
-	<div class="dim-layer2">
-		<div class="dimBg2"></div>
-		<div id="layer2" class="pop-layer2">
-			<div class="pop-container2">
-				<div class="pop-conts2">
-					<!--content //-->
-					<div class="ctxt2 mb202">
-						<div class="editEventTitle">이벤트 수정</div>
-						<div class="deleteEventDiv">
-							<img id="deleteEvent"
-								src="${pageContext.request.contextPath}/resources/image/icon/deleteevent.svg" />
-						</div>
+<div id="dialog2" title="이벤트 수정">
 						<form action="">
 							<div id="upload">
 								<div id="previewId2">
@@ -364,6 +382,7 @@
 										src="${pageContext.request.contextPath}/resources/image/seller/event/noimage.png" />
 									<img id="defaultImg2"
 										src="${pageContext.request.contextPath}/resources/image/seller/event/defaultimg.png" />
+										<img id="uploadedImg" class="uploadedImg"/>
 								</div>
 
 							</div>
@@ -373,44 +392,61 @@
 									<td class="titleStyle" valign="top"><label
 										class="labelStyle" for="eventName">이벤트명</label></td>
 									<td class="contentStyle" valign="top"><input type="text"
-										id="eventName" name="eventName" required /></td>
+										id="eventName2" name="eventName" maxlength="50"/></td>
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">기간</label></td>
 									<td valign="top"><input type="datetime-local"
-										id="beginDate" class="date" name="beginDate" /> <span>~</span>
-										<input type="datetime-local" id="endDate" class="date"
-										name="endDate" required /></td>
+										id="beginDate2" class="date" name="beginDate" style="width:40%"/> <span>~</span>
+										<input type="datetime-local" id="endDate2" class="date"
+										name="endDate" style="width:40%"/></td>
 								</tr>
 								<tr>
-									<td valign="top"><label class="labelStyle" for="target">대상</label></td>
-									<td valign="top"><input type="text" id="target"
-										name="target" required /></td>
+									<td valign="top"><label class="labelStyle" for="target" >대상</label></td>
+									<td valign="top"><input type="text" id="target2"
+										name="target"  maxlength="30"></td>
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">메뉴</label></td>
 									<td valign="top" class="menuWrapper">
 										<div>
+											<div class="categoryW menuCol">종류</div>
 											<div class="menuWidth menuCol">이름</div>
 											<div class="menuWidth2 menuCol">단가(원)</div>
 											<div class="menuWidth2 menuCol">할인액(원)</div>
 											<div class="menuWidth2 menuCol">할인가(원)</div>
 										</div>
+										
+										
+										
+										<select id="allMenu2" name="allMenu" style="display: none;">
+											<option value="" selected>&nbsp;&nbsp;--메뉴--</option>
+											<c:forEach var="i" items="${menuList}">
+												<option value="${i.menu_code}">${i.menu_name}</option>
+											</c:forEach>
+										</select>
+
 										<div id="pre_set2" style="display: none; float: top;">
-											<select class="menuWidth" name="menu1"
-												onchange="changeAttr(this);" required>
-												<option value="" selected>&nbsp;&nbsp;------- 메뉴
-													-------</option>
-												<c:forEach var="i" items="${menuList}">
-													<option value="${i.menu_code}">${i.menu_name}</option>
-												</c:forEach>
-											</select> <input type="text" class="menuWidth2" name="price"
-												placeholder="단가" disabled /> <input type="number"
-												class="menuWidth2" name="discount" placeholder="할인액"
-												onKeyUp="showDiscResult(this);"
-												onkeypress="return digit_check(event);" required disabled />
+										<select class="categoryW selectCat" name="menu1">
+													<option value="" selected>&nbsp;&nbsp;종류</option>
+													<option value="1">한식</option>
+													<option value="2">중식</option>
+													<option value="3">일식</option>
+													<option value="4">분식</option>
+													<option value="5">기타</option>
+										</select>
+										
+											<select class="menuWidth selectmenu2" name="menu1" onchange="return changeAttr2(this);" >
+												<option value='' selected>&nbsp;&nbsp;--메뉴--</option>
+											</select>
+											
+											<input type="text" class="menuWidth2" name="price"
+													placeholder="단가" disabled /> <input type="text"
+													class="menuWidth2 discount2" name="discount" placeholder="할인액"
+													onKeyUp="showDiscResult(this); removeChar(event);"
+													onkeypress="return onlyNumber(event);" disabled />
 											<input type="text" class="menuWidth2" name="dResult"
-												placeholder="할인가" required disabled /> <a href="#"
+												placeholder="할인가"  disabled /> <a href="#"
 												class="deleteMenuBtn" onclick="remove_item2(this)"> <img
 												class="deleteMenuBtnImg"
 												src="${pageContext.request.contextPath}/resources/image/icon/deletemenu.svg" />
@@ -418,26 +454,39 @@
 												src="${pageContext.request.contextPath}/resources/image/icon/deletemenu2.svg" />
 											</a>
 										</div>
-
-										<div id="field2">
-											<div id="default">
-												<select class="menuWidth" name="menu1"
-													onchange="changeAttr(this);" required>
-													<option value="" selected>&nbsp;&nbsp;------- 메뉴
-														-------</option>
-													<c:forEach var="i" items="${menuList}">
-														<option value="${i.menu_code}">${i.menu_name}</option>
-
-													</c:forEach>
-												</select> <input type="text" class="menuWidth2" name="price"
-													placeholder="단가" disabled /> <input type="number"
-													class="menuWidth2" name="discount" placeholder="할인액"
-													onKeyUp="showDiscResult(this);"
-													onkeypress="return digit_check(event);" required disabled />
+										
+										<div id="menuCats2" style="display:none;">
+											<input type="hidden" class="catVal" value="0"/>
+											<c:forEach var="i" items="${menuList}">
+												<input type="hidden" class="catVal" value="${i.menu_category}"/>
+											</c:forEach>
+										</div>
+										
+										<div id="field2" style="overflow-y:scroll">
+											<div id="default2">
+											<select class="categoryW selectCat" name="menu1">
+													<option value="" selected>&nbsp;&nbsp;종류</option>
+													<option value="1">한식</option>
+													<option value="2">중식</option>
+													<option value="3">일식</option>
+													<option value="4">분식</option>
+													<option value="5">기타</option>
+										</select>
+										
+											<select class="menuWidth selectmenu2" name="menu1" onchange="return changeAttr2(this);" >
+												<option value='' selected>&nbsp;&nbsp;--메뉴--</option>
+											</select> <input type="text" class="menuWidth2" name="price"
+													placeholder="단가" disabled /> <input type="text"
+													class="menuWidth2 discount2" name="discount" placeholder="할인액"
+													onKeyUp="showDiscResult(this); removeChar(event);"
+													onkeypress="return onlyNumber(event);" disabled />
 												<input type="text" class="menuWidth2" name="dResult"
-													placeholder="할인가" required disabled />
+													placeholder="할인가"  disabled />
 											</div>
-										</div> <a href="#" class="addmenuBtn" onclick="add_item2()"> <img
+										</div> <c:forEach var="i" items="${menuList}">
+											<input id="${i.menu_code}" type="hidden"
+												value="${i.unit_price}" />
+										</c:forEach> <a href="#" class="addmenuBtn" onclick="add_item2()"> <img
 											class="addmenuBtnImg"
 											src="${pageContext.request.contextPath}/resources/image/icon/addmenu.svg" />
 											<!-- 기본 --> <img class="addmenuBtnImg"
@@ -449,28 +498,25 @@
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle" for="details">상세내용</label></td>
-									<td valign="top"><textarea id="details" name="details"
-											required onFocus="clearMessage(this.form);"
-											onKeyUp="checkByte(this.form);">내용을 입력해 주세요.
-										</textarea>
+									<td valign="top"><textarea id="details2" name="details2"
+									onKeyUp="checkByte2(this.form);" placeholder="내용을 입력해 주세요."></textarea>
 										<div class="showByte">
-											<input type="text" name="messagebyte" value="0" size="1"
+											<input type="text" id="messagebyte2" name="messagebyte" value="0" size="1"
 												maxlength="2" readonly> <font color="#000000">/
-												1000 byte</font>
+												600 byte</font>
+											<input id="checkDetails2" type="hidden" value="0"/>
 										</div></td>
 								</tr>
 								<tr>
 									<td valign="top"><label class="labelStyle">결제수단</label></td>
 									<td class="color666" valign="top">
 										<div>
-											<input type="checkbox" name="payment" value="cash" /> 현금
+											<input type="checkbox" id="pCash2" name="payment" value="cash" />
+											현금
 										</div>
 										<div>
-											<input type="checkbox" name="payment" value="card" /> 카드
-										</div>
-										<div>
-											<input type="checkbox" name="payment" value="kakaoPay" />
-											카카오페이
+											<input type="checkbox" id="pCard2" name="payment" value="card" />
+											카드
 										</div>
 									</td>
 								</tr>
@@ -478,27 +524,21 @@
 									<td valign="top"><label class="labelStyle">중복적용</label></td>
 									<td class="color666" valign="top">
 										<div>
-											<input type="radio" name="duplicate" value="yes" /> 가능
+											<input id="duplicate12" type="radio" name="duplicate" value="1" /> 가능
 										</div>
 										<div>
-											<input type="radio" name="duplicate" value="no" /> 불가
+											<input id="duplicate02" type="radio" name="duplicate" value="0" /> 불가
 										</div>
 									</td>
 								</tr>
 							</table>
-						</form>
-						<div class="btn-r fixedStyle">
-							<button id="editEventBtn" class="btnCommonStyle"
-								onclick="editEventBtn();">수정</button>
-							<button class="btnCommonStyle resetBtn">리셋</button>
-							<button id="cancelEdit" class="btnCommonStyle btn-layerClose">취소</button>
+						
+						<div class="btn-r">
+							<button id="editEventBtn" class="btnCommonStyle">수정</button>
+							<input type="reset" id="resetBtn2"  class="btnCommonStyle resetBtn" type="reset" value="리셋"/>
 						</div>
-					</div>
-					<div class="blankBox"></div>
-					<!--// content-->
-				</div>
-			</div>
-		</div>
+						</form>
 	</div>
+						
 	<!-- 이벤트 수정 딤처리 팝업 레이어(끝) -->
 </body>

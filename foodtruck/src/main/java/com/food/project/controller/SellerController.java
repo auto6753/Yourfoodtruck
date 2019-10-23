@@ -88,7 +88,7 @@ public class SellerController {
 	private LoginService loginservice;
 	// private SellerMapper sellermapper;
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
-	@Resource(name = "uploadPath")
+	@Resource(name = "uploadPathSchool")
 	String uploadPath;
 	private OnboardService onboard;
 
@@ -1272,6 +1272,9 @@ public class SellerController {
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("menuList", sellerservice.getmenu(truckCode));
 		model.addAttribute("eventMenuList", eventMenuList);
+		
+		System.out.println(eventMenuList);
+		
 		model.addAttribute("eventEndLong", eventEndLong);
 		model.addAttribute("curTime", curTime);
 
@@ -1293,24 +1296,25 @@ public class SellerController {
 		EventVO evo = new EventVO();
 		String st1 = null;
 		String str = null;
+		System.out.println(uploadPath);
 
 		try {
-			ResponseEntity<String> upload = new ResponseEntity<String>(
-					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
-					HttpStatus.OK);
+			String name606 = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4);
+			ResponseEntity<String> upload = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),HttpStatus.OK);
 			str = upload.getBody();
-			// String[] array = str.split("\\\\");
-			// str.replace("/event", "\\event");
-
-			String[] array = str.split(File.separator);
-			System.out.println(array[0]);// ddd@naver.com
-			System.out.println(array[1]);// event
-			System.out.println(array[2]);// s_sdalfsdf.png
+			System.out.println(str);
+			str.replace("/event", "\\event");
+			System.out.println(str);
+			String[] array = str.split("\\\\");
+//			String[] array = str.split(File.separator);
+			System.out.println("a "+ array[0]);// ddd@naver.com/event
+			System.out.println("b "+ array[1]);// ddd.png
 			st1 = array[0] + "?" + array[1];
-			System.out.println(array[0] + "/" + array[1] + "/" + array[2].substring(2));
-			str = array[0] + "/" + array[1] + "/" + array[2].substring(2);
-			evo.setEvent_url(array[0] + "/" + array[1] + "/" + array[2].substring(2));
+			System.out.println(array[0] + "/" + array[1].substring(2));
+			str = array[0] + "/" + array[1].substring(2);
+			evo.setEvent_url(array[0] + "/" + array[1].substring(2));
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			evo.setEvent_url("defaultImg.png");
 		}
 		evo.setTruck_code(truckCode);
@@ -1401,11 +1405,117 @@ public class SellerController {
 
 	@RequestMapping(value = "/editEvent", method = RequestMethod.POST)
 	@ResponseBody
-	public String editEvent(Model model, HttpServletRequest request) {
+	public Map<String, Object> editEvent(Model model, HttpServletRequest request) {
 		String eventCode = request.getParameter("eventCode");
 
-//		eventService.getEventForEdit(eventCode);
-		return "success";
+		EventVO evo = new EventVO();
+		evo = eventService.getEventInfo(eventCode);
+		
+		ArrayList<EventMenuVO> emvo = new ArrayList<>();
+		emvo = eventService.getEventMenu2(eventCode); // 이벤트 메뉴의 이름과 할인액 + 메뉴 코드
+		
+		ArrayList<MenuVO> mvo = new ArrayList<>(); // 이벤트 메뉴의 종류와 단가
+		int menuNum = emvo.size();
+		
+		for(int i=0; i<menuNum; i++) {
+			String menuCode = emvo.get(i).getMenu_code();
+			MenuVO tempmenu = sellerservice.getmenu2(menuCode);
+			mvo.add(i, tempmenu);
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("evo", evo);
+		map.put("emvo", emvo);
+		map.put("mvo", mvo);
+		map.put("menuNum", menuNum);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/editEvent2", method = RequestMethod.POST)
+	@ResponseBody
+	public String editEvent2(Model model, HttpServletRequest request, MultipartFile file) throws IOException, Exception{
+		FoodTruckVO foodtruckvo = (FoodTruckVO) request.getSession().getAttribute("seller");
+		String truckCode = foodtruckvo.getTruck_code();
+
+		
+		CustomerVO e = (CustomerVO) request.getSession().getAttribute("sessionid");
+		FoodTruckVO vo4 = new FoodTruckVO();
+		// String em = e.getEmail()+"\\event";
+		String em = e.getEmail() + "/event";
+		vo4.setEmail(em);
+		// vo4.setEmail();
+		EventVO evo = new EventVO();
+		String st1 = null;
+		String str = null;
+		System.out.println(uploadPath);
+		
+			try {
+				ResponseEntity<String> upload = new ResponseEntity<String>(
+						UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes(), vo4),
+						HttpStatus.OK);
+				str = upload.getBody();
+				
+				String[] array = str.split("\\\\");
+				// str.replace("/event", "\\event");
+	
+	//			String[] array = str.split(File.separator);
+				System.out.println(array[0]);// ddd@naver.com
+				System.out.println(array[1]);// event
+				st1 = array[0] + "?" + array[1];
+				str = array[0] + "/" + array[1].substring(2);
+				evo.setEvent_url(array[0] + "/" + array[1].substring(2));
+			} catch (Exception ex) {
+				evo.setEvent_url("defaultImg.png");
+			}
+		evo.setTruck_code(truckCode);
+		evo.setEvent_name(request.getParameter("event_name"));
+		String event_start = request.getParameter("event_start");
+		String event_end = request.getParameter("event_end");
+		Long longdata = Long.parseLong(event_start);
+		evo.setEvent_start(new Date(longdata));
+		longdata = Long.parseLong(event_end);
+		evo.setEvent_end(new Date(longdata));
+		evo.setEvent_target(request.getParameter("event_target"));
+		evo.setEvent_content(request.getParameter("event_content"));
+		evo.setEvent_payment(Integer.parseInt(request.getParameter("event_payment")));
+		evo.setEvent_combinable(Integer.parseInt(request.getParameter("event_combinable")));
+		evo.setEvent_code(request.getParameter("event_code"));
+
+		ArrayList<EventMenuVO> emvos = new ArrayList<>();
+
+		String[] menuCode1 = request.getParameterValues("menuCode[]"); // 메뉴코드
+		String[] discount1 = request.getParameterValues("discount[]"); // 할인액
+
+		String menuCode2 = menuCode1[0];
+		String discount2 = discount1[0];
+		String[] menuCode = menuCode2.split(",");
+		String[] discount = discount2.split(",");
+//		System.out.println(menuCode[0]);
+//		System.out.println(discount[0]);
+		for(int i=0; i<menuCode.length; i++) {
+			EventMenuVO emvo = new EventMenuVO();
+			emvo.setMenu_code(menuCode[i]);
+			emvo.setDiscount(Integer.parseInt(discount[i]));
+			emvos.add(emvo);
+		}
+		
+		Map<String, Object> mapvo = new HashMap<>();
+
+		mapvo.put("event", evo);
+		mapvo.put("eventMenu", emvos);
+		mapvo.put("truck_code", evo.getTruck_code());
+		// mapvo.put("event_url",)
+		
+		if(file.equals("")) {
+			eventService.editEvent2(mapvo);
+		}
+		else {
+			eventService.editEvent(mapvo);
+		}
+
+		return str;
 	}
 
 	@RequestMapping(value = "/addEvent", method = RequestMethod.GET)
@@ -1722,8 +1832,7 @@ public class SellerController {
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public ResponseEntity<String> upload(MultipartFile file, HttpSession session, FoodTruckVO mvo) throws Exception {
-		System.out.println("와랏!");
-
+		System.out.println("tyftyftyu   "   +uploadPath);
 		logger.info("originalName : " + file.getOriginalFilename());
 		logger.info("size : " + file.getSize());
 		logger.info("contentType : " + file.getContentType());
@@ -1740,8 +1849,8 @@ public class SellerController {
 
 		String str = a.getBody();
 		System.out.println(str);
-		String[] array = str.split(File.separator);
-		// String[] array = str.split("\\\\");
+//		String[] array = str.split(File.separator);
+		String[] array = str.split("\\\\");
 		System.out.println(array[0]);
 		System.out.println(array[1]);
 		System.out.println(array[0] + "\\" + array[1].substring(2));

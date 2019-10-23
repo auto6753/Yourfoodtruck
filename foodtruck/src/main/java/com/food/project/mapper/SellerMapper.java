@@ -25,4 +25,6 @@ public interface SellerMapper {
 	public LocationVO getlocation(String truck_code);
 	
 	public CustomerVO getCustomer(String truck_code);
+
+	public MenuVO getmenu2(String menuCode);
 }
